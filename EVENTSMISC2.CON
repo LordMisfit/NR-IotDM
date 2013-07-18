@@ -1,0 +1,3950 @@
+onevent EVENT_USEMEDKIT
+ ifvarn mainmenu 0 state setreturn-1
+ else 
+ {
+  ifvarl FIRSTAIDCURRENT 1
+  { 
+   state checkportablemedikits
+   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_portablemedikit_player
+  }
+  else state usemedikit
+
+  state setreturn-1
+ }
+endevent
+
+onevent EVENT_EGS 
+
+ ifactor MORTER
+ {
+  getactor[THISACTOR].owner TEMP
+  getactor[TEMP].picnum TEMP
+  ifvare TEMP APLAYER
+  {
+   setactorvar[THISACTOR].ACTORATTACK PLAYERATTACK
+   setactor[THISACTOR].owner THISACTOR
+  }
+  else
+  ifvare TEMP MORTER
+  {
+   getactor[THISACTOR].extra TEMP
+   setactorvar[THISACTOR].ACTORATTACK TEMP
+   setactor[THISACTOR].owner THISACTOR
+   setactor[THISACTOR].extra 50
+  }
+ }
+ ifactor TRIPBOMB
+ {
+  getactor[THISACTOR].owner TEMP
+  getactor[TEMP].picnum TEMP
+  ifvare TEMP APLAYER
+  {
+   setactorvar[THISACTOR].ACTORATTACK PLAYERATTACK
+   setactor[THISACTOR].owner THISACTOR
+   setactorvar[THISACTOR].PLAYERTRIPBOMB? 1
+  }
+  else
+  ifvare TEMP TRIPBOMB
+  {
+   getactor[THISACTOR].extra TEMP
+   setactorvar[THISACTOR].ACTORATTACK TEMP
+   setactor[THISACTOR].owner THISACTOR
+   setactor[THISACTOR].extra 100
+  }
+ }
+ ifactor HEAVYHBOMB
+ {
+  getactor[THISACTOR].owner TEMP
+  getactor[TEMP].picnum TEMP
+  ifvare TEMP APLAYER
+  {
+   setactorvar[THISACTOR].ACTORATTACK PLAYERATTACK
+  }
+
+  ifvare CHARACTERSELECTED? 1 { ifp ponsteroids setvar tempd 125 else setvar tempd 100 }
+  ifvare CHARACTERSELECTED? 2 { ifp ponsteroids setvar tempd 119 else setvar tempd 95 }
+  ifvare CHARACTERSELECTED? 3 { ifp ponsteroids setvar tempd 115 else setvar tempd 92 }
+  ifvare CHARACTERSELECTED? 4 { ifp ponsteroids setvar tempd 100 else setvar tempd 80 }
+  ifvare CHARACTERSELECTED? 5 { ifp ponsteroids setvar tempd 138 else setvar tempd 110 }
+  ifvare CHARACTERSELECTED? 6 { ifp ponsteroids setvar tempd 150 else setvar tempd 120 }
+  ifvare CHARACTERSELECTED? 7 { ifp ponsteroids setvar tempd 121 else setvar tempd 97 }
+  ifvare CHARACTERSELECTED? 8 { ifp ponsteroids setvar tempd 106 else setvar tempd 85 }
+  ifvare CHARACTERSELECTED? 9 { ifp ponsteroids setvar tempd 156 else setvar tempd 125 }
+  ifvare CHARACTERSELECTED? 10 { ifp ponsteroids setvar tempd 110 else setvar tempd 88 }
+  ifvare CHARACTERSELECTED? 11 { ifp ponsteroids setvar tempd 104 else setvar tempd 83 }
+  ifvare CHARACTERSELECTED? 12 { ifp ponsteroids setvar tempd 120 else setvar tempd 96 }
+  ifvare CHARACTERSELECTED? 13 { ifp ponsteroids setvar tempd 113 else setvar tempd 90 }
+  ifvare CHARACTERSELECTED? 14 { ifp ponsteroids setvar tempd 188 else setvar tempd 150 }
+  ifvare CHARACTERSELECTED? 15 { ifp ponsteroids setvar tempd 114 else setvar tempd 91 }
+  getactor[THISACTOR].xvel temp
+  getactor[THISACTOR].yvel tempb
+  getactor[THISACTOR].zvel tempc
+  mulvarvar temp tempd
+  mulvarvar tempb tempd
+  mulvarvar tempc tempd
+  divvar temp 100
+  divvar tempb 100
+  divvar tempc 100
+  setactor[THISACTOR].xvel temp
+  setactor[THISACTOR].yvel tempb
+  setactor[THISACTOR].zvel tempc
+ }
+
+// Monster Spawner
+ ifactor EGG state respawnspritefix
+ ifactor SHARK state respawnspritefix
+ ifactor ROTATEGUN state respawnspritefix
+ ifactor LIZTROOP state respawnspritefix
+ ifactor LIZTROOPSTAYPUT state respawnspritefix
+ ifactor LIZTROOPDUCKING state respawnspritefix
+ ifactor LIZTROOPRUNNING state respawnspritefix
+ ifactor LIZTROOPJETPACK state respawnspritefix
+ ifactor LIZTROOPSHOOT state respawnspritefix
+ ifactor LIZTROOPONTOILET state respawnspritefix
+ ifactor LIZTROOPJUSTSIT state respawnspritefix
+ ifactor LIZMAN state respawnspritefix
+ ifactor LIZMANSTAYPUT state respawnspritefix
+ ifactor LIZMANJUMP state respawnspritefix
+ ifactor LIZMANSPITTING state respawnspritefix
+ ifactor DRONE state respawnspritefix
+ ifactor OCTABRAIN state respawnspritefix
+ ifactor OCTABRAINSTAYPUT state respawnspritefix
+ ifactor PIGCOP state respawnspritefix
+ ifactor PIGCOPSTAYPUT state respawnspritefix
+ ifactor PIGCOPDIVE state respawnspritefix
+ ifactor COMMANDER state respawnspritefix
+ ifactor COMMANDERSTAYPUT state respawnspritefix
+ ifactor TANK state respawnspritefix
+ ifactor NEWBEAST state respawnspritefix
+ ifactor NEWBEASTSTAYPUT state respawnspritefix
+ ifactor NEWBEASTHANG state respawnspritefix
+ ifactor NEWBEASTJUMP state respawnspritefix
+ ifactor SCORPIONTANK state respawnspritefix
+ ifactor BOSS1 state respawnspritefix
+ ifactor BOSS1STAYPUT state respawnspritefix
+ ifactor BOSS1SHOOT state respawnspritefix
+ ifactor BOSS1LOB state respawnspritefix
+ ifactor BOSS2 state respawnspritefix
+ ifactor BOSS2STAYPUT state respawnspritefix
+ ifactor BOSS2SHOOT state respawnspritefix
+ ifactor BOSS2BREATH state respawnspritefix
+ ifactor BOSS3 state respawnspritefix
+ ifactor BOSS3STAYPUT state respawnspritefix
+ ifactor BOSS3LOB state respawnspritefix
+ ifactor BOSS4 state respawnspritefix
+ ifactor BOSS4STAYPUT state respawnspritefix
+ ifactor EMPTYTANK state respawnspritefix
+
+// Item Spawner
+ ifactor DONUTS state respawnspriteitemfix
+ ifactor DONUTS2 state respawnspriteitemfix
+ ifactor STEROIDS state respawnspriteitemfix
+ ifactor BOOTS state respawnspriteitemfix
+ ifactor HEATSENSOR state respawnspriteitemfix
+ ifactor SHIELD state respawnspriteitemfix
+ ifactor AIRTANK state respawnspriteitemfix
+ ifactor HOLODUKE state respawnspriteitemfix
+ ifactor JETPACK state respawnspriteitemfix
+ ifactor AMMO state respawnspriteitemfix
+ ifactor FREEZEAMMO state respawnspriteitemfix
+ ifactor AMMOLOTS state respawnspriteitemfix
+ ifactor SHOTGUNAMMO state respawnspriteitemfix
+ ifactor CRYSTALAMMO state respawnspriteitemfix
+ ifactor GROWAMMO state respawnspriteitemfix
+ ifactor BATTERYAMMO state respawnspriteitemfix
+ ifactor DEVISTATORAMMO state respawnspriteitemfix
+ ifactor RPGAMMO state respawnspriteitemfix
+ ifactor HBOMBAMMO state respawnspriteitemfix
+ ifactor RPGSPRITE state respawnspriteitemfix
+ ifactor SHOTGUNSPRITE state respawnspriteitemfix
+ ifactor FIRSTGUNSPRITE state respawnspriteitemfix
+ ifactor TRIPBOMBSPRITE state respawnspriteitemfix
+ ifactor SHRINKERSPRITE state respawnspriteitemfix
+ ifactor CHAINGUNSPRITE state respawnspriteitemfix
+ ifactor FREEZESPRITE state respawnspriteitemfix
+ ifactor DEVISTATORSPRITE state respawnspriteitemfix
+ ifactor COLA state respawnspriteitemfix
+ ifactor SIXPAK state respawnspriteitemfix
+ ifactor ATOMICHEALTH state respawnspriteitemfix
+ ifactor FIRSTAID state respawnspriteitemfix
+ ifactor PENNY state respawnspriteitemfix
+ ifactor NICKEL state respawnspriteitemfix
+ ifactor DIME state respawnspriteitemfix
+ ifactor QUARTER state respawnspriteitemfix
+ ifactor HALFDOLLAR state respawnspriteitemfix
+ ifactor SACDOLLAR state respawnspriteitemfix
+ ifactor ONEDOLLAR state respawnspriteitemfix
+ ifactor TWODOLLARS state respawnspriteitemfix
+ ifactor TWODOLLARBUNDLE state respawnspriteitemfix
+ ifactor FIVEDOLLARS state respawnspriteitemfix
+ ifactor FIVEDOLLARBUNDLE state respawnspriteitemfix
+ ifactor NINEDOLLARBUNDLE state respawnspriteitemfix
+ ifactor TENDOLLARS state respawnspriteitemfix
+ ifactor TENDOLLARBUNDLE state respawnspriteitemfix
+ ifactor TWENTYDOLLARS state respawnspriteitemfix
+ ifactor FIFTYDOLLARS state respawnspriteitemfix
+ ifactor EIGHTYDOLLARBUNDLE state respawnspriteitemfix
+ ifactor ONEHUNDREDDOLLARS state respawnspriteitemfix
+ ifactor FIVEHUNDREDDOLLARS state respawnspriteitemfix
+ ifactor ONETHOUSANDDOLLARS state respawnspriteitemfix
+ ifactor FIVETHOUSANDDOLLARS state respawnspriteitemfix
+ ifactor TENTHOUSANDDOLLARS state respawnspriteitemfix
+ ifactor ONEHUNDREDTHOUSANDDOLLARS state respawnspriteitemfix
+ ifactor ONEMILLIONDOLLARS state respawnspriteitemfix
+ ifactor ONEBILLIONDOLLARS state respawnspriteitemfix
+ ifactor SWMEDIKIT state respawnspriteitemfix
+ ifactor SWBIGMEDIKIT state respawnspriteitemfix
+ ifactor MEDPACK state respawnspriteitemfix
+ ifactor SURGERYKIT state respawnspriteitemfix
+ ifactor MAXHPUP state respawnspriteitemfix
+ ifactor MAXAPUP state respawnspriteitemfix
+ ifactor MAXHPAPUP state respawnspriteitemfix
+ ifactor ATKUP state respawnspriteitemfix
+ ifactor DEFUP state respawnspriteitemfix
+ ifactor SPDUP state respawnspriteitemfix
+ ifactor AIRTIMEBONUS state respawnspriteitemfix
+ ifactor MANTLEBONUS state respawnspriteitemfix
+ ifactor AIRJUMPBONUS state respawnspriteitemfix
+ ifactor SATCHEL_SMALL state respawnspriteitemfix
+ ifactor SATCHEL_LARGE state respawnspriteitemfix
+ ifactor SUPERATOM state respawnspriteitemfix
+ ifactor COLORSHIELD state respawnspriteitemfix
+ ifactor SUPERSHIELD state respawnspriteitemfix
+ ifactor ICONOFTHEDEFENDER state respawnspriteitemfix
+ ifactor QUADDAMAGE state respawnspriteitemfix
+ ifactor REGENITEM state respawnspriteitemfix
+ ifactor APREGENITEM state respawnspriteitemfix
+ ifactor VAMPIREITEM state respawnspriteitemfix
+ ifactor COILS state respawnspriteitemfix
+ ifactor FORTUNECOOKIE state respawnspriteitemfix
+ ifactor ONELIFETSHIRT state respawnspriteitemfix
+ ifactor TWOLIFETSHIRT state respawnspriteitemfix
+ ifactor CONTINUEITEM state respawnspriteitemfix
+ ifactor RESURRECTIONCHALICE state respawnspriteitemfix
+ ifactor EYEDROP state respawnspriteitemfix
+ ifactor ANTIDOTE state respawnspriteitemfix
+ ifactor FOGHORN state respawnspriteitemfix
+ ifactor ENERGYSHELL state respawnspriteitemfix
+ ifactor ENERGYSHELL_UPGRADED state respawnspriteitemfix
+ ifactor ENERGYCELL_SMALL state respawnspriteitemfix
+ ifactor ENERGYCELL_MEDIUM state respawnspriteitemfix
+ ifactor ENERGYCELL_LARGE state respawnspriteitemfix
+ ifactor MERCURYCOMPUTER state respawnspriteitemfix
+ ifactor HACKERVISION state respawnspriteitemfix
+ ifactor AFAS_DROP state respawnspriteitemfix
+ ifactor FAUXLEVELUP state respawnspriteitemfix
+ ifactor SUNRING state respawnspriteitemfix
+ ifactor AQUARING state respawnspriteitemfix
+ ifactor PLASMARING state respawnspriteitemfix
+ ifactor SPIRITRING state respawnspriteitemfix
+ ifactor CHARMANKH state respawnspriteitemfix
+ ifactor MIRRORSHIELD state respawnspriteitemfix
+ ifactor EXPBADGE state respawnspriteitemfix
+ ifactor RANKBADGE state respawnspriteitemfix
+ ifactor MONEYBADGE state respawnspriteitemfix
+ ifactor RIOTSHIELD state respawnspriteitemfix
+ ifactor NYXGLOVEPAIR state respawnspriteitemfix
+ ifactor RABBITSFOOT state respawnspriteitemfix
+
+ ifactor HEADJIB1 state changejibcolor_egs
+ ifactor LEGJIB1 state changejibcolor_egs
+ ifactor ARMJIB1 state changejibcolor_egs
+ ifactor LIZMANHEAD1 state changejibcolor_egs
+ ifactor LIZMANLEG1 state changejibcolor_egs
+ ifactor LIZMANARM1 state changejibcolor_egs
+ ifactor JIBS1 state changejibcolor_egs
+ ifactor JIBS2 state changejibcolor_egs
+ ifactor JIBS3 state changejibcolor_egs
+ ifactor JIBS4 state changejibcolor_egs
+ ifactor JIBS5 state changejibcolor_egs
+ ifactor JIBS6 state changejibcolor_egs
+
+ ifactor RPG
+ {
+  ifspawnedby LIZTROOP state properRPG
+  else ifspawnedby PIGCOP state properRPG
+  else ifspawnedby LIZMAN state properRPG
+  else ifspawnedby OCTABRAIN state properRPG
+  else ifspawnedby DRONE state properRPG
+  else ifspawnedby TANK state properRPG
+  else ifspawnedby SCORPIONTANK state properRPG
+ }
+
+ getactor[THISACTOR].picnum GAMEFLAGEGS 
+
+ switch GAMEFLAGEGS
+
+  case ZAPPER1
+    iffloordistl 16 nullop else 
+    { 
+     getactor[THISACTOR].z z 
+     addvar z 768 
+     setactor[THISACTOR].z z 
+    } 
+  break
+
+  case ZAPPER2 
+    iffloordistl 16 nullop else 
+    { 
+     getactor[THISACTOR].z z 
+     addvar z 1536 
+     setactor[THISACTOR].z z 
+    } 
+  break
+
+  case ZAPPER3 
+    iffloordistl 16 nullop else 
+    { 
+     getactor[THISACTOR].z z 
+     addvar z 3072 
+     setactor[THISACTOR].z z 
+    } 
+  break
+
+  case LEADER_RPG 
+    iffloordistl 16 nullop else 
+    { 
+     getactor[THISACTOR].z z 
+     addvar z 1536 
+     setactor[THISACTOR].z z 
+    } 
+  break
+
+  case BAALO_RPG 
+    iffloordistl 16 nullop else 
+    { 
+     getactor[THISACTOR].z z 
+     addvar z 3072 
+     setactor[THISACTOR].z z 
+    } 
+  break
+
+ endswitch
+
+endevent
+
+onevent EVENT_INVENTORYLEFT // Opens the Menu [also cancels selections/closes menu]
+ifvare oldskoolmode 0
+{
+ state getpartime
+  addvar mpresstime 1
+   ifvarvare temppartime mpresstime nullop else
+     {
+      ifvare shop_id -1
+      {
+       ifvare atm_id -1
+       {
+	  ifvare mainmenu 0 
+        {
+         setvar mainmenu 1
+         ifvare mainmenusubmenu 0
+         {
+          ifvarg CHARACTERSELECTED? 0 ifvarl CHARACTERSELECTED? 9 setvar mainmenupage 0
+          ifvare CHARACTERSELECTED? 1 setvar mainmenuselection 0
+          ifvare CHARACTERSELECTED? 2 setvar mainmenuselection 1
+          ifvare CHARACTERSELECTED? 3 setvar mainmenuselection 2
+          ifvare CHARACTERSELECTED? 4 setvar mainmenuselection 3
+          ifvare CHARACTERSELECTED? 5 setvar mainmenuselection 4
+          ifvare CHARACTERSELECTED? 6 setvar mainmenuselection 5
+          ifvare CHARACTERSELECTED? 7 setvar mainmenuselection 6
+          ifvare CHARACTERSELECTED? 8 setvar mainmenuselection 7
+          ifvarg CHARACTERSELECTED? 8 ifvarl CHARACTERSELECTED? 17 setvar mainmenupage 1
+          ifvare CHARACTERSELECTED? 9 setvar mainmenuselection 0
+          ifvare CHARACTERSELECTED? 10 setvar mainmenuselection 1
+          ifvare CHARACTERSELECTED? 11 setvar mainmenuselection 2
+          ifvare CHARACTERSELECTED? 12 setvar mainmenuselection 3
+          ifvare CHARACTERSELECTED? 13 setvar mainmenuselection 4
+          ifvare CHARACTERSELECTED? 14 setvar mainmenuselection 5
+          ifvare CHARACTERSELECTED? 15 setvar mainmenuselection 6
+          ifvare CHARACTERSELECTED? 16 setvar mainmenuselection 7
+         }
+         sound MENU_ENTER
+		 stopsound MENU_EXIT 
+        }
+	  else 
+        {  
+	   ifvare itemidinuse -1 
+         { 
+	    ifvare skillidinuse -1 
+          { 
+ 	     ifvare equipmenuinuse -1 
+           { 
+            state exit_mainmenu
+           }
+           else
+           { 
+            setvar equipmenuinuse -1
+            setvar equipmenupage 0
+            setvar equipmenuselection 0
+            setvar equipcharacter 0
+            sound MENU_EXIT 
+           }
+          }
+          else
+          { 
+           setvar skillidinuse -1 
+           sound MENU_EXIT 
+          }
+         }
+         else
+         { 
+          setvar itemidinuse -1 
+          sound MENU_EXIT 
+         }
+        }
+       }
+       else state atm-lowerrightbutton // ifvarn atm_id -1
+      }
+      else // ifvarn shop_id -1
+      {
+       setvar shop_id -1 
+       setvar shoppage 0 
+       setvar shopselection 0 
+       setvar shopmode 0 
+       setvar shopowner -1 
+       setvar shopownerhealth -1 
+       sound MENU_EXIT 
+      }
+     }
+  setvarvar mpresstime temppartime
+ state setreturn-1
+}
+endevent
+
+onevent EVENT_INVENTORYRIGHT
+ifvare oldskoolmode 0
+{
+ state getpartime
+  addvar mpresstime 1
+   ifvarvare temppartime mpresstime nullop else
+	{
+	 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
+	 {
+        ifvare itemidinuse -1
+        {
+         ifvare skillidinuse -1
+         {
+          ifvare equipmenuinuse -1
+          {
+  	     ifvare mainmenusubmenu 0
+           {
+            addvar mainmenupage 1
+            ifvarg mainmenupage 1 subvar mainmenupage 2
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 1
+           {
+            addvar mainmenupage 1
+            ifvarg mainmenupage 5 subvar mainmenupage 6
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 2
+           {
+            addvar mainmenupage 1
+            ifvarg mainmenupage 1 subvar mainmenupage 2
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 3
+           {
+            state menuerrorsound
+
+            stopsound MENU_SHIFTPAGE
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 4
+           {
+            state menuerrorsound
+            stopsound MENU_SHIFTPAGE
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 5
+           {
+            state menuerrorsound
+            stopsound MENU_SHIFTPAGE
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 6
+           {
+            state menuerrorsound
+            stopsound MENU_SHIFTPAGE
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+	     ifvare mainmenusubmenu 7
+           {
+            addvar mainmenupage 1
+            ifvarg mainmenupage 10 subvar mainmenupage 11
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+          }
+          else // ifvarn equipmenuinuse -1
+          {
+           addvar equipmenupage 1
+           ifvarg equipmenupage 1 subvar equipmenupage 2
+           sound MENU_SHIFTPAGE 
+           stopsound MENU_SELECTED
+           stopsound MENU_ENTER 
+           stopsound MENU_EXIT 
+          }
+         }
+         else // ifvarn skillidinuse -1
+         {
+          addvar skillmenupage 1
+          ifvarg skillmenupage 1 subvar skillmenupage 2
+          sound MENU_SHIFTPAGE 
+          stopsound MENU_SELECTED
+          stopsound MENU_ENTER 
+          stopsound MENU_EXIT 
+         }
+        }
+        else // ifvarn itemidinuse -1
+        {
+         addvar itemmenupage 1
+         ifvarg itemmenupage 1 subvar itemmenupage 2
+         sound MENU_SHIFTPAGE 
+         stopsound MENU_SELECTED
+         stopsound MENU_ENTER 
+         stopsound MENU_EXIT 
+        }
+	 }
+       else
+       {
+        ifvare shop_id -1
+        {
+         ifvare atm_id -1
+         {
+          ifvare CHARACTERSELECTED? 8
+          ifvare HAVEENERGYSHIELD? 1
+          {
+           ifvare ENERGYSHIELDMODE 0 
+           { 
+            setvar ENERGYSHIELDMODE 1 
+            redefinequote 335 ^14BIO-CELL ENERGY SHIELD ACTIVATED!
+           } 
+           else 
+           { 
+            setvar ENERGYSHIELDMODE 0 
+            redefinequote 335 ^14BIO-CELL ENERGY SHIELD DEACTIVATED!
+           }
+           globalsound ESHIELD_TOGGLE
+           setvarvar fta fta_normal setvar ftq 335
+          }
+         }
+         else state atm-lowerleftbutton   // if in an ATM?
+        }
+        else // if in a shop?
+        {
+         ifvarg shoptransitiontimer 6 state shop_shiftpage
+        }
+       }
+	}
+  setvarvar mpresstime temppartime
+ state setreturn-1
+}
+endevent
+
+onevent EVENT_USE
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 state menu-usingmenu
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+  addvar upresstime 1
+  ifvarvare temppartime upresstime nullop else state shop_selection
+  setvarvar upresstime temppartime
+ }
+ else
+ {
+  ifvarn atm_id -1
+  {
+   state setreturn-1
+   state getpartime
+   addvar upresstime 1
+   setvarvar upresstime temppartime
+  }
+  else
+  ifvarn EDGEGRAPPLING 0
+  {
+   state setreturn-1
+   state getpartime
+   addvar upresstime 1
+   setvarvar upresstime temppartime
+  }
+ }
+}
+endevent
+
+onevent EVENT_PROCESSINPUT
+ getinput[THISACTOR].bits bits
+ getinput[THISACTOR].extbits extbits
+ ifvarand bits 1 // Jump
+ {  
+  ifvarg ONAWALL? 0
+  {
+/*
+   ifvare WALLTYPE 4 // Rope/Vine/Pole type
+   {
+    ifvare ONAWALL? 1
+    {
+     setvar ONAWALL? -10 // can't grab another wall for 10 tics
+     getplayer[THISACTOR].ang dodgeang
+     setvar dodge 6
+    }
+   }
+   else
+   {
+   }
+*/
+   setvar ONAWALL? -6
+   setplayer[THISACTOR].jumping_toggle 1
+  }
+  else
+  {
+    getplayer[THISACTOR].player_par temp
+    addvar jpresstime 1
+    ifp pjetpack nullop else 
+    ifvare SECTORLOTAG 2 nullop else
+    {
+     getplayer[THISACTOR].jetpack_amount tempc
+     ifvarvare temp jpresstime ifvare multijumpflag 0 nullop else
+     {
+      ifp ponground nullop
+      else
+      ifvare SECTORLOTAG 2 nullop	
+      else
+      ifvarvarl multijumpflag PLAYERMAXAIRJUMPS
+      {
+       ifvarvarn temp jpresstime
+       {
+        ifvare mainmenu 0 state extrajump
+       }
+      }
+     }
+    }
+    setvarvar jpresstime temp
+  }
+ }
+
+ ifvarand bits 2 // Crouch
+ {
+  ifvare mainmenu 0
+  {
+   ifvare EDGEGRAPPLING 1 setvar EDGEGRAPPLING -10
+  }
+ }
+
+/*
+ ifvarand bits 4 // Fire
+ {
+ }
+
+ ifvarand bits 8 // Aim Up
+ {
+ }
+
+ ifvarand bits 16 // Aim Down
+ {
+ }
+
+ ifvarand bits 32 // Running Key
+ {
+ }
+
+ ifvarand bits 64 // Looking Left
+ {
+ }
+
+ ifvarand bits 128 // Looking Right
+ {
+ }
+
+ ifvarand bits 2097152 // Pause
+ {
+ }
+*/
+
+ ifvarand bits 536870912 // Open
+ {
+  ifvare mainmenu 0
+  {
+   ifvare EDGEGRAPPLING 1
+   {
+    ifvarg EDGEGRAPPLEDELAY 10 setvar EDGEGRAPPLING 2 // begin the ascent  
+   }
+  }
+ }
+
+endevent
+
+onevent EVENT_MOVEFORWARD // Up Key
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ state getpartime
+  addvar fpresstime 1
+  ifvarvare temppartime fpresstime nullop else
+  {
+	 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+	 {
+        ifvare itemidinuse -1
+        {
+         ifvare skillidinuse -1
+         {
+          ifvare equipmenuinuse -1
+          {
+           ifvare mainmenusubmenu 0 // Characters
+           {
+            subvar mainmenuselection 2
+            ifvarl mainmenuselection 0 addvar mainmenuselection 8
+            sound MENU_CURSOR
+           }
+           ifvare mainmenusubmenu 1 // Items
+           {
+            subvar mainmenuselection 6
+            ifvarl mainmenuselection 0 addvar mainmenuselection 24
+            sound MENU_CURSOR
+           }
+   	     ifvare mainmenusubmenu 2 // Toggles
+  	     {
+  	      subvar mainmenuselection 1
+ 	      ifvarl mainmenuselection 0 addvar mainmenuselection 13
+ 	      sound KICK_HIT // EXITMENUSOUND
+	     }
+	     ifvare mainmenusubmenu 3 state menuerrorsound // Status
+	     ifvare mainmenusubmenu 4 // Skills
+           {
+            ifvare mainmenupage 3
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 2
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 6
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 3
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 9
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 6
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 11
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 2
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 13
+            {
+             ifvare PUBLICBETA? 0
+             {
+              subvar mainmenuselection 1
+              ifvarl mainmenuselection 0 addvar mainmenuselection 2
+              sound MENU_CURSOR
+             }
+             else state menuerrorsound
+            }
+            else
+            ifvare mainmenupage 14
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 2
+             sound MENU_CURSOR
+            }
+            else state menuerrorsound
+           }
+	     ifvare mainmenusubmenu 5 state menuerrorsound // Support
+	     ifvare mainmenusubmenu 6 // Equipment
+           {
+	      subvar mainmenuselection 1
+            ifvare EQUIPCHEAT? 0
+            {
+             ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarl mainmenuselection 0 setvar mainmenuselection 0 }
+             else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarl mainmenuselection 0 setvar mainmenuselection 1 }
+             else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarl mainmenuselection 0 setvar mainmenuselection 2 }
+             else ifvare SKILLLEVEL 0 { ifvarl mainmenuselection 0 setvar mainmenuselection 3 }
+            }
+            else
+            {
+             ifvare EQUIPCHEAT? 2
+             {
+              ifvarl mainmenuselection 0 setvar mainmenuselection 7
+             }
+             else
+             {
+              ifvarl mainmenuselection 0 setvar mainmenuselection 3
+             }
+            }
+	      sound KICK_HIT // EXITMENUSOUND
+           }
+	     ifvare mainmenusubmenu 7 // WorldTiles
+           {
+            subvar mainmenuselection 5
+            ifvarl mainmenuselection 0 addvar mainmenuselection 25
+            sound MENU_CURSOR
+           }
+           ifvare mainmenusubmenu 256 // Cheats
+           {
+            subvar mainmenuselection 8
+            ifvarl mainmenuselection 0 addvar mainmenuselection 36
+            sound MENU_CURSOR
+           }
+          }
+          else // Equipment Choose
+          {
+           subvar equipmenuselection 6
+           ifvarl equipmenuselection 0 addvar equipmenuselection 24
+           sound MENU_CURSOR
+          }
+         }
+         else // Skill Use
+         {
+          subvar skillmenuselection 2
+          ifvarl skillmenuselection 0 addvar skillmenuselection 8
+          sound MENU_CURSOR
+         }
+        }
+        else // Item Use
+        {
+         subvar itemmenuselection 2
+         ifvarl itemmenuselection 0 addvar itemmenuselection 8
+         sound MENU_CURSOR
+        }
+	  state setreturn-1
+	 }
+  }
+  setvarvar fpresstime temppartime
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+  addvar fpresstime 1
+  ifvarvare temppartime fpresstime nullop else
+  {
+   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state shop_moveup
+  }
+  setvarvar fpresstime temppartime
+ }
+ else
+ {
+  ifvarn atm_id -1
+  {
+   state setreturn-1
+   state getpartime
+   addvar fpresstime 1
+   ifvarvare temppartime fpresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state shop_moveup
+   }
+   setvarvar fpresstime temppartime
+  }
+  else
+  {
+   setvar fpress 2
+ 
+   ifvarg ONAWALL? 0 ifvarg CURRENTHITPOINTS 0 // ifp palive
+   {
+ 	state setreturn-1
+ 	ifp ponground  
+	{  
+       getplayer[THISACTOR].posz z 
+       subvar z 1024 
+       setplayer[THISACTOR].posz z 
+	}
+  	  setvarvar temp CHARACTERSPEEDTRUE
+      ifp ponsteroids divvar temp -40 else divvar temp -50
+      setvarvar tempc CHARACTERSPEEDSTAT
+	  ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
+      else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }
+
+      mulvar tempc 10
+      subvarvar temp tempc
+      ifp ponsteroids
+      {
+       setvarvar tempc CHARACTERSPEEDSTAT
+ 	   ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
+       else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }	   
+
+       mulvar tempc 20
+       subvarvar temp tempc
+      }
+	setvarvar CLIMBINGSPEED temp
+   }
+  }
+ }
+}
+endevent
+
+onevent EVENT_MOVEBACKWARD // Down Key
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state getpartime
+ addvar bpresstime 1
+ ifvarvare temppartime bpresstime nullop else
+ {
+	 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+	 {
+        ifvare itemidinuse -1
+        {
+         ifvare skillidinuse -1
+         {
+          ifvare equipmenuinuse -1
+          {
+           ifvare mainmenusubmenu 0 // Characters
+           {
+            addvar mainmenuselection 2
+            ifvarg mainmenuselection 7 subvar mainmenuselection 8
+            sound MENU_CURSOR
+           }
+           ifvare mainmenusubmenu 1 // Items
+           {
+            addvar mainmenuselection 6
+            ifvarg mainmenuselection 23 subvar mainmenuselection 24
+            sound MENU_CURSOR
+           }
+ 	     ifvare mainmenusubmenu 2 // Toggle
+	     {
+	      addvar mainmenuselection 1
+	      ifvarg mainmenuselection 12 subvar mainmenuselection 13
+	      sound KICK_HIT // EXITMENUSOUND
+ 	     }
+	     ifvare mainmenusubmenu 3 state menuerrorsound // Status
+	     ifvare mainmenusubmenu 4 // Skills
+           {
+            ifvare mainmenupage 3
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 1 subvar mainmenuselection 2
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 6
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 2 subvar mainmenuselection 3
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 9
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 5 subvar mainmenuselection 6
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 11
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 1 subvar mainmenuselection 2
+             sound MENU_CURSOR
+            }
+            else
+            ifvare mainmenupage 13
+            {
+             ifvare PUBLICBETA? 0
+             {
+              addvar mainmenuselection 1
+              ifvarg mainmenuselection 1 subvar mainmenuselection 2
+              sound MENU_CURSOR
+             }
+             else state menuerrorsound
+            }
+            else
+            ifvare mainmenupage 14
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 1 subvar mainmenuselection 2
+             sound MENU_CURSOR
+            }
+            else state menuerrorsound
+           }
+	     ifvare mainmenusubmenu 5 state menuerrorsound // Support
+	     ifvare mainmenusubmenu 6 // Equip
+           {
+	      addvar mainmenuselection 1
+            ifvare EQUIPCHEAT? 0
+            {
+             ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarg mainmenuselection 0 setvar mainmenuselection 0 }
+             else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarg mainmenuselection 1 setvar mainmenuselection 0 }
+             else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarg mainmenuselection 2 setvar mainmenuselection 0 }
+             else ifvare SKILLLEVEL 0 { ifvarg mainmenuselection 3 setvar mainmenuselection 0 }
+            }
+            else
+            {
+             ifvare EQUIPCHEAT? 2
+             {
+              ifvarg mainmenuselection 7 setvar mainmenuselection 0
+             }
+             else
+             {
+              ifvarg mainmenuselection 3 setvar mainmenuselection 0
+             }
+            }
+	      sound KICK_HIT // EXITMENUSOUND
+           }
+	     ifvare mainmenusubmenu 7 // WorldTiles
+           {
+            addvar mainmenuselection 5
+            ifvarg mainmenuselection 24 subvar mainmenuselection 25
+            sound MENU_CURSOR
+           }
+           ifvare mainmenusubmenu 256 // Cheats
+           {
+            addvar mainmenuselection 8
+            ifvarg mainmenuselection 35 subvar mainmenuselection 36
+            sound MENU_CURSOR
+           }
+          }
+          else // Equip Choose
+          {
+           addvar equipmenuselection 6
+           ifvarg equipmenuselection 23 subvar equipmenuselection 24
+           sound MENU_CURSOR
+          }
+         }
+         else // Skill Use
+         {
+          addvar skillmenuselection 2
+          ifvarg skillmenuselection 7 subvar skillmenuselection 8
+          sound MENU_CURSOR
+         }
+        }
+        else // Item Use
+        {
+         addvar itemmenuselection 2
+         ifvarg itemmenuselection 7 subvar itemmenuselection 8
+         sound MENU_CURSOR
+        }
+        state setreturn-1
+	 }
+  }
+  setvarvar bpresstime temppartime
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+   addvar bpresstime 1
+   ifvarvare temppartime bpresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state shop_movedown
+   }
+  setvarvar bpresstime temppartime
+ }
+ else
+ {
+  ifvarn atm_id -1
+  {
+   state setreturn-1
+   state getpartime
+   addvar bpresstime 1
+   ifvarvare temppartime bpresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state shop_movedown
+   }
+   setvarvar bpresstime temppartime
+  }
+  else
+  {
+   setvar bpress 2
+
+   ifvarg ONAWALL? 0 ifvarg CURRENTHITPOINTS 0 // ifp palive
+   {
+	state setreturn-1
+	setvarvar temp CHARACTERSPEEDTRUE
+      ifp ponsteroids divvar temp 40 else divvar temp 50
+	  subvar temp 512
+      setvarvar tempc CHARACTERSPEEDSTAT
+      mulvar tempc 10
+      addvarvar temp tempc
+      ifp ponsteroids
+      {
+       setvarvar tempc CHARACTERSPEEDSTAT
+       mulvar tempc 20
+       addvarvar temp tempc
+      }
+	setvarvar CLIMBINGSPEED temp
+   }
+  }
+ }
+}
+endevent
+
+onevent EVENT_STRAFELEFT
+   ifvare ONAWALL? 1 ifvare WALLTYPE 4
+   { 
+    setvar RETURN -1
+    addvar CLIMBWALLANG 32 ifvarg CLIMBWALLANG 2047 subvar CLIMBWALLANG 2048
+   }
+endevent
+
+onevent EVENT_STRAFERIGHT
+   ifvare ONAWALL? 1 ifvare WALLTYPE 4 
+   { 
+    setvar RETURN -1
+    subvar CLIMBWALLANG 32 ifvarl CLIMBWALLANG 0 addvar CLIMBWALLANG 2048 
+   }
+endevent
+
+onevent EVENT_TURNLEFT // Left Key
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ state getpartime
+  addvar lpresstime 1
+   ifvarvare temppartime lpresstime nullop else
+   {
+    ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+    {
+         ifvare itemidinuse -1
+         {
+          ifvare skillidinuse -1
+          {
+           ifvare equipmenuinuse -1
+           {
+            ifvare mainmenusubmenu 0 // Characters
+            {
+             subvar mainmenuselection 1 
+             ifvarl mainmenuselection 0 addvar mainmenuselection 8 
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 1 // Items
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 24
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 2 // System
+            {
+             ifvare mainmenuselection 11
+             {
+              ifvare autosavetoggle 1
+              {
+               subvar AUTOSAVEFREQUENCY 1
+               ifvarl AUTOSAVEFREQUENCY 0 addvar AUTOSAVEFREQUENCY 121
+               savegamevar AUTOSAVEFREQUENCY
+               state reset_autosavetimes
+              }
+             }
+             sound PISTOL_BODYHIT
+            }
+            ifvare mainmenusubmenu 3 // Status
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 4 // Skills
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 5 // Support
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 6 // Equipment
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 7 // WorldTiles
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 25
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 256 // Cheats Menu
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 36
+             sound MENU_CURSOR
+            }
+           }
+           else // Equipment Choose
+           {
+            subvar equipmenuselection 1
+            ifvarl equipmenuselection 0 addvar equipmenuselection 24
+            sound MENU_CURSOR
+           }
+          }
+          else // Skill Use
+          {
+           subvar skillmenuselection 1
+           ifvarl skillmenuselection 0 addvar skillmenuselection 8
+           sound MENU_CURSOR
+          }
+         }
+         else // Item Use
+         {
+          subvar itemmenuselection 1
+          ifvarl itemmenuselection 0 addvar itemmenuselection 8
+          sound MENU_CURSOR
+         }
+	   state setreturn-1 
+    }
+   }
+   setvarvar lpresstime temppartime
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+  addvar lpresstime 1
+  ifvarvare temppartime lpresstime nullop else
+  {
+   ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+   {
+    // ifvarand bits 268435456 subvar shopamount 10 else subvar shopamount 1
+    subvar shopamount 1
+    ifvarl shopamount 1 addvar shopamount 100
+    sound MENU_CURSOR
+   }
+  }
+  setvarvar lpresstime temppartime
+ }
+ else
+ {
+  ifvarn VEHICLEID -1 state setreturn-1
+  ifvarg ONAWALL? 0 ifvare WALLTYPE 4 state setreturn-1
+ }
+}
+endevent
+
+onevent EVENT_STRAFELEFT
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ state getpartime
+  addvar lpresstime 1
+   ifvarvare temppartime lpresstime nullop else
+   {
+    ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+    {
+         ifvare itemidinuse -1
+         {
+          ifvare skillidinuse -1
+          {
+           ifvare equipmenuinuse -1
+           {
+            ifvare mainmenusubmenu 0 // Characters
+            {
+             subvar mainmenuselection 1 
+             ifvarl mainmenuselection 0 addvar mainmenuselection 8 
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 1 // Items
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 24
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 2 // System
+            {
+             ifvare mainmenuselection 11
+             {
+              ifvare autosavetoggle 1
+              {
+               subvar AUTOSAVEFREQUENCY 1
+               ifvarl AUTOSAVEFREQUENCY 0 addvar AUTOSAVEFREQUENCY 121
+               savegamevar AUTOSAVEFREQUENCY
+               state reset_autosavetimes
+              }
+             }
+             sound PISTOL_BODYHIT
+            }
+            ifvare mainmenusubmenu 3 // Status
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 4 // Skills
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 5 // Support
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 6 // Equipment
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensleft
+            }
+            ifvare mainmenusubmenu 7 // WorldTiles
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 25
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 256 // Cheats Menu
+            {
+             subvar mainmenuselection 1
+             ifvarl mainmenuselection 0 addvar mainmenuselection 36
+             sound MENU_CURSOR
+            }
+           }
+           else // Equipment Choose
+           {
+            subvar equipmenuselection 1
+            ifvarl equipmenuselection 0 addvar equipmenuselection 24
+            sound MENU_CURSOR
+           }
+          }
+          else // Skill Use
+          {
+           subvar skillmenuselection 1
+           ifvarl skillmenuselection 0 addvar skillmenuselection 8
+           sound MENU_CURSOR
+          }
+         }
+         else // Item Use
+         {
+          subvar itemmenuselection 1
+          ifvarl itemmenuselection 0 addvar itemmenuselection 8
+          sound MENU_CURSOR
+         }
+	     state setreturn-1 
+    }
+   }
+   setvarvar lpresstime temppartime
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+  addvar lpresstime 1
+  ifvarvare temppartime lpresstime nullop else
+  {
+   ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+   {
+    // ifvarand bits 268435456 subvar shopamount 10 else subvar shopamount 1
+    subvar shopamount 1
+    ifvarl shopamount 1 addvar shopamount 100
+    sound MENU_CURSOR
+   }
+  }
+  setvarvar lpresstime temppartime
+ }
+ else
+ {
+  ifvarn VEHICLEID -1 state setreturn-1
+  ifvarg ONAWALL? 0 ifvare WALLTYPE 4 state setreturn-1
+ }
+}
+endevent
+
+onevent EVENT_TURNRIGHT // Right Key
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ state getpartime
+  addvar rpresstime 1
+   ifvarvare temppartime rpresstime nullop else
+   {
+    ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+    {
+         ifvare itemidinuse -1
+         {
+          ifvare skillidinuse -1
+          {
+           ifvare equipmenuinuse -1
+           {
+            ifvare mainmenusubmenu 0
+	        {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 7 subvar mainmenuselection 8
+             sound MENU_CURSOR
+	        }
+            ifvare mainmenusubmenu 1
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 23 subvar mainmenuselection 24
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 2 // System
+            {
+             ifvare mainmenuselection 11
+             {
+              ifvare autosavetoggle 1
+              {
+               addvar AUTOSAVEFREQUENCY 1
+               ifvarg AUTOSAVEFREQUENCY 120 subvar AUTOSAVEFREQUENCY 121
+               savegamevar AUTOSAVEFREQUENCY
+               state reset_autosavetimes
+              }
+             }
+             sound PISTOL_BODYHIT
+            }
+            ifvare mainmenusubmenu 3 // Status
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+            ifvare mainmenusubmenu 4 // Skills
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+            ifvare mainmenusubmenu 5 // Support
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+            ifvare mainmenusubmenu 6 // Equipment
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+	        ifvare mainmenusubmenu 7 // WorldTiles
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 24 subvar mainmenuselection 25
+             sound MENU_CURSOR
+            }
+	        ifvare mainmenusubmenu 256 // Cheats
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 35 subvar mainmenuselection 36
+             sound MENU_CURSOR
+            }
+           }
+           else // Equipment Choose
+           {
+            addvar equipmenuselection 1
+            ifvarg equipmenuselection 23 subvar equipmenuselection 24
+            sound MENU_CURSOR
+           }
+          }
+          else // Skill Use
+          {
+           addvar skillmenuselection 1
+           ifvarg skillmenuselection 7 subvar skillmenuselection 8
+           sound MENU_CURSOR
+          }
+         }
+         else // Item Use
+         {
+          addvar itemmenuselection 1
+          ifvarg itemmenuselection 7 subvar itemmenuselection 8
+          sound MENU_CURSOR
+         }
+	     state setreturn-1 
+    }
+   }
+   setvarvar rpresstime temppartime
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+   addvar rpresstime 1
+   ifvarvare temppartime rpresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+    {
+     // ifvarand bits 268435456 addvar shopamount 10 else addvar shopamount 1
+     addvar shopamount 1
+     ifvarg shopamount 100 subvar shopamount 100
+     sound MENU_CURSOR
+    }
+   }
+   setvarvar rpresstime temppartime
+ }
+ else
+ {
+  ifvarn VEHICLEID -1 state setreturn-1
+  ifvarg ONAWALL? 0 ifvare WALLTYPE 4 state setreturn-1
+ }
+}
+endevent
+
+onevent EVENT_STRAFERIGHT
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ state getpartime
+  addvar rpresstime 1
+   ifvarvare temppartime rpresstime nullop else
+   {
+    ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+    {
+         ifvare itemidinuse -1
+         {
+          ifvare skillidinuse -1
+          {
+           ifvare equipmenuinuse -1
+           {
+            ifvare mainmenusubmenu 0
+	        {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 7 subvar mainmenuselection 8
+             sound MENU_CURSOR
+	        }
+            ifvare mainmenusubmenu 1
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 23 subvar mainmenuselection 24
+             sound MENU_CURSOR
+            }
+            ifvare mainmenusubmenu 2 // System
+            {
+             ifvare mainmenuselection 11
+             {
+              ifvare autosavetoggle 1
+              {
+               addvar AUTOSAVEFREQUENCY 1
+               ifvarg AUTOSAVEFREQUENCY 120 subvar AUTOSAVEFREQUENCY 121
+               savegamevar AUTOSAVEFREQUENCY
+               state reset_autosavetimes
+              }
+             }
+             sound PISTOL_BODYHIT
+            }
+            ifvare mainmenusubmenu 3 // Status
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+            ifvare mainmenusubmenu 4 // Skills
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+            ifvare mainmenusubmenu 5 // Support
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+            ifvare mainmenusubmenu 6 // Equipment
+            {
+             setvar mainmenuselection 0
+             state checkcharstatusscreensright
+            }
+	        ifvare mainmenusubmenu 7 // WorldTiles
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 24 subvar mainmenuselection 25
+             sound MENU_CURSOR
+            }
+	        ifvare mainmenusubmenu 256 // Cheats
+            {
+             addvar mainmenuselection 1
+             ifvarg mainmenuselection 35 subvar mainmenuselection 36
+             sound MENU_CURSOR
+            }
+           }
+           else // Equipment Choose
+           {
+            addvar equipmenuselection 1
+            ifvarg equipmenuselection 23 subvar equipmenuselection 24
+            sound MENU_CURSOR
+           }
+          }
+          else // Skill Use
+          {
+           addvar skillmenuselection 1
+           ifvarg skillmenuselection 7 subvar skillmenuselection 8
+           sound MENU_CURSOR
+          }
+         }
+         else // Item Use
+         {
+          addvar itemmenuselection 1
+          ifvarg itemmenuselection 7 subvar itemmenuselection 8
+          sound MENU_CURSOR
+         }
+	     state setreturn-1 
+    }
+   }
+   setvarvar rpresstime temppartime
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+   addvar rpresstime 1
+   ifvarvare temppartime rpresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+    {
+     // ifvarand bits 268435456 addvar shopamount 10 else addvar shopamount 1
+     addvar shopamount 1
+     ifvarg shopamount 100 subvar shopamount 100
+     sound MENU_CURSOR
+    }
+   }
+   setvarvar rpresstime temppartime
+ }
+ else
+ {
+  ifvarn VEHICLEID -1 state setreturn-1
+  ifvarg ONAWALL? 0 ifvare WALLTYPE 4 state setreturn-1
+ }
+}
+endevent
+
+onevent EVENT_LOOKLEFT
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
+{
+ state getpartime
+ addvar mpresstime 1
+ ifvarvare temppartime mpresstime nullop else
+ {
+  ifvare mainmenusubmenu 0
+  {
+   // Change Character Form [Up]
+   ifvare mainmenupage 0
+   {
+    ifvare mainmenuselection 2 ifvare BUBSY? 1 
+    {
+     setvar CHARACTERARRAY 3
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
+     ifvare BUBSYFORM? 0
+     {
+      ifvarg TEMPVAR6 0
+      {
+       setvar BUBSYFORM? 1 
+       globalsound TELEPORTER
+      }
+      else
+      {
+       state menuerrorsound
+       redefinequote 334 ^10BUBSY HAS INSUFFICENT EP FOR THE LOKI MASK!
+       setvarvar fta fta_normal setvar ftq 334
+      }
+     }
+     else
+     {
+      setvar BUBSYFORM? 0
+      globalsound TELEPORTER
+     }
+    }
+    else ifvare mainmenuselection 3 ifvare AMI? 1
+    {
+     setvar CHARACTERARRAY 4
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
+     ifvare AMIFORM? 0
+     {
+      ifvarg TEMPVAR6 0
+      {
+       setvar AMIFORM? 2
+       globalsound TELEPORTER
+      }
+      else
+      {
+       state menuerrorsound
+       redefinequote 334 ^10AMI HAS INSUFFICENT EP FOR BALANCED FORM!
+       setvarvar fta fta_normal setvar ftq 334
+      }
+     }
+     else
+     ifvare AMIFORM? 1
+     {
+      setvar AMIFORM? 0
+      globalsound TELEPORTER
+     }
+     else
+     ifvare AMIFORM? 2
+     {
+      setvar AMIFORM? 1
+      globalsound TELEPORTER
+     }
+    }
+    else ifvare mainmenuselection 5 ifvare ESSENCE? 1 { subvar ESSENCEFORM? 1 { ifvarl ESSENCEFORM? 0 setvar ESSENCEFORM? 1 } globalsound TELEPORTER } // ESSence
+    else state menuerrorsound
+   }
+   else
+   ifvare mainmenupage 1
+   {
+    ifvare mainmenuselection 1 ifvare NETHRA? 1 { subvar NETHRAFORM? 1 { ifvarl NETHRAFORM? 0 setvar NETHRAFORM? 1 } globalsound TELEPORTER } // Nethra
+    else ifvare mainmenuselection 4 ifvare MINAKO? 1
+    {
+     setvar CHARACTERARRAY 13
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
+     ifvare MINAKOFORM? 0
+     {
+      ifvarg TEMPVAR6 0
+      {
+       setvar MINAKOFORM? 2
+       globalsound TELEPORTER
+      }
+      else
+      {
+       state menuerrorsound
+       redefinequote 334 ^10MINAKO HAS INSUFFICENT EP FOR BALANCED FORM!
+       setvarvar fta fta_normal setvar ftq 334
+      }
+     }
+     else
+     ifvare MINAKOFORM? 1
+     {
+      setvar MINAKOFORM? 0
+      globalsound TELEPORTER
+     }
+     else
+     ifvare MINAKOFORM? 2
+     {
+      setvar MINAKOFORM? 1
+      globalsound TELEPORTER
+     }
+    }
+    else state menuerrorsound
+   }
+  }
+ }
+ setvarvar mpresstime temppartime
+ state setreturn-1
+}
+else
+// ifvare mainmenu -1 // Tips
+{
+ state getpartime addvar mpresstime 1
+ ifvarvare temppartime mpresstime nullop else
+ {
+  ifvarn tipdisplayid -1 setvar tipdisplayid -1
+  else setvar tipdisplayid 0
+ }
+ setvarvar mpresstime temppartime
+ state setreturn-1 
+}
+/*
+else
+{
+ ifvarn VEHICLEID -1
+ {
+  ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 state setreturn-1
+ }
+}
+*/
+endevent
+
+onevent EVENT_LOOKRIGHT
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
+{
+ state getpartime
+ addvar mpresstime 1
+ ifvarvare temppartime mpresstime nullop else
+ {
+  ifvare mainmenusubmenu 0
+  {
+   // Change Character Form [Down]
+   ifvare mainmenupage 0
+   {
+    ifvare mainmenuselection 2 ifvare BUBSY? 1 
+    {
+     setvar CHARACTERARRAY 3
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
+     ifvare BUBSYFORM? 0
+     {
+      ifvarg TEMPVAR6 0
+      {
+       setvar BUBSYFORM? 1 
+       globalsound TELEPORTER
+      }
+      else
+      {
+       state menuerrorsound
+       redefinequote 334 ^10BUBSY HAS INSUFFICENT EP FOR THE LOKI MASK!
+       setvarvar fta fta_normal setvar ftq 334
+      }
+     }
+     else
+     {
+      setvar BUBSYFORM? 0
+      globalsound TELEPORTER
+     }
+    }
+    else ifvare mainmenuselection 3 ifvare AMI? 1
+    {
+     setvar CHARACTERARRAY 4
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
+     ifvare AMIFORM? 0
+     {
+      setvar AMIFORM? 1
+      globalsound TELEPORTER
+     }
+     else
+     ifvare AMIFORM? 1
+     {
+      ifvarg TEMPVAR6 0
+      {
+       setvar AMIFORM? 2
+       globalsound TELEPORTER
+      }
+      else
+      {
+       state menuerrorsound
+       redefinequote 334 ^10AMI HAS INSUFFICENT EP FOR BALANCED FORM!
+       setvarvar fta fta_normal setvar ftq 334
+      }
+     }
+     else
+     ifvare AMIFORM? 2
+     {
+      setvar AMIFORM? 0
+      globalsound TELEPORTER
+     }
+    }
+    else ifvare mainmenuselection 5 ifvare ESSENCE? 1 { addvar ESSENCEFORM? 1 { ifvarg ESSENCEFORM? 1 setvar ESSENCEFORM? 0 } globalsound TELEPORTER } // ESSence
+    else state menuerrorsound
+   }
+   else
+   ifvare mainmenupage 1
+   {
+    ifvare mainmenuselection 1 ifvare NETHRA? 1 { addvar NETHRAFORM? 1 { ifvarg NETHRAFORM? 1 setvar NETHRAFORM? 0 } globalsound TELEPORTER } // Nethra
+    else ifvare mainmenuselection 4
+    {
+     setvar CHARACTERARRAY 13
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
+     ifvare MINAKOFORM? 0
+     {
+      setvar MINAKOFORM? 1
+      globalsound TELEPORTER
+     }
+     else
+     ifvare MINAKOFORM? 1
+     {
+      ifvarg TEMPVAR6 0
+      {
+       setvar MINAKOFORM? 2
+       globalsound TELEPORTER
+      }
+      else
+      {
+       state menuerrorsound
+       redefinequote 334 ^10MINAKO HAS INSUFFICENT EP FOR BALANCED FORM!
+       setvarvar fta fta_normal setvar ftq 334
+      }
+     }
+     else
+     ifvare MINAKOFORM? 2
+     {
+      setvar MINAKOFORM? 0
+      globalsound TELEPORTER
+     }
+    }
+    else state menuerrorsound
+   }
+  }
+/*
+  else
+  ifvare mainmenusubmenu 6
+  {
+   // Empty Equipment Slot
+  }
+*/
+ }
+ setvarvar mpresstime temppartime
+ state setreturn-1
+}
+else
+// ifvare mainmenu -1 // Tips
+{
+ state getpartime addvar mpresstime 1
+ ifvarvare temppartime mpresstime nullop else
+ {
+  ifvarn tipdisplayid -1 setvar tipdisplayid -1
+  else setvar tipdisplayid 0
+ }
+ setvarvar mpresstime temppartime
+ state setreturn-1 
+}
+/*
+else
+{
+ ifvarn VEHICLEID -1
+ {
+  ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 state setreturn-1
+ }
+}
+*/
+endevent
+
+/*
+onevent EVENT_PREVIOUSWEAPON
+ state getpartime
+  addvar mpresstime 1
+   ifvarvare temppartime mpresstime nullop else
+	{
+
+	}
+  setvarvar mpresstime temppartime
+ state setreturn-1
+endevent
+
+onevent EVENT_NEXTWEAPON
+ state getpartime
+  addvar mpresstime 1
+   ifvarvare temppartime mpresstime nullop else
+	{
+
+	}
+  setvarvar mpresstime temppartime
+ state setreturn-1
+endevent
+*/
+
+onevent EVENT_TURNAROUND
+ifvare mainmenu 0
+{
+ ifvare atm_id -1
+ {
+  ifvarn pad_id -1 nullop
+  else
+  {
+   ifvare EDGEGRAPPLING 1 
+   {
+    ifvare backview 0
+    {
+     setvar backview 52
+     redefinequote 835 ^20OVER-THE-SHOULDER MODE
+     setvarvar fta fta_normal setvar ftq 835
+    }
+    state setreturn-1
+   }
+   else
+   {
+    ifvarg ONAWALL? 0 
+    {
+     ifvare backview 0
+     {
+      setvar backview 52
+      redefinequote 835 ^20OVER-THE-SHOULDER MODE
+      setvarvar fta fta_normal setvar ftq 835
+     }
+     state setreturn-1
+    }
+    else
+    {
+     ifvarn VEHICLEID -1 state setreturn-1
+    }
+   }
+  }
+ }
+}
+   state getpartime
+   addvar mpresstime 1
+   ifvarvare temppartime mpresstime nullop else
+   {
+       ifvare mainmenu 0
+       {
+        ifvare atm_id -1
+        {
+         ifvarn pad_id -1
+         {
+          ifvare pnum 0 // If you hit backspace when the code is 0, you cancel out of the keypad
+          {
+           setvar pad_button11timer 6
+           state randomkeypadbeeps
+           state clearpad
+          }
+          else
+          ifvarg pnum 0 // Else if it's above 0, you divide by 10 to emulate a backspace key
+          {
+           setvar pad_button11timer 6
+           state randomkeypadbeeps
+           divvar pnum 10
+           ifvarl pnum 0 setvar pnum 0
+          }
+          state setreturn-1
+         }
+        }
+        else state atm-backspacekey
+       }
+       else
+       {
+        ifvare mainmenusubmenu 1 // Item Menu
+        {
+         state dropinventoryitem
+         state setreturn-1
+        }
+        ifvare mainmenusubmenu 6 // Equipment Menu
+        {
+         ifvare equipmenuinuse -1
+         {
+          // New Method for Removing Equipped Items
+          state enterequipscreen
+          ifvare mainmenupage 0 setvar equipcharacter 1
+          ifvare mainmenupage 1 setvar equipcharacter 2
+          ifvare mainmenupage 2 setvar equipcharacter 3
+          ifvare mainmenupage 3 setvar equipcharacter 4
+          ifvare mainmenupage 4 setvar equipcharacter 5
+          ifvare mainmenupage 5 setvar equipcharacter 6
+          ifvare mainmenupage 6 setvar equipcharacter 7
+          ifvare mainmenupage 7 setvar equipcharacter 8
+          ifvare mainmenupage 8 setvar equipcharacter 9
+          ifvare mainmenupage 9 setvar equipcharacter 10
+          ifvare mainmenupage 10 setvar equipcharacter 11
+          ifvare mainmenupage 11 setvar equipcharacter 12
+          ifvare mainmenupage 12 setvar equipcharacter 13
+          ifvare mainmenupage 13 setvar equipcharacter 14
+          ifvare mainmenupage 14 setvar equipcharacter 15
+          state menu_checkequipslots
+
+          ifvare EQUIPTEMP 0 { state sound_errorequip } // Nothing Equipped
+          else ifvare EQUIPTEMP 1 { state menu_clearequipslots state checksunrings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Sun Ring Equipped...
+          else ifvare EQUIPTEMP 2 { state menu_clearequipslots state checkaquarings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Aqua Ring Equipped...
+          else ifvare EQUIPTEMP 3 { state menu_clearequipslots state checkplasmarings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Plasma Ring Equipped...
+          else ifvare EQUIPTEMP 4 { state menu_clearequipslots state checkspiritrings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Spirit Ring Equipped...
+          else ifvare EQUIPTEMP 5 { state menu_clearequipslots state checkcharmankhs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Charm Ankh Equipped...
+          else ifvare EQUIPTEMP 6 { state menu_clearequipslots state checkmirrorshields addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Mirror Shield Equipped...
+          else ifvare EQUIPTEMP 7 { state menu_clearequipslots state checkexpbadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If EXP Badge Equipped...
+          else ifvare EQUIPTEMP 8 { state menu_clearequipslots state checkrankbadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Rank Badge Equipped...
+          else ifvare EQUIPTEMP 9 { state menu_clearequipslots state checkmoneybadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Money Badge Equipped...
+          else ifvare EQUIPTEMP 10 { state menu_clearequipslots state checkriotshields addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Riot Shield Equipped...
+          else ifvare EQUIPTEMP 11 { state menu_clearequipslots state checknyxglovepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Nyx Gloves Equipped...
+          else ifvare EQUIPTEMP 12 { state menu_clearequipslots state checkrabbitsfoots addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Rabbit's Foot Equipped...
+          else ifvare EQUIPTEMP 13 { state menu_clearequipslots state checkjumpbootpairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Jump Boots Equipped...
+          else ifvare EQUIPTEMP 14 { state menu_clearequipslots state checkshockabbootpairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If ShockAb Boots Equipped...
+          else ifvare EQUIPTEMP 15 { state menu_clearequipslots state checkhappyshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Happy Shoes Equipped...
+          else ifvare EQUIPTEMP 16 { state menu_clearequipslots state checkstyleshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Style Shoes Equipped...
+          else ifvare EQUIPTEMP 17 { state menu_clearequipslots state checkcharmshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Charm Shoes Equipped...
+          else ifvare EQUIPTEMP 18 { state menu_clearequipslots state checkpowerwrists addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Power Wrist Equipped...
+          else ifvare EQUIPTEMP 19 { state menu_clearequipslots state checkhockeymasks addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Hockey Mask Equipped...
+          else ifvare EQUIPTEMP 20 { state menu_clearequipslots state checkgemstonecrowns addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Gemstone Crown Equipped...
+          else ifvare EQUIPTEMP 21 { state menu_clearequipslots state checkironrunes addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Iron Rune Equipped...
+          else ifvare EQUIPTEMP 22 { state menu_clearequipslots state checktwilightcapes addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Twilight Cape Equipped...
+          else ifvare EQUIPTEMP 23 { state menu_clearequipslots state checksnakearmbands addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Snake Armband Equipped...
+          else ifvare EQUIPTEMP 24 { state menu_clearequipslots state checkmedicbags addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Medic Bag Equipped...
+          else ifvare EQUIPTEMP 25 { state menu_clearequipslots state checkserpenthelmets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Serpent Helmet Equipped...
+          else ifvare EQUIPTEMP 26 { state menu_clearequipslots state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Energy Incurment Equipped...
+          else ifvare EQUIPTEMP 27 { state menu_clearequipslots state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Yin-Yang Orb Equipped...
+          else ifvare EQUIPTEMP 28 { state menu_clearequipslots state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Jewel of Four Souls Equipped...
+ 
+          setvar equipmenuinuse -1
+         }
+         state setreturn-1
+        }
+       }
+  }
+  setvarvar mpresstime temppartime
+endevent
+
+
+onevent EVENT_LOOKUP
+ ifp ponground state setreturn-1 else state gliding
+ state setreturn-1
+endevent
+
+onevent EVENT_LOOKDOWN
+/*
+ state checktelebeacons
+ ifvarg ITEMARRAYID_AMOUNTTEMP 0
+ {
+  ifvare mainmenu 0
+  {
+   ifvare com_pause 0
+   {
+    espawn TELEBEACON
+    setvarvar tempb telebeaconidglobal
+    addvar telebeaconidglobal 1
+    addvar tempb 1
+    setactorvar[RETURN].telebeaconid tempb
+    setactorvar[RETURN].telebeaconstatus 1
+    getactor[PLAYERID].x temp
+    setactor[RETURN].x temp
+    getactor[PLAYERID].y temp
+    setactor[RETURN].y temp
+    getactor[PLAYERID].z temp
+    setactor[RETURN].z temp
+    state checktelebeacons subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
+    setvar com_pause 13
+   }
+  }
+ }
+ else
+ {
+  ifvare mainmenu 0
+  {
+   ifvare com_pause 0
+   {
+    state menuerrorsound
+    redefinequote 142 ^10YOU HAVE NO TELEPORTER BEACONS TO SET!
+    setvarvar fta fta_normal setvar ftq 142
+    setvar com_pause 13
+   }
+  }
+ }
+ state setreturn-1
+*/
+endevent
+
+onevent EVENT_FIRE // Cancel Button
+ ifvarn mainmenu 0 state setreturn-1 
+ else 
+ { 
+  ifvarn shop_id -1 state setreturn-1 
+  else
+  {
+   ifvarn atm_id -1 state setreturn-1 
+   else
+   {
+    ifvarn VEHICLEID -1
+    {
+     state setreturn-1 break 
+    }
+    ifvare CHARACTERSELECTED? 9
+    {
+     ifvarand bits 262144 state setreturn-1
+     ifvarn SPRITEID-TELEKENESIS_P -1
+     {
+      ifvarvare SPRITEID-HOLDING SPRITEID-TELEKENESIS_P state setreturn-1
+      else ifvarand bits 262144 state setreturn-1
+     }
+     else 
+     {
+      ifvarn SPRITEID-HOLDING -1
+      {
+       getactorvar[SPRITEID-HOLDING].ACTORWEIGHT temp
+       ifvarl temp 40 setvar tempb 36 else
+       ifvarl temp 80 setvar tempb 26 else
+       setvar tempb 16
+       setactorvar[SPRITEID-HOLDING].WEIGHTFLAG tempb
+       getactorvar[SPRITEID-HOLDING].initcstat temp
+       setactor[SPRITEID-HOLDING].cstat temp
+       setvar SPRITEID-HOLDING -1
+       state setreturn-1
+       setvar PICKUPVELS -12
+       break 
+      }
+      ifvarl PICKUPVELS 0 { state setreturn-1 break } 
+
+      ifvarg QUADTIME 0
+      {
+       getplayer[THISACTOR].curr_weapon TEMPVAR
+       ifvarn TEMPVAR 0
+       {
+        ifvarg CURRENTAMMOA 0 sound QUADDAMAGE3
+       }
+       else sound QUADDAMAGE3
+      } 
+ 
+      ifvarg VAMPIRETIME 0
+      {
+       getplayer[THISACTOR].curr_weapon TEMPVAR
+       ifvarn TEMPVAR 0
+       {
+        ifvarg CURRENTAMMOA 0 sound SHOOT_VAMPIREITEM
+       }
+       else sound SHOOT_VAMPIREITEM
+      } 
+
+      getplayer[THISACTOR].curr_weapon TEMPVAR
+      ifvare TEMPVAR 0
+      {
+       ifvare PUBLICBETA? 0
+       {
+        ifvare CHARACTERSELECTED? 8
+        {
+         stopsound LISA_MELEE1
+         stopsound LISA_MELEE2
+         stopsound LISA_MELEE3
+         ifrnd 85 sound LISA_MELEE1
+         else ifrnd 128 sound LISA_MELEE2
+         else sound LISA_MELEE3
+        }
+        ifvare CHARACTERSELECTED? 14
+        {
+         stopsound ENERGYSABRESLASH1
+         stopsound ENERGYSABRESLASH2
+         stopsound ENERGYSABRESLASH3
+         ifrnd 85 sound ENERGYSABRESLASH1
+         else ifrnd 128 sound ENERGYSABRESLASH2
+         else sound ENERGYSABRESLASH3
+        }
+        ifvare CHARACTERSELECTED? 15
+        {
+         stopsound MAKEN_MELEE1
+         stopsound MAKEN_MELEE2
+         stopsound MAKEN_MELEE3
+         ifrnd 85 sound MAKEN_MELEE1
+         else ifrnd 128 sound MAKEN_MELEE2
+         else sound MAKEN_MELEE3
+        }
+       }
+      }
+     }
+    }
+    else
+    ifvarn SPRITEID-HOLDING -1
+    {
+     getactorvar[SPRITEID-HOLDING].ACTORWEIGHT temp
+     ifvarl temp 40 setvar tempb 36 else
+     ifvarl temp 80 setvar tempb 26 else
+     setvar tempb 16
+     setactorvar[SPRITEID-HOLDING].WEIGHTFLAG tempb
+     getactorvar[SPRITEID-HOLDING].initcstat temp
+     setactor[SPRITEID-HOLDING].cstat temp
+     setvar SPRITEID-HOLDING -1
+     state setreturn-1
+     setvar PICKUPVELS -12
+     break 
+    }
+    ifvarl PICKUPVELS 0 { state setreturn-1 break }
+
+    ifvarg QUADTIME 1
+    {
+     getplayer[THISACTOR].curr_weapon TEMPVAR
+     ifvarn TEMPVAR 0
+     {
+      ifvarg CURRENTAMMOA 0 sound QUADDAMAGE3
+     }
+     else sound QUADDAMAGE3
+    } 
+
+    ifvarg VAMPIRETIME 1
+    {
+     getplayer[THISACTOR].curr_weapon TEMPVAR
+     ifvarn TEMPVAR 0
+     {
+      ifvarg CURRENTAMMOA 0 sound SHOOT_VAMPIREITEM
+     }
+     else sound SHOOT_VAMPIREITEM
+    } 
+
+    getplayer[THISACTOR].curr_weapon TEMPVAR
+    ifvare TEMPVAR 0
+    {
+     ifvare PUBLICBETA? 0
+     {
+      ifvare CHARACTERSELECTED? 8
+      {
+       stopsound LISA_MELEE1
+       stopsound LISA_MELEE2
+       stopsound LISA_MELEE3
+       ifrnd 85 sound LISA_MELEE1
+       else ifrnd 128 sound LISA_MELEE2
+       else sound LISA_MELEE3
+      }
+      ifvare CHARACTERSELECTED? 14
+      {
+       stopsound ENERGYSABRESLASH1
+       stopsound ENERGYSABRESLASH2
+       stopsound ENERGYSABRESLASH3
+       ifrnd 85 sound ENERGYSABRESLASH1
+       else ifrnd 128 sound ENERGYSABRESLASH2
+       else sound ENERGYSABRESLASH3
+      }
+     }
+    }
+   }
+
+  }
+ }
+endevent
+
+onevent EVENT_QUICKKICK // Alt-fire mode for now
+ ifvarn mainmenu 0 state setreturn-1 
+ else 
+ { 
+  ifvarn shop_id -1 state setreturn-1 
+  else
+  {
+   ifvarg ONAWALL? 0 state setreturn-1
+   else
+   {
+    ifvarg EDGEGRAPPLING 0 state setreturn-1
+    else
+    {
+     ifvare DEATHMISSILESUSABLE? 1
+     {
+      state setreturn-1
+      getplayer[THISACTOR].curr_weapon TEMPVAR
+      ifvare TEMPVAR 4
+      {
+       setvar DEATHMISSILEACTIVATED 1
+       setvar DEATHMISSILETIMERLAPSE 0
+      }
+     }
+     else
+     {
+      ifvare CHARACTERSELECTED? 14
+      {
+       ifvare PUBLICBETA? 0 state setreturn-1
+       else
+       {
+        ifvarg QUADTIME 1 sound QUADDAMAGE3
+        ifvarg VAMPIRETIME 1 sound SHOOT_VAMPIREITEM
+       }
+      }
+      else
+      {
+       ifvarg QUADTIME 1 sound QUADDAMAGE3
+       ifvarg VAMPIRETIME 1 sound SHOOT_VAMPIREITEM
+      }
+     }
+    }
+   }
+  }
+ }
+endevent
+
+onevent EVENT_JUMP
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  else
+  {
+   ifvarn atm_id -1 state atm-midlowerleftbutton
+   else
+   {
+    ifvarn VEHICLEID -1 state setreturn-1
+    else
+    {     
+     ifvarl ONGROUNDTIMER 2 state setreturn-1
+     else
+     {
+      ifp ponground ifp pducking nullop
+      else
+      {
+       ifvare CHARACTERSELECTED? 1 
+	   { 
+	    stopsound DUKE_JUMP1 
+		stopsound DUKE_JUMP2 
+		ifrnd 128 sound DUKE_JUMP1 else sound DUKE_JUMP2 
+	   }
+       ifvare CHARACTERSELECTED? 5 
+	   {
+  	    stopsound WANG_JUMP1 
+		stopsound WANG_JUMP2 
+		ifrnd 128 sound WANG_JUMP1 else sound WANG_JUMP2 
+	   }
+       ifvare CHARACTERSELECTED? 8 
+	   { 
+	    stopsound LISA_JUMP1 
+		stopsound LISA_JUMP2 
+		ifrnd 128 sound LISA_JUMP1 else sound LISA_JUMP2 
+	   }
+       ifvare CHARACTERSELECTED? 9 
+	   { 
+	    stopsound CYBANIS_JUMP1 
+		stopsound CYBANIS_JUMP2 
+		ifrnd 128 sound CYBANIS_JUMP1 else sound CYBANIS_JUMP2 
+	   }
+       ifvare CHARACTERSELECTED? 15 
+	   {
+	    stopsound MAKEN_JUMP1 
+		stopsound MAKEN_JUMP2 
+		ifrnd 128 sound MAKEN_JUMP1 else sound MAKEN_JUMP2 
+	   }
+      }
+      addvar EQUIP_MOVETIMER 1
+      setvar INTHEAIR? 1
+     }
+    }
+   }
+  }
+ }
+endevent
+
+onevent EVENT_CROUCH
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  else
+  {
+   ifvarn atm_id -1 state atm-midlowerrightbutton
+   else 
+   {
+    ifvarn VEHICLEID -1 state setreturn-1
+   }
+  }
+ }
+endevent
+
+onevent EVENT_SWIMUP
+ state menuvehicledisable
+endevent
+
+onevent EVENT_SWIMDOWN
+ state menuvehicledisable
+endevent
+
+onevent EVENT_SOARUP
+ state menuvehicledisable
+endevent
+
+onevent EVENT_SOARDOWN
+ state menuvehicledisable
+endevent
+
+onevent EVENT_USEJETPACK
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  else
+  {
+   ifvarn atm_id -1 state atm-midupperleftbutton
+   else
+   {
+    ifvarn VEHICLEID -1
+    {
+     state getpartime
+     addvar mpresstime 1
+     ifvarvare temppartime mpresstime nullop else
+     {
+      ifvarg JETPACKTIME 0
+      {
+       state menuerrorsound
+       redefinequote 410 ^10JETPACK CANNOT BE USED WHILE IN A VEHICLE!
+       setvarvar fta fta_normal setvar ftq 410
+      }
+     }
+     setvarvar mpresstime temppartime
+     state setreturn-1
+    }
+   }
+  }
+
+  ifvare shop_id -1 ifvare atm_id -1
+  {
+   getplayer[THISACTOR].jetpack_amount varname
+   ifvarg varname 0 nullop
+   else
+   {
+    state checkjetpacks
+    ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_jetpack_player
+    state setreturn-1
+   }
+  }
+ }
+endevent
+
+onevent EVENT_USESTEROIDS
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  else ifvarn atm_id -1 state atm-upperleftbutton
+
+  ifvare shop_id -1 ifvare atm_id -1
+  {
+   setvarvar varname STEROIDSTIME
+   ifvarg varname 0 nullop
+   else
+   {
+    state checkvitaminxs
+    ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_vitaminx_player     
+    state setreturn-1
+   }
+  }
+ }
+endevent
+
+onevent EVENT_USENIGHTVISION
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvare shop_id -1 ifvare atm_id -1
+  {
+   ifvare CHARACTERSELECTED? 4
+   {
+    ifvarl CURRENTENERGYPOINTS 1 { state menuerrorsound state setreturn-1 }
+   }
+   else
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvare HAVEHACKERVISION? 1 nullop
+    else
+	{
+	 getplayer[THISACTOR].heat_amount varname
+	 ifvarl varname 1
+ 	 { 
+      state checkheatsensors
+      ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_nightvisiongoggles_player
+      state setreturn-1
+	 }	 
+	}
+   }
+   else
+   {
+    getplayer[THISACTOR].heat_amount varname
+    ifvarl varname 1
+    { 
+     state checkheatsensors
+     ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_nightvisiongoggles_player
+     state setreturn-1
+    }	 
+   }   
+  }
+  else
+  {
+   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+   else ifvarn atm_id -1 state atm-upperrightbutton    
+  }
+ }
+endevent
+
+onevent EVENT_HOLODUKEON
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  else ifvarn atm_id -1 state atm-midupperrightbutton
+
+  ifvare shop_id -1 ifvare atm_id -1
+  {
+   getplayer[THISACTOR].holoduke_amount varname
+   ifvarg varname 0 nullop
+   else
+   {
+    state checkholoforms
+    ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_holoform_player
+    state setreturn-1
+   }
+  }
+ }
+endevent
+
+onevent EVENT_HOLODUKEOFF
+ ifvarn mainmenu 0 state setreturn-1 
+ else
+ {
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  else ifvarn atm_id -1 state atm-midupperrightbutton    
+ }
+endevent
+
+onevent EVENT_INCURDAMAGE
+ state setreturn-1
+endevent
+
+
+onevent EVENT_GETLOADTILE 
+ ifvarn VEHICLEID -1 setuserdef[THISACTOR].auto_run 1
+ ifvarn BOSSMETERID1 -1 setvar BOSSMETERID1 -1
+ ifvarn BOSSMETERID2 -1 setvar BOSSMETERID2 -1
+ ifvarn BOSSMETERID3 -1 setvar BOSSMETERID3 -1
+ getuserdef[THISACTOR].player_skill SKILLLEVEL
+ ifvarl SKILLLEVEL 0 { setvar SKILLLEVEL 9 setuserdef[THISACTOR].player_skill 9 }
+ ifvare TITLESCREEN 0 
+ {
+  ifvare WORLDTILEBITFIELD1 -1
+  {
+   ifvare WORLDTILEBITFIELD2 -1
+   {
+    ifvare WORLDTILEBITFIELD3 -1
+    {
+     ifvare WORLDTILEBITFIELD4 -1
+     {
+      ifvare WORLDTILEBITFIELD5 -1
+      {
+       ifvare WORLDTILEBITFIELD6 -1
+       {
+	    ifvare WORLDTILEBITFIELD7 -1
+	    {
+		 ifvare WORLDTILEBITFIELD8 -1 setvar RETURN 8706 else setvar RETURN 3281 // 3577
+		}
+       }
+       else setvar RETURN 3281
+      }
+      else setvar RETURN 3281
+     }
+     else setvar RETURN 3281
+    }
+    else setvar RETURN 3281
+   }
+   else setvar RETURN 3281
+  }
+  else setvar RETURN 3281
+ }
+ else
+ {
+  setvar RETURN 8191
+  addvarvar RETURN TITLESCREEN
+ }
+endevent
+
+onevent EVENT_GETAUTOAIMANGLE
+ ifvarand PLAYERSTATUS? 16 setvar AUTOAIMANGLE 6 else setvar AUTOAIMANGLE 48
+endevent
+
+onevent EVENT_AIMUP
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ ifvare itemidinuse -1
+ {
+  ifvare skillidinuse -1
+  {
+   ifvare equipmenuinuse -1
+   {
+    state getpartime
+    addvar hpresstime 1
+    ifvarvare temppartime hpresstime nullop else
+    {
+	  ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+        {
+         ifvarand bits 4 // Holding down Cheat Keys
+         {
+          ifvare mainmenusubmenu 256 // Using in cheats menu causes error sound
+          {
+           state menuerrorsound
+           state setreturn-1 
+          }
+          else // using in any other submenu goes to the cheats submenu
+          {
+           state saveformersubmenustuff
+           setvar mainmenusubmenu 256 // Cheats Submenu
+           state loadnewsubmenustuff
+ 
+           sound MENU_SUBUP 
+           state cheatersound
+           state setreturn-1 
+          }
+         }
+         else // Using the Menu as normal without cheat keys
+         {
+          ifvare mainmenusubmenu 256 // In cheats submenu
+          {
+           state saveformersubmenustuff
+           setvar mainmenusubmenu 0 // Back to Character Menu
+           state loadnewsubmenustuff
+
+           sound MENU_SUBUP 
+           state setreturn-1 
+          }
+          else // in all other submenus
+          {
+           state saveformersubmenustuff
+           subvar mainmenusubmenu 1
+           ifvarl mainmenusubmenu 0 addvar mainmenusubmenu 8
+           state loadnewsubmenustuff
+
+           sound MENU_SUBUP
+	     state setreturn-1 
+          }
+         }
+        }
+    }
+    setvarvar hpresstime temppartime
+   }
+  }
+ }
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+   addvar hpresstime 1
+   ifvarvare temppartime hpresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+    {
+     state shop_changemodeup
+     state setreturn-1
+    }
+   }
+  setvarvar hpresstime temppartime
+ }
+}
+endevent
+
+onevent EVENT_AIMDOWN
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+{
+ state setreturn-1
+ ifvare itemidinuse -1
+ {
+  ifvare skillidinuse -1
+  {
+   ifvare equipmenuinuse -1
+   {
+    state getpartime
+    addvar epresstime 1
+    ifvarvare temppartime epresstime nullop else
+    {
+     ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+     {
+      ifvarand bits 4
+      {
+       ifvare mainmenusubmenu 256
+       {
+        state menuerrorsound
+        state setreturn-1 
+       }
+       else
+       {
+        state saveformersubmenustuff
+        setvar mainmenusubmenu 256 // Cheats Submenu
+        state loadnewsubmenustuff
+
+        sound MENU_SUBDOWN 
+        state cheatersound
+        state setreturn-1 
+       }
+      }
+      else
+      {
+       ifvare mainmenusubmenu 256
+       {
+        state saveformersubmenustuff
+        setvar mainmenusubmenu 0 // Back to Character Menu
+        state loadnewsubmenustuff
+
+        sound MENU_SUBDOWN
+        state setreturn-1 
+       }
+       else
+       {
+        state saveformersubmenustuff
+        addvar mainmenusubmenu 1
+        ifvarg mainmenusubmenu 7 subvar mainmenusubmenu 8
+        state loadnewsubmenustuff
+
+        sound MENU_SUBDOWN
+        state setreturn-1 
+       }
+      }
+     }
+    }
+    setvarvar epresstime temppartime
+   }   
+  }
+ }
+}
+else
+ifvare mainmenu -1 // Tips
+{
+ state setreturn-1 
+}
+else // ifvare mainmenu 0
+{
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+ {
+  state setreturn-1
+  state getpartime
+   addvar epresstime 1
+   ifvarvare temppartime epresstime nullop else
+   {
+    ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+    {
+     state shop_changemodedown
+     state setreturn-1
+    }
+   }
+  setvarvar epresstime temppartime
+ }
+}
+endevent
+
+onevent EVENT_ENTERLEVEL 
+ // Reset Enemies Killed for the Current Level
+ setvar ENEMIES_KILLED_LEVEL 0
+ // Reset Max Enemies Killed for the Current Level
+ setvar MAX_ENEMIES_KILLED_LEVEL 0
+
+ // Reset In-Game Timer for the Current Level
+ setvar TIMERRAWFORMAT_LEVEL 0
+
+ // Reset Secrets Found for the Current Level
+ setvar SECRETSFOUND_LEVEL 0
+ // Reset Max Secrets Found for the Current Level
+ setvar MAX_SECRETSFOUND_LEVEL 0
+
+ // Reset Memorbilia Found for the Current Level
+ setvar RANKITEMSFOUND_LEVEL 0
+ // Reset Max Memorbilia Found for the Current Level
+ setvar MAX_RANKITEMSFOUND_LEVEL 0
+
+ // Reset Civilians Saved for the Current Level
+ setvar CIVILIANSSAVED_LEVEL 0
+ // Reset Max Civilians Saved for the Current Level
+ setvar MAX_CIVILIANSSAVED_LEVEL 0
+
+ // Reset Civilians Killed for the Current Level
+ setvar CIVILIANSKILLED_LEVEL 0
+ // Reset Max Civilians Killed for the Current Level
+ setvar MAX_CIVILIANSKILLED_LEVEL 0
+
+ // Reset All-Secrets Bonus Message/Stuff
+ ifvare GOTALLSECRETSBONUS? 1 setvar GOTALLSECRETSBONUS? 0
+
+ ifmultiplayer break
+ // De-Pseudo
+ gamevar TMP 0 131072
+ readgamevar numruns
+ addvar numruns 1 
+ andvar numruns 65535 
+ setvarvar TMP numruns 
+ xorvar TMP 43690 
+ whilevarn TMP 0 
+ { 
+  ifrnd 1 { }
+  ifrnd 4 { }
+  ifrnd 16 { }
+  ifrnd 64 { }
+  subvar TMP 1 
+ } 
+ savegamevar numruns
+
+ ifvare TIMERRAWFORMAT 0
+ {
+  randvar SHIKONHOLDERENEMYID 4095
+  addvar SHIKONHOLDERENEMYID 1 
+ }
+ setvarvar NEXTAUTOSAVEINTERVAL TIMERRAWFORMAT
+ addvar NEXTAUTOSAVEINTERVAL 13
+endevent
+
+onevent EVENT_CHEATGETSHIELD
+ setvar RETURN 0
+ setvarvar CURRENTARMORPOINTS MAXARMORPOINTSATOMIC
+ setvar ARMORPERCENT 1000
+ ifvare CHARACTERSELECTED? 3
+ {
+  state checkbubsylives setvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
+  state checkcontinues setvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
+ }
+ ifvare CHARACTERSELECTED? 4 setvar HAVEMERCURYCOMPUTER? 1
+ ifvare CHARACTERSELECTED? 8 
+ {
+  setvar HAVEENERGYSHIELD? 1
+  addvar ESHIELDDMGFACTOR 16
+  setvarvar DAMAGEINCELL ESHIELDDMGFACTOR
+  setvarvar CURRENTCELLS MAXCELLS
+ }
+ setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTSATOMIC
+
+ state givecheat_inventoryitems
+ state givecheat_setvehicle
+ setvar CHEAT_PHASE 1
+ state cheatersound
+endevent
+
+onevent EVENT_CHEATGETFIRSTAID
+ setvar RETURN 0
+ setvarvar CURRENTHITPOINTS MAXHITPOINTSATOMIC
+ setvarvar FIRSTAIDCURRENT MAXHITPOINTSATOMIC
+ setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTSATOMIC
+endevent
+
+onevent EVENT_CHEATGETBOOT
+ setvar RETURN 600
+endevent
+
+onevent EVENT_CHEATGETHEAT
+ ifvarn CHARACTERSELECTED? 4 setvar RETURN 3600
+ ifvare CHARACTERSELECTED? 8 setvar HAVEHACKERVISION? 1
+endevent
+
+onevent EVENT_CHEATGETHOLODUKE
+ setvar RETURN 7200
+endevent
+
+onevent EVENT_CHEATGETJETPACK
+ setvar RETURN 4800
+endevent
+
+onevent EVENT_CHEATGETSCUBA
+ setvar SCUBATIME 19200
+ setvar RETURN 19200
+endevent
+
+onevent EVENT_CHEATGETSTEROIDS
+ setvar STEROIDSTIME 1200
+ setvar RETURN 400
+endevent
+
+onevent EVENT_GETMENUTILE
+ setvar RETURN 3577
+endevent
+
+onevent EVENT_RETURNTOCENTER
+        getplayer[THISACTOR].hard_landing temp
+        ifvare temp 0
+        {
+         state setreturn-1
+         ifvare CHARACTERSELECTED? 9 state setreturn-1
+        }
+endevent
+
+onevent EVENT_DRAWWEAPON
+ ifvarn SPRITEID-HOLDING -1 ifvare SPRITEID-TELEKENESIS_P -1 { state setreturn-1 break }
+ ifvarn VEHICLEID -1 { state setreturn-1 break }
+
+ ifvare oldskoolmode 1
+ {
+  getplayer[THISACTOR].curr_weapon TEMPVAR
+  ifvare TEMPVAR 0 { state setreturn-1 break } // Kick
+  ifvare TEMPVAR 1 { state setreturn-1 break } // Pistol
+  ifvare TEMPVAR 2 { state setreturn-1 break } // Shotgun
+  ifvare TEMPVAR 3 { state setreturn-1 break } // Chaingun Cannon
+  ifvare TEMPVAR 4 { state setreturn-1 break } // RPG
+  ifvare TEMPVAR 5 { state setreturn-1 break } // Pipebomb
+  ifvare TEMPVAR 6 { state setreturn-1 break } // Shrinker
+  ifvare TEMPVAR 7 { state setreturn-1 break } // Devastator
+  ifvare TEMPVAR 8 { state setreturn-1 break } // Tripbomb
+  ifvare TEMPVAR 9 { state setreturn-1 break } // Freezethrower
+  ifvare TEMPVAR 10 { state setreturn-1 break } // Hand Remote
+  ifvare TEMPVAR 11 { state setreturn-1 break } // Expander
+ }
+ getuserdef[THISACTOR].pause_on temp
+ ifvarg temp 0 { state setreturn-1 break }
+ endevent
+
+onevent EVENT_DISPLAYCROSSHAIR
+ifvarn gameover? 0 state setreturn-1
+else
+{
+ getuserdef[THISACTOR].pause_on temp
+ ifvarg temp 0 state setreturn-1
+ else
+ {
+  ifvarn mainmenu 0 state setreturn-1 
+  else
+  {
+   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+   else
+   {
+    ifvarn atm_id -1 state setreturn-1
+   }
+  }
+ }
+}
+endevent
+
+onevent EVENT_ANIMATESPRITES
+
+gettspr[THISACTOR].tsprcstat tsprcstat
+gettspr[THISACTOR].tsprpicnum tsprpicnum
+gettspr[THISACTOR].tsprowner tsprowner
+
+getactor[THISACTOR].picnum TEMPVAR5
+ifvare TEMPVAR5 ICONOFTHEDEFENDER // Icon of the Defender [model spin]
+{
+ settspr[THISACTOR].tsprxrepeat 6
+ settspr[THISACTOR].tspryrepeat 6
+}
+
+ifvare TEMPVAR5 QUADDAMAGE // Quad Damage [model spin]
+{
+ settspr[THISACTOR].tsprxrepeat 6
+ settspr[THISACTOR].tspryrepeat 6
+}
+
+ifvare TEMPVAR5 APREGENITEM // Shield Emblem [model spin]
+{
+ settspr[THISACTOR].tsprxrepeat 4
+ settspr[THISACTOR].tspryrepeat 4
+}
+
+ifvare TEMPVAR5 APLAYER // APLAYER actor
+{
+ ifvare VEHICLEID -1
+ {
+  ifvare CHARACTERSELECTED? 5 // Lo Wang
+  {
+   getactor[THISACTOR].xrepeat temp
+   mulvar temp 643
+   divvar temp 1000
+   settspr[THISACTOR].tsprxrepeat temp
+   getactor[THISACTOR].yrepeat temp
+   mulvar temp 583
+   divvar temp 1000
+   settspr[THISACTOR].tspryrepeat temp
+   settspr[THISACTOR].tsprpal 15
+ 
+   // Standing
+   ifvare tsprpicnum 1405 settspr[THISACTOR].tsprpicnum 8448
+   ifvare tsprpicnum 1406 settspr[THISACTOR].tsprpicnum 8449
+   ifvare tsprpicnum 1407 settspr[THISACTOR].tsprpicnum 8450
+   ifvare tsprpicnum 1408 settspr[THISACTOR].tsprpicnum 8451
+   ifvare tsprpicnum 1409 settspr[THISACTOR].tsprpicnum 8452
+   // Walking / Running
+   ifvare tsprpicnum 1425 settspr[THISACTOR].tsprpicnum 8448
+   ifvare tsprpicnum 1426 settspr[THISACTOR].tsprpicnum 8449
+   ifvare tsprpicnum 1427 settspr[THISACTOR].tsprpicnum 8450
+   ifvare tsprpicnum 1428 settspr[THISACTOR].tsprpicnum 8451
+   ifvare tsprpicnum 1429 settspr[THISACTOR].tsprpicnum 8452
+   ifvare tsprpicnum 1430 settspr[THISACTOR].tsprpicnum 8453
+   ifvare tsprpicnum 1431 settspr[THISACTOR].tsprpicnum 8454
+   ifvare tsprpicnum 1432 settspr[THISACTOR].tsprpicnum 8455
+   ifvare tsprpicnum 1433 settspr[THISACTOR].tsprpicnum 8456
+   ifvare tsprpicnum 1434 settspr[THISACTOR].tsprpicnum 8457
+   ifvare tsprpicnum 1435 settspr[THISACTOR].tsprpicnum 8458
+   ifvare tsprpicnum 1436 settspr[THISACTOR].tsprpicnum 8459
+   ifvare tsprpicnum 1437 settspr[THISACTOR].tsprpicnum 8460
+   ifvare tsprpicnum 1438 settspr[THISACTOR].tsprpicnum 8461
+   ifvare tsprpicnum 1439 settspr[THISACTOR].tsprpicnum 8462
+   ifvare tsprpicnum 1440 settspr[THISACTOR].tsprpicnum 8463
+   ifvare tsprpicnum 1441 settspr[THISACTOR].tsprpicnum 8464
+   ifvare tsprpicnum 1442 settspr[THISACTOR].tsprpicnum 8465
+   ifvare tsprpicnum 1443 settspr[THISACTOR].tsprpicnum 8466
+   ifvare tsprpicnum 1444 settspr[THISACTOR].tsprpicnum 8467
+   // Melee
+   ifvare tsprpicnum 1445 settspr[THISACTOR].tsprpicnum 8528
+   ifvare tsprpicnum 1446 settspr[THISACTOR].tsprpicnum 8529
+   ifvare tsprpicnum 1447 settspr[THISACTOR].tsprpicnum 8530
+   ifvare tsprpicnum 1448 settspr[THISACTOR].tsprpicnum 8531
+   ifvare tsprpicnum 1449 settspr[THISACTOR].tsprpicnum 8532
+   ifvare tsprpicnum 1450 settspr[THISACTOR].tsprpicnum 8533
+   ifvare tsprpicnum 1451 settspr[THISACTOR].tsprpicnum 8534
+   ifvare tsprpicnum 1452 settspr[THISACTOR].tsprpicnum 8535
+   ifvare tsprpicnum 1453 settspr[THISACTOR].tsprpicnum 8536
+   ifvare tsprpicnum 1454 settspr[THISACTOR].tsprpicnum 8537
+   // Jumping
+   ifvare tsprpicnum 1455 settspr[THISACTOR].tsprpicnum 8468
+   ifvare tsprpicnum 1456 settspr[THISACTOR].tsprpicnum 8469
+   ifvare tsprpicnum 1457 settspr[THISACTOR].tsprpicnum 8470
+   ifvare tsprpicnum 1458 settspr[THISACTOR].tsprpicnum 8471
+   ifvare tsprpicnum 1459 settspr[THISACTOR].tsprpicnum 8472
+   ifvare tsprpicnum 1460 settspr[THISACTOR].tsprpicnum 8473
+   ifvare tsprpicnum 1461 settspr[THISACTOR].tsprpicnum 8474
+   ifvare tsprpicnum 1462 settspr[THISACTOR].tsprpicnum 8475
+   ifvare tsprpicnum 1463 settspr[THISACTOR].tsprpicnum 8476
+   ifvare tsprpicnum 1464 settspr[THISACTOR].tsprpicnum 8477
+   ifvare tsprpicnum 1465 settspr[THISACTOR].tsprpicnum 8478
+   ifvare tsprpicnum 1466 settspr[THISACTOR].tsprpicnum 8479
+   ifvare tsprpicnum 1467 settspr[THISACTOR].tsprpicnum 8480
+   ifvare tsprpicnum 1468 settspr[THISACTOR].tsprpicnum 8481
+   ifvare tsprpicnum 1469 settspr[THISACTOR].tsprpicnum 8482
+   // Crouch/Crawling
+   ifvare tsprpicnum 1491 settspr[THISACTOR].tsprpicnum 8488
+   ifvare tsprpicnum 1492 settspr[THISACTOR].tsprpicnum 8489
+   ifvare tsprpicnum 1493 settspr[THISACTOR].tsprpicnum 8490
+   ifvare tsprpicnum 1494 settspr[THISACTOR].tsprpicnum 8491
+   ifvare tsprpicnum 1495 settspr[THISACTOR].tsprpicnum 8492
+   ifvare tsprpicnum 1496 settspr[THISACTOR].tsprpicnum 8493
+   ifvare tsprpicnum 1497 settspr[THISACTOR].tsprpicnum 8494
+   ifvare tsprpicnum 1498 settspr[THISACTOR].tsprpicnum 8495
+   ifvare tsprpicnum 1499 settspr[THISACTOR].tsprpicnum 8496
+   ifvare tsprpicnum 1500 settspr[THISACTOR].tsprpicnum 8497
+   ifvare tsprpicnum 1501 settspr[THISACTOR].tsprpicnum 8498
+   ifvare tsprpicnum 1502 settspr[THISACTOR].tsprpicnum 8499
+   ifvare tsprpicnum 1503 settspr[THISACTOR].tsprpicnum 8500
+   ifvare tsprpicnum 1504 settspr[THISACTOR].tsprpicnum 8501
+   ifvare tsprpicnum 1505 settspr[THISACTOR].tsprpicnum 8502
+   // Swimming
+   ifvare tsprpicnum 1780 settspr[THISACTOR].tsprpicnum 8508
+   ifvare tsprpicnum 1781 settspr[THISACTOR].tsprpicnum 8509
+   ifvare tsprpicnum 1782 settspr[THISACTOR].tsprpicnum 8510
+   ifvare tsprpicnum 1783 settspr[THISACTOR].tsprpicnum 8511
+   ifvare tsprpicnum 1784 settspr[THISACTOR].tsprpicnum 8512
+   ifvare tsprpicnum 1785 settspr[THISACTOR].tsprpicnum 8513
+   ifvare tsprpicnum 1786 settspr[THISACTOR].tsprpicnum 8514
+   ifvare tsprpicnum 1787 settspr[THISACTOR].tsprpicnum 8515
+   ifvare tsprpicnum 1788 settspr[THISACTOR].tsprpicnum 8516
+   ifvare tsprpicnum 1789 settspr[THISACTOR].tsprpicnum 8517
+   ifvare tsprpicnum 1790 settspr[THISACTOR].tsprpicnum 8518
+   ifvare tsprpicnum 1791 settspr[THISACTOR].tsprpicnum 8519
+   ifvare tsprpicnum 1792 settspr[THISACTOR].tsprpicnum 8520
+   ifvare tsprpicnum 1793 settspr[THISACTOR].tsprpicnum 8521
+   ifvare tsprpicnum 1794 settspr[THISACTOR].tsprpicnum 8522
+   ifvare tsprpicnum 1795 settspr[THISACTOR].tsprpicnum 8523
+   ifvare tsprpicnum 1796 settspr[THISACTOR].tsprpicnum 8524
+   ifvare tsprpicnum 1797 settspr[THISACTOR].tsprpicnum 8525
+   ifvare tsprpicnum 1798 settspr[THISACTOR].tsprpicnum 8526
+   ifvare tsprpicnum 1799 settspr[THISACTOR].tsprpicnum 8527
+   // Jetpack
+   ifvare tsprpicnum 1420 settspr[THISACTOR].tsprpicnum 8553
+   ifvare tsprpicnum 1421 settspr[THISACTOR].tsprpicnum 8554
+   ifvare tsprpicnum 1422 settspr[THISACTOR].tsprpicnum 8555
+   ifvare tsprpicnum 1423 settspr[THISACTOR].tsprpicnum 8556
+   ifvare tsprpicnum 1424 settspr[THISACTOR].tsprpicnum 8557
+  }
+  else
+  ifvare CHARACTERSELECTED? 6 // ESSence
+  {
+   getactor[THISACTOR].xrepeat temp
+   mulvar temp 1143
+   divvar temp 1000
+   settspr[THISACTOR].tsprxrepeat temp
+   getactor[THISACTOR].yrepeat temp
+   mulvar temp 1333
+   divvar temp 1000
+   settspr[THISACTOR].tspryrepeat temp
+   settspr[THISACTOR].tsprpal 24
+   // Standing
+   ifvare tsprpicnum 1405 settspr[THISACTOR].tsprpicnum 2630
+   ifvare tsprpicnum 1406 settspr[THISACTOR].tsprpicnum 2631
+   ifvare tsprpicnum 1407 settspr[THISACTOR].tsprpicnum 2632
+   ifvare tsprpicnum 1408 settspr[THISACTOR].tsprpicnum 2633
+   ifvare tsprpicnum 1409 settspr[THISACTOR].tsprpicnum 2634
+   // Walking / Running
+   ifvare tsprpicnum 1425 settspr[THISACTOR].tsprpicnum 2630
+   ifvare tsprpicnum 1426 settspr[THISACTOR].tsprpicnum 2631
+   ifvare tsprpicnum 1427 settspr[THISACTOR].tsprpicnum 2632
+   ifvare tsprpicnum 1428 settspr[THISACTOR].tsprpicnum 2633
+   ifvare tsprpicnum 1429 settspr[THISACTOR].tsprpicnum 2634
+   ifvare tsprpicnum 1430 settspr[THISACTOR].tsprpicnum 2640
+   ifvare tsprpicnum 1431 settspr[THISACTOR].tsprpicnum 2641
+   ifvare tsprpicnum 1432 settspr[THISACTOR].tsprpicnum 2642
+   ifvare tsprpicnum 1433 settspr[THISACTOR].tsprpicnum 2643
+   ifvare tsprpicnum 1434 settspr[THISACTOR].tsprpicnum 2644
+   ifvare tsprpicnum 1435 settspr[THISACTOR].tsprpicnum 2645
+   ifvare tsprpicnum 1436 settspr[THISACTOR].tsprpicnum 2646
+   ifvare tsprpicnum 1437 settspr[THISACTOR].tsprpicnum 2647
+   ifvare tsprpicnum 1438 settspr[THISACTOR].tsprpicnum 2648
+   ifvare tsprpicnum 1439 settspr[THISACTOR].tsprpicnum 2649
+   ifvare tsprpicnum 1440 settspr[THISACTOR].tsprpicnum 2655
+   ifvare tsprpicnum 1441 settspr[THISACTOR].tsprpicnum 2656
+   ifvare tsprpicnum 1442 settspr[THISACTOR].tsprpicnum 2657
+   ifvare tsprpicnum 1443 settspr[THISACTOR].tsprpicnum 2658
+   ifvare tsprpicnum 1444 settspr[THISACTOR].tsprpicnum 2659
+   // Melee
+   ifvare tsprpicnum 1445 settspr[THISACTOR].tsprpicnum 2670
+   ifvare tsprpicnum 1446 settspr[THISACTOR].tsprpicnum 2671
+   ifvare tsprpicnum 1447 settspr[THISACTOR].tsprpicnum 2672
+   ifvare tsprpicnum 1448 settspr[THISACTOR].tsprpicnum 2633
+   ifvare tsprpicnum 1449 settspr[THISACTOR].tsprpicnum 2634
+   ifvare tsprpicnum 1450 settspr[THISACTOR].tsprpicnum 2675
+   ifvare tsprpicnum 1451 settspr[THISACTOR].tsprpicnum 2676
+   ifvare tsprpicnum 1452 settspr[THISACTOR].tsprpicnum 2677
+   ifvare tsprpicnum 1453 settspr[THISACTOR].tsprpicnum 2643
+   ifvare tsprpicnum 1454 settspr[THISACTOR].tsprpicnum 2644
+   // Jumping
+   ifvare tsprpicnum 1455 settspr[THISACTOR].tsprpicnum 3485
+   ifvare tsprpicnum 1456 settspr[THISACTOR].tsprpicnum 3486
+   ifvare tsprpicnum 1457 settspr[THISACTOR].tsprpicnum 3487
+   ifvare tsprpicnum 1458 settspr[THISACTOR].tsprpicnum 3488
+   ifvare tsprpicnum 1459 settspr[THISACTOR].tsprpicnum 3489
+   ifvare tsprpicnum 1460 settspr[THISACTOR].tsprpicnum 3490
+   ifvare tsprpicnum 1461 settspr[THISACTOR].tsprpicnum 3491
+   ifvare tsprpicnum 1462 settspr[THISACTOR].tsprpicnum 3492
+   ifvare tsprpicnum 1463 settspr[THISACTOR].tsprpicnum 3493
+   ifvare tsprpicnum 1464 settspr[THISACTOR].tsprpicnum 3494
+   ifvare tsprpicnum 1465 settspr[THISACTOR].tsprpicnum 3495
+   ifvare tsprpicnum 1466 settspr[THISACTOR].tsprpicnum 3496
+   ifvare tsprpicnum 1467 settspr[THISACTOR].tsprpicnum 3497
+   ifvare tsprpicnum 1468 settspr[THISACTOR].tsprpicnum 3498
+   ifvare tsprpicnum 1469 settspr[THISACTOR].tsprpicnum 3499
+   // Idle Crouch
+   ifvare tsprpicnum 1491 settspr[THISACTOR].tsprpicnum 2635
+   ifvare tsprpicnum 1492 settspr[THISACTOR].tsprpicnum 2636
+   ifvare tsprpicnum 1493 settspr[THISACTOR].tsprpicnum 2637
+   ifvare tsprpicnum 1494 settspr[THISACTOR].tsprpicnum 2638
+   ifvare tsprpicnum 1495 settspr[THISACTOR].tsprpicnum 2639
+   // Jetpack
+   ifvare tsprpicnum 1420 settspr[THISACTOR].tsprpicnum 3490
+   ifvare tsprpicnum 1421 settspr[THISACTOR].tsprpicnum 3491
+   ifvare tsprpicnum 1422 settspr[THISACTOR].tsprpicnum 3492
+   ifvare tsprpicnum 1423 settspr[THISACTOR].tsprpicnum 3493
+   ifvare tsprpicnum 1424 settspr[THISACTOR].tsprpicnum 3494
+  }
+  else
+  ifvare CHARACTERSELECTED? 9 // Cybanis
+  {
+   getactor[THISACTOR].xrepeat temp
+   mulvar temp 1143
+   divvar temp 1000
+   settspr[THISACTOR].tsprxrepeat temp
+   getactor[THISACTOR].yrepeat temp
+   mulvar temp 1333
+   divvar temp 1000
+   settspr[THISACTOR].tspryrepeat temp
+   getactor[THISACTOR].pal temp
+   settspr[THISACTOR].tsprpal 24
+   // Standing
+   ifvare tsprpicnum 1405 settspr[THISACTOR].tsprpicnum 2710
+   ifvare tsprpicnum 1406 settspr[THISACTOR].tsprpicnum 2711
+   ifvare tsprpicnum 1407 settspr[THISACTOR].tsprpicnum 2712
+   ifvare tsprpicnum 1408 settspr[THISACTOR].tsprpicnum 2713
+   ifvare tsprpicnum 1409 settspr[THISACTOR].tsprpicnum 2714
+   // Walking / Running
+   ifvare tsprpicnum 1425 settspr[THISACTOR].tsprpicnum 2710
+   ifvare tsprpicnum 1426 settspr[THISACTOR].tsprpicnum 2711
+   ifvare tsprpicnum 1427 settspr[THISACTOR].tsprpicnum 2712
+   ifvare tsprpicnum 1428 settspr[THISACTOR].tsprpicnum 2713
+   ifvare tsprpicnum 1429 settspr[THISACTOR].tsprpicnum 2714
+   ifvare tsprpicnum 1430 settspr[THISACTOR].tsprpicnum 2715
+   ifvare tsprpicnum 1431 settspr[THISACTOR].tsprpicnum 2716
+   ifvare tsprpicnum 1432 settspr[THISACTOR].tsprpicnum 2717
+   ifvare tsprpicnum 1433 settspr[THISACTOR].tsprpicnum 2718
+   ifvare tsprpicnum 1434 settspr[THISACTOR].tsprpicnum 2719
+   ifvare tsprpicnum 1435 settspr[THISACTOR].tsprpicnum 2720
+   ifvare tsprpicnum 1436 settspr[THISACTOR].tsprpicnum 2721
+   ifvare tsprpicnum 1437 settspr[THISACTOR].tsprpicnum 2722
+   ifvare tsprpicnum 1438 settspr[THISACTOR].tsprpicnum 2723
+   ifvare tsprpicnum 1439 settspr[THISACTOR].tsprpicnum 2724
+   ifvare tsprpicnum 1440 settspr[THISACTOR].tsprpicnum 2725
+   ifvare tsprpicnum 1441 settspr[THISACTOR].tsprpicnum 2726
+   ifvare tsprpicnum 1442 settspr[THISACTOR].tsprpicnum 2727
+   ifvare tsprpicnum 1443 settspr[THISACTOR].tsprpicnum 2728
+   ifvare tsprpicnum 1444 settspr[THISACTOR].tsprpicnum 2729
+   // Melee
+   ifvare tsprpicnum 1445 settspr[THISACTOR].tsprpicnum 2730
+   ifvare tsprpicnum 1446 settspr[THISACTOR].tsprpicnum 2731
+   ifvare tsprpicnum 1447 settspr[THISACTOR].tsprpicnum 2732
+   ifvare tsprpicnum 1448 settspr[THISACTOR].tsprpicnum 2713
+   ifvare tsprpicnum 1449 settspr[THISACTOR].tsprpicnum 2714
+   ifvare tsprpicnum 1450 settspr[THISACTOR].tsprpicnum 2735
+   ifvare tsprpicnum 1451 settspr[THISACTOR].tsprpicnum 2736
+   ifvare tsprpicnum 1452 settspr[THISACTOR].tsprpicnum 2737
+   ifvare tsprpicnum 1453 settspr[THISACTOR].tsprpicnum 2718
+   ifvare tsprpicnum 1454 settspr[THISACTOR].tsprpicnum 2719
+   // Jumping
+   ifvare tsprpicnum 1455 settspr[THISACTOR].tsprpicnum 3310
+   ifvare tsprpicnum 1456 settspr[THISACTOR].tsprpicnum 3311
+   ifvare tsprpicnum 1457 settspr[THISACTOR].tsprpicnum 3312
+   ifvare tsprpicnum 1458 settspr[THISACTOR].tsprpicnum 3313
+   ifvare tsprpicnum 1459 settspr[THISACTOR].tsprpicnum 3314
+   ifvare tsprpicnum 1460 settspr[THISACTOR].tsprpicnum 3315
+   ifvare tsprpicnum 1461 settspr[THISACTOR].tsprpicnum 3316
+   ifvare tsprpicnum 1462 settspr[THISACTOR].tsprpicnum 3317
+   ifvare tsprpicnum 1463 settspr[THISACTOR].tsprpicnum 3318
+   ifvare tsprpicnum 1464 settspr[THISACTOR].tsprpicnum 3319
+   ifvare tsprpicnum 1465 settspr[THISACTOR].tsprpicnum 3320
+   ifvare tsprpicnum 1466 settspr[THISACTOR].tsprpicnum 3321
+   ifvare tsprpicnum 1467 settspr[THISACTOR].tsprpicnum 3322
+   ifvare tsprpicnum 1468 settspr[THISACTOR].tsprpicnum 3323
+   ifvare tsprpicnum 1469 settspr[THISACTOR].tsprpicnum 3324
+   // Idle Crouch
+   ifvare tsprpicnum 1491 settspr[THISACTOR].tsprpicnum 3040
+   ifvare tsprpicnum 1492 settspr[THISACTOR].tsprpicnum 3041
+   ifvare tsprpicnum 1493 settspr[THISACTOR].tsprpicnum 3042
+   ifvare tsprpicnum 1494 settspr[THISACTOR].tsprpicnum 3043
+   ifvare tsprpicnum 1495 settspr[THISACTOR].tsprpicnum 3044
+   // Jetpack
+   ifvare tsprpicnum 1420 settspr[THISACTOR].tsprpicnum 3310
+   ifvare tsprpicnum 1421 settspr[THISACTOR].tsprpicnum 3311
+   ifvare tsprpicnum 1422 settspr[THISACTOR].tsprpicnum 3312
+   ifvare tsprpicnum 1423 settspr[THISACTOR].tsprpicnum 3313
+   ifvare tsprpicnum 1424 settspr[THISACTOR].tsprpicnum 3314
+  }
+  else
+  ifvare CHARACTERSELECTED? 10 // Nethra/Christina
+  {
+   ifvare NETHRAFORM? 0 // Nethra
+   {
+    getactor[THISACTOR].xrepeat temp
+    mulvar temp 857
+    divvar temp 1000
+    settspr[THISACTOR].tsprxrepeat temp
+    getactor[THISACTOR].yrepeat temp
+    mulvar temp 1000
+    divvar temp 1000
+    settspr[THISACTOR].tspryrepeat temp
+    getactor[THISACTOR].pal temp
+    settspr[THISACTOR].tsprpal 20
+    // Standing
+    ifvare tsprpicnum 1405 settspr[THISACTOR].tsprpicnum 4620
+    ifvare tsprpicnum 1406 settspr[THISACTOR].tsprpicnum 4621
+    ifvare tsprpicnum 1407 settspr[THISACTOR].tsprpicnum 4622
+    ifvare tsprpicnum 1408 settspr[THISACTOR].tsprpicnum 4623
+    ifvare tsprpicnum 1409 settspr[THISACTOR].tsprpicnum 4624
+    // Walking / Running
+    ifvare tsprpicnum 1425 settspr[THISACTOR].tsprpicnum 4620
+    ifvare tsprpicnum 1426 settspr[THISACTOR].tsprpicnum 4621
+    ifvare tsprpicnum 1427 settspr[THISACTOR].tsprpicnum 4622
+    ifvare tsprpicnum 1428 settspr[THISACTOR].tsprpicnum 4623
+    ifvare tsprpicnum 1429 settspr[THISACTOR].tsprpicnum 4624
+    ifvare tsprpicnum 1430 settspr[THISACTOR].tsprpicnum 4625
+    ifvare tsprpicnum 1431 settspr[THISACTOR].tsprpicnum 4626
+    ifvare tsprpicnum 1432 settspr[THISACTOR].tsprpicnum 4627
+    ifvare tsprpicnum 1433 settspr[THISACTOR].tsprpicnum 4628
+    ifvare tsprpicnum 1434 settspr[THISACTOR].tsprpicnum 4629
+    ifvare tsprpicnum 1435 settspr[THISACTOR].tsprpicnum 4630
+    ifvare tsprpicnum 1436 settspr[THISACTOR].tsprpicnum 4631
+    ifvare tsprpicnum 1437 settspr[THISACTOR].tsprpicnum 4632
+    ifvare tsprpicnum 1438 settspr[THISACTOR].tsprpicnum 4633
+    ifvare tsprpicnum 1439 settspr[THISACTOR].tsprpicnum 4634
+    ifvare tsprpicnum 1440 settspr[THISACTOR].tsprpicnum 4635
+    ifvare tsprpicnum 1441 settspr[THISACTOR].tsprpicnum 4636
+    ifvare tsprpicnum 1442 settspr[THISACTOR].tsprpicnum 4637
+    ifvare tsprpicnum 1443 settspr[THISACTOR].tsprpicnum 4638
+    ifvare tsprpicnum 1444 settspr[THISACTOR].tsprpicnum 4639
+    // Melee
+    ifvare tsprpicnum 1445 settspr[THISACTOR].tsprpicnum 4645
+    ifvare tsprpicnum 1446 settspr[THISACTOR].tsprpicnum 4646
+    ifvare tsprpicnum 1447 settspr[THISACTOR].tsprpicnum 4647
+    ifvare tsprpicnum 1448 settspr[THISACTOR].tsprpicnum 4623
+    ifvare tsprpicnum 1449 settspr[THISACTOR].tsprpicnum 4624
+    ifvare tsprpicnum 1450 settspr[THISACTOR].tsprpicnum 4650
+    ifvare tsprpicnum 1451 settspr[THISACTOR].tsprpicnum 4651
+    ifvare tsprpicnum 1452 settspr[THISACTOR].tsprpicnum 4652
+    ifvare tsprpicnum 1453 settspr[THISACTOR].tsprpicnum 4628
+    ifvare tsprpicnum 1454 settspr[THISACTOR].tsprpicnum 4629
+    // Jumping
+    ifvare tsprpicnum 1455 settspr[THISACTOR].tsprpicnum 4690
+    ifvare tsprpicnum 1456 settspr[THISACTOR].tsprpicnum 4691
+    ifvare tsprpicnum 1457 settspr[THISACTOR].tsprpicnum 4692
+    ifvare tsprpicnum 1458 settspr[THISACTOR].tsprpicnum 4693
+    ifvare tsprpicnum 1459 settspr[THISACTOR].tsprpicnum 4694
+    ifvare tsprpicnum 1460 settspr[THISACTOR].tsprpicnum 4695
+    ifvare tsprpicnum 1461 settspr[THISACTOR].tsprpicnum 4696
+    ifvare tsprpicnum 1462 settspr[THISACTOR].tsprpicnum 4697
+    ifvare tsprpicnum 1463 settspr[THISACTOR].tsprpicnum 4698
+    ifvare tsprpicnum 1464 settspr[THISACTOR].tsprpicnum 4699
+    ifvare tsprpicnum 1465 settspr[THISACTOR].tsprpicnum 4700
+    ifvare tsprpicnum 1466 settspr[THISACTOR].tsprpicnum 4701
+    ifvare tsprpicnum 1467 settspr[THISACTOR].tsprpicnum 4702
+    ifvare tsprpicnum 1468 settspr[THISACTOR].tsprpicnum 4703
+    ifvare tsprpicnum 1469 settspr[THISACTOR].tsprpicnum 4704
+    // Idle Crouch
+    ifvare tsprpicnum 1491 settspr[THISACTOR].tsprpicnum 4610
+    ifvare tsprpicnum 1492 settspr[THISACTOR].tsprpicnum 4611
+    ifvare tsprpicnum 1493 settspr[THISACTOR].tsprpicnum 4612
+    ifvare tsprpicnum 1494 settspr[THISACTOR].tsprpicnum 4613
+    ifvare tsprpicnum 1495 settspr[THISACTOR].tsprpicnum 4614
+   }
+   else // Christina
+   {
+    getactor[THISACTOR].xrepeat temp
+    mulvar temp 833
+    divvar temp 1000
+    settspr[THISACTOR].tsprxrepeat temp
+    getactor[THISACTOR].yrepeat temp
+    mulvar temp 917
+    divvar temp 1000
+    settspr[THISACTOR].tspryrepeat temp
+    settspr[THISACTOR].tsprpal 20
+   }
+  }
+  else
+  {
+   getactor[THISACTOR].xrepeat temp
+   ifvare CHARACTERSELECTED? 1 mulvar temp 1000
+   ifvare CHARACTERSELECTED? 2 mulvar temp 762
+   ifvare CHARACTERSELECTED? 3 mulvar temp 786
+   ifvare CHARACTERSELECTED? 4 mulvar temp 738
+   ifvare CHARACTERSELECTED? 7 mulvar temp 929
+   ifvare CHARACTERSELECTED? 8 mulvar temp 857
+   ifvare CHARACTERSELECTED? 11 mulvar temp 833
+   ifvare CHARACTERSELECTED? 12 mulvar temp 833
+   ifvare CHARACTERSELECTED? 13 mulvar temp 738
+   ifvare CHARACTERSELECTED? 14 mulvar temp 857
+   ifvare CHARACTERSELECTED? 15 mulvar temp 786
+   divvar temp 1000
+   settspr[THISACTOR].tsprxrepeat temp
+   getactor[THISACTOR].yrepeat temp
+   ifvare CHARACTERSELECTED? 1 mulvar temp 1000
+   ifvare CHARACTERSELECTED? 2 mulvar temp 861
+   ifvare CHARACTERSELECTED? 3 mulvar temp 861
+   ifvare CHARACTERSELECTED? 4 mulvar temp 861
+   ifvare CHARACTERSELECTED? 7 mulvar temp 944
+   ifvare CHARACTERSELECTED? 8 mulvar temp 889
+   ifvare CHARACTERSELECTED? 11 mulvar temp 972
+   ifvare CHARACTERSELECTED? 12 mulvar temp 944
+   ifvare CHARACTERSELECTED? 13 mulvar temp 861
+   ifvare CHARACTERSELECTED? 14 mulvar temp 1000
+   ifvare CHARACTERSELECTED? 15 mulvar temp 889
+   divvar temp 1000
+   settspr[THISACTOR].tspryrepeat temp
+   ifvare CHARACTERSELECTED? 2 settspr[THISACTOR].tsprpal 15
+   ifvare CHARACTERSELECTED? 3 settspr[THISACTOR].tsprpal 21
+   ifvare CHARACTERSELECTED? 4 settspr[THISACTOR].tsprpal 16
+   ifvare CHARACTERSELECTED? 7 settspr[THISACTOR].tsprpal 23
+   ifvare CHARACTERSELECTED? 8 settspr[THISACTOR].tsprpal 14
+   ifvare CHARACTERSELECTED? 11 settspr[THISACTOR].tsprpal 21
+   ifvare CHARACTERSELECTED? 12 settspr[THISACTOR].tsprpal 15
+   ifvare CHARACTERSELECTED? 13 settspr[THISACTOR].tsprpal 23
+   ifvare CHARACTERSELECTED? 15 settspr[THISACTOR].tsprpal 18
+  }
+ }
+ else
+ {
+  ifvarn VEHICLEID -1 { ifvarand tsprcstat 2 xorvar tsprcstat 2 }
+  settspr[THISACTOR].tsprcstat tsprcstat 
+
+  getactor[THISACTOR].xrepeat temp
+  mulvar temp 1429
+  divvar temp 1000
+  settspr[THISACTOR].tsprxrepeat temp
+  getactor[THISACTOR].yrepeat temp
+  mulvar temp 1667
+  divvar temp 1000
+  settspr[THISACTOR].tspryrepeat temp
+  getactor[THISACTOR].pal temp
+  settspr[THISACTOR].tsprpal temp
+  ifvare tsprpicnum 1405 settspr[THISACTOR].tsprpicnum 5435
+  ifvare tsprpicnum 1406 settspr[THISACTOR].tsprpicnum 5436
+  ifvare tsprpicnum 1407 settspr[THISACTOR].tsprpicnum 5438
+  ifvare tsprpicnum 1408 settspr[THISACTOR].tsprpicnum 5440
+  ifvare tsprpicnum 1409 settspr[THISACTOR].tsprpicnum 5441
+ }
+
+ gettspr[THISACTOR].tsprshade tsprowner
+ ifvare tsprowner 127 // Shade 127 usally means the object is a shadow, and thus it should be shrunk down properly.
+ {
+  gettspr[THISACTOR].tspryrepeat temp
+  mulvar temp 187
+  divvar temp 1000
+  settspr[THISACTOR].tspryrepeat temp
+ }
+
+ gettspr[THISACTOR].tsprowner temp
+ getplayer[THISACTOR].holoduke_on TEMPVAR
+ ifvarvare temp TEMPVAR // if the sprites are from the HoloDuke/HoloForm
+ {
+  state shadepulse2
+  divvar shade 2
+  settspr[THISACTOR].tsprshade shade
+ }
+
+} // APLAYER actor
+
+// code to make dropped items flicker before they vanish
+ifvarl tsprowner 0 setvar TEMPVAR4 0 else getactorvar[tsprowner].ITEMWASDROPPED? TEMPVAR4
+ifvarg TEMPVAR4 0
+{
+ getactor[tsprowner].cstat TEMPVAR5
+ setvarvar tsprcstat TEMPVAR5
+
+ getactorvar[tsprowner].ITEMDROPTIMER TEMPVAR2
+ ifvarl TEMPVAR2 196 // 79
+ {
+  ifvarl TEMPVAR2 66
+  {
+   setvarvar TEMPVAR3 TEMPVAR2
+   modvar TEMPVAR3 6
+   ifvarg TEMPVAR3 -1 ifvarl TEMPVAR3 3
+   {
+    ifvarand tsprcstat 2 nullop else addvar tsprcstat 2
+   }
+   else
+   ifvarg TEMPVAR3 2 ifvarl TEMPVAR3 6
+   {
+    ifvarand tsprcstat 2 nullop else addvar tsprcstat 2
+    ifvarand tsprcstat 512 nullop else addvar tsprcstat 512
+   }
+  }
+  else
+  {
+   setvarvar TEMPVAR3 TEMPVAR2
+   modvar TEMPVAR3 12
+   ifvarg TEMPVAR3 -1 ifvarl TEMPVAR3 6
+   {
+   }
+   else
+   ifvarg TEMPVAR3 5 ifvarl TEMPVAR3 12
+   {
+    ifvarand tsprcstat 2 nullop else addvar tsprcstat 2
+   }
+  }
+  settspr[tsprowner].tsprcstat tsprcstat
+ }
+ else
+ {
+  settspr[tsprowner].tsprcstat TEMPVAR5
+ }
+}
+
+// code to prevent items from disappearing in shallow water
+ifvarl tsprowner 0 setvar TEMPVAR4 0 else getactorvar[tsprowner].position TEMPVAR4
+ifvare TEMPVAR4 32768
+{
+ getactor[tsprowner].sectnum temp
+ ifvarn temp -1
+ {
+  getsector[temp].lotag tempb
+
+  ifvare tempb 1
+  {
+   getactor[tsprowner].x TEMPVAR2
+   getactor[tsprowner].y TEMPVAR3
+   getflorzofslope temp TEMPVAR2 TEMPVAR3 digz
+   getactor[tsprowner].z mz
+   subvarvar digz mz
+
+   ifvarl digz 1024 // on the floor
+   {		
+    getactorvar[tsprowner].itemtimer TEMPVAR5
+    setvarvar temp TEMPVAR5
+    shiftvarl temp 5
+    addvarvar temp tsprowner
+    sin tempb temp
+    shiftvarr tempb 4
+    getactor[tsprowner].z mz
+				
+    subvarvar mz tempb
+    subvar mz 4096
+    settspr[THISACTOR].tsprz mz
+   }
+  }
+ }
+}
+
+endevent
+
+onevent EVENT_KILLIT
+
+ getactor[THISACTOR].picnum picnum
+ switch picnum
+
+  case BOTTLE10
+    ifrnd 64 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 64 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 64 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 64 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn PENNY setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn NICKEL setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 16 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 8 { espawn DIME setactor[RETURN].pal 3 }
+    ifrnd 32 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn QUARTER setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn HALFDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn ONEDOLLAR setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn FIVEDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn TENDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn TWENTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn TWENTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn TWENTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn TWENTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn TWENTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn TWENTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn FIFTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn FIFTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn FIFTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn FIFTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn FIFTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn FIFTYDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn ONEHUNDREDDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn ONEHUNDREDDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn ONEHUNDREDDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 32 { espawn FIVEHUNDREDDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 16 { espawn FIVEHUNDREDDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 8 { espawn FIVEHUNDREDDOLLARS setactor[RETURN].pal 3 }   
+    ifrnd 4 { espawn RANDOMMONEY setactor[RETURN].pal 3 }
+    ifrnd 2 { espawn RANDOMMONEY setactor[RETURN].pal 3 }
+    ifrnd 1 { espawn RANDOMMONEY setactor[RETURN].pal 3 }
+    setvar RETURN 0
+  break
+
+  case FIREVASE
+  case FIREVASE_OUT
+  case FIREBARREL
+  case FIREBARREL_OUT
+  case CANWITHSOMETHING
+  case CANWITHSOMETHING2
+  case CANWITHSOMETHING3
+  case CANWITHSOMETHING4
+  case CANWITHSOMETHING1NEW
+  case CANWITHSOMETHING2NEW
+  case CANWITHSOMETHING3NEW
+  case CANWITHSOMETHING4NEW
+  case CANWITHSOMETHING5
+  case TRASHCAN1
+  case TRASHCAN2
+  case TRASHCAN3
+  case TRASHBAG1
+  case TRASHBAG2
+  case TRASHBAG3
+  case TRASHBAG4
+  case NUKEBARREL
+  case MAILBAG
+  case RUBBERCAN
+  case FLOORBASKET
+  case BOTTLE7
+  case VASE
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 16 state drop_randomized_item
+   ifrnd 16 state drop_randomized_item
+   ifrnd 32 state drop_randomized_item
+   setvar RETURN 0
+  break
+
+  case MONK
+  case SPACEMARINE
+  case LUKE
+  case INDY
+  case JURYGUY
+  case SNAKEP
+  case PIRATE1A
+  case PIRATE2A
+  case PIRATE3A
+  case PIRATE4A
+  case PIRATE5A
+  case PIRATE6A
+  case PIRATEHALF
+  case ROBOTPIRATE
+  case ROBOTMOUSE
+  case STATUE
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 16 state drop_randomized_item
+   setvar RETURN 0
+  break
+
+  case JOLLYMEAL
+  case BOTTLE11
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 4 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 8 state drop_randomized_item
+   ifrnd 16 state drop_randomized_item
+   setvar RETURN 0
+  break
+
+  case MUSICANDSFX
+   getactor[THISACTOR].lotag TEMP5
+   stopsoundvar TEMP5
+  break
+
+  case ROULETTEWHEEL
+   ifvarn MUSICANDSFX_LINKID -1
+   {
+    getactorvar[MUSICANDSFX_LINKID].MUSICANDSFX_LINKPICNUM TEMP
+    ifvare TEMP ROULETTEWHEEL setactorvar[MUSICANDSFX_LINKID].MUSICANDSFX_STATUS -1
+   }
+  break
+
+  case FANSPRITE
+   ifvarn MUSICANDSFX_LINKID -1
+   {
+    getactorvar[MUSICANDSFX_LINKID].MUSICANDSFX_LINKPICNUM TEMP
+    ifvare TEMP FANSPRITE setactorvar[MUSICANDSFX_LINKID].MUSICANDSFX_STATUS -1
+   }
+  break
+
+  case COOLEXPLOSION1
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    //
+    setvar RETURN 0
+   }
+  break
+
+  case FREEZEBLAST
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    sound ICE_HISS
+    setvar RETURN 0
+   }
+  break
+
+  case SPIT
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    randvar temp 1
+    ifrnd 25 state sparkstate
+    ifvare temp 0 sound SPIT_IMPACT1 else
+    ifvare temp 1 sound SPIT_IMPACT2
+    setvar RETURN 0
+   }
+  break
+
+  case FIRELASER
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    espawn TRANSPORTERSTAR
+    setactor[RETURN].pal 2
+    setactor[RETURN].xrepeat 14
+    setactor[RETURN].yrepeat 14
+    setactor[RETURN].cstat 642 // 130
+    ifrnd 240 state sparkstate
+    randvar temp 2
+    ifvare temp 0 sound FIRELASER_IMPACT1 else
+    ifvare temp 1 sound FIRELASER_IMPACT2 else
+    ifvare temp 2 sound FIRELASER_IMPACT3  
+    setvar RETURN 0
+   }
+  break
+
+  case ZAPPER1
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    espawn TRANSPORTERSTAR
+    setactor[RETURN].xrepeat 28
+    setactor[RETURN].yrepeat 28
+    setactor[RETURN].cstat 642 // 130
+    ifrnd 252 state sparkstate
+    ifrnd 252 state sparkstate
+    ifrnd 252 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 132 state sparkstate
+    ifrnd 132 state sparkstate
+    ifrnd 132 state sparkstate
+    randvar temp 2
+    ifvare temp 0 sound FIRELASER_IMPACT1 else
+    ifvare temp 1 sound FIRELASER_IMPACT2 else
+    ifvare temp 2 sound FIRELASER_IMPACT3  
+    setvar RETURN 0
+   }
+  break
+
+  case ZAPPER2
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    espawn TRANSPORTERSTAR
+    setactor[RETURN].xrepeat 20
+    setactor[RETURN].yrepeat 20
+    setactor[RETURN].cstat 642 // 130
+    ifrnd 252 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 132 state sparkstate
+    randvar temp 2
+    ifvare temp 0 sound FIRELASER_IMPACT1 else
+    ifvare temp 1 sound FIRELASER_IMPACT2 else
+    ifvare temp 2 sound FIRELASER_IMPACT3  
+    setvar RETURN 0
+   }
+  break
+
+  case ZAPPER3
+   getactor[THISACTOR].htmovflag temp
+   ifvarn temp 0
+   {
+    espawn TRANSPORTERSTAR
+    setactor[RETURN].xrepeat 38
+    setactor[RETURN].yrepeat 38
+    setactor[RETURN].cstat 642 // 130
+    ifrnd 252 state sparkstate
+    ifrnd 252 state sparkstate
+    ifrnd 252 state sparkstate
+    ifrnd 252 state sparkstate
+    ifrnd 252 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 192 state sparkstate
+    ifrnd 132 state sparkstate
+    ifrnd 132 state sparkstate
+    ifrnd 132 state sparkstate
+    ifrnd 132 state sparkstate
+    ifrnd 132 state sparkstate
+    randvar temp 2
+    ifvare temp 0 sound FIRELASER_IMPACT1 else
+    ifvare temp 1 sound FIRELASER_IMPACT2 else
+    ifvare temp 2 sound FIRELASER_IMPACT3  
+    setvar RETURN 0
+   }
+  break
+
+  case OCTANINE_RPG
+
+ // Try to make projectile disappear fully when hitting a PK-Shielded player.
+   findnearsprite APLAYER 512 TEMP
+   ifvarn TEMP -1 // If it's a player, check for PKShield
+   {
+    ifvarand PLAYERSTATUS? 1024
+    {
+     getactor[THISACTOR].htg_t 0 DEFLECTATTACK_FRAME
+     getactor[THISACTOR].x DEFLECTATTACK_X
+     getactor[THISACTOR].y DEFLECTATTACK_Y
+     getactor[THISACTOR].z DEFLECTATTACK_Z
+     getactor[THISACTOR].ang DEFLECTATTACK_ANGLE
+     ifvare PKSHIELDHITTYPE 1
+     {
+      eshoot OCTANINE_RPG
+      setactor[RETURN].owner TEMP
+      setactor[RETURN].htg_t 0 DEFLECTATTACK_FRAME
+      setactor[RETURN].x DEFLECTATTACK_X
+      setactor[RETURN].y DEFLECTATTACK_Y
+      setactor[RETURN].z DEFLECTATTACK_Z
+      randvar TEMP2 1024
+      ifrnd 128 mulvar TEMP2 -1
+      setactor[RETURN].zvel TEMP2
+      addvar DEFLECTATTACK_ANGLE 1024
+      randvar TEMPVAR3 128
+      ifrnd 128 addvarvar DEFLECTATTACK_ANGLE TEMPVAR3 else subvarvar DEFLECTATTACK_ANGLE TEMPVAR3
+      setactor[RETURN].ang DEFLECTATTACK_ANGLE
+      setvar TEMP5 1
+     }
+    }
+    else
+    {
+     espawn EXPLOSION2CUSTOM
+     setactor[RETURN].xrepeat 32
+     setactor[RETURN].yrepeat 32
+     sound PIPEBOMB_EXPLODE
+    }
+   }
+   else
+   {
+    espawn EXPLOSION2CUSTOM
+    setactor[RETURN].xrepeat 32
+    setactor[RETURN].yrepeat 32
+    sound PIPEBOMB_EXPLODE
+   }
+   setvar RETURN 0
+  break
+
+ endswitch
+
+endevent
+
+// END OF EVENTS

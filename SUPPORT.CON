@@ -1,0 +1,4405 @@
+state damagemod-fallresist
+      setvar DAMAGEMODIFIER 1000
+
+      ifvarl CHARFALLRESIST 0 // Negative Fall Resistance
+      {
+       ifvare CHARACTERSELECTED? 3 // Bubsy
+       {
+        // Duke
+        ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Jack
+        ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Ami
+        ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Lo Wang
+        ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // ESSence
+        ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Ted
+        ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Lisa
+        ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Cybanis
+        ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Nethra
+        ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Paula
+        ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Lori
+        ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Minako
+        ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // "Mystery Lady"
+        ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+        // Maken
+        ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+       }
+       else
+       {
+        // Bubsy
+        ifvarg PLAYERSUPPORTBUBSY 0 addvar DAMAGEMODIFIER -50 // "C" Support
+        ifvarg PLAYERSUPPORTBUBSY 1 addvar DAMAGEMODIFIER -75 // "B" Support
+        ifvarg PLAYERSUPPORTBUBSY 2 addvar DAMAGEMODIFIER -100 // "A" Support
+        ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+        ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+       }
+      }
+      else
+      ifvare CHARFALLRESIST 0 nullop
+      else
+      ifvarg CHARFALLRESIST 0 // Positive Fall Resistance
+      {
+       ifvare CHARACTERSELECTED? 3 // Bubsy
+       {
+        // Duke
+        ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Jack
+        ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Ami
+        ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Lo Wang
+        ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // ESSence
+        ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Ted
+        ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Lisa
+        ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Cybanis
+        ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Nethra
+        ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Paula
+        ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Lori
+        ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Minako
+        ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // "Mystery Lady"
+        ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350 // "*" Support
+        // Maken
+        ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       }
+       else
+       {
+        // Bubsy
+        ifvarg PLAYERSUPPORTBUBSY 0 addvar DAMAGEMODIFIER 50 // "C" Support
+        ifvarg PLAYERSUPPORTBUBSY 1 addvar DAMAGEMODIFIER 75 // "B" Support
+        ifvarg PLAYERSUPPORTBUBSY 2 addvar DAMAGEMODIFIER 100 // "A" Support
+        ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125 // "S" Support
+        ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       }
+      }
+
+      ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+      mulvarvar CHARFALLRESIST DAMAGEMODIFIER
+      divvar CHARFALLRESIST 1000
+      ifvarg CHARFALLRESIST 1160 setvar CHARFALLRESIST 1160
+
+ends
+
+state damagemod-survival
+      setvar DAMAGEMODIFIER 1000
+
+      ifvare CHARACTERSELECTED? 15 // Maken
+      {
+       // Duke
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Jack
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Bubsy
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Ami
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Lo Wang
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // ESSence
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Ted
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Lisa
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Cybanis
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Nethra
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Paula
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Lori
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // Minako
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350 // "*" Support
+       // "Mystery Lady"
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350 // "*" Support
+      }
+      else
+      {
+       // Maken
+       ifvarg PLAYERSUPPORTMAKEN 0 addvar DAMAGEMODIFIER 50 // "C" Support
+       ifvarg PLAYERSUPPORTMAKEN 1 addvar DAMAGEMODIFIER 75 // "B" Support
+       ifvarg PLAYERSUPPORTMAKEN 2 addvar DAMAGEMODIFIER 100 // "A" Support
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125 // "S" Support
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350 // "*" Support
+      }
+
+      ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+      mulvarvar SURVIVALVALUE DAMAGEMODIFIER
+      divvar SURVIVALVALUE 1000
+
+      ifvarg SURVIVALVALUE 10000 setvar SURVIVALVALUE 10000
+      ifvare SKILLLEVEL 0 { ifvarg SURVIVALVALUE 9900 setvar SURVIVALVALUE 9900 }
+      ifvare SKILLLEVEL 1 { ifvarg SURVIVALVALUE 9800 setvar SURVIVALVALUE 9800 }
+      ifvare SKILLLEVEL 2 { ifvarg SURVIVALVALUE 9700 setvar SURVIVALVALUE 9700 }
+      ifvare SKILLLEVEL 3 { ifvarg SURVIVALVALUE 9600 setvar SURVIVALVALUE 9600 }
+      ifvare SKILLLEVEL 4 { ifvarg SURVIVALVALUE 9500 setvar SURVIVALVALUE 9500 }
+      ifvare SKILLLEVEL 5 { ifvarg SURVIVALVALUE 9400 setvar SURVIVALVALUE 9400 }
+      ifvare SKILLLEVEL 6 { ifvarg SURVIVALVALUE 9300 setvar SURVIVALVALUE 9300 }
+      ifvare SKILLLEVEL 7 { ifvarg SURVIVALVALUE 9200 setvar SURVIVALVALUE 9200 }
+      ifvare SKILLLEVEL 8 { ifvarg SURVIVALVALUE 9100 setvar SURVIVALVALUE 9100 }
+      ifvare SKILLLEVEL 9 { ifvarg SURVIVALVALUE 9000 setvar SURVIVALVALUE 9000 }
+      addvar SURVIVALVALUE 1
+
+ends
+
+state damagemod-enemy-knee
+      ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+      mulvarvar KNEEDAMAGE DAMAGEMODIFIER
+      divvar KNEEDAMAGE 1000
+      ifvarl KNEEDAMAGE 1 setvar KNEEDAMAGE 1
+      ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
+ends
+
+state damagemod-enemy-general
+      ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+      mulvarvar GENERALDAMAGE DAMAGEMODIFIER
+      divvar GENERALDAMAGE 1000
+      ifvarl GENERALDAMAGE 1 setvar GENERALDAMAGE 1
+      ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+ends
+
+state damagemod-enemy-melee
+      ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+      mulvarvar MELEEDAMAGE DAMAGEMODIFIER
+      divvar MELEEDAMAGE 1000
+      ifvarl MELEEDAMAGE 1 setvar MELEEDAMAGE 1
+      ifvarvarg MELEEDAMAGE STATLIMITMAXIMUM setvarvar MELEEDAMAGE STATLIMITMAXIMUM
+ends
+
+state damagemod-enemy-critical
+      ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+      mulvarvar CRITICALHITCHANCE2 DAMAGEMODIFIER
+      divvar CRITICALHITCHANCE2 1000
+      ifvarl CRITICALHITCHANCE2 1 setvar CRITICALHITCHANCE2 1
+      ifvarg CRITICALHITCHANCE2 640001 setvar CRITICALHITCHANCE2 640001
+ends
+
+//*******************************************
+//*******************************************
+//**SUPPORTS FOR CHARACTER-DAMAGE MODIFIERS**
+//*******************************************
+//*******************************************
+
+// Duke / Atomic [Damagefloors Only]
+
+state support-atomicresist
+ //******************************
+ //*Support Modifiers for Atomic*
+ //******************************
+ ifvare CHARACTERSELECTED? 1 // Duke
+ {
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTDUKE 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTDUKE 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Jack / Poison
+
+state support-poisonresist
+ //******************************
+ //*Support Modifiers for Poison*
+ //******************************
+ ifvare CHARACTERSELECTED? 2 // Jack
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTJACK 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTJACK 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Ami & Nethra / Ice
+
+state support-iceresist
+ //***************************
+ //*Support Modifiers for Ice*
+ //***************************
+ ifvare CHARACTERSELECTED? 4 // Ami
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTAMI 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTAMI 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ ifvare CHARACTERSELECTED? 10 // Nethra
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTNETHRA 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTNETHRA 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Ami / Water
+
+state support-waterresist
+ //*****************************
+ //*Support Modifiers for Water*
+ //*****************************
+ ifvare CHARACTERSELECTED? 4 // Ami
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTAMI 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTAMI 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// ESSence / Overall
+
+state support-overallresist
+ //*******************************
+ //*Support Modifiers for Overall*
+ //*******************************
+ ifvare CHARACTERSELECTED? 6 // ESSence
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTESSENCE 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTESSENCE 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Ted / Explosives
+
+state support-explosionresist
+ //**********************************
+ //*Support Modifiers for Explosives*
+ //**********************************
+ ifvare CHARACTERSELECTED? 7 // Ted
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Ted
+  ifvarg PLAYERSUPPORTTED 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTTED 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTTED 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Ted / Fire
+
+state support-fireresist
+ //****************************
+ //*Support Modifiers for Fire*
+ //****************************
+ ifvare CHARACTERSELECTED? 7 // Ted
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Ted
+  ifvarg PLAYERSUPPORTTED 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTTED 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTTED 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Lisa / Energy
+
+state support-energyresist
+ //******************************
+ //*Support Modifiers for Energy*
+ //******************************
+ ifvare CHARACTERSELECTED? 8 // Lisa
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTLISA 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTLISA 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Nethra / Electricity
+
+state support-electricresist
+ //***********************************
+ //*Support Modifiers for Electricity*
+ //***********************************
+ ifvare CHARACTERSELECTED? 10 // Nethra
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTNETHRA 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTNETHRA 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Paula / Psionics
+
+state support-psionicsresist
+ //********************************
+ //*Support Modifiers for Psionics*
+ //********************************
+ ifvare CHARACTERSELECTED? 11 // Paula
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTPAULA 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTPAULA 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Minako / Metal
+state support-metalresist
+ //*****************************
+ //*Support Modifiers for Metal*
+ //*****************************
+ ifvare CHARACTERSELECTED? 13 // Minako
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTMINAKO 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTMINAKO 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+// Maken / Ailments
+
+state support-ailmentresist
+ //*******************************
+ //*Support Modifiers for Aiments*
+ //*******************************
+ ifvare CHARACTERSELECTED? 15 // Maken
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER -350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ else
+ {
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 0 addvar DAMAGEMODIFIER -50 // "C" Support
+  ifvarg PLAYERSUPPORTMAKEN 1 addvar DAMAGEMODIFIER -75 // "B" Support
+  ifvarg PLAYERSUPPORTMAKEN 2 addvar DAMAGEMODIFIER -100 // "A" Support
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER -125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER -350 // "*" Support
+ }
+ends
+
+//***************************************
+//***************************************
+//**SUPPORTS FOR ENEMY-DAMAGE MODIFIERS**
+//***************************************
+//***************************************
+
+// Jack / Poison Support Stuff
+
+state support-monsterpoisoneffect-main
+      // Jack Support Levels
+      ifvarn CHARACTERSELECTED? 2 // Jack
+      {
+       ifvarg PLAYERSUPPORTJACK 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTJACK 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTJACK 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterpoisoneffect-extra
+      ifvare CHARACTERSELECTED? 2 // Jack
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Bubsy & Lori / Overall Damage Support Stuff
+
+state support-monsteroveralleffect-main
+      ifvarn CHARACTERSELECTED? 3 // Bubsy
+      {
+       // Bubsy Support Levels
+       ifvarg PLAYERSUPPORTBUBSY 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTBUBSY 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTBUBSY 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+      }
+      ifvarn CHARACTERSELECTED? 12 // Lori
+      {
+       // Lori Support Levels
+       ifvarg PLAYERSUPPORTLORI 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTLORI 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTLORI 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsteroveralleffect-extra
+      ifvare CHARACTERSELECTED? 3 // Bubsy
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+      ifvare CHARACTERSELECTED? 12 // Lori
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Ami & Nethra / Ice Support Stuff
+
+state support-monstericeeffect-main
+      ifvarn CHARACTERSELECTED? 4 // Ami
+      {
+       // Ami Support Levels
+       ifvarg PLAYERSUPPORTAMI 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTAMI 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTAMI 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+      }
+      ifvarn CHARACTERSELECTED? 10 // Nethra
+      {
+       // Nethra Support Levels
+       ifvarg PLAYERSUPPORTNETHRA 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTNETHRA 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTNETHRA 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monstericeeffect-extra
+      ifvare CHARACTERSELECTED? 4 // Ami
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+      ifvare CHARACTERSELECTED? 10 // Nethra
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Ami / Water Support Stuff
+
+state support-monsterwatereffect-main
+      ifvarn CHARACTERSELECTED? 4 // Ami
+      {
+       // Ami Support Levels
+       ifvarg PLAYERSUPPORTAMI 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTAMI 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTAMI 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterwatereffect-extra
+      ifvare CHARACTERSELECTED? 4 // Ami
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Lo Wang / Primeval Support Stuff
+
+state support-monsterprimevaleffect-main
+      // Lo Wang Support Levels
+      ifvarg PLAYERSUPPORTLOWANG 0 addvar DAMAGEMODIFIER 50
+      ifvarg PLAYERSUPPORTLOWANG 1 addvar DAMAGEMODIFIER 75
+      ifvarg PLAYERSUPPORTLOWANG 2 addvar DAMAGEMODIFIER 100
+      ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+      ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+ends
+
+state support-monsterprimevaleffect-extra
+      ifvare CHARACTERSELECTED? 5 // Lo Wang
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Ted / Fire Support Stuff
+
+state support-monsterfireeffect-main
+      ifvarn CHARACTERSELECTED? 7 // Ted
+      {
+       // Ted Support Levels
+       ifvarg PLAYERSUPPORTTED 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTTED 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTTED 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterfireeffect-extra
+      ifvare CHARACTERSELECTED? 7 // Ted
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Ted / Explosion Support Stuff
+
+state support-monsterexplodeeffect-main
+      ifvarn CHARACTERSELECTED? 7 // Ted
+      {
+       // Ted Support Levels
+       ifvarg PLAYERSUPPORTTED 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTTED 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTTED 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterexplodeeffect-extra
+      ifvare CHARACTERSELECTED? 7 // Ted
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Lisa / Energy Support Stuff
+
+state support-monsterenergyeffect-main
+      ifvarn CHARACTERSELECTED? 8 // Lisa
+      {
+       // Lisa Support Levels
+       ifvarg PLAYERSUPPORTLISA 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTLISA 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTLISA 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterenergyeffect-extra
+      ifvare CHARACTERSELECTED? 8 // Lisa
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Cybanis / Psychokensis Support Stuff
+
+state support-monsterpsychoeffect-main
+      ifvarn CHARACTERSELECTED? 9 // Cybanis
+      {
+       // Cybanis Support Levels
+       ifvarg PLAYERSUPPORTCYBANIS 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTCYBANIS 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTCYBANIS 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterpsychoeffect-extra
+      ifvare CHARACTERSELECTED? 9 // Cybanis
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Nethra / Electric Support Stuff
+
+state support-monsterelectriceffect-main
+      ifvarn CHARACTERSELECTED? 10 // Nethra
+      {
+       // Nethra Support Levels
+       ifvarg PLAYERSUPPORTNETHRA 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTNETHRA 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTNETHRA 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monsterelectriceffect-extra
+      ifvare CHARACTERSELECTED? 10 // Nethra
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+// Minako / Metal Support Stuff
+
+state support-monstermetaleffect-main
+      ifvarn CHARACTERSELECTED? 13 // Minako
+      {
+       // Minako Support Levels
+       ifvarg PLAYERSUPPORTMINAKO 0 addvar DAMAGEMODIFIER 50
+       ifvarg PLAYERSUPPORTMINAKO 1 addvar DAMAGEMODIFIER 75
+       ifvarg PLAYERSUPPORTMINAKO 2 addvar DAMAGEMODIFIER 100
+       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+state support-monstermetaleffect-extra
+      ifvare CHARACTERSELECTED? 13 // Minako
+      {
+       ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350
+
+//       ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125
+//       ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350
+
+       ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125
+       ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350
+      }
+ends
+
+//***************************************
+//*************MAIN STATE****************
+//***************************************
+
+state support-monsterdmgeffect
+  ifvare tempe APLAYER
+  {
+     setvar DAMAGEMODIFIER 1000
+     ifvare tempc SPIT
+     {
+      state support-monsterpoisoneffect-main
+      state support-monsterpoisoneffect-extra
+     }
+     ifvare tempc SHOTSPARK1
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+     ifvare tempc NEWSHOTSPARK1
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+     ifvare tempc SHOTGUN
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+     ifvare tempc NEWSHOTGUN
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+     ifvare tempc CHAINGUN
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+     ifvare tempc GROWSPARK
+     {
+      state support-monsterfireeffect-main
+      state support-monsterfireeffect-extra
+     }
+     ifvare tempc FREEZEBLAST 
+     { 
+      state support-monstericeeffect-main
+      state support-monstericeeffect-extra
+     }
+     ifvare tempc FIRELASER 
+     { 
+      state support-monsterenergyeffect-main
+      state support-monsterenergyeffect-extra
+     }
+     ifvare tempc ZAPPER1
+     { 
+      state support-monsterenergyeffect-main
+      state support-monsterenergyeffect-extra
+      state support-monsterelectriceffect-main
+      state support-monsterelectriceffect-extra
+     }
+     ifvare tempc ZAPPER2
+     { 
+      state support-monsterenergyeffect-main
+      state support-monsterenergyeffect-extra
+      state support-monsterelectriceffect-main
+      state support-monsterelectriceffect-extra
+     }
+     ifvare tempc ZAPPER3
+     { 
+      state support-monsterenergyeffect-main
+      state support-monsterenergyeffect-extra
+      state support-monsterelectriceffect-main
+      state support-monsterelectriceffect-extra
+     }
+     ifvare tempc GENERAL_RPG
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc COMMANDER_RPG
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc LEADER_RPG
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc BAALO_RPG
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc RPG
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc RPG_NOAIM
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc GATEMISSILE_MAIN
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc GATEMISSILE_SPLIT
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc STROKEMISSILE_MAIN
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc STROKEMISSILE_SPLIT
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc MORTER
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc SEENINE
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc OOZFILTER
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc RADIUSEXPLOSION
+     {
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+     }
+     ifvare tempc OCTANINE_RPG
+     {
+      state support-monsterprimevaleffect-main
+      state support-monsterprimevaleffect-extra
+      state support-monsterexplodeeffect-main
+      state support-monsterexplodeeffect-extra
+      state support-monsterpsychoeffect-main
+      state support-monsterpsychoeffect-extra
+     }
+     ifvare tempc COOLEXPLOSION1
+     {
+      state support-monsterprimevaleffect-main
+      state support-monsterprimevaleffect-extra
+      state support-monsterpsychoeffect-main
+      state support-monsterpsychoeffect-extra
+     }
+     ifvare tempc NEWSHOTSPARK1
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+     ifvare tempc NEWSHOTGUN
+     {
+      state support-monstermetaleffect-main
+      state support-monstermetaleffect-extra
+     }
+
+     state support-monsteroveralleffect-main
+     state support-monsteroveralleffect-extra
+
+     state damagemod-enemy-general
+  }
+ends
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+state equipment-monsterdmgeffect
+  ifvare tempe APLAYER
+  {
+     setvar DAMAGEMODIFIER 1000
+/*
+     ifvare tempc SPIT
+     {
+     }
+     ifvare tempc SHOTSPARK1
+     {
+     }
+     ifvare tempc NEWSHOTSPARK1
+     {
+     }
+     ifvare tempc SHOTGUN
+     {
+     }
+     ifvare tempc NEWSHOTGUN
+     {
+     }
+     ifvare tempc CHAINGUN
+     {
+     }
+     ifvare tempc GROWSPARK
+     {
+     }
+     ifvare tempc FREEZEBLAST 
+     { 
+     }
+     ifvare tempc FIRELASER 
+     { 
+     }
+     ifvare tempc ZAPPER1
+     { 
+     }
+     ifvare tempc ZAPPER2
+     { 
+     }
+     ifvare tempc ZAPPER3
+     { 
+     }
+     ifvare tempc GENERAL_RPG
+     {
+     }
+     ifvare tempc COMMANDER_RPG
+     {
+     }
+     ifvare tempc LEADER_RPG
+     {
+     }
+     ifvare tempc BAALO_RPG
+     {
+     }
+     ifvare tempc RPG
+     {
+     }
+     ifvare tempc RPG_NOAIM
+     {
+     }
+     ifvare tempc GATEMISSILE_MAIN
+     {
+     }
+     ifvare tempc GATEMISSILE_SPLIT
+     {
+     }
+     ifvare tempc STROKEMISSILE_MAIN
+     {
+     }
+     ifvare tempc STROKEMISSILE_SPLIT
+     {
+     }
+     ifvare tempc MORTER
+     {
+     }
+     ifvare tempc SEENINE
+     {
+     }
+     ifvare tempc OOZFILTER
+     {
+     }
+     ifvare tempc RADIUSEXPLOSION
+     {
+     }
+     ifvare tempc OCTANINE_RPG
+     {
+     }
+     ifvare tempc COOLEXPLOSION1
+     {
+     }
+     ifvare tempc NEWSHOTSPARK1
+     {
+     }
+     ifvare tempc NEWSHOTGUN
+     {
+     }
+*/
+     state damagemod-enemy-general
+  }
+ends
+
+//********************************
+//********************************
+//**SUPPORTS FOR OTHER MODIFIERS**
+//********************************
+//********************************
+
+// Jack / EXP
+
+state support-expbonus-main
+ ifvare CHARACTERSELECTED? 2 // Jack
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ else
+ {
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 0 addvar DAMAGEMODIFIER 4 // "C" Support
+  ifvarg PLAYERSUPPORTJACK 1 addvar DAMAGEMODIFIER 6 // "B" Support
+  ifvarg PLAYERSUPPORTJACK 2 addvar DAMAGEMODIFIER 9 // "A" Support
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ends
+
+// ESSence / Rank
+
+state support-rankbonus
+ ifvare CHARACTERSELECTED? 6 // ESSence
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ else
+ {
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 0 addvar DAMAGEMODIFIER 4 // "C" Support
+  ifvarg PLAYERSUPPORTESSENCE 1 addvar DAMAGEMODIFIER 6 // "B" Support
+  ifvarg PLAYERSUPPORTESSENCE 2 addvar DAMAGEMODIFIER 9 // "A" Support
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ends
+
+// Lo Wang & Mystery Lady / HP Regen
+
+state support-hpregen
+ //********************************
+ //*Support Modifiers for HP Regen*
+ //********************************
+ ifvare CHARACTERSELECTED? 5 // Lo Wang
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ else
+ {
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 0 addvar DAMAGEMODIFIER 50 // "C" Support
+  ifvarg PLAYERSUPPORTLOWANG 1 addvar DAMAGEMODIFIER 75 // "B" Support
+  ifvarg PLAYERSUPPORTLOWANG 2 addvar DAMAGEMODIFIER 100 // "A" Support
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ ifvare CHARACTERSELECTED? 14 // "Mystery Lady"
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ else
+ {
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 0 addvar DAMAGEMODIFIER 50 // "C" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 1 addvar DAMAGEMODIFIER 75 // "B" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 2 addvar DAMAGEMODIFIER 100 // "A" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ends
+
+// Mystery Lady / Air Jump Strength
+
+state support-airjump
+ //*****************************************
+ //*Support Modifiers for Air Jump Strength*
+ //*****************************************
+ ifvare CHARACTERSELECTED? 14 // "Mystery Lady"
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ else
+ {
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 0 addvar DAMAGEMODIFIER 50 // "C" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 1 addvar DAMAGEMODIFIER 75 // "B" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 2 addvar DAMAGEMODIFIER 100 // "A" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ends
+
+// Lisa / Critical Hits
+
+state support-criticalhit
+ //**************************************
+ //*Support Modifiers for Critical Hit %*
+ //**************************************
+ ifvare CHARACTERSELECTED? 8 // Lisa
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 350 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ else
+ {
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 0 addvar DAMAGEMODIFIER 50 // "C" Support
+  ifvarg PLAYERSUPPORTLISA 1 addvar DAMAGEMODIFIER 75 // "B" Support
+  ifvarg PLAYERSUPPORTLISA 2 addvar DAMAGEMODIFIER 100 // "A" Support
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 125 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 350 // "*" Support
+ }
+ends
+
+
+
+//***********************************************************************************************************************************************************
+//***********************************************************************************************************************************************************
+//****************************************************************SUPPORTS FOR STAT MODIFIERS****************************************************************
+//***********************************************************************************************************************************************************
+//***********************************************************************************************************************************************************
+
+state support-lvl1-increase
+      mulvar TEMPVAR 50
+      divvar TEMPVAR 1000
+ends
+
+state support-lvl2-increase
+      mulvar TEMPVAR 75
+      divvar TEMPVAR 1000
+ends
+
+state support-lvl3-increase
+      mulvar TEMPVAR 100
+      divvar TEMPVAR 1000
+ends
+
+state support-lvl4-increase
+      mulvar TEMPVAR 125
+      divvar TEMPVAR 1000
+ends
+
+state support-lvl5-increase
+      mulvar TEMPVAR 350
+      divvar TEMPVAR 1000
+ends
+
+// Duke / Max HP
+
+state support-hp-frag1
+     getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 1 { ifvare TEMPVAR2 0 setvar TEMPVAR2 1 }
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-hp-frag2
+     getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 2 { ifvare TEMPVAR2 1 setvar TEMPVAR2 2 }
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-hp-frag3
+     getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 3 { ifvare TEMPVAR2 2 setvar TEMPVAR2 3 }
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-hp-frag4
+     getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 4 { ifvare TEMPVAR2 3 setvar TEMPVAR2 4 }
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-hp-frag5
+     getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 5 { ifvare TEMPVAR2 4 setvar TEMPVAR2 5 }
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-hp-increase-selected
+      addvarvar MAXHITPOINTS TEMPVAR
+      ifvarvarg MAXHITPOINTS STATLIMIT setvarvar MAXHITPOINTS STATLIMIT
+      ifvarvarl CURRENTHITPOINTS STATLIMIT addvarvar CURRENTHITPOINTS TEMPVAR
+ends
+
+state support-hp-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMP2
+      addvarvar TEMP2 TEMPVAR
+      ifvarvarg TEMP2 STATLIMIT setvarvar TEMP2 STATLIMIT
+      setactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMP2
+      getactorvar[CHARACTERARRAY].CHARACTERHP TEMP2
+      ifvarvarl TEMP2 STATLIMIT addvarvar TEMP2 TEMPVAR
+      setactorvar[CHARACTERARRAY].CHARACTERHP TEMP2
+ends
+
+state support-hp-mainstate1
+    setvarvar TEMPVAR MAXHITPOINTS
+
+// Check Support Levels
+    ifvarg PLAYERSUPPORTDUKE 0 state support-hp-frag1
+    ifvarg PLAYERSUPPORTDUKE 1 state support-hp-frag2
+    ifvarg PLAYERSUPPORTDUKE 2 state support-hp-frag3
+    ifvarg PLAYERSUPPORTDUKE 3 state support-hp-frag4
+    ifvarg PLAYERSUPPORTDUKE 4 state support-hp-frag5
+
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-hp-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-hp-increase-selected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-hp-increase-selected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-hp-increase-selected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-hp-increase-selected }
+    }
+ends
+
+state support-hp-mainstate2
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE TEMPVAR4
+    ifvarg TEMPVAR4 0 state support-hp-frag1
+    ifvarg TEMPVAR4 1 state support-hp-frag2
+    ifvarg TEMPVAR4 2 state support-hp-frag3
+    ifvarg TEMPVAR4 3 state support-hp-frag4
+    ifvarg TEMPVAR4 4 state support-hp-frag5
+
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-hp-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-hp-increase-notselected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-hp-increase-notselected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-hp-increase-notselected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-hp-increase-notselected }
+    }
+ends
+//
+
+state support-maxhp
+   // Duke
+   setvar CHARACTERARRAY 1
+   ifvare CHARACTERSELECTED? 1
+   {
+    setvarvar TEMPVAR MAXHITPOINTS
+
+// Check Support Levels
+    ifvarg PLAYERSUPPORTJACK 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTJACK 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTBUBSY 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTBUBSY 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTAMI 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTAMI 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTLOWANG 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTLOWANG 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTESSENCE 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTESSENCE 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTTED 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTTED 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTLISA 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTLISA 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTCYBANIS 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTCYBANIS 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTNETHRA 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTNETHRA 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTPAULA 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTPAULA 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTLORI 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTLORI 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTMINAKO 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTMINAKO 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTMYSTERY1 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTMYSTERY1 4 state support-hp-frag2
+    ifvarg PLAYERSUPPORTMAKEN 3 state support-hp-frag1
+    ifvarg PLAYERSUPPORTMAKEN 4 state support-hp-frag2
+// End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-hp-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-hp-increase-selected }
+    }
+   }
+   else
+   {
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-hp-frag1
+    ifvarg TEMPVAR4 4 state support-hp-frag2
+// End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].HPSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-hp-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-hp-increase-notselected }
+    }
+   }
+
+   // Jack
+   setvar CHARACTERARRAY 2 ifvare CHARACTERSELECTED? 2 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Bubsy
+   setvar CHARACTERARRAY 3 ifvare CHARACTERSELECTED? 3 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Ami
+   setvar CHARACTERARRAY 4 ifvare CHARACTERSELECTED? 4 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Lo Wang
+   setvar CHARACTERARRAY 5 ifvare CHARACTERSELECTED? 5 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // ESSence
+   setvar CHARACTERARRAY 6 ifvare CHARACTERSELECTED? 6 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Ted
+   setvar CHARACTERARRAY 7 ifvare CHARACTERSELECTED? 7 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Lisa
+   setvar CHARACTERARRAY 8 ifvare CHARACTERSELECTED? 8 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Cybanis
+   setvar CHARACTERARRAY 9 ifvare CHARACTERSELECTED? 9 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Nethra
+   setvar CHARACTERARRAY 10 ifvare CHARACTERSELECTED? 10 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Paula
+   setvar CHARACTERARRAY 11 ifvare CHARACTERSELECTED? 11 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Lori
+   setvar CHARACTERARRAY 12 ifvare CHARACTERSELECTED? 12 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Minako
+   setvar CHARACTERARRAY 13 ifvare CHARACTERSELECTED? 13 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // "Mystery Lady"
+   setvar CHARACTERARRAY 14 ifvare CHARACTERSELECTED? 14 state support-hp-mainstate1 else state support-hp-mainstate2
+
+   // Maken
+   setvar CHARACTERARRAY 15 ifvare CHARACTERSELECTED? 15 state support-hp-mainstate1 else state support-hp-mainstate2
+ends
+
+
+
+
+
+
+
+// Minako / Max AP
+
+state support-ap-frag1
+     getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 1 { ifvare TEMPVAR2 0 setvar TEMPVAR2 1 }
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-ap-frag2
+     getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 2 { ifvare TEMPVAR2 1 setvar TEMPVAR2 2 }
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-ap-frag3
+     getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 3 { ifvare TEMPVAR2 2 setvar TEMPVAR2 3 }
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-ap-frag4
+     getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 4 { ifvare TEMPVAR2 3 setvar TEMPVAR2 4 }
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-ap-frag5
+     getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 5 { ifvare TEMPVAR2 4 setvar TEMPVAR2 5 }
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-ap-increase-selected
+      addvarvar MAXARMORPOINTS TEMPVAR
+      ifvarg MAXARMORPOINTS 524288 setvar MAXARMORPOINTS 524288
+      ifvarg CURRENTARMORPOINTS 0 { ifvarl CURRENTARMORPOINTS 524288 addvarvar CURRENTARMORPOINTS TEMPVAR }
+ends
+
+state support-ap-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP2
+      addvarvar TEMP2 TEMPVAR
+      ifvarg TEMP2 524288 setvar TEMP2 524288
+      setactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP2
+      getactorvar[CHARACTERARRAY].CHARACTERAP TEMP2
+      ifvarg TEMP2 0 { ifvarl TEMP2 524288 addvarvar TEMP2 TEMPVAR }
+      setactorvar[CHARACTERARRAY].CHARACTERAP TEMP2
+ends
+
+state support-ap-mainstate1
+    setvarvar TEMPVAR MAXARMORPOINTS
+
+// Check Support Levels
+    ifvarg PLAYERSUPPORTMINAKO 0 state support-ap-frag1
+    ifvarg PLAYERSUPPORTMINAKO 1 state support-ap-frag2
+    ifvarg PLAYERSUPPORTMINAKO 2 state support-ap-frag3
+    ifvarg PLAYERSUPPORTMINAKO 3 state support-ap-frag4
+    ifvarg PLAYERSUPPORTMINAKO 4 state support-ap-frag5
+
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-ap-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-ap-increase-selected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-ap-increase-selected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-ap-increase-selected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-ap-increase-selected }
+    }
+ends
+
+state support-ap-mainstate2
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMPVAR
+
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR4
+    ifvarg TEMPVAR4 0 state support-ap-frag1
+    ifvarg TEMPVAR4 1 state support-ap-frag2
+    ifvarg TEMPVAR4 2 state support-ap-frag3
+    ifvarg TEMPVAR4 3 state support-ap-frag4
+    ifvarg TEMPVAR4 4 state support-ap-frag5
+
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-ap-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-ap-increase-notselected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-ap-increase-notselected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-ap-increase-notselected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-ap-increase-notselected }
+    }
+ends
+
+//
+
+state support-maxap
+   // Duke
+   setvar CHARACTERARRAY 1 ifvare CHARACTERSELECTED? 1 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Jack
+   setvar CHARACTERARRAY 2 ifvare CHARACTERSELECTED? 2 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Bubsy
+   setvar CHARACTERARRAY 3 ifvare CHARACTERSELECTED? 3 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Ami
+   setvar CHARACTERARRAY 4 ifvare CHARACTERSELECTED? 4 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Lo Wang
+   setvar CHARACTERARRAY 5 ifvare CHARACTERSELECTED? 5 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // ESSence
+   setvar CHARACTERARRAY 6 ifvare CHARACTERSELECTED? 6 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Ted
+   setvar CHARACTERARRAY 7 ifvare CHARACTERSELECTED? 7 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Lisa
+   setvar CHARACTERARRAY 8 ifvare CHARACTERSELECTED? 8 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Cybanis
+   setvar CHARACTERARRAY 9 ifvare CHARACTERSELECTED? 9 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Nethra
+   setvar CHARACTERARRAY 10 ifvare CHARACTERSELECTED? 10 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Paula
+   setvar CHARACTERARRAY 11 ifvare CHARACTERSELECTED? 11 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Lori
+   setvar CHARACTERARRAY 12 ifvare CHARACTERSELECTED? 12 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Minako
+   setvar CHARACTERARRAY 13
+   ifvare CHARACTERSELECTED? 13
+   {
+    setvarvar TEMPVAR MAXARMORPOINTS
+
+// Check Support Levels
+    ifvarg PLAYERSUPPORTDUKE 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTDUKE 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTJACK 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTJACK 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTBUBSY 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTBUBSY 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTAMI 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTAMI 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTLOWANG 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTLOWANG 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTESSENCE 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTESSENCE 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTTED 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTTED 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTLISA 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTLISA 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTCYBANIS 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTCYBANIS 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTNETHRA 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTNETHRA 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTPAULA 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTPAULA 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTLORI 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTLORI 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTMYSTERY1 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTMYSTERY1 4 state support-ap-frag2
+    ifvarg PLAYERSUPPORTMAKEN 3 state support-ap-frag1
+    ifvarg PLAYERSUPPORTMAKEN 4 state support-ap-frag2
+// End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-ap-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-ap-increase-selected }
+    }
+   }
+   else
+   {
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMPVAR
+
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-ap-frag1
+    ifvarg TEMPVAR4 4 state support-ap-frag2
+// End Check Support Levels
+
+    setvar CHARACTERARRAY 13
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].APSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-ap-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-ap-increase-notselected }
+    }
+   }
+
+   // "Mystery Lady"
+   setvar CHARACTERARRAY 14 ifvare CHARACTERSELECTED? 14 state support-ap-mainstate1 else state support-ap-mainstate2
+
+   // Maken
+   setvar CHARACTERARRAY 15 ifvare CHARACTERSELECTED? 15 state support-ap-mainstate1 else state support-ap-mainstate2
+ends
+
+
+
+
+
+
+
+// Ami / Air Time
+
+state support-air-frag1
+     getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 1 { ifvare TEMPVAR2 0 setvar TEMPVAR2 1 }
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-air-frag2
+     getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 2 { ifvare TEMPVAR2 1 setvar TEMPVAR2 2 }
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-air-frag3
+     getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 3 { ifvare TEMPVAR2 2 setvar TEMPVAR2 3 }
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-air-frag4
+     getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 4 { ifvare TEMPVAR2 3 setvar TEMPVAR2 4 }
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-air-frag5
+     getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 5 { ifvare TEMPVAR2 4 setvar TEMPVAR2 5 }
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-air-increase-selected
+      addvarvar MAXAIRTIME TEMPVAR
+      ifvarg MAXAIRTIME 93600 setvar MAXAIRTIME 93600
+      ifvarl AIRTIME 93600 addvarvar AIRTIME TEMPVAR
+ends
+
+state support-air-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMP2
+      addvarvar TEMP2 TEMPVAR
+      ifvarg TEMP2 93600 setvar TEMP2 93600
+      setactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMP2
+      getactorvar[CHARACTERARRAY].CHARACTERBREATHTIME TEMP2
+      ifvarl TEMP2 93600 addvarvar TEMP2 TEMPVAR
+      setactorvar[CHARACTERARRAY].CHARACTERBREATHTIME TEMP2
+ends
+
+state support-air-mainstate1
+    setvarvar TEMPVAR MAXAIRTIME
+
+// Check Support Levels
+    ifvarg PLAYERSUPPORTAMI 0 state support-air-frag1
+    ifvarg PLAYERSUPPORTAMI 1 state support-air-frag2
+    ifvarg PLAYERSUPPORTAMI 2 state support-air-frag3
+    ifvarg PLAYERSUPPORTAMI 3 state support-air-frag4
+    ifvarg PLAYERSUPPORTAMI 4 state support-air-frag5
+
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-air-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-air-increase-selected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-air-increase-selected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-air-increase-selected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-air-increase-selected }
+    }
+ends
+
+state support-air-mainstate2
+    getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR
+
+    // Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR4
+    ifvarg TEMPVAR4 0 state support-air-frag1
+    ifvarg TEMPVAR4 1 state support-air-frag2
+    ifvarg TEMPVAR4 2 state support-air-frag3
+    ifvarg TEMPVAR4 3 state support-air-frag4
+    ifvarg TEMPVAR4 4 state support-air-frag5
+
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-air-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-air-increase-notselected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-air-increase-notselected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-air-increase-notselected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-air-increase-notselected }
+    }
+ends
+
+//
+state support-airtime
+   // Duke
+   setvar CHARACTERARRAY 1 ifvare CHARACTERSELECTED? 1 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Jack
+   setvar CHARACTERARRAY 2 ifvare CHARACTERSELECTED? 2 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Bubsy
+   setvar CHARACTERARRAY 3 ifvare CHARACTERSELECTED? 3 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Ami
+   setvar CHARACTERARRAY 4
+   ifvare CHARACTERSELECTED? 4
+   {
+    setvarvar TEMPVAR MAXAIRTIME
+
+    // Check Support Levels
+    ifvarg PLAYERSUPPORTDUKE 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTDUKE 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTJACK 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTJACK 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTBUBSY 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTBUBSY 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTLOWANG 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTLOWANG 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTESSENCE 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTESSENCE 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTTED 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTTED 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTLISA 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTLISA 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTCYBANIS 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTCYBANIS 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTNETHRA 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTNETHRA 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTPAULA 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTPAULA 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTLORI 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTLORI 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTMINAKO 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTMINAKO 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTMYSTERY1 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTMYSTERY1 4 state support-air-frag2
+    ifvarg PLAYERSUPPORTMAKEN 3 state support-air-frag1
+    ifvarg PLAYERSUPPORTMAKEN 4 state support-air-frag2
+    // End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-air-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-air-increase-selected }
+    }
+   }
+   else
+   {
+    getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR
+
+    // Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-air-frag1
+    ifvarg TEMPVAR4 4 state support-air-frag2
+    // End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].AIRSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-air-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-air-increase-notselected }
+    }
+   }
+
+   // Lo Wang
+   setvar CHARACTERARRAY 5 ifvare CHARACTERSELECTED? 5 state support-air-mainstate1 else state support-air-mainstate2
+
+   // ESSence
+   setvar CHARACTERARRAY 6 ifvare CHARACTERSELECTED? 6 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Ted
+   setvar CHARACTERARRAY 7 ifvare CHARACTERSELECTED? 7 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Lisa
+   setvar CHARACTERARRAY 8 ifvare CHARACTERSELECTED? 8 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Cybanis
+   setvar CHARACTERARRAY 9 ifvare CHARACTERSELECTED? 9 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Nethra
+   setvar CHARACTERARRAY 10 ifvare CHARACTERSELECTED? 10 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Paula
+   setvar CHARACTERARRAY 11 ifvare CHARACTERSELECTED? 11 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Lori
+   setvar CHARACTERARRAY 12 ifvare CHARACTERSELECTED? 12 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Minako
+   setvar CHARACTERARRAY 13 ifvare CHARACTERSELECTED? 13 state support-air-mainstate1 else state support-air-mainstate2
+
+   // "Mystery Lady"
+   setvar CHARACTERARRAY 14 ifvare CHARACTERSELECTED? 14 state support-air-mainstate1 else state support-air-mainstate2
+
+   // Maken
+   setvar CHARACTERARRAY 15 ifvare CHARACTERSELECTED? 15 state support-air-mainstate1 else state support-air-mainstate2
+ends
+
+
+
+
+
+
+
+// Cybanis / Mantling Time
+
+state support-mantle-frag1
+     getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 1 { ifvare TEMPVAR2 0 setvar TEMPVAR2 1 }
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-mantle-frag2
+     getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 2 { ifvare TEMPVAR2 1 setvar TEMPVAR2 2 }
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-mantle-frag3
+     getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 3 { ifvare TEMPVAR2 2 setvar TEMPVAR2 3 }
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-mantle-frag4
+     getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 4 { ifvare TEMPVAR2 3 setvar TEMPVAR2 4 }
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-mantle-frag5
+     getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 5 { ifvare TEMPVAR2 4 setvar TEMPVAR2 5 }
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-mantle-increase-selected
+      addvarvar MANTLINGTIMERMAX TEMPVAR
+      ifvarg MANTLINGTIMERMAX 93600 setvar MANTLINGTIMERMAX 93600
+      ifvarl MANTLINGTIMER 93600 addvarvar MANTLINGTIMER TEMPVAR
+ends
+
+state support-mantle-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMP2
+      addvarvar TEMP2 TEMPVAR
+      ifvarg TEMP2 93600 setvar TEMP2 93600
+      setactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMP2
+      getactorvar[CHARACTERARRAY].CHARACTERMANTLETIME TEMP2
+      ifvarl TEMP2 93600 addvarvar TEMP2 TEMPVAR
+      setactorvar[CHARACTERARRAY].CHARACTERMANTLETIME TEMP2
+ends
+
+state support-mantle-mainstate1
+    setvarvar TEMPVAR MANTLINGTIMERMAX
+
+    // Check Support Levels
+    ifvarg PLAYERSUPPORTCYBANIS 0 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTCYBANIS 1 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTCYBANIS 2 state support-mantle-frag3
+    ifvarg PLAYERSUPPORTCYBANIS 3 state support-mantle-frag4
+    ifvarg PLAYERSUPPORTCYBANIS 4 state support-mantle-frag5
+
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-mantle-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-mantle-increase-selected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-mantle-increase-selected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-mantle-increase-selected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-mantle-increase-selected }
+    }
+ends
+
+state support-mantle-mainstate2
+    getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR
+
+    // Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS TEMPVAR4
+    ifvarg TEMPVAR4 0 state support-mantle-frag1
+    ifvarg TEMPVAR4 1 state support-mantle-frag2
+    ifvarg TEMPVAR4 2 state support-mantle-frag3
+    ifvarg TEMPVAR4 3 state support-mantle-frag4
+    ifvarg TEMPVAR4 4 state support-mantle-frag5
+
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-mantle-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-mantle-increase-notselected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-mantle-increase-notselected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-mantle-increase-notselected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-mantle-increase-notselected }
+    }
+ends
+
+// Mantle Stuff
+state support-mantling
+   // Duke
+   setvar CHARACTERARRAY 1 ifvare CHARACTERSELECTED? 1 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Jack
+   setvar CHARACTERARRAY 2 ifvare CHARACTERSELECTED? 2 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Bubsy
+   setvar CHARACTERARRAY 3 ifvare CHARACTERSELECTED? 3 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Ami
+   setvar CHARACTERARRAY 4 ifvare CHARACTERSELECTED? 4 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Lo Wang
+   setvar CHARACTERARRAY 5 ifvare CHARACTERSELECTED? 5 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // ESSence
+   setvar CHARACTERARRAY 6 ifvare CHARACTERSELECTED? 6 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Ted
+   setvar CHARACTERARRAY 7 ifvare CHARACTERSELECTED? 7 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Lisa
+   setvar CHARACTERARRAY 8 ifvare CHARACTERSELECTED? 8 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Cybanis
+   setvar CHARACTERARRAY 9
+   ifvare CHARACTERSELECTED? 9
+   {
+    setvarvar TEMPVAR MANTLINGTIMERMAX
+
+    // Check Support Levels
+    ifvarg PLAYERSUPPORTDUKE 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTDUKE 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTJACK 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTJACK 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTBUBSY 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTBUBSY 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTAMI 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTAMI 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTLOWANG 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTLOWANG 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTESSENCE 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTESSENCE 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTTED 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTTED 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTLISA 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTLISA 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTNETHRA 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTNETHRA 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTPAULA 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTPAULA 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTLORI 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTLORI 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTMINAKO 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTMINAKO 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTMYSTERY1 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTMYSTERY1 4 state support-mantle-frag2
+    ifvarg PLAYERSUPPORTMAKEN 3 state support-mantle-frag1
+    ifvarg PLAYERSUPPORTMAKEN 4 state support-mantle-frag2
+    // End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-mantle-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-mantle-increase-selected }
+    }
+   }
+   else
+   {
+    getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR
+
+    // Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-mantle-frag1
+    ifvarg TEMPVAR4 4 state support-mantle-frag2
+    // End Check Support Levels
+
+    setvar CHARACTERARRAY 9
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].MANTLESUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-mantle-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-mantle-increase-notselected }
+    }
+   }
+
+   // Nethra
+   setvar CHARACTERARRAY 10 ifvare CHARACTERSELECTED? 10 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Paula
+   setvar CHARACTERARRAY 11 ifvare CHARACTERSELECTED? 11 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Lori
+   setvar CHARACTERARRAY 12 ifvare CHARACTERSELECTED? 12 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Minako
+   setvar CHARACTERARRAY 13 ifvare CHARACTERSELECTED? 13 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // "Mystery Lady"
+   setvar CHARACTERARRAY 14 ifvare CHARACTERSELECTED? 14 state support-mantle-mainstate1 else state support-mantle-mainstate2
+
+   // Maken
+   setvar CHARACTERARRAY 15 ifvare CHARACTERSELECTED? 15 state support-mantle-mainstate1 else state support-mantle-mainstate2
+ends
+
+
+
+
+
+
+
+// Paula / Speed & Attack Speed
+state support-speed-frag1
+     getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 1 { ifvare TEMPVAR2 0 setvar TEMPVAR2 1 }
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-speed-frag2
+     getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 2 { ifvare TEMPVAR2 1 setvar TEMPVAR2 2 }
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-speed-frag3
+     getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 3 { ifvare TEMPVAR2 2 setvar TEMPVAR2 3 }
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-speed-frag4
+     getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 4 { ifvare TEMPVAR2 3 setvar TEMPVAR2 4 }
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-speed-frag5
+     getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 5 { ifvare TEMPVAR2 4 setvar TEMPVAR2 5 }
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-speed-increase-selected
+      addvarvar CHARACTERSPEEDTRUE TEMPVAR
+      ifvarg CHARACTERSPEEDTRUE 61000 setvar CHARACTERSPEEDTRUE 61000
+      setplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
+ends
+
+state support-speed-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMP2
+      addvarvar TEMP2 TEMPVAR
+      ifvarg TEMP2 61000 setvar TEMP2 61000
+      setactorvar[CHARACTERARRAY].CHARACTERSPEED TEMP2
+ends
+
+state support-speed-mainstate1
+    setvarvar TEMPVAR CHARACTERSPEEDTRUE
+    subvar TEMPVAR 46500
+
+// Check Support Levels
+    ifvarg PLAYERSUPPORTPAULA 0 state support-speed-frag1
+    ifvarg PLAYERSUPPORTPAULA 1 state support-speed-frag2
+    ifvarg PLAYERSUPPORTPAULA 2 state support-speed-frag3
+    ifvarg PLAYERSUPPORTPAULA 3 state support-speed-frag4
+    ifvarg PLAYERSUPPORTPAULA 4 state support-speed-frag5
+
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-speed-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-speed-increase-selected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-speed-increase-selected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-speed-increase-selected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-speed-increase-selected }
+    }
+ends
+
+state support-speed-mainstate2
+    getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR
+    subvar TEMPVAR 46500
+
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA TEMPVAR4
+    ifvarg TEMPVAR4 0 state support-speed-frag1
+    ifvarg TEMPVAR4 1 state support-speed-frag2
+    ifvarg TEMPVAR4 2 state support-speed-frag3
+    ifvarg TEMPVAR4 3 state support-speed-frag4
+    ifvarg TEMPVAR4 4 state support-speed-frag5
+
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl1-increase state support-speed-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl2-increase state support-speed-increase-notselected }
+     ifvare TEMPVAR3 3 { state support-lvl3-increase state support-speed-increase-notselected }
+     ifvare TEMPVAR3 4 { state support-lvl4-increase state support-speed-increase-notselected }
+     ifvare TEMPVAR3 5 { state support-lvl5-increase state support-speed-increase-notselected }
+    }
+ends
+
+// Speed Boosts
+state support-speed
+   // Duke
+   setvar CHARACTERARRAY 1 ifvare CHARACTERSELECTED? 1 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Jack
+   setvar CHARACTERARRAY 2 ifvare CHARACTERSELECTED? 2 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Bubsy
+   setvar CHARACTERARRAY 3 ifvare CHARACTERSELECTED? 3 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Ami
+   setvar CHARACTERARRAY 4 ifvare CHARACTERSELECTED? 4 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Lo Wang
+   setvar CHARACTERARRAY 5 ifvare CHARACTERSELECTED? 5 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // ESSence
+   setvar CHARACTERARRAY 6 ifvare CHARACTERSELECTED? 6 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Ted
+   setvar CHARACTERARRAY 7 ifvare CHARACTERSELECTED? 7 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Lisa
+   setvar CHARACTERARRAY 8 ifvare CHARACTERSELECTED? 8 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Cybanis
+   setvar CHARACTERARRAY 9 ifvare CHARACTERSELECTED? 9 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Nethra
+   setvar CHARACTERARRAY 10 ifvare CHARACTERSELECTED? 10 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Paula
+   setvar CHARACTERARRAY 11
+   ifvare CHARACTERSELECTED? 11
+   {
+    setvarvar TEMPVAR CHARACTERSPEEDTRUE
+    subvar TEMPVAR 46500
+
+    // Check Support Levels
+    ifvarg PLAYERSUPPORTDUKE 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTDUKE 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTJACK 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTJACK 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTBUBSY 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTBUBSY 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTAMI 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTAMI 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTLOWANG 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTLOWANG 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTESSENCE 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTESSENCE 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTTED 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTTED 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTLISA 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTLISA 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTCYBANIS 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTCYBANIS 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTNETHRA 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTNETHRA 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTLORI 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTLORI 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTMINAKO 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTMINAKO 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTMYSTERY1 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTMYSTERY1 4 state support-speed-frag2
+    ifvarg PLAYERSUPPORTMAKEN 3 state support-speed-frag1
+    ifvarg PLAYERSUPPORTMAKEN 4 state support-speed-frag2
+    // End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-speed-increase-selected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-speed-increase-selected }
+    }
+   }
+   else
+   {
+    getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR
+    subvar TEMPVAR 46500
+
+    // Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-speed-frag1
+    ifvarg TEMPVAR4 4 state support-speed-frag2
+    // End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].SPEEDSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1 { state support-lvl4-increase state support-speed-increase-notselected }
+     ifvare TEMPVAR3 2 { state support-lvl5-increase state support-speed-increase-notselected }
+    }
+   }
+
+   // Lori
+   setvar CHARACTERARRAY 12 ifvare CHARACTERSELECTED? 12 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Minako
+   setvar CHARACTERARRAY 13 ifvare CHARACTERSELECTED? 13 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // "Mystery Lady"
+   setvar CHARACTERARRAY 14 ifvare CHARACTERSELECTED? 14 state support-speed-mainstate1 else state support-speed-mainstate2
+
+   // Maken
+   setvar CHARACTERARRAY 15 ifvare CHARACTERSELECTED? 15 state support-speed-mainstate1 else state support-speed-mainstate2
+ends
+
+
+
+
+
+
+
+// Lori / Random
+
+state support-rand-frag1
+     getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 1 { ifvare TEMPVAR2 0 setvar TEMPVAR2 1 }
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-rand-frag2
+     getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 2 { ifvare TEMPVAR2 1 setvar TEMPVAR2 2 }
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-rand-frag3
+     getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 3 { ifvare TEMPVAR2 2 setvar TEMPVAR2 3 }
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-rand-frag4
+     getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 4 { ifvare TEMPVAR2 3 setvar TEMPVAR2 4 }
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-rand-frag5
+     getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+     ifvarl TEMPVAR2 5 { ifvare TEMPVAR2 4 setvar TEMPVAR2 5 }
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+ends
+
+state support-atk-increase-selected
+      addvarvar PLAYERATTACK TEMPVAR
+      ifvarg PLAYERATTACK 524288 setvar PLAYERATTACK 524288
+ends
+
+state support-atk-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMP2
+      ifvarl TEMP2 524288 addvarvar TEMP2 TEMPVAR
+      setactorvar[CHARACTERARRAY].CHARACTERATTACK TEMP2
+ends
+
+state support-def-increase-selected
+      addvarvar PLAYERDEFENSE TEMPVAR
+      ifvarg PLAYERDEFENSE 524288 setvar PLAYERDEFENSE 524288
+ends
+
+state support-def-increase-notselected
+      getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMP2
+      ifvarl TEMP2 524288 addvarvar TEMP2 TEMPVAR
+      setactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMP2
+ends
+
+state support-random-mainstate1
+// Check Support Levels
+    ifvarg PLAYERSUPPORTLORI 0 state support-rand-frag1
+    ifvarg PLAYERSUPPORTLORI 1 state support-rand-frag2
+    ifvarg PLAYERSUPPORTLORI 2 state support-rand-frag3
+    ifvarg PLAYERSUPPORTLORI 3 state support-rand-frag4
+    ifvarg PLAYERSUPPORTLORI 4 state support-rand-frag5
+
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl1-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl1-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl1-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl1-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl1-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl1-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl1-increase state support-speed-increase-selected } // Speed
+     }
+     ifvare TEMPVAR3 2
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl2-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl2-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl2-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl2-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl2-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl2-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl2-increase state support-speed-increase-selected } // Speed
+     }
+     ifvare TEMPVAR3 3
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl3-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl3-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl3-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl3-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl3-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl3-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl3-increase state support-speed-increase-selected } // Speed
+     }
+     ifvare TEMPVAR3 4
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl4-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl4-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl4-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl4-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl4-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl4-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl4-increase state support-speed-increase-selected } // Speed
+     }
+     ifvare TEMPVAR3 5
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl5-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl5-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl5-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl5-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl5-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl5-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl5-increase state support-speed-increase-selected } // Speed
+     }
+    }
+ends
+
+state support-random-mainstate2
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI TEMPVAR4
+    ifvarg TEMPVAR4 0 state support-rand-frag1
+    ifvarg TEMPVAR4 1 state support-rand-frag2
+    ifvarg TEMPVAR4 2 state support-rand-frag3
+    ifvarg TEMPVAR4 3 state support-rand-frag4
+    ifvarg TEMPVAR4 4 state support-rand-frag5
+
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl1-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl1-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl1-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl1-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl1-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl1-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl1-increase state support-speed-increase-notselected } // Speed
+     }
+     ifvare TEMPVAR3 2
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl2-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl2-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl2-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl2-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl2-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl2-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl2-increase state support-speed-increase-notselected } // Speed
+     }
+     ifvare TEMPVAR3 3
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl3-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl3-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl3-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl3-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl3-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl3-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl3-increase state support-speed-increase-notselected } // Speed
+     }
+     ifvare TEMPVAR3 4
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl4-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl4-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl4-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl4-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl4-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl4-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl4-increase state support-speed-increase-notselected } // Speed
+     }
+     ifvare TEMPVAR3 5
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl5-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl5-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl5-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl5-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl5-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl5-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl5-increase state support-speed-increase-notselected } // Speed
+     }
+    }
+ends
+//
+
+state support-randomstat
+   // Duke
+   setvar CHARACTERARRAY 1 ifvare CHARACTERSELECTED? 1 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Jack
+   setvar CHARACTERARRAY 2 ifvare CHARACTERSELECTED? 2 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Bubsy
+   setvar CHARACTERARRAY 3 ifvare CHARACTERSELECTED? 3 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Ami
+   setvar CHARACTERARRAY 4 ifvare CHARACTERSELECTED? 4 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Lo Wang
+   setvar CHARACTERARRAY 5 ifvare CHARACTERSELECTED? 5 state support-random-mainstate1 else state support-random-mainstate2
+
+   // ESSence
+   setvar CHARACTERARRAY 6 ifvare CHARACTERSELECTED? 6 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Ted
+   setvar CHARACTERARRAY 7 ifvare CHARACTERSELECTED? 7 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Lisa
+   setvar CHARACTERARRAY 8 ifvare CHARACTERSELECTED? 8 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Cybanis
+   setvar CHARACTERARRAY 9 ifvare CHARACTERSELECTED? 9 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Nethra
+   setvar CHARACTERARRAY 10 ifvare CHARACTERSELECTED? 10 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Paula
+   setvar CHARACTERARRAY 11 ifvare CHARACTERSELECTED? 11 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Lori
+   setvar CHARACTERARRAY 12
+   ifvare CHARACTERSELECTED? 12
+   {
+// Check Support Levels
+    ifvarg PLAYERSUPPORTDUKE 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTDUKE 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTJACK 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTJACK 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTBUBSY 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTBUBSY 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTAMI 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTAMI 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTLOWANG 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTLOWANG 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTESSENCE 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTESSENCE 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTTED 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTTED 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTLISA 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTLISA 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTCYBANIS 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTCYBANIS 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTNETHRA 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTNETHRA 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTPAULA 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTPAULA 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTMINAKO 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTMINAKO 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTMYSTERY1 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTMYSTERY1 4 state support-rand-frag2
+    ifvarg PLAYERSUPPORTMAKEN 3 state support-rand-frag1
+    ifvarg PLAYERSUPPORTMAKEN 4 state support-rand-frag2
+// End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl4-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl4-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl4-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl4-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl4-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl4-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl4-increase state support-speed-increase-selected } // Speed
+     }
+     ifvare TEMPVAR3 2
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { setvarvar TEMPVAR MAXHITPOINTS state support-lvl5-increase state support-hp-increase-selected } // Max HP
+      ifvare TEMPVAR4 2 { setvarvar TEMPVAR MAXARMORPOINTS state support-lvl5-increase state support-ap-increase-selected } // Max AP
+      ifvare TEMPVAR4 3 { setvarvar TEMPVAR PLAYERATTACK state support-lvl5-increase state support-atk-increase-selected } // Attack
+      ifvare TEMPVAR4 4 { setvarvar TEMPVAR PLAYERDEFENSE state support-lvl5-increase state support-def-increase-selected } // Defense
+      ifvare TEMPVAR4 5 { setvarvar TEMPVAR MAXAIRTIME state support-lvl5-increase state support-air-increase-selected } // Air Time
+      ifvare TEMPVAR4 6 { setvarvar TEMPVAR MANTLINGTIMERMAX state support-lvl5-increase state support-mantle-increase-selected } // Mantle
+      ifvare TEMPVAR4 7 { setvarvar TEMPVAR CHARACTERSPEEDTRUE subvar TEMPVAR 46500 state support-lvl5-increase state support-speed-increase-selected } // Speed
+     }
+    }
+   }
+   else
+   {
+// Check Support Levels
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN TEMPVAR4
+    ifvarg TEMPVAR4 3 state support-rand-frag1
+    ifvarg TEMPVAR4 4 state support-rand-frag2
+// End Check Support Levels
+
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP1 TEMPVAR2
+    getactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+    ifvarvarl TEMPVAR3 TEMPVAR2
+    {
+     addvar TEMPVAR3 1
+     setactorvar[CHARACTERARRAY].RANDOMSUPPORTTEMP2 TEMPVAR3
+     ifvare TEMPVAR3 1
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl4-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl4-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl4-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl4-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl4-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl4-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl4-increase state support-speed-increase-notselected } // Speed
+     }
+     ifvare TEMPVAR3 2
+     {
+      randvar TEMPVAR4 6 addvar TEMPVAR4 1 // 1 = HP, 2 = AP, 3 = Attack, 4 = Defense, 5 = Air, 6 = Mantle, 7 = Speed
+//      addlogvar TEMPVAR4
+      ifvare TEMPVAR4 1 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl5-increase state support-hp-increase-notselected } // Max HP
+      ifvare TEMPVAR4 2 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl5-increase state support-ap-increase-notselected } // Max AP
+      ifvare TEMPVAR4 3 { getactorvar[CHARACTERARRAY].CHARACTERATTACK TEMPVAR state support-lvl5-increase state support-atk-increase-notselected } // Attack
+      ifvare TEMPVAR4 4 { getactorvar[CHARACTERARRAY].CHARACTERDEFENSE TEMPVAR state support-lvl5-increase state support-def-increase-notselected } // Defense
+      ifvare TEMPVAR4 5 { getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR state support-lvl5-increase state support-air-increase-notselected } // Air Time
+      ifvare TEMPVAR4 6 { getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR state support-lvl5-increase state support-mantle-increase-notselected } // Mantle
+      ifvare TEMPVAR4 7 { getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR subvar TEMPVAR 46500 state support-lvl5-increase state support-speed-increase-notselected } // Speed
+     }
+    }
+   }
+
+   // Minako
+   setvar CHARACTERARRAY 13 ifvare CHARACTERSELECTED? 13 state support-random-mainstate1 else state support-random-mainstate2
+
+   // "Mystery Lady"
+   setvar CHARACTERARRAY 14 ifvare CHARACTERSELECTED? 14 state support-random-mainstate1 else state support-random-mainstate2
+
+   // Maken
+   setvar CHARACTERARRAY 15 ifvare CHARACTERSELECTED? 15 state support-random-mainstate1 else state support-random-mainstate2
+ends
+
+//**************************************************************************************************************************************************************
+//*This is for Allowing Characters with a Support one or more other character[s] to deal extra damage "out of anger" when their support partner[s] is/are dead.*
+//**************************************************************************************************************************************************************
+
+state checkdeadsupportdmgeffect
+    ifvarl TEMPVAR4 0 addvar DAMAGEMODIFIER 0
+    ifvare TEMPVAR4 0 addvar DAMAGEMODIFIER 10 // "-" Level Support = +1.0% More Damage
+    ifvare TEMPVAR4 1 addvar DAMAGEMODIFIER 22 // "C" Level Support = +2.2% More Damage
+    ifvare TEMPVAR4 2 addvar DAMAGEMODIFIER 48 // "B" Level Support = +4.8% More Damage
+    ifvare TEMPVAR4 3 addvar DAMAGEMODIFIER 106 // "A" Level Support = +10.6% More Damage
+    ifvare TEMPVAR4 4 addvar DAMAGEMODIFIER 234 // "S" Level Support = +23.4% More Damage
+    ifvarg TEMPVAR4 4 addvar DAMAGEMODIFIER 644 // "*" Level Support = +64.4% More Damage
+    // addlogvar DAMAGEMODIFIER
+ends
+
+state checksupportlevels_duke
+    setvar CHARACTERARRAY 1
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTDUKE
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_jack
+    setvar CHARACTERARRAY 2
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTJACK
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_bubsy
+    setvar CHARACTERARRAY 3
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTBUBSY
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_ami
+    setvar CHARACTERARRAY 4
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTAMI
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_lowang
+    setvar CHARACTERARRAY 5
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTLOWANG
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_essence
+    setvar CHARACTERARRAY 6
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTESSENCE
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_ted
+    setvar CHARACTERARRAY 7
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTTED
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_lisa
+    setvar CHARACTERARRAY 8
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTLISA
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_cybanis
+    setvar CHARACTERARRAY 9
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTCYBANIS
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_nethra
+    setvar CHARACTERARRAY 10
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTNETHRA
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_paula
+    setvar CHARACTERARRAY 11
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTPAULA
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_lori
+    setvar CHARACTERARRAY 12
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTLORI
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_minako
+    setvar CHARACTERARRAY 13
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTMINAKO
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_mystery1
+    setvar CHARACTERARRAY 14
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTMYSTERY1
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state checksupportlevels_maken
+    setvar CHARACTERARRAY 15
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    ifvare TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 PLAYERSUPPORTMAKEN
+     state checkdeadsupportdmgeffect
+    }
+ends
+
+state playersupport-deadcharacters
+    ifvarn CHARACTERSELECTED? 1 state checksupportlevels_duke // Duke
+    ifvarn CHARACTERSELECTED? 2 state checksupportlevels_jack // Jack
+    ifvarn CHARACTERSELECTED? 3 state checksupportlevels_bubsy // Bubsy
+    ifvarn CHARACTERSELECTED? 4 state checksupportlevels_ami // Ami
+    ifvarn CHARACTERSELECTED? 5 state checksupportlevels_lowang // Lo Wang/Higa
+    ifvarn CHARACTERSELECTED? 6 state checksupportlevels_essence // ESSence
+    ifvarn CHARACTERSELECTED? 7 state checksupportlevels_ted // Ted
+    ifvarn CHARACTERSELECTED? 8 state checksupportlevels_lisa // Lisa
+    ifvarn CHARACTERSELECTED? 9 state checksupportlevels_cybanis // Cybanis
+    ifvarn CHARACTERSELECTED? 10 state checksupportlevels_nethra // Nethra/Christina
+    ifvarn CHARACTERSELECTED? 11 state checksupportlevels_paula // Paula
+    ifvarn CHARACTERSELECTED? 12 state checksupportlevels_lori // Lori
+    ifvarn CHARACTERSELECTED? 13 state checksupportlevels_minako // Minako
+    ifvarn CHARACTERSELECTED? 14 state checksupportlevels_mystery1 // "Mystery Lady"
+    ifvarn CHARACTERSELECTED? 15 state checksupportlevels_maken // Maken
+ends

@@ -1,0 +1,1694 @@
+// CHARACTER SPECFIC VARIABLES
+
+state setjumpcounter
+  setplayer[THISACTOR].jumping_counter jumpcounter
+ends
+
+state getjumpheights
+
+ifvare PLAYERJUMPSTRENGTHTEMP 0 setplayer[THISACTOR].jumping_counter 0
+
+/*
+ifvarg PLAYERJUMPSTRENGTHTEMP 0
+{
+ ifvare jumpcounter 181
+ {
+  ifonwater setvar JUMP_ONWATER? 1 else setvar JUMP_ONWATER? 0
+ }
+}
+*/
+
+// ****************************
+// ** Revised Jumping System **
+// ****************************
+ // Controls Jump Timer to compare w/ a character's jump strength
+ ifvare jumpcounter 0 setvar PLAYERJUMPTICS 0
+ ifonwater { mulvar PLAYERJUMPSTRENGTHTEMP 7 divvar PLAYERJUMPSTRENGTHTEMP 12 }
+
+ // Intended to prevent large crouch jumps by reducing jump strength to 30% of it's normal amount
+ getinput[THISACTOR].bits TEMP3
+ ifp pjetpack nullop 
+         else 
+		    {
+  			 ifvarand TEMP3 2 
+			 {
+			  randvar TEMP4 10 addvar TEMP4 20
+ 			  mulvarvar PLAYERJUMPSTRENGTHTEMP TEMP4 divvar PLAYERJUMPSTRENGTHTEMP 100 
+			 } 
+			}
+ ifp ponground setvarvar PLAYERJUMPSTRENGTHTEMP2 PLAYERJUMPSTRENGTHTEMP
+ else ifonwater setvarvar PLAYERJUMPSTRENGTHTEMP2 PLAYERJUMPSTRENGTHTEMP
+ ifonwater setvar JUMP_ONWATER? 1 else setvar JUMP_ONWATER? 0
+ 
+ ifvare JUMP_ONWATER? 1 { ifvarg jumpcounter 0 ifvarl jumpcounter 1441 { addvar PLAYERJUMPTICS 1 } } // If Jumping from Water
+                   else { ifvarg jumpcounter 0 ifvarl jumpcounter 1441 { addvar PLAYERJUMPTICS 1 } } // If Jumping from Solid Ground
+
+ ifvare JUMP_ONWATER? 1 
+ {
+  ifvare PLAYERJUMPTICS 1 { setvar jumpcounter 181 state setjumpcounter setplayer[THISACTOR].poszv -455 }
+  ifvare PLAYERJUMPTICS 2 { setvar jumpcounter 361 state setjumpcounter setplayer[THISACTOR].poszv -910 }
+  ifvare PLAYERJUMPTICS 3 { setvar jumpcounter 541 state setjumpcounter setplayer[THISACTOR].poszv -1365 }
+  ifvare PLAYERJUMPTICS 4 { setvar jumpcounter 721 state setjumpcounter setplayer[THISACTOR].poszv -1820 }
+  ifvare PLAYERJUMPTICS 5 { setvar jumpcounter 722 state setjumpcounter setplayer[THISACTOR].poszv -2275 }
+  ifvare PLAYERJUMPTICS 6 { setvar jumpcounter 722 state setjumpcounter setplayer[THISACTOR].poszv -2730 }
+  ifvarg PLAYERJUMPTICS 6 { setvar jumpcounter 722 state setjumpcounter setplayer[THISACTOR].poszv -2730 }
+ }
+ else
+ {
+  ifvare PLAYERJUMPTICS 1 { setvar jumpcounter 181 state setjumpcounter setplayer[THISACTOR].poszv -682 }
+  ifvare PLAYERJUMPTICS 2 { setvar jumpcounter 361 state setjumpcounter setplayer[THISACTOR].poszv -1365 }
+  ifvare PLAYERJUMPTICS 3 { setvar jumpcounter 541 state setjumpcounter setplayer[THISACTOR].poszv -2048 }
+  ifvare PLAYERJUMPTICS 4 { setvar jumpcounter 721 state setjumpcounter setplayer[THISACTOR].poszv -2730 }
+  ifvare PLAYERJUMPTICS 5 { setvar jumpcounter 901 state setjumpcounter setplayer[THISACTOR].poszv -3413 }
+  ifvare PLAYERJUMPTICS 6 { setvar jumpcounter 1081 state setjumpcounter setplayer[THISACTOR].poszv -4096 }
+  ifvarg PLAYERJUMPTICS 6 { setvar jumpcounter 1082 state setjumpcounter setplayer[THISACTOR].poszv -4096 }
+ }
+
+ // Cuts off a jump if the Jump timer exceeds the character's jump strength			   
+ ifvarvarg PLAYERJUMPTICS PLAYERJUMPSTRENGTHTEMP2 { setvar jumpcounter 1441 state setjumpcounter setvar PLAYERJUMPTICS 0 }
+ 
+ends
+
+state readweapontochar
+        setvar PLAYERWEAPONBITFIELD 0
+        getplayer[THISACTOR].gotweapon 0 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 1
+        getplayer[THISACTOR].gotweapon 1 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 2
+        getplayer[THISACTOR].gotweapon 2 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 4
+        getplayer[THISACTOR].gotweapon 3 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 8
+        getplayer[THISACTOR].gotweapon 4 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 16
+        getplayer[THISACTOR].gotweapon 5 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 32
+        getplayer[THISACTOR].gotweapon 6 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 64
+        getplayer[THISACTOR].gotweapon 7 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 128
+        getplayer[THISACTOR].gotweapon 8 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 256
+        getplayer[THISACTOR].gotweapon 9 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 512
+        getplayer[THISACTOR].gotweapon 11 temp ifvare temp 1 addvar PLAYERWEAPONBITFIELD 1024
+ends
+
+state readchartoweapon
+        ifvarand PLAYERWEAPONBITFIELD 1 setplayer[THISACTOR].gotweapon 0 1 else setplayer[THISACTOR].gotweapon 0 0
+        ifvarand PLAYERWEAPONBITFIELD 2 setplayer[THISACTOR].gotweapon 1 1 else setplayer[THISACTOR].gotweapon 1 0
+        ifvarand PLAYERWEAPONBITFIELD 4 setplayer[THISACTOR].gotweapon 2 1 else setplayer[THISACTOR].gotweapon 2 0
+        ifvarand PLAYERWEAPONBITFIELD 8 setplayer[THISACTOR].gotweapon 3 1 else setplayer[THISACTOR].gotweapon 3 0
+        ifvarand PLAYERWEAPONBITFIELD 16 setplayer[THISACTOR].gotweapon 4 1 else setplayer[THISACTOR].gotweapon 4 0
+        ifvarand PLAYERWEAPONBITFIELD 32 setplayer[THISACTOR].gotweapon 5 1 else setplayer[THISACTOR].gotweapon 5 0
+        ifvarand PLAYERWEAPONBITFIELD 64 setplayer[THISACTOR].gotweapon 6 1 else setplayer[THISACTOR].gotweapon 6 0
+        ifvarand PLAYERWEAPONBITFIELD 128 setplayer[THISACTOR].gotweapon 7 1 else setplayer[THISACTOR].gotweapon 7 0
+        ifvarand PLAYERWEAPONBITFIELD 256 setplayer[THISACTOR].gotweapon 8 1 else setplayer[THISACTOR].gotweapon 8 0
+        ifvarand PLAYERWEAPONBITFIELD 512 setplayer[THISACTOR].gotweapon 9 1 else setplayer[THISACTOR].gotweapon 9 0
+        ifvarand PLAYERWEAPONBITFIELD 1024 setplayer[THISACTOR].gotweapon 11 1 else setplayer[THISACTOR].gotweapon 11 0
+ends
+
+state donotswitchchars
+        setvarvar CHARACTERSELECTED? CHARACTEROLD
+ends
+
+state setcharacterarrays
+        setvarvar CHARACTERARRAY CHARACTERSELECTED?
+
+        setactorvar[CHARACTERARRAY].CHARACTERHP CURRENTHITPOINTS
+        setactorvar[CHARACTERARRAY].CHARACTERMAXHP MAXHITPOINTS
+        setactorvar[CHARACTERARRAY].CHARACTERAP CURRENTARMORPOINTS
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAP MAXARMORPOINTS
+        setactorvar[CHARACTERARRAY].CHARACTERAPABSORB ARMORPERCENT
+        setactorvar[CHARACTERARRAY].CHARACTEREP CURRENTENERGYPOINTS
+        setactorvar[CHARACTERARRAY].CHARACTERMAXEP MAXENERGYPOINTS
+        setactorvar[CHARACTERARRAY].CHARACTERFA FIRSTAIDCURRENT
+        setactorvar[CHARACTERARRAY].CHARACTERATTACK PLAYERATTACK
+        setactorvar[CHARACTERARRAY].CHARACTERDEFENSE PLAYERDEFENSE
+        setactorvar[CHARACTERARRAY].CHARACTERBREATHTIME AIRTIME
+        setactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME MAXAIRTIME
+        setactorvar[CHARACTERARRAY].CHARACTERQUADTIME QUADTIME
+        setactorvar[CHARACTERARRAY].CHARACTERINVULNTIME INVULNTIME
+        setactorvar[CHARACTERARRAY].CHARACTERREGENTIME REGENTIME
+        setactorvar[CHARACTERARRAY].CHARACTERAPREGENTIME APREGENTIME
+        setactorvar[CHARACTERARRAY].CHARACTERVAMPIRETIME VAMPIRETIME
+        setactorvar[CHARACTERARRAY].CHARACTERSTEROIDSTIME STEROIDSTIME
+        getplayer[THISACTOR].jetpack_amount TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME TEMPVAR
+        getplayer[THISACTOR].jetpack_on TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE TEMPVAR
+        getplayer[THISACTOR].heat_amount TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
+        getplayer[THISACTOR].heat_on TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE TEMPVAR
+        getplayer[THISACTOR].boot_amount TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERBOOTSTIME TEMPVAR
+        getplayer[THISACTOR].holoduke_amount TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERHOLOTIME TEMPVAR
+        getplayervar[THISACTOR].SCUBATIME TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERSCUBATIME TEMPVAR
+        getplayer[THISACTOR].ammo_amount 0 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO1 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 1 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO2 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 2 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO3 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 3 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO4 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 4 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO5 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 5 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO6 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 6 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO7 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 7 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO8 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 8 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO9 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 9 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO10 TEMPVAR
+        getplayer[THISACTOR].ammo_amount 11 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO11 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO1 MAXKICK
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO2 MAXPISTOL
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO3 MAXSHOTGUN
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO4 MAXCHAINGUN
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO5 MAXRPG
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO6 MAXPIPEBOMB
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO7 MAXSHRINKER
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO8 MAXDEVASTATOR
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO9 MAXTRIPBOMB
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO10 MAXFREEZER
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO11 MAXEXPANDER
+        getplayer[THISACTOR].runspeed TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERCRITHITCHANCE CRITICALHITCHANCE
+        getplayer[THISACTOR].curr_weapon TEMPVAR
+        setactorvar[CHARACTERARRAY].CURRWEAPONCHARACTER TEMPVAR
+        state readweapontochar
+        setactorvar[CHARACTERARRAY].CHARACTERWEAPBITFIELD PLAYERWEAPONBITFIELD
+        setactorvar[CHARACTERARRAY].CHARACTERLEVEL PLAYERLEVEL
+        setactorvar[CHARACTERARRAY].CHARACTERTEMPLEVEL PLAYERTEMPLEVEL
+        setactorvar[CHARACTERARRAY].CHARACTEREXPPTS EXPPTS
+        setactorvar[CHARACTERARRAY].CHARACTERAIRJUMPS multijumpflag
+        setactorvar[CHARACTERARRAY].CHARACTERMAXAIRJUMPS PLAYERMAXAIRJUMPS
+        setactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME MANTLINGTIMERMAX
+        setactorvar[CHARACTERARRAY].CHARACTERMANTLETIME MANTLINGTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERSTATUS? PLAYERSTATUS?
+        setactorvar[CHARACTERARRAY].CHARACTERSHRINKINGRESIST SHRINKINGRESISTPLAYER
+        setactorvar[CHARACTERARRAY].CHARACTERHASTETIMER PLAYERHASTETIMER
+        setactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER PLAYERSLOWTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER PLAYERPOISONTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER PLAYERDIMNESSTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERREFRACTORTIMER PLAYERREFRACTORTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERRAGNAROKTIMER PLAYERRAGNAROKTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER PLAYERCONFUSIONTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERAQUAPROTECTTIMER PLAYERAQUAPROTECTTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERSHELLTIMER PLAYERSHELLTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER PLAYERPSISHIELDTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERBLITZKRIEGTIMER PLAYERBLITZKRIEGTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERBOOSTERTIMER PLAYERBOOSTERTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER PLAYERPSISHIELDTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERBLOODLUSTTIMER PLAYERBLOODLUSTTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER HITPOINTREGENTICS
+        setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER ENERGYPOINTREGENTICS
+        setactorvar[CHARACTERARRAY].CHARACTERSHRINKTIMER PLAYERSHRINKTIMER
+        setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH PLAYERJUMPSTRENGTH
+        setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH PLAYERLIFTSTRENGTH
+        setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST PLAYERFALLRESIST
+        setactorvar[CHARACTERARRAY].CHARACTERDROWNDMGFACTOR DROWNDMGFACTOR
+        setactorvar[CHARACTERARRAY].CHARACTERFREEZETIMER freezetimer
+        setactorvar[CHARACTERARRAY].CHARACTERWINTERCLOTHES winterclothes
+        setactorvar[CHARACTERARRAY].CHARACTERTRANSFORMTIMER TRANSFORMTIMER
+        // setactorvar[CHARACTERARRAY].CHARACTERWEAPONCOUNT weaponcount
+ends
+
+state getcharacterarrays
+         setvarvar CHARACTERARRAY CHARACTERSELECTED?
+
+         getactorvar[CHARACTERARRAY].CHARACTERHP CURRENTHITPOINTS
+         getactorvar[CHARACTERARRAY].CHARACTERMAXHP MAXHITPOINTS
+         getactorvar[CHARACTERARRAY].CHARACTERAP CURRENTARMORPOINTS
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAP MAXARMORPOINTS
+         getactorvar[CHARACTERARRAY].CHARACTERAPABSORB ARMORPERCENT
+         getactorvar[CHARACTERARRAY].CHARACTEREP CURRENTENERGYPOINTS
+         getactorvar[CHARACTERARRAY].CHARACTERMAXEP MAXENERGYPOINTS
+         getactorvar[CHARACTERARRAY].CHARACTERFA FIRSTAIDCURRENT
+         getactorvar[CHARACTERARRAY].CHARACTERATTACK PLAYERATTACK
+         getactorvar[CHARACTERARRAY].CHARACTERDEFENSE PLAYERDEFENSE
+         getactorvar[CHARACTERARRAY].CHARACTERBREATHTIME AIRTIME
+         getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME MAXAIRTIME
+         getactorvar[CHARACTERARRAY].CHARACTERQUADTIME QUADTIME
+         getactorvar[CHARACTERARRAY].CHARACTERINVULNTIME INVULNTIME
+         getactorvar[CHARACTERARRAY].CHARACTERREGENTIME REGENTIME
+         getactorvar[CHARACTERARRAY].CHARACTERAPREGENTIME APREGENTIME
+         getactorvar[CHARACTERARRAY].CHARACTERVAMPIRETIME VAMPIRETIME
+         getactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERSTEROIDSTIME STEROIDSTIME
+
+         ifvare STEROIDSTIME 0 setplayer[THISACTOR].steroids_amount 0
+         else ifvare STEROIDSTIME 600 setplayer[THISACTOR].steroids_amount 400 // 150
+         else ifvare STEROIDSTIME 1200 setplayer[THISACTOR].steroids_amount 400 // 300
+         else ifvare STEROIDSTIME 2400 setplayer[THISACTOR].steroids_amount 400 // 600
+         else ifvare STEROIDSTIME 4800 setplayer[THISACTOR].steroids_amount 400 // 1200
+         else setplayer[THISACTOR].steroids_amount 399
+
+         setplayer[THISACTOR].jetpack_amount TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE TEMPVAR
+         setplayer[THISACTOR].jetpack_on TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
+         setplayer[THISACTOR].heat_amount TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE TEMPVAR
+         setplayer[THISACTOR].heat_on TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERBOOTSTIME TEMPVAR
+         setplayer[THISACTOR].boot_amount TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERHOLOTIME TEMPVAR
+         setplayer[THISACTOR].holoduke_amount TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERSCUBATIME TEMPVAR
+         setplayervar[THISACTOR].SCUBATIME TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO1 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 0 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO2 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 1 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO3 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 2 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO4 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 3 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO5 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 4 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO6 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 5 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO7 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 6 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO8 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 7 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO9 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 8 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO10 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 9 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERAMMO11 TEMPVAR
+         setplayer[THISACTOR].ammo_amount 11 TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO1 MAXKICK
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO2 MAXPISTOL
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO3 MAXSHOTGUN
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO4 MAXCHAINGUN
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO5 MAXRPG
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO6 MAXPIPEBOMB
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO7 MAXSHRINKER
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO8 MAXDEVASTATOR
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO9 MAXTRIPBOMB
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO10 MAXFREEZER
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO11 MAXEXPANDER
+         getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR
+         setplayer[THISACTOR].runspeed TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERCRITHITCHANCE CRITICALHITCHANCE
+         getactorvar[CHARACTERARRAY].CURRWEAPONCHARACTER TEMPVAR
+         setplayer[THISACTOR].curr_weapon TEMPVAR
+         getactorvar[CHARACTERARRAY].CHARACTERWEAPBITFIELD PLAYERWEAPONBITFIELD
+         state readchartoweapon
+         getactorvar[CHARACTERARRAY].CHARACTERLEVEL PLAYERLEVEL
+         getactorvar[CHARACTERARRAY].CHARACTERTEMPLEVEL PLAYERTEMPLEVEL
+         getactorvar[CHARACTERARRAY].CHARACTEREXPPTS EXPPTS
+         getactorvar[CHARACTERARRAY].CHARACTERAIRJUMPS multijumpflag
+         getactorvar[CHARACTERARRAY].CHARACTERMAXAIRJUMPS PLAYERMAXAIRJUMPS
+         getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME MANTLINGTIMERMAX
+         getactorvar[CHARACTERARRAY].CHARACTERMANTLETIME MANTLINGTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERSTATUS? PLAYERSTATUS?
+         getactorvar[CHARACTERARRAY].CHARACTERSHRINKINGRESIST SHRINKINGRESISTPLAYER
+         getactorvar[CHARACTERARRAY].CHARACTERHASTETIMER PLAYERHASTETIMER
+         getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER PLAYERSLOWTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER PLAYERPOISONTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER PLAYERDIMNESSTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERREFRACTORTIMER PLAYERREFRACTORTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERRAGNAROKTIMER PLAYERRAGNAROKTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER PLAYERCONFUSIONTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERAQUAPROTECTTIMER PLAYERAQUAPROTECTTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERSHELLTIMER PLAYERSHELLTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER PLAYERPSISHIELDTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERBLITZKRIEGTIMER PLAYERBLITZKRIEGTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERBOOSTERTIMER PLAYERBOOSTERTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER PLAYERPSISHIELDTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERBLOODLUSTTIMER PLAYERBLOODLUSTTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER HITPOINTREGENTICS
+         getactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER ENERGYPOINTREGENTICS
+         getactorvar[CHARACTERARRAY].CHARACTERSHRINKTIMER PLAYERSHRINKTIMER
+         getactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH PLAYERJUMPSTRENGTH
+         getactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH PLAYERLIFTSTRENGTH
+         getactorvar[CHARACTERARRAY].CHARACTERFALLRESIST PLAYERFALLRESIST
+         getactorvar[CHARACTERARRAY].CHARACTERDROWNDMGFACTOR DROWNDMGFACTOR
+         getactorvar[CHARACTERARRAY].CHARACTERFREEZETIMER freezetimer
+         getactorvar[CHARACTERARRAY].CHARACTERWINTERCLOTHES winterclothes
+         getactorvar[CHARACTERARRAY].CHARACTERTRANSFORMTIMER TRANSFORMTIMER
+         // getactorvar[CHARACTERARRAY].CHARACTERWEAPONCOUNT weaponcount
+ends
+
+state checkcharacter_status
+ getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+ends
+
+state checkfallresistances
+        ifvare VEHICLEID -1
+        {
+         setvarvar CHARFALLRESIST PLAYERFALLRESISTTEMP
+         state damagemod-fallresist
+        }
+        else
+        {
+         ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 setvarvar CHARFALLRESIST 15
+        }
+ends
+
+state level_calcfallresist
+        setvarvar TEMPVAR5 PLAYERTEMPLEVEL
+        divvar TEMPVAR5 16
+        addvarvar PLAYERFALLRESISTTEMP TEMPVAR5
+ends
+
+state level_calcsurvivalrate
+        // Factor in Level
+        setvarvar TEMPVAR5 PLAYERTEMPLEVEL
+
+        ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR5 7
+        else ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR5 5
+        else ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR5 11
+        else ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR5 10
+        else ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR5 8
+        else ifvare CHARACTERSELECTED? 6 mulvar TEMPVAR5 3
+        else ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR5 6
+        else ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR5 14
+        else ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR5 2
+        else ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR5 12
+        else ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR5 15
+        else ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR5 4
+        else ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR5 13
+        else ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR5 1
+        else ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR5 9
+        else mulvar TEMPVAR5 5
+        addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+
+        // Factor in Rabbit's Feet [Equippable Item]
+        ifvare PLAYEREQUIPSLOTITEM1 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM2 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM3 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM4 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM5 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM6 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM7 12 addvar SURVIVALVALUE_TEMP 1250
+        ifvare PLAYEREQUIPSLOTITEM8 12 addvar SURVIVALVALUE_TEMP 1250
+
+        // Factor in Jewel of Four Souls
+        ifvare PLAYEREQUIPSLOTITEM1 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM2 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM3 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM4 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM5 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM6 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM7 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+        ifvare PLAYEREQUIPSLOTITEM8 28
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+
+        ifp ponsteroids
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 SURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 3
+         divvar TEMPVAR5 4
+         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
+        }
+
+ends
+
+state checkcharacters
+getplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
+//************************************
+//*START OF CHARACTER SWITCHING CODES*
+//************************************
+
+    ifvarvare CHARACTERSELECTED? CHARACTEROLD // If the character hasn't changed yet
+    {
+      ifvare CHARACTERSELECTED? 1
+      {
+        redefinequote 47 ^19HOLODUKE ON
+        redefinequote 48 ^19HOLODUKE OFF
+        redefinequote 49 ^21HOLODUKE NOT FOUND YET!
+        redefinequote 51 ^20HOLODUKE
+        redefinequote 91 ^20HOLODUKE
+
+        setvar SURVIVALVALUE_TEMP 1250
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 12096 // In Build Units [6'3" / 191.2cm]
+        setvar PLAYERWEIGHT 224 // In lbs
+        // setplayer[THISACTOR].autostep 5120
+        // setplayer[THISACTOR].autostep_sbw 1024
+		
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 2
+      {
+        redefinequote 47 ^19HOLOJACK ON
+        redefinequote 48 ^19HOLOJACK OFF
+        redefinequote 49 ^21HOLOJACK NOT FOUND YET!
+        redefinequote 51 ^20HOLOJACK
+        redefinequote 91 ^20HOLOJACK
+
+        setvar SURVIVALVALUE_TEMP 625
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 10470 // In Build Units [5'5" / 165.5cm]
+        setvar PLAYERWEIGHT 146 // In lbs
+        // setplayer[THISACTOR].autostep 5526 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1105 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 3
+      {
+        redefinequote 47 ^19HOLOBUBSY ON
+        redefinequote 48 ^19HOLOBUBSY OFF
+        redefinequote 49 ^21HOLOBUBSY NOT FOUND YET!
+        redefinequote 51 ^20HOLOBUBSY
+        redefinequote 91 ^20HOLOBUBSY
+
+        setvar SURVIVALVALUE_TEMP 937
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 10325 // In Build Units [5'4" / 163.2cm]
+        setvar PLAYERWEIGHT 137 // In lbs
+        // setplayer[THISACTOR].autostep 5563 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1113 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 4
+      {
+        redefinequote 47 ^19HOLOAMI ON
+        redefinequote 48 ^19HOLOAMI OFF
+        redefinequote 49 ^21HOLOAMI NOT FOUND YET!
+        redefinequote 51 ^20HOLOAMI
+        redefinequote 91 ^20HOLOAMI
+
+        setvar SURVIVALVALUE_TEMP 500
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 10489 // In Build Units [6'3" / 165.8cm]
+        setvar PLAYERWEIGHT 123 // In lbs
+        // setplayer[THISACTOR].autostep 5522 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1104 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 5
+      {
+        redefinequote 47 ^19HOLOHIGA ON
+        redefinequote 48 ^19HOLOHIGA OFF
+        redefinequote 49 ^21HOLOHIGA NOT FOUND YET!
+        redefinequote 51 ^20HOLOHIGA
+        redefinequote 91 ^20HOLOHIGA
+
+        setvar SURVIVALVALUE_TEMP 1000
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 11723 // In Build Units [6'1" / 185.3cm]
+        setvar PLAYERWEIGHT 187 // In lbs
+        // setplayer[THISACTOR].autostep 5213 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1043 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 6
+      {
+        redefinequote 47 ^19HOLOESSENCE ON
+        redefinequote 48 ^19HOLOESSENCE OFF
+        redefinequote 49 ^21HOLOESSENCE NOT FOUND YET!
+        redefinequote 51 ^20HOLOESSENCE
+        redefinequote 91 ^20HOLOESSENCE
+
+        setvar SURVIVALVALUE_TEMP 1667
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 22351 // In Build Units [11'7" / 353.3cm]
+        setvar PLAYERWEIGHT 1032 // In lbs
+        // setplayer[THISACTOR].autostep 2556 // 5120
+        // setplayer[THISACTOR].autostep_sbw 511 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 7
+      {
+        redefinequote 47 ^19HOLOTED ON
+        redefinequote 48 ^19HOLOTED OFF
+        redefinequote 49 ^21HOLOTED NOT FOUND YET!
+        redefinequote 51 ^20HOLOTED
+        redefinequote 91 ^20HOLOTED
+
+        setvar SURVIVALVALUE_TEMP 1500
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 11628 // In Build Units [6' / 183.8cm]
+        setvar PLAYERWEIGHT 185
+        // setplayer[THISACTOR].autostep 5237 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1047 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 8
+      {
+        redefinequote 47 ^19HOLOLISA ON
+        redefinequote 48 ^19HOLOLISA OFF
+        redefinequote 49 ^21HOLOLISA NOT FOUND YET!
+        redefinequote 51 ^20HOLOLISA
+        redefinequote 91 ^20HOLOLISA
+
+        setvar SURVIVALVALUE_TEMP 2000
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 10976 // In Build Units [5'8" / 173.5cm]
+        setvar PLAYERWEIGHT 130
+        // setplayer[THISACTOR].autostep 5400 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1080 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 9
+      {
+        redefinequote 47 ^19HOLOCYBANIS ON
+        redefinequote 48 ^19HOLOCYBANIS OFF
+        redefinequote 49 ^21HOLOCYBANIS NOT FOUND YET!
+        redefinequote 51 ^20HOLOCYBANIS
+        redefinequote 91 ^20HOLOCYBANIS
+
+        setvar SURVIVALVALUE_TEMP 1333
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 23825 // In Build Units [12'4" / 376.6cm]
+        setvar PLAYERWEIGHT 1186
+        // setplayer[THISACTOR].autostep 2188 // 5120
+        // setplayer[THISACTOR].autostep_sbw 438 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 10
+      {
+       ifvare NETHRAFORM? 0
+       {
+        redefinequote 47 ^19HOLONETHRA ON
+        redefinequote 48 ^19HOLONETHRA OFF
+        redefinequote 49 ^21HOLONETHRA NOT FOUND YET!
+        redefinequote 51 ^20HOLONETHRA
+        redefinequote 91 ^20HOLONETHRA
+
+        setvar PLAYERHEIGHT 11932 // In Build Units [6'2" / 188.6cm]
+        setvar PLAYERWEIGHT 114
+        // setplayer[THISACTOR].autostep 5161 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1032 // 1024
+       }
+       else
+       {
+        redefinequote 47 ^19HOLOCHRISTINA ON
+        redefinequote 48 ^19HOLOCHRISTINA OFF
+        redefinequote 49 ^21HOLOCHRISTINA NOT FOUND YET!
+        redefinequote 51 ^20HOLOCHRISTINA
+        redefinequote 91 ^20HOLOCHRISTINA
+
+        setvar PLAYERHEIGHT 11160 // In Build Units [5'9" / 176.4cm]
+        setvar PLAYERWEIGHT 138
+        // setplayer[THISACTOR].autostep 5354 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1071 // 1024
+       }
+        setvar SURVIVALVALUE_TEMP 2000
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 11
+      {
+        redefinequote 47 ^19HOLOPAULA ON
+        redefinequote 48 ^19HOLOPAULA OFF
+        redefinequote 49 ^21HOLOPAULA NOT FOUND YET!
+        redefinequote 51 ^20HOLOPAULA
+        redefinequote 91 ^20HOLOPAULA
+
+        setvar SURVIVALVALUE_TEMP 3333
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 11609 // In Build Units [6' / 183.5cm]
+        setvar PLAYERWEIGHT 114
+        // setplayer[THISACTOR].autostep 5242 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1048 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 12
+      {
+        redefinequote 47 ^19HOLOLORI ON
+        redefinequote 48 ^19HOLOLORI OFF
+        redefinequote 49 ^21HOLOLORI NOT FOUND YET!
+        redefinequote 51 ^20HOLOLORI
+        redefinequote 91 ^20HOLOLORI
+
+        setvar SURVIVALVALUE_TEMP 1250
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 11356 // In Build Units [5'10" / 179.5cm]
+        setvar PLAYERWEIGHT 136
+        // setplayer[THISACTOR].autostep 5305 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1061 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 13
+      {
+        redefinequote 47 ^19HOLOMINAKO ON
+        redefinequote 48 ^19HOLOMINAKO OFF
+        redefinequote 49 ^21HOLOMINAKO NOT FOUND YET!
+        redefinequote 51 ^20HOLOMINAKO
+        redefinequote 91 ^20HOLOMINAKO
+
+        setvar SURVIVALVALUE_TEMP 750
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 10451 // In Build Units [5'5" / 165.2cm]
+        setvar PLAYERWEIGHT 126
+        // setplayer[THISACTOR].autostep 5531 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1106 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 14
+      {
+       ifvare debugtoggle 0
+       {
+        ifvare PUBLICBETA? 1
+        {
+         redefinequote 47 ^19HOLO??????? ON
+         redefinequote 48 ^19HOLO??????? OFF
+         redefinequote 49 ^21HOLO??????? NOT FOUND YET!
+         redefinequote 51 ^20HOLO???????
+         redefinequote 91 ^20HOLO???????
+        }
+        else
+        {
+         redefinequote 47 ^19HOLONAFERIA ON
+         redefinequote 48 ^19HOLONAFERIA OFF
+         redefinequote 49 ^21HOLONAFERIA NOT FOUND YET!
+         redefinequote 51 ^20HOLONAFERIA
+         redefinequote 91 ^20HOLONAFERIA
+        }
+       }
+       else
+       {
+        ifvare PUBLICBETA? 1
+        {
+         redefinequote 47 ^19HOLOHINOTORI ON
+         redefinequote 48 ^19HOLOHINOTORI OFF
+         redefinequote 49 ^21HOLOHINOTORI NOT FOUND YET!
+         redefinequote 51 ^20HOLOHINOTORI
+         redefinequote 91 ^20HOLOHINOTORI
+        }
+        else
+        {
+         redefinequote 47 ^19HOLONAFERIA ON
+         redefinequote 48 ^19HOLONAFERIA OFF
+         redefinequote 49 ^21HOLONAFERIA NOT FOUND YET!
+         redefinequote 51 ^20HOLONAFERIA
+         redefinequote 91 ^20HOLONAFERIA
+        }
+       }
+
+        setvar SURVIVALVALUE_TEMP 1500
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 12147 // In Build Units [6'3" / 192cm]
+        setvar PLAYERWEIGHT 140
+        // setplayer[THISACTOR].autostep 5107 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1021 // 1024
+
+        state setcharacterarrays
+      }
+      else
+      ifvare CHARACTERSELECTED? 15
+      {
+        redefinequote 47 ^19HOLOMAKEN ON
+        redefinequote 48 ^19HOLOMAKEN OFF
+        redefinequote 49 ^21HOLOMAKEN NOT FOUND YET!
+        redefinequote 51 ^20HOLOMAKEN
+        redefinequote 91 ^20HOLOMAKEN
+
+        setvar SURVIVALVALUE_TEMP 1000
+        state level_calcsurvivalrate
+        setvarvar SURVIVALVALUE SURVIVALVALUE_TEMP
+        state damagemod-survival
+
+        setvar PLAYERHEIGHT 10862 // In Build Units [5'7" / 171.7cm]
+        setvar PLAYERWEIGHT 124
+        // setplayer[THISACTOR].autostep 5428 // 5120
+        // setplayer[THISACTOR].autostep_sbw 1086 // 1024
+
+        state setcharacterarrays
+      }
+    }    //*******************************************************
+    else //*If the game detects a change in the current character*
+    {    //*******************************************************
+      setvar SWITCHOVERDELAY 1 // Set to >1 to prevent bleed ins for HP, AIRTIME and Inventory Times
+      setplayer[THISACTOR].holoduke_on -1 // Turns off Holoform automatically if the last character left it on[since switching back to that person will not make their holoform respawn and waste its' energy.
+      setplayer[THISACTOR].scuba_on 0 // Turns off Scuba automatically if the last character left it on so the next character is not stuck with a 'perma-scubatank' even if they don't have one of their own
+	  setplayer[THISACTOR].random_club_frame 0 // SET THIS TO 0 IN ORDER TO RESET IT AND ALLOW THE SHOTGUN TO FIRE. FINALLY FIXED THIS CRAPHEAD OF A BUG!! :D
+      setvar HITPOINTREGENTICS 0
+      setvar PLAYERREGENCOUNTER 0
+      setvar PLAYERAPREGENCOUNTER 0
+      setvar HPINCREASED 0 setvar HPLUPDISPLAY 53
+      setvar APINCREASED 0 setvar APLUPDISPLAY 53
+      setvar ATKINCREASED 0 setvar ATKLUPDISPLAY 53
+      setvar DEFINCREASED 0 setvar DEFLUPDISPLAY 53
+      setactorvar[HPBARCHILD].HPBARFLASHTIMER 0
+      setactorvar[APBARCHILD].APBARFLASHTIMER 0
+      setvar DISPLAYHPFLASHTIMER 0
+      setvar DISPLAYFAFLASHTIMER 0
+      setvar DISPLAYAPFLASHTIMER 0
+      ifvare CHARACTERSELECTED? 1 // If switching to Duke...
+      {
+       ifvarn DUKE? 1 state donotswitchchars
+       else
+       {
+        setvar CHARACTERARRAY 1
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 2
+      {
+       ifvarn JACK? 1 state donotswitchchars
+       else // If Jack is there, try to switch to him.
+       {
+        setvar CHARACTERARRAY 2
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 3
+      {
+       ifvarn BUBSY? 1 state donotswitchchars
+       else // If Bubsy is there, try to switch to him.
+       {
+        setvar CHARACTERARRAY 3
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 4
+      {
+       ifvarn AMI? 1 state donotswitchchars
+       else // If Ami is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 4
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 5
+      {
+       ifvarn LOWANG? 1 state donotswitchchars
+       else // If Higa is there, try to switch to him.
+       {
+        setvar CHARACTERARRAY 5
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 6
+      {
+       ifvarn ESSENCE? 1 state donotswitchchars
+       else // If ESSence is there, try to switch to him.
+       {
+        setvar CHARACTERARRAY 6
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 7
+      {
+       ifvarn TED? 1 state donotswitchchars
+       else // If Ted is there, try to switch to him.
+       {
+        setvar CHARACTERARRAY 7
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 8
+      {
+       ifvarn LISA? 1 state donotswitchchars
+       else // If Lisa is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 8
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 9
+      {
+       ifvarn CYBANIS? 1 state donotswitchchars
+       else // If Cybanis is there, try to switch to him.
+       {
+        setvar CHARACTERARRAY 9
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 10
+      {
+       ifvarn NETHRA? 1 state donotswitchchars
+       else // If Nethra is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 10
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 11
+      {
+       ifvarn PAULA? 1 state donotswitchchars
+       else // If Paula is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 11
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 12
+      {
+       ifvarn LORI? 1 state donotswitchchars
+       else // If Lori is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 12
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 13
+      {
+       ifvarn MINAKO? 1 state donotswitchchars
+       else // If Minako is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 13
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 14
+      {
+       ifvarn MYSTERY1? 1 state donotswitchchars
+       else // If 'Mystery Woman' is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 14
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+      else
+      ifvare CHARACTERSELECTED? 15
+      {
+       ifvarn MAKEN? 1 state donotswitchchars
+       else // If Maken is there, try to switch to her.
+       {
+        setvar CHARACTERARRAY 15
+        state checkcharacter_status
+        ifvarand TEMPVAR 1 state donotswitchchars else state getcharacterarrays
+       }
+      }
+    }
+    setvarvar CHARACTEROLD CHARACTERSELECTED? // Sets the 'old' var to the current one to prevent repeats of the code.
+
+//**********************************
+//*END OF CHARACTER SWITCHING CODES*
+//**********************************
+ends
+
+state changecharacterdeathcount
+  ifvare gameover? 0
+  {
+    ifvarg DEATHCHARACTERVAR 0 ifvarl DEATHCHARACTERVAR 16
+    {
+     getactorvar[DEATHCHARACTERVAR].CHARACTERDEATHS TEMP
+     addvar TEMP 1
+     setactorvar[DEATHCHARACTERVAR].CHARACTERDEATHS TEMP
+    }
+    setvar DEATHCHARACTERVAR 0
+  }
+ends
+
+state checkforcontinues
+  state checkcontinues
+  ifvarg ITEMARRAYID_AMOUNTTEMP 0
+  {
+   state changecharacterdeathcount
+   setvarvar CURRENTHITPOINTS MAXHITPOINTS
+   ifvare DUKE? 1
+   {
+    setvar CHARACTERARRAY 1
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare JACK? 1
+   {
+    setvar CHARACTERARRAY 2
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare BUBSY? 1
+   {
+    setvar CHARACTERARRAY 3
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare AMI? 1
+   {
+    setvar CHARACTERARRAY 4
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare LOWANG? 1
+   {
+    setvar CHARACTERARRAY 5
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare ESSENCE? 1
+   {
+    setvar CHARACTERARRAY 6
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare TED? 1
+   {
+    setvar CHARACTERARRAY 7
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare LISA? 1
+   {
+    setvar CHARACTERARRAY 8
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare CYBANIS? 1
+   {
+    setvar CHARACTERARRAY 9
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare NETHRA? 1
+   {
+    setvar CHARACTERARRAY 10
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare PAULA? 1
+   {
+    setvar CHARACTERARRAY 11
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare LORI? 1
+   {
+    setvar CHARACTERARRAY 12
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare MINAKO? 1
+   {
+    setvar CHARACTERARRAY 13
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare MYSTERY1? 1
+   {
+    setvar CHARACTERARRAY 14
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   ifvare MAKEN? 1
+   {
+    setvar CHARACTERARRAY 15
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   }
+   setactor[PLAYERID].extra 16384
+
+   state checkcontinues subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
+
+   setvar DEATHSWITCHDELAY 39
+   globalsound CONTINUE_USED
+   redefinequote 321 ^20YOUR GROUP WAS SAVED BY ONE OF YOUR CONTINUES!!
+   setvarvar fta fta_normal setvar ftq 321
+  }
+  else
+  {
+   ifvarn PLAYERSTATUS? 1 state changecharacterdeathcount
+   setvar PLAYERSTATUS? 1
+  }
+ends
+
+state checkbubsylives
+     setvar CHARACTERARRAY 3
+     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+     ifvare TEMPVAR 0  
+     { 
+      setactor[PLAYERID].extra 16384
+      getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
+      setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+      getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME temp
+      setactorvar[CHARACTERARRAY].CHARACTERBREATHTIME temp
+      state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
+      setvar DEATHSWITCHDELAY 39
+      redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
+      setvarvar fta fta_normal setvar ftq 321
+     }
+ends
+
+state checkbubsylives2
+     setvar CHARACTERARRAY 3
+     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+     ifvare TEMPVAR 0  
+     { 
+      setactor[PLAYERID].extra 16384
+      setvarvar CURRENTHITPOINTS MAXHITPOINTS
+      setvarvar AIRTIME MAXAIRTIME
+      state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
+      stopsound DUKE_GRUNT
+      setvar DEATHSWITCHDELAY 39
+      redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
+      setvarvar fta fta_normal setvar ftq 321
+      break 
+     }
+ends
+
+state changechar
+    ifvarn VEHICLEID -1 setvar bits 268435456
+    setvarvar CHARACTERSELECTED? CHARACTERNEW
+    setvar CHARACTERNEW 0
+    stopsound DUKE_SCREAM
+    stopsound DUKE_SCREAM2
+    stopsound JACK_FALLSCREAM
+    stopsound WANG_SCREAM
+    stopsound ESSENCE_FALLSCREAM
+    stopsound LISA_FALLSCREAM
+    stopsound MAKEN_FALLSCREAM
+    setvar AUTOSWITCHATTEMPTS 0
+    setvar DEATHSWITCHDELAY 39
+    setactor[PLAYERID].extra 16384
+ends
+
+state mortalblowstuff
+   setactor[PLAYERID].extra 16384
+   setvar CURRENTHITPOINTS 1
+   stopsound DUKE_GRUNT
+   redefinequote 321 ^23SURVIVED A MORTAL BLOW!!   
+   setvar DEATHCHARACTERVAR 0
+   setvar DEATHSWITCHDELAY 39
+   setvarvar fta fta_normal setvar ftq 321
+ends
+
+state survivalcheck1
+  getactor[PLAYERID].htpicnum TEMPVAR
+  ifvare gameover? 0 { ifvare TEMPVAR -1 { setvar SURVIVALCHECK 10001 } else { randvar SURVIVALCHECK 10000 } } else { setvar SURVIVALCHECK 10001 break } 
+  ifvarvarl SURVIVALCHECK SURVIVALVALUE
+  {
+   ifvare CURRENTHITPOINTS 0 state mortalblowstuff
+   break 
+  }
+ends
+
+state switchtorandomcharacter
+ getcurraddress TEMPVAR3
+ setvar CHARACTERNEW 0 // set to 0
+ randvar CHARACTERNEW 14 // 0 to 14
+ addvar CHARACTERNEW 1 // +1
+
+ ifvare CHARACTERNEW 1
+ {
+  ifvare DUKE? 1
+  {
+   setvar CHARACTERARRAY 1
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 2
+ {
+  ifvare JACK? 1
+  {
+   setvar CHARACTERARRAY 2
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 3
+ {
+  ifvare BUBSY? 1
+  {
+   setvar CHARACTERARRAY 3
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 4
+ {
+  ifvare AMI? 1
+  {
+   setvar CHARACTERARRAY 4
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 5
+ {
+  ifvare LOWANG? 1
+  {
+   setvar CHARACTERARRAY 5
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 6
+ {
+  ifvare ESSENCE? 1
+  {
+   setvar CHARACTERARRAY 6
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 7
+ {
+  ifvare TED? 1
+  {
+   setvar CHARACTERARRAY 7
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 8
+ {
+  ifvare LISA? 1
+  {
+   setvar CHARACTERARRAY 8
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 9
+ {
+  ifvare CYBANIS? 1
+  {
+   setvar CHARACTERARRAY 9
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 10
+ {
+  ifvare NETHRA? 1
+  {
+   setvar CHARACTERARRAY 10
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 11
+ {
+  ifvare PAULA? 1
+  {
+   setvar CHARACTERARRAY 11
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 12
+ {
+  ifvare LORI? 1
+  {
+   setvar CHARACTERARRAY 12
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 13
+ {
+  ifvare MINAKO? 1
+  {
+   setvar CHARACTERARRAY 13
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 14
+ {
+  ifvare MYSTERY1? 1
+  {
+   setvar CHARACTERARRAY 14
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ else
+ ifvare CHARACTERNEW 15
+ {
+  ifvare MAKEN? 1
+  {
+   setvar CHARACTERARRAY 15
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+  }
+  else jump TEMPVAR3 // state switchtolivingcharacter
+ }
+ends
+
+state switchtolivingcharacter
+ ifvarand CHEATBITFIELD? 32
+ {
+  ifvare CURRENTHITPOINTS 0 state mortalblowstuff
+  break 
+ }
+ else
+ {
+  getactor[PLAYERID].htpicnum TEMPVAR
+  ifvare gameover? 0 { ifvare TEMPVAR -1 { setvar SURVIVALCHECK 10001 } else { randvar SURVIVALCHECK 10000 } } else { setvar SURVIVALCHECK 10001 break }   
+  ifvarvarl SURVIVALCHECK SURVIVALVALUE
+  {
+   ifvare CURRENTHITPOINTS 0 state mortalblowstuff
+   break 
+  }
+ }
+
+ ifvare CHARACTERSELECTED? 3 
+ { 
+  ifvare CURRENTHITPOINTS 0
+  {
+   state checkbubsylives
+   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
+  }
+ }
+ else
+ {
+  setvar CHARACTERARRAY 3
+  getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+  ifvare TEMPVAR 0
+  {
+   state checkbubsylives
+   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
+  }
+ }
+ 
+// Randomizes your next character when one dies.
+ ifvare CURRENTHITPOINTS 0
+ {
+  ifvarvarg SURVIVALCHECK SURVIVALVALUE
+  {
+   sound CHARACTER_DIE
+   palfrom 64 64
+   state changecharacterdeathcount
+   setvarvar TEMPVAR2 CHARACTEROLD
+
+   // Rank Point Penalty
+   setvarvar TEMPVAR6 RANKPOINTS
+   randvar TEMPVAR5 3
+   ifrnd 128 mulvar TEMPVAR5 -1
+   addvar TEMPVAR5 7
+   ifvarg PLAYERLEVEL 9 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 19 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 29 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 39 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 49 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 59 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 69 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 79 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 89 addvar TEMPVAR5 1
+   ifvarg PLAYERLEVEL 99 addvar TEMPVAR5 1
+   mulvarvar TEMPVAR6 TEMPVAR5
+   divvar TEMPVAR6 100
+   setvarvar TEMPVAR4 PLAYERLEVEL
+   ifvare SKILLLEVEL 0 { mulvar TEMPVAR4 25 addvar TEMPVAR4 1250 }
+   ifvare SKILLLEVEL 1 { mulvar TEMPVAR4 30 addvar TEMPVAR4 1500 }
+   ifvare SKILLLEVEL 2 { mulvar TEMPVAR4 35 addvar TEMPVAR4 1750 }
+   ifvare SKILLLEVEL 3 { mulvar TEMPVAR4 40 addvar TEMPVAR4 2000 }
+   ifvare SKILLLEVEL 4 { mulvar TEMPVAR4 45 addvar TEMPVAR4 2250 }
+   ifvare SKILLLEVEL 5 { mulvar TEMPVAR4 55 addvar TEMPVAR4 2750 }
+   ifvare SKILLLEVEL 6 { mulvar TEMPVAR4 60 addvar TEMPVAR4 3000 }
+   ifvare SKILLLEVEL 7 { mulvar TEMPVAR4 65 addvar TEMPVAR4 3250 }
+   ifvare SKILLLEVEL 8 { mulvar TEMPVAR4 70 addvar TEMPVAR4 3500 }
+   ifvare SKILLLEVEL 9 { mulvar TEMPVAR4 75 addvar TEMPVAR4 3750 }
+   ifvarvarl TEMPVAR6 TEMPVAR4 setvarvar TEMPVAR6 TEMPVAR4
+   divvar TEMPVAR6 2
+   subvarvar RANKPOINTS TEMPVAR6
+
+   ifvare TEMPVAR2 1
+   {
+    redefinequote 321 ^21DUKE HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    globalsound DUKE_KILLED4
+    ifvare PERMADEATH? 1 setvar DUKE? 0
+   }
+   else
+   ifvare TEMPVAR2 2
+   {
+    redefinequote 321 ^21JACK HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar JACK? 0
+   }
+   else
+   ifvare TEMPVAR2 3
+   {
+    redefinequote 321 ^21BUBSY HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar BUBSY? 0
+   }
+   else
+   ifvare TEMPVAR2 4
+   {
+    redefinequote 321 ^21AMI HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar AMI? 0
+   }
+   else
+   ifvare TEMPVAR2 5
+   {
+    redefinequote 321 ^21HIGA HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    globalsound WANG_LONGTERM_PAIN1
+    ifvare PERMADEATH? 1 setvar LOWANG? 0
+   }
+   else
+   ifvare TEMPVAR2 6
+   {
+    redefinequote 321 ^21ESSENCE HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar ESSENCE? 0
+   }
+   else
+   ifvare TEMPVAR2 7
+   {
+    redefinequote 321 ^21TED HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar TED? 0
+   }
+   else
+   ifvare TEMPVAR2 8
+   {
+    redefinequote 321 ^21LISA HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifrnd 128 globalsound LISA_DEATH1 else globalsound LISA_DEATH2
+    ifvare PERMADEATH? 1 setvar LISA? 0
+   }
+   else
+   ifvare TEMPVAR2 9
+   {
+    redefinequote 321 ^21CYBANIS HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar CYBANIS? 0
+   }
+   else
+   ifvare TEMPVAR2 10
+   {
+    ifvare NETHRAFORM? 0
+    {
+     redefinequote 321 ^21NETHRA HAS BEEN KILLED!! [-%d RANK PTS]
+     qsprintf 321 321 TEMPVAR6
+    }
+    else
+    {
+     redefinequote 321 ^21CHRISTINA HAS BEEN KILLED!! [-%d RANK PTS]
+     qsprintf 321 321 TEMPVAR6
+    }
+    ifvare PERMADEATH? 1 setvar NETHRA? 0
+   }
+   else
+   ifvare TEMPVAR2 11
+   {
+    redefinequote 321 ^21PAULA HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar PAULA? 0
+   }
+   else
+   ifvare TEMPVAR2 12
+   {
+    redefinequote 321 ^21LORI HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar LORI? 0
+   }
+   else
+   ifvare TEMPVAR2 13
+   {
+    redefinequote 321 ^21MINAKO HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifvare PERMADEATH? 1 setvar MINAKO? 0
+   }
+   else
+   ifvare TEMPVAR2 14
+   {
+    ifvare debugtoggle 0
+    {
+     ifvare PUBLICBETA? 1
+     {
+      redefinequote 321 ^21??????? HAS BEEN KILLED!! [-%d RANK PTS]
+      qsprintf 321 321 TEMPVAR6
+     }
+     else
+     {
+      redefinequote 321 ^21NAFERIA HAS BEEN KILLED!! [-%d RANK PTS]
+      qsprintf 321 321 TEMPVAR6
+     }
+    }
+    else
+    {
+     ifvare PUBLICBETA? 1
+     {
+      redefinequote 321 ^21HINOTORI HAS BEEN KILLED!! [-%d RANK PTS]
+      qsprintf 321 321 TEMPVAR6
+     }
+     else
+     {
+      redefinequote 321 ^21NAFERIA HAS BEEN KILLED!! [-%d RANK PTS]
+      qsprintf 321 321 TEMPVAR6
+     }
+    }
+    ifvare PERMADEATH? 1 setvar MYSTERY1? 0
+   }
+   else
+   ifvare TEMPVAR2 15
+   {
+    redefinequote 321 ^21MAKEN HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+    ifrnd 128 globalsound MAKEN_DEATH1 else globalsound MAKEN_DEATH2
+    ifvare PERMADEATH? 1 setvar MAKEN? 0
+   }
+   else
+   {
+    redefinequote 321 ^21SOMEONE HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
+   }
+   setvarvar fta fta_normal setvar ftq 321
+  }
+ }
+
+ state switchtorandomcharacter
+ addvar AUTOSWITCHATTEMPTS 1
+ends
+
+state checkpartysize
+   setvar PARTYSIZE 0 
+   setvar PARTYALIVE 0
+       ifvare DUKE? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 1 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 1 state switchtorandomcharacter }
+       ifvare JACK? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 2 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 2 state switchtorandomcharacter }
+      ifvare BUBSY? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 3 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 3 state switchtorandomcharacter }
+        ifvare AMI? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 4 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 4 state switchtorandomcharacter }
+     ifvare LOWANG? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 5 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 5 state switchtorandomcharacter }
+    ifvare ESSENCE? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 6 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 6 state switchtorandomcharacter }
+        ifvare TED? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 7 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 7 state switchtorandomcharacter }
+       ifvare LISA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 8 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 8 state switchtorandomcharacter }
+    ifvare CYBANIS? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 9 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 9 state switchtorandomcharacter }
+     ifvare NETHRA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 10 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 10 state switchtorandomcharacter }
+      ifvare PAULA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 11 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 11 state switchtorandomcharacter }
+       ifvare LORI? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 12 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 12 state switchtorandomcharacter }
+     ifvare MINAKO? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 13 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 13 state switchtorandomcharacter }
+   ifvare MYSTERY1? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 14 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 14 state switchtorandomcharacter }
+      ifvare MAKEN? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 15 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+                 else { ifvare CHARACTERSELECTED? 15 state switchtorandomcharacter }
+ends
+
+state checkcharalive
+      getactorvar[CHARACTERARRAY].CHARACTERHP temp
+      ifvarg temp 0 
+      {
+       state checkcharacter_status
+       ifvarand TEMPVAR 1 
+       {
+        subvar TEMPVAR 1
+        setactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+       }
+      }
+      else
+      {
+       setactorvar[CHARACTERARRAY].CHARACTERSTATUS? 1
+       setactorvar[CHARACTERARRAY].CHARACTERHP 0
+      }
+ends
+
+state iscurrentcharalive
+ setvar CHARACTERARRAY 1 state checkcharalive
+ setvar CHARACTERARRAY 2 state checkcharalive
+ setvar CHARACTERARRAY 3 state checkcharalive
+ setvar CHARACTERARRAY 4 state checkcharalive
+ setvar CHARACTERARRAY 5 state checkcharalive
+ setvar CHARACTERARRAY 6 state checkcharalive
+ setvar CHARACTERARRAY 7 state checkcharalive
+ setvar CHARACTERARRAY 8 state checkcharalive
+ setvar CHARACTERARRAY 9 state checkcharalive
+ setvar CHARACTERARRAY 10 state checkcharalive
+ setvar CHARACTERARRAY 11 state checkcharalive
+ setvar CHARACTERARRAY 12 state checkcharalive
+ setvar CHARACTERARRAY 13 state checkcharalive
+ setvar CHARACTERARRAY 14 state checkcharalive
+ setvar CHARACTERARRAY 15 state checkcharalive
+ends

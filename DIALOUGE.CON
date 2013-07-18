@@ -1,0 +1,3424 @@
+state pause-dialouge-box
+   setvar digy 96 state digz32768 state pal0
+   setvar digx 32 setvar tilenum 8171 state rs
+   setvar digx 184 setvar tilenum 8173 state rs
+   setvar digx 32 setvarvar tilenum dialougepicnum state rs
+   setvar textscale 49152 setvar tilenum 2822 setvar pal 20 state digx320 setvar digy 74 setvar temp 1031 state gtz
+
+   setvar digx 140 state pal0
+   setvar digy 82 setvar temp 1025 state gtz
+   addvar digy 6 setvar temp 1026 state gtz
+   addvar digy 6 setvar temp 1027 state gtz
+   addvar digy 6 setvar temp 1028 state gtz
+   addvar digy 6 setvar temp 1029 state gtz
+   addvar digy 6 setvar temp 1030 state gtz
+ends
+
+state dialouge-sounds
+   ifvare CHARACTERSELECTED? 8 // Lisa
+   {
+    stopsound LISA_PAUSEDGAME1
+    stopsound LISA_PAUSEDGAME2
+    stopsound LISA_PAUSEDGAME3
+    stopsound LISA_PAUSEDGAME4
+    stopsound LISA_PAUSEDGAME5
+    ifvare pausequote 0 globalsound LISA_PAUSEDGAME1
+    ifvare pausequote 1 globalsound LISA_PAUSEDGAME2
+    ifvare pausequote 2 globalsound LISA_PAUSEDGAME3
+    ifvare pausequote 3 globalsound LISA_PAUSEDGAME4
+    ifvare pausequote 4 globalsound LISA_PAUSEDGAME5
+   }
+   ifvare CHARACTERSELECTED? 15 // Maken
+   {
+    stopsound MAKEN_PAUSEDGAME1
+    stopsound MAKEN_PAUSEDGAME2
+    stopsound MAKEN_PAUSEDGAME3
+    stopsound MAKEN_PAUSEDGAME4
+    stopsound MAKEN_PAUSEDGAME5
+    ifvare pausequote 0 globalsound MAKEN_PAUSEDGAME1
+    ifvare pausequote 1 globalsound MAKEN_PAUSEDGAME2
+    ifvare pausequote 2 globalsound MAKEN_PAUSEDGAME3
+    ifvare pausequote 3 globalsound MAKEN_PAUSEDGAME4
+    ifvare pausequote 4 globalsound MAKEN_PAUSEDGAME5
+   }
+ends
+
+state dialouge-pausedgame
+   state orientation2 
+
+   ifvare CHARACTERSELECTED? 1
+   {
+    setvar dialougepicnum 7936
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Duke
+
+    ifvare pausequote 0
+    {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Come back quickly before I kick your sorry
+      redefinequote 1026 ass!
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 So, what the hell are you waiting for,
+      redefinequote 1026 Thanksgiving?!
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+    }
+    else 
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 I hate sitting here on my ass because you
+     redefinequote 1026 have to "take a break". Friggin' pansy!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else 
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 At this rate, disco will have been back in
+     redefinequote 1026 style and then died off again by the time you
+     redefinequote 1027 get back!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else 
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 What the hell is taking you so long?!
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 2
+   {
+    setvar dialougepicnum 7937
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Jack
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 *sigh* Man, I hate all this waiting around!
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You know, I would like to have some of my
+     redefinequote 1026 summer vacation left over by the time this
+     redefinequote 1027 is done!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Hey man, wake up! This isn't the time to
+     redefinequote 1026 snooze on the job!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Come, I have aliens to kill before I sleep...
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You'd think someone like you would want to
+     redefinequote 1026 actually be considered a hero, but you're
+     redefinequote 1027 just waiting around like a lump!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 3
+   {
+    ifvare BUBSYFORM? 0 setvar dialougepicnum 7938
+    ifvare BUBSYFORM? 1 setvar dialougepicnum 7962
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Bubsy
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You players always have to find a way to
+     redefinequote 1026 delay us hero-types, don't ya?
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Aw come on, I got a world to save, and you're
+     redefinequote 1026 over there just twiddling your thumbs!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 If you were this lazy 5 years ago, the
+     redefinequote 1026 Woolies would have already taken all your
+     redefinequote 1027 yarn by now!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Wow, my Amazitorium tour guide job was more
+     redefinequote 1026 interesting than you are right now!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Come on, I have a world to save, and more
+     redefinequote 1026 movies to star in!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 4
+   {
+    ifvare AMIFORM? 0 setvar dialougepicnum 7939
+    ifvare AMIFORM? 1 setvar dialougepicnum 7963
+    ifvare AMIFORM? 2 setvar dialougepicnum 7966
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Ami
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Yeah, take all the time you need. It's not
+     redefinequote 1026 like I'm gonna go walk off on my own or
+     redefinequote 1027 anything like that. *Whistles innocently*
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 *Is reading a novel on her mini-computer*
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Don't get lost now. See you in a bit! *Smile*
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 *Is eating a small bolonga sandwich*
+     redefinequote 1026 Oh, I'm sorry. Did you want one of my
+     redefinequote 1027 sandwiches? Oh... yeah, you're the player
+     redefinequote 1028 so I can't actually give you one. *Chuckles*
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You do understand even someone like me has
+     redefinequote 1026 a limit to her patience, right?
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 5
+   {
+    setvar dialougepicnum 7940
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Higa
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 I am sitting here, getting really stiff!
+     redefinequote 1026 as in "Lo Wang want kick your ass" stiff!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 It not the same without Mr. Fly to entertain
+     redefinequote 1026 Lo Wang while he sit around!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Lo Wang just eat some sushi while wait for
+     redefinequote 1026 you to come back from your happy time!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 How about Lo Wang take a break and you wait
+     redefinequote 1026 on him instead?!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Lo Wang be 95-years-old by time you get back
+     redefinequote 1026 at this rate!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 6
+   {
+    setvar dialougepicnum 7941
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 ESSence
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 If you don't come back quickly, I'll burst
+     redefinequote 1026 out into song right here and humiliate your
+     redefinequote 1027 sorry ass!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You should thank your god or whoever you
+     redefinequote 1026 believe in that I'm not an Anfaciar, or you'd
+     redefinequote 1027 be in for a world of hurt!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You know, if I were you, I wouldn't leave a
+     redefinequote 1026 Medatarion waiting around for too long.
+     redefinequote 1027 could be very unhealthy for everyone else.
+     redefinequote 1028 *Glares*
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 I wonder, can I drive Duke insane if I sing
+     redefinequote 1026 "Stayin' Alive" while waiting on you to come
+     redefinequote 1027 back?
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 *In the middle of singing "What Is Love" by
+     redefinequote 1026 Hadaway*
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 7
+   {
+    setvar dialougepicnum 7942
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Ted
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Don't mind me, I'll just play some "Pong
+     redefinequote 1026 Solo" with Tori and the others while your
+     redefinequote 1027 off doing whatever you're doing...
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Wow, this is taking a bit long for you to get
+     redefinequote 1026 back. What exactly are you doing?
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Don't be gone too long! Don't wanna find an
+     redefinequote 1026 explosive under your seat when you come
+     redefinequote 1027 back, do you?
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Wait a second, am I actually breaking the
+     redefinequote 1026 fourth wall by talking to you right now?
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Come back soon, because I don't like to just
+     redefinequote 1026 sit around frozen in place!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 8
+   {
+    setvar dialougepicnum 7943
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Lisa
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Hey, you take all the time you need. In the
+     redefinequote 1026 meantime I'm going to conceive some new tech
+     redefinequote 1027 for us... and I don't mean ^20you^0, to use.
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 *sigh* You know, maybe if I offer you a few
+     redefinequote 1026 thousand dollars you'd get off your lazy
+     redefinequote 1027 ass and continue this.
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Things to do, places to go? Do us a favor
+     redefinequote 1026 then: Shut the game off instead of pausing
+     redefinequote 1027 it like this. I speak for most of us when I say
+     redefinequote 1028 we don't like to just stand here for hours at
+     redefinequote 1029 a time!
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You know, everyone tells me the world is in
+     redefinequote 1026 the balance, but yet you're here taking a
+     redefinequote 1027 coffee break in the middle of important
+     redefinequote 1028 affairs! Do you really care about your world
+     redefinequote 1029 or not?!
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Ted's right! I think we are breaking the
+     redefinequote 1026 fourth wall when we talk to you. But it's
+     redefinequote 1027 just so fun! *smirks*
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 9
+   {
+    setvar dialougepicnum 7944
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Cybanis
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Just for your information, we Cycloidians
+     redefinequote 1026 aren't the most patient species in the
+     redefinequote 1027 universe. You would do well to come back as
+     redefinequote 1028 soon as you can...
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Hurry up before that clown ESSence drives
+     redefinequote 1026 me bat-shit insane with his damn singing!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 I crave battle! Hurry up and get back here!
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Cycloidians are warriors graced in combat,
+     redefinequote 1026 not philosophers with their noses in books!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Well, this is what I save roasted Gamarah
+     redefinequote 1026 for! and no, you can't have any. Even if I
+     redefinequote 1027 wanted you to have some, you're just the
+     redefinequote 1028 player, and I couldn't send any to you
+     redefinequote 1029 anyways. *razz*
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 10
+   {
+    ifvare NETHRAFORM? 0
+    {
+     setvar dialougepicnum 7945
+     // Quote 1031 = Name of the Speaker
+     redefinequote 1031 Nethra
+     ifvare pausequote 0
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Blah, having to sit here is very depressing.
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 1
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Please hurry back. We have a crisis to solve
+      redefinequote 1026 before we sleep.
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 2
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Stop holding me up, before I decide to become
+      redefinequote 1026 a "Royal Pain" in your ass!
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 3
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 My claws starting to dull. You're gonna
+      redefinequote 1026 have to help me sharpen them when you get
+      redefinequote 1027 back.
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 4
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 My kind are terrorizing your planet, so why
+      redefinequote 1026 in the nine hells are you just waiting there
+      redefinequote 1027 like a fool?!
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+    }
+    ifvare NETHRAFORM? 1
+    {
+     setvar dialougepicnum 7964
+     // Quote 1031 = Name of the Speaker
+     redefinequote 1031 Christina
+     ifvare pausequote 0
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 But I don't wanna stand around like a fool!
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 1
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Yeah, some first date this is... *glares*
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 2
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 This is even more boring than Algebra class!
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 3
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 I wish I could at least eat something while
+      redefinequote 1026 I wait on you to get back. *frown*
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 4
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 You know what, no cheers for you, Mister
+      redefinequote 1026 Snorefest! *grumbles*
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+    }
+   }
+   ifvare CHARACTERSELECTED? 11
+   {
+    setvar dialougepicnum 7946
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Paula
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Come back soon! I don't want to have to wait
+     redefinequote 1026 forever!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 You know, we hero-types do have lives of our
+     redefinequote 1026 own... we can't always wait hand on foot for
+     redefinequote 1027 you when you go off and forget about us.
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 I'm breaking the fourth wall? What fourth
+     redefinequote 1026 wall? *razz*
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Althought many consider me a very patient
+     redefinequote 1026 girl, I do have limits to how long I can wait
+     redefinequote 1027 for something to happen...
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 So, having fun out there, leaving us frozen
+     redefinequote 1026 in time? *glares*
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 12
+   {
+    setvar dialougepicnum 7947
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Lori
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Hey, can you bring me back some fish? *smiles*
+     redefinequote 1026  
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 If you're gonna head out, go get us some food.
+     redefinequote 1026 Maybe the others won't be so mad at you then.
+     redefinequote 1027 *shifty eyes*
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 If you're gonna head out for a while, you
+     redefinequote 1026 should just shut the game off then. I can't
+     redefinequote 1027 say I wanna just stand here all frozen.
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Justice might be blind, but player is not
+     redefinequote 1026 active.
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Hey, I want to take a break too, but you don't
+     redefinequote 1026 see me slacking off at my job, do you?!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 13
+   {
+    ifvare MINAKOFORM? 0 setvar dialougepicnum 7948
+    ifvare MINAKOFORM? 1 setvar dialougepicnum 7965
+    ifvare MINAKOFORM? 2 setvar dialougepicnum 7968
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Minako
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Maybe I should swallow my pride and sing
+     redefinequote 1026 songs just to annoy you. *smirks*
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 The soldier of Love and Justice does not
+     redefinequote 1026 wait on a foolish player, so make it quick!
+     redefinequote 1027  
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Make haste with what you're doing! Justice is
+     redefinequote 1026 waiting to be served to the alien scum who
+     redefinequote 1027 are attacking the Earth!
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 At the rate it's taking for you to come back
+     redefinequote 1026 I should just ask one of the aliens to shoot
+     redefinequote 1027 me and get it over with. *grumbles*
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 If you bring me back some sausage patties,
+     redefinequote 1026 then you might be able to appease me from
+     redefinequote 1027 kicking your sorry butt halfway across
+     redefinequote 1028 Earth!
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+   ifvare CHARACTERSELECTED? 14
+   {
+    ifvare PUBLICBETA? 0
+    {
+     setvar dialougepicnum 7957
+     // Quote 1031 = Name of the Speaker
+     redefinequote 1031 Naferia
+     ifvare pausequote 0
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 So, you're the one who's behind the curtain?
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 1
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 You're not related to Shao Kahn by any
+      redefinequote 1026 chance, are you?
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 2
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Do hurry up over there. I have a race of many
+      redefinequote 1026 to get back to ruling over in the near
+      redefinequote 1027 future!
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 3
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 So, have my people answered your questions
+      redefinequote 1026 about 'Being Alone in The Universe' yet?
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 4
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 Don't you find someone like me attractive?
+      redefinequote 1026 *unnerving smirk*
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+    }
+    else
+    {
+     setvar dialougepicnum 7957
+     // Quote 1031 = Name of the Speaker
+     ifvare debugtoggle 0 redefinequote 1031 ???????
+     else ifvare debugtoggle 0 redefinequote 1031 Hinotori
+     ifvare pausequote 0
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 *shifting her eyes to the right*
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 1
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 *shifting her eyes to the left*
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 2
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 *has big, googly eyes*
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 3
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 *is playing dead*
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+     else
+     ifvare pausequote 4
+     {
+      // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                      // 123456789012345678901234567890123456789 | 39 Characters per line
+      redefinequote 1025 *looks dizzy*
+      redefinequote 1026  
+      redefinequote 1027  
+      redefinequote 1028  
+      redefinequote 1029  
+      redefinequote 1030  
+     }
+    }
+   }
+   ifvare CHARACTERSELECTED? 15
+   {
+    setvar dialougepicnum 7971
+    // Quote 1031 = Name of the Speaker
+    redefinequote 1031 Maken
+    ifvare pausequote 0
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Don't let me catch you looking for porn or
+     redefinequote 1026 some dumbass thing like that. I can see what
+     redefinequote 1027 you're looking at, you know. *grumbles*
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 1
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 I heard rumors you think I look like some
+     redefinequote 1026 "Emo Goth Chick". I hope for your sake, and
+     redefinequote 1027 especially your computer's that's not the
+     redefinequote 1028 case.
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 2
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Man, your computer is clogged with so much
+     redefinequote 1026 junk! What the hell is all of this shit?! I
+     redefinequote 1027 swear people these days have no organizing
+     redefinequote 1028 sense!
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 3
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 So tell me, do you have any experience with
+     redefinequote 1026 computers? Or are you just one who lets
+     redefinequote 1027 others fix your computer problems like a
+     redefinequote 1028 lazy ass?
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+    else
+    ifvare pausequote 4
+    {
+     // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                     // 123456789012345678901234567890123456789 | 39 Characters per line
+     redefinequote 1025 Just between you and me, Lisa's not such an
+     redefinequote 1026 annoying person. I just like to act like her
+     redefinequote 1027 rival to get under her skin. *smirks*
+     redefinequote 1028  
+     redefinequote 1029  
+     redefinequote 1030  
+    }
+   }
+
+ state pause-dialouge-box
+
+ gettimedate ticktemp tempb tempb tempb tempb tempb tempb tempb
+ modvar ticktemp 2
+ ifvare ticktemp 0
+ {
+  ifvare pauseinit2 0
+  {
+   addvar pausetimer 1
+   setvar pauseinit2 1
+  }
+ }
+ else setvar pauseinit2 0
+
+ ifvarvarg pausetimer pausetimermax
+ {
+  getcurraddress TEMPVAR3
+
+  randvar pausequotenew 4
+
+  ifvarvare pausequotenew pausequote jump TEMPVAR3
+  else
+  {
+   setvarvar pausequote pausequotenew
+   setvar pausetimer 0
+  }
+ }
+
+ ifvarg pausetimer -1 ifvarl pausetimer 2
+ {
+  ifvare pauseinit 0
+  {
+   state dialouge-sounds
+   setvar pauseinit 1
+  }
+ }
+ else setvar pauseinit 0
+
+ ifvare debugtoggle 1 
+ {
+  state digx160
+  state settile2837
+  state orientation27
+  setvar textscale 49152
+
+  setvar digy 40
+  state pal16
+  setvarvar varname pausetimer
+  state dnz
+
+  setvar digy 48
+  state pal0
+  setvarvar varname pauseinit
+  state dnz
+ }
+
+ends
+
+//
+//
+//
+
+state dialouge-phasechange_USE
+ends
+
+state dialouge-phasechange_ENTER
+ends
+
+state top-dialouge-box
+   setvar digy 56 state digz32768 state pal0
+   setvar digx 32 setvar tilenum 8171 state rs
+   setvar digx 184 setvar tilenum 8173 state rs
+   setvar digx 32 setvarvar tilenum dialougepicnum state rs
+   setvar textscale 49152 setvar tilenum 2822 setvar pal 20 state digx320 setvar digy 34 setvar temp 1031 state gtz
+
+   setvar digx 140 state pal0
+   setvar digy 42 setvar temp 1025 state gtz
+   addvar digy 6 setvar temp 1026 state gtz
+   addvar digy 6 setvar temp 1027 state gtz
+   addvar digy 6 setvar temp 1028 state gtz
+   addvar digy 6 setvar temp 1029 state gtz
+   addvar digy 6 setvar temp 1030 state gtz
+ends
+
+state bottom-dialouge-box
+   setvar digy 144 state digz32768 state pal0
+   setvar digx 288 setvar tilenum 8171 state rs
+   setvar digx 136 setvar tilenum 8173 state rs
+   setvar digx 288 setvarvar tilenum dialougepicnum state rs
+   setvar textscale 49152 setvar tilenum 2822 setvar pal 20 state digx320 setvar digy 122 setvar temp 1031 state gtz
+
+   setvar digx 44 state pal0
+   setvar digy 130 setvar temp 1025 state gtz
+   addvar digy 6 setvar temp 1026 state gtz
+   addvar digy 6 setvar temp 1027 state gtz
+   addvar digy 6 setvar temp 1028 state gtz
+   addvar digy 6 setvar temp 1029 state gtz
+   addvar digy 6 setvar temp 1030 state gtz
+ends
+
+state dialouge-mainsystem
+
+ ifvare dialougeactive -1 setvar dialougephase 0
+ else ifvarn dialougeactive -1
+ {
+  //*************************************************
+  //*ID#s 0 to 1073741823 are for most conversations*
+  //*************************************************
+
+  state orientation2 
+  ifvare dialougeactive 0
+  {
+   // Top Character's Dialouge
+   setvar dialougepicnum 7941
+   // Quote 1031 = Name of the Top Speaker
+   redefinequote 1031 ESSence
+
+   // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                   // 123456789012345678901234567890123456789 | 39 Characters per line
+   redefinequote 1025 'Sup?
+   redefinequote 1026  
+   redefinequote 1027  
+   redefinequote 1028  
+   redefinequote 1029  
+   redefinequote 1030  
+   state top-dialouge-box
+
+   // --------
+
+   // Bottom Character's Dialouge
+   setvar dialougepicnum 7944
+   // Quote 1031 = Name of the Bottom Speaker
+   redefinequote 1031 CYBANIS
+
+   // Quotes 1025-1030 are the six lines that can fit in the dialouge box
+                   // 123456789012345678901234567890123456789 | 39 Characters per line
+   redefinequote 1025 Oh nothing really... Watching the game...
+   redefinequote 1026 Having' a Bud...
+   redefinequote 1027  
+   redefinequote 1028  
+   redefinequote 1029  
+   redefinequote 1030  
+   state bottom-dialouge-box
+  }
+
+  //************************************************
+  //*ID#s 1073741824+ are for Support Conversations*
+  //************************************************
+/*
+  ifvare dialougeactive 1073741824 // Duke & Jack - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741825 // Duke & Jack - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741826 // Duke & Jack - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741827 // Duke & Jack - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741828 // Duke & Jack - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741829 // Duke & Bubsy - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741830 // Duke & Bubsy - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741831 // Duke & Bubsy - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741832 // Duke & Bubsy - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741833 // Duke & Bubsy - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741834 // Duke & Ami - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741835 // Duke & Ami - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741836 // Duke & Ami - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741837 // Duke & Ami - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741838 // Duke & Ami - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741839 // Duke & Higa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741840 // Duke & Higa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741841 // Duke & Higa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741842 // Duke & Higa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741843 // Duke & Higa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741844 // Duke & ESSence - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741845 // Duke & ESSence - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741846 // Duke & ESSence - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741847 // Duke & ESSence - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741848 // Duke & ESSence - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741849 // Duke & Ted - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741850 // Duke & Ted - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741851 // Duke & Ted - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741852 // Duke & Ted - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741853 // Duke & Ted - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741854 // Duke & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741855 // Duke & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741856 // Duke & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741857 // Duke & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741858 // Duke & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741859 // Duke & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741860 // Duke & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741861 // Duke & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741862 // Duke & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741863 // Duke & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741864 // Duke & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741865 // Duke & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741866 // Duke & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741867 // Duke & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741868 // Duke & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741869 // Duke & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741870 // Duke & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741871 // Duke & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741872 // Duke & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741873 // Duke & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741874 // Duke & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741875 // Duke & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741876 // Duke & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741877 // Duke & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741878 // Duke & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741879 // Duke & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741880 // Duke & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741881 // Duke & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741882 // Duke & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741883 // Duke & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741884 // Duke & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741885 // Duke & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741886 // Duke & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741887 // Duke & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741888 // Duke & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741889 // Duke & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741890 // Duke & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741891 // Duke & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741892 // Duke & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741893 // Duke & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073741894 // Jack & Bubsy - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741895 // Jack & Bubsy - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741896 // Jack & Bubsy - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741897 // Jack & Bubsy - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741898 // Jack & Bubsy - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741889 // Jack & Ami - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741900 // Jack & Ami - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741901 // Jack & Ami - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741902 // Jack & Ami - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741903 // Jack & Ami - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741904 // Jack & Higa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741905 // Jack & Higa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741906 // Jack & Higa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741907 // Jack & Higa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741908 // Jack & Higa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741909 // Jack & ESSence - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741910 // Jack & ESSence - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741911 // Jack & ESSence - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741912 // Jack & ESSence - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741913 // Jack & ESSence - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741914 // Jack & Ted - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741915 // Jack & Ted - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741916 // Jack & Ted - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741917 // Jack & Ted - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741918 // Jack & Ted - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741919 // Jack & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741920 // Jack & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741921 // Jack & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741922 // Jack & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741923 // Jack & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741924 // Jack & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741925 // Jack & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741926 // Jack & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741927 // Jack & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741928 // Jack & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741929 // Jack & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741930 // Jack & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741931 // Jack & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741932 // Jack & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741933 // Jack & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741934 // Jack & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741935 // Jack & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741936 // Jack & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741937 // Jack & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741938 // Jack & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741939 // Jack & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741940 // Jack & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741941 // Jack & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741942 // Jack & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741943 // Jack & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741944 // Jack & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741945 // Jack & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741946 // Jack & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741947 // Jack & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741948 // Jack & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741949 // Jack & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741950 // Jack & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741951 // Jack & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741952 // Jack & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741953 // Jack & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741954 // Jack & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741955 // Jack & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741956 // Jack & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741957 // Jack & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741958 // Jack & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073741959 // Bubsy & Ami - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741960 // Bubsy & Ami - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741961 // Bubsy & Ami - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741962 // Bubsy & Ami - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741963 // Bubsy & Ami - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741964 // Bubsy & ESSence - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741965 // Bubsy & ESSence - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741966 // Bubsy & ESSence - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741967 // Bubsy & ESSence - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741968 // Bubsy & ESSence - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741969 // Bubsy & Ted - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741970 // Bubsy & Ted - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741971 // Bubsy & Ted - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741972 // Bubsy & Ted - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741973 // Bubsy & Ted - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741974 // Bubsy & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741975 // Bubsy & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741976 // Bubsy & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741977 // Bubsy & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741978 // Bubsy & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741979 // Bubsy & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741980 // Bubsy & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741981 // Bubsy & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741982 // Bubsy & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741983 // Bubsy & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741984 // Bubsy & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741985 // Bubsy & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741986 // Bubsy & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741987 // Bubsy & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741988 // Bubsy & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741989 // Bubsy & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741990 // Bubsy & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741991 // Bubsy & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741992 // Bubsy & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741993 // Bubsy & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741994 // Bubsy & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741995 // Bubsy & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741996 // Bubsy & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741997 // Bubsy & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741998 // Bubsy & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073741999 // Bubsy & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742000 // Bubsy & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742001 // Bubsy & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742002 // Bubsy & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742003 // Bubsy & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742004 // Bubsy & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742005 // Bubsy & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742006 // Bubsy & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742007 // Bubsy & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742008 // Bubsy & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742009 // Bubsy & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742010 // Bubsy & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742011 // Bubsy & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742012 // Bubsy & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742013 // Bubsy & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742014 // Ami & Higa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742015 // Ami & Higa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742016 // Ami & Higa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742017 // Ami & Higa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742018 // Ami & Higa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742019 // Ami & ESSence - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742020 // Ami & ESSence - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742021 // Ami & ESSence - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742022 // Ami & ESSence - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742023 // Ami & ESSence - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742024 // Ami & Ted - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742025 // Ami & Ted - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742026 // Ami & Ted - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742027 // Ami & Ted - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742028 // Ami & Ted - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742029 // Ami & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742030 // Ami & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742031 // Ami & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742032 // Ami & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742033 // Ami & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742034 // Ami & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742035 // Ami & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742036 // Ami & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742037 // Ami & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742038 // Ami & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742039 // Ami & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742040 // Ami & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742041 // Ami & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742042 // Ami & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742043 // Ami & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742044 // Ami & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742045 // Ami & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742046 // Ami & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742047 // Ami & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742048 // Ami & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742049 // Ami & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742050 // Ami & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742051 // Ami & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742052 // Ami & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742053 // Ami & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742054 // Ami & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742055 // Ami & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742056 // Ami & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742057 // Ami & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742058 // Ami & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742059 // Ami & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742060 // Ami & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742061 // Ami & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742062 // Ami & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742063 // Ami & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742064 // Ami & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742065 // Ami & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742066 // Ami & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742067 // Ami & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742068 // Ami & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742069 // Higa & ESSence - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742070 // Higa & ESSence - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742071 // Higa & ESSence - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742072 // Higa & ESSence - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742073 // Higa & ESSence - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742074 // Higa & Ted - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742075 // Higa & Ted - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742076 // Higa & Ted - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742077 // Higa & Ted - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742078 // Higa & Ted - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742079 // Higa & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742080 // Higa & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742081 // Higa & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742082 // Higa & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742083 // Higa & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742084 // Higa & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742085 // Higa & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742086 // Higa & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742087 // Higa & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742088 // Higa & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742089 // Higa & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742090 // Higa & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742091 // Higa & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742092 // Higa & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742093 // Higa & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742094 // Higa & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742095 // Higa & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742096 // Higa & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742097 // Higa & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742098 // Higa & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742099 // Higa & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742100 // Higa & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742101 // Higa & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742102 // Higa & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742103 // Higa & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742104 // Higa & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742105 // Higa & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742106 // Higa & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742107 // Higa & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742108 // Higa & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742109 // Higa & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742110 // Higa & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742111 // Higa & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742112 // Higa & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742113 // Higa & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742114 // Higa & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742115 // Higa & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742116 // Higa & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742117 // Higa & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742118 // Higa & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742119 // ESSence & Ted - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742120 // ESSence & Ted - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742121 // ESSence & Ted - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742122 // ESSence & Ted - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742123 // ESSence & Ted - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742124 // ESSence & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742125 // ESSence & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742126 // ESSence & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742127 // ESSence & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742128 // ESSence & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742129 // ESSence & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742130 // ESSence & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742131 // ESSence & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742132 // ESSence & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742133 // ESSence & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742134 // ESSence & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742135 // ESSence & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742136 // ESSence & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742137 // ESSence & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742138 // ESSence & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742139 // ESSence & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742140 // ESSence & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742141 // ESSence & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742142 // ESSence & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742143 // ESSence & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742144 // ESSence & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742145 // ESSence & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742146 // ESSence & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742147 // ESSence & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742148 // ESSence & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742149 // ESSence & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742150 // ESSence & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742151 // ESSence & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742152 // ESSence & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742153 // ESSence & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742154 // ESSence & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742155 // ESSence & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742156 // ESSence & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742157 // ESSence & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742158 // ESSence & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742159 // ESSence & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742160 // ESSence & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742161 // ESSence & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742162 // ESSence & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742163 // ESSence & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742164 // Ted & Lisa - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742165 // Ted & Lisa - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742166 // Ted & Lisa - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742167 // Ted & Lisa - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742168 // Ted & Lisa - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742169 // Ted & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742170 // Ted & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742171 // Ted & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742172 // Ted & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742173 // Ted & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742174 // Ted & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742175 // Ted & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742176 // Ted & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742177 // Ted & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742178 // Ted & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742179 // Ted & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742180 // Ted & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742181 // Ted & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742182 // Ted & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742183 // Ted & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742184 // Ted & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742185 // Ted & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742186 // Ted & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742187 // Ted & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742188 // Ted & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742189 // Ted & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742190 // Ted & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742191 // Ted & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742192 // Ted & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742193 // Ted & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742194 // Ted & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742195 // Ted & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742196 // Ted & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742197 // Ted & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742198 // Ted & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742199 // Ted & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742200 // Ted & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742201 // Ted & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742202 // Ted & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742203 // Ted & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742204 // Lisa & Cybanis - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742205 // Lisa & Cybanis - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742206 // Lisa & Cybanis - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742207 // Lisa & Cybanis - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742208 // Lisa & Cybanis - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742209 // Lisa & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742210 // Lisa & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742211 // Lisa & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742212 // Lisa & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742213 // Lisa & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742214 // Lisa & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742215 // Lisa & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742216 // Lisa & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742217 // Lisa & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742218 // Lisa & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742219 // Lisa & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742220 // Lisa & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742221 // Lisa & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742222 // Lisa & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742223 // Lisa & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742224 // Lisa & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742225 // Lisa & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742226 // Lisa & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742227 // Lisa & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742228 // Lisa & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742229 // Lisa & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742230 // Lisa & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742231 // Lisa & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742232 // Lisa & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742233 // Lisa & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742234 // Lisa & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742235 // Lisa & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742236 // Lisa & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742237 // Lisa & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742238 // Lisa & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742239 // Cybanis & Christina/Nethra - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742240 // Cybanis & Christina/Nethra - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742241 // Cybanis & Christina/Nethra - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742242 // Cybanis & Christina/Nethra - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742243 // Cybanis & Christina/Nethra - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742244 // Cybanis & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742245 // Cybanis & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742246 // Cybanis & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742247 // Cybanis & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742248 // Cybanis & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742249 // Cybanis & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742250 // Cybanis & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742251 // Cybanis & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742252 // Cybanis & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742253 // Cybanis & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742254 // Cybanis & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742255 // Cybanis & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742256 // Cybanis & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742257 // Cybanis & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742258 // Cybanis & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742259 // Cybanis & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742260 // Cybanis & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742261 // Cybanis & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742262 // Cybanis & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742263 // Cybanis & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742264 // Cybanis & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742265 // Cybanis & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742266 // Cybanis & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742267 // Cybanis & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742268 // Cybanis & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742269 // Christina/Nethra & Paula - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742270 // Christina/Nethra & Paula - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742271 // Christina/Nethra & Paula - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742272 // Christina/Nethra & Paula - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742273 // Christina/Nethra & Paula - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742274 // Christina/Nethra & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742275 // Christina/Nethra & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742276 // Christina/Nethra & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742277 // Christina/Nethra & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742278 // Christina/Nethra & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742279 // Christina/Nethra & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742280 // Christina/Nethra & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742281 // Christina/Nethra & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742282 // Christina/Nethra & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742283 // Christina/Nethra & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742284 // Christina/Nethra & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742285 // Christina/Nethra & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742286 // Christina/Nethra & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742287 // Christina/Nethra & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742288 // Christina/Nethra & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742289 // Christina/Nethra & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742290 // Christina/Nethra & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742291 // Christina/Nethra & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742292 // Christina/Nethra & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742293 // Christina/Nethra & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742294 // Paula & Lori - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742295 // Paula & Lori - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742296 // Paula & Lori - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742297 // Paula & Lori - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742298 // Paula & Lori - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742299 // Paula & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742300 // Paula & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742301 // Paula & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742302 // Paula & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742303 // Paula & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742304 // Paula & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742305 // Paula & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742306 // Paula & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742307 // Paula & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742308 // Paula & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742309 // Paula & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742310 // Paula & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742311 // Paula & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742312 // Paula & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742313 // Paula & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742314 // Lori & Minako - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742315 // Lori & Minako - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742316 // Lori & Minako - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742317 // Lori & Minako - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742318 // Lori & Minako - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742319 // Lori & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742320 // Lori & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742321 // Lori & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742322 // Lori & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742323 // Lori & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742324 // Lori & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742325 // Lori & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742326 // Lori & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742327 // Lori & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742328 // Lori & Maken - "*" Level Support
+  {
+  }
+
+
+  ifvare dialougeactive 1073742329 // Minako & "Hinotori" - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742330 // Minako & "Hinotori" - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742331 // Minako & "Hinotori" - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742332 // Minako & "Hinotori" - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742333 // Minako & "Hinotori" - "*" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742334 // Minako & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742335 // Minako & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742336 // Minako & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742337 // Minako & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742338 // Minako & Maken - "*" Level Support
+  {
+  }
+
+
+
+  ifvare dialougeactive 1073742339 // "Hinotori" & Maken - "C" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742340 // "Hinotori" & Maken - "B" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742341 // "Hinotori" & Maken - "A" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742342 // "Hinotori" & Maken - "S" Level Support
+  {
+  }
+
+  ifvare dialougeactive 1073742343 // "Hinotori" & Maken - "*" Level Support
+  {
+  }
+*/
+ }
+
+ends
