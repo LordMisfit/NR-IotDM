@@ -1,0 +1,78 @@
+// General
+music { id "intro" file "music\general\grabbag.ogg" }
+music { id "briefing" file "music\general\brief.ogg" }
+// music { id "loading" file "music\general\2bwild.ogg" }
+
+// Episode 1
+music { id "E1L1" file "music\ep1\stalker.ogg" }
+music { id "E1L2" file "music\ep1\dethtoll.ogg" }
+music { id "E1L3" file "music\ep1\streets.ogg" }
+music { id "E1L4" file "music\ep1\watrwld1.ogg" }
+music { id "E1L5" file "music\ep1\snake1.ogg" }
+music { id "E1L6" file "music\ep1\thecall.ogg" }
+music { id "E1L7" file "music\ep1\ahgeez.ogg" }
+music { id "E1L8" file "music\NR-Extra\red1.ogg" }
+
+// Episode 2
+music { id "E2L1" file "music\ep2\futurmil.ogg" }
+music { id "E2L2" file "music\ep2\storm.ogg" }
+music { id "E2L3" file "music\ep2\gutwrnch.ogg" }
+music { id "E2L4" file "music\ep2\robocrep.ogg" }
+music { id "E2L5" file "music\ep2\stalag.ogg" }
+music { id "E2L6" file "music\ep2\pizzed.ogg" }
+music { id "E2L7" file "music\ep2\alienz.ogg" }
+music { id "E2L8" file "music\ep2\xplasma.ogg" }
+music { id "E2L9" file "music\ep2\alfredh.ogg" }
+music { id "E2L10" file "music\ep2\gloomy.ogg" }
+music { id "E2L11" file "music\ep2\intents.ogg" }
+
+// Episode 3
+music { id "E3L1" file "music\ep3\inhiding.ogg" }
+music { id "E3L2" file "music\ep3\fatcmdr.ogg" }
+music { id "E3L3" file "music\ep3\names.ogg" }
+music { id "E3L4" file "music\ep3\subway.ogg" }
+music { id "E3L5" file "music\ep3\invader.ogg" }
+music { id "E3L6" file "music\ep3\gotham.ogg" }
+music { id "E3L7" file "music\ep3\233c.ogg" }
+music { id "E3L8" file "music\ep3\lordofla.ogg" }
+music { id "E3L9" file "music\ep3\urban.ogg" }
+music { id "E3L10" file "music\ep3\spook.ogg" }
+music { id "E3L11" file "music\ep3\whomp.ogg" }
+
+// Episode 4
+music { id "E4L1" file "music\ep4\missimp.ogg" }
+music { id "E4L2" file "music\ep4\prepd.ogg" }
+music { id "E4L3" file "music\ep4\bakedgds.ogg" }
+music { id "E4L4" file "music\ep4\cf.ogg" }
+music { id "E4L5" file "music\ep4\lemchill.ogg" }
+music { id "E4L6" file "music\ep4\pob.ogg" }
+music { id "E4L7" file "music\ep4\warehaus.ogg" }
+music { id "E4L8" file "music\ep4\layers.ogg" }
+music { id "E4L9" file "music\ep4\floghorn.ogg" }
+music { id "E4L10" file "music\ep4\depart.ogg" }
+music { id "E4L11" file "music\ep4\restrict.ogg" }
+
+// Episode 5
+music { id "E5L1" file "music\NR-Extra\red1.ogg" }
+music { id "E5L2" file "music\NR-Extra\red1.ogg" }
+music { id "E5L3" file "music\NR-Extra\red1.ogg" }
+music { id "E5L4" file "music\NR-Extra\red1.ogg" }
+music { id "E5L5" file "music\NR-Extra\red1.ogg" }
+music { id "E5L6" file "music\NR-Extra\red1.ogg" }
+
+// Episode 6
+music { id "E6L1" file "music\dukedc\dc1_hero.ogg" }
+music { id "E6L2" file "music\dukedc\dc2_therain.ogg" }
+music { id "E6L3" file "music\dukedc\dc3_txftrance.ogg" }
+music { id "E6L4" file "music\dukedc\dc4_curse.ogg" }
+music { id "E6L5" file "music\dukedc\dc5_trixmat.ogg" }
+music { id "E6L6" file "music\dukedc\dc6_fromdark.ogg" }
+music { id "E6L7" file "music\dukedc\dc7_crabraft.ogg" }
+music { id "E6L8" file "music\dukedc\dc8_tense.ogg" }
+music { id "E6L9" file "music\dukedc\dc9_robocop3.ogg" }
+music { id "E6L10" file "music\dukedc\dcsl_ominous.ogg" }
+
+// Sounds that are music
+sound { id "95" file "music\general\barmusic.ogg" }
+sound { id "168" file "music\general\2bwild.ogg" }
+sound { id "249" file "music\general\bonus.ogg" }
