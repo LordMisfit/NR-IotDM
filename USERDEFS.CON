@@ -4107,6 +4107,7 @@ definequote 412       -
 definequote 413       -
 definequote 414       -
 definequote 415       -
+definequote 416       -
 
 definequote 437       [VEHICLE USE KEY]
 definequote 438       [VEHICLE COMMAND NAME]
@@ -4362,7 +4363,7 @@ definelevelname 3 29 E4L8.map 03:18 01:59 CRITICAL MASS
 definelevelname 3 30 E4L9.map 05:02 02:51 DERELICT
 definelevelname 3 31 E4L10.map 10:50 05:25 THE QUEEN
 
-definelevelname 4 0 QRED.map 10:00 03:20 HIGHWAY HORROR
+definelevelname 4 0 RED1.map 10:00 03:20 HIGHWAY HORROR
 definelevelname 4 1 RED2.map 03:55 00:59 ABANDONED MINE TOWN
 definelevelname 4 2 RED3.map 03:32 01:49 HAUNTED TOWN
 definelevelname 4 3 RED4.map 23:15 06:46 WAIT FOR THE SHIP

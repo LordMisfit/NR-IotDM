@@ -510,6 +510,21 @@ For mappers who want to make sectors that act as a healing spring or beam of reg
 
 * CHANGELOG *
 
+=SINCE 5.22=
++ Character Trait/Skill: "Watch Over Me" for Paula. Increases Attack/Defense by increasing amounts depending on how many characters are dead.
++ Oversight Fix: Happy/Style/Charm Shoes no longer increment their timer[s] while you're in shops or at ATM prompts
++ Balance: Mindblasts ignore 33% of the target's defense now.
++ Balance: Spit Loogies ignore 60% of the target's defense now.
++ Balance: Lasers, Freezeblasts, and Expander rays ignore 40% of the target's defense stat now.
++ Balance: Rockets and explosives in general now ignore 50% of the target's defense stat. Devastator Rockets also inherit this bonus, AND they now ignore an additional 75% of the Defense stat on their own instead of 75%. This means missiles and rockets in general should now deal more damage between players and enemies and help speed up combat.
++ Memorbilia: 28 new posters.
++ Displays: If characters are on the opposing page from the current page, a prompt will show that you have characters there. This also works for using items/skills on characters as well.
++ Balance: Enemy chances of waking up with powerup items, protective boots and scuba gear are halved across all difficulty levels. Hopefully this significantly cuts down on the bitching and moaning people have given me about too many invuln-monsters showing up on the highest skills. Unless I still get a buttload of complaints from multiple players, this is as low as it's going though. >.>
++ Cheats: No-EP-Use/Infinte-EP cheat now affects Lisa fixing ATMs and vending machines, making it only cost the $ value when in effect.
++ Displays: Getting next to a vending machine will show the number of snacks/drinks left in the machine now.
++ Feature: Natural Regeneration for HP and EP are now affected by moving/resting/etc. Moving around horizontally slows down regeneration speed some, jumping straight up or falling down slows it down more, crouching still nearly doubles regeneration speed. Resting in a Riot Tank also increases regeneration speed, but by a lesser amount than crouching. Haste/Slow now affect regeneration speed for HP and EP as well. Going into defense mode also speeds up regeneration speed slightly.
++ Equipment: ????? ?? ???? ????? now increases falling-resistance for it's wearer by 2.5x.
+
 =SINCE 5.21=
 
 + Weapon Bugfix: A critically annoying bug concerning the Shotgun randomly 'jamming' after switching characters was FINALLY fixed after having been around since the inception of the multi-character system. Hint to all future developers of mods like this, make sure the player struct called "random_club_frame" is reset to 0 upon switching characters. The problem was linked to having the shrinker/expander [or any weapon with a 'glowing' component] selected on one character and then switching straight to another character currently equipped with a Shotgun.

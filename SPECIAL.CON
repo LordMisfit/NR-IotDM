@@ -352,7 +352,7 @@ gamevar ITEMDROPPEDTIME 0 2 // If var is >0, then an item cannot be grabbed. For
 gamevar ARMORISUSED? 0 2 // If an Armor item is used, this flag is set to make it appear and work differently.
 gamevar ARMORAPPEARANCE? 0 0 // 0 = Males [Normal], 1 = Female, 2 = ESSence, 3 = Cybanis
 
-gamevar DEFENSEMODE? 0 131073 // Player Defense mode means -50% damage from attacks.
+gamevar DEFENSEMODE? 0 131073 // Player Defense mode means -50% damage from attacks, +33% faster natural healing rate
 
 gamevar ITEMWASDROPPED? 0 2 // Used to give dropped items a time limit before they vanish [mostly applies to extraneous bonus items and etc]
 gamevar ITEMDROPTIMER 390 2 // The default time a dropped item has on the map before it vanishes.
@@ -466,7 +466,7 @@ gamevar DEATHMISSILEACTIVATED 0 131073 // If > then 0, all Deathgate/stroke Miss
 gamevar DEATHMISSILETIMERLAPSE 0 131073
 gamevar DEATHMISSILEMODE 0 131073 // 0 = Deathgate, 1 = Deathstroke
 
-gamevar CHAINGUNMODE 0 131073 // 0 = Normal Bullets, 1 = RPG Rockets, 2 =
+gamevar CHAINGUNMODE 0 131073 // 0 = Normal Bullets, 1 = RPG Rockets, 2 = Laser Blasts
 
 gamevar backview 0 131073
 
@@ -1782,6 +1782,7 @@ gamevar telebeaconstatus 0 131074
 
 gamevar DAMAGEMODIFIER 0 131072 // For Calculating Complex Resistance Formulas [10000 = 100.00% Vulnerability]
 gamevar TEMPMOD 0 131072 //
+gamevar TEMPMOD2 0 131072
 
 //***********************************************
 //*BEGINNING OF CHARACTER-RELATED VARIABLES HERE*
@@ -1913,7 +1914,7 @@ gamevar MAKEN? 0 131072
 // The Following are for if a character 'transforms' or has different states at some point in the game [Bubsy/Ami/ESSence/Nethra/etc]
 gamevar DUKEFORM? 0 131072
 gamevar JACKFORM? 0 131072
-gamevar BUBSYFORM? 0 131072	// 0 = Normal Form, 1 = Bubsy w/ 'The Mask' on
+gamevar BUBSYFORM? 0 131072		// 0 = Normal Form, 1 = Bubsy w/ 'The Mask' on
 gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 gamevar LOWANGFORM? 0 131072
 gamevar ESSENCEFORM? 0 131072	// 0 = Normal Attire/Weapons, 1 = Armorless Attire/Weapons
@@ -3114,6 +3115,119 @@ ends
 
 //
 
+state checkpg1characters
+   ifvare DUKE? 1 addvar TEMPMOD 1
+   ifvare JACK? 1 addvar TEMPMOD 1
+   ifvare BUBSY? 1 addvar TEMPMOD 1
+   ifvare AMI? 1 addvar TEMPMOD 1
+   ifvare LOWANG? 1 addvar TEMPMOD 1
+   ifvare ESSENCE? 1 addvar TEMPMOD 1
+   ifvare TED? 1 addvar TEMPMOD 1
+   ifvare LISA? 1 addvar TEMPMOD 1
+ends
+
+state checkpg2characters
+   ifvare CYBANIS? 1 addvar TEMPMOD 1
+   ifvare NETHRA? 1 addvar TEMPMOD 1
+   ifvare PAULA? 1 addvar TEMPMOD 1
+   ifvare LORI? 1 addvar TEMPMOD 1
+   ifvare MINAKO? 1 addvar TEMPMOD 1
+   ifvare MYSTERY1? 1 addvar TEMPMOD 1
+   ifvare MAKEN? 1 addvar TEMPMOD 1
+ends
+
+state checkpg1items
+ends
+
+state checkpg2items
+ends
+
+state checkpg3items
+ends
+
+state checkpg4items
+ends
+
+state checkpg5items
+   // Row 1
+   state checksunrings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkaquarings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkplasmarings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkspiritrings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkcharmankhs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmirrorshields ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   // Row 2
+   state checkexpbadges ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkrankbadges ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmoneybadges ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkriotshields ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checknyxglovepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkrabbitsfoots ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   // Row 3
+   state checkjumpbootpairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkshockabbootpairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkhappyshoepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkstyleshoepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkcharmshoepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkpowerwrists ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   // Row 4
+   state checkhockeymasks ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkgemstonecrowns ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkironrunes ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checktwilightcapes ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checksnakearmbands ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmedicbags ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+ends
+
+state checkpg6items
+   // Row 1
+   state checkserpenthelmets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkenergyincurments ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkserpenthelmets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+ends
+
+state checkpg1equippables
+   // Row 1
+   state checksunrings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkaquarings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkplasmarings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkspiritrings ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkcharmankhs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmirrorshields ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   // Row 2
+   state checkexpbadges ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkrankbadges ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmoneybadges ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkriotshields ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checknyxglovepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkrabbitsfoots ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   // Row 3
+   state checkjumpbootpairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkshockabbootpairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkhappyshoepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkstyleshoepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkcharmshoepairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkpowerwrists ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   // Row 4
+   state checkhockeymasks ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkgemstonecrowns ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkironrunes ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checktwilightcapes ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checksnakearmbands ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmedicbags ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+ends
+
+state checkpg2equippables
+   // Row 1
+   state checkserpenthelmets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkenergyincurments ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkyinyangorbs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+ends
+
+//
+
 state secretrecipecheck
                // Check Secret Recipes [Permenant Boost Item]
                state checksecretrecipes
@@ -3456,7 +3570,6 @@ state showhealing_actorap
 ends
 
 //
-
 
 state rndmizer256
  randvar RNDMIZER 255 addvar RNDMIZER 1
@@ -5090,9 +5203,9 @@ setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setvar TEMPVAR4 4
 randvar TEMPVAR5 4
-addvarvar TEMPVAR4 TEMPVAR5
+addvarvar TEMPVAR4 TEMPVAR5 mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER -260
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH DUKEJUMPSTRENGTH
 setvarvar PLAYERJUMPSTRENGTH DUKEJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST DUKEFALLRESISTANCE
@@ -5328,7 +5441,7 @@ setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER -130
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH BUBSYJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST BUBSYFALLRESISTANCE
 
@@ -5446,9 +5559,9 @@ setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setvar TEMPVAR4 1
 randvar TEMPVAR5 1
-addvarvar TEMPVAR4 TEMPVAR5
+addvarvar TEMPVAR4 TEMPVAR5 mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 520
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH AMIJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST AMIFALLRESISTANCE
 
@@ -5566,9 +5679,9 @@ setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setvar TEMPVAR4 2
 randvar TEMPVAR5 4
-addvarvar TEMPVAR4 TEMPVAR5
+addvarvar TEMPVAR4 TEMPVAR5 mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 260
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH LOWANGJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST LOWANGFALLRESISTANCE
 
@@ -5701,8 +5814,8 @@ addvar TEMPVAR ESSENCELIFTSTRENGTHMIN
 setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 8
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 80
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 130
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH ESSENCEJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST ESSENCEFALLRESISTANCE
 
@@ -5820,7 +5933,7 @@ setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setvar TEMPVAR4 6
 randvar TEMPVAR5 2
-addvarvar TEMPVAR4 TEMPVAR5
+addvarvar TEMPVAR4 TEMPVAR5 mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
 setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH TEDJUMPSTRENGTH
@@ -5950,9 +6063,9 @@ setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setvar TEMPVAR4 12
 randvar TEMPVAR5 4
-addvarvar TEMPVAR4 TEMPVAR5
+addvarvar TEMPVAR4 TEMPVAR5 mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 130
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH LISAJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST LISAFALLRESISTANCE
 
@@ -6084,8 +6197,8 @@ addvar TEMPVAR CYBANISLIFTSTRENGTHMIN
 setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 8
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 80
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 130
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH CYBANISJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST CYBANISFALLRESISTANCE
 
@@ -6218,8 +6331,9 @@ setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 ifvare NETHRAFORM? 0 setvar TEMPVAR4 16 else setvar TEMPVAR4 2
+mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 26
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 260
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH NETHRAJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST NETHRAFALLRESISTANCE
 
@@ -6356,7 +6470,7 @@ setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 390
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH PAULAJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST PAULAFALLRESISTANCE
 
@@ -6472,8 +6586,8 @@ addvar TEMPVAR LORILIFTSTRENGTHMIN
 setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 6
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 13
+setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 60
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 130
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH LORIJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST LORIFALLRESISTANCE
 
@@ -6589,8 +6703,8 @@ addvar TEMPVAR MINAKOLIFTSTRENGTHMIN
 setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 10
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 0
+setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 100
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 520
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH MINAKOJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST MINAKOFALLRESISTANCE
 
@@ -6723,7 +6837,7 @@ setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 65
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 650
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH MYSTERY1JUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST MYSTERY1FALLRESISTANCE
 
@@ -6839,8 +6953,8 @@ addvar TEMPVAR MAKENLIFTSTRENGTHMIN
 setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
-setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 6
-setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 13
+setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER 60
+setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 130
 setactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH MAKENJUMPSTRENGTH
 setactorvar[CHARACTERARRAY].CHARACTERFALLRESIST MAKENFALLRESISTANCE
 
@@ -7319,8 +7433,10 @@ ifvarl TEMPVAR 1 setvar TEMPVAR 1
 ifvarvarg TEMPVAR STATLIMIT setvarvar TEMPVAR STATLIMIT
 setvarvar MAXENERGYPOINTS TEMPVAR
 
-setvarvar CURRENTHITPOINTS MAXHITPOINTS
-setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
+// setvarvar CURRENTHITPOINTS MAXHITPOINTS
+// setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
+addlogvar CURRENTENERGYPOINTS
+
 ends
 
 //
@@ -19481,16 +19597,16 @@ ends
 
 state calciteminits
   setvar INITTYPE 0
-  ifvare SKILLLEVEL 0 ifrnd 1 ifrnd 32 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 1 ifrnd 1 ifrnd 64 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 2 ifrnd 1 ifrnd 128 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 3 ifrnd 1 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 4 ifrnd 2 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 5 ifrnd 4 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 6 ifrnd 8 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 7 ifrnd 12 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 8 ifrnd 18 setvarvar INITTYPE INITBENEFIT
-  ifvare SKILLLEVEL 9 ifrnd 27 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 0 ifrnd 1 ifrnd 16 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 1 ifrnd 1 ifrnd 32 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 2 ifrnd 1 ifrnd 64 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 3 ifrnd 1 ifrnd 128 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 4 ifrnd 1 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 5 ifrnd 2 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 6 ifrnd 4 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 7 ifrnd 6 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 8 ifrnd 9 setvarvar INITTYPE INITBENEFIT
+  ifvare SKILLLEVEL 9 ifrnd 13 ifrnd 128 setvarvar INITTYPE INITBENEFIT
 ends
 
 state setenemyfirstaid1
@@ -21322,16 +21438,16 @@ state newenemystatcalc-2
  setvarvar ENEMYMAXHP ENEMYHP
 
  // Determines based on the skill level if the monster will have atomic health starting out
- ifvare SKILLLEVEL 0 { ifrnd 4 { ifrnd 16 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 1 { ifrnd 8 { ifrnd 20 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 2 { ifrnd 12 { ifrnd 24 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 3 { ifrnd 16 { ifrnd 32 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 4 { ifrnd 20 { ifrnd 40 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 5 { ifrnd 24 { ifrnd 52 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 6 { ifrnd 32 { ifrnd 64 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 7 { ifrnd 40 { ifrnd 80 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 8 { ifrnd 48 { ifrnd 96 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 9 { ifrnd 64 { ifrnd 128 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 0 { ifrnd 3 { ifrnd 14 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 1 { ifrnd 6 { ifrnd 17 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 2 { ifrnd 9 { ifrnd 20 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 3 { ifrnd 12 { ifrnd 26 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 4 { ifrnd 15 { ifrnd 35 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 5 { ifrnd 18 { ifrnd 46 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 6 { ifrnd 24 { ifrnd 57 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 7 { ifrnd 30 { ifrnd 73 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 8 { ifrnd 36 { ifrnd 88 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 9 { ifrnd 48 { ifrnd 114 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
  divvar ENEMYHP 100
 
  // Stops HP from Exceeding 'Atomic' max [again]
@@ -21343,7 +21459,7 @@ state newenemystatcalc-2
 
  setvarvar SKILLARMORCALC ENEMYMAXAP
  mulvar SKILLARMORCALC 100
- divvar SKILLARMORCALC 1000 // Determines 10% of the base HP value to use for the varience
+ divvar SKILLARMORCALC 1000 // Determines 10% of the base AP value to use for the varience
  randvarvar TEMPVAR SKILLARMORCALC
 
  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
@@ -21381,8 +21497,25 @@ state newenemystatcalc-2
   }
   else
   {
-   randvar ENEMYARMORPERCENT 100
-   addvar ENEMYARMORPERCENT 900
+   ifvarl SKILLLEVEL 8
+   {
+    ifrnd 85 setvar ENEMYARMORPERCENT 667
+    else ifrnd 128 setvar ENEMYARMORPERCENT 900
+    else
+    {
+     randvar ENEMYARMORPERCENT 100
+     addvar ENEMYARMORPERCENT 900
+    }
+   }
+   else
+   {
+    ifrnd 128
+    {
+     randvar ENEMYARMORPERCENT 100
+     addvar ENEMYARMORPERCENT 900
+    }
+    else setvar ENEMYARMORPERCENT 1000
+   }
   }
  }
 
@@ -21467,16 +21600,16 @@ state newenemystatcalc-2
 // *Setting Up Possible First Aid Amount for Monsters*
 // ***************************************************
 
-  ifvare SKILLLEVEL 0 ifrnd 4 { state setenemyfirstaid1 ifrnd 8 state setenemyfirstaid2 }
-  ifvare SKILLLEVEL 1 ifrnd 8 { state setenemyfirstaid1 ifrnd 16 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 2 ifrnd 16 { state setenemyfirstaid1 ifrnd 16 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 3 ifrnd 32 { state setenemyfirstaid1 ifrnd 32 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 4 ifrnd 64 { state setenemyfirstaid1 ifrnd 32 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 5 ifrnd 96 { state setenemyfirstaid1 ifrnd 64 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 6 ifrnd 128 { state setenemyfirstaid1 ifrnd 64 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 7 ifrnd 192 { state setenemyfirstaid1 ifrnd 128 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 8 ifrnd 224 { state setenemyfirstaid1 ifrnd 192 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 9 ifrnd 240 { state setenemyfirstaid1 ifrnd 224 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 0 ifrnd 3 { state setenemyfirstaid1 ifrnd 6 state setenemyfirstaid2 }
+  ifvare SKILLLEVEL 1 ifrnd 7 { state setenemyfirstaid1 ifrnd 10 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 2 ifrnd 13 { state setenemyfirstaid1 ifrnd 12 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 3 ifrnd 27 { state setenemyfirstaid1 ifrnd 20 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 4 ifrnd 33 { state setenemyfirstaid1 ifrnd 24 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 5 ifrnd 49 { state setenemyfirstaid1 ifrnd 48 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 6 ifrnd 66 { state setenemyfirstaid1 ifrnd 52 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 7 ifrnd 99 { state setenemyfirstaid1 ifrnd 112 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 8 ifrnd 118 { state setenemyfirstaid1 ifrnd 172 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 9 ifrnd 134 { state setenemyfirstaid1 ifrnd 200 state setenemyfirstaid2 }  
 
 // ****************************************
 // *Setting Up Possible Boots for Monsters*
@@ -21582,6 +21715,15 @@ state newenemystatcalc-2
    mulvar ENEMYVAMPIRETIME 4
    addvar ACTORMAXFALLRESIST 8
    addvar ACTORFALLRESIST 8
+  }
+
+  getactorvar[ARRAYPOSITION].ENEMYHASSHIKON? TEMPVAR
+  ifvare TEMPVAR 1
+  {
+   mulvar ACTORFALLRESIST 5
+   divvar ACTORFALLRESIST 2
+   mulvar ACTORMAXFALLRESIST 5
+   divvar ACTORMAXFALLRESIST 2
   }
 
   getactorvar[ARRAYPOSITION].ACTORFLAGS TEMPVAR
@@ -28710,8 +28852,8 @@ state calcmaxapbonus_vehicle
               ifspritepal 9 mulvar TEMPVAR 9
              }
 
-	       randvarvar tempb TEMPVAR
-	       ifrnd 128 addvarvar TEMPARMORPOINTS tempb else subvarvar TEMPARMORPOINTS tempb
+             randvarvar tempb TEMPVAR
+             ifrnd 128 addvarvar TEMPARMORPOINTS tempb else subvarvar TEMPARMORPOINTS tempb
              getactorvar[tempvehicleid].ENEMYLEVEL TEMP2
              ifvarg TEMP2 25 ifvarl TEMP2 51 { mulvar TEMPARMORPOINTS 3 divvar TEMPARMORPOINTS 2 } 
              ifvarg TEMP2 50 ifvarl TEMP2 76 { mulvar TEMPARMORPOINTS 4 divvar TEMPARMORPOINTS 2 } 
@@ -28752,25 +28894,25 @@ state calcmaxapbonus_vehicle
              state checkdoublepickupbonus
              setvarvar TEMPARMORPOINTS ACTORPICKUPAMOUNT
 
-			 mulvarvar TEMPARMORPOINTS STARTSTATMULTI
-			 divvarvar TEMPARMORPOINTS STARTSTATDIVISOR
-			 ifvarl TEMPARMORPOINTS 1 setvar TEMPARMORPOINTS 1
+             mulvarvar TEMPARMORPOINTS STARTSTATMULTI
+             divvarvar TEMPARMORPOINTS STARTSTATDIVISOR
+             ifvarl TEMPARMORPOINTS 1 setvar TEMPARMORPOINTS 1
 
-      		addvarvar TEMPVAR5 TEMPARMORPOINTS
+             addvarvar TEMPVAR5 TEMPARMORPOINTS
              ifvarvarg TEMPVAR5 STATLIMIT setvarvar TEMPVAR5 STATLIMIT
              setactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
 
-       	addvarvar APINCREASED TEMPARMORPOINTS
-      		{
-      	        ifvarg APINCREASED 0 
-      	        { 
-      	         qsprintf 205 210 APINCREASED 
-      	         setvar APLUPDISPLAY 0 
-      	        } 
-      		}
+             addvarvar APINCREASED TEMPARMORPOINTS
+             {
+              ifvarg APINCREASED 0 
+              { 
+               qsprintf 205 210 APINCREASED 
+               setvar APLUPDISPLAY 0 
+              } 
+             }
 
              getactorvar[tempvehicleid].ENEMYAP TEMPARMOR
-      		ifvarg TEMPARMOR 0
+             ifvarg TEMPARMOR 0
              {
               addvarvar TEMPARMOR TEMPARMORPOINTS
 
@@ -28783,7 +28925,7 @@ state calcmaxapbonus_vehicle
                }
               }
              }
-      		ifvarvarg TEMPARMOR STATLIMITMAXIMUM setvarvar TEMPARMOR STATLIMITMAXIMUM
+             ifvarvarg TEMPARMOR STATLIMITMAXIMUM setvarvar TEMPARMOR STATLIMITMAXIMUM
              setactorvar[tempvehicleid].ENEMYAP TEMPARMOR
 
 ends
@@ -28835,8 +28977,8 @@ state calcmaxapbonus
               ifspritepal 9 mulvar TEMPVAR 9
              }
  
-	       randvarvar tempb TEMPVAR
-	       ifrnd 128 addvarvar TEMPARMORPOINTS tempb else subvarvar TEMPARMORPOINTS tempb
+             randvarvar tempb TEMPVAR
+             ifrnd 128 addvarvar TEMPARMORPOINTS tempb else subvarvar TEMPARMORPOINTS tempb
              ifvarg PLAYERTEMPLEVEL 25 ifvarl PLAYERTEMPLEVEL 51 { mulvar TEMPARMORPOINTS 3 divvar TEMPARMORPOINTS 2 } 	
              ifvarg PLAYERTEMPLEVEL 50 ifvarl PLAYERTEMPLEVEL 76 { mulvar TEMPARMORPOINTS 4 divvar TEMPARMORPOINTS 2 } 	
              ifvarg PLAYERTEMPLEVEL 75 ifvarl PLAYERTEMPLEVEL 101 { mulvar TEMPARMORPOINTS 5 divvar TEMPARMORPOINTS 2 } 	
@@ -28876,23 +29018,23 @@ state calcmaxapbonus
              state checkdoublepickupbonus
              setvarvar TEMPARMORPOINTS ACTORPICKUPAMOUNT
 
-			 mulvarvar TEMPARMORPOINTS STARTSTATMULTI
-			 divvarvar TEMPARMORPOINTS STARTSTATDIVISOR
-			 ifvarl TEMPARMORPOINTS 1 setvar TEMPARMORPOINTS 1
+             mulvarvar TEMPARMORPOINTS STARTSTATMULTI
+             divvarvar TEMPARMORPOINTS STARTSTATDIVISOR
+             ifvarl TEMPARMORPOINTS 1 setvar TEMPARMORPOINTS 1
 
-      		addvarvar MAXARMORPOINTS TEMPARMORPOINTS
+             addvarvar MAXARMORPOINTS TEMPARMORPOINTS
              ifvarvarg MAXARMORPOINTS STATLIMIT setvarvar MAXARMORPOINTS STATLIMIT
 
-       	addvarvar APINCREASED TEMPARMORPOINTS
-      		{
-      	        ifvarg APINCREASED 0 
-      	        { 
-      	         qsprintf 205 210 APINCREASED 
-      	         setvar APLUPDISPLAY 0 
-      	        } 
-      	       }
+             addvarvar APINCREASED TEMPARMORPOINTS
+             {
+              ifvarg APINCREASED 0 
+              { 
+               qsprintf 205 210 APINCREASED 
+               setvar APLUPDISPLAY 0 
+              } 
+             }
 
-      		ifvarg TEMPARMOR 0
+             ifvarg TEMPARMOR 0
              {
               addvarvar TEMPARMOR TEMPARMORPOINTS
 
@@ -28931,7 +29073,7 @@ state maxhpapbonusgive
               ifvarvarl MAXHITPOINTS STATLIMIT state calcmaxhpbonus else setvar TEMPHITPOINTS 0
               ifvarvarl MAXARMORPOINTS STATLIMIT state calcmaxapbonus else setvar TEMPARMORPOINTS 0
  
- 	        qsprintf 162 263 TEMPHITPOINTS TEMPARMORPOINTS 
+              qsprintf 162 263 TEMPHITPOINTS TEMPARMORPOINTS 
               ifvarand ACTORFLAGS 2 nullop
               else
               {
@@ -29037,10 +29179,10 @@ state calcatkbonus_vehicle
              setvar statincreasetempd 0
              setvar statincreasetempe 0
 
-	       setvarvar statincreasetemp TEMPVAR5
-	       ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
-	       setvarvar statincreasetempc TEMPVAR5
-	       ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
+             setvarvar statincreasetemp TEMPVAR5
+             ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
+             setvarvar statincreasetempc TEMPVAR5
+             ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
 
              setvar CHARSTATINCREASE 0
              getactorvar[PLAYERID].VEHICLETYPE tempvehicletype
@@ -29082,9 +29224,9 @@ state calcatkbonus_vehicle
               ifspritepal 9 mulvar statincreasetempc 9
              }
 
-	       randvarvar statincreasetempb statincreasetempc
+             randvarvar statincreasetempb statincreasetempc
 
-	       ifrnd 128 addvarvar statincreasetemp statincreasetempb else subvarvar statincreasetemp statincreasetempb
+             ifrnd 128 addvarvar statincreasetemp statincreasetempb else subvarvar statincreasetemp statincreasetempb
              getactorvar[tempvehicleid].ENEMYLEVEL TEMP2
              ifvarg TEMP2 25 ifvarl TEMP2 51 { mulvar statincreasetemp 3 divvar statincreasetemp 2 } 
              ifvarg TEMP2 50 ifvarl TEMP2 76 { mulvar statincreasetemp 4 divvar statincreasetemp 2 } 
@@ -29125,19 +29267,19 @@ state calcatkbonus_vehicle
              state checkdoublepickupbonus
              setvarvar statincreasetemp ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetemp STARTSTATMULTI
-			 divvarvar statincreasetemp STARTSTATDIVISOR
-			 ifvarl statincreasetemp 1 setvar statincreasetemp 1
+             mulvarvar statincreasetemp STARTSTATMULTI
+             divvarvar statincreasetemp STARTSTATDIVISOR
+             ifvarl statincreasetemp 1 setvar statincreasetemp 1
 
-      		addvarvar TEMPVAR5 statincreasetemp
+             addvarvar TEMPVAR5 statincreasetemp
              setactorvar[tempvehicleid].ACTORATTACK TEMPVAR5
-      	 	addvarvar ATKINCREASED statincreasetemp
+             addvarvar ATKINCREASED statincreasetemp
 
-       	ifvarg ATKINCREASED 0 
-       	{ 
-       	 qsprintf 206 211 ATKINCREASED 
-       	 setvar ATKLUPDISPLAY 0 
-        	} 
+             ifvarg ATKINCREASED 0 
+             { 
+              qsprintf 206 211 ATKINCREASED 
+              setvar ATKLUPDISPLAY 0 
+             } 
 ends
 
 state calcatkbonus
@@ -29147,10 +29289,10 @@ state calcatkbonus
              setvar statincreasetempd 0
              setvar statincreasetempe 0
 
-	       setvarvar statincreasetemp PLAYERATTACK
-	       ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
-	       setvarvar statincreasetempc PLAYERATTACK
-	       ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
+             setvarvar statincreasetemp PLAYERATTACK
+             ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
+             setvarvar statincreasetempc PLAYERATTACK
+             ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
 
              setvar CHARSTATINCREASE 0
 
@@ -29190,8 +29332,8 @@ state calcatkbonus
               ifspritepal 9 mulvar statincreasetempc 9
              }
 
-	       randvarvar statincreasetempb statincreasetempc
-	       ifrnd 128 addvarvar statincreasetemp statincreasetempb else subvarvar statincreasetemp statincreasetempb
+             randvarvar statincreasetempb statincreasetempc
+             ifrnd 128 addvarvar statincreasetemp statincreasetempb else subvarvar statincreasetemp statincreasetempb
              ifvarg PLAYERTEMPLEVEL 25 ifvarl PLAYERTEMPLEVEL 51 { mulvar statincreasetemp 3 divvar statincreasetemp 2 } 
              ifvarg PLAYERTEMPLEVEL 50 ifvarl PLAYERTEMPLEVEL 76 { mulvar statincreasetemp 4 divvar statincreasetemp 2 } 
              ifvarg PLAYERTEMPLEVEL 75 ifvarl PLAYERTEMPLEVEL 101 { mulvar statincreasetemp 5 divvar statincreasetemp 2 } 
@@ -29232,18 +29374,18 @@ state calcatkbonus
              state checkdoublepickupbonus
              setvarvar statincreasetemp ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetemp STARTSTATMULTI
-			 divvarvar statincreasetemp STARTSTATDIVISOR
-			 ifvarl statincreasetemp 1 setvar statincreasetemp 1
+             mulvarvar statincreasetemp STARTSTATMULTI
+             divvarvar statincreasetemp STARTSTATDIVISOR
+             ifvarl statincreasetemp 1 setvar statincreasetemp 1
 
-      		addvarvar PLAYERATTACK statincreasetemp
-      	 	addvarvar ATKINCREASED statincreasetemp
+             addvarvar PLAYERATTACK statincreasetemp
+             addvarvar ATKINCREASED statincreasetemp
 
-       	ifvarg ATKINCREASED 0 
-       	{ 
-       	 qsprintf 206 211 ATKINCREASED 
-       	 setvar ATKLUPDISPLAY 0 
-        	} 
+             ifvarg ATKINCREASED 0 
+             { 
+              qsprintf 206 211 ATKINCREASED 
+              setvar ATKLUPDISPLAY 0 
+             } 
 ends
 
 state calcdefbonus_vehicle
@@ -29253,10 +29395,10 @@ state calcdefbonus_vehicle
              setvar statincreasetempd 0
              setvar statincreasetempe 0
 
-	       setvarvar statincreasetemp TEMPVAR5
-	       ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
-	       setvarvar statincreasetempc TEMPVAR5
-	       ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
+             setvarvar statincreasetemp TEMPVAR5
+             ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
+             setvarvar statincreasetempc TEMPVAR5
+             ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
 
              setvar CHARSTATINCREASE 0
              getactorvar[PLAYERID].VEHICLETYPE tempvehicletype
@@ -29298,9 +29440,9 @@ state calcdefbonus_vehicle
               ifspritepal 9 mulvar statincreasetempc 9
              }
 
-	       randvarvar statincreasetempb statincreasetempc
+             randvarvar statincreasetempb statincreasetempc
 
-	       ifrnd 128 addvarvar statincreasetemp statincreasetempb else subvarvar statincreasetemp statincreasetempb
+             ifrnd 128 addvarvar statincreasetemp statincreasetempb else subvarvar statincreasetemp statincreasetempb
              getactorvar[tempvehicleid].ENEMYLEVEL TEMP2
              ifvarg TEMP2 25 ifvarl TEMP2 51 { mulvar statincreasetemp 3 divvar statincreasetemp 2 } 
              ifvarg TEMP2 50 ifvarl TEMP2 76 { mulvar statincreasetemp 4 divvar statincreasetemp 2 } 
@@ -29341,19 +29483,19 @@ state calcdefbonus_vehicle
              state checkdoublepickupbonus
              setvarvar statincreasetemp ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetemp STARTSTATMULTI
-			 divvarvar statincreasetemp STARTSTATDIVISOR
-			 ifvarl statincreasetemp 1 setvar statincreasetemp 1
+             mulvarvar statincreasetemp STARTSTATMULTI
+             divvarvar statincreasetemp STARTSTATDIVISOR
+             ifvarl statincreasetemp 1 setvar statincreasetemp 1
 
-      		addvarvar TEMPVAR5 statincreasetemp
+             addvarvar TEMPVAR5 statincreasetemp
              setactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR5
-      	 	addvarvar DEFINCREASED statincreasetemp
+             addvarvar DEFINCREASED statincreasetemp
 
-       	ifvarg DEFINCREASED 0 
-       	{ 
-       	 qsprintf 207 212 DEFINCREASED 
-       	 setvar DEFLUPDISPLAY 0 
-        	} 
+             ifvarg DEFINCREASED 0 
+             { 
+              qsprintf 207 212 DEFINCREASED 
+              setvar DEFLUPDISPLAY 0 
+             } 
 ends
 
 state calcdefbonus
@@ -29363,10 +29505,10 @@ state calcdefbonus
              setvar statincreasetempd 0
              setvar statincreasetempe 0
 
-	       setvarvar statincreasetemp PLAYERDEFENSE
-	       ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
-	       setvarvar statincreasetempc PLAYERDEFENSE
-	       ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
+             setvarvar statincreasetemp PLAYERDEFENSE
+             ifvare PUBLICBETA? 0 divvar statincreasetemp 500 else divvar statincreasetemp 200
+             setvarvar statincreasetempc PLAYERDEFENSE
+             ifvare PUBLICBETA? 0 divvar statincreasetempc 1000 else divvar statincreasetempc 400
 
              setvar CHARSTATINCREASE 0
 
@@ -29406,13 +29548,13 @@ state calcdefbonus
               ifspritepal 9 mulvar statincreasetempc 9
              }
 
-	       randvarvar statincreasetempb statincreasetempc
+             randvarvar statincreasetempb statincreasetempc
 
-	       ifrnd 128 { addvarvar statincreasetemp statincreasetempb } else { subvarvar statincreasetemp statincreasetempb }
+             ifrnd 128 { addvarvar statincreasetemp statincreasetempb } else { subvarvar statincreasetemp statincreasetempb }
              ifvarg PLAYERTEMPLEVEL 25 ifvarl PLAYERTEMPLEVEL 51 { mulvar statincreasetemp 3 divvar statincreasetemp 2 } 
              ifvarg PLAYERTEMPLEVEL 50 ifvarl PLAYERTEMPLEVEL 76 { mulvar statincreasetemp 4 divvar statincreasetemp 2 } 
              ifvarg PLAYERTEMPLEVEL 75 ifvarl PLAYERTEMPLEVEL 101 { mulvar statincreasetemp 5 divvar statincreasetemp 2 } 
-	
+
              getactor[THISACTOR].picnum statincreasetempd
              ifvare statincreasetempd DEFUP
              {
@@ -29448,40 +29590,40 @@ state calcdefbonus
              state checkdoublepickupbonus
              setvarvar statincreasetemp ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetemp STARTSTATMULTI
-			 divvarvar statincreasetemp STARTSTATDIVISOR
-			 ifvarl statincreasetemp 1 setvar statincreasetemp 1
+             mulvarvar statincreasetemp STARTSTATMULTI
+             divvarvar statincreasetemp STARTSTATDIVISOR
+             ifvarl statincreasetemp 1 setvar statincreasetemp 1
 
-      		addvarvar PLAYERDEFENSE statincreasetemp
-      	 	addvarvar DEFINCREASED statincreasetemp
+             addvarvar PLAYERDEFENSE statincreasetemp
+             addvarvar DEFINCREASED statincreasetemp
 
-       	ifvarg DEFINCREASED 0 
-       	{ 
-       	 qsprintf 207 212 DEFINCREASED 
-       	 setvar DEFLUPDISPLAY 0 
-        	} 
+             ifvarg DEFINCREASED 0 
+             { 
+              qsprintf 207 212 DEFINCREASED 
+              setvar DEFLUPDISPLAY 0 
+             } 
 ends
 
 state atkdefbonusgive_vehicle
              getactorvar[tempvehicleid].ACTORATTACK TEMPVAR5
-	       ifvarvarl TEMPVAR5 STATLIMIT state calcatkbonus_vehicle else setvar ATKINCREASED 0 // If Player's Attack is less than STATLIMIT	      
+             ifvarvarl TEMPVAR5 STATLIMIT state calcatkbonus_vehicle else setvar ATKINCREASED 0 // If Player's Attack is less than STATLIMIT	      
              getactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR5
-	       ifvarvarl TEMPVAR5 STATLIMIT state calcdefbonus_vehicle else setvar DEFINCREASED 0 // If Player's Defense is less than STATLIMIT
+             ifvarvarl TEMPVAR5 STATLIMIT state calcdefbonus_vehicle else setvar DEFINCREASED 0 // If Player's Defense is less than STATLIMIT
 
              redefinequote 836 ^15YOUR VEHICLE GRABBED AN ATTACK/DEFENSE BONUS! (^10+%d^15/^14+%d^15)
              qsprintf 836 836 ATKINCREASED DEFINCREASED
-	       setvarvar fta fta_normal setvar ftq 836
+             setvarvar fta fta_normal setvar ftq 836
 ends
 
 state atkdefbonusgive
-	       ifvarvarl PLAYERATTACK STATLIMIT state calcatkbonus else setvar ATKINCREASED 0	// If Player's Attack is less than STATLIMIT	      
-	       ifvarvarl PLAYERDEFENSE STATLIMIT state calcdefbonus else setvar DEFINCREASED 0 // If Player's Defense is less than STATLIMIT
+             ifvarvarl PLAYERATTACK STATLIMIT state calcatkbonus else setvar ATKINCREASED 0	// If Player's Attack is less than STATLIMIT	      
+             ifvarvarl PLAYERDEFENSE STATLIMIT state calcdefbonus else setvar DEFINCREASED 0 // If Player's Defense is less than STATLIMIT
              qsprintf 328 331 ATKINCREASED DEFINCREASED
-	       setvarvar fta fta_normal setvar ftq 328
+             setvarvar fta fta_normal setvar ftq 328
 ends
 
 state randspdbonus1
-	      randvar statincreasetemp 5
+            randvar statincreasetemp 5
             getactor[THISACTOR].picnum statincreasetempd
             ifvare statincreasetempd SPDUP
             {
@@ -29503,11 +29645,11 @@ state calcspdbonus
              setvar statincreasetempe 0
              addvarvar statincreasetempe statincreasetempb
 
-	       state randspdbonus1
-	       state randspdbonus1
-	       state randspdbonus1
-	       state randspdbonus1
-	       state randspdbonus1
+             state randspdbonus1
+             state randspdbonus1
+             state randspdbonus1
+             state randspdbonus1
+             state randspdbonus1
 
              setvarvar statincreasetemp PLAYERLEVEL
              divvar statincreasetemp 3
@@ -29621,16 +29763,16 @@ state calcspdbonus
              state checkdoublepickupbonus
              setvarvar statincreasetempe ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetempe STARTSTATMULTI
-			 divvarvar statincreasetempe STARTSTATDIVISOR
-			 ifvarl statincreasetempe 1 setvar statincreasetempe 1
+             mulvarvar statincreasetempe STARTSTATMULTI
+             divvarvar statincreasetempe STARTSTATDIVISOR
+             ifvarl statincreasetempe 1 setvar statincreasetempe 1
 
              addvarvar SPDINCREASED statincreasetempe
-       	ifvarg SPDINCREASED 0
-       	{ 
-       	 qsprintf 208 213 SPDINCREASED 
-       	 setvar SPDLUPDISPLAY 0 
-        	} 
+             ifvarg SPDINCREASED 0
+             { 
+             qsprintf 208 213 SPDINCREASED 
+             setvar SPDLUPDISPLAY 0 
+             } 
 
              addvarvar statincreasetempc statincreasetempe
              ifvarg statincreasetempc 61000 setvar statincreasetempc 61000
@@ -29694,9 +29836,9 @@ state airtimebonus
             state checkdoublepickupbonus
             setvarvar statincreasetempb ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetempb STARTSTATMULTI
-			 divvarvar statincreasetempb STARTSTATDIVISOR
-			 ifvarl statincreasetempb 1 setvar statincreasetempb 1
+            mulvarvar statincreasetempb STARTSTATMULTI
+            divvarvar statincreasetempb STARTSTATDIVISOR
+            ifvarl statincreasetempb 1 setvar statincreasetempb 1
 
             addvarvar MAXAIRTIME statincreasetempb
             addvarvar AIRTIME statincreasetempb
@@ -29761,9 +29903,9 @@ state mantlebonus
             state checkdoublepickupbonus
             setvarvar statincreasetempb ACTORPICKUPAMOUNT
 
-			 mulvarvar statincreasetempb STARTSTATMULTI
-			 divvarvar statincreasetempb STARTSTATDIVISOR
-			 ifvarl statincreasetempb 1 setvar statincreasetempb 1
+            mulvarvar statincreasetempb STARTSTATMULTI
+            divvarvar statincreasetempb STARTSTATDIVISOR
+            ifvarl statincreasetempb 1 setvar statincreasetempb 1
 
             addvarvar MANTLINGTIMERMAX statincreasetempb
             addvarvar MANTLINGTIMER statincreasetempb
@@ -30599,208 +30741,154 @@ ends
 
 
 state showequipmentnames
+     setvar digx 276
+     ifvarg TEMPVAR 0 addvar digx 3
+     // addvarvar digx digx_test
      ifvare TEMPVAR 0 // No Item
      {
-      setvar digx 260
       redefinequote 332 [NONE]
-      state gtz
      }
      else
      ifvare TEMPVAR 1 // Sun Ring
      {
-      setvar digx 263
       redefinequote 332 SUN RING
-      state gtz
      }
      else
      ifvare TEMPVAR 2 // Aqua Ring
      {
-      setvar digx 263
       redefinequote 332 AQUA RING
-      state gtz
      }
      else
      ifvare TEMPVAR 3 // Plasma Ring
      {
-      setvar digx 263
       redefinequote 332 PLASMA RING
-      state gtz
      }
      else
      ifvare TEMPVAR 4 // Spirit Ring
      {
-      setvar digx 263
       redefinequote 332 SPIRIT RING
-      state gtz
      }
      else
      ifvare TEMPVAR 5 // Charm Ankh
      {
-      setvar digx 263
       redefinequote 332 CHARM ANKH
-      state gtz
      }
      else
      ifvare TEMPVAR 6 // Mirror Shield
      {
-      setvar digx 263
       redefinequote 332 MIRROR SHIELD
-      state gtz
      }
      else
      ifvare TEMPVAR 7 // EXP Badge
      {
-      setvar digx 263
       redefinequote 332 EXPERIENCE BADGE
-      state gtz
      }
      else
      ifvare TEMPVAR 8 // Rank Badge
      {
-      setvar digx 263
       redefinequote 332 RANK BADGE
-      state gtz
      }
      else
      ifvare TEMPVAR 9 // Money Badge
      {
-      setvar digx 263
       redefinequote 332 MONEY BADGE
-      state gtz
      }
      else
      ifvare TEMPVAR 10 // Riot Shield
      {
-      setvar digx 263
       redefinequote 332 RIOT SHIELD
-      state gtz
      }
      else
      ifvare TEMPVAR 11 // Nyx Gloves
      {
-      setvar digx 263
       redefinequote 332 NYX GLOVES
-      state gtz
      }
      else
      ifvare TEMPVAR 12 // Rabbit's Foot
      {
-      setvar digx 263
       redefinequote 332 RABBIT'S FOOT
-      state gtz
      }
      else
      ifvare TEMPVAR 13 // Jump Boots
      {
-      setvar digx 263
       redefinequote 332 JUMP BOOTS
-      state gtz
      }
      else
      ifvare TEMPVAR 14 // ShockAb Boots
      {
-      setvar digx 263
       redefinequote 332 SHOCKAB BOOTS
-      state gtz
      }
      else
      ifvare TEMPVAR 15 // Happy Shoes
      {
-      setvar digx 263
       redefinequote 332 HAPPY SHOES
-      state gtz
      }
      else
      ifvare TEMPVAR 16 // Style Shoes
      {
-      setvar digx 263
       redefinequote 332 STYLE SHOES
-      state gtz
      }
      else
      ifvare TEMPVAR 17 // Charm Shoes
      {
-      setvar digx 263
       redefinequote 332 CHARM SHOES
-      state gtz
      }
      else
      ifvare TEMPVAR 18 // Power Wrist
      {
-      setvar digx 263
       redefinequote 332 POWER WRIST
-      state gtz
      }
      else
      ifvare TEMPVAR 19 // Hockey Mask
      {
-      setvar digx 263
       redefinequote 332 HOCKEY MASK
-      state gtz
      }
      else
      ifvare TEMPVAR 20 // Gemstone Crown
      {
-      setvar digx 263
       redefinequote 332 GEMSTONE CROWN
-      state gtz
      }
      else
      ifvare TEMPVAR 21 // Iron Rune
      {
-      setvar digx 263
       redefinequote 332 IRON RUNE
-      state gtz
      }
      else
      ifvare TEMPVAR 22 // Twilight Cape
      {
-      setvar digx 263
       redefinequote 332 TWILIGHT CAPE
-      state gtz
      }
      else
      ifvare TEMPVAR 23 // Snake Armband
      {
-      setvar digx 263
       redefinequote 332 SNAKE ARMBAND
-      state gtz
      }
      else
      ifvare TEMPVAR 24 // Medic Bag
      {
-      setvar digx 263
       redefinequote 332 MEDIC BAG
-      state gtz
      }
      else
      ifvare TEMPVAR 25 // Serpent Helmet
      {
-      setvar digx 263
       redefinequote 332 SERPENT HELMET
-      state gtz
      }
      else
      ifvare TEMPVAR 26 // Energy Incurment
      {
-      setvar digx 263
       redefinequote 332 ENERGY INCURMENT
-      state gtz
      }
      else
      ifvare TEMPVAR 27 // Yin-Yang Orb
      {
-      setvar digx 263
       redefinequote 332 YIN-YANG ORB
-      state gtz
      }
      else
      ifvare TEMPVAR 28 // Jewel of Four Souls
      {
-      setvar digx 263
       redefinequote 332 JEWEL OF FOUR SOULS
-      state gtz
      }
+     state gtz
 ends
 
 state showequipmenticons
@@ -44791,6 +44879,44 @@ state energycostcheatcheck1
               ifvarand CHEATBITFIELD? 128 mulvar SKILL-ENERGYCOST 0 else mulvar SKILL-ENERGYCOST 0
 ends
 
+state itemusecheckpartysize
+    ifvare CHARACTERSELECTED? 1 { setvar itemmenupage 0 setvar itemmenuselection 0 }
+    ifvare CHARACTERSELECTED? 2 { setvar itemmenupage 0 setvar itemmenuselection 1 }
+    ifvare CHARACTERSELECTED? 3 { setvar itemmenupage 0 setvar itemmenuselection 2 }
+    ifvare CHARACTERSELECTED? 4 { setvar itemmenupage 0 setvar itemmenuselection 3 }
+    ifvare CHARACTERSELECTED? 5 { setvar itemmenupage 0 setvar itemmenuselection 4 }
+    ifvare CHARACTERSELECTED? 6 { setvar itemmenupage 0 setvar itemmenuselection 5 }
+    ifvare CHARACTERSELECTED? 7 { setvar itemmenupage 0 setvar itemmenuselection 6 }
+    ifvare CHARACTERSELECTED? 8 { setvar itemmenupage 0 setvar itemmenuselection 7 }
+    ifvare CHARACTERSELECTED? 9 { setvar itemmenupage 1 setvar itemmenuselection 0 }
+    ifvare CHARACTERSELECTED? 10 { setvar itemmenupage 1 setvar itemmenuselection 1 }
+    ifvare CHARACTERSELECTED? 11 { setvar itemmenupage 1 setvar itemmenuselection 2 }
+    ifvare CHARACTERSELECTED? 12 { setvar itemmenupage 1 setvar itemmenuselection 3 }
+    ifvare CHARACTERSELECTED? 13 { setvar itemmenupage 1 setvar itemmenuselection 4 }
+    ifvare CHARACTERSELECTED? 14 { setvar itemmenupage 1 setvar itemmenuselection 5 }
+    ifvare CHARACTERSELECTED? 15 { setvar itemmenupage 1 setvar itemmenuselection 6 }
+    ifvare CHARACTERSELECTED? 16 { setvar itemmenupage 1 setvar itemmenuselection 7 }
+ends
+
+state skillusecheckpartysize
+    ifvare CHARACTERSELECTED? 1 { setvar skillmenupage 0 setvar skillmenuselection 0 }
+    ifvare CHARACTERSELECTED? 2 { setvar skillmenupage 0 setvar skillmenuselection 1 }
+    ifvare CHARACTERSELECTED? 3 { setvar skillmenupage 0 setvar skillmenuselection 2 }
+    ifvare CHARACTERSELECTED? 4 { setvar skillmenupage 0 setvar skillmenuselection 3 }
+    ifvare CHARACTERSELECTED? 5 { setvar skillmenupage 0 setvar skillmenuselection 4 }
+    ifvare CHARACTERSELECTED? 6 { setvar skillmenupage 0 setvar skillmenuselection 5 }
+    ifvare CHARACTERSELECTED? 7 { setvar skillmenupage 0 setvar skillmenuselection 6 }
+    ifvare CHARACTERSELECTED? 8 { setvar skillmenupage 0 setvar skillmenuselection 7 }
+    ifvare CHARACTERSELECTED? 9 { setvar skillmenupage 1 setvar skillmenuselection 0 }
+    ifvare CHARACTERSELECTED? 10 { setvar skillmenupage 1 setvar skillmenuselection 1 }
+    ifvare CHARACTERSELECTED? 11 { setvar skillmenupage 1 setvar skillmenuselection 2 }
+    ifvare CHARACTERSELECTED? 12 { setvar skillmenupage 1 setvar skillmenuselection 3 }
+    ifvare CHARACTERSELECTED? 13 { setvar skillmenupage 1 setvar skillmenuselection 4 }
+    ifvare CHARACTERSELECTED? 14 { setvar skillmenupage 1 setvar skillmenuselection 5 }
+    ifvare CHARACTERSELECTED? 15 { setvar skillmenupage 1 setvar skillmenuselection 6 }
+    ifvare CHARACTERSELECTED? 16 { setvar skillmenupage 1 setvar skillmenuselection 7 }
+ends
+
 state menu-mainmenu-state
 //
          ifvare weaponcount 0 ifvare mainmenusubmenu 0
@@ -45305,53 +45431,53 @@ state menu-mainmenu-state
           ifvare mainmenupage 0
           {
            // Row #1
-           ifvare mainmenuselection 0 { state checkreschalices ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 0 else state menuerrorsound }
-           ifvare mainmenuselection 1 { state checkeyedrops ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 1 else state menuerrorsound }
-           ifvare mainmenuselection 2 { state checkantidotes ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 2 else state menuerrorsound }
-           ifvare mainmenuselection 3 { state checkfoghorns ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 3 else state menuerrorsound }
-           ifvare mainmenuselection 4 { state checkafasdrops ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 4 else state menuerrorsound }
-           ifvare mainmenuselection 5 { state checkportablemedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 13 else state menuerrorsound }
+           ifvare mainmenuselection 0 { state checkreschalices ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 0 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 1 { state checkeyedrops ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 1 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 2 { state checkantidotes ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 2 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 3 { state checkfoghorns ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 3 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 4 { state checkafasdrops ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 4 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 5 { state checkportablemedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 13 state itemusecheckpartysize } else state menuerrorsound }
            // Row #2
-           ifvare mainmenuselection 6 { state checkheatsensors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 15 else state menuerrorsound }
-           ifvare mainmenuselection 7 { state checkbootpairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 16 else state menuerrorsound }
-           ifvare mainmenuselection 8 { state checkholoforms ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 17 else state menuerrorsound }
-           ifvare mainmenuselection 9 { state checkjetpacks ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 18 else state menuerrorsound }
-           ifvare mainmenuselection 10 { state checkvitaminxs ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 19 else state menuerrorsound }
-           ifvare mainmenuselection 11 { state checkscubatanks ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 14 else state menuerrorsound }
+           ifvare mainmenuselection 6 { state checkheatsensors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 15 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 7 { state checkbootpairs ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 16 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 8 { state checkholoforms ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 17 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 9 { state checkjetpacks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 18 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 10 { state checkvitaminxs ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 19 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 11 { state checkscubatanks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 14 state itemusecheckpartysize } else state menuerrorsound }
            // Row #3
-           ifvare mainmenuselection 12 { state checkusedbodyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 20 else state menuerrorsound }
-           ifvare mainmenuselection 13 { state checkusedsuperarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 21 else state menuerrorsound }
-           ifvare mainmenuselection 14 { state checkbodyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 11 else state menuerrorsound }
-           ifvare mainmenuselection 15 { state checksuperarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 12 else state menuerrorsound }
-           ifvare mainmenuselection 16 { state checkatomichealths ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 22 else state menuerrorsound }
-           ifvare mainmenuselection 17 { state checksuperatoms ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 23 else state menuerrorsound }
+           ifvare mainmenuselection 12 { state checkusedbodyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 20 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 13 { state checkusedsuperarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 21 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 14 { state checkbodyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 11 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 15 { state checksuperarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 12 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 16 { state checkatomichealths ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 22 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 17 { state checksuperatoms ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 23 state itemusecheckpartysize } else state menuerrorsound }
            // Row #4
-           ifvare mainmenuselection 18 { state checksmallmedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 5 else state menuerrorsound }
-           ifvare mainmenuselection 19 { state checkmediummedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 6 else state menuerrorsound }
-           ifvare mainmenuselection 20 { state checklargemedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 7 else state menuerrorsound }
-           ifvare mainmenuselection 21 { state checkextralargemedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 8 else state menuerrorsound }
-           ifvare mainmenuselection 22 { state checkmedpacks ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 9 else state menuerrorsound }
-           ifvare mainmenuselection 23 { state checksurgerykits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 10 else state menuerrorsound }
+           ifvare mainmenuselection 18 { state checksmallmedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 5 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 19 { state checkmediummedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 6 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 20 { state checklargemedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 7 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 21 { state checkextralargemedikits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 8 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 22 { state checkmedpacks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 9 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 23 { state checksurgerykits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 10 state itemusecheckpartysize } else state menuerrorsound }
           }
           ifvare mainmenupage 1
           {
            // Row #1
-           ifvare mainmenuselection 0 { state checkusedgreenarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 24 else state menuerrorsound }
-           ifvare mainmenuselection 1 { state checkusedbluearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 25 else state menuerrorsound }
-           ifvare mainmenuselection 2 { state checkusedyellowarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 26 else state menuerrorsound }
-           ifvare mainmenuselection 3 { state checkusedredarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 27 else state menuerrorsound }
-           ifvare mainmenuselection 4 { state checkusedgreyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 28 else state menuerrorsound }
-           ifvare mainmenuselection 5 { state checkusedwhitearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 29 else state menuerrorsound }
+           ifvare mainmenuselection 0 { state checkusedgreenarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 24 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 1 { state checkusedbluearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 25 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 2 { state checkusedyellowarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 26 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 3 { state checkusedredarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 27 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 4 { state checkusedgreyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 28 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 5 { state checkusedwhitearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 29 state itemusecheckpartysize } else state menuerrorsound }
            // Row #2
-           ifvare mainmenuselection 6 { state checkgreenarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 30 else state menuerrorsound }
-           ifvare mainmenuselection 7 { state checkbluearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 31 else state menuerrorsound }
-           ifvare mainmenuselection 8 { state checkyellowarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 32 else state menuerrorsound }
-           ifvare mainmenuselection 9 { state checkredarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 33 else state menuerrorsound }
-           ifvare mainmenuselection 10 { state checkgreyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 34 else state menuerrorsound }
-           ifvare mainmenuselection 11 { state checkwhitearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 35 else state menuerrorsound }
+           ifvare mainmenuselection 6 { state checkgreenarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 30 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 7 { state checkbluearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 31 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 8 { state checkyellowarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 32 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 9 { state checkredarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 33 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 10 { state checkgreyarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 34 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 11 { state checkwhitearmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 35 state itemusecheckpartysize } else state menuerrorsound }
            // Row #3
-           ifvare mainmenuselection 12 { state checkusedrandomarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 36 else state menuerrorsound }
-           ifvare mainmenuselection 13 { state checkrandomarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 37 else state menuerrorsound }
+           ifvare mainmenuselection 12 { state checkusedrandomarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 36 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 13 { state checkrandomarmors ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 37 state itemusecheckpartysize } else state menuerrorsound }
            ifvare mainmenuselection 14 state cannotuseitem
            ifvare mainmenuselection 15 state cannotuseitem
            ifvare mainmenuselection 16 state cannotuseitem
@@ -45362,15 +45488,15 @@ state menu-mainmenu-state
            ifvare mainmenuselection 20 state cannotuseitem
            ifvare mainmenuselection 21 state cannotuseitem
            ifvare mainmenuselection 22 state dropatelebeacon // Will Try to Drop a Telebeacon
-           ifvare mainmenuselection 23 { state checkfauxlevelups ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 38 else state menuerrorsound }
+           ifvare mainmenuselection 23 { state checkfauxlevelups ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 38 state itemusecheckpartysize } else state menuerrorsound }
           }
           ifvare mainmenupage 2
           {
            // Row #1
-           ifvare mainmenuselection 0 { state checksmallenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 39 else state menuerrorsound }
-           ifvare mainmenuselection 1 { state checklargeenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 40 else state menuerrorsound }
-           ifvare mainmenuselection 2 { state checkhyperenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 41 else state menuerrorsound }
-           ifvare mainmenuselection 3 { state checkwintersuits ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar itemidinuse 42 else state menuerrorsound }
+           ifvare mainmenuselection 0 { state checksmallenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 39 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 1 { state checklargeenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 40 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 2 { state checkhyperenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 41 state itemusecheckpartysize } else state menuerrorsound }
+           ifvare mainmenuselection 3 { state checkwintersuits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 42 state itemusecheckpartysize } else state menuerrorsound }
            ifvare mainmenuselection 4 { ifvare GOTPORTABLEATM? 1 { state exit_mainmenu setvar atm_id -4 setvar atm_type 4 setvar atm_mode 0 randvar atm_background 43 randvar atm_wscreen 3 addvar atm_wscreen 1 randvar atm_extquote 21 } else state menuerrorsound }
            ifvare mainmenuselection 5 { ifvare GOTMONEYRADAR? 1 { ifvare ISRADARON? 0 { setvar ISRADARON? 1 } else ifvare ISRADARON? 1 { setvar ISRADARON? 0 } ifrnd 128 { sound KEYPAD_BEEP1 } else { sound KEYPAD_BEEP2 } } else state menuerrorsound }
            // Row #2
@@ -45490,29 +45616,29 @@ state menu-mainmenu-state
           }
          }
 
-	   ifvare mainmenusubmenu 2 // System Menu
- 	   {
+       ifvare mainmenusubmenu 2 // System Menu
+       {
         ifvare mainmenupage 0
-		{
- 	     ifvare mainmenuselection 0 { addvar miscdisplaytoggle 1 ifvarg miscdisplaytoggle 15 { setvar miscdisplaytoggle 0 } savegamevar miscdisplaytoggle }
-  	     ifvare mainmenuselection 1 { ifvare statusdisplaytoggle 0 setvar statusdisplaytoggle 1 else setvar statusdisplaytoggle 0 savegamevar statusdisplaytoggle }
-  	     ifvare mainmenuselection 2 { ifvare debugtoggle 0 setvar debugtoggle 1 else setvar debugtoggle 0 savegamevar debugtoggle }
-  	     ifvare mainmenuselection 3 { ifvare lifebartogglemode 0 setvar lifebartogglemode 1 else setvar lifebartogglemode 0 savegamevar lifebartogglemode }
-  	     ifvare mainmenuselection 4 { ifvare automedikittoggle 0 setvar automedikittoggle 1 else setvar automedikittoggle 0 savegamevar automedikittoggle }
-  	     ifvare mainmenuselection 5 { ifvare automantletoggle 0 setvar automantletoggle 1 else setvar automantletoggle 0 savegamevar automantletoggle }
-  	     ifvare mainmenuselection 6 { ifvare footstepsndtoggle 0 setvar footstepsndtoggle 1 else setvar footstepsndtoggle 0 savegamevar footstepsndtoggle }
-  	     ifvare mainmenuselection 7 { ifvare normalhitscantoggle 0 setvar normalhitscantoggle 1 else setvar normalhitscantoggle 0 savegamevar normalhitscantoggle }
-  	     ifvare mainmenuselection 8 { addvar vehiclepickuptoggle 1 ifvarg vehiclepickuptoggle 3 subvar vehiclepickuptoggle 4 savegamevar vehiclepickuptoggle }
-  	     ifvare mainmenuselection 9 { ifvare PAINSOUNDSTYPE 0 setvar PAINSOUNDSTYPE 1 else setvar PAINSOUNDSTYPE 0 savegamevar PAINSOUNDSTYPE }
-  	     ifvare mainmenuselection 10 { ifvare rpgdmgdisplaytoggle 0 setvar rpgdmgdisplaytoggle 1 else setvar rpgdmgdisplaytoggle 0 savegamevar rpgdmgdisplaytoggle }
-  	     ifvare mainmenuselection 11 { ifvare autosavetoggle 0 { setvar autosavetoggle 1 state reset_autosavetimes } else { setvar autosavetoggle 0 } savegamevar autosavetoggle }
-		 ifvare mainmenuselection 12 { ifvare weapontoggleselect 0 setvar weapontoggleselect 1 else setvar weapontoggleselect 0 savegamevar weapontoggleselect }
-		}
+        {
+         ifvare mainmenuselection 0 { addvar miscdisplaytoggle 1 ifvarg miscdisplaytoggle 15 { setvar miscdisplaytoggle 0 } savegamevar miscdisplaytoggle }
+         ifvare mainmenuselection 1 { ifvare statusdisplaytoggle 0 setvar statusdisplaytoggle 1 else setvar statusdisplaytoggle 0 savegamevar statusdisplaytoggle }
+         ifvare mainmenuselection 2 { ifvare debugtoggle 0 setvar debugtoggle 1 else setvar debugtoggle 0 savegamevar debugtoggle }
+         ifvare mainmenuselection 3 { ifvare lifebartogglemode 0 setvar lifebartogglemode 1 else setvar lifebartogglemode 0 savegamevar lifebartogglemode }
+         ifvare mainmenuselection 4 { ifvare automedikittoggle 0 setvar automedikittoggle 1 else setvar automedikittoggle 0 savegamevar automedikittoggle }
+         ifvare mainmenuselection 5 { ifvare automantletoggle 0 setvar automantletoggle 1 else setvar automantletoggle 0 savegamevar automantletoggle }
+         ifvare mainmenuselection 6 { ifvare footstepsndtoggle 0 setvar footstepsndtoggle 1 else setvar footstepsndtoggle 0 savegamevar footstepsndtoggle }
+         ifvare mainmenuselection 7 { ifvare normalhitscantoggle 0 setvar normalhitscantoggle 1 else setvar normalhitscantoggle 0 savegamevar normalhitscantoggle }
+         ifvare mainmenuselection 8 { addvar vehiclepickuptoggle 1 ifvarg vehiclepickuptoggle 3 subvar vehiclepickuptoggle 4 savegamevar vehiclepickuptoggle }
+         ifvare mainmenuselection 9 { ifvare PAINSOUNDSTYPE 0 setvar PAINSOUNDSTYPE 1 else setvar PAINSOUNDSTYPE 0 savegamevar PAINSOUNDSTYPE }
+         ifvare mainmenuselection 10 { ifvare rpgdmgdisplaytoggle 0 setvar rpgdmgdisplaytoggle 1 else setvar rpgdmgdisplaytoggle 0 savegamevar rpgdmgdisplaytoggle }
+         ifvare mainmenuselection 11 { ifvare autosavetoggle 0 { setvar autosavetoggle 1 state reset_autosavetimes } else { setvar autosavetoggle 0 } savegamevar autosavetoggle }
+         ifvare mainmenuselection 12 { ifvare weapontoggleselect 0 setvar weapontoggleselect 1 else setvar weapontoggleselect 0 savegamevar weapontoggleselect }
+        }
         sound PISTOL_BODYHIT // INTRUDER_ALERT
        }
-  	   ifvare mainmenusubmenu 3 state menuerrorsound // Status Menu
-	
-	   ifvare mainmenusubmenu 4 // Skills Menu
+       ifvare mainmenusubmenu 3 state menuerrorsound // Status Menu
+    
+         ifvare mainmenusubmenu 4 // Skills Menu
          {
           ifvare mainmenupage 0 nullop // Duke Nukem
           else ifvare mainmenupage 1 // Jack Walker
@@ -45532,7 +45658,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 13 // Damage Shell
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 13 state skillusecheckpartysize } // Damage Shell
             }
            }
           }
@@ -45633,7 +45759,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 12 // Mercury Quickening
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 12 state skillusecheckpartysize } // Mercury Quickening
             }
            }
           }
@@ -45657,7 +45783,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 9 // Fortify [Lesser]
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 9 state skillusecheckpartysize } // Fortify [Lesser]
             }
             else ifvare mainmenuselection 1
             {
@@ -45670,7 +45796,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 10 // Fortify [Moderate]
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 10 state skillusecheckpartysize } // Fortify [Moderate]
             }
             else ifvare mainmenuselection 2 
             { 
@@ -45683,7 +45809,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 11 // Fortify [Greater]
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 11 state skillusecheckpartysize } // Fortify [Greater]
             }
            }
           }
@@ -45706,7 +45832,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 15 // Bloodlusting
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 15 state skillusecheckpartysize } // Bloodlusting
             }
            }
           }
@@ -45728,7 +45854,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 3 // Lesser Resurrection
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 3 state skillusecheckpartysize } // Lesser Resurrection
             }
             else ifvare mainmenuselection 1
             {
@@ -45741,7 +45867,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 4 // Heal Life [Lesser]
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 4 state skillusecheckpartysize } // Heal Life [Lesser]
             }
             else ifvare mainmenuselection 2
             {
@@ -45754,7 +45880,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 5 // Cure Ailment [Moderate]
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 5 state skillusecheckpartysize } // Cure Ailment [Moderate]
             }
             else ifvare mainmenuselection 3
             {
@@ -45767,7 +45893,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 6 // Heal Life [Greater]
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 6 state skillusecheckpartysize } // Heal Life [Greater]
             }
             else ifvare mainmenuselection 4 
             {
@@ -45780,7 +45906,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 7 // Greater Resurrection
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 7 state skillusecheckpartysize } // Greater Resurrection
             }
             else ifvare mainmenuselection 5 
             {
@@ -45793,7 +45919,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 8 // Cure Ailment [Greatest]   
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 8 state skillusecheckpartysize } // Cure Ailment [Greatest]   
             }       
            }
           }
@@ -45815,7 +45941,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 16 // PK Shield
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 16 state skillusecheckpartysize } // PK Shield
             }
            }
           }
@@ -46001,7 +46127,7 @@ state menu-mainmenu-state
               state check-skillenergycost-add
               setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
               getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-              ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 1 // Resurrection Prime
+              ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 1 state skillusecheckpartysize } // Resurrection Prime
              }
              else 
              ifvare mainmenuselection 1 
@@ -46117,7 +46243,7 @@ state menu-mainmenu-state
              state check-skillenergycost-add
              setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
              getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else setvar skillidinuse 14 // Triad Booster
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 14 state skillusecheckpartysize } // Triad Booster
             }
            }
           }
@@ -46188,96 +46314,22 @@ state menu-mainmenu-state
           else state menuerrorsound
          }
 */
-	   ifvare mainmenusubmenu 6 // Equipment Menu
+         ifvare mainmenusubmenu 6 // Equipment Menu
          {
-          ifvare mainmenupage 0 // Duke Nukem
+          setvar TEMPMOD 0
+          state checkpg1equippables
+          state checkpg2equippables
+          ifvarg TEMPMOD 0
           {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 1 }
-          }
-          else
-          ifvare mainmenupage 1 // Jack Walker
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 2 }
-          }
-          else
-          ifvare mainmenupage 2 // Bubsy Bobcat
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 3 }
-          }
-          else
-          ifvare mainmenupage 3 // Ami Mizuno
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 4 }
-          }
-          else
-          ifvare mainmenupage 4 // Lo Wang
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 5 }
-          }
-          else
-          ifvare mainmenupage 5 // ESSence Margalan
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 6 }
-          }
-          else
-          ifvare mainmenupage 6 // Ted Maldoras
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 7 }
-          }
-          else
-          ifvare mainmenupage 7 // Lisa Bates
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 8 }
-          }
-          else
-          ifvare mainmenupage 8 // Cybanis Morgandos
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 9 }
-          }
-          else
-          ifvare mainmenupage 9 // Nethra Mahoboroshi/Christina Mitchell
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 10 }
-          }
-          else
-          ifvare mainmenupage 10 // Paula Polestar
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 11 }
-          }
-          else
-          ifvare mainmenupage 11 // Lori Stephens
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 12 }
-          }
-          else
-          ifvare mainmenupage 12 // Minako Aino
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 13 }
-          }
-          else
-          ifvare mainmenupage 13 // "Mystery Lady"
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 14 }
-          }
-          else
-          ifvare mainmenupage 14 // Maken Shinkara
-          {
-           state enterequipscreen
-           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 { setvar equipmenupage 0 setvar equipmenuselection 0 setvar equipcharacter 15 }
+           ifvarg mainmenuselection -1 ifvarl mainmenuselection 9 
+           {
+            ifvarg mainmenupage -1 ifvarl mainmenupage 15 
+            {
+             state enterequipscreen
+             setvar equipmenupage 0 setvar equipmenuselection 0
+             setvarvar equipcharacter mainmenupage addvar equipcharacter 1
+            }
+           }
           }
           else state menuerrorsound
          }

@@ -13862,16 +13862,16 @@ state newenemystatcalc
  setactor[THISACTOR].extra 16384
 
  // Determines based on the skill level if the monster will have atomic health starting out
- ifvare SKILLLEVEL 0 { ifrnd 4 { ifrnd 16 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 1 { ifrnd 8 { ifrnd 20 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 2 { ifrnd 12 { ifrnd 24 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 3 { ifrnd 16 { ifrnd 32 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 4 { ifrnd 20 { ifrnd 40 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 5 { ifrnd 24 { ifrnd 52 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 6 { ifrnd 32 { ifrnd 64 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 7 { ifrnd 40 { ifrnd 80 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 8 { ifrnd 48 { ifrnd 96 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
- ifvare SKILLLEVEL 9 { ifrnd 64 { ifrnd 128 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 0 { ifrnd 3 { ifrnd 14 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 1 { ifrnd 6 { ifrnd 17 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 2 { ifrnd 9 { ifrnd 20 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 3 { ifrnd 12 { ifrnd 26 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 4 { ifrnd 15 { ifrnd 35 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 5 { ifrnd 18 { ifrnd 46 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 6 { ifrnd 24 { ifrnd 57 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 7 { ifrnd 30 { ifrnd 73 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 8 { ifrnd 36 { ifrnd 88 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
+ ifvare SKILLLEVEL 9 { ifrnd 48 { ifrnd 114 mulvar ENEMYHP 200 else mulvar ENEMYHP 150 } else mulvar ENEMYHP 100 }
  divvar ENEMYHP 100
 
  // Stops HP from Exceeding 'Atomic' max [again]
@@ -13921,8 +13921,25 @@ state newenemystatcalc
   }
   else
   {
-   randvar ENEMYARMORPERCENT 100
-   addvar ENEMYARMORPERCENT 900
+   ifvarl SKILLLEVEL 8
+   {
+    ifrnd 85 setvar ENEMYARMORPERCENT 667
+    else ifrnd 128 setvar ENEMYARMORPERCENT 900
+    else
+    {
+     randvar ENEMYARMORPERCENT 100
+     addvar ENEMYARMORPERCENT 900
+    }
+   }
+   else
+   {
+    ifrnd 128
+    {
+     randvar ENEMYARMORPERCENT 100
+     addvar ENEMYARMORPERCENT 900
+    }
+    else setvar ENEMYARMORPERCENT 1000
+   }
   }
  }
 
@@ -14007,16 +14024,16 @@ state newenemystatcalc
 // *Setting Up Possible First Aid Amount for Monsters*
 // ***************************************************
 
-  ifvare SKILLLEVEL 0 ifrnd 4 { state setenemyfirstaid1 ifrnd 8 state setenemyfirstaid2 }
-  ifvare SKILLLEVEL 1 ifrnd 8 { state setenemyfirstaid1 ifrnd 16 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 2 ifrnd 16 { state setenemyfirstaid1 ifrnd 16 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 3 ifrnd 32 { state setenemyfirstaid1 ifrnd 32 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 4 ifrnd 64 { state setenemyfirstaid1 ifrnd 32 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 5 ifrnd 96 { state setenemyfirstaid1 ifrnd 64 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 6 ifrnd 128 { state setenemyfirstaid1 ifrnd 64 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 7 ifrnd 192 { state setenemyfirstaid1 ifrnd 128 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 8 ifrnd 224 { state setenemyfirstaid1 ifrnd 192 state setenemyfirstaid2 }  
-  ifvare SKILLLEVEL 9 ifrnd 240 { state setenemyfirstaid1 ifrnd 224 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 0 ifrnd 3 { state setenemyfirstaid1 ifrnd 6 state setenemyfirstaid2 }
+  ifvare SKILLLEVEL 1 ifrnd 7 { state setenemyfirstaid1 ifrnd 10 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 2 ifrnd 13 { state setenemyfirstaid1 ifrnd 12 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 3 ifrnd 27 { state setenemyfirstaid1 ifrnd 20 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 4 ifrnd 33 { state setenemyfirstaid1 ifrnd 24 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 5 ifrnd 49 { state setenemyfirstaid1 ifrnd 48 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 6 ifrnd 66 { state setenemyfirstaid1 ifrnd 52 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 7 ifrnd 99 { state setenemyfirstaid1 ifrnd 112 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 8 ifrnd 118 { state setenemyfirstaid1 ifrnd 172 state setenemyfirstaid2 }  
+  ifvare SKILLLEVEL 9 ifrnd 134 { state setenemyfirstaid1 ifrnd 200 state setenemyfirstaid2 }  
 
 // ****************************************
 // *Setting Up Possible Boots for Monsters*
@@ -14121,6 +14138,14 @@ state newenemystatcalc
    mulvar ENEMYVAMPIRETIME 4
    addvar ACTORMAXFALLRESIST 8
    addvar ACTORFALLRESIST 8
+  }
+
+  ifvare ENEMYHASSHIKON? 1
+  {
+   mulvar ACTORFALLRESIST 5
+   divvar ACTORFALLRESIST 2
+   mulvar ACTORMAXFALLRESIST 5
+   divvar ACTORMAXFALLRESIST 2
   }
 
   ifvarand ACTORFLAGS 4096 // Special Flag #1
@@ -16732,13 +16757,17 @@ state calcrankitems
             state getworldtile
             globalsound DUKE_GET
             globalsound DUKE_GET
-			
+
             ifvarg MAX_RANKITEMSFOUND_LEVEL 0
             {
              ifvarvare RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL
              {
-              globalsound FOUND_ALLSECRETS
-              redefinequote 335 ^23 YOU HAVE FOUND ALL OF THE MEMORBILIA!
+              ifactor 6457 nullop
+              else
+              {
+               globalsound FOUND_ALLSECRETS
+               redefinequote 335 ^23 YOU HAVE FOUND ALL OF THE MEMORBILIA!
+              }
              }
             }
 
@@ -16774,6 +16803,25 @@ state grabspecialfigurine
            {
             redefinequote 335 ^23 GRABBED A RARE FIGURINE!
             setvar RANKPOINTSTEMP 400
+            state calcrankitems
+           }
+      }
+     }
+ends
+
+state graboneofakindimage
+     ifvare oldskoolmode 0
+     {
+      ifactor 6457 nullop else state setrankitemmax
+      ifvarg CURRENTHITPOINTS 0 // ifp palive
+      {
+        ifpdistl RETRIEVEDISTANCE
+          ifp pfacing
+           ifhitspace
+           {
+            ifactor 6457 state setrankitemmax
+            redefinequote 335 ^23 GRABBED A ^10ONE OF A KIND^23 PICTURE!
+            setvar RANKPOINTSTEMP 262144
             state calcrankitems
            }
       }
@@ -19425,7 +19473,7 @@ state grabheatsensoritem
            subvar ACTORPICKUPAMOUNT 1
            state checkheatsensors addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
            
- 	     ifvarand ACTORFLAGS 2 nullop
+           ifvarand ACTORFLAGS 2 nullop
            else
            {
             ifvarg ACTORPICKUPAMOUNT 0
@@ -21446,115 +21494,115 @@ state checkmantlesprite
 
 ifvarn hitsprite -1
 {
-	getactor[hitsprite].picnum picnum
-	ifvare picnum 3699 // special mantling sprite
-	ifvarl xydist MANTDIST
-		setvar EDGEGRAPPLING 1
+ getactor[hitsprite].picnum picnum
+ ifvare picnum 3699 // special mantling sprite
+ ifvarl xydist MANTDIST
+ setvar EDGEGRAPPLING 1
 }
 ends
 
 state checkwall
 
-	setvar EDGEGRAPPLING 0
+    setvar EDGEGRAPPLING 0
 
-	// we start by checking for the dreaded slope at feet problem
+    // we start by checking for the dreaded slope at feet problem
 
-	getactor[THISACTOR].z z
-	getactor[THISACTOR].x x
-	getactor[THISACTOR].y y
-	getactor[THISACTOR].sectnum mysector
-	getactor[THISACTOR].ang angvar
-	setvar zdist 0
-	cos mycos angvar
-	sin mysin angvar
-	
-	hitscan x y z mysector mycos mysin zdist hitsector hitwall hitsprite hitx hity hitz clipmask
-	state pythagoras
-	setvarvar xydist2 xydist // saves the distance
-	subvar z 1536
-	hitscan x y z mysector mycos mysin zdist hitsector hitwall2 hitsprite hitx hity hitz clipmask
-	state pythagoras
+    getactor[THISACTOR].z z
+    getactor[THISACTOR].x x
+    getactor[THISACTOR].y y
+    getactor[THISACTOR].sectnum mysector
+    getactor[THISACTOR].ang angvar
+    setvar zdist 0
+    cos mycos angvar
+    sin mysin angvar
+
+    hitscan x y z mysector mycos mysin zdist hitsector hitwall hitsprite hitx hity hitz clipmask
+    state pythagoras
+    setvarvar xydist2 xydist // saves the distance
+    subvar z 1536
+    hitscan x y z mysector mycos mysin zdist hitsector hitwall2 hitsprite hitx hity hitz clipmask
+    state pythagoras
 /*
-      ifvarn hitsprite -1
-      {
-       getactor[hitsprite].picnum picnum
-       ifvare picnum CRATE2 ifvarl xydist 844
-       {
-        setvar EDGEGRAPPLING 1 break 
-       }
-      }
+    ifvarn hitsprite -1
+    {
+     getactor[hitsprite].picnum picnum
+     ifvare picnum CRATE2 ifvarl xydist 844
+     {
+      setvar EDGEGRAPPLING 1 break 
+     }
+    }
 */
 
-      ifvarn hitwall -1
-      ifvarvare hitwall hitwall2 ifvarvarg xydist xydist2 break // it's one of those slopes...
+    ifvarn hitwall -1
+    ifvarvare hitwall hitwall2 ifvarvarg xydist xydist2 break // it's one of those slopes...
 
-      // Character Reach Z (the value determines how far the character can 'reach up' to grapple/mantle on an edge
-      setvarvar TEMPVAR PLAYERHEIGHT
-      divvar TEMPVAR 3
-      subvarvar z TEMPVAR
-      // subvar z 3072 // 1536 // now we do the first "real" hitscan
-      // End Character Reach Z
+    // Character Reach Z (the value determines how far the character can 'reach up' to grapple/mantle on an edge
+    setvarvar TEMPVAR PLAYERHEIGHT
+    divvar TEMPVAR 3
+    subvarvar z TEMPVAR
+    // subvar z 3072 // 1536 // now we do the first "real" hitscan
+    // End Character Reach Z
 
-	hitscan x y z mysector mycos mysin zdist hitsector hitwall hitsprite hitx hity hitz clipmask
-	state pythagoras
-	
-	ifvarg xydist MANTDIST
-	{
-		subvar z 3072
-		hitscan x y z mysector mycos mysin zdist hitsector hitwall hitsprite hitx hity hitz clipmask
-		addvar z 3072
-		state checkmantlesprite
-		ifvare EDGEGRAPPLING 1 break
-  		ifvarg xydist MANTDIST break
-	}
-	ifvarn hitsprite -1
-	{
-		state checkmantlesprite
-		ifvare EDGEGRAPPLING 1 break
-		getactor[hitsprite].cstat temp
-		ifvarand temp 1 nullop else break // a non-blocking sprite will prevent mantling
-	}
-	
-	//ifvare hitwall -1 ifvarn hitsprite -1 setvarvar hitwall hitsprite // treats sprite as wall
-	
-	// now a second hitscan to see whether the upper body is above the wall
+    hitscan x y z mysector mycos mysin zdist hitsector hitwall hitsprite hitx hity hitz clipmask
+    state pythagoras
 
-	subvar z 7168
-	hitscan x y z mysector mycos mysin zdist hitsector hitwall2 hitsprite hitx hity hitz clipmask
+    ifvarg xydist MANTDIST
+    {
+     subvar z 3072
+     hitscan x y z mysector mycos mysin zdist hitsector hitwall hitsprite hitx hity hitz clipmask
+     addvar z 3072
+     state checkmantlesprite
+     ifvare EDGEGRAPPLING 1 break
+     ifvarg xydist MANTDIST break
+    }
+    ifvarn hitsprite -1
+    {
+     state checkmantlesprite
+     ifvare EDGEGRAPPLING 1 break
+     getactor[hitsprite].cstat temp
+     ifvarand temp 1 nullop else break // a non-blocking sprite will prevent mantling
+    }
 
-	//ifvare hitwall2 -1 ifvarn hitsprite2 -1 setvarvar hitwall2 hitsprite2 // treats sprite as wall
+    //ifvare hitwall -1 ifvarn hitsprite -1 setvarvar hitwall hitsprite // treats sprite as wall
 
-	state pythagoras
-	state checkmantlesprite
-	ifvare INTHEAIR? 0 setvar tempb MANTDIST else setvar tempb 256
-	ifvarvarg xydist tempb 
-       ifvarvarn hitwall hitwall2
-	 {
-        setvar EDGEGRAPPLING 1
-	 }
-	 else
-	 {
-		subvar z 3072
-		hitscan x y z mysector mycos mysin zdist hitsector hitwall2 hitsprite hitx hity hitz clipmask
+    // now a second hitscan to see whether the upper body is above the wall
 
-		ifvarvare hitwall hitwall2 break
-		state pythagoras
-  		state checkmantlesprite
-		ifvare EDGEGRAPPLING 1 break
-		ifvarl xydist MANTDIST 
-		{
-			// there's still the possibility it could be a duct...
-			ifvarn hitsprite -1
-			{
-				getactor[hitsprite].picnum picnum
-				ifvare picnum BGRATE1 setvar EDGEGRAPPLING 1
-				ifvare picnum FANSPRITEBROKE setvar EDGEGRAPPLING 1
-			}
-			break
-		}
-	 }
+    subvar z 7168
+    hitscan x y z mysector mycos mysin zdist hitsector hitwall2 hitsprite hitx hity hitz clipmask
 
-	setvar EDGEGRAPPLING 1
+    //ifvare hitwall2 -1 ifvarn hitsprite2 -1 setvarvar hitwall2 hitsprite2 // treats sprite as wall
+
+    state pythagoras
+    state checkmantlesprite
+    ifvare INTHEAIR? 0 setvar tempb MANTDIST else setvar tempb 256
+    ifvarvarg xydist tempb 
+     ifvarvarn hitwall hitwall2
+     {
+      setvar EDGEGRAPPLING 1
+     }
+     else
+     {
+      subvar z 3072
+      hitscan x y z mysector mycos mysin zdist hitsector hitwall2 hitsprite hitx hity hitz clipmask
+
+      ifvarvare hitwall hitwall2 break
+      state pythagoras
+      state checkmantlesprite
+      ifvare EDGEGRAPPLING 1 break
+      ifvarl xydist MANTDIST 
+      {
+       // there's still the possibility it could be a duct...
+       ifvarn hitsprite -1
+       {
+        getactor[hitsprite].picnum picnum
+        ifvare picnum BGRATE1 setvar EDGEGRAPPLING 1
+        ifvare picnum FANSPRITEBROKE setvar EDGEGRAPPLING 1
+       }
+       break
+      }
+     }
+
+    setvar EDGEGRAPPLING 1
 
 ends
 
@@ -21568,57 +21616,56 @@ ifvarn VEHICLEID -1 break
 
 ifvare EDGEGRAPPLING 0
 {
-	ifvare PLAYERPULLUPSOUND? 1 setvar PLAYERPULLUPSOUND? 0
-	getplayer[THISACTOR].posx x
-	getplayer[THISACTOR].posy y
-	getactor[THISACTOR].z z
-	getplayer[THISACTOR].cursectnum mysector
-	getflorzofslope mysector x y mz // mz is the return var
-	subvarvar mz z // mz is now the distance to the ground
-	setvar temp 0
-	ifvarl mz 6144 nullop else    
-	{
-		getplayer[THISACTOR].poszv temp
-		ifvare INTHEAIR? 1 setvar tempb 0 else setvar tempb 1536
-		ifvarvarg temp tempb
-		{
-			state checkwall
-			ifvare EDGEGRAPPLING 1 
-			{
-				getplayer[THISACTOR].posz EDGEGRAPPLEZ
-				ifvare CHARACTERSELECTED? 1 
-				{
-				 stopsound DUKE_GRUNT
-				 sound DUKE_GRUNT 
-				}
-				ifvare CHARACTERSELECTED? 8
-				{ 
-				 stopsound LISA_WALLGRAB
- 				 sound LISA_WALLGRAB 
-				}
-				ifvare CHARACTERSELECTED? 15 
-				{
- 			 	 stopsound MAKEN_WALLGRAB
-				 sound MAKEN_WALLGRAB
-				}
-				wackplayer
-				getplayer[THISACTOR].posz z
-				subvar z 512
-				setplayer[THISACTOR].posz z
-				shiftvarr temp 7
-				addvar temp 3
-				setvarvar EDGEWAITTIME temp
-				ifvarg EDGEWAITTIME 40 setvar EDGEWAITTIME 40
-			}
-			
-		}
-	}
+ ifvare PLAYERPULLUPSOUND? 1 setvar PLAYERPULLUPSOUND? 0
+ getplayer[THISACTOR].posx x
+ getplayer[THISACTOR].posy y
+ getactor[THISACTOR].z z
+ getplayer[THISACTOR].cursectnum mysector
+ getflorzofslope mysector x y mz // mz is the return var
+ subvarvar mz z // mz is now the distance to the ground
+ setvar temp 0
+ ifvarl mz 6144 nullop else    
+ {
+  getplayer[THISACTOR].poszv temp
+  ifvare INTHEAIR? 1 setvar tempb 0 else setvar tempb 1536
+  ifvarvarg temp tempb
+  {
+   state checkwall
+   ifvare EDGEGRAPPLING 1 
+   {
+    getplayer[THISACTOR].posz EDGEGRAPPLEZ
+    ifvare CHARACTERSELECTED? 1 
+    {
+     stopsound DUKE_GRUNT
+     sound DUKE_GRUNT 
+    }
+    ifvare CHARACTERSELECTED? 8
+    { 
+     stopsound LISA_WALLGRAB
+     sound LISA_WALLGRAB 
+    }
+    ifvare CHARACTERSELECTED? 15 
+    {
+     stopsound MAKEN_WALLGRAB
+     sound MAKEN_WALLGRAB
+    }
+    wackplayer
+    getplayer[THISACTOR].posz z
+    subvar z 512
+    setplayer[THISACTOR].posz z
+    shiftvarr temp 7
+    addvar temp 3
+    setvarvar EDGEWAITTIME temp
+    ifvarg EDGEWAITTIME 40 setvar EDGEWAITTIME 40
+   }
+  }
+ }
 }
 
 ifvarg EDGEGRAPPLING 0
 {
-	ifvare mainmenu 0
-	{
+    ifvare mainmenu 0
+    {
        ifvarl INVULNTIME 1
        {
         ifvarn CHARACTERSELECTED? 9 // Cybanis has unlimited mantle-strength
@@ -21810,7 +21857,7 @@ ifvarg EDGEGRAPPLING 0
          setvarvar MANTLINGTIMER tempc
         }
        }
-	}
+    }
 
 	ifvare EDGEGRAPPLING 1 // hanging there, possibly strafing
 	{
@@ -22003,8 +22050,63 @@ state playerregen5percentap
       setvarvar CURRENTARMORPOINTS PLAYERAPREGENAMOUNT
 ends
 
+state determineregenrates // affects how regeneration speed for HP and EP works.
+       ifp ponsteroids mulvar TEMPMOD 4 // Steroids = 400% Speed
+       ifvarand PLAYERSTATUS? 2 { mulvar TEMPMOD 1250 divvar TEMPMOD 1000 } // Haste = 125% Speed
+       ifvarand PLAYERSTATUS? 4 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Slow = 75% Speed
+       ifvare DEFENSEMODE? 1 { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // Defend Mode = 133% Speed
+       ifvarn VEHICLEID -1 
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 
+        {
+         mulvar TEMPMOD 1400 divvar TEMPMOD 1000 // using a Riot Tank will put a character at rest, giving a 40% bonus to regen speeds
+        }
+       }
+       else
+       {
+        ifvarand bits 1 // Jump
+        { 
+         ifp ponground
+         {
+          mulvar TEMPMOD 400 divvar TEMPMOD 1000 
+         }
+         else 
+         {
+          ifp pjetpack 
+          {
+           mulvar TEMPMOD 600 divvar TEMPMOD 1000 
+          }
+          else
+          {
+           mulvar TEMPMOD 400 divvar TEMPMOD 1000 
+          }
+         } 
+        }
+        else ifvarg jumpcounter 0 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+        else ifvarand bits 2 // Crouch
+        {
+         ifp ponground 
+         {
+          mulvar TEMPMOD 1800 divvar TEMPMOD 1000 
+         }
+         else 
+         {
+          ifp pjetpack { mulvar TEMPMOD 600 divvar TEMPMOD 1000 } else { mulvar TEMPMOD 750 divvar TEMPMOD 1000 }
+         } 
+        }
+        ifvarand bits 4 { mulvar TEMPMOD 500 divvar TEMPMOD 1000 } // Fire
+        else ifvarand bits 4194304 { mulvar TEMPMOD 500 divvar TEMPMOD 1000 } // Alt-Fire/Quick Kick
+        ifvarand extbits 1 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Move Forward
+        else ifvarand extbits 2 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Move Backwards
+        else ifvarand extbits 4 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Strafe Left
+        else ifvarand extbits 8 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Strafe Right
+        else ifvarand extbits 16 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Turn Left
+        else ifvarand extbits 32 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Turn Right
+       }
+ends
+
 state playerregenhealthnormal
-   ifvare PUBLICBETA? 0 { ifvarand PLAYERSTATUS? 8 setvar HITPOINTREGENINTERVAL 39 else setvar HITPOINTREGENINTERVAL 78 } else { setvar HITPOINTREGENINTERVAL 26 }
+   ifvare PUBLICBETA? 0 { ifvarand PLAYERSTATUS? 8 setvar HITPOINTREGENINTERVAL 390 else setvar HITPOINTREGENINTERVAL 780 } else { setvar HITPOINTREGENINTERVAL 260 }
    ifvarand PLAYERSTATUS? 8 { setvarvar TEMP STATLIMITATOMIC addvar TEMP 1 } else { setvarvar TEMP MAXHITPOINTS } // If player is poisoned, their health will go down even if above 100%
    ifvarvarl CURRENTHITPOINTS TEMP // TEMP or MAXHITPOINTS
    {
@@ -22012,20 +22114,26 @@ state playerregenhealthnormal
     {
      ifvare mainmenu 0 
      {
+      setvar TEMPMOD 0
       ifvarvarl CURRENTHITPOINTS MAXHITPOINTS 
       { 
-       ifp ponsteroids addvar HITPOINTREGENTICS 4 else addvar HITPOINTREGENTICS 1
+       setvar TEMPMOD 10
       } 
       else
       {
        ifvarand PLAYERSTATUS? 8
        { 
-        ifp ponsteroids addvar HITPOINTREGENTICS 4 else addvar HITPOINTREGENTICS 1
+        setvar TEMPMOD 10
        }
        else
        {
         setvar HITPOINTREGENTICS 0
        }
+      }
+      ifvarn TEMPMOD 0
+      { 
+       state determineregenrates
+       addvarvar HITPOINTREGENTICS TEMPMOD 
       }
      }
       ifvarvarg HITPOINTREGENTICS HITPOINTREGENINTERVAL
@@ -22232,7 +22340,9 @@ state playerregenhealthnormal
         }
         setvar TEMPVAR 0
 
-        // Reset the interval timer
+        //**************************
+        //*Reset the interval timer*
+        //**************************
         setvarvar TEMPVAR4 PLAYERLEVEL divvar TEMPVAR4 20
 
         ifvare CHARACTERSELECTED? 1 // Duke Nukem
@@ -22320,6 +22430,7 @@ state playerregenhealthnormal
          else setvar HITPOINTREGENTICS 6 // + 6 tics of Healing
         }
         else setvar HITPOINTREGENTICS 0 // Jack, Bubsy, Paula & Mystery Lady
+        ifvarn HITPOINTREGENTICS 0 mulvar HITPOINTREGENTICS 10
 
         // Add Speed from Character Levels
         ifvarand PLAYERSTATUS? 8 subvarvar HITPOINTREGENTICS TEMPVAR4
@@ -22327,37 +22438,37 @@ state playerregenhealthnormal
 
         // Add Speed from Equipped Charm Ankhs
         setvar TEMPMOD 0
-        ifvare PLAYEREQUIPSLOTITEM1 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM2 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM3 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM4 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM5 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM6 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM7 5 addvar TEMPMOD 1
-        ifvare PLAYEREQUIPSLOTITEM8 5 addvar TEMPMOD 1
-        divvar TEMPMOD 2
+        ifvare PLAYEREQUIPSLOTITEM1 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM2 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM3 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM4 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM5 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM6 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM7 5 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM8 5 addvar TEMPMOD 10
+        divvar TEMPMOD 20
         // Add Speed from Equipped Jewels of Four Souls
         ifvare PUBLICBETA? 0
         {
-         ifvare PLAYEREQUIPSLOTITEM1 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM2 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM3 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM4 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM5 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM6 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM7 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM8 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 35 } else { addvar TEMPMOD 71 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM1 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM2 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM3 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM4 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM5 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM6 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM7 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM8 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
         }
         else
         {
-         ifvare PLAYEREQUIPSLOTITEM1 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM2 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM3 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM4 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM5 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM6 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM7 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
-         ifvare PLAYEREQUIPSLOTITEM8 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 24 } else { addvar TEMPMOD 24 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM1 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM2 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM3 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM4 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM5 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM6 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM7 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM8 28 { ifvarand PLAYERSTATUS? 8 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
         }
         ifvarand PLAYERSTATUS? 8 subvarvar HITPOINTREGENTICS TEMPMOD
         else addvarvar HITPOINTREGENTICS TEMPMOD
@@ -22369,17 +22480,23 @@ state playerregenhealthnormal
 ends
 
 state playerregenenergynormal
-   ifvare PUBLICBETA? 0 setvar ENERGYPOINTREGENINTERVAL 624 else setvar ENERGYPOINTREGENINTERVAL 208
+   ifvare PUBLICBETA? 0 setvar ENERGYPOINTREGENINTERVAL 6240 else setvar ENERGYPOINTREGENINTERVAL 2080
    ifvarvarl CURRENTENERGYPOINTS MAXENERGYPOINTS // TEMP or MAXHITPOINTS
    {
     ifvarg CURRENTHITPOINTS 0 // ifp palive
     {
       ifvare mainmenu 0 
       {
+       setvar TEMPMOD 0
        ifvarvarl CURRENTENERGYPOINTS MAXENERGYPOINTS 
-       { 
-        ifp ponsteroids addvar ENERGYPOINTREGENTICS 4 else addvar ENERGYPOINTREGENTICS 1
+       {
+        setvar TEMPMOD 10
        } 
+       ifvarn TEMPMOD 0 
+       {
+        state determineregenrates
+        addvarvar ENERGYPOINTREGENTICS TEMPMOD
+       }
       }
       ifvarvarg ENERGYPOINTREGENTICS ENERGYPOINTREGENINTERVAL
       { 
@@ -22397,8 +22514,21 @@ state playerregenenergynormal
         ifvarg RANDOMIZER 40 ifvarl RANDOMIZER 122 mulvar TEMPVAR 1 // 41-121 +81
 
         // Character Specfic Multipliers/Dividors
-        ifvare CHARACTERSELECTED? 11 { ifrnd 64 mulvar TEMPVAR 2 } // Paula has 25% chance of recovering 2x EP
+        ifvare CHARACTERSELECTED? 1 { ifrnd 8 mulvar TEMPVAR 2 } // Duke has 3.1% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 2 { ifrnd 25 mulvar TEMPVAR 2 } // Jack has 9.7% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 3 { ifrnd 13 mulvar TEMPVAR 2 } // Bubsy has 5.1% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 4 { ifrnd 112 mulvar TEMPVAR 2 } // Ami has 43.75% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 5 { ifrnd 56 mulvar TEMPVAR 2 } // Higa has 21.8% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 6 { ifrnd 45 mulvar TEMPVAR 2 } // ESSence has 17.5% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 7 { ifrnd 23 mulvar TEMPVAR 2 } // Ted has 8.9% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 8 { ifrnd 19 mulvar TEMPVAR 2 } // Lisa has 7.4% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 9 { ifrnd 12 mulvar TEMPVAR 2 } // Cybanis has 4.6% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 10 { ifrnd 78 mulvar TEMPVAR 2 } // Christina has 30.4% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 11 { ifrnd 64 mulvar TEMPVAR 2 } // Paula has 25% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 12 { ifrnd 48 mulvar TEMPVAR 2 } // Lori has 18.75% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 13 { ifrnd 32 mulvar TEMPVAR 2 } // Minako has 12.5% chance of recovering 2x EP
         else ifvare CHARACTERSELECTED? 14 { ifrnd 85 mulvar TEMPVAR 2 } // Mystery Lady has 33% chance of recovering 2x EP
+        else ifvare CHARACTERSELECTED? 15 { ifrnd 48 mulvar TEMPVAR 2 } // Maken has 18.75% chance of recovering 2x EP
 
         ifvare PUBLICBETA? 0 divvar TEMPVAR 9 else divvar TEMPVAR 3
 
@@ -22433,38 +22563,49 @@ state playerregenenergynormal
         ifvarvarg CURRENTENERGYPOINTS MAXENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
         setvar TEMPVAR 0
 
-        // Reset the interval timer
+        //***************************
+        //*Reset the interval timer*
+        //***************************
         setvarvar TEMPVAR4 PLAYERLEVEL divvar TEMPVAR4 5
 
         // Character Specfic Timer Alterations
-        ifvare CHARACTERSELECTED? 10 setvar ENERGYPOINTREGENTICS 26 // Christina has 1 second less regen wait
-        else ifvare CHARACTERSELECTED? 12 setvar ENERGYPOINTREGENTICS 13 // Lori has 1/2 second less regen wait
-        else ifvare CHARACTERSELECTED? 14 setvar ENERGYPOINTREGENTICS 65 // Mystery Lady 2 1/2 seconds less regen wait
-        else ifvare CHARACTERSELECTED? 15 setvar ENERGYPOINTREGENTICS 13 // Maken has 1/2 second less regen wait
-        else setvar ENERGYPOINTREGENTICS 0
+        ifvare CHARACTERSELECTED? 1 setvar ENERGYPOINTREGENTICS -260 // Duke has 1 second MORE regen wait
+        else ifvare CHARACTERSELECTED? 3 setvar ENERGYPOINTREGENTICS -130 // Bubsy has 1/2 second MORE regen wait
+        else ifvare CHARACTERSELECTED? 4 setvar ENERGYPOINTREGENTICS 520 // Ami has 2 seconds less regen wait
+        else ifvare CHARACTERSELECTED? 5 setvar ENERGYPOINTREGENTICS 260 // Higa has 1 second less regen wait
+        else ifvare CHARACTERSELECTED? 6 setvar ENERGYPOINTREGENTICS -130 // ESSence has 1/2 second MORE regen wait
+        else ifvare CHARACTERSELECTED? 8 setvar ENERGYPOINTREGENTICS 130 // Lisa has 1/2 second less regen wait
+        else ifvare CHARACTERSELECTED? 9 setvar ENERGYPOINTREGENTICS 130 // Cybanis has 1/2 second less regen wait
+        else ifvare CHARACTERSELECTED? 10 setvar ENERGYPOINTREGENTICS 260 // Christina has 1 second less regen wait
+        else ifvare CHARACTERSELECTED? 11 setvar ENERGYPOINTREGENTICS 390 // Paula has 1 1/2 seconds less regen wait
+        else ifvare CHARACTERSELECTED? 12 setvar ENERGYPOINTREGENTICS 130 // Lori has 1/2 second less regen wait
+        else ifvare CHARACTERSELECTED? 13 setvar ENERGYPOINTREGENTICS 520 // Minako has 2 seconds less regen wait
+        else ifvare CHARACTERSELECTED? 14 setvar ENERGYPOINTREGENTICS 650 // Mystery Lady 2 1/2 seconds less regen wait
+        else ifvare CHARACTERSELECTED? 15 setvar ENERGYPOINTREGENTICS 130 // Maken has 1/2 second less regen wait
+        else setvar ENERGYPOINTREGENTICS 0 // Jack and Ted have normal regen rates
 
         // Add Speed from Equipped Jewels of Four Souls
         ifvare PUBLICBETA? 0 
         {
-         ifvare PLAYEREQUIPSLOTITEM1 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM2 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM3 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM4 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM5 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM6 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM7 28 addvar ENERGYPOINTREGENTICS 562
-         ifvare PLAYEREQUIPSLOTITEM8 28 addvar ENERGYPOINTREGENTICS 562
+         ifvare PLAYEREQUIPSLOTITEM1 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM2 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM3 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM4 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM5 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM6 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM7 28 addvar ENERGYPOINTREGENTICS 5620
+         ifvare PLAYEREQUIPSLOTITEM8 28 addvar ENERGYPOINTREGENTICS 5620
         }
         else
         {
-         ifvare PLAYEREQUIPSLOTITEM1 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM2 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM3 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM4 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM5 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM6 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM7 28 addvar ENERGYPOINTREGENTICS 187
-         ifvare PLAYEREQUIPSLOTITEM8 28 addvar ENERGYPOINTREGENTICS 187
+         ifvare PLAYEREQUIPSLOTITEM1 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM2 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM3 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM4 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM5 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM6 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM7 28 addvar ENERGYPOINTREGENTICS 1873
+         ifvare PLAYEREQUIPSLOTITEM8 28 addvar ENERGYPOINTREGENTICS 1873
         }
 
         // Add Speed from Character Levels
@@ -28809,7 +28950,7 @@ state pickupconditions
             ifcanseetarget addvar targetlock 2
             ifvarg targetlock 3 setvar targetlock 3
             ifvarvare scannedsprite THISACTOR setvar targetlock 3
- 	              
+
             ifvarg targetlock 2
             {
              ifvare initcstat -1 getactor[THISACTOR].cstat initcstat
@@ -29808,7 +29949,7 @@ state checkitemflags2
      {
       espawn PICKUPMULTIICON
       setactorvar[RETURN].MULTIICONPARENT THISACTOR
-     setactorvar[THISACTOR].MULTIICONCHILD RETURN
+      setactorvar[THISACTOR].MULTIICONCHILD RETURN
      }
     }
     else setvar MULTIPLIERITEMCANSEE? 0

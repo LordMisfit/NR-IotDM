@@ -32,7 +32,7 @@ ifvare mainmenu 0
   setvar digy 100
   state orientation0 // 3
   setvar tilenum 8191 // For the menu background >.> (2456 or 8191)
-  setvar shade 16
+  setvar shade 16 // 16
   state rs
  }
 }
@@ -81,7 +81,7 @@ ifvare mainmenu 1
   setvar digy 100
   state orientation0 // 3
   setvar tilenum 8191 // For the menu background >.> (2456 or 8191)
-  setvar shade 16
+  setvar shade 16 // 16
   state rs
  }
 
@@ -442,7 +442,9 @@ ifvare mainmenu 1
     ifvare mainmenupage 5 redefinequote 504 =TO PG.7  
     ifvare mainmenupage 6 redefinequote 504 =TO PG.8  
     ifvare mainmenupage 7 redefinequote 504 =TO PG.9  
-    ifvare mainmenupage 8 redefinequote 504 =TO PG.1  
+    ifvare mainmenupage 8 redefinequote 504 =TO PG.10  
+    ifvare mainmenupage 9 redefinequote 504 =TO PG.11 
+    ifvare mainmenupage 10 redefinequote 504 =TO PG.1  
    }
    qstrcat 1001 504
 
@@ -2466,6 +2468,38 @@ ifvare mainmenu 1
   ifvarg CENTS -1 ifvarl CENTS 10 setvar temp 193
   else setvar temp 194 
   state mt
+
+  // Show Indication of Characters on the other page
+  ifvare mainmenupage 0
+  {
+   setvar TEMPMOD 0
+   state checkpg2characters
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 OTHER CHARACTERS ON PG.2>>
+    setvar temp 332
+    state mt
+   }
+  }
+  else
+  ifvare mainmenupage 1
+  {
+   setvar TEMPMOD 0
+   state checkpg1characters
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 <<OTHER CHARACTERS ON PG.1
+    setvar temp 332
+    state mt
+   }
+  }
+
   // Character Portraits - Page 1
 
   setvar digx 70
@@ -10225,7 +10259,7 @@ ifvare mainmenusubmenu 6
 
   // Larger Picture Displays [when a picture IS selected]
   state orientation2
-  setvar digz 12288 // 8192
+  setvar digz 16384 // 8192
   state pal0
 
   ifvare mainmenuselection 0 state tiledisplayr1c1
@@ -10261,8 +10295,7 @@ ifvare mainmenusubmenu 6
   // Cursor
 
   state orientation2
-  ifvare mainmenupage 10 { ifvarg mainmenuselection 5 setvar digz 16384 else setvar digz 24576 } else setvar digz 24576
-//  setvar digz 24576 // 16384
+  ifvare mainmenupage 10 { ifvarg mainmenuselection 5 setvar digz 16384 else setvar digz 32768 } else setvar digz 32768
   setvar tilenum 8178
   state pal0
 
@@ -11162,6 +11195,37 @@ ifvarg equipmenuinuse 0
   setvar digx 195
   redefinequote 332 SELECT THE ITEM
   state gt
+
+  // Show Indication of Characters on the other page
+  ifvare equipmenupage 0
+  {
+   setvar TEMPMOD 0
+   state checkpg2equippables
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 OTHER EQUPPABLES ON PG.2>>
+    setvar temp 332
+    state mt
+   }
+  }
+  else
+  ifvare equipmenupage 1
+  {
+   setvar TEMPMOD 0
+   state checkpg1equippables
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 <<OTHER EQUPPABLES ON PG.1
+    setvar temp 332
+    state mt
+   }
+  }
 
  ifvare equipmenupage 0
  {
@@ -12082,6 +12146,38 @@ ifvarg equipmenuinuse 0
   redefinequote 332 SELECT THE RECIPIENT
   state gt
 
+  // Show Indication of Characters on the other page
+  ifvare skillmenupage 0
+  {
+   setvar TEMPMOD 0
+   state checkpg2characters
+   ifvarn VEHICLEID -1 addvar TEMPMOD 1
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 OTHER CHARACTERS ON PG.2>>
+    setvar temp 332
+    state mt
+   }
+  }
+  else
+  ifvare skillmenupage 1
+  {
+   setvar TEMPMOD 0
+   state checkpg1characters
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 <<OTHER CHARACTERS ON PG.1
+    setvar temp 332
+    state mt
+   }
+  }
+
 // Character Displays
   setvar digx 70
   setvar digy 53
@@ -12187,6 +12283,38 @@ ifvarg equipmenuinuse 0
   setvar digx 171
   redefinequote 332 SELECT THE RECIPIENT
   state gt
+
+  // Show Indication of Characters on the other page
+  ifvare itemmenupage 0
+  {
+   setvar TEMPMOD 0
+   state checkpg2characters
+   ifvarn VEHICLEID -1 addvar TEMPMOD 1
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 OTHER CHARACTERS ON PG.2>>
+    setvar temp 332
+    state mt
+   }
+  }
+  else
+  ifvare itemmenupage 1
+  {
+   setvar TEMPMOD 0
+   state checkpg1characters
+   ifvarg TEMPMOD 0
+   {
+    state pal20
+    setvar digx 161
+    setvar digy 169
+    redefinequote 332 <<OTHER CHARACTERS ON PG.1
+    setvar temp 332
+    state mt
+   }
+  }
 
 // Character Displays
   setvar digx 70

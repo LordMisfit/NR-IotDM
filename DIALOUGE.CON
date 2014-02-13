@@ -1297,7 +1297,7 @@ state dialouge-mainsystem
    // Bottom Character's Dialouge
    setvar dialougepicnum 7944
    // Quote 1031 = Name of the Bottom Speaker
-   redefinequote 1031 CYBANIS
+   redefinequote 1031 Cybanis
 
    // Quotes 1025-1030 are the six lines that can fit in the dialouge box
                    // 123456789012345678901234567890123456789 | 39 Characters per line

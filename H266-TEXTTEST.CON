@@ -1,5 +1,0 @@
-definequote 666 THIS IS A TEST TEXT
-
-onevent EVENT_DISPLAYREST
-   gametextz 2822 120 120 666 0 0 27 ZERO ZERO xdim ydim 49152
-endevent

@@ -15,6 +15,17 @@ endevent
 
 onevent EVENT_EGS 
 
+/*
+ getactor[THISACTOR].picnum picnum
+ switch picnum
+
+  case FIRELASER
+     setactor[THISACTOR].xoffset -32
+  break
+
+ endswitch
+*/
+
  ifactor MORTER
  {
   getactor[THISACTOR].owner TEMP
@@ -334,7 +345,7 @@ ifvare oldskoolmode 0
       {
        ifvare atm_id -1
        {
-	  ifvare mainmenu 0 
+        ifvare mainmenu 0 
         {
          setvar mainmenu 1
          ifvare mainmenusubmenu 0
@@ -359,15 +370,15 @@ ifvare oldskoolmode 0
           ifvare CHARACTERSELECTED? 16 setvar mainmenuselection 7
          }
          sound MENU_ENTER
-		 stopsound MENU_EXIT 
+         stopsound MENU_EXIT 
         }
-	  else 
+        else 
         {  
-	   ifvare itemidinuse -1 
+         ifvare itemidinuse -1 
          { 
-	    ifvare skillidinuse -1 
+          ifvare skillidinuse -1 
           { 
- 	     ifvare equipmenuinuse -1 
+           ifvare equipmenuinuse -1 
            { 
             state exit_mainmenu
            }
@@ -417,25 +428,62 @@ ifvare oldskoolmode 0
  state getpartime
   addvar mpresstime 1
    ifvarvare temppartime mpresstime nullop else
-	{
-	 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
-	 {
+    {
+     ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
+     {
         ifvare itemidinuse -1
         {
          ifvare skillidinuse -1
          {
           ifvare equipmenuinuse -1
           {
-  	     ifvare mainmenusubmenu 0
+           ifvare mainmenusubmenu 0 // Characters Submenu
            {
-            addvar mainmenupage 1
-            ifvarg mainmenupage 1 subvar mainmenupage 2
-            sound MENU_SHIFTPAGE 
-            stopsound MENU_SELECTED
-            stopsound MENU_EXIT 
-            stopsound MENU_ENTER 
+            ifvare mainmenupage 0
+            {
+             setvar TEMPMOD 0
+             state checkpg2characters
+             ifvarg TEMPMOD 0
+             {
+              addvar mainmenupage 1
+              ifvarg mainmenupage 1 subvar mainmenupage 2
+              sound MENU_SHIFTPAGE 
+              stopsound MENU_SELECTED
+              stopsound MENU_EXIT 
+              stopsound MENU_ENTER 
+             }
+             else
+             {
+              sound MENU_ERROR
+              stopsound MENU_SELECTED
+              stopsound MENU_EXIT 
+              stopsound MENU_ENTER 
+             }
+            }
+            else
+            ifvare mainmenupage 1
+            {
+             setvar TEMPMOD 0
+             state checkpg1characters
+             ifvarg TEMPMOD 0
+             {
+              addvar mainmenupage 1
+              ifvarg mainmenupage 1 subvar mainmenupage 2
+              sound MENU_SHIFTPAGE 
+              stopsound MENU_SELECTED
+              stopsound MENU_EXIT 
+              stopsound MENU_ENTER 
+             }
+             else
+             {
+              sound MENU_ERROR
+              stopsound MENU_SELECTED
+              stopsound MENU_EXIT 
+              stopsound MENU_ENTER 
+             }
+            }
            }
-	     ifvare mainmenusubmenu 1
+           ifvare mainmenusubmenu 1 // Items Submenu
            {
             addvar mainmenupage 1
             ifvarg mainmenupage 5 subvar mainmenupage 6
@@ -444,7 +492,7 @@ ifvare oldskoolmode 0
             stopsound MENU_EXIT 
             stopsound MENU_ENTER 
            }
-	     ifvare mainmenusubmenu 2
+           ifvare mainmenusubmenu 2
            {
             addvar mainmenupage 1
             ifvarg mainmenupage 1 subvar mainmenupage 2
@@ -453,16 +501,7 @@ ifvare oldskoolmode 0
             stopsound MENU_EXIT 
             stopsound MENU_ENTER 
            }
-	     ifvare mainmenusubmenu 3
-           {
-            state menuerrorsound
-
-            stopsound MENU_SHIFTPAGE
-            stopsound MENU_SELECTED
-            stopsound MENU_EXIT 
-            stopsound MENU_ENTER 
-           }
-	     ifvare mainmenusubmenu 4
+           ifvare mainmenusubmenu 3
            {
             state menuerrorsound
             stopsound MENU_SHIFTPAGE
@@ -470,7 +509,7 @@ ifvare oldskoolmode 0
             stopsound MENU_EXIT 
             stopsound MENU_ENTER 
            }
-	     ifvare mainmenusubmenu 5
+           ifvare mainmenusubmenu 4
            {
             state menuerrorsound
             stopsound MENU_SHIFTPAGE
@@ -478,7 +517,7 @@ ifvare oldskoolmode 0
             stopsound MENU_EXIT 
             stopsound MENU_ENTER 
            }
-	     ifvare mainmenusubmenu 6
+           ifvare mainmenusubmenu 5
            {
             state menuerrorsound
             stopsound MENU_SHIFTPAGE
@@ -486,7 +525,15 @@ ifvare oldskoolmode 0
             stopsound MENU_EXIT 
             stopsound MENU_ENTER 
            }
-	     ifvare mainmenusubmenu 7
+           ifvare mainmenusubmenu 6
+           {
+            state menuerrorsound
+            stopsound MENU_SHIFTPAGE
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+           ifvare mainmenusubmenu 7 // Worldtiles
            {
             addvar mainmenupage 1
             ifvarg mainmenupage 10 subvar mainmenupage 11
@@ -498,34 +545,155 @@ ifvare oldskoolmode 0
           }
           else // ifvarn equipmenuinuse -1
           {
+           ifvare equipmenupage 0
+           {
+            setvar TEMPMOD 0
+            state checkpg2equippables
+            ifvarg TEMPMOD 0
+            {
+             addvar equipmenupage 1
+             ifvarg equipmenupage 1 subvar equipmenupage 2
+             sound MENU_SHIFTPAGE 
+             stopsound MENU_SELECTED
+             stopsound MENU_EXIT 
+             stopsound MENU_ENTER 
+            }
+            else
+            {
+             sound MENU_ERROR
+             stopsound MENU_SELECTED
+             stopsound MENU_EXIT 
+             stopsound MENU_ENTER 
+            }
+           }
+           else
+           ifvare equipmenupage 1
+           {
+            setvar TEMPMOD 0
+            state checkpg1equippables
+            ifvarg TEMPMOD 0
+            {
+             addvar equipmenupage 1
+             ifvarg equipmenupage 1 subvar equipmenupage 2
+             sound MENU_SHIFTPAGE 
+             stopsound MENU_SELECTED
+             stopsound MENU_EXIT 
+             stopsound MENU_ENTER 
+            }
+            else
+            {
+             sound MENU_ERROR
+             stopsound MENU_SELECTED
+             stopsound MENU_EXIT 
+             stopsound MENU_ENTER 
+            }
+           }
+/*
            addvar equipmenupage 1
            ifvarg equipmenupage 1 subvar equipmenupage 2
            sound MENU_SHIFTPAGE 
            stopsound MENU_SELECTED
            stopsound MENU_ENTER 
            stopsound MENU_EXIT 
+*/
           }
          }
          else // ifvarn skillidinuse -1
          {
-          addvar skillmenupage 1
-          ifvarg skillmenupage 1 subvar skillmenupage 2
-          sound MENU_SHIFTPAGE 
-          stopsound MENU_SELECTED
-          stopsound MENU_ENTER 
-          stopsound MENU_EXIT 
+          ifvare skillmenupage 0
+          {
+           setvar TEMPMOD 0
+           state checkpg2characters
+           ifvarn VEHICLEID -1 addvar TEMPMOD 1
+           ifvarg TEMPMOD 0
+           {
+            addvar skillmenupage 1
+            ifvarg skillmenupage 1 subvar skillmenupage 2
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+           else
+           {
+            sound MENU_ERROR
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+          }
+          else
+          ifvare skillmenupage 1
+          {
+           setvar TEMPMOD 0
+           state checkpg1characters
+           ifvarg TEMPMOD 0
+           {
+            addvar skillmenupage 1
+            ifvarg skillmenupage 1 subvar skillmenupage 2
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+           else
+           {
+            sound MENU_ERROR
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+          }
          }
         }
         else // ifvarn itemidinuse -1
         {
-         addvar itemmenupage 1
-         ifvarg itemmenupage 1 subvar itemmenupage 2
-         sound MENU_SHIFTPAGE 
-         stopsound MENU_SELECTED
-         stopsound MENU_ENTER 
-         stopsound MENU_EXIT 
+          ifvare itemmenupage 0
+          {
+           setvar TEMPMOD 0
+           state checkpg2characters
+           ifvarn VEHICLEID -1 addvar TEMPMOD 1
+           ifvarg TEMPMOD 0
+           {
+            addvar itemmenupage 1
+            ifvarg itemmenupage 1 subvar itemmenupage 2
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+           else
+           {
+            sound MENU_ERROR
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+          }
+          else
+          ifvare itemmenupage 1
+          {
+           setvar TEMPMOD 0
+           state checkpg1characters
+           ifvarg TEMPMOD 0
+           {
+            addvar itemmenupage 1
+            ifvarg itemmenupage 1 subvar itemmenupage 2
+            sound MENU_SHIFTPAGE 
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+           else
+           {
+            sound MENU_ERROR
+            stopsound MENU_SELECTED
+            stopsound MENU_EXIT 
+            stopsound MENU_ENTER 
+           }
+          }
         }
-	 }
+     }
        else
        {
         ifvare shop_id -1
@@ -556,7 +724,7 @@ ifvare oldskoolmode 0
          ifvarg shoptransitiontimer 6 state shop_shiftpage
         }
        }
-	}
+    }
   setvarvar mpresstime temppartime
  state setreturn-1
 }
@@ -705,141 +873,141 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
   addvar fpresstime 1
   ifvarvare temppartime fpresstime nullop else
   {
-	 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
-	 {
-        ifvare itemidinuse -1
+   ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+   {
+    ifvare itemidinuse -1
+    {
+     ifvare skillidinuse -1
+     {
+      ifvare equipmenuinuse -1
+      {
+       ifvare mainmenusubmenu 0 // Characters
+       {
+        subvar mainmenuselection 2
+        ifvarl mainmenuselection 0 addvar mainmenuselection 8
+        sound MENU_CURSOR
+       }
+       ifvare mainmenusubmenu 1 // Items
+       {
+        subvar mainmenuselection 6
+        ifvarl mainmenuselection 0 addvar mainmenuselection 24
+        sound MENU_CURSOR
+       }
+       ifvare mainmenusubmenu 2 // Toggles
+       {
+        subvar mainmenuselection 1
+        ifvarl mainmenuselection 0 addvar mainmenuselection 13
+        sound KICK_HIT // EXITMENUSOUND
+       }
+       ifvare mainmenusubmenu 3 state menuerrorsound // Status
+       ifvare mainmenusubmenu 4 // Skills
+       {
+        ifvare mainmenupage 3
         {
-         ifvare skillidinuse -1
-         {
-          ifvare equipmenuinuse -1
-          {
-           ifvare mainmenusubmenu 0 // Characters
-           {
-            subvar mainmenuselection 2
-            ifvarl mainmenuselection 0 addvar mainmenuselection 8
-            sound MENU_CURSOR
-           }
-           ifvare mainmenusubmenu 1 // Items
-           {
-            subvar mainmenuselection 6
-            ifvarl mainmenuselection 0 addvar mainmenuselection 24
-            sound MENU_CURSOR
-           }
-   	     ifvare mainmenusubmenu 2 // Toggles
-  	     {
-  	      subvar mainmenuselection 1
- 	      ifvarl mainmenuselection 0 addvar mainmenuselection 13
- 	      sound KICK_HIT // EXITMENUSOUND
-	     }
-	     ifvare mainmenusubmenu 3 state menuerrorsound // Status
-	     ifvare mainmenusubmenu 4 // Skills
-           {
-            ifvare mainmenupage 3
-            {
-             subvar mainmenuselection 1
-             ifvarl mainmenuselection 0 addvar mainmenuselection 2
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 6
-            {
-             subvar mainmenuselection 1
-             ifvarl mainmenuselection 0 addvar mainmenuselection 3
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 9
-            {
-             subvar mainmenuselection 1
-             ifvarl mainmenuselection 0 addvar mainmenuselection 6
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 11
-            {
-             subvar mainmenuselection 1
-             ifvarl mainmenuselection 0 addvar mainmenuselection 2
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 13
-            {
-             ifvare PUBLICBETA? 0
-             {
-              subvar mainmenuselection 1
-              ifvarl mainmenuselection 0 addvar mainmenuselection 2
-              sound MENU_CURSOR
-             }
-             else state menuerrorsound
-            }
-            else
-            ifvare mainmenupage 14
-            {
-             subvar mainmenuselection 1
-             ifvarl mainmenuselection 0 addvar mainmenuselection 2
-             sound MENU_CURSOR
-            }
-            else state menuerrorsound
-           }
-	     ifvare mainmenusubmenu 5 state menuerrorsound // Support
-	     ifvare mainmenusubmenu 6 // Equipment
-           {
-	      subvar mainmenuselection 1
-            ifvare EQUIPCHEAT? 0
-            {
-             ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarl mainmenuselection 0 setvar mainmenuselection 0 }
-             else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarl mainmenuselection 0 setvar mainmenuselection 1 }
-             else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarl mainmenuselection 0 setvar mainmenuselection 2 }
-             else ifvare SKILLLEVEL 0 { ifvarl mainmenuselection 0 setvar mainmenuselection 3 }
-            }
-            else
-            {
-             ifvare EQUIPCHEAT? 2
-             {
-              ifvarl mainmenuselection 0 setvar mainmenuselection 7
-             }
-             else
-             {
-              ifvarl mainmenuselection 0 setvar mainmenuselection 3
-             }
-            }
-	      sound KICK_HIT // EXITMENUSOUND
-           }
-	     ifvare mainmenusubmenu 7 // WorldTiles
-           {
-            subvar mainmenuselection 5
-            ifvarl mainmenuselection 0 addvar mainmenuselection 25
-            sound MENU_CURSOR
-           }
-           ifvare mainmenusubmenu 256 // Cheats
-           {
-            subvar mainmenuselection 8
-            ifvarl mainmenuselection 0 addvar mainmenuselection 36
-            sound MENU_CURSOR
-           }
-          }
-          else // Equipment Choose
-          {
-           subvar equipmenuselection 6
-           ifvarl equipmenuselection 0 addvar equipmenuselection 24
-           sound MENU_CURSOR
-          }
-         }
-         else // Skill Use
-         {
-          subvar skillmenuselection 2
-          ifvarl skillmenuselection 0 addvar skillmenuselection 8
-          sound MENU_CURSOR
-         }
-        }
-        else // Item Use
-        {
-         subvar itemmenuselection 2
-         ifvarl itemmenuselection 0 addvar itemmenuselection 8
+         subvar mainmenuselection 1
+         ifvarl mainmenuselection 0 addvar mainmenuselection 2
          sound MENU_CURSOR
         }
-	  state setreturn-1
-	 }
+        else
+        ifvare mainmenupage 6
+        {
+         subvar mainmenuselection 1
+         ifvarl mainmenuselection 0 addvar mainmenuselection 3
+         sound MENU_CURSOR
+        }
+        else
+        ifvare mainmenupage 9
+        {
+         subvar mainmenuselection 1
+         ifvarl mainmenuselection 0 addvar mainmenuselection 6
+         sound MENU_CURSOR
+        }
+        else
+        ifvare mainmenupage 11
+        {
+         subvar mainmenuselection 1
+         ifvarl mainmenuselection 0 addvar mainmenuselection 2
+         sound MENU_CURSOR
+        }
+        else
+        ifvare mainmenupage 13
+        {
+         ifvare PUBLICBETA? 0
+         {
+          subvar mainmenuselection 1
+          ifvarl mainmenuselection 0 addvar mainmenuselection 2
+          sound MENU_CURSOR
+         }
+         else state menuerrorsound
+        }
+        else
+        ifvare mainmenupage 14
+        {
+         subvar mainmenuselection 1
+         ifvarl mainmenuselection 0 addvar mainmenuselection 2
+         sound MENU_CURSOR
+        }
+        else state menuerrorsound
+       }
+       ifvare mainmenusubmenu 5 state menuerrorsound // Support
+       ifvare mainmenusubmenu 6 // Equipment
+       {
+        subvar mainmenuselection 1
+        ifvare EQUIPCHEAT? 0
+        {
+         ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarl mainmenuselection 0 setvar mainmenuselection 0 }
+         else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarl mainmenuselection 0 setvar mainmenuselection 1 }
+         else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarl mainmenuselection 0 setvar mainmenuselection 2 }
+         else ifvare SKILLLEVEL 0 { ifvarl mainmenuselection 0 setvar mainmenuselection 3 }
+        }
+        else
+        {
+         ifvare EQUIPCHEAT? 2
+         {
+          ifvarl mainmenuselection 0 setvar mainmenuselection 7
+         }
+         else
+         {
+          ifvarl mainmenuselection 0 setvar mainmenuselection 3
+         }
+        }
+        sound KICK_HIT // EXITMENUSOUND
+       }
+       ifvare mainmenusubmenu 7 // WorldTiles
+       {
+        subvar mainmenuselection 5
+        ifvarl mainmenuselection 0 addvar mainmenuselection 25
+        sound MENU_CURSOR
+       }
+       ifvare mainmenusubmenu 256 // Cheats
+       {
+        subvar mainmenuselection 8
+        ifvarl mainmenuselection 0 addvar mainmenuselection 36
+        sound MENU_CURSOR
+       }
+      }
+      else // Equipment Choose
+      {
+       subvar equipmenuselection 6
+       ifvarl equipmenuselection 0 addvar equipmenuselection 24
+       sound MENU_CURSOR
+      }
+     }
+     else // Skill Use
+     {
+      subvar skillmenuselection 2
+      ifvarl skillmenuselection 0 addvar skillmenuselection 8
+      sound MENU_CURSOR
+     }
+    }
+    else // Item Use
+    {
+     subvar itemmenuselection 2
+     ifvarl itemmenuselection 0 addvar itemmenuselection 8
+     sound MENU_CURSOR
+    }
+    state setreturn-1
+   }
   }
   setvarvar fpresstime temppartime
 }
@@ -880,31 +1048,31 @@ else // ifvare mainmenu 0
  
    ifvarg ONAWALL? 0 ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
- 	state setreturn-1
- 	ifp ponground  
-	{  
-       getplayer[THISACTOR].posz z 
-       subvar z 1024 
-       setplayer[THISACTOR].posz z 
-	}
-  	  setvarvar temp CHARACTERSPEEDTRUE
-      ifp ponsteroids divvar temp -40 else divvar temp -50
-      setvarvar tempc CHARACTERSPEEDSTAT
-	  ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
-      else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }
+    state setreturn-1
+    ifp ponground  
+    {  
+     getplayer[THISACTOR].posz z 
+     subvar z 1024 
+     setplayer[THISACTOR].posz z 
+    }
+    setvarvar temp CHARACTERSPEEDTRUE
+    ifp ponsteroids divvar temp -40 else divvar temp -50
+    setvarvar tempc CHARACTERSPEEDSTAT
+    ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
+    else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }
 
-      mulvar tempc 10
-      subvarvar temp tempc
-      ifp ponsteroids
-      {
-       setvarvar tempc CHARACTERSPEEDSTAT
- 	   ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
-       else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }	   
+    mulvar tempc 10
+    subvarvar temp tempc
+    ifp ponsteroids
+    {
+     setvarvar tempc CHARACTERSPEEDSTAT
+     ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
+     else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }	   
 
-       mulvar tempc 20
-       subvarvar temp tempc
-      }
-	setvarvar CLIMBINGSPEED temp
+     mulvar tempc 20
+     subvarvar temp tempc
+    }
+    setvarvar CLIMBINGSPEED temp
    }
   }
  }
@@ -918,143 +1086,143 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
  addvar bpresstime 1
  ifvarvare temppartime bpresstime nullop else
  {
-	 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
-	 {
-        ifvare itemidinuse -1
+  ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+  {
+   ifvare itemidinuse -1
+   {
+    ifvare skillidinuse -1
+    {
+     ifvare equipmenuinuse -1
+     {
+      ifvare mainmenusubmenu 0 // Characters
+      {
+       addvar mainmenuselection 2
+       ifvarg mainmenuselection 7 subvar mainmenuselection 8
+       sound MENU_CURSOR
+      }
+      ifvare mainmenusubmenu 1 // Items
+      {
+       addvar mainmenuselection 6
+       ifvarg mainmenuselection 23 subvar mainmenuselection 24
+       sound MENU_CURSOR
+      }
+      ifvare mainmenusubmenu 2 // Toggle
+      {
+       addvar mainmenuselection 1
+       ifvarg mainmenuselection 12 subvar mainmenuselection 13
+       sound KICK_HIT // EXITMENUSOUND
+      }
+      ifvare mainmenusubmenu 3 state menuerrorsound // Status
+      ifvare mainmenusubmenu 4 // Skills
+      {
+       ifvare mainmenupage 3
+       {
+        addvar mainmenuselection 1
+        ifvarg mainmenuselection 1 subvar mainmenuselection 2
+        sound MENU_CURSOR
+       }
+       else
+       ifvare mainmenupage 6
+       {
+        addvar mainmenuselection 1
+        ifvarg mainmenuselection 2 subvar mainmenuselection 3
+        sound MENU_CURSOR
+       }
+       else
+       ifvare mainmenupage 9
+       {
+        addvar mainmenuselection 1
+        ifvarg mainmenuselection 5 subvar mainmenuselection 6
+        sound MENU_CURSOR
+       }
+       else
+       ifvare mainmenupage 11
+       {
+        addvar mainmenuselection 1
+        ifvarg mainmenuselection 1 subvar mainmenuselection 2
+        sound MENU_CURSOR
+       }
+       else
+       ifvare mainmenupage 13
+       {
+        ifvare PUBLICBETA? 0
         {
-         ifvare skillidinuse -1
-         {
-          ifvare equipmenuinuse -1
-          {
-           ifvare mainmenusubmenu 0 // Characters
-           {
-            addvar mainmenuselection 2
-            ifvarg mainmenuselection 7 subvar mainmenuselection 8
-            sound MENU_CURSOR
-           }
-           ifvare mainmenusubmenu 1 // Items
-           {
-            addvar mainmenuselection 6
-            ifvarg mainmenuselection 23 subvar mainmenuselection 24
-            sound MENU_CURSOR
-           }
- 	     ifvare mainmenusubmenu 2 // Toggle
-	     {
-	      addvar mainmenuselection 1
-	      ifvarg mainmenuselection 12 subvar mainmenuselection 13
-	      sound KICK_HIT // EXITMENUSOUND
- 	     }
-	     ifvare mainmenusubmenu 3 state menuerrorsound // Status
-	     ifvare mainmenusubmenu 4 // Skills
-           {
-            ifvare mainmenupage 3
-            {
-             addvar mainmenuselection 1
-             ifvarg mainmenuselection 1 subvar mainmenuselection 2
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 6
-            {
-             addvar mainmenuselection 1
-             ifvarg mainmenuselection 2 subvar mainmenuselection 3
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 9
-            {
-             addvar mainmenuselection 1
-             ifvarg mainmenuselection 5 subvar mainmenuselection 6
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 11
-            {
-             addvar mainmenuselection 1
-             ifvarg mainmenuselection 1 subvar mainmenuselection 2
-             sound MENU_CURSOR
-            }
-            else
-            ifvare mainmenupage 13
-            {
-             ifvare PUBLICBETA? 0
-             {
-              addvar mainmenuselection 1
-              ifvarg mainmenuselection 1 subvar mainmenuselection 2
-              sound MENU_CURSOR
-             }
-             else state menuerrorsound
-            }
-            else
-            ifvare mainmenupage 14
-            {
-             addvar mainmenuselection 1
-             ifvarg mainmenuselection 1 subvar mainmenuselection 2
-             sound MENU_CURSOR
-            }
-            else state menuerrorsound
-           }
-	     ifvare mainmenusubmenu 5 state menuerrorsound // Support
-	     ifvare mainmenusubmenu 6 // Equip
-           {
-	      addvar mainmenuselection 1
-            ifvare EQUIPCHEAT? 0
-            {
-             ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarg mainmenuselection 0 setvar mainmenuselection 0 }
-             else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarg mainmenuselection 1 setvar mainmenuselection 0 }
-             else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarg mainmenuselection 2 setvar mainmenuselection 0 }
-             else ifvare SKILLLEVEL 0 { ifvarg mainmenuselection 3 setvar mainmenuselection 0 }
-            }
-            else
-            {
-             ifvare EQUIPCHEAT? 2
-             {
-              ifvarg mainmenuselection 7 setvar mainmenuselection 0
-             }
-             else
-             {
-              ifvarg mainmenuselection 3 setvar mainmenuselection 0
-             }
-            }
-	      sound KICK_HIT // EXITMENUSOUND
-           }
-	     ifvare mainmenusubmenu 7 // WorldTiles
-           {
-            addvar mainmenuselection 5
-            ifvarg mainmenuselection 24 subvar mainmenuselection 25
-            sound MENU_CURSOR
-           }
-           ifvare mainmenusubmenu 256 // Cheats
-           {
-            addvar mainmenuselection 8
-            ifvarg mainmenuselection 35 subvar mainmenuselection 36
-            sound MENU_CURSOR
-           }
-          }
-          else // Equip Choose
-          {
-           addvar equipmenuselection 6
-           ifvarg equipmenuselection 23 subvar equipmenuselection 24
-           sound MENU_CURSOR
-          }
-         }
-         else // Skill Use
-         {
+         addvar mainmenuselection 1
+         ifvarg mainmenuselection 1 subvar mainmenuselection 2
+         sound MENU_CURSOR
+        }
+        else state menuerrorsound
+       }
+       else
+       ifvare mainmenupage 14
+       {
+        addvar mainmenuselection 1
+        ifvarg mainmenuselection 1 subvar mainmenuselection 2
+        sound MENU_CURSOR
+       }
+       else state menuerrorsound
+      }
+      ifvare mainmenusubmenu 5 state menuerrorsound // Support
+      ifvare mainmenusubmenu 6 // Equip
+      {
+       addvar mainmenuselection 1
+       ifvare EQUIPCHEAT? 0
+       {
+        ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarg mainmenuselection 0 setvar mainmenuselection 0 }
+        else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarg mainmenuselection 1 setvar mainmenuselection 0 }
+        else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarg mainmenuselection 2 setvar mainmenuselection 0 }
+        else ifvare SKILLLEVEL 0 { ifvarg mainmenuselection 3 setvar mainmenuselection 0 }
+       }
+       else
+       {
+        ifvare EQUIPCHEAT? 2
+        {
+         ifvarg mainmenuselection 7 setvar mainmenuselection 0
+        }
+        else
+        {
+         ifvarg mainmenuselection 3 setvar mainmenuselection 0
+        }
+       }
+       sound KICK_HIT // EXITMENUSOUND
+      }
+      ifvare mainmenusubmenu 7 // WorldTiles
+      {
+       addvar mainmenuselection 5
+       ifvarg mainmenuselection 24 subvar mainmenuselection 25
+       sound MENU_CURSOR
+      }
+      ifvare mainmenusubmenu 256 // Cheats
+      {
+       addvar mainmenuselection 8
+       ifvarg mainmenuselection 35 subvar mainmenuselection 36
+       sound MENU_CURSOR
+      }
+     }
+     else // Equip Choose
+     {
+      addvar equipmenuselection 6
+      ifvarg equipmenuselection 23 subvar equipmenuselection 24
+      sound MENU_CURSOR
+     }
+    }
+    else // Skill Use
+    {
           addvar skillmenuselection 2
           ifvarg skillmenuselection 7 subvar skillmenuselection 8
           sound MENU_CURSOR
-         }
-        }
-        else // Item Use
-        {
-         addvar itemmenuselection 2
-         ifvarg itemmenuselection 7 subvar itemmenuselection 8
-         sound MENU_CURSOR
-        }
-        state setreturn-1
-	 }
+    }
+   }
+   else // Item Use
+   {
+    addvar itemmenuselection 2
+    ifvarg itemmenuselection 7 subvar itemmenuselection 8
+    sound MENU_CURSOR
+   }
+   state setreturn-1
   }
-  setvarvar bpresstime temppartime
+ }
+ setvarvar bpresstime temppartime
 }
 else
 ifvare mainmenu -1 // Tips
@@ -1067,11 +1235,11 @@ else // ifvare mainmenu 0
  {
   state setreturn-1
   state getpartime
-   addvar bpresstime 1
-   ifvarvare temppartime bpresstime nullop else
-   {
-    ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state shop_movedown
-   }
+  addvar bpresstime 1
+  ifvarvare temppartime bpresstime nullop else
+  {
+   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state shop_movedown
+  }
   setvarvar bpresstime temppartime
  }
  else
@@ -1093,20 +1261,20 @@ else // ifvare mainmenu 0
 
    ifvarg ONAWALL? 0 ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
-	state setreturn-1
-	setvarvar temp CHARACTERSPEEDTRUE
-      ifp ponsteroids divvar temp 40 else divvar temp 50
-	  subvar temp 512
-      setvarvar tempc CHARACTERSPEEDSTAT
-      mulvar tempc 10
-      addvarvar temp tempc
-      ifp ponsteroids
-      {
-       setvarvar tempc CHARACTERSPEEDSTAT
-       mulvar tempc 20
-       addvarvar temp tempc
-      }
-	setvarvar CLIMBINGSPEED temp
+    state setreturn-1
+    setvarvar temp CHARACTERSPEEDTRUE
+    ifp ponsteroids divvar temp 40 else divvar temp 50
+    subvar temp 512
+    setvarvar tempc CHARACTERSPEEDSTAT
+    mulvar tempc 10
+    addvarvar temp tempc
+    ifp ponsteroids
+    {
+     setvarvar tempc CHARACTERSPEEDSTAT
+     mulvar tempc 20
+     addvarvar temp tempc
+    }
+    setvarvar CLIMBINGSPEED temp
    }
   }
  }
@@ -1356,7 +1524,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
           ifvarl itemmenuselection 0 addvar itemmenuselection 8
           sound MENU_CURSOR
          }
-	     state setreturn-1 
+         state setreturn-1 
     }
    }
    setvarvar lpresstime temppartime
@@ -1414,7 +1582,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
              addvar mainmenuselection 1
              ifvarg mainmenuselection 7 subvar mainmenuselection 8
              sound MENU_CURSOR
-	        }
+            }
             ifvare mainmenusubmenu 1
             {
              addvar mainmenuselection 1
@@ -1455,13 +1623,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
              setvar mainmenuselection 0
              state checkcharstatusscreensright
             }
-	        ifvare mainmenusubmenu 7 // WorldTiles
+            ifvare mainmenusubmenu 7 // WorldTiles
             {
              addvar mainmenuselection 1
              ifvarg mainmenuselection 24 subvar mainmenuselection 25
              sound MENU_CURSOR
             }
-	        ifvare mainmenusubmenu 256 // Cheats
+            ifvare mainmenusubmenu 256 // Cheats
             {
              addvar mainmenuselection 1
              ifvarg mainmenuselection 35 subvar mainmenuselection 36
@@ -1488,7 +1656,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
           ifvarg itemmenuselection 7 subvar itemmenuselection 8
           sound MENU_CURSOR
          }
-	     state setreturn-1 
+         state setreturn-1 
     }
    }
    setvarvar rpresstime temppartime
@@ -1542,11 +1710,11 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
            ifvare equipmenuinuse -1
            {
             ifvare mainmenusubmenu 0
-	        {
+            {
              addvar mainmenuselection 1
              ifvarg mainmenuselection 7 subvar mainmenuselection 8
              sound MENU_CURSOR
-	        }
+            }
             ifvare mainmenusubmenu 1
             {
              addvar mainmenuselection 1
@@ -1587,13 +1755,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
              setvar mainmenuselection 0
              state checkcharstatusscreensright
             }
-	        ifvare mainmenusubmenu 7 // WorldTiles
+            ifvare mainmenusubmenu 7 // WorldTiles
             {
              addvar mainmenuselection 1
              ifvarg mainmenuselection 24 subvar mainmenuselection 25
              sound MENU_CURSOR
             }
-	        ifvare mainmenusubmenu 256 // Cheats
+            ifvare mainmenusubmenu 256 // Cheats
             {
              addvar mainmenuselection 1
              ifvarg mainmenuselection 35 subvar mainmenuselection 36
@@ -1620,7 +1788,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
           ifvarg itemmenuselection 7 subvar itemmenuselection 8
           sound MENU_CURSOR
          }
-	     state setreturn-1 
+         state setreturn-1 
     }
    }
    setvarvar rpresstime temppartime
@@ -3509,7 +3677,7 @@ ifvarl tsprowner 0 setvar TEMPVAR4 0 else getactorvar[tsprowner].position TEMPVA
 ifvare TEMPVAR4 32768
 {
  getactor[tsprowner].sectnum temp
- ifvarn temp -1
+ ifvarg temp -1 ifvarl temp 4096
  {
   getsector[temp].lotag tempb
 
@@ -3522,7 +3690,7 @@ ifvare TEMPVAR4 32768
    subvarvar digz mz
 
    ifvarl digz 1024 // on the floor
-   {		
+   {
     getactorvar[tsprowner].itemtimer TEMPVAR5
     setvarvar temp TEMPVAR5
     shiftvarl temp 5
@@ -3530,7 +3698,7 @@ ifvare TEMPVAR4 32768
     sin tempb temp
     shiftvarr tempb 4
     getactor[tsprowner].z mz
-				
+
     subvarvar mz tempb
     subvar mz 4096
     settspr[THISACTOR].tsprz mz

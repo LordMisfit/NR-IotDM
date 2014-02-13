@@ -200,10 +200,22 @@ onevent EVENT_WEAPKEY4
        ifvare CHAINGUNMODE 1
        {
         setvar CHAINGUNMODE 0
+//        setvar CHAINGUNMODE 2
+        redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
+//        redefinequote 1334 ^21CHAINGUN SHOOTS LASER BLASTS!
+        setvarvar fta fta_normal setvar ftq 1334
+        sound SELECT_WEAPON
+       }
+/*
+       else
+       ifvare CHAINGUNMODE 2
+       {
+        setvar CHAINGUNMODE 0
         redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
         setvarvar fta fta_normal setvar ftq 1334
         sound SELECT_WEAPON
        }
+*/
       }
      }
      setvarvar mpresstime temppartime
@@ -1475,9 +1487,10 @@ ifvarand TEMP 1 // Dead
 endevent
 
 onevent EVENT_SOUND
-// addlogvar RETURN
+addlogvar RETURN
+ifvare RETURN 42 { setvar RETURN -1 addlogvar RETURN }
+ifvare RETURN 200 { setvar RETURN -1 addlogvar RETURN } // fix by Hendricks266: prevents DUKE_LAND_HURT [#200] from playing and might help fix a sound issue with fall-damage sounds
 
-ifvare RETURN DUKE_LAND_HURT2 addlogvar RETURN
 ifvare RETURN WANG_LONGTERM_PAIN6 addlogvar RETURN
 ifvare RETURN LISA_FALLDAMAGE addlogvar RETURN
 ifvare RETURN LISA_FALLDAMAGE2 addlogvar RETURN
@@ -2071,7 +2084,7 @@ onevent EVENT_DISPLAYMENUREST
   state digx320
   setvar digy 186 // 120
   setvar textscale 48152
-  redefinequote 332 http://misfittechstudios.netii.net
+  redefinequote 332 http://misfittechstudios.duke4.net
   state setquote332
   state pal0
   state settilealphanum

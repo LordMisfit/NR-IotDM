@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22)
-definequote 1337 ^22VERSION:^0 5.22.12242011
+setgamename Naferia's Reign (5.22t)
+definequote 1337 ^22VERSION:^0 5.22t.12242012
 
 action ANULLACTION 0
 
@@ -2367,6 +2367,31 @@ state freezeblast-chilleffect_player
       }
 	ends
 
+state watchovermeskill-defense
+   ifvare CHARACTERSELECTED? 11 // Paula
+   {
+//    addlogvar PLAYERDEFENSETEMP
+    setvarvar TEMPVAR PARTYSIZE subvarvar TEMPVAR PARTYALIVE
+    ifvare TEMPVAR 1 { mulvar PLAYERDEFENSETEMP 135 divvarvar PLAYERDEFENSETEMP 100 } // +35 [35]
+    ifvare TEMPVAR 2 { mulvar PLAYERDEFENSETEMP 180 divvarvar PLAYERDEFENSETEMP 100 } // +80 [45]
+    ifvare TEMPVAR 3 { mulvar PLAYERDEFENSETEMP 235 divvarvar PLAYERDEFENSETEMP 100 } // +135 [55]
+    ifvare TEMPVAR 4 { mulvar PLAYERDEFENSETEMP 300 divvarvar PLAYERDEFENSETEMP 100 } // +200 [65]
+    ifvare TEMPVAR 5 { mulvar PLAYERDEFENSETEMP 375 divvarvar PLAYERDEFENSETEMP 100 } // +275 [75]
+    ifvare TEMPVAR 6 { mulvar PLAYERDEFENSETEMP 460 divvarvar PLAYERDEFENSETEMP 100 } // +360 [85]
+    ifvare TEMPVAR 7 { mulvar PLAYERDEFENSETEMP 555 divvarvar PLAYERDEFENSETEMP 100 } // +455 [95]
+    ifvare TEMPVAR 8 { mulvar PLAYERDEFENSETEMP 660 divvarvar PLAYERDEFENSETEMP 100 } // +560 [105]
+    ifvare TEMPVAR 9 { mulvar PLAYERDEFENSETEMP 775 divvarvar PLAYERDEFENSETEMP 100 } // +675 [115]
+    ifvare TEMPVAR 10 { mulvar PLAYERDEFENSETEMP 900 divvarvar PLAYERDEFENSETEMP 100 } // +800 [125]
+    ifvare TEMPVAR 11 { mulvar PLAYERDEFENSETEMP 1035 divvarvar PLAYERDEFENSETEMP 100 } // +935 [135]
+    ifvare TEMPVAR 12 { mulvar PLAYERDEFENSETEMP 1180 divvarvar PLAYERDEFENSETEMP 100 } // +1080 [145]
+    ifvare TEMPVAR 13 { mulvar PLAYERDEFENSETEMP 1335 divvarvar PLAYERDEFENSETEMP 100 } // +1235 [155]
+    ifvare TEMPVAR 14 { mulvar PLAYERDEFENSETEMP 1500 divvarvar PLAYERDEFENSETEMP 100 } // +1400 [165]
+    ifvarg TEMPVAR 14 { mulvar PLAYERDEFENSETEMP 1675 divvarvar PLAYERDEFENSETEMP 100 } // +1575 [175]
+    ifvarvarg PLAYERDEFENSETEMP STATLIMIT setvarvar PLAYERDEFENSETEMP STATLIMIT
+//    addlogvar PLAYERDEFENSETEMP
+   }
+ends
+
 //*****************************************************
 //*****************************************************
 //*****************************************************
@@ -2381,7 +2406,7 @@ state player_defense
   ifvarn MELEEATTACKERID -1 getactorvar[MELEEATTACKERID].ACTORATTACK tempe else setvar tempe 0
   getactor[THISACTOR].htpicnum ATTACKPICNUM
   getactor[THISACTOR].htextra PLAYERDAMAGE // The true variable for determining the end damage the actor receives
-  ifvare ATTACKPICNUM RPG { ifvare PLAYERDAMAGE 35 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
+  ifvare ATTACKPICNUM RPG { ifvarg PLAYERDAMAGE 10 ifvarl PLAYERDAMAGE 60 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
   getactorvar[THISACTOR].VEHICLEID tempvehicleid
   getactorvar[THISACTOR].VEHICLETYPE tempvehicletype
   setvarvar TEMP CURRENTHITPOINTS
@@ -3612,19 +3637,25 @@ state player_defense
     ifvare ISDEVASTATOR? 1 divvar PLAYERDAMAGE 2
 
     // Defense Formula
-    ifvare tempvehicleid -1
-    {
-     setvarvar PLAYERDEFENSETEMP PLAYERDEFENSE
-     ifvare ISDEVASTATOR? 1 divvar PLAYERDEFENSETEMP 4
-     subvarvar PLAYERDAMAGE PLAYERDEFENSETEMP
-    }
-    else
-    {
-     getactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR3
-     setvarvar PLAYERDEFENSETEMP TEMPVAR3
-     ifvare ISDEVASTATOR? 1 divvar PLAYERDEFENSETEMP 4
-     subvarvar PLAYERDAMAGE PLAYERDEFENSETEMP
-    }
+    ifvare tempvehicleid -1 { setvarvar PLAYERDEFENSETEMP PLAYERDEFENSE }
+    else { getactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR3 setvarvar PLAYERDEFENSETEMP TEMPVAR3 }
+    state watchovermeskill-defense
+    ifvare ISDEVASTATOR? 1 divvar PLAYERDEFENSETEMP 10
+    ifvare ATTACKPICNUM SPIT { mulvar PLAYERDEFENSETEMP 2 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM GROWSPARK { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM FREEZEBLAST { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM FIRELASER { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM COOLEXPLOSION1 { mulvar PLAYERDEFENSETEMP 2 divvar PLAYERDEFENSETEMP 3 }
+    ifvare ATTACKPICNUM RADIUSEXPLOSION divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM RPG_NOAIM divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM GENERAL_RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM COMMANDER_RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM LEADER_RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM BAALO_RPG divvar PLAYERDEFENSETEMP 2
+
+    subvarvar PLAYERDAMAGE PLAYERDEFENSETEMP
+
     ifvarand CHEATBITFIELD? 16
     {
      state cheatersound
@@ -5368,6 +5399,31 @@ state checkdamagecaps-knee
   // addlogvar ENEMYARMORDAMAGE
 ends
 
+state watchovermeskill-attack
+   ifvare CHARACTERSELECTED? 11 // Paula
+   {
+//    addlogvar PLAYERATTACKTEMP
+    setvarvar TEMPVAR PARTYSIZE subvarvar TEMPVAR PARTYALIVE
+    ifvare TEMPVAR 1 { mulvar PLAYERATTACKTEMP 135 divvarvar PLAYERATTACKTEMP 100 } // +35 [35]
+    ifvare TEMPVAR 2 { mulvar PLAYERATTACKTEMP 180 divvarvar PLAYERATTACKTEMP 100 } // +80 [45]
+    ifvare TEMPVAR 3 { mulvar PLAYERATTACKTEMP 235 divvarvar PLAYERATTACKTEMP 100 } // +135 [55]
+    ifvare TEMPVAR 4 { mulvar PLAYERATTACKTEMP 300 divvarvar PLAYERATTACKTEMP 100 } // +200 [65]
+    ifvare TEMPVAR 5 { mulvar PLAYERATTACKTEMP 375 divvarvar PLAYERATTACKTEMP 100 } // +275 [75]
+    ifvare TEMPVAR 6 { mulvar PLAYERATTACKTEMP 460 divvarvar PLAYERATTACKTEMP 100 } // +360 [85]
+    ifvare TEMPVAR 7 { mulvar PLAYERATTACKTEMP 555 divvarvar PLAYERATTACKTEMP 100 } // +455 [95]
+    ifvare TEMPVAR 8 { mulvar PLAYERATTACKTEMP 660 divvarvar PLAYERATTACKTEMP 100 } // +560 [105]
+    ifvare TEMPVAR 9 { mulvar PLAYERATTACKTEMP 775 divvarvar PLAYERATTACKTEMP 100 } // +675 [115]
+    ifvare TEMPVAR 10 { mulvar PLAYERATTACKTEMP 900 divvarvar PLAYERATTACKTEMP 100 } // +800 [125]
+    ifvare TEMPVAR 11 { mulvar PLAYERATTACKTEMP 1035 divvarvar PLAYERATTACKTEMP 100 } // +935 [135]
+    ifvare TEMPVAR 12 { mulvar PLAYERATTACKTEMP 1180 divvarvar PLAYERATTACKTEMP 100 } // +1080 [145]
+    ifvare TEMPVAR 13 { mulvar PLAYERATTACKTEMP 1335 divvarvar PLAYERATTACKTEMP 100 } // +1235 [155]
+    ifvare TEMPVAR 14 { mulvar PLAYERATTACKTEMP 1500 divvarvar PLAYERATTACKTEMP 100 } // +1400 [165]
+    ifvarg TEMPVAR 14 { mulvar PLAYERATTACKTEMP 1675 divvarvar PLAYERATTACKTEMP 100 } // +1575 [175]
+    ifvarvarg PLAYERATTACKTEMP STATLIMIT setvarvar PLAYERATTACKTEMP STATLIMIT
+//    addlogvar PLAYERATTACKTEMP
+   }
+ends
+
 //********************************************************
 //*State for Calculating Kick/Melee Damage to non-players*
 //********************************************************
@@ -5441,13 +5497,16 @@ state add_playermeleedamage
      {
       setvarvar DEFENDINGACTORDEBUG DEFENDINGACTOR
 
+      setvarvar PLAYERATTACKTEMP PLAYERATTACK
+      state watchovermeskill-attack
+
       // Set to [Attack * 2]
-      setvarvar KNEEDAMAGE PLAYERATTACK 
+      setvarvar KNEEDAMAGE PLAYERATTACKTEMP
       mulvar KNEEDAMAGE 2
       ifp ponsteroids mulvar KNEEDAMAGE 10 // Steroids make damage 10x stronger
 
       // Add or Remove [Attack / 2]
-      randvarvar DAMAGERANDOMIZER PLAYERATTACK 
+      randvarvar DAMAGERANDOMIZER PLAYERATTACKTEMP
       divvar DAMAGERANDOMIZER 2 
       ifp ponsteroids mulvar DAMAGERANDOMIZER 10 // Steroids make damage 5x stronger
 
@@ -6446,7 +6505,8 @@ state add_generaldamage
   getactor[THISACTOR].picnum temp
   getactor[THISACTOR].htextra tempb
   getactor[THISACTOR].htpicnum tempc
-  ifvare tempc RPG { ifvare tempb 35 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
+  ifvarn tempb -1 addlogvar tempb
+  ifvare tempc RPG { ifvarg tempb 0 ifvarl tempb 76 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
   setvarvar TEMP ENEMYHP
 
   ifvarg ACTORDEATHSWITCHDELAY 0 { setactor[THISACTOR].htextra -1 break }
@@ -6511,9 +6571,8 @@ ifvarg tempb 0
   break 
  }
  setvar ENEMYARMORDAMAGE 0
- // ifvarg ZEROHP 0 nullop // Prevents Sector Damage like Lava from being augumented by the damage formula else
  ifvarg FLOORDAMAGETEMP 0 nullop // Prevents Sector Damage like Lava from being augumented by the damage formula
- else ifvarg ENEMYTOTALDROWNDMG 0 nullop // Prevents Underwater damage from being augumented by the damage formula
+// else ifvarg ENEMYTOTALDROWNDMG 0 nullop // Prevents Underwater damage from being augumented by the damage formula
  else // Else go on to the main formulas
  {
   getactor[THISACTOR].htextra GENERALDAMAGE // TODO: LEAVE-THIS
@@ -8964,6 +9023,7 @@ ifvarg tempb 0
      // Stage 7p of Damage Formula
      // For Damage Inflicted by the Player directly.
      setvarvar PLAYERATTACKTEMP PLAYERATTACK
+     state watchovermeskill-attack
      ifvare tempc BIOMETRICBLAST1
      {
       ifp ponsteroids mulvar PLAYERATTACKTEMP 3 else mulvar PLAYERATTACKTEMP 5
@@ -9392,7 +9452,7 @@ ifvarg tempb 0
     state checkdamagecaps-general
 
     // Stage 22p of Damage Formula
-    ifvare ISDEVASTATOR? 1 divvar GENERALDAMAGE 2
+    // ifvare ISDEVASTATOR? 1 divvar GENERALDAMAGE 2
     setvarvar ACTORDEFENSETEMP ACTORDEFENSE
     state checkdamagecaps-general
 
@@ -9402,9 +9462,22 @@ ifvarg tempb 0
 
     // Stage 24p of Damage Formula
     ifvare ISDEVASTATOR? 1 divvar ACTORDEFENSETEMP 4
-    ifvare tempc GATEMISSILE_MAIN { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 3 }
-    ifvare tempc GATEMISSILE_SPLIT divvar ACTORDEFENSETEMP 15
-    ifvare tempc STROKEMISSILE_MAIN divvar ACTORDEFENSETEMP 2
+    addlogvar ISDEVASTATOR?
+    ifvare tempc SPIT { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc FIRELASER { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc GROWSPARK { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc FREEZEBLAST { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc COOLEXPLOSION1 { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 3 }
+    ifvare tempc RADIUSEXPLOSION divvar ACTORDEFENSETEMP 2
+    ifvare tempc RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc RPG_NOAIM divvar ACTORDEFENSETEMP 2
+    ifvare tempc GENERAL_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc COMMANDER_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc LEADER_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc BAALO_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc GATEMISSILE_MAIN divvar ACTORDEFENSETEMP 2
+    ifvare tempc GATEMISSILE_SPLIT divvar ACTORDEFENSETEMP 30
+    ifvare tempc STROKEMISSILE_MAIN divvar ACTORDEFENSETEMP 4
     ifvare tempc STROKEMISSILE_SPLIT divvar ACTORDEFENSETEMP 60
     state checkdamagecaps-general
 
@@ -9413,19 +9486,13 @@ ifvarg tempb 0
     {
      ifvare HITACTORTYPE? 1
      {
-      ifvare CHARACTERSELECTED? 15 // Maken
-      {
-       ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 // If Maken is using "Triad Blitzkreg"
-      }
+      ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
       ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
       subvarvar GENERALDAMAGE ACTORDEFENSETEMP
      }
      else
      {
-      ifvare CHARACTERSELECTED? 15 // Maken
-      {
-       ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 // If Maken is using "Triad Blitzkreg"
-      }
+      ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
       ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
       subvarvar GENERALDAMAGE ACTORDEFENSETEMP
       state cheatersound
@@ -9435,10 +9502,7 @@ ifvarg tempb 0
     }
     else
     {
-     ifvare CHARACTERSELECTED? 15 // Maken
-     {
-      ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 // If Maken is using "Triad Blitzkreg"
-     }
+     ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
      ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
      subvarvar GENERALDAMAGE ACTORDEFENSETEMP
     }
@@ -15033,17 +15097,17 @@ useractor notenemy DEALER TOUGH
         subvar DOLLARS 100
         subvar DISPLAYDOLLARS 100
         state displaymoney
-	  ifrnd 128 spawn RPGSPRITE 
-	  else spawn DEVISTATORSPRITE 
-	  state leave
-	 }
+        ifrnd 128 spawn RPGSPRITE 
+        else spawn DEVISTATORSPRITE 
+        state leave
+       }
        else
-	 {
+       {
         ifvare GENDER? 0 redefinequote 130 ^10NOT ENOUGH MONEY, MAN!
         else ifvare GENDER? 1 redefinequote 130 ^10NOT ENOUGH MONEY, LADY!
         else redefinequote 130 ^10NOT ENOUGH MONEY, YOU!
         setvarvar fta fta_normal setvar ftq 130 
-  	 }
+       }
       }
       else
       {
@@ -21570,37 +21634,56 @@ ends
 //************************************************************************************************************************
 
 actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
-
-// stopactorsound THISACTOR SQUISHED
-// ifvarn equipmenuinuse -1 addlogvar equipmenuinuse
-
-
+/*
+ifinwater ifp prunning
+{
+ getinput[THISACTOR].extbits TEMPVAR2
+ ifvarand TEMPVAR2 1
+ {
+  getplayer[THISACTOR].horiz TEMPVAR
+  subvar TEMPVAR 100 // 100 horiz equals straight ahead, so take away 100 and make 0 'straight ahead' for this
+  mulvar TEMPVAR -20
+  setplayer[THISACTOR].poszv TEMPVAR
+ }
+ else
+ ifvarand TEMPVAR2 2
+ {
+  getplayer[THISACTOR].horiz TEMPVAR
+  subvar TEMPVAR 100 // 100 horiz equals straight ahead, so take away 100 and make 0 'straight ahead' for this
+  mulvar TEMPVAR 20
+  setplayer[THISACTOR].poszv TEMPVAR
+ }
+}
+*/
 ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 3
 {
- ifvarvarn CURRENTENERGYPOINTS MAXENERGYPOINTS { addlogvar CURRENTENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS }
+ ifvare CHARACTERSELECTED? 1 { ifvare CURRENTENERGYPOINTS 0 { setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS addlogvar CURRENTENERGYPOINTS } }
+ else
+ {
+  setvar CHARACTERARRAY 1
+  getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERMAXEP TEMPVAR2
+  ifvare TEMPVAR 0 setvarvar TEMPVAR TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
+  addlogvar TEMPVAR
+ }
 }
 
-ifvare autosavetoggle 1
+ifvare autosavetoggle 1 ifvarvare TIMERRAWFORMAT NEXTAUTOSAVEINTERVAL
 {
- ifvarvare TIMERRAWFORMAT NEXTAUTOSAVEINTERVAL
- {
-  setvarvar LASTAUTOSAVEINTERVAL TIMERRAWFORMAT
-  state reset_autosavetimes
-  state autosave_slot10
- }
+ setvarvar LASTAUTOSAVEINTERVAL TIMERRAWFORMAT
+ state reset_autosavetimes
+ state autosave_slot10
 }
 
 ifvare shop_id -1 setvar shopamount 1
-ifvarn atm_id -1
+ifvarn atm_id -1 ifvarand atm_type 4
 {
- ifvarand atm_type 4
- {
-  addvar SOUNDPITCH -256
-  setplayer[THISACTOR].sound_pitch SOUNDPITCH
-  soundonce ATM_HUM 
-  subvar SOUNDPITCH -256
-  setplayer[THISACTOR].sound_pitch SOUNDPITCH
- }
+ addvar SOUNDPITCH -256
+ setplayer[THISACTOR].sound_pitch SOUNDPITCH
+ soundonce ATM_HUM 
+ subvar SOUNDPITCH -256
+ setplayer[THISACTOR].sound_pitch SOUNDPITCH
 }
 
 ifvare CHEAT_PHASE 1
@@ -21652,16 +21735,16 @@ ifvare TEMPVAR4 1
 
 ifvarvarl player[THISACTOR].posz player[THISACTOR].truecz setplayer[THISACTOR].posz player[THISACTOR].truecz
 
-            ifvarg MAXPISTOL 24576 setvar MAXPISTOL 24576
-            ifvarg MAXSHOTGUN 24576 setvar MAXSHOTGUN 24576
-            ifvarg MAXCHAINGUN 24576 setvar MAXCHAINGUN 24576
-            ifvarg MAXRPG 24576 setvar MAXRPG 24576
-            ifvarg MAXPIPEBOMB 24576 setvar MAXPIPEBOMB 24576
-            ifvarg MAXSHRINKER 24576 setvar MAXSHRINKER 24576
-            ifvarg MAXEXPANDER 24576 setvar MAXEXPANDER 24576
-            ifvarg MAXDEVASTATOR 24576 setvar MAXDEVASTATOR 24576
-            ifvarg MAXTRIPBOMB 24576 setvar MAXTRIPBOMB 24576
-            ifvarg MAXFREEZER 24576 setvar MAXFREEZER 24576
+        ifvarg MAXPISTOL 24576 setvar MAXPISTOL 24576
+        ifvarg MAXSHOTGUN 24576 setvar MAXSHOTGUN 24576
+        ifvarg MAXCHAINGUN 24576 setvar MAXCHAINGUN 24576
+        ifvarg MAXRPG 24576 setvar MAXRPG 24576
+        ifvarg MAXPIPEBOMB 24576 setvar MAXPIPEBOMB 24576
+        ifvarg MAXSHRINKER 24576 setvar MAXSHRINKER 24576
+        ifvarg MAXEXPANDER 24576 setvar MAXEXPANDER 24576
+        ifvarg MAXDEVASTATOR 24576 setvar MAXDEVASTATOR 24576
+        ifvarg MAXTRIPBOMB 24576 setvar MAXTRIPBOMB 24576
+        ifvarg MAXFREEZER 24576 setvar MAXFREEZER 24576
 
 state checkoverflowmods
 
@@ -21851,12 +21934,12 @@ ifvare mainmenu 0
    {
     setplayer[THISACTOR].heat_on 0
     ifvare VISOROFFSOUND 0 
-	{
- 	 stopsound NITEVISION_ONOFF
-	 sound VRVISOR_OFF
-	 setvar VISOROFFSOUND 1
-	 setvar VISORONSOUND 0 
-	}
+    {
+     stopsound NITEVISION_ONOFF
+     sound VRVISOR_OFF
+     setvar VISOROFFSOUND 1
+     setvar VISORONSOUND 0 
+    }
    }
   }
   ifvare AMIFORM? 2
@@ -22024,22 +22107,11 @@ ifvare mainmenu 0
  mulvarvar PLAYERLIFTSTRENGTHTEMP TEMPVAR5
  divvar PLAYERLIFTSTRENGTHTEMP 100
 
- ifvare CHARACTERSELECTED? 3
- {
-  ifvare BUBSYFORM? 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 2 }
- }
- ifvare CHARACTERSELECTED? 4
- {
-  ifvare AMIFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
- }
- ifvare CHARACTERSELECTED? 10
- {
-  ifvare NETHRAFORM? 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
- }
- ifvare CHARACTERSELECTED? 13
- {
-  ifvare MINAKOFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
- }
+ ifvare CHARACTERSELECTED? 3 ifvare BUBSYFORM? 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 2 }
+ ifvare CHARACTERSELECTED? 4 ifvare AMIFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
+ ifvare CHARACTERSELECTED? 10 ifvare NETHRAFORM? 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
+ ifvare CHARACTERSELECTED? 13 ifvare MINAKOFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
+
 
  // Check for Power Wrist [equippable item]
  setvar DAMAGEMODIFIER 100
@@ -22100,23 +22172,28 @@ ifvare mainmenu 0
 setvar EQUIP_ISMOVING? 0
 ifvare mainmenu 0
 {
- ifvare SECTORLOTAG 2 // Underwater
- {
-  ifvarand bits 1 addvar EQUIP_ISMOVING? 1
-  ifvarand bits 2 addvar EQUIP_ISMOVING? 1
- }
+ ifvarn shop_id -1 nullop // lol no increasing timers while using the keys to shop, that's just derptastically cheap and lolz
+ else ifvarn atm_id -1 nullop // same for ATMs, although it's harder to really think to press movement keys while in the ATM <.<
  else
- {
-  ifp pjetpack
+ {  
+  ifvare SECTORLOTAG 2 // Underwater
   {
    ifvarand bits 1 addvar EQUIP_ISMOVING? 1
    ifvarand bits 2 addvar EQUIP_ISMOVING? 1
   }
+  else
+  {
+   ifp pjetpack
+   {
+    ifvarand bits 1 addvar EQUIP_ISMOVING? 1
+    ifvarand bits 2 addvar EQUIP_ISMOVING? 1
+   }
+  }
+  ifvarand extbits 1 addvar EQUIP_ISMOVING? 1
+  ifvarand extbits 2 addvar EQUIP_ISMOVING? 1
+  ifvarand extbits 3 addvar EQUIP_ISMOVING? 1
+  ifvarand extbits 4 addvar EQUIP_ISMOVING? 1
  }
- ifvarand extbits 1 addvar EQUIP_ISMOVING? 1
- ifvarand extbits 2 addvar EQUIP_ISMOVING? 1
- ifvarand extbits 3 addvar EQUIP_ISMOVING? 1
- ifvarand extbits 4 addvar EQUIP_ISMOVING? 1
 }
 ifvarg EQUIP_ISMOVING? 0
 {
@@ -22270,26 +22347,10 @@ ifvare gameover? 0
 {
  ifvarg gameovertransitiontimer 0 ifvarl gameovertransitiontimer 14 setvar gameovertransitiontimer 0
  ifvarl gameovertransitiontimer 14 randvar gameoverscreen 24
-/*
- ifvare PUBLICBETA? 1
- {
- }
- else
- {
- }
-*/
  ifvarg gameovertransitiontimer 0 subvar gameovertransitiontimer 1
 }
 else
 {
-/*
- ifvare PUBLICBETA? 1
- {
- }
- else
- {
- }
-*/
  ifvarl gameovertransitiontimer 28 addvar gameovertransitiontimer 1
 }
 
@@ -22370,18 +22431,18 @@ setactor[THISACTOR].mdflags TEMP
 getplayer[THISACTOR].on_ground temp
 ifvare temp 1
 {
- getplayer[THISACTOR].posxv posxv
- getplayer[THISACTOR].posyv posyv
- ifvarg posxv 65536 state enforceoverheadsprites
+ // getplayer[THISACTOR].posxv posxv
+ // getplayer[THISACTOR].posyv posyv
+ ifvarg player[THISACTOR].posxv 65536 state enforceoverheadsprites
  else
  {
-  ifvarl posxv -65536 state enforceoverheadsprites
+  ifvarl player[THISACTOR].posxv -65536 state enforceoverheadsprites
   else
   {
-   ifvarg posyv 65536 state enforceoverheadsprites
+   ifvarg player[THISACTOR].posyv 65536 state enforceoverheadsprites
    else
    {
-    ifvarl posyv -65536 state enforceoverheadsprites
+    ifvarl player[THISACTOR].posyv -65536 state enforceoverheadsprites
     else setvar OVERHEADSPRITE 0
    }
   }
@@ -22396,7 +22457,6 @@ ifvarn VEHICLEID -1
 {
  setplayer[THISACTOR].hurt_delay 12 // Constantly sets to 12 to prevent Forcefields and Cacti from damaging a Vehicle
  setplayer[THISACTOR].footprintcount 0
- // setplayer[THISACTOR].last_pissed_time 600
  ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3
  {
   ifvare CHARACTERSELECTED? 6 setvar bits 268435456
@@ -23088,6 +23148,16 @@ ifvare oldskoolmode 0
   setvar WEAPON3_FIRESOUND 6
   setvar WEAPON3_FLAGS 73748 // 4+16+8192+65536
  }
+/*
+ else
+ ifvare CHAINGUNMODE 2
+ {
+  setvar WEAPON3_SHOOTS FIRELASER
+  setvar WEAPON3_SHOTSPERBURST 1
+  setvar WEAPON3_FIRESOUND PRED_ATTACK
+  setvar WEAPON3_FLAGS 73748 // 4+16+8192+65536
+ }
+*/
 
  /*
  ifvare CHARACTERSELECTED? 8
@@ -23432,6 +23502,7 @@ else
  ifvarl TEMPVAR 1 setvar CURRENTHITPOINTS 0
 }
 
+// Deals with Protozoid [GREENSLIME] damage
 getplayer[THISACTOR].somethingonplayer GREENSLIMEID
 ifvarn GREENSLIMEID -1
 {
@@ -23641,7 +23712,6 @@ ifvare INSTANTDEATH 1
  state killallcharacters
 }
 ifvarg CURRENTHITPOINTS 0 { setvar gameover? 0 ifvarand PLAYERSTATUS? 1 subvar PLAYERSTATUS? 1 }
-
 
 state getcharactergender
 
@@ -24541,20 +24611,12 @@ getplayer[THISACTOR].poszv poszv
   divvarvar ESHIELDCOMPARISON TEMPVAR5
  }
 
- ifvare CHARACTERSELECTED? 8
+ ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
  {
-  ifvare HAVEENERGYSHIELD? 1
+  setvar BIOSHIELDFLASHPULSE? 1
+  setplayer[THISACTOR].hurt_delay 12 // Constantly sets to 12 to prevent Forcefields and Cacti from damaging Lisa when she has the Bio-Shield turned on
+  ifvare mainmenu 0
   {
-   ifvare ENERGYSHIELDMODE 1
-   {
-    ifvarg CURRENTCELLS -1
-    {
-     ifvarg DAMAGEINCELL 0
-     {
-      setvar BIOSHIELDFLASHPULSE? 1
-      setplayer[THISACTOR].hurt_delay 12 // Constantly sets to 12 to prevent Forcefields and Cacti from damaging Lisa when she has the Bio-Shield turned on
-      ifvare mainmenu 0
-      {
        // old increments of 4
        addvar SHIELDPULSETIMER 1
        ifvare SHIELDPULSETIMER 1  palfrom  3 0 0 64
@@ -24576,45 +24638,13 @@ getplayer[THISACTOR].poszv poszv
         palfrom 3 0 0 64 
         setvar SHIELDPULSETIMER 1
 
-        ifvarl ESHIELDCOMPARISON 16
-		{ 
-		 stopsound BIOSHIELD_HUM_QUIETEST 
-		 sound BIOSHIELD_HUM_QUIETEST 
-		}
-
-        ifvarg ESHIELDCOMPARISON 15 ifvarl ESHIELDCOMPARISON 64 
-		{
-		 stopsound BIOSHIELD_HUM_QUIET 
-		 sound BIOSHIELD_HUM_QUIET 
-		}
-
-        ifvarg ESHIELDCOMPARISON 63 ifvarl ESHIELDCOMPARISON 256 
-		{ 
-		 stopsound BIOSHIELD_HUM_NORMAL 
-		 sound BIOSHIELD_HUM_NORMAL 
-		}
-
-        ifvarg ESHIELDCOMPARISON 255 ifvarl ESHIELDCOMPARISON 1024 
-		{ 
-		 stopsound BIOSHIELD_HUM_LOUD
-		 sound BIOSHIELD_HUM_LOUD 
-		}
-
-        ifvarg ESHIELDCOMPARISON 1023 
-		{ 
-		 stopsound BIOSHIELD_HUM_LOUDEST 
-		 sound BIOSHIELD_HUM_LOUDEST 
-		}
+        ifvarl ESHIELDCOMPARISON 16 { stopsound BIOSHIELD_HUM_QUIETEST sound BIOSHIELD_HUM_QUIETEST }
+        ifvarg ESHIELDCOMPARISON 15 ifvarl ESHIELDCOMPARISON 64 { stopsound BIOSHIELD_HUM_QUIET sound BIOSHIELD_HUM_QUIET }
+        ifvarg ESHIELDCOMPARISON 63 ifvarl ESHIELDCOMPARISON 256 { stopsound BIOSHIELD_HUM_NORMAL  sound BIOSHIELD_HUM_NORMAL }
+        ifvarg ESHIELDCOMPARISON 255 ifvarl ESHIELDCOMPARISON 1024 { stopsound BIOSHIELD_HUM_LOUD sound BIOSHIELD_HUM_LOUD }
+        ifvarg ESHIELDCOMPARISON 1023 { stopsound BIOSHIELD_HUM_LOUDEST sound BIOSHIELD_HUM_LOUDEST }
        }
-      }
-     }
-     else setvar BIOSHIELDFLASHPULSE? 0
-    }
-    else setvar BIOSHIELDFLASHPULSE? 0
-   }
-   else setvar BIOSHIELDFLASHPULSE? 0
   }
-  else setvar BIOSHIELDFLASHPULSE? 0
  }
  else setvar BIOSHIELDFLASHPULSE? 0
 
@@ -25442,33 +25472,6 @@ ifvarn multijumpflag 0
  {
   setvarvar PLAYERFALLRESISTTEMP PLAYERFALLRESIST
 
-  setvarvar TEMPVAR5 PLAYERTEMPLEVEL
-  ifvarl SKILLLEVEL 1 divvar TEMPVAR5 14
-  ifvare SKILLLEVEL 1 divvar TEMPVAR5 15
-  ifvare SKILLLEVEL 2 divvar TEMPVAR5 16
-  ifvare SKILLLEVEL 3 divvar TEMPVAR5 17
-  ifvare SKILLLEVEL 4 divvar TEMPVAR5 18
-  ifvare SKILLLEVEL 5 divvar TEMPVAR5 19
-  ifvare SKILLLEVEL 6 divvar TEMPVAR5 20
-  ifvare SKILLLEVEL 7 divvar TEMPVAR5 21
-  ifvare SKILLLEVEL 8 divvar TEMPVAR5 22
-  ifvarg SKILLLEVEL 8 divvar TEMPVAR5 23
-  addvarvar PLAYERFALLRESISTTEMP TEMPVAR5
-
-  // Check Steroids
-  ifp ponsteroids 
-  {
-   ifvarl PLAYERFALLRESISTTEMP 0
-   {
-    mulvar PLAYERFALLRESISTTEMP 4 divvar PLAYERFALLRESISTTEMP 5 // 80% [-20%]
-   }
-   else
-   ifvarg PLAYERFALLRESISTTEMP 0
-   {
-    mulvar PLAYERFALLRESISTTEMP 7 divvar PLAYERFALLRESISTTEMP 5 // 140% [+40%]
-   }
-  }
-
   // Check Character Forms
   ifvare CHARACTERSELECTED? 3
   {
@@ -25546,6 +25549,7 @@ ifvarn multijumpflag 0
    }
   }
 
+  // Check Support Bonuses
   setvar DAMAGEMODIFIER 0
   ifvare CHARACTERSELECTED? 3 // Bubsy
   {
@@ -25616,6 +25620,62 @@ ifvarn multijumpflag 0
    addvarvar PLAYERFALLRESISTTEMP TEMPVAR5
   }
  }
+
+  // Increases Fall Resistance as You Level Up
+  setvarvar TEMPVAR5 PLAYERTEMPLEVEL
+  ifvarl SKILLLEVEL 1 divvar TEMPVAR5 14
+  ifvare SKILLLEVEL 1 divvar TEMPVAR5 15
+  ifvare SKILLLEVEL 2 divvar TEMPVAR5 16
+  ifvare SKILLLEVEL 3 divvar TEMPVAR5 17
+  ifvare SKILLLEVEL 4 divvar TEMPVAR5 18
+  ifvare SKILLLEVEL 5 divvar TEMPVAR5 19
+  ifvare SKILLLEVEL 6 divvar TEMPVAR5 20
+  ifvare SKILLLEVEL 7 divvar TEMPVAR5 21
+  ifvare SKILLLEVEL 8 divvar TEMPVAR5 22
+  ifvarg SKILLLEVEL 8 divvar TEMPVAR5 23
+  addvarvar PLAYERFALLRESISTTEMP TEMPVAR5
+
+  // Check for Jewel of Four Souls
+  ifvarl PLAYERFALLRESISTTEMP 0 { setvarvar TEMPMOD PLAYERFALLRESISTTEMP mulvar TEMPMOD -1 } // saves the pre-jewel value for negative fall resistance into abs
+  setvar DAMAGEMODIFIER 0
+  ifvare PLAYEREQUIPSLOTITEM1 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM2 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM3 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM4 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM5 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM6 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM7 28 addvar DAMAGEMODIFIER 5
+  ifvare PLAYEREQUIPSLOTITEM8 28 addvar DAMAGEMODIFIER 5
+  ifvarl DAMAGEMODIFIER 2 setvar DAMAGEMODIFIER 2
+  ifvarl PLAYERFALLRESISTTEMP 0
+  {
+   ifvarg DAMAGEMODIFIER 2
+   {
+    mulvarvar TEMPMOD DAMAGEMODIFIER
+    divvarvar TEMPMOD 2
+    addvarvar PLAYERFALLRESISTTEMP TEMPMOD
+   }
+  }
+  else
+  {
+   mulvarvar PLAYERFALLRESISTTEMP DAMAGEMODIFIER
+   divvar PLAYERFALLRESISTTEMP 2 
+  }
+ 
+  // Check Steroids
+  ifp ponsteroids 
+  {
+   ifvarl PLAYERFALLRESISTTEMP 0
+   {
+    mulvar PLAYERFALLRESISTTEMP 4 divvar PLAYERFALLRESISTTEMP 5 // 80% [-20%]
+   }
+   else
+   ifvarg PLAYERFALLRESISTTEMP 0
+   {
+    mulvar PLAYERFALLRESISTTEMP 7 divvar PLAYERFALLRESISTTEMP 5 // 140% [+40%]
+   }
+  }
+
  // Allows a Character to crouch in midair to try to soften their fall [increases fall resistance temporarily]
  getinput[THISACTOR].bits TEMP3
  ifvarand TEMP3 2
@@ -27268,12 +27328,13 @@ ifvare mainmenu -1
             {
              setwall[hitwall].picnum 867 // fix the ATM machine :P
              sound MENU_ENTER
-             subvar CURRENTENERGYPOINTS 40
+             ifvarand CHEATBITFIELD? 128 nullop else subvar CURRENTENERGYPOINTS 40
              subvar DOLLARS 10500
              subvar DISPLAYDOLLARS 10500
              state displaymoney
              setvarvar ARRAYPOSITION hitwall state createmusicsfx_atm
-             redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00 AND 40 EP!
+             ifvarand CHEATBITFIELD? 128 redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00!
+             else redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00 AND 40 EP!
              setvarvar fta fta_normal setvar ftq 321
             }
             else
@@ -27336,12 +27397,13 @@ ifvare mainmenu -1
             {
              setwall[hitwall].picnum 1212 // fix the Vending machine :P
              sound MENU_ENTER
-             subvar CURRENTENERGYPOINTS 10
+             ifvarand CHEATBITFIELD? 128 nullop else subvar CURRENTENERGYPOINTS 10
              subvar DOLLARS 500
              subvar DISPLAYDOLLARS 500
              state displaymoney
              setvarvar ARRAYPOSITION hitwall state createmusicsfx_snackcola
-             redefinequote 321 ^20LISA FIXED THE VENDING MACHINE, FOR A COST OF $500.00 AND 10 EP!
+             ifvarand CHEATBITFIELD? 128 redefinequote 321 ^20LISA FIXED THE VENDING MACHINE, FOR A COST OF $500.00!
+             else redefinequote 321 ^20LISA FIXED THE VENDING MACHINE, FOR A COST OF $500.00 AND 10 EP!
              setvarvar fta fta_normal setvar ftq 321
             }
             else
@@ -27401,10 +27463,11 @@ ifvare mainmenu -1
              sound MENU_ENTER
              subvar DOLLARS 500
              subvar DISPLAYDOLLARS 500
-             subvar CURRENTENERGYPOINTS 10
+             ifvarand CHEATBITFIELD? 128 nullop else subvar CURRENTENERGYPOINTS 10
              state displaymoney
              setvarvar ARRAYPOSITION hitwall state createmusicsfx_snackcola
-             redefinequote 321 ^20LISA FIXED THE COLA MACHINE, FOR A COST OF $500.00 AND 10 EP!
+             ifvarand CHEATBITFIELD? 128 redefinequote 321 ^20LISA FIXED THE COLA MACHINE, FOR A COST OF $500.00!
+             else redefinequote 321 ^20LISA FIXED THE COLA MACHINE, FOR A COST OF $500.00 AND 10 EP!
              setvarvar fta fta_normal setvar ftq 321
             }
             else
@@ -27480,7 +27543,6 @@ ifvare mainmenu -1
  }
 
 // Code for Regenerating Player-Character's HP when below 100%
-
 ifvare oldskoolmode 0
 {
  ifvare mainmenu 0
@@ -31052,8 +31114,8 @@ state troophidestate
       ifspritepal 17 sizeto 55 55 else sizeto 40 40
       ifspritepal 17 sizeto 55 55 else sizeto 40 40
       setvar CLOAKED? 0
-	getactor[THISACTOR].xrepeat ACTORX
-	getactor[THISACTOR].yrepeat ACTORY
+      getactor[THISACTOR].xrepeat ACTORX
+      getactor[THISACTOR].yrepeat ACTORY
       spawn FRAMEEFFECT1
     }
   }
@@ -31095,8 +31157,8 @@ state troophidestate
       ifspritepal 17 sizeto 4 55 else sizeto 4 40
       ifspritepal 17 sizeto 4 55 else sizeto 4 40
       ifspritepal 17 sizeto 4 55 else sizeto 4 40
-	getactor[THISACTOR].xrepeat ACTORX
-	getactor[THISACTOR].yrepeat ACTORY
+      getactor[THISACTOR].xrepeat ACTORX
+      getactor[THISACTOR].yrepeat ACTORY
       spawn FRAMEEFFECT1
     }
   }
@@ -45362,8 +45424,7 @@ useractor notenemy PICKUPMULTIICON 0
 
  ifvare MULTIICONPARENT -1 { state killattachedobject break }
  ifvarn MULTIICONPARENT -1 { getactor[MULTIICONPARENT].statnum TEMP ifvarand TEMP 1024 { state killattachedobject break } }
- getactorvar[MULTIICONPARENT].MULTIPLIERITEMCANSEE? TEMP
- ifvare TEMP 0 { state killattachedobject break }
+ // getactorvar[MULTIICONPARENT].MULTIPLIERITEMCANSEE? TEMP ifvare TEMP 0 { state killattachedobject break }
  ifvarn MULTIICONPARENT -1 getactorvar[MULTIICONPARENT].temph TEMP
  ifvarg TEMP 1
  {
@@ -46659,6 +46720,19 @@ useractor notenemy 6441 0 state grabspecialposter3 enda // "Pagan" Movie Poster
 useractor notenemy 6442 0 state grabspecialposter3 enda // "Arcana Heart 2" Movie Poster
 useractor notenemy 6443 0 state grabspecialposter4 enda // "The Man Eaters" Movie Poster
 useractor notenemy 6444 0 state grabspecialposter3 enda // "Shredder: I Want You" Poster
+useractor notenemy 6445 0 state grabspecialposter3 enda // "Sanderson Sisters!" Poster
+useractor notenemy 6446 0 state grabspecialposter3 enda // "Raiden: I Want You" Poster
+useractor notenemy 6447 0 state grabspecialposter3 enda // "Sub Zero Bros. 2" Poster
+useractor notenemy 6448 0 state grabspecialposter3 enda // "GATO" Poster
+useractor notenemy 6449 0 state grabspecialposter3 enda // "ChocoVania" Poster
+useractor notenemy 6450 0 state grabspecialposter3 enda // "DooM TimE" Poster
+useractor notenemy 6451 0 state grabspecialposter3 enda // "Scott Pilgrim" Poster #1
+useractor notenemy 6452 0 state grabspecialposter3 enda // "Scott Pilgrim" Poster #2
+useractor notenemy 6453 0 state grabspecialposter3 enda // "Stronger and Cooler" Poster
+useractor notenemy 6454 0 state grabspecialposter3 enda // "Chain and Linear" Poster
+useractor notenemy 6455 0 state grabspecialposter3 enda // "Keeping Score" Poster
+useractor notenemy 6456 0 state grabspecialposter3 enda // "Pretty Feather" Poster
+useractor notenemy 6457 0 state graboneofakindimage enda // "The Lost Painting" Image
 
 useractor notenemy 6528 0 state grabspecialposter4 enda // Anime Pinup #1
 useractor notenemy 6529 0 state grabspecialposter4 enda // Anime Pinup #2
@@ -46688,6 +46762,21 @@ useractor notenemy 6552 0 state grabspecialposter4 enda // Anime Pinup #23
 useractor notenemy 6553 0 state grabspecialposter4 enda // Anime Pinup #24
 useractor notenemy 6554 0 state grabspecialposter4 enda // Anime Pinup #25
 useractor notenemy 6555 0 state grabspecialposter4 enda // Anime Pinup #26
+useractor notenemy 6556 0 state grabspecialposter4 enda // Anime Pinup #27
+useractor notenemy 6557 0 state grabspecialposter4 enda // Anime Pinup #28
+useractor notenemy 6558 0 state grabspecialposter4 enda // Anime Pinup #29
+useractor notenemy 6559 0 state grabspecialposter4 enda // Anime Pinup #30
+useractor notenemy 6560 0 state grabspecialposter4 enda // Anime Pinup #31
+useractor notenemy 6561 0 state grabspecialposter4 enda // Anime Pinup #32
+useractor notenemy 6562 0 state grabspecialposter4 enda // Anime Pinup #33
+useractor notenemy 6563 0 state grabspecialposter4 enda // Anime Pinup #34
+useractor notenemy 6564 0 state grabspecialposter4 enda // Anime Pinup #35
+useractor notenemy 6565 0 state grabspecialposter4 enda // Anime Pinup #36
+useractor notenemy 6566 0 state grabspecialposter4 enda // Anime Pinup #37
+useractor notenemy 6567 0 state grabspecialposter4 enda // Anime Pinup #38
+useractor notenemy 6568 0 state grabspecialposter4 enda // Anime Pinup #39
+useractor notenemy 6569 0 state grabspecialposter4 enda // Anime Pinup #40
+useractor notenemy 6570 0 state grabspecialposter4 enda // Anime Pinup #41
 
 useractor notenemy 6652 0 state grabspecialmagazine2 enda
 useractor notenemy 6653 0 state grabspecialmagazine2 enda
@@ -59726,30 +59815,31 @@ enda // NR-Number font "Centerpoint"
 //************************************************
 eventloadactor WATERDRIP 
 {
-	ifvare freezestart 0
-	{
- 	 getactor[THISACTOR].yvel freezestart 
- 	 setactor[THISACTOR].yvel -1
-      }
-	getactor[THISACTOR].extra ACTORFLAGS 
-	setactor[THISACTOR].extra -1
-	ifvarn ACTORFLAGS 0 ifvarn ACTORFLAGS -1
-	{
-		setvarvar rainstart ACTORFLAGS
-		getactor[THISACTOR].cstat raincstat
-		getactor[THISACTOR].pal rainpal
-		getactor[THISACTOR].xvel rainradius
-		ifvarl rainradius 0 mulvar rainradius -1
-		shiftvarl rainradius 1
-		ifvare rainradius 0 setvar rainradius 12288
-		ifvarl rainradius 2048 setvar rainradius 2048
-		getactor[THISACTOR].zvel snowceiling
-		ifvarl snowceiling 0 mulvar snowceiling -1
-		shiftvarl snowceiling 4
-		ifvare snowceiling 0 setvar snowceiling 65536
-		ifvarl snowceiling 16384 setvar snowceiling 16384
-		killit
-	}
+ ifvare freezestart 0
+ {
+  getactor[THISACTOR].yvel freezestart 
+  setactor[THISACTOR].yvel -1
+ }
+
+ getactor[THISACTOR].extra ACTORFLAGS 
+ setactor[THISACTOR].extra -1
+ ifvarn ACTORFLAGS 0 ifvarn ACTORFLAGS -1
+ {
+  setvarvar rainstart ACTORFLAGS
+  getactor[THISACTOR].cstat raincstat
+  getactor[THISACTOR].pal rainpal
+  getactor[THISACTOR].xvel rainradius
+  ifvarl rainradius 0 mulvar rainradius -1
+  shiftvarl rainradius 1
+  ifvare rainradius 0 setvar rainradius 12288
+  ifvarl rainradius 2048 setvar rainradius 2048
+  getactor[THISACTOR].zvel snowceiling
+  ifvarl snowceiling 0 mulvar snowceiling -1
+  shiftvarl snowceiling 4
+  ifvare snowceiling 0 setvar snowceiling 65536
+  ifvarl snowceiling 16384 setvar snowceiling 16384
+  killit
+ }
 } 
 enda
 
