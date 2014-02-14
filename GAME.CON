@@ -2370,25 +2370,25 @@ state freezeblast-chilleffect_player
 state watchovermeskill-defense
    ifvare CHARACTERSELECTED? 11 // Paula
    {
-//    addlogvar PLAYERDEFENSETEMP
+    // addlogvar PLAYERDEFENSETEMP
     setvarvar TEMPVAR PARTYSIZE subvarvar TEMPVAR PARTYALIVE
-    ifvare TEMPVAR 1 { mulvar PLAYERDEFENSETEMP 140 divvarvar PLAYERDEFENSETEMP 100 } // +40 [40]
-    ifvare TEMPVAR 2 { mulvar PLAYERDEFENSETEMP 200 divvarvar PLAYERDEFENSETEMP 100 } // +100 [60]
-    ifvare TEMPVAR 3 { mulvar PLAYERDEFENSETEMP 280 divvarvar PLAYERDEFENSETEMP 100 } // +180 [80]
-    ifvare TEMPVAR 4 { mulvar PLAYERDEFENSETEMP 380 divvarvar PLAYERDEFENSETEMP 100 } // +280 [100]
-    ifvare TEMPVAR 5 { mulvar PLAYERDEFENSETEMP 500 divvarvar PLAYERDEFENSETEMP 100 } // +400 [120]
-    ifvare TEMPVAR 6 { mulvar PLAYERDEFENSETEMP 640 divvarvar PLAYERDEFENSETEMP 100 } // +540 [140]
-    ifvare TEMPVAR 7 { mulvar PLAYERDEFENSETEMP 800 divvarvar PLAYERDEFENSETEMP 100 } // +700 [160]
-    ifvare TEMPVAR 8 { mulvar PLAYERDEFENSETEMP 980 divvarvar PLAYERDEFENSETEMP 100 } // +880 [180]
-    ifvare TEMPVAR 9 { mulvar PLAYERDEFENSETEMP 1180 divvarvar PLAYERDEFENSETEMP 100 } // +1080 [200]
-    ifvare TEMPVAR 10 { mulvar PLAYERDEFENSETEMP 1400 divvarvar PLAYERDEFENSETEMP 100 } // +1300 [220]
-    ifvare TEMPVAR 11 { mulvar PLAYERDEFENSETEMP 1640 divvarvar PLAYERDEFENSETEMP 100 } // +1540 [240]
-    ifvare TEMPVAR 12 { mulvar PLAYERDEFENSETEMP 1900 divvarvar PLAYERDEFENSETEMP 100 } // +1800 [260]
-    ifvare TEMPVAR 13 { mulvar PLAYERDEFENSETEMP 2180 divvarvar PLAYERDEFENSETEMP 100 } // +2080 [280]
-    ifvare TEMPVAR 14 { mulvar PLAYERDEFENSETEMP 2480 divvarvar PLAYERDEFENSETEMP 100 } // +2380 [300]
-    ifvarg TEMPVAR 14 { mulvar PLAYERDEFENSETEMP 2800 divvarvar PLAYERDEFENSETEMP 100 } // +2700 [320]
+    ifvare TEMPVAR 1 { mulvar PLAYERDEFENSETEMP 140 divvarvar PLAYERDEFENSETEMP 100 } // +40% [40]
+    ifvare TEMPVAR 2 { mulvar PLAYERDEFENSETEMP 200 divvarvar PLAYERDEFENSETEMP 100 } // +100% [60]
+    ifvare TEMPVAR 3 { mulvar PLAYERDEFENSETEMP 280 divvarvar PLAYERDEFENSETEMP 100 } // +180%[80]
+    ifvare TEMPVAR 4 { mulvar PLAYERDEFENSETEMP 380 divvarvar PLAYERDEFENSETEMP 100 } // +280% [100]
+    ifvare TEMPVAR 5 { mulvar PLAYERDEFENSETEMP 500 divvarvar PLAYERDEFENSETEMP 100 } // +400% [120]
+    ifvare TEMPVAR 6 { mulvar PLAYERDEFENSETEMP 640 divvarvar PLAYERDEFENSETEMP 100 } // +540% [140]
+    ifvare TEMPVAR 7 { mulvar PLAYERDEFENSETEMP 800 divvarvar PLAYERDEFENSETEMP 100 } // +700% [160]
+    ifvare TEMPVAR 8 { mulvar PLAYERDEFENSETEMP 980 divvarvar PLAYERDEFENSETEMP 100 } // +880% [180]
+    ifvare TEMPVAR 9 { mulvar PLAYERDEFENSETEMP 1180 divvarvar PLAYERDEFENSETEMP 100 } // +1080% [200]
+    ifvare TEMPVAR 10 { mulvar PLAYERDEFENSETEMP 1400 divvarvar PLAYERDEFENSETEMP 100 } // +1300% [220]
+    ifvare TEMPVAR 11 { mulvar PLAYERDEFENSETEMP 1640 divvarvar PLAYERDEFENSETEMP 100 } // +1540% [240]
+    ifvare TEMPVAR 12 { mulvar PLAYERDEFENSETEMP 1900 divvarvar PLAYERDEFENSETEMP 100 } // +1800% [260]
+    ifvare TEMPVAR 13 { mulvar PLAYERDEFENSETEMP 2180 divvarvar PLAYERDEFENSETEMP 100 } // +2080% [280]
+    ifvare TEMPVAR 14 { mulvar PLAYERDEFENSETEMP 2480 divvarvar PLAYERDEFENSETEMP 100 } // +2380% [300]
+    ifvarg TEMPVAR 14 { mulvar PLAYERDEFENSETEMP 2800 divvarvar PLAYERDEFENSETEMP 100 } // +2700% [320]
     ifvarvarg PLAYERDEFENSETEMP STATLIMIT setvarvar PLAYERDEFENSETEMP STATLIMIT
-//    addlogvar PLAYERDEFENSETEMP
+    // addlogvar PLAYERDEFENSETEMP
    }
 ends
 
@@ -5402,7 +5402,7 @@ ends
 state watchovermeskill-attack
    ifvare CHARACTERSELECTED? 11 // Paula
    {
-//    addlogvar PLAYERATTACKTEMP
+    // addlogvar PLAYERATTACKTEMP
     setvarvar TEMPVAR PARTYSIZE subvarvar TEMPVAR PARTYALIVE
     ifvare TEMPVAR 1 { mulvar PLAYERATTACKTEMP 140 divvarvar PLAYERATTACKTEMP 100 } // +40% [40]
     ifvare TEMPVAR 2 { mulvar PLAYERATTACKTEMP 200 divvarvar PLAYERATTACKTEMP 100 } // +100% [60]
@@ -5420,7 +5420,7 @@ state watchovermeskill-attack
     ifvare TEMPVAR 14 { mulvar PLAYERATTACKTEMP 2480 divvarvar PLAYERATTACKTEMP 100 } // +2380% [300]
     ifvarg TEMPVAR 14 { mulvar PLAYERATTACKTEMP 2800 divvarvar PLAYERATTACKTEMP 100 } // +2700% [320]
     ifvarvarg PLAYERATTACKTEMP STATLIMIT setvarvar PLAYERATTACKTEMP STATLIMIT
-//    addlogvar PLAYERATTACKTEMP
+    // addlogvar PLAYERATTACKTEMP
    }
 ends
 
@@ -6505,7 +6505,7 @@ state add_generaldamage
   getactor[THISACTOR].picnum temp
   getactor[THISACTOR].htextra tempb
   getactor[THISACTOR].htpicnum tempc
-  ifvarn tempb -1 addlogvar tempb
+  // ifvarn tempb -1 addlogvar tempb
   ifvare tempc RPG { ifvarg tempb 0 ifvarl tempb 76 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
   setvarvar TEMP ENEMYHP
 
@@ -9462,7 +9462,7 @@ ifvarg tempb 0
 
     // Stage 24p of Damage Formula
     ifvare ISDEVASTATOR? 1 divvar ACTORDEFENSETEMP 4
-    addlogvar ISDEVASTATOR?
+    // addlogvar ISDEVASTATOR?
     ifvare tempc SPIT { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5 }
     ifvare tempc FIRELASER { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
     ifvare tempc GROWSPARK { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
@@ -21657,7 +21657,7 @@ ifinwater ifp prunning
 */
 ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 3
 {
- ifvare CHARACTERSELECTED? 1 { ifvare CURRENTENERGYPOINTS 0 { setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS addlogvar CURRENTENERGYPOINTS } }
+ ifvare CHARACTERSELECTED? 1 { ifvare CURRENTENERGYPOINTS 0 { setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS } } // addlogvar CURRENTENERGYPOINTS
  else
  {
   setvar CHARACTERARRAY 1
@@ -21665,7 +21665,7 @@ ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 3
   getactorvar[CHARACTERARRAY].CHARACTERMAXEP TEMPVAR2
   ifvare TEMPVAR 0 setvarvar TEMPVAR TEMPVAR2
   setactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
-  addlogvar TEMPVAR
+  // addlogvar TEMPVAR
  }
 }
 
@@ -28166,7 +28166,7 @@ ifvare FALLSOUND? 1
          setvarvar DAMAGEHUEFACTOR tempe
          state playerdamagehues-normaltype
 
-         addlogvar TEMPVAR3
+         // addlogvar TEMPVAR3
          ifvare CHARACTERSELECTED? 1
          {
           stopsound DUKE_SCREAM

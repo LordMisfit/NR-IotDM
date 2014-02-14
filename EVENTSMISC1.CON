@@ -1487,19 +1487,9 @@ ifvarand TEMP 1 // Dead
 endevent
 
 onevent EVENT_SOUND
-addlogvar RETURN
-ifvare RETURN 42 { setvar RETURN -1 addlogvar RETURN }
-ifvare RETURN 200 { setvar RETURN -1 addlogvar RETURN } // fix by Hendricks266: prevents DUKE_LAND_HURT [#200] from playing and might help fix a sound issue with fall-damage sounds
-
-ifvare RETURN WANG_LONGTERM_PAIN6 addlogvar RETURN
-ifvare RETURN LISA_FALLDAMAGE addlogvar RETURN
-ifvare RETURN LISA_FALLDAMAGE2 addlogvar RETURN
-ifvare RETURN LISA_FALLDAMAGE3 addlogvar RETURN
-ifvare RETURN CYBANIS_FALLDAMAGE1 addlogvar RETURN
-ifvare RETURN CYBANIS_FALLDAMAGE2 addlogvar RETURN
-ifvare RETURN MAKEN_FALLDAMAGE1 addlogvar RETURN
-ifvare RETURN MAKEN_FALLDAMAGE2 addlogvar RETURN
-ifvare RETURN MAKEN_FALLDAMAGE3 addlogvar RETURN
+// addlogvar RETURN
+ifvare RETURN 42 { setvar RETURN -1 }
+ifvare RETURN 200 { setvar RETURN -1 } // fix by Hendricks266: prevents DUKE_LAND_HURT [#200] from playing and might help fix a sound issue with fall-damage sounds
 
 ifvare RETURN DUKE_TAKEPILLS
 {
