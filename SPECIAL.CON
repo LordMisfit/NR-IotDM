@@ -33207,14 +33207,18 @@ state vehicledisplays
      {
       // SHOP BACKGROUND
       setvar shade 27
-      state pal14
+      ifvare VEHICLETYPE 0 setvar pal 14
+      ifvare VEHICLETYPE 1 setvar pal 16
+      ifvare VEHICLETYPE 2 setvar pal 10
       setvar digx -120
       setvar digy 100 // 129
       setvar digz 655360
       state orientation2 //  state orientation3
       setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
       state rs
-      state pal14
+      ifvare VEHICLETYPE 0 setvar pal 14
+      ifvare VEHICLETYPE 1 setvar pal 16
+      ifvare VEHICLETYPE 2 setvar pal 10
       setvar digx 440
       setvar digy 100 // 129
       setvar digz 655360
