@@ -3121,6 +3121,7 @@ ifvare mainmenusubmenu 1
 
  ifvare mainmenupage 1
  {
+  state orientation2
 
 // Row #1
   state checkusedgreenarmors
