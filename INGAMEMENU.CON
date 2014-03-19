@@ -6,24 +6,12 @@ ifvare mainmenu 0
  ifvarg mainmenutransitiontimer 0
  {
   switch mainmenutransitiontimer
-   case 1 
-    setvar digz 7022
-    break
-   case 2 
-    setvar digz 14043
-    break
-   case 3
-    setvar digz 21065
-    break
-   case 4 
-    setvar digz 28087
-    break
-   case 5
-    setvar digz 35108
-    break
-   case 6 
-    setvar digz 42130
-    break
+   case 1 setvar digz 7022 break
+   case 2 setvar digz 14043 break
+   case 3 setvar digz 21065 break
+   case 4 setvar digz 28087 break
+   case 5 setvar digz 35108 break
+   case 6 setvar digz 42130 break
   endswitch
   ifvarg mainmenutransitiontimer 6 setvar digz 49152
 
@@ -44,7 +32,14 @@ ifvare mainmenu 1
  ifvarg mainmenutransitiontimer 6
  {
   state pal4
-  state digx160
+  setvar digx -1
+  setvar digy 100 // 129
+  setvar digz 655360
+  state orientation2 //  state orientation3
+  setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
+  state rs
+  state pal4
+  setvar digx 319
   setvar digy 100 // 129
   setvar digz 655360
   state orientation2 //  state orientation3
@@ -55,24 +50,12 @@ ifvare mainmenu 1
  ifvarg mainmenutransitiontimer 0
  {
   switch mainmenutransitiontimer
-   case 1 
-    setvar digz 7022
-    break
-   case 2 
-    setvar digz 14043
-    break
-   case 3
-    setvar digz 21065
-    break
-   case 4 
-    setvar digz 28087
-    break
-   case 5
-    setvar digz 35108
-    break
-   case 6 
-    setvar digz 42130
-    break
+   case 1 setvar digz 7022 break
+   case 2 setvar digz 14043 break
+   case 3 setvar digz 21065 break
+   case 4 setvar digz 28087 break
+   case 5 setvar digz 35108 break
+   case 6 setvar digz 42130 break
   endswitch
   ifvarg mainmenutransitiontimer 6 setvar digz 49152
   
@@ -771,10 +754,13 @@ ifvare mainmenu 1
    state setquote332
   }
 
-  // Above Menu
+  //**************
+  //**Above Menu**
+  //**************
   ifvare mainmenusubmenu 256 nullop
   else
   {
+   setvar orientation_change 256
    state pal23
  
    setvar digx 1
@@ -800,6 +786,7 @@ ifvare mainmenu 1
    setvar digx 37
    setvar digy 3
    setvarvar varname SKILLLEVEL
+   state orientation2
    state dn
  
    ifvare PUBLICBETA? 1 
@@ -807,11 +794,13 @@ ifvare mainmenu 1
     setvar digx 45
     addvar digy 6 // setvar digy 9
     setvarvar varname DISPLAYEPISODE
+    state orientation2
     state dn
    }
 
    setvar digx 37
    addvar digy 6 // setvar digy 15
+   state orientation2
    setvarvar varname DISPLAYLEVEL
    state dn
  
@@ -828,7 +817,9 @@ ifvare mainmenu 1
    ifvare SKILLLEVEL 8 redefinequote 332 : ^14YOU ARE DEATH'S BITCH!!
    ifvare SKILLLEVEL 9 redefinequote 332 : ^6THE END OF YOUR DESTINY!!!
    state mt
+   setvar orientation_change 0
 
+   setvar orientation_change 512
    // Show Kills Counter [Label]
    setvar digy -5
    ifvarg MAX_ENEMIES_KILLED_LEVEL 0
@@ -878,6 +869,7 @@ ifvare mainmenu 1
     setvar digx 293
     addvar digy 6
     setvarvar varname ENEMIES_KILLED_LEVEL // getplayer[THISACTOR].actors_killed varname
+    state orientation2
     state dn
    }
 
@@ -888,6 +880,7 @@ ifvare mainmenu 1
     setvar digx 293
     addvar digy 6
     setvarvar varname SECRETSFOUND_LEVEL
+    state orientation2
     state dn
    }
 
@@ -898,6 +891,7 @@ ifvare mainmenu 1
     setvar digx 293
     addvar digy 6
     setvarvar varname RANKITEMSFOUND_LEVEL
+    state orientation2
     state dn
    }
 
@@ -908,6 +902,7 @@ ifvare mainmenu 1
     setvar digx 293
     addvar digy 6
     setvarvar varname CIVILIANSSAVED_LEVEL
+    state orientation2
     state dn
    }
 
@@ -960,6 +955,7 @@ ifvare mainmenu 1
     setvar digx 313
     addvar digy 6
     setvarvar varname MAX_ENEMIES_KILLED_LEVEL
+    state orientation2
     state dn
    }
 
@@ -970,6 +966,7 @@ ifvare mainmenu 1
     setvar digx 313
     addvar digy 6
     setvarvar varname MAX_SECRETSFOUND_LEVEL
+    state orientation2
     state dn
    }
 
@@ -980,6 +977,7 @@ ifvare mainmenu 1
     setvar digx 313
     addvar digy 6
     setvarvar varname MAX_RANKITEMSFOUND_LEVEL
+    state orientation2
     state dn
    }
 
@@ -990,8 +988,10 @@ ifvare mainmenu 1
     setvar digx 313
     addvar digy 6
     setvarvar varname MAX_CIVILIANSSAVED_LEVEL
+    state orientation2
     state dn
    }
+   setvar orientation_change 0
   }
 
   // Item Descriptions and Text Descriptions

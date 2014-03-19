@@ -14796,14 +14796,18 @@ state civsave
   }
 ends
 
+state fordencall
+    setvar FORDENTIMER 38
+    randvar FORDENTYPE 1
+ends
+
 state frosty
   ifvare oldskoolmode 0
   {
    ifrnd 64 
    {
     globalsound FROSTY
-    setvar FORDENTIMER 19
-    randvar FORDENTYPE 1
+    state fordencall
     redefinequote 340 ^1Frosty!!
     userquote 340
    }
@@ -14844,16 +14848,14 @@ state jib_sounds
     ifrnd 128 
     {
      globalsound TOASTY
-     setvar FORDENTIMER 19
-     randvar FORDENTYPE 1
+     state fordencall
      redefinequote 340 ^2Toasty!!
      userquote 340
     }
     else 
     {
      globalsound CRISPY
-     setvar FORDENTIMER 19 
-     randvar FORDENTYPE 1
+     state fordencall
      redefinequote 340 ^10Crispy!!
      userquote 340
     }

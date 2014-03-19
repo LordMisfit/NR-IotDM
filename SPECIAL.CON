@@ -89,6 +89,7 @@ gamevar cursormemorysubmenu 0 0
 gamevar cursormemorypagepos 0 132098
 gamevar cursormemorycursorpos 0 132098
 
+gamevar prev_orientation 0 0
 gamevar orientation_change 0 0
 
 gamevar position 0 2
@@ -1453,6 +1454,14 @@ gamevar digx 0 131073
 gamevar digy 0 131073
 gamevar digz 24576 131073 // 32768 1
 gamevar diga 0 131073
+gamevar blockang 0 131073
+gamevar charang 0 131073
+gamevar alpha 0 131073
+gamevar xspace 0 131073
+gamevar yline 0 131073
+gamevar xbetween 0 131073
+gamevar ybetween 0 131073
+gamevar textflags 0 131073
 gamevar tilenum 0 131073
 gamevar varname 0 131073
 gamevar TEMP 0 131074
@@ -3797,95 +3806,95 @@ state orientationsetproperscale
 ends
 
 state orientation0
- setvar orientation 0 state orientationsetproperscale
+ setvar orientation 0
 ends
 
 state orientation1
- setvar orientation 1 state orientationsetproperscale
+ setvar orientation 1
 ends
 
 state orientation2
- setvar orientation 2 state orientationsetproperscale
+ setvar orientation 2
 ends
 
 state orientation3
- setvar orientation 3 state orientationsetproperscale
+ setvar orientation 3
 ends
 
 state orientation10
- setvar orientation 10 state orientationsetproperscale
+ setvar orientation 10
 ends
 
 state orientation11
- setvar orientation 11 state orientationsetproperscale
+ setvar orientation 11
 ends
 
 state orientation16
- setvar orientation 16 state orientationsetproperscale
+ setvar orientation 16
 ends
 
 state orientation17
- setvar orientation 17 state orientationsetproperscale
+ setvar orientation 17
 ends
 
 state orientation18
- setvar orientation 18 state orientationsetproperscale
+ setvar orientation 18
 ends
 
 state orientation19
- setvar orientation 19 state orientationsetproperscale
+ setvar orientation 19
 ends
 
 state orientation20
- setvar orientation 20 state orientationsetproperscale
+ setvar orientation 20
 ends
 
 state orientation24
- setvar orientation 24 state orientationsetproperscale
+ setvar orientation 24
 ends
 
 state orientation25
- setvar orientation 25 state orientationsetproperscale
+ setvar orientation 25
 ends
 
 state orientation26
- setvar orientation 26 state orientationsetproperscale
+ setvar orientation 26
 ends
 
 state orientation27
- setvar orientation 27 state orientationsetproperscale
+ setvar orientation 27
 ends
 
 state orientation33
- setvar orientation 33 state orientationsetproperscale
+ setvar orientation 33
 ends
 
 state orientation35
- setvar orientation 35 state orientationsetproperscale
+ setvar orientation 35
 ends
 
 state orientation37
- setvar orientation 37 state orientationsetproperscale
+ setvar orientation 37
 ends
 
 state orientation43
- setvar orientation 43 state orientationsetproperscale
+ setvar orientation 43
 ends
 
 state orientation49
- setvar orientation 49 state orientationsetproperscale
+ setvar orientation 49
 ends
 
 state orientation51
- setvar orientation 51 state orientationsetproperscale
+ setvar orientation 51
 ends
 
 state orientation57
- setvar orientation 57 state orientationsetproperscale
+ setvar orientation 57
 ends
 
 state orientation59
- setvar orientation 59 state orientationsetproperscale
+ setvar orientation 59
 ends
 
 state digx160
@@ -4838,27 +4847,53 @@ state addworldtilecount
 ends
 
 state rs
+ state orientationsetproperscale
  rotatesprite digx digy digz diga tilenum shade pal orientation ZERO ZERO xdim ydim
 ends
 
+state rs16
+ state orientationsetproperscale
+ rotatesprite16 digx digy digz diga tilenum shade pal orientation ZERO ZERO xdim ydim
+ends
+
 state dn
+ state orientationsetproperscale
  digitalnumber tilenum digx digy varname shade pal orientation ZERO ZERO xdim ydim
 ends
 
 state dnz
+ state orientationsetproperscale
  digitalnumberz tilenum digx digy varname shade pal orientation ZERO ZERO xdim ydim textscale
 ends
 
 state gt
+ state orientationsetproperscale
  gametext tilenum digx digy temp shade pal orientation ZERO ZERO xdim ydim
 ends
 
 state gtz
+ state orientationsetproperscale
  gametextz tilenum digx digy temp shade pal orientation ZERO ZERO xdim ydim textscale
 ends
 
 state mt
- minitext digx digy temp shade pal
+//  ifvare digx_test 0 minitext digx digy temp shade pal
+/*
+  ifvare digx_test 1
+  {
+*/
+   setvarvar prev_orientation orientation
+   setvar xspace 4
+   setvar yline 6
+   setvar xbetween 1
+   setvar ybetween 1  
+   setvar textflags 8192
+   setvar orientation 26
+   setvar textscale 65536
+   state orientationsetproperscale
+   screentext MINIFONT digx digy textscale blockang charang temp shade pal orientation alpha xspace yline xbetween ybetween textflags ZERO ZERO xdim ydim
+   setvarvar orientation prev_orientation
+//  }
 ends
 
 //****************************

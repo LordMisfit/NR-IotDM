@@ -16,12 +16,19 @@ ifvarg temp 0
   state vehicledisplays
 
   // Dim the Foreground
-  setvar digx 0
-  setvar digy 0
-  state digz65536
-  setvar tilenum 7801
   state pal4
-  state orientation27
+  setvar digx -1
+  setvar digy 100 // 129
+  setvar digz 65536
+  state orientation3 //  state orientation3
+  setvar tilenum 7801 // For the shop background >.> (2456 or 8191)
+  state rs
+  state pal4
+  setvar digx 319
+  setvar digy 100 // 129
+  setvar digz 65536
+  state orientation3 //  state orientation3
+  setvar tilenum 7801 // For the shop background >.> (2456 or 8191)
   state rs
 
   // "Paused" Text
@@ -1440,6 +1447,7 @@ else
    setvar diga 0
    ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0
    {
+    setvar orientation_change 512
     //************************************
     //*Fordenator Code - "MORTAL KOMBAT!"*
     //************************************
@@ -1455,30 +1463,44 @@ else
      ifvare FORDENTYPE 0
      {
       ifvare FORDENTIMER 1 setvar tilenum 3833
-      ifvare FORDENTIMER 2 setvar tilenum 3835
-      ifvare FORDENTIMER 3 setvar tilenum 3837
-      ifvarg FORDENTIMER 3 { ifvarl FORDENTIMER 17 setvar tilenum 3839 } // 4-16
-      ifvare FORDENTIMER 17 setvar tilenum 3837
-      ifvare FORDENTIMER 18 setvar tilenum 3835
-      ifvare FORDENTIMER 19 setvar tilenum 3833
-      ifvarg FORDENTIMER 19 setvar tilenum 3831
+      ifvare FORDENTIMER 2 setvar tilenum 3833
+      ifvare FORDENTIMER 3 setvar tilenum 3835
+      ifvare FORDENTIMER 4 setvar tilenum 3835
+      ifvare FORDENTIMER 5 setvar tilenum 3837
+      ifvare FORDENTIMER 6 setvar tilenum 3837
+      ifvarg FORDENTIMER 6 { ifvarl FORDENTIMER 33 setvar tilenum 3839 } // 4-16
+      ifvare FORDENTIMER 33 setvar tilenum 3837
+      ifvare FORDENTIMER 34 setvar tilenum 3837
+      ifvare FORDENTIMER 35 setvar tilenum 3835
+      ifvare FORDENTIMER 36 setvar tilenum 3835
+      ifvare FORDENTIMER 37 setvar tilenum 3833
+      ifvare FORDENTIMER 38 setvar tilenum 3833
+      ifvarg FORDENTIMER 38 setvar tilenum 3831
      }
      ifvare FORDENTYPE 1
      {
       ifvare FORDENTIMER 1 setvar tilenum 3824
-      ifvare FORDENTIMER 2 setvar tilenum 3826
-      ifvare FORDENTIMER 3 setvar tilenum 3828
-      ifvarg FORDENTIMER 3 { ifvarl FORDENTIMER 17 setvar tilenum 3830 } // 4-16
-      ifvare FORDENTIMER 17 setvar tilenum 3828
-      ifvare FORDENTIMER 18 setvar tilenum 3826
-      ifvare FORDENTIMER 19 setvar tilenum 3824
-      ifvarg FORDENTIMER 19 setvar tilenum 3822
+      ifvare FORDENTIMER 2 setvar tilenum 3824
+      ifvare FORDENTIMER 3 setvar tilenum 3826
+      ifvare FORDENTIMER 4 setvar tilenum 3826
+      ifvare FORDENTIMER 5 setvar tilenum 3828
+      ifvare FORDENTIMER 6 setvar tilenum 3828
+      ifvarg FORDENTIMER 6 { ifvarl FORDENTIMER 33 setvar tilenum 3830 } // 4-16
+      ifvare FORDENTIMER 33 setvar tilenum 3828
+      ifvare FORDENTIMER 34 setvar tilenum 3828
+      ifvare FORDENTIMER 35 setvar tilenum 3826
+      ifvare FORDENTIMER 36 setvar tilenum 3826
+      ifvare FORDENTIMER 37 setvar tilenum 3824
+      ifvare FORDENTIMER 38 setvar tilenum 3824
+      ifvarg FORDENTIMER 38 setvar tilenum 3822
      }
      state rs
      subvar FORDENTIMER 1
     }
     // End Fordenator Code
+    setvar orientation_change 0
 
+    setvar orientation_change 256
     //**************************************************
     //*Show Alive / Total Character Count (Quick Party)*
     //**************************************************
@@ -1549,6 +1571,7 @@ else
        divvar TEMPVAR5 31
        addvarvar tilenum TEMPVAR5
        addvar shade 13
+       state orientation27
        state rs
        state settile3087 
        subvar shade 13
@@ -1567,6 +1590,7 @@ else
        ifvarg PARTYALIVE -1 ifvarl PARTYALIVE 10 addvar digx 55
        ifvarg PARTYALIVE 9 ifvarl PARTYALIVE 100 addvar digx 57
        setvarvar varname PARTYALIVE
+       state orientation27
        state dn
  
        // "/"
@@ -1583,11 +1607,14 @@ else
        setvarvar varname PARTYSIZE
        ifvarg PARTYSIZE -1 ifvarl PARTYSIZE 10 addvar digx 0
        ifvarg PARTYSIZE 9 ifvarl PARTYSIZE 100 addvar digx 2
+       state orientation27
        state dn
       }       
       state shade0
      }
+     setvar orientation_change 0
 
+     setvar orientation_change 256
      //*******************************
      //*Show Current Character's name*
      //*******************************
@@ -1709,11 +1736,12 @@ else
       state pal10
      }
      ifvarg CHARACTERSELECTED? 15 setvarvar CHARACTERSELECTED? CHARACTEROLD
+     setvar orientation_change 0
 
+     setvar orientation_change 256
      setvar temp 318
      state mt
      state shade0
-
      getplayer[THISACTOR].holster_weapon temp
      ifvare temp 1
      {
@@ -1726,6 +1754,7 @@ else
       subvar digx 1 // 182
       subvar digy -3 // 182
      }
+     setvar orientation_change 0
 
      //**************************************
      //*Shows the character's weapon numbers*
@@ -1734,7 +1763,7 @@ else
      state settile3087 
      setvar temp 325
      // Weapon 1
-     setvar digx 112
+     setvar digx 102
      redefinequote 325 1
      ifvare PLAYERWEAPON? 0 state shadepulse3
      state pal20
@@ -1899,6 +1928,8 @@ else
      state ammocolors
      ifvarand PLAYERWEAPONBITFIELD 1024 state mt
 
+
+     setvar orientation_change 256
      state shade0
      setvar diga 0
      // Show Character's Icon at Bottom Left Corner
@@ -1962,6 +1993,7 @@ else
      state shade0
     } // ifvare mainmenu 0
    } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0
+   setvar orientation_change 0
 
    ifvare mainmenu 0
    { // ifvare mainmenu 0 [line 9653]
@@ -1991,6 +2023,7 @@ else
      {
       ifvare GOTMONEYRADAR? 1
       {
+       setvar orientation_change 512
        //****************
        //*Money Detector*
        //****************
@@ -2061,11 +2094,14 @@ else
          addvar diga 1024
          getactor[MONEYID].picnum temp
          ifvarg temp 5119 ifvarl temp 5147 setvar tilenum 5154 else setvar tilenum 5372
+         state orientation1
          state rs
          state shade0
         }
        }
+       setvar orientation_change 0
  
+       setvar orientation_change 512
        //*******************
        //*Gemstone-Detector*
        //*******************
@@ -2137,17 +2173,21 @@ else
          else setvar tilenum 5372
          setvar digz 5120 // 2048
          setvar diga 0
+         state orientation1
          state rs
          state shade0
         }
        }
       }
      }
+     setvar orientation_change 0
 
      state shade0
      setvar diga 0
      state orientation27
 
+
+     setvar orientation_change 256
      //****************************************
      //*Show Character's Status Ailments/Buffs*
      //****************************************
@@ -2182,6 +2222,7 @@ else
      {
       setvar digx 32
       setvar tilenum 8100
+      state orientation27
       state rs
      }
      ifvarand PLAYERSTATUS? 2 // Hasted
@@ -2189,6 +2230,7 @@ else
       setvar digx 32
       setvar tilenum 8106
       ifvarl PLAYERHASTETIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2198,6 +2240,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERHASTETIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3 // +25
@@ -2211,6 +2254,7 @@ else
       ifvarand PLAYERSTATUS? 2 addvar digx 7
       setvar tilenum 8107
       ifvarl PLAYERSLOWTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2220,6 +2264,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERSLOWTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2234,6 +2279,7 @@ else
       ifvarand PLAYERSTATUS? 4 addvar digx 7
       setvar tilenum 8101
       ifvarl PLAYERPOISONTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2243,6 +2289,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERPOISONTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2258,6 +2305,7 @@ else
       ifvarand PLAYERSTATUS? 8 addvar digx 7
       setvar tilenum 8102
       ifvarl PLAYERDIMNESSTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2267,6 +2315,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERDIMNESSTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2283,6 +2332,7 @@ else
       ifvarand PLAYERSTATUS? 16 addvar digx 7
       setvar tilenum 8104
       ifvarl PLAYERREFRACTORTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2292,6 +2342,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERREFRACTORTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2309,6 +2360,7 @@ else
       ifvarand PLAYERSTATUS? 32 addvar digx 7
       setvar tilenum 8105
       ifvarl PLAYERRAGNAROKTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2318,6 +2370,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERRAGNAROKTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2336,6 +2389,7 @@ else
       ifvarand PLAYERSTATUS? 64 addvar digx 7
       setvar tilenum 8103
       ifvarl PLAYERCONFUSIONTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2345,6 +2399,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERCONFUSIONTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2364,6 +2419,7 @@ else
       ifvarand PLAYERSTATUS? 128 addvar digx 7
       setvar tilenum 8109
       ifvarl PLAYERAQUAPROTECTTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2373,6 +2429,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERAQUAPROTECTTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2393,6 +2450,7 @@ else
       ifvarand PLAYERSTATUS? 256 addvar digx 7
       setvar tilenum 8108
       ifvarl PLAYERSHELLTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2402,6 +2460,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERSHELLTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2423,6 +2482,7 @@ else
       ifvarand PLAYERSTATUS? 512 addvar digx 7
       setvar tilenum 8110
       ifvarl PLAYERPSISHIELDTIMER 2 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2431,6 +2491,7 @@ else
       subvar digy 4
       setvar textscale 45056
       setvarvar varname PLAYERPSISHIELDTIMER
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2453,6 +2514,7 @@ else
       ifvarand PLAYERSTATUS? 1024 addvar digx 7
       setvar tilenum 8111
       ifvarl PLAYERBLITZKRIEGTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2462,6 +2524,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERBLITZKRIEGTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2485,6 +2548,7 @@ else
       ifvarand PLAYERSTATUS? 2048 addvar digx 7
       setvar tilenum 8112
       ifvarl PLAYERBOOSTERTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2494,6 +2558,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERBOOSTERTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2518,6 +2583,7 @@ else
       ifvarand PLAYERSTATUS? 4096 addvar digx 7
       setvar tilenum 8113
       ifvarl PLAYERBLOODLUSTTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2527,6 +2593,7 @@ else
       setvar textscale 45056
       setvarvar varname PLAYERBLOODLUSTTIMER
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2555,6 +2622,7 @@ else
       ifvarand PLAYERSTATUS? 8192 addvar digx 7
       setvar tilenum 8071 // 5272
       ifvarl QUADTIME 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2564,6 +2632,7 @@ else
       setvar textscale 45056
       setvarvar varname QUADTIME
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2592,6 +2661,7 @@ else
       ifvarg QUADTIME 0 addvar digx 7
       setvar tilenum 8072 // 5272
       ifvarl INVULNTIME 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2601,6 +2671,7 @@ else
       setvar textscale 45056
       setvarvar varname INVULNTIME
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2629,6 +2700,7 @@ else
       ifvarg INVULNTIME 0 addvar digx 7
       setvar tilenum 8073 // 5272
       ifvarl REGENTIME 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2638,6 +2710,7 @@ else
       setvar textscale 45056
       setvarvar varname REGENTIME
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2667,6 +2740,7 @@ else
       ifvarg REGENTIME 0 addvar digx 7
       setvar tilenum 8074 // 5272
       ifvarl APREGENTIME 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2676,6 +2750,7 @@ else
       setvar textscale 45056
       setvarvar varname APREGENTIME
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2706,6 +2781,7 @@ else
       ifvarg APREGENTIME 0 addvar digx 7
       setvar tilenum 8075 // 5272
       ifvarl VAMPIRETIME 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
  
       setvar tilenum 3087 // Blue Digital Text
@@ -2715,6 +2791,7 @@ else
       setvar textscale 45056
       setvarvar varname VAMPIRETIME
       divvar varname 26
+      state orientation27
       state dnz
  
       subvar digx 3
@@ -2722,7 +2799,9 @@ else
       setvar pal 0
       setvar shade 0
      }
+     setvar orientation_change 0
 
+     setvar orientation_change 256
      setvar shade 0
      state pal20
      state settile3087 
@@ -2754,6 +2833,7 @@ else
  
      addvarvar tilenum TEMPVAR5
      addvar shade 13
+     state orientation27
      state rs
      state settile3087 
      subvar shade 13
@@ -2781,6 +2861,7 @@ else
      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 26
      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 28
      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 30
+     state orientation27
      state dn
 
      // Display the word "/" (for EXP)
@@ -2829,6 +2910,7 @@ else
       else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 12 
       else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 14
       // ifvarl PLAYERTEMPLEVEL 100 
+      state orientation27
       state dn
      }
  
@@ -2886,8 +2968,10 @@ else
      state mt   
      state pal0
      state shade0   
+     setvar orientation_change 0
 
 
+     setvar orientation_change 256
      state pal23
      //************
      //*RANK Stuff*
@@ -2937,6 +3021,7 @@ else
 
      addvarvar tilenum TEMPVAR5
      addvar shade 13
+     state orientation27
      state rs
      state settile3087 
      subvar shade 13
@@ -2978,6 +3063,7 @@ else
      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 34
      else ifvarg varname 99999999 ifvarl varname 1000000000 addvar digx 36
      else ifvarg varname 999999999 addvar digx 38
+     state orientation27
      state dn
  
      // Display RANK level [N to ZZ]
@@ -3097,7 +3183,9 @@ else
      state mt   
      state pal0
      state shade0   
+     setvar orientation_change 0
 
+     setvar orientation_change 256
      //************************
      //*HP/AP/EP/EShield Stuff*
      //************************
@@ -3116,6 +3204,7 @@ else
      divvar TEMPVAR5 31
      addvarvar tilenum TEMPVAR5
      addvar shade 13
+     state orientation27
      state rs
      state settile3087 
      subvar shade 13
@@ -3143,6 +3232,7 @@ else
      else ifvarg CURRENTHITPOINTS 99999 ifvarl CURRENTHITPOINTS 1000000 addvar digx 22
      else ifvarg CURRENTHITPOINTS 999999 ifvarl CURRENTHITPOINTS 10000000 addvar digx 24
      else ifvarg CURRENTHITPOINTS 9999999 ifvarl CURRENTHITPOINTS 100000000 addvar digx 26
+     state orientation27
      state dn
  
      // Display the word "/" (for HP)
@@ -3184,6 +3274,7 @@ else
      else ifvarg MAXHITPOINTS 99999 ifvarl MAXHITPOINTS 1000000 addvar digx 18
      else ifvarg MAXHITPOINTS 999999 ifvarl MAXHITPOINTS 10000000 addvar digx 20
      else ifvarg MAXHITPOINTS 9999999 ifvarl MAXHITPOINTS 100000000 addvar digx 22
+     state orientation27
      state dn
  
      // Adding FA to this line [for compression]
@@ -3310,6 +3401,7 @@ else
       divvar TEMPVAR5 31
       addvarvar tilenum TEMPVAR5
       addvar shade 13
+      state orientation27
       state rs
       state settile3087 
       subvar shade 13
@@ -3335,6 +3427,7 @@ else
       else ifvarg CURRENTARMORPOINTS 99999 ifvarl CURRENTARMORPOINTS 1000000 addvar digx 22
       else ifvarg CURRENTARMORPOINTS 999999 ifvarl CURRENTARMORPOINTS 10000000 addvar digx 24
       else ifvarg CURRENTARMORPOINTS 9999999 ifvarl CURRENTARMORPOINTS 100000000 addvar digx 26
+      state orientation27
       state dn
  
       // Display the word "/" (for AP)
@@ -3374,6 +3467,7 @@ else
       else ifvarg MAXARMORPOINTS 99999 ifvarl MAXARMORPOINTS 1000000 addvar digx 18
       else ifvarg MAXARMORPOINTS 999999 ifvarl MAXARMORPOINTS 10000000 addvar digx 20
       else ifvarg MAXARMORPOINTS 9999999 ifvarl MAXARMORPOINTS 100000000 addvar digx 22
+      state orientation27
       state dn
       // Adding AB% to this line [for compression]
       ifvarg ARMORPERCENT 0
@@ -3434,6 +3528,7 @@ else
      divvar TEMPVAR5 31
      addvarvar tilenum TEMPVAR5
      addvar shade 13
+     state orientation27
      state rs
      state settile3087 
      subvar shade 13
@@ -3459,6 +3554,7 @@ else
      else ifvarg CURRENTENERGYPOINTS 99999 ifvarl CURRENTENERGYPOINTS 1000000 addvar digx 22
      else ifvarg CURRENTENERGYPOINTS 999999 ifvarl CURRENTENERGYPOINTS 10000000 addvar digx 24
      else ifvarg CURRENTENERGYPOINTS 9999999 ifvarl CURRENTENERGYPOINTS 100000000 addvar digx 26
+     state orientation27
      state dn
 
      // Display the word "/" (for EP)
@@ -3498,6 +3594,7 @@ else
      else ifvarg MAXENERGYPOINTS 99999 ifvarl MAXENERGYPOINTS 1000000 addvar digx 18
      else ifvarg MAXENERGYPOINTS 999999 ifvarl MAXENERGYPOINTS 10000000 addvar digx 20
      else ifvarg MAXENERGYPOINTS 9999999 ifvarl MAXENERGYPOINTS 100000000 addvar digx 22
+     state orientation27
      state dn
      state shade0 // stops future shadepulses from leaking out
 
@@ -3551,6 +3648,7 @@ else
       divvar TEMPVAR5 31
       addvarvar tilenum TEMPVAR5
       addvar shade 13
+      state orientation27
       state rs
       state settile3087 
       subvar shade 13
@@ -3574,6 +3672,7 @@ else
       else ifvarg CURRENTBIOSHIELDPOWER 99999 ifvarl CURRENTBIOSHIELDPOWER 1000000 addvar digx 22
       else ifvarg CURRENTBIOSHIELDPOWER 999999 ifvarl CURRENTBIOSHIELDPOWER 10000000 addvar digx 24
       else ifvarg CURRENTBIOSHIELDPOWER 9999999 ifvarl CURRENTBIOSHIELDPOWER 100000000 addvar digx 26
+      state orientation27
       state dn
  
       // Display the word "/" (for ES)
@@ -3611,11 +3710,15 @@ else
       else ifvarg MAXBIOSHIELDPOWER 99999 ifvarl MAXBIOSHIELDPOWER 1000000 addvar digx 18
       else ifvarg MAXBIOSHIELDPOWER 999999 ifvarl MAXBIOSHIELDPOWER 10000000 addvar digx 20
       else ifvarg MAXBIOSHIELDPOWER 9999999 ifvarl MAXBIOSHIELDPOWER 100000000 addvar digx 22
+      state orientation27
       state dn
       state shade0
      }
      state shade0 state pal0 // Stops future shadepulses from leaking
+     setvar orientation_change 0
 
+
+     setvar orientation_change 256
      //*****************************
      //*ATK/DEF/SPD/AIRJUMP Display*
      //*****************************
@@ -3639,8 +3742,10 @@ else
      else ifvarg PLAYERATTACK 99999 ifvarl PLAYERATTACK 1000000 addvar digx 26
      else ifvarg PLAYERATTACK 999999 ifvarl PLAYERATTACK 10000000 addvar digx 28
      else ifvarg PLAYERATTACK 9999999 ifvarl PLAYERATTACK 100000000 addvar digx 32
+     state orientation27
      state dn
- 
+
+
      state pal22
      // Display the word "DEF"
      setvar digx 22 // 288
@@ -3677,8 +3782,10 @@ else
      else ifvarg PLAYERDEFENSE 99999 ifvarl PLAYERDEFENSE 1000000 addvar digx 26
      else ifvarg PLAYERDEFENSE 999999 ifvarl PLAYERDEFENSE 10000000 addvar digx 28
      else ifvarg PLAYERDEFENSE 9999999 ifvarl PLAYERDEFENSE 100000000 addvar digx 30
+     state orientation27
      state dn
- 
+
+
      state pal20
      // Display the word "SPD"
      setvar digx 22 // 288
@@ -3736,9 +3843,11 @@ else
      else ifvarg CHARACTERSPEEDVISUAL 999999 ifvarl CHARACTERSPEEDVISUAL 10000000 addvar digx 28
      else ifvarg CHARACTERSPEEDVISUAL 9999999 ifvarl CHARACTERSPEEDVISUAL 100000000 addvar digx 30
      ifvarand PLAYERSTATUS? 2 state paletteflasher else ifvarand PLAYERSTATUS? 4 { state shadepulse4 addvar shade 10 }
+     state orientation27
      state dn
      state shade0
      state pal22
+
 
      ifvarg PLAYERMAXAIRJUMPS 0
      {
@@ -3841,10 +3950,13 @@ else
       else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 46
       else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 48
       else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 50
+      state orientation27
       state dn
       state shade0
      }
+     setvar orientation_change 0
  
+     setvar orientation_change 512
      //***************
      //*AMMO Displays*
      //***************
@@ -3886,6 +3998,8 @@ else
       else ifvarg varname 9999 ifvarl varname 100000 addvar digx 32
       else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 34
       else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 36
+      
+      state orientation27
       state dn
  
       // Shows "/" text [AMMO]
@@ -3922,7 +4036,8 @@ else
       else ifvarg varname 999 ifvarl varname 10000 addvar digx 14
       else ifvarg varname 9999 ifvarl varname 100000 addvar digx 16
       else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 18
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 20
+      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 20      
+      state orientation27
       state dn
      }
  
@@ -3934,7 +4049,12 @@ else
      setvar digx 240 // 190
      ifvarg CENTS -1 ifvarl CENTS 10 setvar temp 193 else setvar temp 194 
      state mt
+     setvar orientation_change 0
 
+     setvar orientation_change 256
+     //*****************
+     //*Top Keys Legend*
+     //*****************
      setvar digy 3
      ifvarn ftq 777
      {
@@ -3964,9 +4084,6 @@ else
       }
      }
  
-     //*****************
-     //*Top Keys Legend*
-     //*****************
      ifvarn CURRENTWEAPON 0
      {
       ifvare DEFENSEMODE? 1 state shadepulse
@@ -4058,6 +4175,7 @@ else
      }
  
     } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0 [line 1991]
+     setvar orientation_change 0
     //************************** End of redisplay attempt **************************
  
     state shade0
@@ -9472,6 +9590,8 @@ else
      }
     }
 
+
+    setvar orientation_change 256
     setvar shade 0
     ifvare mainmenu 0
     {
@@ -9576,7 +9696,9 @@ else
       qsprintf 332 332 varname
       state gtz
      }
+     setvar orientation_change 0
 
+     setvar orientation_change 256
      setvar shade 0
      // Freeze Counter
      setvarvar MANTLINGFACTOR freezetimermax
@@ -9680,6 +9802,7 @@ else
       // state dnz
      }
     }
+    setvar orientation_change 0
 
     setvar shade 0
     setvar tilenum 0
@@ -9939,15 +10062,16 @@ else
     }
     // End of BOSS Lifemeters Display Code
 
+
+    setvar orientation_change 512
     setvar shade 0
     // display keycards - coded originally by DeeperThought >.>
     ifvarn ACCESSCARDS? 0
     {
      state digz16384
-     mulvar digz 750 divvar digz 1000
+     mulvar digz 875 divvar digz 1000
 
      setvar diga 0
-     state orientation17 // 16
      // first bit is blue card, second bit is red card, third bit is yellow card
      ifvarand ACCESSCARDS? 1
      {
@@ -9955,6 +10079,7 @@ else
       setvar digx 297 // 294
       setvar digy 9 // 4
       setvar tilenum 60
+      state orientation17
       state rs
      }
      ifvarand ACCESSCARDS? 2
@@ -9963,6 +10088,7 @@ else
       setvar digx 297 // 294
       setvar digy 15
       setvar tilenum 60
+      state orientation17
       state rs
      }
      ifvarand ACCESSCARDS? 4
@@ -9971,6 +10097,7 @@ else
       setvar digx 297 // 294
       setvar digy 21 // 20
       setvar tilenum 60
+      state orientation17
       state rs
      }
      ifvarand ACCESSCARDS? 8
@@ -9979,6 +10106,7 @@ else
       setvar digx 308 // 307
       setvar digy 12 // 8
       setvar tilenum 60
+      state orientation17
       state rs
      }
      ifvarand ACCESSCARDS? 16
@@ -9987,6 +10115,7 @@ else
       setvar digx 308 // 307
       setvar digy 18 // 8
       setvar tilenum 60
+      state orientation17
       state rs
      }
      ifvarand ACCESSCARDS? 32
@@ -9995,6 +10124,7 @@ else
       setvar digx 286 // 281
       setvar digy 12 // 8
       setvar tilenum 60
+      state orientation17
       state rs
      }
      ifvarand ACCESSCARDS? 64
@@ -10003,14 +10133,17 @@ else
       setvar digx 286 // 281
       setvar digy 18 // 16
       setvar tilenum 60
+      state orientation17
       state rs
      }
     }
+    setvar orientation_change 0
 
     ifvare mainmenu 0
     { // ifvare mainmenu 0 [line 12060]
       setvar diga 0
 
+      setvar orientation_change 512
       // display continues - based off DeeperThought's display coding $.$
       state checkcontinues
       ifvarg ITEMARRAYID_AMOUNTTEMP 0
@@ -10129,7 +10262,9 @@ else
        }
       }
       state shade0
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display goggles - coded originally by DeeperThought -.-
       getplayer[THISACTOR].heat_on TEMPVAR
       getplayer[THISACTOR].heat_amount varname
@@ -10182,6 +10317,7 @@ else
         mulvar digz 750 divvar digz 1000
         ifvarl CURRENTENERGYPOINTS 1 state pal2 else state pal17
         setvar tilenum 8182
+        state orientation1
         state rs
        }
        else
@@ -10195,6 +10331,7 @@ else
          mulvar digz 750 divvar digz 1000
          state pal17
          setvar tilenum 8182
+         state orientation1
          state rs
         }
         else
@@ -10317,7 +10454,9 @@ else
        }
       }
       state shade0
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display jetpack - coded originally by DeeperThought o.o
       getplayer[THISACTOR].jetpack_on TEMPVAR
       getplayer[THISACTOR].jetpack_amount varname
@@ -10416,7 +10555,9 @@ else
        }
       }
       state shade0
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display holoform - coded originally by DeeperThought o.O
       getplayer[THISACTOR].holoduke_on TEMPVAR
       getplayer[THISACTOR].holoduke_amount varname
@@ -10518,7 +10659,9 @@ else
        }
       }
       state shade0
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display scuba - coded originally by DeeperThought O.o
       setvarvar varname SCUBATIME // getplayer[THISACTOR].scuba_amount varname
       ifvarg varname 0
@@ -10562,17 +10705,10 @@ else
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
        state dnz
       }
-/*
-      else
-      {
-       state checkscubatanks
-       ifvarg ITEMARRAYID_AMOUNTTEMP 0
-       {
-       }
-      }
-*/
       state shade0
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display boots - coded originally by DeeperThought O.O
       getplayer[THISACTOR].on_ground TEMPVAR
       getplayer[THISACTOR].boot_amount varname
@@ -10635,7 +10771,9 @@ else
        state dnz
       }
       state shade0
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display Bubsy's extra lives - based off DeeperThought's display coding *.*
       state checkbubsylives
       ifvare CHARACTERSELECTED? 3 ifvarg ITEMARRAYID_AMOUNTTEMP 0
@@ -10663,7 +10801,9 @@ else
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
        state dnz
       }
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display bioshield
       ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
       {
@@ -10739,6 +10879,7 @@ else
         state pal21
         setvarvar varname DAMAGEINCELL
         setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
+        state orientation17
         state dnz
        }
 
@@ -10748,6 +10889,7 @@ else
        state pal0
        setvarvar varname ESHIELDDMGFACTOR
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
+       state orientation17
        state dnz
 
        setvar digx 606
@@ -10766,11 +10908,14 @@ else
        }
        setvarvar tilenum 3072 // Blue Digital Text
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
+       state orientation17
        state gtz
 
        state shade0
       }
+      setvar orientation_change 0
 
+      setvar orientation_change 512
       // display mercury computer
       ifvare CHARACTERSELECTED? 4 ifvare HAVEMERCURYCOMPUTER? 1
       {
@@ -10793,8 +10938,10 @@ else
        mulvar digz 750 divvar digz 1000
        state pal17
        setvar tilenum 8182
+       state orientation1
        state rs
       }
+      setvar orientation_change 0
 
 //*******************************
 

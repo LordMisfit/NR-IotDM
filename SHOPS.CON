@@ -2305,10 +2305,17 @@ state shop_display
   {
    // SHOP BACKGROUND
    state pal4
-   state digx160
+   setvar digx -1
    setvar digy 100 // 129
    setvar digz 655360
-   state orientation2 //  state orientation3
+   state orientation3 //  state orientation3
+   setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
+   state rs
+   state pal4
+   setvar digx 319
+   setvar digy 100 // 129
+   setvar digz 655360
+   state orientation3 //  state orientation3
    setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
    state rs
   }
