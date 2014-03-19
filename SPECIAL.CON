@@ -32617,6 +32617,7 @@ state showvehiclecommands
    {
     ifvare mainmenu 0
     {
+     setvar orientation_change 256
      state shade0
      setvar digx 4
      setvar digy 4
@@ -32712,6 +32713,7 @@ state showvehiclecommands
      divvar TEMPVAR5 31
      addvarvar tilenum TEMPVAR5
      addvar shade 13
+     state orientation27
      state rs
      state settile3087 
      subvar shade 13
@@ -32809,6 +32811,7 @@ state showvehiclecommands
       divvar TEMPVAR5 31
       addvarvar tilenum TEMPVAR5
       addvar shade 13
+      state orientation27
       state rs
       state settile3087 
       subvar shade 13
@@ -33019,7 +33022,7 @@ state showvehiclecommands
      getactorvar[VEHICLEID].ENEMYVAMPIRETIME varname ifvarg varname 0 addvar TEMPVAR5 1
      ifvarg TEMPVAR5 0
      {
-	state pal20
+      state pal20
       setvar digx 2
       addvar digy 6
       state shade0
@@ -33034,117 +33037,125 @@ state showvehiclecommands
      state digz12288
      ifvarg varname 0
      {
- 	setvar digx 28 // 136
+      setvar digx 28 // 136
       setvar tilenum 8071 // 5272
       getactorvar[VEHICLEID].ENEMYQUADTIME varname
       ifvarl varname 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
 
-	setvar tilenum 3087 // Blue Digital Text
-	setvar pal 23 // Powerups are Unique
-	addvar digx 3
-	subvar digy -7
-	setvar textscale 45056
+      setvar tilenum 3087 // Blue Digital Text
+      setvar pal 23 // Powerups are Unique
+      addvar digx 3
+      subvar digy -7
+      setvar textscale 45056
       getactorvar[VEHICLEID].ENEMYQUADTIME varname
-	setvarvar varname varname
-	divvar varname 26
-	state dnz
+      setvarvar varname varname
+      divvar varname 26
+      state orientation27
+      state dnz
 
-	subvar digx 3 // +25
-	addvar digy -7 // +25
-	setvar pal 0
-	setvar shade 0
+      subvar digx 3 // +25
+      addvar digy -7 // +25
+      setvar pal 0
+      setvar shade 0
      }
      // Show Invuln Icon
      getactorvar[VEHICLEID].ENEMYINVULNTIME varname
      state digz12288
      ifvarg varname 0
      {
- 	setvar digx 28 // 136
+      setvar digx 28 // 136
       getactorvar[VEHICLEID].ENEMYQUADTIME varname ifvarg varname 0 addvar digx 7
       setvar tilenum 8072 // 5272
       getactorvar[VEHICLEID].ENEMYINVULNTIME varname
       ifvarl varname 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
 
-	setvar tilenum 3087 // Blue Digital Text
-	setvar pal 23 // Powerups are Unique
-	addvar digx 3
-	subvar digy -7
-	setvar textscale 45056
+      setvar tilenum 3087 // Blue Digital Text
+      setvar pal 23 // Powerups are Unique
+      addvar digx 3
+      subvar digy -7
+      setvar textscale 45056
       getactorvar[VEHICLEID].ENEMYINVULNTIME varname
-	setvarvar varname varname
-	divvar varname 26
-	state dnz
+      setvarvar varname varname
+      divvar varname 26
+      state orientation27
+      state dnz
 
-	subvar digx 3 // +25
-	addvar digy -7 // +25
-	setvar pal 0
-	setvar shade 0
+      subvar digx 3 // +25
+      addvar digy -7 // +25
+      setvar pal 0
+      setvar shade 0
      }
      // Show Regen Icon
      getactorvar[VEHICLEID].ENEMYREGENTIME varname
      state digz12288
      ifvarg varname 0
      {
- 	setvar digx 28 // 136
+      setvar digx 28 // 136
       getactorvar[VEHICLEID].ENEMYQUADTIME varname ifvarg varname 0 addvar digx 7
       getactorvar[VEHICLEID].ENEMYINVULNTIME varname ifvarg varname 0 addvar digx 7
       setvar tilenum 8073 // 5272
       getactorvar[VEHICLEID].ENEMYREGENTIME varname
       ifvarl varname 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
 
-	setvar tilenum 3087 // Blue Digital Text
-	setvar pal 23 // Powerups are Unique
-	addvar digx 3
-	subvar digy -7
-	setvar textscale 45056
+      setvar tilenum 3087 // Blue Digital Text
+      setvar pal 23 // Powerups are Unique
+      addvar digx 3
+      subvar digy -7
+      setvar textscale 45056
       getactorvar[VEHICLEID].ENEMYREGENTIME varname
-	setvarvar varname varname
-	divvar varname 26
-	state dnz
+      setvarvar varname varname
+      divvar varname 26
+      state orientation27
+      state dnz
 
-	subvar digx 3 // +25
-	addvar digy -7 // +25
-	setvar pal 0
-	setvar shade 0
+      subvar digx 3 // +25
+      addvar digy -7 // +25
+      setvar pal 0
+      setvar shade 0
      }
      // Show APRegen Icon
      getactorvar[VEHICLEID].ENEMYAPREGENTIME varname
      state digz12288
      ifvarg varname 0
      {
- 	setvar digx 28 // 136
+      setvar digx 28 // 136
       getactorvar[VEHICLEID].ENEMYQUADTIME varname ifvarg varname 0 addvar digx 7
       getactorvar[VEHICLEID].ENEMYINVULNTIME varname ifvarg varname 0 addvar digx 7
       getactorvar[VEHICLEID].ENEMYREGENTIME varname ifvarg varname 0 addvar digx 7
       setvar tilenum 8074 // 5272
       getactorvar[VEHICLEID].ENEMYAPREGENTIME varname
       ifvarl varname 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
 
-	setvar tilenum 3087 // Blue Digital Text
-	setvar pal 23 // Powerups are Unique
-	addvar digx 3
-	subvar digy -7
-	setvar textscale 45056
+      setvar tilenum 3087 // Blue Digital Text
+      setvar pal 23 // Powerups are Unique
+      addvar digx 3
+      subvar digy -7
+      setvar textscale 45056
       getactorvar[VEHICLEID].ENEMYAPREGENTIME varname
-	setvarvar varname varname
-	divvar varname 26
-	state dnz
+      setvarvar varname varname
+      divvar varname 26
+      state orientation27
+      state dnz
 
-	subvar digx 3 // +25
-	addvar digy -7 // +25
-	setvar pal 0
-	setvar shade 0
+      subvar digx 3 // +25
+      addvar digy -7 // +25
+      setvar pal 0
+      setvar shade 0
      }
      // Show Vampire Icon
      getactorvar[VEHICLEID].ENEMYVAMPIRETIME varname
      state digz12288
      ifvarg varname 0
      {
- 	setvar digx 28 // 136
+      setvar digx 28 // 136
       getactorvar[VEHICLEID].ENEMYQUADTIME varname ifvarg varname 0 addvar digx 7
       getactorvar[VEHICLEID].ENEMYINVULNTIME varname ifvarg varname 0 addvar digx 7
       getactorvar[VEHICLEID].ENEMYREGENTIME varname ifvarg varname 0 addvar digx 7
@@ -33152,171 +33163,26 @@ state showvehiclecommands
       setvar tilenum 8075 // 5272
       getactorvar[VEHICLEID].ENEMYVAMPIRETIME varname
       ifvarl varname 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
       state rs
 
-	setvar tilenum 3087 // Blue Digital Text
-	setvar pal 23 // Powerups are Unique
-	addvar digx 3
-	subvar digy -7
-	setvar textscale 45056
+      setvar tilenum 3087 // Blue Digital Text
+      setvar pal 23 // Powerups are Unique
+      addvar digx 3
+      subvar digy -7
+      setvar textscale 45056
       getactorvar[VEHICLEID].ENEMYVAMPIRETIME varname
-	setvarvar varname varname
-	divvar varname 26
-	state dnz
+      setvarvar varname varname
+      divvar varname 26
+      state orientation27
+      state dnz
 
-	subvar digx 3 // +25
-	addvar digy -7 // +25
-	setvar pal 0
-	setvar shade 0
+      subvar digx 3 // +25
+      addvar digy -7 // +25
+      setvar pal 0
+      setvar shade 0
      }
-
-/*
-     // Vehicle Quad Time
-     getactorvar[VEHICLEID].ENEMYQUADTIME varname
-     ifvarg varname 0
-     {
-      addvar digy 7
-      state shade0
-      setvar digx 2
-      state pal16
-      setvar tilenum 3461
-      state orientation27 // 1+2+8+16
-      redefinequote 437 QUAD
-      setvar temp 437
-      state mt
-      state shade0
-      ifvare debugtoggle 0 divvar varname 26
-      ifvarg varname -1 ifvarl varname 10 addvar digx 20
-      else ifvarg varname 9 ifvarl varname 100 addvar digx 22
-      else ifvarg varname 99 ifvarl varname 1000 addvar digx 24
-      else ifvarg varname 999 ifvarl varname 10000 addvar digx 26
-      else ifvarg varname 9999 ifvarl varname 100000 addvar digx 28
-      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 30
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 32
-      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 34
-      state pal16
-      setvar tilenum 3087
-      state orientation27 // 1+2+8+16
-      state dn
-     }
-
-     // Vehicle Invuln Time
-     getactorvar[VEHICLEID].ENEMYINVULNTIME varname
-     ifvarg varname 0
-     {
-      addvar digy 7
-      state shade0
-      setvar digx 2
-      state pal23
-      setvar tilenum 3461
-      state orientation27 // 1+2+8+16
-      redefinequote 437 INVULN
-      setvar temp 437
-      state mt
-      state shade0
-      ifvare debugtoggle 0 divvar varname 26
-      ifvarg varname -1 ifvarl varname 10 addvar digx 28
-      else ifvarg varname 9 ifvarl varname 100 addvar digx 30
-      else ifvarg varname 99 ifvarl varname 1000 addvar digx 32
-      else ifvarg varname 999 ifvarl varname 10000 addvar digx 34
-      else ifvarg varname 9999 ifvarl varname 100000 addvar digx 36
-      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 38
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 40
-      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 42
-      state pal23
-      setvar tilenum 3087
-      state orientation27 // 1+2+8+16
-      state dn
-     }
-
-     // Vehicle Regen Time
-     getactorvar[VEHICLEID].ENEMYREGENTIME varname
-     ifvarg varname 0
-     {
-      addvar digy 7
-      state shade0
-      setvar digx 2
-      state pal21
-      setvar tilenum 3461
-      state orientation27 // 1+2+8+16
-      redefinequote 437 REGEN
-      setvar temp 437
-      state mt
-      state shade0
-      ifvare debugtoggle 0 divvar varname 26
-      ifvarg varname -1 ifvarl varname 10 addvar digx 24
-      else ifvarg varname 9 ifvarl varname 100 addvar digx 26
-      else ifvarg varname 99 ifvarl varname 1000 addvar digx 28
-      else ifvarg varname 999 ifvarl varname 10000 addvar digx 30
-      else ifvarg varname 9999 ifvarl varname 100000 addvar digx 32
-      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 34
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 36
-      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 38
-      state pal21
-      setvar tilenum 3087
-      state orientation27 // 1+2+8+16
-      state dn
-     }
-
-     // Vehicle APRegen Time
-     getactorvar[VEHICLEID].ENEMYAPREGENTIME varname
-     ifvarg varname 0
-     {
-      addvar digy 7
-      state shade0
-      setvar digx 2
-       state pal22
-      setvar tilenum 3461
-      state orientation27 // 1+2+8+16
-      redefinequote 437 APREGEN
-      setvar temp 437
-      state mt
-      state shade0
-      ifvare debugtoggle 0 divvar varname 26
-      ifvarg varname -1 ifvarl varname 10 addvar digx 32
-      else ifvarg varname 9 ifvarl varname 100 addvar digx 34
-      else ifvarg varname 99 ifvarl varname 1000 addvar digx 36
-      else ifvarg varname 999 ifvarl varname 10000 addvar digx 38
-      else ifvarg varname 9999 ifvarl varname 100000 addvar digx 40
-      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 42
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 44
-      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 46
-      state pal22
-      setvar tilenum 3087
-      state orientation27 // 1+2+8+16
-      state dn
-     }
-
-     // Vehicle VAMPIRE Time
-     getactorvar[VEHICLEID].ENEMYVAMPIRETIME varname
-     ifvarg varname 0
-     {
-      addvar digy 7
-      state shade0
-      setvar digx 2
-      state pal10
-      setvar tilenum 3461
-      state orientation27 // 1+2+8+16
-      redefinequote 437 VAMP
-      setvar temp 437
-      state mt
-      state shade0
-      ifvare debugtoggle 0 divvar varname 26
-      ifvarg varname -1 ifvarl varname 10 addvar digx 20
-      else ifvarg varname 9 ifvarl varname 100 addvar digx 22
-      else ifvarg varname 99 ifvarl varname 1000 addvar digx 24
-      else ifvarg varname 999 ifvarl varname 10000 addvar digx 26
-      else ifvarg varname 9999 ifvarl varname 100000 addvar digx 28
-      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 30
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 32
-      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 34
-      state pal10
-      setvar tilenum 3087
-      state orientation27 // 1+2+8+16
-      state dn
-     }
-*/
-
+     setvar orientation_change 0
     }
    }
 ends
@@ -33339,6 +33205,22 @@ state vehicledisplays
     {
      ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 // Riot Tank
      {
+      // SHOP BACKGROUND
+      state pal4
+      setvar digx -120
+      setvar digy 100 // 129
+      setvar digz 655360
+      state orientation2 //  state orientation3
+      setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
+      state rs
+      state pal4
+      setvar digx 440
+      setvar digy 100 // 129
+      setvar digz 655360
+      state orientation2 //  state orientation3
+      setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
+      state rs
+
       setvar digx 160
       setvar digy 100
       state digz65536
