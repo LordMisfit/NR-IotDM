@@ -1,0 +1,8 @@
+include duke3d_hrp.def
+include music.def
+
+tilefromtexture 3580
+{
+ file "ART Files/Tiles013/3580.png"
+ alphacut 255
+}

@@ -33206,20 +33206,22 @@ state vehicledisplays
      ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 // Riot Tank
      {
       // SHOP BACKGROUND
-      state pal4
+      setvar shade 27
+      state pal14
       setvar digx -120
       setvar digy 100 // 129
       setvar digz 655360
       state orientation2 //  state orientation3
       setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
       state rs
-      state pal4
+      state pal14
       setvar digx 440
       setvar digy 100 // 129
       setvar digz 655360
       state orientation2 //  state orientation3
       setvar tilenum 7800 // For the shop background >.> (2456 or 8191)
       state rs
+      setvar shade 0
 
       setvar digx 160
       setvar digy 100

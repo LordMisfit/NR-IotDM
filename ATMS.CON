@@ -1698,8 +1698,8 @@ ifvarn atm_id -1
   state shade0
   // Main ATM Panel
   state pal0
-  state digx160
-  setvar digy 120
+  setvar digx 256 // digx_test
+  setvar digy 163 // digy_test
   state digz49152
   state orientation2
   ifvarand atm_type 4 setvar tilenum 3581

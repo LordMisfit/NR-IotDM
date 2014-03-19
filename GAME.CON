@@ -22999,6 +22999,9 @@ ifvarg DEATHMISSILEACTIVATED 0
 }
 
 ifvare SKILLLEVEL 4 setuserdef[THISACTOR].respawn_monsters 0
+setuserdef[THISACTOR].levelstats 0
+setuserdef[THISACTOR].althud 0
+setuserdef[THISACTOR].lockout 0
 
 //***********************************************
 //*Check for Twilight Cloaks or Vampire Artifact*
