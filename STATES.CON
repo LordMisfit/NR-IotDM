@@ -18305,7 +18305,7 @@ state breakobject
       {
         ifcount 32
         {
-          globalsound MOUSEANNOY
+          ifvare CHARACTERSELECTED? 1 globalsound MOUSEANNOY
           killit
         }
         break
@@ -18748,7 +18748,47 @@ state breakobject
         debris SCRAP1 2
         debris SCRAP3 3
         debris SCRAP4 2
-        ifvarand ACTORFLAGS 128 espawn SHIKONJEWEL
+        state gemring_drops
+        ifrnd 224 state gemring_drops
+        ifrnd 192 state gemring_drops
+        ifrnd 160 state gemring_drops
+        ifrnd 128 state gemring_drops
+        ifrnd 128 state gemring_drops
+        ifrnd 96 state gemring_drops
+        ifrnd 96 state gemring_drops
+        ifrnd 64 state gemring_drops
+        ifrnd 64 state gemring_drops
+        ifrnd 32 state gemring_drops
+        ifrnd 32 state gemring_drops
+        ifrnd 16 state gemring_drops
+        ifrnd 16 state gemring_drops
+        ifrnd 16 state gemring_drops
+        ifrnd 16 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 8 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifrnd 4 state gemring_drops
+        ifvarand ACTORFLAGS 128 ifrnd 32 espawn SHIKONJEWEL
       }
       else
         ifactor ROBOTMOUSE
