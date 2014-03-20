@@ -118,6 +118,13 @@ Ion Zerman [NPC]: 			178935 & 9385 (ID: 340) [SemiEvil]			[added]
 Kenneth Fertang [NPC]: 		938457 & 1537 (ID: 341) [SemiEvil]			[added]
 Quenton Stephens [NPC]:		027964 & 6407 (ID: 342) [Good]			[added]
 
+Philipp Kutin [NPC]:		391347 & 2873 (ID: 343) [Cameo-Good]		[not yet added]
+Norwell Dylan [NPC]:		843536 & 9338 (ID: 344) [Cameo-Good]		[not yet added]
+Barbara Shelman [NPC]:		461842 & 7482 (ID: 345) [Cameo-Good]		[not yet added]
+Kyle Belanger [NPC]:		007873 & 9001 (ID: 346) [Cameo-Good]		[not yet added]
+Marc Goldstein [NPC]:		151520 & 1215 (ID: 347) [Cameo-Good]		[not yet added]
+Anthony Goldstein [NPC]:	202015 & 5112 (ID: 348) [Cameo-Good]		[not yet added]
+Marcus Sparacio [NPC]:		521326 & 4444 (ID: 349) [Cameo-Good]		[not yet added]
 
 */
 
@@ -806,6 +813,41 @@ state checkinterestrates
    setvar CHARACTERARRAY 342
    getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
   }   
+  ifvare atm_acctnum 391347 // Philipp Kutin (NPC)
+  {
+   setvar CHARACTERARRAY 343
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
+  ifvare atm_acctnum 843536 // Norwell Dylan (NPC)
+  {
+   setvar CHARACTERARRAY 344
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
+  ifvare atm_acctnum 461843 // Barbara Shelman (NPC)
+  {
+   setvar CHARACTERARRAY 345
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
+  ifvare atm_acctnum 7873 // Kyle Belanger (NPC)
+  {
+   setvar CHARACTERARRAY 346
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
+  ifvare atm_acctnum 151520 // Marc Goldstein (NPC)
+  {
+   setvar CHARACTERARRAY 347
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
+  ifvare atm_acctnum 202015 // Anthony Goldstein (NPC)
+  {
+   setvar CHARACTERARRAY 348
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
+  ifvare atm_acctnum 521326 // Marcus Sparacio (NPC)
+  {
+   setvar CHARACTERARRAY 349
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
 //
 ends
 
@@ -1325,6 +1367,41 @@ state checkdollarcents
    setvar CHARACTERARRAY 342
    state getatmdollarcents
   }   
+  ifvare atm_acctnum 391347 // Philipp Kutin (NPC)
+  {
+   setvar CHARACTERARRAY 343
+   state getatmdollarcents
+  }   
+  ifvare atm_acctnum 843536 // Norwell Dylan (NPC)
+  {
+   setvar CHARACTERARRAY 344
+   state getatmdollarcents
+  }   
+  ifvare atm_acctnum 461843 // Barbara Shelman (NPC)
+  {
+   setvar CHARACTERARRAY 345
+   state getatmdollarcents
+  }   
+  ifvare atm_acctnum 7873 // Kyle Belanger (NPC)
+  {
+   setvar CHARACTERARRAY 346
+   state getatmdollarcents
+  }   
+  ifvare atm_acctnum 151520 // Marc Goldstein (NPC)
+  {
+   setvar CHARACTERARRAY 347
+   state getatmdollarcents
+  }   
+  ifvare atm_acctnum 202015 // Anthony Goldstein (NPC)
+  {
+   setvar CHARACTERARRAY 348
+   state getatmdollarcents
+  }   
+  ifvare atm_acctnum 521326 // Marcus Sparacio (NPC)
+  {
+   setvar CHARACTERARRAY 349
+   state getatmdollarcents
+  }   
 ends
 
 state displayaccountinfo
@@ -1594,6 +1671,13 @@ state atm_showwiretonames
   ifvare atm_wacctnum 178935 redefinequote 332 Ion Zerman
   ifvare atm_wacctnum 938457 redefinequote 332 Kenneth Fertang
   ifvare atm_wacctnum 27964 redefinequote 332 Quenton Stephens
+  ifvare atm_wacctnum 391347 redefinequote 332 Philipp Kutin
+  ifvare atm_wacctnum 843536 redefinequote 332 Norwell Dylan
+  ifvare atm_wacctnum 461843 redefinequote 332 Barbara Shelman
+  ifvare atm_wacctnum 7873 redefinequote 332 Kyle Belanger
+  ifvare atm_wacctnum 151520 redefinequote 332 Marc Goldstein
+  ifvare atm_wacctnum 202015 redefinequote 332 Anthony Goldstein
+  ifvare atm_wacctnum 521326 redefinequote 332 Marcus Sparacio
 // Fill in more beyond here
 ends
 
@@ -2872,6 +2956,13 @@ ifvarn atm_id -1
   ifvare atm_acctnum 178935 redefinequote 332 Welcome Mr. Zerman. Please
   ifvare atm_acctnum 938457 redefinequote 332 Welcome Mr. Fertang. Please
   ifvare atm_acctnum 27964 redefinequote 332 Welcome Mr. Stephens. Please
+  ifvare atm_acctnum 391347 redefinequote 332 Welcome Mr. Kutin. Please
+  ifvare atm_acctnum 843536 redefinequote 332 Welcome Mr. Dylan. Please
+  ifvare atm_acctnum 461843 redefinequote 332 Welcome Miss Shelman. Please
+  ifvare atm_acctnum 7873 redefinequote 332 Welcome Mr. Belanger. Please
+  ifvare atm_acctnum 151520 redefinequote 332 Welcome Mr. Goldstein. Please
+  ifvare atm_acctnum 202015 redefinequote 332 Welcome Mr. Goldstein. Please
+  ifvare atm_acctnum 521326 redefinequote 332 Welcome Mr. Sparacio. Please
 // Fill in more
   state pal22
   state gtz
@@ -2983,6 +3074,13 @@ ifvarn atm_id -1
   case 178935
   case 938457
   case 27964
+  case 391347
+  case 843536
+  case 461843
+  case 7873
+  case 151520
+  case 202015
+  case 521326
 // Fill in Here
    setvar TEMPVAR4 1
   break
@@ -5897,6 +5995,195 @@ ifvarn atm_id -1
    state pal22
    state gtz
   }   
+
+  ifvare atm_acctnum 391347 // Philipp Kutin (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Kutin!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
+
+  ifvare atm_acctnum 843536 // Norwell Dylan (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Dylan!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
+
+  ifvare atm_acctnum 461843 // Barbara Shelman (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Miss Shelman!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
+
+  ifvare atm_acctnum 7873 // Kyle Belanger (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Belanger!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
+
+  ifvare atm_acctnum 151520 // Marc Goldstein (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Goldstein!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
+
+  ifvare atm_acctnum 202015 // Anthony Goldstein (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Goldstein!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
+
+  ifvare atm_acctnum 521326 // Marcus Sparacio (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Sparacio!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
 // Fill in more
 
   // Screen Text
@@ -8048,6 +8335,41 @@ state cmd_depositmoney2
            setvar CHARACTERARRAY 342
            state cmd_depositmoney
           }   
+          ifvare atm_acctnum 391347 // Philipp Kutin (NPC)
+          {
+           setvar CHARACTERARRAY 343
+           state cmd_depositmoney
+          }   
+          ifvare atm_acctnum 843536 // Norwell Dylan (NPC)
+          {
+           setvar CHARACTERARRAY 344
+           state cmd_depositmoney
+          }   
+          ifvare atm_acctnum 461843 // Barbara Shelman (NPC)
+          {
+           setvar CHARACTERARRAY 345
+           state cmd_depositmoney
+          }   
+          ifvare atm_acctnum 7873 // Kyle Belanger (NPC)
+          {
+           setvar CHARACTERARRAY 346
+           state cmd_depositmoney
+          }   
+          ifvare atm_acctnum 151520 // Marc Goldstein (NPC)
+          {
+           setvar CHARACTERARRAY 347
+           state cmd_depositmoney
+          }   
+          ifvare atm_acctnum 202015 // Anthony Goldstein (NPC)
+          {
+           setvar CHARACTERARRAY 348
+           state cmd_depositmoney
+          }   
+          ifvare atm_acctnum 521326 // Marcus Sparacio (NPC)
+          {
+           setvar CHARACTERARRAY 349
+           state cmd_depositmoney
+          }   
 // Fill in Here
           else // No one
           {
@@ -8684,6 +9006,41 @@ state cmd_withdrawmoney2
           ifvare atm_acctnum 27964 // Quenton Stephens (NPC)
           {
            setvar CHARACTERARRAY 342
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 391347 // Philipp Kutin (NPC)
+          {
+           setvar CHARACTERARRAY 343
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 843536 // Norwell Dylan (NPC)
+          {
+           setvar CHARACTERARRAY 344
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 461843 // Barbara Shelman (NPC)
+          {
+           setvar CHARACTERARRAY 345
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 7873 // Kyle Belanger (NPC)
+          {
+           setvar CHARACTERARRAY 346
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 151520 // Marc Goldstein (NPC)
+          {
+           setvar CHARACTERARRAY 347
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 202015 // Anthony Goldstein (NPC)
+          {
+           setvar CHARACTERARRAY 348
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 521326 // Marcus Sparacio (NPC)
+          {
+           setvar CHARACTERARRAY 349
            state cmd_withdrawmoney
           }   
 // Fill in Here
@@ -9335,6 +9692,41 @@ state cmd_wiremoney_sender
         setvar atm_wirereceivearray 342
         state cmd_wiremoney_receiver
        }   
+       ifvare atm_wacctnum 391347 // Philipp Kutin (NPC)
+       {
+        setvar atm_wirereceivearray 343
+        state cmd_wiremoney_receiver
+       }   
+       ifvare atm_wacctnum 843536 // Norwell Dylan (NPC)
+       {
+        setvar atm_wirereceivearray 344
+        state cmd_wiremoney_receiver
+       }   
+       ifvare atm_wacctnum 461843 // Barbara Shelman (NPC)
+       {
+        setvar atm_wirereceivearray 345
+        state cmd_wiremoney_receiver
+       }   
+       ifvare atm_wacctnum 7873 // Kyle Belanger (NPC)
+       {
+        setvar atm_wirereceivearray 346
+        state cmd_wiremoney_receiver
+       }   
+       ifvare atm_wacctnum 151520 // Marc Goldstein (NPC)
+       {
+        setvar atm_wirereceivearray 347
+        state cmd_wiremoney_receiver
+       }   
+       ifvare atm_wacctnum 202015 // Anthony Goldstein (NPC)
+       {
+        setvar atm_wirereceivearray 348
+        state cmd_wiremoney_receiver
+       }   
+       ifvare atm_wacctnum 521326 // Marcus Sparacio (NPC)
+       {
+        setvar atm_wirereceivearray 349
+        state cmd_wiremoney_receiver
+       }   
 // Fill in Here
        else
        {
@@ -9476,6 +9868,13 @@ state atm-upperleftbutton
       else ifvare atm_acctnum 178935 { setvar atm_mode 2 state randomatmbeeps } // Ion Zerman's ID (NPC)
       else ifvare atm_acctnum 938457 { setvar atm_mode 2 state randomatmbeeps } // Kenneth Fertang's ID (NPC)
       else ifvare atm_acctnum 27964 { setvar atm_mode 2 state randomatmbeeps } // Quenton Stephens's ID (NPC)
+      else ifvare atm_acctnum 391347 { setvar atm_mode 2 state randomatmbeeps } // Philipp Kutin's ID (NPC)
+      else ifvare atm_acctnum 843536 { setvar atm_mode 2 state randomatmbeeps } // Norwell Dylan's ID (NPC)
+      else ifvare atm_acctnum 461843 { setvar atm_mode 2 state randomatmbeeps } // Barbara Shelman's ID (NPC)
+      else ifvare atm_acctnum 7873 { setvar atm_mode 2 state randomatmbeeps } // Kyle Belanger's ID (NPC)
+      else ifvare atm_acctnum 151520 { setvar atm_mode 2 state randomatmbeeps } // Marc Goldstein's ID (NPC)
+      else ifvare atm_acctnum 202015 { setvar atm_mode 2 state randomatmbeeps } // Anthony Goldstein's ID (NPC)
+      else ifvare atm_acctnum 521326 { setvar atm_mode 2 state randomatmbeeps } // Marcus Sparacio's ID (NPC)
 // Fill in Here
       else // Incorrect ACCT#
       {
@@ -9600,6 +9999,13 @@ state atm-upperleftbutton
       else ifvare atm_acctnum 178935 ifvare atm_pinnum 9385 { setvar atm_mode 3 state randomatmbeeps } // Ion Zerman's PIN (NPC)
       else ifvare atm_acctnum 938457 ifvare atm_pinnum 1537 { setvar atm_mode 3 state randomatmbeeps } // Kenneth Fertang's PIN (NPC)
       else ifvare atm_acctnum 27964 ifvare atm_pinnum 6407 { setvar atm_mode 3 state randomatmbeeps } // Quenton Stephens's PIN (NPC)
+      else ifvare atm_acctnum 391347 ifvare atm_pinnum 2873 { setvar atm_mode 3 state randomatmbeeps } // Philipp Kutin's PIN (NPC)
+      else ifvare atm_acctnum 843536 ifvare atm_pinnum 9338 { setvar atm_mode 3 state randomatmbeeps } // Norwell Dylan's PIN (NPC)
+      else ifvare atm_acctnum 461843 ifvare atm_pinnum 7482 { setvar atm_mode 3 state randomatmbeeps } // Barbara Shelman's PIN (NPC)
+      else ifvare atm_acctnum 7873 ifvare atm_pinnum 9001 { setvar atm_mode 3 state randomatmbeeps } // Kyle Belanger's PIN (NPC)
+      else ifvare atm_acctnum 151520 ifvare atm_pinnum 1215 { setvar atm_mode 3 state randomatmbeeps } // Marc Goldstein's PIN (NPC)
+      else ifvare atm_acctnum 202015 ifvare atm_pinnum 5112 { setvar atm_mode 3 state randomatmbeeps } // Anthony Goldstein's PIN (NPC)
+      else ifvare atm_acctnum 521326 ifvare atm_pinnum 4444 { setvar atm_mode 3 state randomatmbeeps } // Marcus Sparacio's PIN (NPC)
 // Fill in Here
       else 
       {
@@ -10548,6 +10954,41 @@ state atm-upperleftbutton
        ifvare atm_acctnum 27964 // Quenton Stephens (NPC)
        {
         setvar atm_wiresendarray 342
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 391347 // Philipp Kutin (NPC)
+       {
+        setvar atm_wiresendarray 343
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 843536 // Norwell Dylan (NPC)
+       {
+        setvar atm_wiresendarray 344
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 461843 // Barbara Shelman (NPC)
+       {
+        setvar atm_wiresendarray 345
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 7873 // Kyle Belanger (NPC)
+       {
+        setvar atm_wiresendarray 346
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 151520 // Marc Goldstein (NPC)
+       {
+        setvar atm_wiresendarray 347
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 202015 // Anthony Goldstein (NPC)
+       {
+        setvar atm_wiresendarray 348
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 521326 // Marcus Sparacio (NPC)
+       {
+        setvar atm_wiresendarray 349
         state cmd_wiremoney_sender
        }   
 // Fill in Here
