@@ -1698,8 +1698,16 @@ ifvarn atm_id -1
   state shade0
   // Main ATM Panel
   state pal0
-  setvar digx 256 // digx_test
-  setvar digy 163 // digy_test
+  ifvarand atm_type 4
+  {
+   setvar digx 262 // digx_test
+   setvar digy 166 // digy_test
+  }
+  else
+  {
+   setvar digx 256 // digx_test
+   setvar digy 163 // digy_test
+  }
   state digz49152
   state orientation2
   ifvarand atm_type 4 setvar tilenum 3581
@@ -1891,6 +1899,7 @@ ifvarn atm_id -1
   state shade0
   state setquote332
 
+  setvar orientation_change 256
   state orientation3
   state settilealphanum
   setvar textscale 49152
@@ -1919,8 +1928,12 @@ ifvarn atm_id -1
   ifvare CHARACTERSELECTED? 14 setvar varname 198255
   ifvare CHARACTERSELECTED? 15 setvar varname 918372
   state pal21
+  state orientation3
   state dnz
+  setvar orientation_change 0
 
+  setvar orientation_change 512
+  state orientation3
   state settilealphanum
   setvar digx 580 // 25
   setvar digy 10 // 44
@@ -1947,7 +1960,9 @@ ifvarn atm_id -1
   ifvare CHARACTERSELECTED? 14 setvar varname 7364
   ifvare CHARACTERSELECTED? 15 setvar varname 7873
   state pal21
+  state orientation3
   state dnz
+  setvar orientation_change 0
 
   state orientation2
   setvar textscale 98304
@@ -2133,13 +2148,13 @@ ifvarn atm_id -1
  // "Cubism Roper VT" Interlude
  ifvarand atm_type 4
  {
-  redefinequote 332 "CUBISM  ROPER  VT:   PORTABLE"   V5.25.97
-  setvarvar digx 223 // 228
+  redefinequote 332 "CUBISM ROPER VT:  PORTABLE"  V5.25.97
+  setvar digx 320 // 223
  }
  else
  {
-  redefinequote 332 "CUBISM  ROPER  VT"   V1.29.96
-  setvarvar digx 250 // 254
+  redefinequote 332 "CUBISM ROPER VT"  V1.29.96
+  setvar digx 320 // 250
  }
  setvar digy 34
  state pal22

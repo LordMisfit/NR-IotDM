@@ -6,3 +6,8 @@ tilefromtexture 3580
  file "ART Files/Tiles013/3580.png"
  alphacut 255
 }
+tilefromtexture 3581
+{
+ file "ART Files/Tiles013/3581.png"
+ alphacut 255
+}
