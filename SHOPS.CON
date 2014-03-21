@@ -15823,7 +15823,7 @@ ifvare com_pause 0
            }
           }
 
-          ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+          ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
           redefinequote 341 ^20BOUGHT %d ENERGY CELLS
           qsprintf 341 341 TEMPVAR7
           setvarvar fta fta_normal setvar ftq 341
@@ -15897,7 +15897,7 @@ ifvare com_pause 0
             }
            }
  
-           ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+           ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
            redefinequote 341 ^20BOUGHT %d ENERGY CELLS
            qsprintf 341 341 TEMPVAR7
            setvarvar fta fta_normal setvar ftq 341
@@ -15979,7 +15979,7 @@ ifvare com_pause 0
             }
            }
 
-           ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+           ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
            redefinequote 341 ^20BOUGHT %d ENERGY CELLS
            qsprintf 341 341 TEMPVAR7
            setvarvar fta fta_normal setvar ftq 341

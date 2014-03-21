@@ -2245,6 +2245,8 @@ define CONTINUE_USED             1286
 define RAREDROP_LESSER           1287
 define RAREDROP_GREATER          1288
 
+define ESHIELD_CHARGEDMAX      1289
+
 // MAXIMUM NUMBER OF SOUNDS: 4096 ( 0-4095 ) [from 2560 sounds]
 
 // DT other defs
@@ -5117,6 +5119,7 @@ definesound GEMLARGE               gemlarge.wav      -128    64   255   0   4096
 definesound ESHIELD_HIT            BarrierHit.wav      -250   250   255   0   0
 definesound ESHIELD_HIT2           barrierhit2.wav     -250   250   255   0   0
 definesound ESHIELD_TOGGLE         shieldupgrade.wav   -250   250   255   0   0
+definesound ESHIELD_CHARGEDMAX     SH_FULL.ogg         -250   250   255   0   0
 
 definesound ABSORB_DAMAGE          absorb2.wav   -250   250   255   0   0
 definesound INVULN_PULSE           invulnpulse.wav   0   0   255   0   0

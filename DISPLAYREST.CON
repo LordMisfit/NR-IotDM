@@ -1497,19 +1497,20 @@ else
      state rs
      subvar FORDENTIMER 1
     }
-    // End Fordenator Code
     setvar orientation_change 0
+    // End Fordenator Code
 
-    setvar orientation_change 256
     //**************************************************
     //*Show Alive / Total Character Count (Quick Party)*
     //**************************************************
+    setvar orientation_change 256
     ifvarg PARTYSIZE 0
     {
      setvarvar TEMPVAR PARTYALIVE
      mulvar TEMPVAR 100
      ifvarn PARTYSIZE 0 divvarvar TEMPVAR PARTYSIZE
     }
+    setvar orientation_change 0
 
     state orientation17
     state settile3087 
@@ -1526,6 +1527,7 @@ else
      setvarvar TEMP3 PARTYSIZE
      subvarvar TEMP3 PARTYALIVE
 
+     setvar orientation_change 256
      ifvarg PARTYALIVE 0
      {
       setvar TEMPVAR 0
@@ -1991,9 +1993,9 @@ else
      ifvare CHARACTERSELECTED? 15 setvar tilenum 7971
      state rs
      state shade0
+     setvar orientation_change 0
     } // ifvare mainmenu 0
    } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0
-   setvar orientation_change 0
 
    ifvare mainmenu 0
    { // ifvare mainmenu 0 [line 9653]
@@ -2178,9 +2180,9 @@ else
          state shade0
         }
        }
+       setvar orientation_change 0
       }
      }
-     setvar orientation_change 0
 
      state shade0
      setvar diga 0
@@ -4060,10 +4062,10 @@ else
      {
       setvar digx 1
       addvar digy 6
-      redefinequote 332 MENUS = 
-      state setquote332
       getkeyname 401 30 0 
-      qstrcat 332 401 
+      redefinequote 332 MENUS = ^12%s 
+      qsprintf 332 332 401
+      state setquote332
       state pal21
       state mt    
       state shade0
@@ -4074,10 +4076,10 @@ else
       {
        setvar digx 1
        addvar digy 6
-       redefinequote 332 MENUS = 
-       state setquote332
        getkeyname 401 30 0 
-       qstrcat 332 401 
+       redefinequote 332 MENUS = ^12%s 
+       qsprintf 332 332 401
+       state setquote332
        state pal21
        state mt    
        state shade0
@@ -4089,10 +4091,10 @@ else
       ifvare DEFENSEMODE? 1 state shadepulse
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      redefinequote 332 DEFEND = 
-      state setquote332
       getkeyname 401 42 0 
-      qstrcat 332 401 
+      redefinequote 332 DEFEND = ^12%s
+      qsprintf 332 332 401
+      state setquote332
       state pal21
       state mt    
       state shade0
@@ -4103,10 +4105,10 @@ else
       state shadepulse
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      redefinequote 332 THROW = 
-      state setquote332
       getkeyname 401 5 0 
-      qstrcat 332 401 
+      redefinequote 332 THROW = ^12%s
+      qsprintf 332 332 401
+      state setquote332
       state pal21
       state mt    
       state shade0
@@ -4119,25 +4121,42 @@ else
        ifvare GLIDING? 1 state shadepulse
        setvar digx 1
        addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-       redefinequote 332 GLIDE = 
-       state setquote332
        getkeyname 401 11 0 
-       qstrcat 332 401 
+       redefinequote 332 GLIDE = ^12%s
+       qsprintf 332 332 401
+       state setquote332
        state pal21
        state mt    
        state shade0
       }
      }
- 
+
+     ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
+     {
+      ifvarand bits 262144 state shadepulse
+      setvar digx 1
+      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+      state setquote332
+      getkeyname 401 6 0
+      getkeyname 402 15 0
+      getkeyname 403 16 0
+      redefinequote 404 +
+      redefinequote 332 CHARGE BIO-SHIELD = ^12%s ^23%s ^12%s ^23%s ^12%s
+      qsprintf 332 332 401 404 402 404 403
+      state pal21
+      state mt    
+      state shade0
+     } 
+
      ifvare CHARACTERSELECTED? 9
      {
       ifvarand bits 262144 state shadepulse
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      redefinequote 332 TELEKENESIS = 
-      state setquote332
       getkeyname 401 41 0
-      qstrcat 332 401
+      redefinequote 332 TELEKENESIS = ^12%s
+      qsprintf 332 332 401
+      state setquote332
       state pal21
       state mt    
       state shade0
@@ -4148,12 +4167,12 @@ else
       ifvarand bits 262144 state shadepulse
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      ifvare CHAINGUNMODE 0 redefinequote 332 ROCKETS [CHAINGUN] = 
-      else ifvare CHAINGUNMODE 1 redefinequote 332 BULLETS [CHAINGUN] = 
-      // else ifvare CHAINGUNMODE 2 redefinequote 332 LASERS [CHAINGUN] = 
-      state setquote332
       getkeyname 401 22 0
-      qstrcat 332 401
+      ifvare CHAINGUNMODE 0 redefinequote 332 ROCKETS [CHAINGUN] = ^12%s
+      else ifvare CHAINGUNMODE 1 redefinequote 332 BULLETS [CHAINGUN] = ^12%s
+      // else ifvare CHAINGUNMODE 2 redefinequote 332 LASERS [CHAINGUN] = ^12%s
+      qsprintf 332 332 401
+      state setquote332
       state pal21
       state mt    
       state shade0
@@ -4164,11 +4183,11 @@ else
       ifvarand bits 262144 state shadepulse
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      ifvare DEATHMISSILEMODE 0 redefinequote 332 DEATHSTROKES [RPG] = 
-      else redefinequote 332 DEATHGATES [RPG] = 
-      state setquote332
       getkeyname 401 23 0
-      qstrcat 332 401
+      ifvare DEATHMISSILEMODE 0 redefinequote 332 DEATHSTROKES [RPG] = ^12%s
+      else redefinequote 332 DEATHGATES [RPG] = ^12%s
+      qsprintf 332 332 401
+      state setquote332
       state pal21
       state mt    
       state shade0
@@ -9591,10 +9610,10 @@ else
     }
 
 
-    setvar orientation_change 256
     setvar shade 0
     ifvare mainmenu 0
     {
+     setvar orientation_change 256
      // Winter Clothes Counter
      setvarvar MANTLINGFACTOR winterclothes
      mulvar MANTLINGFACTOR 10000
@@ -9801,8 +9820,8 @@ else
       state gtz
       // state dnz
      }
+     setvar orientation_change 0
     }
-    setvar orientation_change 0
 
     setvar shade 0
     setvar tilenum 0

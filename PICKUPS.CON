@@ -13631,7 +13631,7 @@ useractor notenemy ENERGYSHELL 0
             state checkpickupamountflags state checkdoublepickupbonus
             addvarvar ESHIELDDMGFACTOR ACTORPICKUPAMOUNT
             ifvarn CURRENTCELLS 0 setvarvar DAMAGEINCELL ESHIELDDMGFACTOR
-            ifvarvare CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR         
+            ifvarvare CURRENTCELLS MAXCELLS { setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }  
 
             ifvarn HAVEENERGYSHIELD? 0 redefinequote 335 ^14BIO-CELL ENERGY SHIELD UPGRADED!
             ifvarand ACTORFLAGS 2 nullop
@@ -13666,7 +13666,7 @@ state checkcellpickups
              {
               addvar CURRENTCELLS 5
               addvar tempc 5
-              ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              ifvarvarg CURRENTCELLS MAXCELLS { setvarvar CURRENTCELLS MAXCELLS setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
              }
              else addvar TEMP4 1
 
@@ -13742,7 +13742,7 @@ useractor notenemy ENERGYCELL_SMALL 0
           ifvarvarl CURRENTCELLS MAXCELLS
           {
            ifvare LISA? 1 // Lisa must be in your group in order to grab this item
-   	     {
+   	       {
             state checkexplodeflag
             setvar ACTORPICKUPAMOUNT 5
             state checkpickupamountflags state checkdoublepickupbonus

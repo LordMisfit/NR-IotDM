@@ -752,12 +752,40 @@ else // ifvare mainmenu 0
    setvarvar upresstime temppartime
   }
   else
-  ifvarn EDGEGRAPPLING 0
   {
-   state setreturn-1
-   state getpartime
-   addvar upresstime 1
-   setvarvar upresstime temppartime
+   ifvarn EDGEGRAPPLING 0
+   {
+    state setreturn-1
+    state getpartime
+    addvar upresstime 1
+    setvarvar upresstime temppartime
+   }
+   else
+   {
+    // Lisa's new ability to change her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
+    getinput[THISACTOR].extbits TEMP3
+    ifvarand TEMP3 12
+    {
+     ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
+     {
+      ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR nullop
+      else
+      {
+       subvar CURRENTENERGYPOINTS 1
+       ifvare ESHIELDADVANCEMENT 1 addvar DAMAGEINCELL 8 else addvar DAMAGEINCELL 3
+       ifvarvare CURRENTCELLS MAXCELLS
+       {
+        ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR { setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
+        ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR { setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
+       }
+       else
+       {
+        ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR { addvar CURRENTCELLS 1 subvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+       }
+      }
+     }
+    }
+   }
   }
  }
 }

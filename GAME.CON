@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22t)
-definequote 1337 ^22VERSION:^0 5.22t.12242012
+setgamename Naferia's Reign (5.22git)
+definequote 1337 ^22VERSION:^0 5.22.git18.03212014
 
 action ANULLACTION 0
 
@@ -22611,10 +22611,12 @@ ifvare mainmenu 0 // Main Menu is NOT open
         }
        }
 
-       addvarvar DAMAGEINCELL TEMP3
-       ifvarvare CURRENTCELLS MAXCELLS
+       ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR nullop
+       else
        {
-        ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR setvarvar DAMAGEINCELL ESHIELDDMGFACTOR
+        addvarvar DAMAGEINCELL TEMP3
+        ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR { soundonce ESHIELD_CHARGEDMAX }
+        ifvarvare CURRENTCELLS MAXCELLS ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR { setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
        }
       }
      }
@@ -22682,8 +22684,12 @@ ifvare mainmenu 0 // Main Menu is NOT open
         }
        }
 
-       addvarvar DAMAGEINCELL TEMP3
-       ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR setvarvar DAMAGEINCELL ESHIELDDMGFACTOR
+       ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR nullop
+       else
+       {
+        addvarvar DAMAGEINCELL TEMP3
+        ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR setvarvar DAMAGEINCELL ESHIELDDMGFACTOR
+       }
       }
      }
     }
@@ -24622,23 +24628,23 @@ getplayer[THISACTOR].poszv poszv
   {
        // old increments of 4
        addvar SHIELDPULSETIMER 1
-       ifvare SHIELDPULSETIMER 1  palfrom  3 0 0 64
-       ifvare SHIELDPULSETIMER 2  palfrom  6 0 0 64
-       ifvare SHIELDPULSETIMER 3  palfrom  9 0 0 64
-       ifvare SHIELDPULSETIMER 4  palfrom 12 0 0 64
-       ifvare SHIELDPULSETIMER 5  palfrom 15 0 0 64
-       ifvare SHIELDPULSETIMER 6  palfrom 18 0 0 64
-       ifvare SHIELDPULSETIMER 7  palfrom 21 0 0 64
-       ifvare SHIELDPULSETIMER 8  palfrom 24 0 0 64
-       ifvare SHIELDPULSETIMER 9  palfrom 21 0 0 64
-       ifvare SHIELDPULSETIMER 10 palfrom 18 0 0 64
-       ifvare SHIELDPULSETIMER 11 palfrom 15 0 0 64
-       ifvare SHIELDPULSETIMER 12 palfrom 12 0 0 64
-       ifvare SHIELDPULSETIMER 13 palfrom  9 0 0 64
-       ifvare SHIELDPULSETIMER 14 palfrom  6 0 0 64
+       ifvare SHIELDPULSETIMER 1  palfrom  2 0 0 64
+       ifvare SHIELDPULSETIMER 2  palfrom  4 0 0 64
+       ifvare SHIELDPULSETIMER 3  palfrom  6 0 0 64
+       ifvare SHIELDPULSETIMER 4  palfrom  8 0 0 64
+       ifvare SHIELDPULSETIMER 5  palfrom 10 0 0 64
+       ifvare SHIELDPULSETIMER 6  palfrom 12 0 0 64
+       ifvare SHIELDPULSETIMER 7  palfrom 14 0 0 64
+       ifvare SHIELDPULSETIMER 8  palfrom 16 0 0 64
+       ifvare SHIELDPULSETIMER 9  palfrom 14 0 0 64
+       ifvare SHIELDPULSETIMER 10 palfrom 12 0 0 64
+       ifvare SHIELDPULSETIMER 11 palfrom 10 0 0 64
+       ifvare SHIELDPULSETIMER 12 palfrom  8 0 0 64
+       ifvare SHIELDPULSETIMER 13 palfrom  6 0 0 64
+       ifvare SHIELDPULSETIMER 14 palfrom  4 0 0 64
        ifvare SHIELDPULSETIMER 15
        {
-        palfrom 3 0 0 64 
+        palfrom 2 0 0 64 
         setvar SHIELDPULSETIMER 1
 
         ifvarl ESHIELDCOMPARISON 16 { stopsound BIOSHIELD_HUM_QUIETEST sound BIOSHIELD_HUM_QUIETEST }
