@@ -246,8 +246,10 @@ ifvare mainmenu 1
    state mt
   }
 
-  // Below Menu Notes/Commands
-  ifvare mainmenusubmenu 256
+  //************************************
+  //**Below Menu Notes/Commands Legend**
+  //************************************
+  ifvare mainmenusubmenu 256 // Cheats Submenu
   {
    state pal21
    // Line #1
@@ -255,84 +257,68 @@ ifvare mainmenu 1
    setvar digy 183
    redefinequote 1001 
   
-   getkeyname 501 30 0
+   getkeyname 502 30 0
+   ifvarand bits 4 redefinequote 501 ^12%s^21=^22EXIT
+   else redefinequote 501 ^12%s^21=^22EXIT  
+   qsprintf 501 501 502
    qstrcat 1001 501
-   ifvarand bits 4 redefinequote 502 =EXIT
-   else redefinequote 502 =EXIT  
-   qstrcat 1001 502
  
    ifvarand bits 4 nullop
    else
    {
     ifvare mainmenuselection 15
     {
-     getkeyname 503 15 0
-     qstrcat 1001 503
-     redefinequote 504 /
-     qstrcat 1001 504
-     getkeyname 505 16 0
-     qstrcat 1001 505
-     redefinequote 506 =CHANGE #  
-     qstrcat 1001 506
+     getkeyname 502 15 0
+     getkeyname 503 16 0
+     redefinequote 501 ^12%s^23/^12%s^21=^22CHANGE #  
+     qsprintf 501 501 502 503
+     qstrcat 1001 501
     }
  
-    getkeyname 507 17 0
-    qstrcat 1001 507
-    redefinequote 508 =NORMAL MENUS  
-    qstrcat 1001 508
-  
-    getkeyname 509 18 0
-    qstrcat 1001 509
-    redefinequote 510 =NORMAL MENUS
-    qstrcat 1001 510
+    getkeyname 502 17 0
+    getkeyname 503 18 0
+    redefinequote 501 ^12%s^23/^12%s^21=^22NORMAL SUBMENUS^21
+    qsprintf 501 501 502 503
+    qstrcat 1001 501
    }
  
    setvar temp 1001
-   qstrlen TEMPVAR 1001
-   ifvarg TEMPVAR 0 
-   { 
-    setvarvar tempb TEMPVAR
-    mulvar tempb 2
-    subvarvar digx tempb
-    subvar digx 4
-   }
-   state mt
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
+
  
+
    // Line #2
    state digx160 // 89
    setvar digy 189
    redefinequote 1001 
  
-   getkeyname 501 0 0
+   getkeyname 502 0 0
+   redefinequote 501 ^12%s^21=^22CURSOR UP  
+   qsprintf 501 501 502
    qstrcat 1001 501
-   redefinequote 502 =CURSOR UP  
-   qstrcat 1001 502
-  
-   getkeyname 503 1 0
-   qstrcat 1001 503
-   redefinequote 504 =CURSOR DOWN  
-   qstrcat 1001 504
- 
-   getkeyname 505 2 0
-   qstrcat 1001 505
-   redefinequote 506 =CURSOR LEFT  
-   qstrcat 1001 506
- 
-   getkeyname 507 3 0
-   qstrcat 1001 507
-   redefinequote 508 =CURSOR RIGHT
-   qstrcat 1001 508 
- 
+   getkeyname 502 1 0
+   redefinequote 501 ^12%s^21=^22CURSOR DOWN  
+   qsprintf 501 501 502
+   qstrcat 1001 501
+   getkeyname 502 2 0
+   redefinequote 501 ^12%s^21=^22CURSOR LEFT  
+   qsprintf 501 501 502
+   qstrcat 1001 501
+   getkeyname 502 3 0
+   redefinequote 501 ^12%s^21=^22CURSOR RIGHT
+   qsprintf 501 501 502
+   qstrcat 1001 501
+
    setvar temp 1001
-   qstrlen TEMPVAR 1001
-   ifvarg TEMPVAR 0 
-   { 
-    setvarvar tempb TEMPVAR
-    mulvar tempb 2
-    subvarvar digx tempb
-    subvar digx 4
-   }
-   state mt
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
 
    state setquote332
   }
@@ -344,204 +330,204 @@ ifvare mainmenu 1
    setvar digy 183
    redefinequote 1001 
   
-   getkeyname 501 30 0
+   getkeyname 502 30 0
+   redefinequote 501 ^12%s^21=^22EXIT^21  
+   qsprintf 501 501 502
    qstrcat 1001 501
-   redefinequote 502 =EXIT  
-   qstrcat 1001 502
- 
-   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2
-   {
-    getkeyname 503 31 0
-    qstrcat 1001 503
-   }
-   else
-   ifvare mainmenusubmenu 6
-   {
-    ifvarn equipmenuinuse -1
-    {
-     getkeyname 503 31 0
-     qstrcat 1001 503
-    }
-   }
-   ifvare mainmenusubmenu 7
-   {
-    getkeyname 503 31 0
-    qstrcat 1001 503
-   }
- 
-   ifvare mainmenusubmenu 0
-   {
-    ifvare mainmenupage 0 redefinequote 504 =TO PG.2  
-    ifvare mainmenupage 1 redefinequote 504 =TO PG.1  
-   }
-   else
-   ifvare mainmenusubmenu 1
-   {
-    ifvare mainmenupage 0 redefinequote 504 =TO PG.2  
-    ifvare mainmenupage 1 redefinequote 504 =TO PG.3  
-    ifvare mainmenupage 2 redefinequote 504 =TO PG.4  
-    ifvare mainmenupage 3 redefinequote 504 =TO PG.5  
-    ifvare mainmenupage 4 redefinequote 504 =TO PG.6  
-    ifvare mainmenupage 5 redefinequote 504 =TO PG.1  
-   }
-   else
-   ifvare mainmenusubmenu 2
-   {
-    redefinequote 504 
-   }
-   else
-   ifvare mainmenusubmenu 3
-   {
-    redefinequote 504 
-   }
-   else
-   ifvare mainmenusubmenu 4
-   {
-    redefinequote 504 
-   }
-   else
-   ifvare mainmenusubmenu 5
-   {
-    redefinequote 504 
-   }
-   else
-   ifvare mainmenusubmenu 6
-   {
-    ifvare equipmenuinuse -1 redefinequote 504 
-    else
-    {
-     ifvare equipmenupage 0 redefinequote 504 =TO PG.2  
-     ifvare equipmenupage 1 redefinequote 504 =TO PG.1  
-    }
-   }
-   else
-   ifvare mainmenusubmenu 7
-   {
-    ifvare mainmenupage 0 redefinequote 504 =TO PG.2  
-    ifvare mainmenupage 1 redefinequote 504 =TO PG.3  
-    ifvare mainmenupage 2 redefinequote 504 =TO PG.4  
-    ifvare mainmenupage 3 redefinequote 504 =TO PG.5  
-    ifvare mainmenupage 4 redefinequote 504 =TO PG.6  
-    ifvare mainmenupage 5 redefinequote 504 =TO PG.7  
-    ifvare mainmenupage 6 redefinequote 504 =TO PG.8  
-    ifvare mainmenupage 7 redefinequote 504 =TO PG.9  
-    ifvare mainmenupage 8 redefinequote 504 =TO PG.10  
-    ifvare mainmenupage 9 redefinequote 504 =TO PG.11 
-    ifvare mainmenupage 10 redefinequote 504 =TO PG.1  
-   }
-   qstrcat 1001 504
 
+   setvar temp 0
+   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 addvar temp 1
+   ifvare mainmenusubmenu 4 ifvarg skillidinuse -1 addvar temp 1
+   ifvare mainmenusubmenu 6 ifvarn equipmenuinuse -1 addvar temp 1
+   ifvare mainmenusubmenu 7 addvar temp 1
+   ifvarg temp 0
+   {
+    getkeyname 503 31 0
+
+    ifvare mainmenusubmenu 0
+    {
+     ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
+     ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+    }
+    else
+    ifvare mainmenusubmenu 1
+    {
+     ifvarn itemidinuse -1
+     {
+      ifvare itemmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
+      ifvare itemmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+     }
+     else
+     {
+      ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
+      ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.3^21  
+      ifvare mainmenupage 2 redefinequote 504 ^12%s^21=^22TO PG.4^21  
+      ifvare mainmenupage 3 redefinequote 504 ^12%s^21=^22TO PG.5^21  
+      ifvare mainmenupage 4 redefinequote 504 ^12%s^21=^22TO PG.6^21  
+      ifvare mainmenupage 5 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+     }
+    }
+    else
+    ifvare mainmenusubmenu 2
+    {
+     redefinequote 504 
+    }
+    else
+    ifvare mainmenusubmenu 3
+    {
+     redefinequote 504 
+    }
+    else
+    ifvare mainmenusubmenu 4
+    {
+     ifvarg skillidinuse -1
+     {
+      ifvare skillmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
+      ifvare skillmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+     }
+     else redefinequote 504 
+    }
+    else
+    ifvare mainmenusubmenu 5
+    {
+     redefinequote 504 
+    }
+    else
+    ifvare mainmenusubmenu 6
+    {
+     ifvare equipmenuinuse -1 redefinequote 504 
+     else
+     {
+      ifvare equipmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
+      ifvare equipmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+     }
+    }
+    else
+    ifvare mainmenusubmenu 7
+    {
+     ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
+     ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.3^21  
+     ifvare mainmenupage 2 redefinequote 504 ^12%s^21=^22TO PG.4^21  
+     ifvare mainmenupage 3 redefinequote 504 ^12%s^21=^22TO PG.5^21  
+     ifvare mainmenupage 4 redefinequote 504 ^12%s^21=^22TO PG.6^21  
+     ifvare mainmenupage 5 redefinequote 504 ^12%s^21=^22TO PG.7^21  
+     ifvare mainmenupage 6 redefinequote 504 ^12%s^21=^22TO PG.8^21  
+     ifvare mainmenupage 7 redefinequote 504 ^12%s^21=^22TO PG.9^21  
+     ifvare mainmenupage 8 redefinequote 504 ^12%s^21=^22TO PG.10^21  
+     ifvare mainmenupage 9 redefinequote 504 ^12%s^21=^22TO PG.11^21 
+     ifvare mainmenupage 10 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+    }
+    qsprintf 504 504 503
+    qstrcat 1001 504
+   }
 
    ifvare mainmenusubmenu 0 // Characters Menu
    {
-    getkeyname 505 6 0
-    qstrcat 1001 505
-    redefinequote 506 =SELECT  
+    getkeyname 502 6 0
+    redefinequote 506 ^12%s^21=^22SELECT^21  
+    qsprintf 506 506 502
     qstrcat 1001 506
    }
    else
    ifvare mainmenusubmenu 1 // Item Menu
    {
-    getkeyname 505 6 0
-    qstrcat 1001 505
-    redefinequote 506 =SELECT  
+    getkeyname 502 6 0
+    redefinequote 506 ^12%s^21=^22SELECT^21  
+    qsprintf 506 506 502
     qstrcat 1001 506
- 
-    state pal21 
-    getkeyname 513 36 0
-    qstrcat 1001 513
-    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 514 =DROP 8X  
-    else redefinequote 514 =DROP  
-    qstrcat 1001 514
+
+    getkeyname 502 36 0
+    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 506 ^12%s^21=^14DROP 8X^21  
+    else redefinequote 506 ^12%s^21=^22DROP^21  
+    qsprintf 506 506 502
+    qstrcat 1001 506
    }
    else
    ifvare mainmenusubmenu 2 // Toggle Menu
    {
-    getkeyname 505 6 0
-    qstrcat 1001 505
-    redefinequote 506 =TOGGLE  
+    getkeyname 502 6 0
+    redefinequote 506 ^12%s^21=^22TOGGLE^21  
+    qsprintf 506 506 502
     qstrcat 1001 506
    }
    else ifvare mainmenusubmenu 3 nullop // Status Menu
    else ifvare mainmenusubmenu 4 // Skills Menu
    {
     getkeyname 505 6 0
-    qstrcat 1001 505
  
     // Check Spell Type
-    redefinequote 506 =USE SKILL  
+    redefinequote 506 
     ifvare mainmenupage 1 // Jack
     {
-     ifvare mainmenuselection 0 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
     ifvare mainmenupage 3 // Ami
     {
-     ifvare mainmenuselection 0 redefinequote 506 =TOGGLE SKILL  
-     ifvare mainmenuselection 1 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
     ifvare mainmenupage 6 // Ted
     {
-     ifvare mainmenuselection 0 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 1 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 2 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 2 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
     ifvare mainmenupage 8 // Cybanis
     {
-     ifvare mainmenuselection 0 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
     ifvare mainmenupage 9 // Nethra/Christina
     {
-     ifvare mainmenuselection 0 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 1 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 2 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 3 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 4 redefinequote 506 =USE SKILL  
-     ifvare mainmenuselection 5 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 2 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 3 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 4 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 5 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
     ifvare mainmenupage 10 // Paula
     {
-     ifvare mainmenuselection 0 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
     ifvare mainmenupage 11 // Lori
     {
-     ifvare mainmenuselection 0 redefinequote 506 =TOGGLE SKILL  
-     ifvare mainmenuselection 1 redefinequote 506 =TOGGLE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
     }
     ifvare mainmenupage 13 // Mystery
     {
      ifvare PUBLICBETA? 0
      {
-      ifvare mainmenuselection 0 redefinequote 506 =USE SKILL  
-      ifvare mainmenuselection 1 redefinequote 506 =USE SKILL  
+      ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+      ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
      }
     }
     ifvare mainmenupage 14 // Maken
     {
-     ifvare mainmenuselection 0 redefinequote 506 =TOGGLE SKILL  
-     ifvare mainmenuselection 1 redefinequote 506 =USE SKILL  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
     }
+    qsprintf 506 506 505
     qstrcat 1001 506
    }
    else ifvare mainmenusubmenu 5 nullop // Support Menu
    else ifvare mainmenusubmenu 6 // Equipment Menu
    {
-   getkeyname 505 6 0
-
-    qstrcat 1001 505
-    ifvare equipmenuinuse -1 redefinequote 506 =CHANGE ITEM  
-    else redefinequote 506 =EQUIP ITEM  
+    getkeyname 502 6 0
+    ifvare equipmenuinuse -1 redefinequote 506 ^12%s^21=^22CHANGE ITEM^21  
+    else redefinequote 506 ^12%s^21=^22EQUIP ITEM^21  
+    qsprintf 506 506 502
     qstrcat 1001 506
  
     ifvare equipmenuinuse -1
     {
-     getkeyname 505 36 0
-     qstrcat 1001 505
-     redefinequote 506 =REMOVE ITEM  
+     getkeyname 502 36 0
+     redefinequote 506 ^12%s^21=^22REMOVE ITEM^21  
+     qsprintf 506 506 502
      qstrcat 1001 506
     }
    }
    // else ifvare mainmenusubmenu 7 nullop // Worldtile Menu
-
 
    state pal21 
    ifvare itemidinuse -1
@@ -550,206 +536,134 @@ ifvare mainmenu 1
     {
      ifvare equipmenuinuse -1
      {
-      state pal21 
-      getkeyname 507 17 0
-      qstrcat 1001 507
-      ifvarand bits 4 redefinequote 508 =CHEATS  
-      else redefinequote 508 =SUB UP  
-      qstrcat 1001 508
- 
-      state pal21 
-      getkeyname 509 18 0
-      qstrcat 1001 509
-      ifvarand bits 4 redefinequote 510 =CHEATS
-      else redefinequote 510 =SUB DN
-      qstrcat 1001 510
+      getkeyname 502 17 0
+      getkeyname 503 18 0
+
+      ifvarand bits 4
+      {
+       redefinequote 506 ^12%s^23/^12%s^21=^14CHEATS^21  
+       qsprintf 506 506 502 503
+       qstrcat 1001 506
+      }
+      else
+      {
+       redefinequote 506 ^12%s^23/^12%s^21=^22SUB UP^23/^22DOWN^21  
+       qsprintf 506 506 502 503
+       qstrcat 1001 506
+      }
      }
     }
    }
-
-   state pal21 
    setvar temp 1001
-   qstrlen TEMPVAR 1001
-   ifvarg TEMPVAR 0 
-   { 
-    setvarvar tempb TEMPVAR
-    mulvar tempb 2
-    subvarvar digx tempb
-    subvar digx 5
-   }
-   state mt
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
 
+//
    // Line #2
    state digx160 // 89
    setvar digy 189
    redefinequote 1001 
 
-   ifvarg mainmenusubmenu -1 
-   ifvarl mainmenusubmenu 3
+   setvar temp 0
+   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 3 addvar temp 1
+   ifvare mainmenusubmenu 4 ifvarg skillidinuse -1 addvar temp 1
+   ifvare mainmenusubmenu 6 addvar temp 1
+   ifvare mainmenusubmenu 7 addvar temp 1
+   ifvarg temp 0
    {
     getkeyname 501 0 0
-    qstrcat 1001 501
-    redefinequote 502 =CURSOR UP  
+    redefinequote 502 ^12%s^21=^22CURSOR UP^21  
+    qsprintf 502 502 501
     qstrcat 1001 502
   
-    getkeyname 503 1 0
-    qstrcat 1001 503
-    redefinequote 504 =CURSOR DOWN  
-    qstrcat 1001 504
-   }
-   else
-   ifvare mainmenusubmenu 4
-   {
-    ifvarg skillidinuse -1
-    {
-     getkeyname 501 0 0
-     qstrcat 1001 501
-     redefinequote 502 =CURSOR UP  
-     qstrcat 1001 502
-  
-     getkeyname 503 1 0
-     qstrcat 1001 503
-     redefinequote 504 =CURSOR DOWN  
-     qstrcat 1001 504
-    }
-   }
-   else
-   ifvare mainmenusubmenu 6
-   {
-    getkeyname 501 0 0
-    qstrcat 1001 501
-    redefinequote 502 =CURSOR UP  
+    getkeyname 501 1 0
+    redefinequote 502 ^12%s^21=^22CURSOR DOWN^21  
+    qsprintf 502 502 501
     qstrcat 1001 502
-  
-    getkeyname 503 1 0
-    qstrcat 1001 503
-    redefinequote 504 =CURSOR DOWN  
-    qstrcat 1001 504
-   }
-   else
-   ifvare mainmenusubmenu 7
-   {
-    getkeyname 501 0 0
-    qstrcat 1001 501
-    redefinequote 502 =CURSOR UP  
-    qstrcat 1001 502
-  
-    getkeyname 503 1 0
-    qstrcat 1001 503
-    redefinequote 504 =CURSOR DOWN  
-    qstrcat 1001 504
    }
 
-   ifvarg mainmenusubmenu -1 
-   ifvarl mainmenusubmenu 2
+   setvar temp 0
+   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 addvar temp 1
+   ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 8 addvar temp 1
+   ifvare mainmenusubmenu 2 ifvare mainmenuselection 11 ifvare autosavetoggle 1 addvar temp 1
+   ifvarg temp 0
    {
     getkeyname 505 2 0
-    qstrcat 1001 505
-   }
-   else
-   ifvarg mainmenusubmenu 2
-   ifvarl mainmenusubmenu 8
-   {
-    getkeyname 505 2 0
-    qstrcat 1001 505
-   }
-   else
-   ifvare mainmenusubmenu 2
-   {
-    ifvare mainmenuselection 11 ifvare autosavetoggle 1
+
+    ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 506 ^12%s^21=^22CURSOR LEFT^21  
+    else ifvare mainmenusubmenu 2
     {
-     getkeyname 505 2 0
-     qstrcat 1001 505
+     ifvare mainmenuselection 11 ifvare autosavetoggle 1
+     {
+      ifvare AUTOSAVEFREQUENCY 1 redefinequote 506 ^12%s^21=^22MAP LOAD ONLY^21  
+      else ifvare AUTOSAVEFREQUENCY 0 redefinequote 506 ^12%s^21=^22SET TO 120 MIN^21  
+      else redefinequote 506 ^12%s^21=^22-1 MIN^21  
+     }
+     else
+     {
+      redefinequote 506 
+     }
     }
-   }
+    else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 506 ^12%s^21=^22SCREEN LEFT^21  
+    else ifvare mainmenusubmenu 6
+    {
+     ifvare equipmenuinuse -1 redefinequote 506 ^12%s^21=^22SCREEN LEFT^21  
+     else redefinequote 506 ^12%s^21=^22CURSOR LEFT^21  
+    }
+    else ifvare mainmenusubmenu 7 // redefinequote 506
+    {
+     redefinequote 506 ^12%s^21=^22CURSOR LEFT^21  
+    }
+    qsprintf 506 506 505
+    qstrcat 1001 506
+   } 
+
  
-   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 506 =CURSOR LEFT  
-   else
-   ifvare mainmenusubmenu 2
-   {
-    ifvare mainmenuselection 11 ifvare autosavetoggle 1
-    {
-     ifvare AUTOSAVEFREQUENCY 1 redefinequote 506 =MAP LOAD ONLY  
-     else ifvare AUTOSAVEFREQUENCY 0 redefinequote 506 =SET TO 120 MIN  
-     else redefinequote 506 =-1 MIN  
-    }
-    else
-    {
-     redefinequote 506 
-    }
-   }
-   else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 506 =SCREEN LEFT  
-   else ifvare mainmenusubmenu 6
-   {
-    ifvare equipmenuinuse -1 redefinequote 506 =SCREEN LEFT  
-    else redefinequote 506 =CURSOR LEFT  
-   }
-   else ifvare mainmenusubmenu 7 // redefinequote 506
-   {
-    redefinequote 506 =CURSOR LEFT  
-   }
-   qstrcat 1001 506
- 
-   ifvarg mainmenusubmenu -1 
-   ifvarl mainmenusubmenu 2
+   setvar temp 0
+   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 addvar temp 1
+   ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 8 addvar temp 1
+   ifvare mainmenusubmenu 2 ifvare mainmenuselection 11 ifvare autosavetoggle 1 addvar temp 1
+   ifvarg temp 0
    {
     getkeyname 507 3 0
-    qstrcat 1001 507
-   }
-   else
-   ifvarg mainmenusubmenu 2
-   ifvarl mainmenusubmenu 8
-   {
-    getkeyname 507 3 0
-    qstrcat 1001 507
-   }
-   else
-   ifvare mainmenusubmenu 2
-   {
-    ifvare mainmenuselection 11 ifvare autosavetoggle 1
-    {
-     getkeyname 507 3 0
-     qstrcat 1001 507
-    }
-   }
  
-   ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 508 =CURSOR RIGHT
-   else
-   ifvare mainmenusubmenu 2
-   {
-    ifvare mainmenuselection 11 ifvare autosavetoggle 1
+    ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 508 ^12%s^21=^22CURSOR RIGHT^21
+    else ifvare mainmenusubmenu 2
     {
-     ifvare AUTOSAVEFREQUENCY 120 redefinequote 508 =MAP LOAD ONLY
-     else ifvare AUTOSAVEFREQUENCY 0 redefinequote 508 =SET TO 1 MIN
-     else redefinequote 508 =+1 MIN
+     ifvare mainmenuselection 11 ifvare autosavetoggle 1
+     {
+      ifvare AUTOSAVEFREQUENCY 120 redefinequote 508 ^12%s^21=^22MAP LOAD ONLY^21
+      else ifvare AUTOSAVEFREQUENCY 0 redefinequote 508 ^12%s^21=^22SET TO 1 MIN^21
+      else redefinequote 508 ^12%s^21=^22+1 MIN^21
+     }
+     else
+     {
+      redefinequote 508 
+     }
     }
-    else
+    else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 508 ^12%s^21=^22SCREEN RIGHT^21
+    else ifvare mainmenusubmenu 6
     {
-     redefinequote 508 
+     ifvare equipmenuinuse -1 redefinequote 508 ^12%s^21=^22SCREEN RIGHT^21  
+     else redefinequote 508 ^12%s^21=^22CURSOR RIGHT^21  
     }
+    else ifvare mainmenusubmenu 7 // redefinequote 508  
+    {
+     redefinequote 508 ^12%s^21=^22CURSOR RIGHT^21
+    }
+    qsprintf 508 508 507
+    qstrcat 1001 508 
    }
-   else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 508 =SCREEN RIGHT
-   else ifvare mainmenusubmenu 6
-   {
-    ifvare equipmenuinuse -1 redefinequote 508 =SCREEN RIGHT  
-    else redefinequote 508 =CURSOR RIGHT  
-   }
-   else ifvare mainmenusubmenu 7 // redefinequote 508  
-   {
-    redefinequote 508 =CURSOR RIGHT
-   }
-   qstrcat 1001 508 
- 
+
    setvar temp 1001
-   qstrlen TEMPVAR 1001
-   ifvarg TEMPVAR 0 
-   { 
-    setvarvar tempb TEMPVAR
-    mulvar tempb 2
-    subvarvar digx tempb
-    subvar digx 4
-   }
-   state mt
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
  
    state setquote332
   }
@@ -994,7 +908,9 @@ ifvare mainmenu 1
    setvar orientation_change 0
   }
 
-  // Item Descriptions and Text Descriptions
+  //*******************************************
+  //**Item Descriptions and Text Descriptions**
+  //*******************************************
   ifvare mainmenusubmenu 0
   {
    state pal23
@@ -1015,26 +931,19 @@ ifvare mainmenu 1
 
    ifvare TEMPVAR3 1
    {
-    state digx160
     redefinequote 1001 
-    getkeyname 501 13 0
-    qstrcat 1001 501
-    redefinequote 502 /
-    qstrcat 1001 502
+    getkeyname 502 13 0
     getkeyname 503 14 0
-    qstrcat 1001 503
-    redefinequote 504  = TRANSFORM THIS CHARACTER ONE LEVEL [DOWN/UP]
-    qstrcat 1001 504
+    redefinequote 501 ^12%s^21/^12%s^23=^22 TRANSFORM THIS CHARACTER ONE LEVEL [DOWN/UP]
+    qsprintf 501 501 502 503
+    qstrcat 1001 501
+
     setvar temp 1001
-    qstrlen TEMPVAR 1001
-    ifvarg TEMPVAR 0 
-    { 
-     setvarvar tempb TEMPVAR
-     mulvar tempb 2
-     subvarvar digx tempb
-     subvar digx 2
-    }
-    state mt
+    setvar digx 160
+    setvar orientation 26
+    setvar textflags 8194
+    setvar textscale 65536
+    state mt_free
    }
   }
 
@@ -1687,16 +1596,12 @@ ifvare mainmenu 1
     }
    }
 
+   setvar temp 332
    setvar digx 160
-   qstrlen TEMPVAR 332
-   ifvarg TEMPVAR 0 
-   { 
-    setvarvar tempb TEMPVAR
-    mulvar tempb 2
-    subvarvar digx tempb
-    subvar digx 4
-   }
-   state mt
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
 
   }
 
@@ -1789,16 +1694,12 @@ ifvare mainmenu 1
      ifvare weapontoggleselect 1 redefinequote 332 "WEAPON LEFT/RIGHT" WILL CYCLE THROUGH WEAPONS INSTEAD OF CHARACTERS.
     }
    }
+   setvar temp 332
    setvar digx 160
-   qstrlen TEMPVAR 332
-   ifvarg TEMPVAR 0 
-   { 
-    setvarvar tempb TEMPVAR
-    mulvar tempb 2
-    subvarvar digx tempb
-    subvar digx 4
-   }
-   state mt
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
   }
 
 /*
@@ -1867,7 +1768,7 @@ ifvare mainmenu 1
     getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 EQUIPTEMP
     ifvare equipmenuinuse -1 state showequipmentitemdescript
    }
-   ifvare equipmenuinuse -1 state mt
+   // ifvare equipmenuinuse -1 state mt
   }
 
   state setquote332
@@ -2170,11 +2071,13 @@ ifvare mainmenu 1
     ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD8 1073741824 redefinequote 332 WORLDTILE #255: ^22"THE MIRACLE DOGS OF THE GREAT DEPRESSION!"
     ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD8 2147483648 redefinequote 332 WORLDTILE #256: ^22"INTRODUCTING... MISFITTECH STUDIOS!"
    }
-   qstrlen TEMPVAR 332
-   mulvar TEMPVAR 2
-   subvarvar digx TEMPVAR
-   subvarvar digx 2
-   state mt
+
+   setvar temp 332
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
   }
 
   state setquote332
@@ -2450,11 +2353,13 @@ ifvare mainmenu 1
     ifvarand CHEATBITFIELD? 4 redefinequote 332 DISABLES "BUDDHA MODE" CHEAT [0 INDESTRUCTIBLE HP]
     else redefinequote 332 ENABLES "BUDDHA MODE" CHEAT [1 INDESTRUCTIBLE HP]
    }
-   qstrlen TEMPVAR 332
-   mulvar TEMPVAR 2
-   subvarvar digx TEMPVAR
-   subvarvar digx 2
-   state mt
+
+   setvar temp 332
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
   }
 
 // Main Menu - Character Select
@@ -12062,16 +11967,12 @@ ifvarg equipmenuinuse 0
   }
 */
 
+  setvar temp 332
   setvar digx 160
-  qstrlen TEMPVAR 332
-  ifvarg TEMPVAR 0 
-  { 
-   setvarvar tempb TEMPVAR
-   mulvar tempb 2
-   subvarvar digx tempb
-   subvar digx 4
-  }
-  state mt
+  setvar orientation 26
+  setvar textflags 8194
+  setvar textscale 65536
+  state mt_free
 
   ifvarg equipmenuselection -1 ifvarl equipmenuselection 6 setvar digy 52
   ifvarg equipmenuselection 5 ifvarl equipmenuselection 12 setvar digy 84 // 32
@@ -12275,6 +12176,16 @@ ifvarg equipmenuinuse 0
   setvar shade 12
   state rs
  
+  state pal23
+  setvar shade 0
+  setvar digx 260 // 260
+  setvar digy 26
+  setvarvar TEMPVAR itemmenupage
+  addvar TEMPVAR 1
+  redefinequote 332 PG.%d
+  qsprintf 332 332 TEMPVAR
+  state mt
+
   state shade0
   setvar digy 20
   state orientation2
@@ -12382,6 +12293,18 @@ ifvarg equipmenuinuse 0
    state rs
  } // ifvarg itemidinuse -1
 
+/*
+ // Testing for cursor [future mouse-based system?]
+ setvarvar digx cursorx
+ setvarvar digy cursory
+ setvar digz 32768
+ setvarvar diga cursorang
+ setvar tilenum 100
+ setvar shade 0
+ setvar pal 0
+ setvar orientation 0
+ state rs
+*/
 
  } // ifvarg mainmenutransitiontimer 6
 } // ifvare mainmenu 1

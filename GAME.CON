@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git18.03212014
+definequote 1337 ^22VERSION:^0 5.22.git20.03222014
 
 action ANULLACTION 0
 
@@ -21634,27 +21634,28 @@ ends
 //************************************************************************************************************************
 
 actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
-/*
-ifinwater ifp prunning
+
+ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
 {
- getinput[THISACTOR].extbits TEMPVAR2
- ifvarand TEMPVAR2 1
- {
-  getplayer[THISACTOR].horiz TEMPVAR
-  subvar TEMPVAR 100 // 100 horiz equals straight ahead, so take away 100 and make 0 'straight ahead' for this
-  mulvar TEMPVAR -20
-  setplayer[THISACTOR].poszv TEMPVAR
- }
- else
- ifvarand TEMPVAR2 2
- {
-  getplayer[THISACTOR].horiz TEMPVAR
-  subvar TEMPVAR 100 // 100 horiz equals straight ahead, so take away 100 and make 0 'straight ahead' for this
-  mulvar TEMPVAR 20
-  setplayer[THISACTOR].poszv TEMPVAR
- }
+ addvar cursorang 37
+ getplayer[THISACTOR].ang temp
+ getplayer[THISACTOR].oang tempb
+ getincangle angvar temp tempb
+ divvar angvar 3
+ subvarvar cursorx angvar
+ setplayer[THISACTOR].ang player[THISACTOR].oang
+ ifvarl cursorx 0 setvar cursorx 0
+ ifvarg cursorx 320 setvar cursorx 320
+
+ getplayer[THISACTOR].horiz temp
+ getplayer[THISACTOR].ohoriz tempb
+ subvarvar temp tempb
+ getuserdef[THISACTOR].mouseflip tempc
+ ifvare tempc 0 addvarvar cursory temp else subvarvar cursory temp
+ ifvarl cursory 0 setvar cursory 0
+ ifvarg cursory 200 setvar cursory 200
 }
-*/
+
 ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 3
 {
  ifvare CHARACTERSELECTED? 1 { ifvare CURRENTENERGYPOINTS 0 { setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS } } // addlogvar CURRENTENERGYPOINTS

@@ -85,12 +85,17 @@ define ZAPPER3 6678
 //**GAMEVARS**
 //************
 
+gamevar cursorx 160 132098
+gamevar cursory 100 132098
+gamevar cursorang 0 132098
+
 gamevar cursormemorysubmenu 0 0
 gamevar cursormemorypagepos 0 132098
 gamevar cursormemorycursorpos 0 132098
 
 gamevar prev_orientation 0 0
 gamevar orientation_change 0 0
+gamevar extra_orientation 0 0
 
 gamevar position 0 2
 gamevar itemtimer 0 2
@@ -4851,6 +4856,11 @@ state rs
  rotatesprite digx digy digz diga tilenum shade pal orientation ZERO ZERO xdim ydim
 ends
 
+state rsa
+ state orientationsetproperscale
+ rotatespritea digx digy digz diga tilenum shade pal orientation alpha ZERO ZERO xdim ydim
+ends
+
 state rs16
  state orientationsetproperscale
  rotatesprite16 digx digy digz diga tilenum shade pal orientation ZERO ZERO xdim ydim
@@ -4877,11 +4887,6 @@ state gtz
 ends
 
 state mt
-//  ifvare digx_test 0 minitext digx digy temp shade pal
-/*
-  ifvare digx_test 1
-  {
-*/
    setvarvar prev_orientation orientation
    setvar xspace 4
    setvar yline 6
@@ -4893,7 +4898,17 @@ state mt
    state orientationsetproperscale
    screentext MINIFONT digx digy textscale blockang charang temp shade pal orientation alpha xspace yline xbetween ybetween textflags ZERO ZERO xdim ydim
    setvarvar orientation prev_orientation
-//  }
+ends
+
+state mt_free
+   setvarvar prev_orientation orientation
+   setvar xspace 4
+   setvar yline 6
+   setvar xbetween 1
+   setvar ybetween 1  
+   state orientationsetproperscale
+   screentext MINIFONT digx digy textscale blockang charang temp shade pal orientation alpha xspace yline xbetween ybetween textflags ZERO ZERO xdim ydim
+   setvarvar orientation prev_orientation
 ends
 
 //****************************
@@ -31896,6 +31911,7 @@ state showequipmentitemdescript
    ifvare EQUIPTEMP 26 state showenergyincurmentdescript
    ifvare EQUIPTEMP 27 state showyinyangorbdescript
    ifvare EQUIPTEMP 28 state showshikonjeweldescript
+/*
    setvar digx 160
    qstrlen TEMPVAR 332
    ifvarg TEMPVAR 0 
@@ -31906,6 +31922,13 @@ state showequipmentitemdescript
     subvar digx 4
    }
    state mt
+*/
+   setvar temp 332
+   setvar digx 160
+   setvar orientation 26
+   setvar textflags 8194
+   setvar textscale 65536
+   state mt_free
 ends
 
 state displayresisticons
