@@ -2846,9 +2846,10 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     addvar hpresstime 1
     ifvarvare temppartime hpresstime nullop else
     {
-	  ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
+        ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
         {
-         ifvarand bits 4 // Holding down Cheat Keys
+         addlogvar SHOPCOMBOBITS
+         ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS // Holding down Cheat Keys
          {
           ifvare mainmenusubmenu 256 // Using in cheats menu causes error sound
           {
@@ -2885,7 +2886,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
            state loadnewsubmenustuff
 
            sound MENU_SUBUP
-	     state setreturn-1 
+           state setreturn-1 
           }
          }
         }
@@ -2936,7 +2937,9 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
      ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
      {
-      ifvarand bits 4
+//      ifvarand bits 4
+      addlogvar SHOPCOMBOBITS
+      ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS // Holding down Cheat Keys
       {
        ifvare mainmenusubmenu 256
        {
@@ -3036,6 +3039,11 @@ onevent EVENT_ENTERLEVEL
  setvar CIVILIANSKILLED_LEVEL 0
  // Reset Max Civilians Killed for the Current Level
  setvar MAX_CIVILIANSKILLED_LEVEL 0
+
+ // Reset WorldTiles found for the Current Level
+ setvar WORLDTILESFOUND_LEVEL 0
+ // Reset Max WorldTiles found for the Current Level
+ setvar MAX_WORLDTILESFOUND_LEVEL 0
 
  // Reset All-Secrets Bonus Message/Stuff
  ifvare GOTALLSECRETSBONUS? 1 setvar GOTALLSECRETSBONUS? 0

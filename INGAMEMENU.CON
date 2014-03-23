@@ -539,7 +539,8 @@ ifvare mainmenu 1
       getkeyname 502 17 0
       getkeyname 503 18 0
 
-      ifvarand bits 4
+      addlogvar SHOPCHEATBITTOTAL
+      ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS
       {
        redefinequote 506 ^12%s^23/^12%s^21=^14CHEATS^21  
        qsprintf 506 506 502 503
@@ -775,7 +776,18 @@ ifvare mainmenu 1
     state mt
    }
 
-   // Show Kills Counter [Label]
+   // Show Worldtiles Counter [Label]
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   {
+    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    setvar digx 235
+    addvar digy 6
+    redefinequote 332 WORLDTILES =
+    state mt
+   }
+
+
+   // Show Kills Counter [Current]
    setvar digy -3
    ifvarg MAX_ENEMIES_KILLED_LEVEL 0
    {
@@ -816,6 +828,17 @@ ifvare mainmenu 1
     setvar digx 293
     addvar digy 6
     setvarvar varname CIVILIANSSAVED_LEVEL
+    state orientation2
+    state dn
+   }
+
+   // Show Worldtiles Counter [Current]
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   {
+    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    setvar digx 293
+    addvar digy 6
+    setvarvar varname WORLDTILESFOUND_LEVEL
     state orientation2
     state dn
    }
@@ -861,6 +884,16 @@ ifvare mainmenu 1
     state mt
    }
  
+   // Show Worldtiles Counter [/]
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   {
+    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    setvar digx 300
+    addvar digy 6
+    redefinequote 332 /
+    state mt
+   }
+
    // Show Kills Counter [Maximum]
    setvar digy -3
    ifvarg MAX_ENEMIES_KILLED_LEVEL 0
@@ -905,8 +938,20 @@ ifvare mainmenu 1
     state orientation2
     state dn
    }
+
+   // Show Worldtiles Counter [Maximum]
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   {
+    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    setvar digx 313
+    addvar digy 6
+    setvarvar varname MAX_WORLDTILESFOUND_LEVEL
+    state orientation2
+    state dn
+   }
    setvar orientation_change 0
   }
+
 
   //*******************************************
   //**Item Descriptions and Text Descriptions**
