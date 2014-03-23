@@ -2569,6 +2569,7 @@ state shop_display
  state pal0
  state shade-31
 
+ // Line #1
  setvar temp 332
  state pal22
 // Item Descriptions
@@ -2804,100 +2805,94 @@ state shop_display
    ifvare shopselection 3 state showtank3capsuledescript
   }
  }
- qstrlen TEMPVAR 332
- ifvarg TEMPVAR 0 
- { 
-  setvarvar tempb TEMPVAR
-  mulvar tempb 2
-  subvarvar digx tempb
-  subvar digx 2
- }
- state mt
 
+ setvar temp 332
+ setvar digx 160
+ setvar orientation 26
+ setvar textflags 8194
+ setvar textscale 65536
+ state mt_free
+ setvar orientation 2
+
+ // Line #2
  setvar temp 1001
  state pal0
 // Key Listings
  state digx160
  setvar digy 183 // 177
  redefinequote 1001 
- getkeyname 501 17 0
- qstrcat 1001 501
- redefinequote 502 /
- qstrcat 1001 502
+
+ getkeyname 502 17 0
  getkeyname 503 18 0
- qstrcat 1001 503
- redefinequote 504 =TOGGLE BUY/SELL  
- qstrcat 1001 504
-
- getkeyname 501 2 0
+ redefinequote 501 ^12%s^23/^12%s^0=^22TOGGLE BUY^23/^22SELL^21  
+ qsprintf 501 501 502 503
  qstrcat 1001 501
- redefinequote 502 /
- qstrcat 1001 502
+
+ getkeyname 502 2 0
  getkeyname 503 3 0
- qstrcat 1001 503
- redefinequote 504 /
- qstrcat 1001 504
- getkeyname 505 15 0
- qstrcat 1001 505
- redefinequote 506 /
- qstrcat 1001 506
- getkeyname 507 16 0
- qstrcat 1001 507
- redefinequote 508 =QUANITY -1/+1/-10/+10  
- qstrcat 1001 508
+ getkeyname 504 15 0
+ getkeyname 505 16 0
+ redefinequote 501 ^12%s^23/^12%s^23/^12%s^23/%s^0=^22QUANITY -1^23/^22+1^23/^22-10^23/^22+10  
+ qsprintf 501 501 502 503 504 505
+ qstrcat 1001 501
 
- qstrlen TEMPVAR 1001
- ifvarg TEMPVAR 0 
- { 
-  setvarvar tempb TEMPVAR
-  mulvar tempb 2
-  subvarvar digx tempb
-  subvar digx 2
- }
- state mt
+ setvar temp 1001
+ setvar digx 160
+ setvar orientation 26
+ setvar textflags 8194
+ setvar textscale 65536
+ state mt_free
+ setvar orientation 2
 
+ // Line #3
  state digx160 // 89
  setvar digy 189 // 183
  redefinequote 1001 
 
- getkeyname 501 30 0
+ getkeyname 502 30 0
+ redefinequote 501 ^12%s^0=^22EXIT^21  
+ qsprintf 501 501 502
  qstrcat 1001 501
- redefinequote 502 =EXIT  
- qstrcat 1001 502
 
- getkeyname 503 31 0
- qstrcat 1001 503
- redefinequote 504 =SHIFT PG  
- qstrcat 1001 504
-
- getkeyname 505 6 0
- qstrcat 1001 505
- ifvare shopmode 0 redefinequote 506 =BUY ITEM  
- else ifvare shopmode 1 redefinequote 506 =SELL ITEM  
- qstrcat 1001 506
-
- getkeyname 501 0 0
+ getkeyname 502 31 0
+ redefinequote 501 ^12%s^0=^22SHIFT PG^21  
+ qsprintf 501 501 502
  qstrcat 1001 501
- redefinequote 502 =CURSOR UP  
- qstrcat 1001 502
 
- getkeyname 503 1 0
- qstrcat 1001 503
- redefinequote 504 =CURSOR DOWN
- qstrcat 1001 504
+ getkeyname 502 6 0
+ ifvare shopmode 0
+ {
+  ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^0=^14"BUY" ITEM^21  
+  else redefinequote 501 ^12%s^0=^22BUY ITEM^21  
+ }
+ else ifvare shopmode 1
+ {
+  ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^0=^14SELL "ITEM"^21  
+  else redefinequote 501 ^12%s^0=^22SELL ITEM^21  
+ }
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ getkeyname 502 0 0
+ redefinequote 501 ^12%s^0=^22CURSOR UP^21  
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ getkeyname 502 1 0
+ redefinequote 501 ^12%s^0=^22CURSOR DOWN^21
+ qsprintf 501 501 502
+ qstrcat 1001 501
 
  setvar temp 1001
- qstrlen TEMPVAR 1001
- ifvarg TEMPVAR 0 
- { 
-  setvarvar tempb TEMPVAR
-  mulvar tempb 2
-  subvarvar digx tempb
-  subvar digx 3
- }
- state mt
- state pal0
+ setvar digx 160
+ setvar orientation 26
+ setvar textflags 8194
+ setvar textscale 65536
+ state mt_free
+ setvar orientation 2
 
+ // Other Lines
+ state pal0
  setvar temp 332
  // Show Current Money
  state pal22
