@@ -270,14 +270,14 @@ ifvare mainmenu 1
     {
      getkeyname 502 15 0
      getkeyname 503 16 0
-     redefinequote 501 ^12%s^23/^12%s^21=^22CHANGE #  
+     redefinequote 501 ^12%s^23/^12%s^21=^22CHANGE # 
      qsprintf 501 501 502 503
      qstrcat 1001 501
     }
  
     getkeyname 502 17 0
     getkeyname 503 18 0
-    redefinequote 501 ^12%s^23/^12%s^21=^22NORMAL SUBMENUS^21
+    redefinequote 501 ^12%s^23/^12%s^21=^22NORMAL SUBMENUS
     qsprintf 501 501 502 503
     qstrcat 1001 501
    }
@@ -297,15 +297,15 @@ ifvare mainmenu 1
    redefinequote 1001 
  
    getkeyname 502 0 0
-   redefinequote 501 ^12%s^21=^22CURSOR UP  
+   redefinequote 501 ^12%s^21=^22CURSOR UP 
    qsprintf 501 501 502
    qstrcat 1001 501
    getkeyname 502 1 0
-   redefinequote 501 ^12%s^21=^22CURSOR DOWN  
+   redefinequote 501 ^12%s^21=^22CURSOR DOWN 
    qsprintf 501 501 502
    qstrcat 1001 501
    getkeyname 502 2 0
-   redefinequote 501 ^12%s^21=^22CURSOR LEFT  
+   redefinequote 501 ^12%s^21=^22CURSOR LEFT 
    qsprintf 501 501 502
    qstrcat 1001 501
    getkeyname 502 3 0
@@ -331,7 +331,7 @@ ifvare mainmenu 1
    redefinequote 1001 
   
    getkeyname 502 30 0
-   redefinequote 501 ^12%s^21=^22EXIT^21  
+   redefinequote 501 ^12%s^21=^22EXIT 
    qsprintf 501 501 502
    qstrcat 1001 501
 
@@ -346,25 +346,25 @@ ifvare mainmenu 1
 
     ifvare mainmenusubmenu 0
     {
-     ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
-     ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+     ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2 
+     ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1 
     }
     else
     ifvare mainmenusubmenu 1
     {
      ifvarn itemidinuse -1
      {
-      ifvare itemmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
-      ifvare itemmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+      ifvare itemmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2 
+      ifvare itemmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1 
      }
      else
      {
-      ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
-      ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.3^21  
-      ifvare mainmenupage 2 redefinequote 504 ^12%s^21=^22TO PG.4^21  
-      ifvare mainmenupage 3 redefinequote 504 ^12%s^21=^22TO PG.5^21  
-      ifvare mainmenupage 4 redefinequote 504 ^12%s^21=^22TO PG.6^21  
-      ifvare mainmenupage 5 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+      ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2 
+      ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.3 
+      ifvare mainmenupage 2 redefinequote 504 ^12%s^21=^22TO PG.4 
+      ifvare mainmenupage 3 redefinequote 504 ^12%s^21=^22TO PG.5 
+      ifvare mainmenupage 4 redefinequote 504 ^12%s^21=^22TO PG.6 
+      ifvare mainmenupage 5 redefinequote 504 ^12%s^21=^22TO PG.1 
      }
     }
     else
@@ -382,8 +382,8 @@ ifvare mainmenu 1
     {
      ifvarg skillidinuse -1
      {
-      ifvare skillmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
-      ifvare skillmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+      ifvare skillmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2 
+      ifvare skillmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1 
      }
      else redefinequote 504 
     }
@@ -398,24 +398,24 @@ ifvare mainmenu 1
      ifvare equipmenuinuse -1 redefinequote 504 
      else
      {
-      ifvare equipmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
-      ifvare equipmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+      ifvare equipmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2 
+      ifvare equipmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.1 
      }
     }
     else
     ifvare mainmenusubmenu 7
     {
-     ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2^21  
-     ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.3^21  
-     ifvare mainmenupage 2 redefinequote 504 ^12%s^21=^22TO PG.4^21  
-     ifvare mainmenupage 3 redefinequote 504 ^12%s^21=^22TO PG.5^21  
-     ifvare mainmenupage 4 redefinequote 504 ^12%s^21=^22TO PG.6^21  
-     ifvare mainmenupage 5 redefinequote 504 ^12%s^21=^22TO PG.7^21  
-     ifvare mainmenupage 6 redefinequote 504 ^12%s^21=^22TO PG.8^21  
-     ifvare mainmenupage 7 redefinequote 504 ^12%s^21=^22TO PG.9^21  
-     ifvare mainmenupage 8 redefinequote 504 ^12%s^21=^22TO PG.10^21  
-     ifvare mainmenupage 9 redefinequote 504 ^12%s^21=^22TO PG.11^21 
-     ifvare mainmenupage 10 redefinequote 504 ^12%s^21=^22TO PG.1^21  
+     ifvare mainmenupage 0 redefinequote 504 ^12%s^21=^22TO PG.2 
+     ifvare mainmenupage 1 redefinequote 504 ^12%s^21=^22TO PG.3 
+     ifvare mainmenupage 2 redefinequote 504 ^12%s^21=^22TO PG.4 
+     ifvare mainmenupage 3 redefinequote 504 ^12%s^21=^22TO PG.5 
+     ifvare mainmenupage 4 redefinequote 504 ^12%s^21=^22TO PG.6 
+     ifvare mainmenupage 5 redefinequote 504 ^12%s^21=^22TO PG.7 
+     ifvare mainmenupage 6 redefinequote 504 ^12%s^21=^22TO PG.8 
+     ifvare mainmenupage 7 redefinequote 504 ^12%s^21=^22TO PG.9 
+     ifvare mainmenupage 8 redefinequote 504 ^12%s^21=^22TO PG.10 
+     ifvare mainmenupage 9 redefinequote 504 ^12%s^21=^22TO PG.11 
+     ifvare mainmenupage 10 redefinequote 504 ^12%s^21=^22TO PG.1 
     }
     qsprintf 504 504 503
     qstrcat 1001 504
@@ -424,7 +424,7 @@ ifvare mainmenu 1
    ifvare mainmenusubmenu 0 // Characters Menu
    {
     getkeyname 502 6 0
-    redefinequote 506 ^12%s^21=^22SELECT^21  
+    redefinequote 506 ^12%s^21=^22SELECT 
     qsprintf 506 506 502
     qstrcat 1001 506
    }
@@ -432,13 +432,13 @@ ifvare mainmenu 1
    ifvare mainmenusubmenu 1 // Item Menu
    {
     getkeyname 502 6 0
-    redefinequote 506 ^12%s^21=^22SELECT^21  
+    redefinequote 506 ^12%s^21=^22SELECT 
     qsprintf 506 506 502
     qstrcat 1001 506
 
     getkeyname 502 36 0
-    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 506 ^12%s^21=^14DROP 8X^21  
-    else redefinequote 506 ^12%s^21=^22DROP^21  
+    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 506 ^12%s^21=^14DROP 8X 
+    else redefinequote 506 ^12%s^21=^22DROP 
     qsprintf 506 506 502
     qstrcat 1001 506
    }
@@ -446,7 +446,7 @@ ifvare mainmenu 1
    ifvare mainmenusubmenu 2 // Toggle Menu
    {
     getkeyname 502 6 0
-    redefinequote 506 ^12%s^21=^22TOGGLE^21  
+    redefinequote 506 ^12%s^21=^22TOGGLE 
     qsprintf 506 506 502
     qstrcat 1001 506
    }
@@ -459,53 +459,53 @@ ifvare mainmenu 1
     redefinequote 506 
     ifvare mainmenupage 1 // Jack
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     ifvare mainmenupage 3 // Ami
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
-     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL 
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     ifvare mainmenupage 6 // Ted
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 2 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 2 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     ifvare mainmenupage 8 // Cybanis
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     ifvare mainmenupage 9 // Nethra/Christina
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 2 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 3 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 4 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-     ifvare mainmenuselection 5 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 2 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 3 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 4 redefinequote 506 ^12%s^21=^22USE SKILL 
+     ifvare mainmenuselection 5 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     ifvare mainmenupage 10 // Paula
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     ifvare mainmenupage 11 // Lori
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
-     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL 
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22TOGGLE SKILL 
     }
     ifvare mainmenupage 13 // Mystery
     {
      ifvare PUBLICBETA? 0
      {
-      ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL^21  
-      ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+      ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22USE SKILL 
+      ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL 
      }
     }
     ifvare mainmenupage 14 // Maken
     {
-     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL^21  
-     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL^21  
+     ifvare mainmenuselection 0 redefinequote 506 ^12%s^21=^22TOGGLE SKILL 
+     ifvare mainmenuselection 1 redefinequote 506 ^12%s^21=^22USE SKILL 
     }
     qsprintf 506 506 505
     qstrcat 1001 506
@@ -514,15 +514,15 @@ ifvare mainmenu 1
    else ifvare mainmenusubmenu 6 // Equipment Menu
    {
     getkeyname 502 6 0
-    ifvare equipmenuinuse -1 redefinequote 506 ^12%s^21=^22CHANGE ITEM^21  
-    else redefinequote 506 ^12%s^21=^22EQUIP ITEM^21  
+    ifvare equipmenuinuse -1 redefinequote 506 ^12%s^21=^22CHANGE ITEM 
+    else redefinequote 506 ^12%s^21=^22EQUIP ITEM 
     qsprintf 506 506 502
     qstrcat 1001 506
  
     ifvare equipmenuinuse -1
     {
      getkeyname 502 36 0
-     redefinequote 506 ^12%s^21=^22REMOVE ITEM^21  
+     redefinequote 506 ^12%s^21=^22REMOVE ITEM  
      qsprintf 506 506 502
      qstrcat 1001 506
     }
@@ -542,13 +542,13 @@ ifvare mainmenu 1
       addlogvar SHOPCHEATBITTOTAL
       ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS
       {
-       redefinequote 506 ^12%s^23/^12%s^21=^14CHEATS^21  
+       redefinequote 506 ^12%s^23/^12%s^21=^14CHEATS 
        qsprintf 506 506 502 503
        qstrcat 1001 506
       }
       else
       {
-       redefinequote 506 ^12%s^23/^12%s^21=^22SUB UP^23/^22DOWN^21  
+       redefinequote 506 ^12%s^23/^12%s^21=^22SUB UP^23/^22DN 
        qsprintf 506 506 502 503
        qstrcat 1001 506
       }
@@ -576,12 +576,12 @@ ifvare mainmenu 1
    ifvarg temp 0
    {
     getkeyname 501 0 0
-    redefinequote 502 ^12%s^21=^22CURSOR UP^21  
+    redefinequote 502 ^12%s^21=^22CURSOR UP  
     qsprintf 502 502 501
     qstrcat 1001 502
   
     getkeyname 501 1 0
-    redefinequote 502 ^12%s^21=^22CURSOR DOWN^21  
+    redefinequote 502 ^12%s^21=^22CURSOR DOWN  
     qsprintf 502 502 501
     qstrcat 1001 502
    }
@@ -594,29 +594,29 @@ ifvare mainmenu 1
    {
     getkeyname 505 2 0
 
-    ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 506 ^12%s^21=^22CURSOR LEFT^21  
+    ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 506 ^12%s^21=^22CURSOR LEFT  
     else ifvare mainmenusubmenu 2
     {
      ifvare mainmenuselection 11 ifvare autosavetoggle 1
      {
-      ifvare AUTOSAVEFREQUENCY 1 redefinequote 506 ^12%s^21=^22MAP LOAD ONLY^21  
-      else ifvare AUTOSAVEFREQUENCY 0 redefinequote 506 ^12%s^21=^22SET TO 120 MIN^21  
-      else redefinequote 506 ^12%s^21=^22-1 MIN^21  
+      ifvare AUTOSAVEFREQUENCY 1 redefinequote 506 ^12%s^21=^22MAP LOAD ONLY  
+      else ifvare AUTOSAVEFREQUENCY 0 redefinequote 506 ^12%s^21=^22SET TO 120 MIN  
+      else redefinequote 506 ^12%s^21=^22-1 MIN  
      }
      else
      {
       redefinequote 506 
      }
     }
-    else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 506 ^12%s^21=^22SCREEN LEFT^21  
+    else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 506 ^12%s^21=^22SCREEN LEFT  
     else ifvare mainmenusubmenu 6
     {
-     ifvare equipmenuinuse -1 redefinequote 506 ^12%s^21=^22SCREEN LEFT^21  
-     else redefinequote 506 ^12%s^21=^22CURSOR LEFT^21  
+     ifvare equipmenuinuse -1 redefinequote 506 ^12%s^21=^22SCREEN LEFT  
+     else redefinequote 506 ^12%s^21=^22CURSOR LEFT  
     }
     else ifvare mainmenusubmenu 7 // redefinequote 506
     {
-     redefinequote 506 ^12%s^21=^22CURSOR LEFT^21  
+     redefinequote 506 ^12%s^21=^22CURSOR LEFT  
     }
     qsprintf 506 506 505
     qstrcat 1001 506
@@ -631,29 +631,29 @@ ifvare mainmenu 1
    {
     getkeyname 507 3 0
  
-    ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 508 ^12%s^21=^22CURSOR RIGHT^21
+    ifvarg mainmenusubmenu -1 ifvarl mainmenusubmenu 2 redefinequote 508 ^12%s^21=^22CURSOR RIGHT
     else ifvare mainmenusubmenu 2
     {
      ifvare mainmenuselection 11 ifvare autosavetoggle 1
      {
-      ifvare AUTOSAVEFREQUENCY 120 redefinequote 508 ^12%s^21=^22MAP LOAD ONLY^21
-      else ifvare AUTOSAVEFREQUENCY 0 redefinequote 508 ^12%s^21=^22SET TO 1 MIN^21
-      else redefinequote 508 ^12%s^21=^22+1 MIN^21
+      ifvare AUTOSAVEFREQUENCY 120 redefinequote 508 ^12%s^21=^22MAP LOAD ONLY
+      else ifvare AUTOSAVEFREQUENCY 0 redefinequote 508 ^12%s^21=^22SET TO 1 MIN
+      else redefinequote 508 ^12%s^21=^22+1 MIN
      }
      else
      {
       redefinequote 508 
      }
     }
-    else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 508 ^12%s^21=^22SCREEN RIGHT^21
+    else ifvarg mainmenusubmenu 2 ifvarl mainmenusubmenu 6 redefinequote 508 ^12%s^21=^22SCREEN RIGHT
     else ifvare mainmenusubmenu 6
     {
-     ifvare equipmenuinuse -1 redefinequote 508 ^12%s^21=^22SCREEN RIGHT^21  
-     else redefinequote 508 ^12%s^21=^22CURSOR RIGHT^21  
+     ifvare equipmenuinuse -1 redefinequote 508 ^12%s^21=^22SCREEN RIGHT  
+     else redefinequote 508 ^12%s^21=^22CURSOR RIGHT  
     }
     else ifvare mainmenusubmenu 7 // redefinequote 508  
     {
-     redefinequote 508 ^12%s^21=^22CURSOR RIGHT^21
+     redefinequote 508 ^12%s^21=^22CURSOR RIGHT
     }
     qsprintf 508 508 507
     qstrcat 1001 508 
