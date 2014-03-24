@@ -4218,6 +4218,7 @@ else
  
     ifvarand miscdisplaytoggle 4
     {     
+     setvar orientation_change 512
      ifvarg DISPLAYMONEYTIMER 0
      {
       // Display the Money Amount
@@ -4281,6 +4282,7 @@ else
  
       ifvarg DISPLAYMONEYTIMER 53 { setvar DISPLAYDOLLARS 0 setvar DISPLAYCENTS 0 setvar DISPLAYMONEYTIMER 0 setvar MONEYGAIN 0 }
      }
+     setvar orientation_change 0
     }
 
     //********************************************
@@ -5474,6 +5476,7 @@ else
 
     ifvarand miscdisplaytoggle 2
     {
+     setvar orientation_change 512
      //********************
      //**Stat Boost Gains**
      //********************
@@ -5711,6 +5714,7 @@ else
       state gtz
       ifvarg JUMLUPDISPLAY 52 { setvar JUMINCREASED 0 setvar JUMLUPDISPLAY 0 state orientation0 }
      }
+     setvar orientation_change 0
     }
  
  

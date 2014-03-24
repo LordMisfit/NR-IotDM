@@ -12197,7 +12197,7 @@ enda
 state fortunecookie_fortunedisplays
             // Defines the various quotes for a fortune cookie
             setvar FORTUNECOOKIETIMER 78 // displays fortune for 3 seconds
-            randvar FORTUNECOOKIEQUOTE 97 // Determines how many of the fortunes on the list below are used
+            randvar FORTUNECOOKIEQUOTE 99 // Determines how many of the fortunes on the list below are used
             {
              ifvare FORTUNECOOKIEQUOTE 0 redefinequote 272 FORTUNE SAY:^22 ALL YOUR BASE ARE BELONG TO US!
              ifvare FORTUNECOOKIEQUOTE 1 redefinequote 272 FORTUNE SAY:^22 IT'S OVER NINE THOUSAAAND!!!
@@ -12472,6 +12472,30 @@ state fortunecookie_fortunedisplays
              ifvare FORTUNECOOKIEQUOTE 95 redefinequote 272 FORTUNE SAY:^22 TAKE YOUR GAY LEOTARD AND DIE!!!!
              ifvare FORTUNECOOKIEQUOTE 96 redefinequote 272 FORTUNE SAY:^22 WATER DROPLETS AND A RAZOR IS ALL YOU NEED...
              ifvare FORTUNECOOKIEQUOTE 97 redefinequote 272 FORTUNE SAY:^22 PROTIP: PEOPLE DIE WHEN YOU KILL THEM!
+             ifvare FORTUNECOOKIEQUOTE 98
+             {
+              redefinequote 272 FORTUNE SAY:^22 ......SESAME UNDER WATCH - CAUSE OF DEATH: 
+              randvar tempb 16
+              ifvare tempb 0 redefinequote 501 ^22VIOLENT TRAUMATISM
+              ifvare tempb 1 redefinequote 501 ^22UNCONTROLLABLE HAEMMORRHAGE
+              ifvare tempb 2 redefinequote 501 ^22EXHAUSTION
+              ifvare tempb 3 redefinequote 501 ^22DEHYDRATION
+              ifvare tempb 4 redefinequote 501 ^22POISONING FROM GANGRENE
+              ifvare tempb 5 redefinequote 501 ^22CYANIDE POISONING
+              ifvare tempb 6 redefinequote 501 ^22HYPOTHERMIA
+              ifvare tempb 7 redefinequote 501 ^22HYPERTHERMIA
+              ifvare tempb 8 redefinequote 501 ^22TACHYCARDIA - CARDIAC ARREST
+              ifvare tempb 9 redefinequote 501 ^22HYPOTENSION
+              ifvare tempb 10 redefinequote 501 ^22HYPERTENSION
+              ifvare tempb 11 redefinequote 501 ^22STATE OF SHOCK
+              ifvare tempb 12 redefinequote 501 ^22SYNCOPE
+              ifvare tempb 13 redefinequote 501 ^22SUFFOCATION
+              ifvare tempb 14 redefinequote 501 ^22ELECTROCUTION
+              ifvare tempb 15 redefinequote 501 ^22CARBONISATION
+              ifvare tempb 16 redefinequote 501 ^22LASER IMPACT
+              qstrcat 272 501
+             }
+             ifvare FORTUNECOOKIEQUOTE 99 redefinequote 272 FORTUNE SAY:^22 GOBLINS ARE INVADING FROM THE WEST!
             }
 ends
 
