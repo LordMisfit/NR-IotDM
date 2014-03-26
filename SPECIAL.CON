@@ -32688,9 +32688,9 @@ state showvehiclecommands
      state settilealphanum
      state orientation10
      ifvarand bits 4 state shadepulse3
-     ifvare VEHICLETYPE 0 redefinequote 438  = BULLETS
-     ifvare VEHICLETYPE 1 redefinequote 438  = SHOTGUN SHELLS
-     ifvare VEHICLETYPE 2 redefinequote 438  = RPG MISSILES
+     ifvare VEHICLETYPE 0 redefinequote 438 ^21 = ^22BULLETS
+     ifvare VEHICLETYPE 1 redefinequote 438 ^21 = ^22SHOTGUN SHELLS
+     ifvare VEHICLETYPE 2 redefinequote 438 ^21 = ^22RPG MISSILES
      getkeyname 437 5 0
      qstrcat 437 438
      state gtz
@@ -32704,9 +32704,9 @@ state showvehiclecommands
      state settilealphanum
      state orientation10
      ifvarand bits 4194304 state shadepulse3
-     ifvare VEHICLETYPE 0 redefinequote 438  = LASERS
-     ifvare VEHICLETYPE 1 redefinequote 438  = EXPANDER CLUSTERS
-     ifvare VEHICLETYPE 2 redefinequote 438  = RPG MISSILES
+     ifvare VEHICLETYPE 0 redefinequote 438 ^21 = ^22LASERS
+     ifvare VEHICLETYPE 1 redefinequote 438 ^21 = ^22EXPANDER CLUSTERS
+     ifvare VEHICLETYPE 2 redefinequote 438 ^21 = ^22RPG MISSILES
      getkeyname 437 49 0
      qstrcat 437 438
      state gtz
@@ -32719,7 +32719,7 @@ state showvehiclecommands
      state pal20
      state settilealphanum
      state orientation10
-     redefinequote 438  = EXIT VEHICLE
+     redefinequote 438  ^21 = ^22EXIT VEHICLE
      getkeyname 437 36 0
 
      qstrcat 437 438

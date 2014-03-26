@@ -4058,33 +4058,38 @@ else
      //*Top Keys Legend*
      //*****************
      setvar digy 3
-     ifvarn ftq 777
+     setvar temp 0
+     ifvarn ftq 777 addvar temp 1
+     else ifvare fta 0 addvar temp 1
+     ifvarg temp 0
      {
       setvar digx 1
       addvar digy 6
       getkeyname 401 30 0 
-      redefinequote 332 MENUS = ^12%s 
+      redefinequote 332 ^12%s ^21= ^22MENUS
       qsprintf 332 332 401
       state setquote332
       state pal21
       state mt    
       state shade0
      }
+
+     setvar digx 1
+     addvar digy 6
+     getkeyname 401 13 0 
+     getkeyname 402 14 0 
+     ifvare tipdisplayid -1 redefinequote 332 ^12%s^23/^12%s ^21= ^22DISPLAY TIPS
      else
      {
-      ifvare fta 0
-      {
-       setvar digx 1
-       addvar digy 6
-       getkeyname 401 30 0 
-       redefinequote 332 MENUS = ^12%s 
-       qsprintf 332 332 401
-       state setquote332
-       state pal21
-       state mt    
-       state shade0
-      }
+      ifvare tipdisplayid 0 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS OFF^21/^22TIPS ^11FORWARD
+      else ifvarg tipdisplayid 0 ifvarl tipdisplayid 31 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS ^11BACK^21/^22FORWARD
+      else ifvare tipdisplayid 31 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS ^11BACK^21/^22TIPS OFF
      }
+     qsprintf 332 332 401 402
+     state setquote332
+     state pal21
+     state mt    
+     state shade0
  
      ifvarn CURRENTWEAPON 0
      {
@@ -4092,7 +4097,7 @@ else
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
       getkeyname 401 42 0 
-      redefinequote 332 DEFEND = ^12%s
+      redefinequote 332 ^12%s ^21= ^22DEFEND
       qsprintf 332 332 401
       state setquote332
       state pal21
@@ -4106,7 +4111,7 @@ else
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
       getkeyname 401 5 0 
-      redefinequote 332 THROW = ^12%s
+      redefinequote 332 ^12%s ^21= ^22THROW
       qsprintf 332 332 401
       state setquote332
       state pal21
@@ -4122,7 +4127,7 @@ else
        setvar digx 1
        addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
        getkeyname 401 11 0 
-       redefinequote 332 GLIDE = ^12%s
+       redefinequote 332 ^12%s ^21= ^22GLIDE
        qsprintf 332 332 401
        state setquote332
        state pal21
@@ -4140,9 +4145,8 @@ else
       getkeyname 401 6 0
       getkeyname 402 15 0
       getkeyname 403 16 0
-      redefinequote 404 +
-      redefinequote 332 CHARGE BIO-SHIELD = ^12%s ^23%s ^12%s ^23%s ^12%s
-      qsprintf 332 332 401 404 402 404 403
+      redefinequote 332 ^12%s ^23+ ^12%s ^23+ ^12%s ^21= ^22CHARGE BIO-SHIELD
+      qsprintf 332 332 401 402 403
       state pal21
       state mt    
       state shade0
@@ -4154,7 +4158,7 @@ else
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
       getkeyname 401 41 0
-      redefinequote 332 TELEKENESIS = ^12%s
+      redefinequote 332 ^12%s ^21= ^22TELEKENESIS
       qsprintf 332 332 401
       state setquote332
       state pal21
@@ -4168,9 +4172,9 @@ else
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
       getkeyname 401 22 0
-      ifvare CHAINGUNMODE 0 redefinequote 332 ROCKETS [CHAINGUN] = ^12%s
-      else ifvare CHAINGUNMODE 1 redefinequote 332 BULLETS [CHAINGUN] = ^12%s
-      // else ifvare CHAINGUNMODE 2 redefinequote 332 LASERS [CHAINGUN] = ^12%s
+      ifvare CHAINGUNMODE 0 redefinequote 332 ^12%s ^21= ^22ROCKETS [CHAINGUN]
+      else ifvare CHAINGUNMODE 1 redefinequote 332 ^12%s ^21= ^22BULLETS [CHAINGUN]
+      // else ifvare CHAINGUNMODE 2 redefinequote 332 ^12%s ^21= ^22LASERS [CHAINGUN]
       qsprintf 332 332 401
       state setquote332
       state pal21
@@ -4184,17 +4188,19 @@ else
       setvar digx 1
       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
       getkeyname 401 23 0
-      ifvare DEATHMISSILEMODE 0 redefinequote 332 DEATHSTROKES [RPG] = ^12%s
-      else redefinequote 332 DEATHGATES [RPG] = ^12%s
+      ifvare DEATHMISSILEMODE 0 redefinequote 332 ^12%s ^21= ^22DEATHSTROKES [RPG]
+      else redefinequote 332 ^12%s ^21= ^22DEATHGATES [RPG]
       qsprintf 332 332 401
       state setquote332
       state pal21
       state mt    
       state shade0
      }
- 
+
+      
+
     } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0 [line 1991]
-     setvar orientation_change 0
+    setvar orientation_change 0
     //************************** End of redisplay attempt **************************
  
     state shade0
@@ -4232,31 +4238,12 @@ else
       setvar MONEYGAIN 0
       ifvare DISPLAYDOLLARS 0 //
       {
-       ifvare DISPLAYCENTS 0
-       {
-        setvar DISPLAYMONEYTIMER 0
-       }
-       else ifvarg DISPLAYCENTS 0 // Positive
-       {
-        state pal22
-        setvar MONEYGAIN 1
-       }
-       else ifvarl DISPLAYCENTS 0 // Negative
-       {
-        state pal10
-        setvar MONEYGAIN -1
-       }
+       ifvare DISPLAYCENTS 0 setvar DISPLAYMONEYTIMER 0
+       else ifvarg DISPLAYCENTS 0 { state pal22 setvar MONEYGAIN 1 } // Positive
+       else ifvarl DISPLAYCENTS 0 { state pal10 setvar MONEYGAIN -1 } // Negative
       }
-      else ifvarg DISPLAYDOLLARS 0 // Positive
-      {
-       state pal22
-       setvar MONEYGAIN 1
-      }
-      else ifvarl DISPLAYDOLLARS 0 // Negative
-      {
-       state pal10
-       setvar MONEYGAIN -1
-      }
+      else ifvarg DISPLAYDOLLARS 0 { state pal22 setvar MONEYGAIN 1 } // Positive      
+      else ifvarl DISPLAYDOLLARS 0 { state pal10 setvar MONEYGAIN -1 } // Negative
  
       ifvarg tempc -1 ifvarl tempc 10
       {
@@ -4272,8 +4259,8 @@ else
       }
  
       ifvarg DISPLAYMONEYTIMER 0 ifvarl DISPLAYMONEYTIMER 20 state orientation26
-      else ifvarg DISPLAYMONEYTIMER 19 ifvarl DISPLAYMONEYTIMER 37 state orientation27
-      else ifvarg DISPLAYMONEYTIMER 36 ifvarl DISPLAYMONEYTIMER 55 state orientation59 
+      ifvarg DISPLAYMONEYTIMER 19 ifvarl DISPLAYMONEYTIMER 37 state orientation27
+      ifvarg DISPLAYMONEYTIMER 36 ifvarl DISPLAYMONEYTIMER 55 state orientation59 
       setvarvar digx 478 // 1
       setvarvar digy 182 // 148
       setvar temp 332
@@ -11311,11 +11298,11 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20DUKE NUKEM^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
+       redefinequote 1034 THE ULTIMATE ALIEN ASS KICKER! HE HAS
+       redefinequote 1035 DEFEATED THE ^10TRIOCLADIAR^23 AT ALL TURNS
+       redefinequote 1036 SO FAR. YOU ARE HERE TO MAKE SURE THIS
+       redefinequote 1037 ADVENTURE CONTINUES HIS WINNING 
+       redefinequote 1038 STREAK! :)
        redefinequote 1039  
        redefinequote 1040  
        redefinequote 1041  
@@ -11355,12 +11342,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20JACK WALKER^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 A YOUTHFUL 'BRAT' WHO HELPED DUKE IN
+       redefinequote 1035 THE ^21D.C. INVASION^23. HE LOOKS AT DUKE
+       redefinequote 1036 AS A TEACHER OF COMBAT, BUT NOT AS A
+       redefinequote 1037 TECHER OF ETTIQUTTE. IS EXTREMELY OB-
+       redefinequote 1038 SERVANT OF THINGS DESPITE HIS YOUTH
+       redefinequote 1039 AND (IM)MATURITY.
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11399,12 +11386,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20BUBSY BOBCAT^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 AN ANTHROMORPHIC BOBCAT WITH A LIC-
+       redefinequote 1035 ENSE TO ACT! STARRING IN MANY MOVIES,
+       redefinequote 1036 INCLUDING ^11"EYE OF HORNED SOLITUDE"^23
+       redefinequote 1037 ALONGSIDE DUKE HIMSELF! HAS ALSO
+       redefinequote 1038 THWARTED THE ALIEN 'WOOLIES' IN THE
+       redefinequote 1039 PAST.
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11443,12 +11430,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20AMI MIZUNO^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 SHE IS THE ONE CALLED ^0SAILOR MERCURY^23!
+       redefinequote 1035 SMART, THOUGH SHY AND A BIT OF A
+       redefinequote 1036 BOOKWORM. POSSESSES A VERY LEVEL HEAD
+       redefinequote 1037 IN BATTLE AND SECRETLY LIKES DECON-
+       redefinequote 1038 STRUCTING HER WORST ENEMIES' CONFI-
+       redefinequote 1039 DENCE PIECE BY PIECE.
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11487,11 +11474,11 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20HIGA HAKAISHA^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
+       redefinequote 1034 THE ^10SHADOW WARRIOR^23 AND ULTIMATE NINJA!
+       redefinequote 1035 SEEKS HIS FORMER EMPLOYER ^21ZILLA^23 TO
+       redefinequote 1036 FINISH HIM AND AND FOR ALL AND BEC-
+       redefinequote 1037 OMES A RELUCTANT ALLY [FRIEND?] TO
+       redefinequote 1038 DUKE!
        redefinequote 1039  
        redefinequote 1040  
        redefinequote 1041  
@@ -11531,11 +11518,11 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20ESSENCE MARGALAN^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
+       redefinequote 1034 MEDATARION ^24ESS-LEVEL^23 SOLDIER FORM-
+       redefinequote 1035 ERLY IN SERVICE TO ^21NAFERIA^23. WAS
+       redefinequote 1036 EXCILED FOR SUSPICIOUS REASONS, BUT
+       redefinequote 1037 SOON TURNS TO GIVE DUKE HELP IN BOTH
+       redefinequote 1038 ADVICE AND HELPING HANDS!
        redefinequote 1039  
        redefinequote 1040  
        redefinequote 1041  
@@ -11575,12 +11562,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20TED MALDORAS^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 A TEENAGE CONSTRUCTION-WORKER GIFTED
+       redefinequote 1035 IN DEMOLITIONS AND EXPLOSIVES. HE IS
+       redefinequote 1036 ALSO THE BEST FRIEND OF ^11LISA BATES^23.
+       redefinequote 1037 HIS MOTHER IS SUPPOSABLY A MECHANIC,
+       redefinequote 1038 BUT HAS A SHADY BACKGROUND OF HER
+       redefinequote 1039 OWN!
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11619,12 +11606,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20LISA BATES^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 DAUGHTER OF ESTEEMED SCIENTIST ^11HAROLD
+       redefinequote 1035 ^11BATES^23. IS EVEN MORE INTELLIGENT THAN
+       redefinequote 1036 HER FATHER, WITH THE LOOKS AND BEAU-
+       redefinequote 1037 TY OF HER MOTHER'S SIDE! IS LEADER
+       redefinequote 1038 OF HER OWN HAND OF CRIME-FIGHTER
+       redefinequote 1039 TEENAGERS IN SANTA MONICA.
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11663,12 +11650,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20CYBANIS MORGANDOS^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 CYCLOIDIAN SOLDIER. SON OF ^21HANO-
+       redefinequote 1035 ^21MOTHAS^23, THE FIRST CYCLOIDIAN KILLED
+       redefinequote 1036 BY DUKE. HAS BEEN WRONGLY FRAME OF
+       redefinequote 1037 KIDNAPPING ^11PRINCESS NETHRA^23 BY AN UN-
+       redefinequote 1038 KNOWN TRIOCLADIAN SOURCE, POSSIBLY
+       redefinequote 1039 ^10NAFERIA^23 HERSELF!
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11707,12 +11694,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20CHRISTINA MITCHELL^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 STRONG, ENERGETIC, AND VERY UNMODEST
+       redefinequote 1035 ABOUT HER LOOKS. CHRISTINA LOVES TO
+       redefinequote 1036 HAVE FUN WITH TOY WITH HER MOST HAT-
+       redefinequote 1037 ED ENEMIES. SHE ALSO HAS AN UNIQUE
+       redefinequote 1038 INTEREST IN LO WANG AND HIS BRAND OF
+       redefinequote 1039 HUMOR AND WOMANIZING.
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11751,12 +11738,12 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20NETHRA MABOROSHI^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 ^11CHRISTINA'S ^12TRIOCLADIAR^23 ALTER-EGO.
+       redefinequote 1035 NETHRA IS THE DAUGHTER OF ^10NAFERIA^23,
+       redefinequote 1036 MAKING HER HIGH PRINCESS OF THE ^21TRI-
+       redefinequote 1037 ^21OCLADIAR^23. LOVES HER MOTHER DEARLY,
+       redefinequote 1038 BUT TIRES OF HER WAR-LIKE CONQUERING
+       redefinequote 1039 OF WORLDS FOR REPOPULATION.
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11791,16 +11778,17 @@ else
        setvarvar digy 95
        state gtz
 
+
        // Tip Description - 15 Lines, ~32 Characters per line.
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20PAULA POLESTAR^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
+       redefinequote 1034 A HEROINE OF THE ^12GIYGAS WAR^23, PAULA
+       redefinequote 1035 PLAYED A CRUICAL ROLE IN THE COSMIC
+       redefinequote 1036 DESTROYER'S DEFEAT. SHE ALSO FEELS
+       redefinequote 1037 THE ^21TRIOCLADIAR^23 MIGHT BE CAPTIALIZING
+       redefinequote 1038 ON GIYGAS'S DEFEAT TO MOVE IN ON 
+       redefinequote 1039 EARTH!
        redefinequote 1040  
        redefinequote 1041  
        redefinequote 1042  
@@ -11839,11 +11827,11 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20LORI STEPHENS^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
+       redefinequote 1034 STEPCOUSIN OF JACK. IS VERY CENTRAL
+       redefinequote 1035 TO NATURE AND FISHING. LOVES TO USE
+       redefinequote 1036 A BAMBOO STAFF IN BATTLE. VERY STRONG
+       redefinequote 1037 AND DURABLE IN PHYSICAL WAYS. IS ALSO
+       redefinequote 1038 AN APPRENTICE ^22DELTA SCION^23.
        redefinequote 1039  
        redefinequote 1040  
        redefinequote 1041  
@@ -11883,11 +11871,11 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20MINAKO AINO^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
+       redefinequote 1034 SHE IS THE ONE CALLED ^6SAILOR VENUS^23!
+       redefinequote 1035 OUTGOING AND CHEERFUL MOST OF THE
+       redefinequote 1036 TIME, BUT HAS A STREAK OF VENGENCE
+       redefinequote 1037 AGAINST THE ^21TRIOCLADIAR^23 FOR NEARLY
+       redefinequote 1038 KILLING SOME OF HER FRIENDS.
        redefinequote 1039  
        redefinequote 1040  
        redefinequote 1041  
@@ -11918,28 +11906,107 @@ else
        setvarvar orientation 0
        setvarvar textscale 49152
        setvarvar digz 49152
-       redefinequote 1031 ??????? ?????????
+       ifvare PUBLICBETA? 1
+       {
+        ifvare debugtoggle 0 redefinequote 1031 ??????? ?????????
+        else redefinequote 1031 HINOTORI GENKAI
+       }
+       else
+       {
+        ifvare debugtoggle 0 redefinequote 1031 HINOTORI GENKAI
+        else redefinequote 1031 NAFERIA MABOROSHI
+       }
        setvarvar digx 320
        setvarvar digy 95
        state gtz
 
-       // Tip Description - 15 Lines, ~32 Characters per line.
-                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
-       redefinequote 1032 PLAYABLE CHARACTER: ^20??????? ?????????^23
-       redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
-       redefinequote 1040  
-       redefinequote 1041  
-       redefinequote 1042  
-       redefinequote 1043  
-       redefinequote 1044  
-       redefinequote 1045  
-       redefinequote 1046  
+       ifvare PUBLICBETA? 1
+       {
+        ifvare debugtoggle 0
+        {
+         // Tip Description - 15 Lines, ~32 Characters per line.
+                         // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+         redefinequote 1032 PLAYABLE CHARACTER: ^20??????? ?????????^23
+         redefinequote 1033  
+         redefinequote 1034 WHO IS SHE EXACTLY? WHAT SECRETS LIE
+         redefinequote 1035 INSIDE THAT COOL-LEVELED HEAD OF HERS?
+         redefinequote 1036 SHE ALSO EMITS A FEELING OF FAMILIAR-
+         redefinequote 1037 ITY WITH YOU FOR SOME ODD REASON.
+         redefinequote 1038 HER MOTIVES HOWEVER ARE A COMPLETE
+         redefinequote 1039 MYSTERY...
+         redefinequote 1040  
+         redefinequote 1041  
+         redefinequote 1042  
+         redefinequote 1043  
+         redefinequote 1044  
+         redefinequote 1045  
+         redefinequote 1046  
+        }
+        else
+        {
+         // Tip Description - 15 Lines, ~32 Characters per line.
+                         // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+         redefinequote 1032 PLAYABLE CHARACTER: ^20HINOTORI GENKAI^23
+         redefinequote 1033  
+         redefinequote 1034 WHO IS SHE EXACTLY? WHAT SECRETS LIE
+         redefinequote 1035 INSIDE THAT COOL-LEVELED HEAD OF HERS?
+         redefinequote 1036 SHE ALSO EMITS A FEELING OF FAMILIAR-
+         redefinequote 1037 ITY WITH YOU FOR SOME ODD REASON.
+         redefinequote 1038 HER MOTIVES HOWEVER ARE A COMPLETE
+         redefinequote 1039 MYSTERY...
+         redefinequote 1040  
+         redefinequote 1041  
+         redefinequote 1042  
+         redefinequote 1043  
+         redefinequote 1044  
+         redefinequote 1045  
+         redefinequote 1046  
+        }
+       }
+       else
+       {
+        ifvare debugtoggle 0
+        {
+         // Tip Description - 15 Lines, ~32 Characters per line.
+                         // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+         redefinequote 1032 PLAYABLE CHARACTER: ^20HINOTORI GENKAI^23
+         redefinequote 1033  
+         redefinequote 1034 WHO IS SHE EXACTLY? WHAT SECRETS LIE
+         redefinequote 1035 INSIDE THAT COOL-LEVELED HEAD OF HERS?
+         redefinequote 1036 SHE ALSO EMITS A FEELING OF FAMILIAR-
+         redefinequote 1037 ITY WITH YOU FOR SOME ODD REASON.
+         redefinequote 1038 HER MOTIVES HOWEVER ARE A COMPLETE
+         redefinequote 1039 MYSTERY...
+         redefinequote 1040  
+         redefinequote 1041  
+         redefinequote 1042  
+         redefinequote 1043  
+         redefinequote 1044  
+         redefinequote 1045  
+         redefinequote 1046  
+        }
+        else
+        {
+
+         // Tip Description - 15 Lines, ~32 Characters per line.
+                         // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+         redefinequote 1032 PLAYABLE CHARACTER: ^20NAFERIA MABOROSHI^23
+         redefinequote 1033  
+         redefinequote 1034 HIGH-QUEEN OF MOST OF THE ^10TRIOCLAD-
+         redefinequote 1035 ^10IAR^23. DESPITE THE DANGER SHE POSES TO
+         redefinequote 1036 OTHERS, SHE CARES A LOT ABOUT HER
+         redefinequote 1037 ADOPTED SPECIES. HER TRUE FORM LOOKS
+         redefinequote 1038 VERY HUMAN LIKE. RUMORED OT HAVE INT-
+         redefinequote 1039 ERESTS IN ^11DUKE^23 AS A SOLDIER IN HER
+         redefinequote 1040 ARMY!
+         redefinequote 1041  
+         redefinequote 1042  
+         redefinequote 1043  
+         redefinequote 1044  
+         redefinequote 1045  
+         redefinequote 1046  
+        }
+       }
       }
       else
       ifvare tipdisplayid 17 // Character: Maken Shinkara
@@ -11971,13 +12038,13 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20MAKEN SHINKARA^23
        redefinequote 1033  
-       redefinequote 1034  
-       redefinequote 1035  
-       redefinequote 1036  
-       redefinequote 1037  
-       redefinequote 1038  
-       redefinequote 1039  
-       redefinequote 1040  
+       redefinequote 1034 LITTLE SISTER OF ^11KASEY SHINKARA^23.
+       redefinequote 1035 CONSIDERED TO BE A MASTER HACKER,
+       redefinequote 1036 MASQUERADING AS HER BROTHER UNDER THE
+       redefinequote 1037 ALIAS ^21"INVADER"^23. DESPITE HER ROUGH
+       redefinequote 1038 PERSONALITY, SHE HAS A ENDEARING FR-
+       redefinequote 1039 IENDSHIP WITH LORI. IS AN INTERMEDIATE
+       redefinequote 1040 ^22DELTA SCION^23.
        redefinequote 1041  
        redefinequote 1042  
        redefinequote 1043  
@@ -11988,46 +12055,401 @@ else
       else
       ifvare tipdisplayid 18 // In-Game Menu Access
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 IN-GAME MENU ACCESS
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035 THE IN-GAME MAIN MENU ALLOWS YOU TO
+       redefinequote 1036 ACCESS INFORMATION SUCH AS CHARACTERS,
+       redefinequote 1037 ITEMS, SYSTEM SETTINGS, STATUS REPORTS
+       redefinequote 1038 ON CHARACTERS, CHARACTERS' SKILLS, THE
+       redefinequote 1039 SUPPORT LEVELS OF CHARACTERS, THE
+       redefinequote 1040 CHARACTERS' EQUIPPABLE ITEMS, AND THE
+       redefinequote 1041 WORLDTILES YOU'VE COLLECTED. THERE
+       redefinequote 1042 MIGHT BE OTHER HIDDEN THINGS NOT MENT-
+       redefinequote 1043 IONED IN HERE THOUGH. :O
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046 
       }
       else
       ifvare tipdisplayid 19 // "Characters" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 CHARACTERS SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035 THIS SUBMENU ALLOWS YOU TO VIEW YOUR
+       redefinequote 1036 CHARACTERS STATS SUCH AS ^21HP^23, ^22AP^23, ^10ATT-
+       redefinequote 1037 ^10ACK^23, ^14DEFENSE^23, AND EVEN THEIR STATUS
+       redefinequote 1038 CONDITIONS. ADDITIONALLY, THIS ALLOWS
+       redefinequote 1039 YOU TO SWAP BETWEEN CHARACTERS ON THE
+       redefinequote 1040 FLY MID-GAME. NOPE, NONE OF THAT
+       redefinequote 1041 'PICK ONE CHARACTER AND USE ONLY THEM 
+       redefinequote 1042 THE ENTIRE GAME' STUFF LIKE OTHER 
+       redefinequote 1043 GAMES DO. :D
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046 
       }
       else
       ifvare tipdisplayid 20 // "Items" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 ITEMS SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033 
+       redefinequote 1034  
+       redefinequote 1035  
+       redefinequote 1036 SIMPLY PUT, THIS SUBMENU ALLOWS YOU
+       redefinequote 1037 TO VIEW ALL OF THE ITEMS YOU'VE AQ-
+       redefinequote 1038 UIRED OVER THE COURSE OF YOUR TRA-
+       redefinequote 1039 VELS. ITEMS INCLUDE ^21HEALING^23, ^22ARMOR^23,
+       redefinequote 1040 ^12INVENTORY ITEMS^23, ^11SPECIAL TYPES^23,
+       redefinequote 1041 ^14EQUIPPABLES^23, ^15PERMANENT BOOST ITEMS^23,
+       redefinequote 1042 ^0ENERGY ITEMS^23, AND WHATNOT.
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 21 // "System" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 SYSTEMS SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032 
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035  
+       redefinequote 1036 THIS SUBMENU IS FOR PERSONALIZED OP-
+       redefinequote 1037 TIONS, SUCH AS SHOWING THE ^0HEADS-UP-
+       redefinequote 1038 ^0DISPLAY^23, THE WAY CHARACTERS/WEAPONS
+       redefinequote 1039 ARE SWITCHED OUT OF THE MENUS, THE
+       redefinequote 1040 AUTOSAVING INTERVALS, AUTO-MANTLE,
+       redefinequote 1041 AND VARIOUS OTHER OPTIONS FOR THE
+       redefinequote 1042 PLAYER'S SPECFIC PERFERENCE.
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 22 // "Status" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 STATUS SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032 
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035  
+       redefinequote 1036 SHOWS SPECFIC INFORMATION ON A SINGLE
+       redefinequote 1037 CHARACTER'S STATUS, SUCH AS THEIR
+       redefinequote 1038 ^22POWERUP TIMERS^23, THEIR ^13AMMO COUNTERS^23,
+       redefinequote 1039 THEIR ^0AIRTIME^23, ^15MANTLE-TIME^23, THEIR
+       redefinequote 1040 KILLS, # OF DEATHS, AND OF COURSE:
+       redefinequote 1041 ^21HP^23, ^22AP^23, ^0EP^23 AND ^21PORTABLE MEDIKIT
+       redefinequote 1042 ^21ENERGY^23.
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 23 // "Skills" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 SKILLS SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032 
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035  
+       redefinequote 1036 SOME CHARACTER POSSESS SKILLS THAT
+       redefinequote 1037 ARE NOT PASSIVE AND MUST BE USED
+       redefinequote 1038 DIRECTLY. IN THIS MENU, JUST HIGH-
+       redefinequote 1039 LIGHT THE SKILL YOU INTEND TO USE
+       redefinequote 1040 AND IT WILL EITHER TOGGLE IT ON/OFF
+       redefinequote 1041 IF IT'S A SELF-USE SKILL OR ALLOW
+       redefinequote 1042 YOU TO CHOOSE WHO TO USE IT ON.
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 24 // "Support" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 SUPPORT SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033 OVER THE COURSE OF THE GAME, YOUR
+       redefinequote 1034 CHARACTERS WILL LEARN TO BETTER GET
+       redefinequote 1035 USED TO ONE ANOTHER, ALLOWING YOU THE
+       redefinequote 1036 OPTION TO ACTIVATE 'SUPPORTS' BETWEEN
+       redefinequote 1037 THEM. EACH CHARACTER HAS TWO TRAITS
+       redefinequote 1038 THAT LINKING THEM IN SUPPORT TO ANO-
+       redefinequote 1039 THER WILL BOOST FOR THEIR RECEPIENTS.
+       redefinequote 1040 HIGHER SUPPORTS GIVE STRONGER BOOSTS
+       redefinequote 1041 TO THESE STATS, BUT HIGH LEVEL SUPP-
+       redefinequote 1042 ORT STATES ARE HARDER TO ACHIEVE AND
+       redefinequote 1043 USUALLY ONLY ONE OR TWO OTHER CHARA-
+       redefinequote 1044 CTERS CAN LINK SUPPORTS WITH THE 
+       redefinequote 1045 CURRENT CHARACTERS AT SUCH A LEVEL.
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 25 // "Equipment" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 EQUIPMENT SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033 
+       redefinequote 1034  
+       redefinequote 1035  
+       redefinequote 1036  
+       redefinequote 1037 ALLOWS YOU TO EQUIP OR UNEQUIP SPEC-
+       redefinequote 1038 IAL ITEMS THAT GIVE BENFICIAL BOOSTS.
+       redefinequote 1039 DEPENDING ON YOUR ^21DIFFICULTY LEVEL^23,
+       redefinequote 1040 YOU CAN HAVE FROM ^221^23 TO ^224^23 SLOTS FOR
+       redefinequote 1041 EQUIPMENT PER CHARACTER.
+       redefinequote 1042  
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 26 // "Worldtile" Submenu
       {
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 WORLDTILES SUBMENU
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035 ^0WORLDTILES^23 ARE SPECIAL IMAGES THAT
+       redefinequote 1036 ARE CONSIDERED EASTER EGGS. THEY HAVE
+       redefinequote 1037 NO DIRECT AFFECT ON GAMEPLAY ITSELF,
+       redefinequote 1038 BUT THEY CAN CHANGE THE APPEARANCE
+       redefinequote 1039 OF THE ^12LOADING SCREEN^23 FOR A LEVEL.
+       redefinequote 1040 THERE ARE ^22256^23 WORLDTILES IN ALL, AND
+       redefinequote 1041 FINDING THEM ALL IS A CHALLENGE IN
+       redefinequote 1042 ITSELF, AND GETTING THEM ALL WILL
+       redefinequote 1043 LIKELY NET YOU AN ^20ACHIEVEMENT^23 FOR IT.
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046 
       }
       else
       ifvare tipdisplayid 27 // Using Shops/Dealers
       {
+       // Dealer NPC
+       setvarvar orientation 0
+       setvarvar digx 160
+       setvarvar digy 114
+       setvarvar digz 12800
+       state pal0
+       setvar tilenum DEALER
+       state rs
+
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 SHOPS AND WEAPON DEALERS
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035 OCCASIONALLY, YOU WILL STUMBLE UPON
+       redefinequote 1036 WEAPONS DEALERS IN YOUR TRAVELS WHO
+       redefinequote 1037 WILL SELL NOT ONLY WEAPONS, BUT SOME-
+       redefinequote 1038 TIMES OTHER AMMO AND ITEMS OF ASSIST-
+       redefinequote 1039 ANCE TO YOU. YOUR ^0RANK^23 LEVEL AFFECTS
+       redefinequote 1040 THE BUYING AND SELLING PRICES OF
+       redefinequote 1041 THEIR WARES THOUGH, BUT SOME RARE
+       redefinequote 1042 ITEMS MAY ALSO BE FOUND WITH THEM!
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 28 // Rescuing Innocent Civilians
       {
+       // Civilian #1
+       setvarvar orientation 0
+       setvarvar digx 120
+       setvarvar digy 114
+       setvarvar digz 16384
+       state pal0
+       setvar tilenum 1321
+       state rs
+
+       // Civilian #2
+       setvarvar orientation 0
+       setvarvar digx 160
+       setvarvar digy 114
+       setvarvar digz 12800
+       state pal0
+       setvar tilenum 6396
+       state rs
+
+       // Dog #1
+       setvarvar orientation 0
+       setvarvar digx 200
+       setvarvar digy 114
+       setvarvar digz 21280
+       state pal0
+       setvar tilenum 4403
+       state rs
+
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 CIVILIANS/INNOCENTS
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033  
+       redefinequote 1034 ON YOUR TRAVELS, YOU'LL UNDOUBTEDLY
+       redefinequote 1035 FIND INNOCENT CIVILIANS AND ANIMALS
+       redefinequote 1036 CAUGHT IN THE CROSSFIRES OF WAR. IF
+       redefinequote 1037 YOU USE YOUR TELEPORTERS AND ARE
+       redefinequote 1038 WILLING TO SACRIFICE SOME MONEY WITH
+       redefinequote 1039 EACH ONE, YOU CAN RESCUE THESE NPCS
+       redefinequote 1040 AND YOU WILL USUALLY GET REWARDS FROM
+       redefinequote 1041 THE ^22EDF^23 FOR YOUR EFFORTS. BE CAREFUL
+       redefinequote 1042 THOUGH, THE TRIOCLADIAR CAN SOMETIMES
+       redefinequote 1043 INTERCEPT YOUR REWARD AND LAY IN TR-
+       redefinequote 1044 APS AND AMBUSHES FOR YOU.
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 29 // Memorbilia
@@ -12075,7 +12497,7 @@ else
 
        // Tip Description - 15 Lines, ~32 Characters per line.
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
-       redefinequote 1032  
+       redefinequote 1032 
        redefinequote 1033  
        redefinequote 1034  
        redefinequote 1035 LOOK FOR MAGAZINES, FIGURINES, AND
@@ -12094,10 +12516,105 @@ else
       else
       ifvare tipdisplayid 30 // Using Vending Machines
       {
+       // Portable ATM
+       setvarvar orientation 0
+       setvarvar digx 120
+       setvarvar digy 114
+       setvarvar digz 16384
+       state pal0
+       setvar tilenum 1212
+       state rs
+
+       // ATM
+       setvarvar orientation 0
+       setvarvar digx 200
+       setvarvar digy 114
+       setvarvar digz 16384
+       state pal0
+       setvar tilenum 1215
+       state rs
+
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 VENDING MACHINES
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+       // Tip Description - 15 Lines, ~32 Characters per line.
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032 
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035  
+       redefinequote 1036 THOUGH THEY WILL NOT APPEAR EVERYWHERE,
+       redefinequote 1037 VENDING MACHINES WILL USUALLY SUPPLY
+       redefinequote 1038 YOUR CHARACTERS WITH DRINKS OR SNACKS
+       redefinequote 1039 THAT WILL REPLENISH MINOR AMOUNTS OF
+       redefinequote 1040 THEIR HP WHEN USED. MOST MACHINES HAVE
+       redefinequote 1041 A LIMITED NUMBER OF SNACKS/DRINKS IN
+       redefinequote 1042 THEM, SO THEY WILL NOT LAST FOREVER.
+       redefinequote 1043  
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       ifvare tipdisplayid 31 // Using ATMs
       {
+       // Pictures, etc here
+
+       // Portable ATM
+       setvarvar orientation 0
+       setvarvar digx 120
+       setvarvar digy 114
+       setvarvar digz 5555
+       state pal0
+       setvar tilenum 5148
+       state rs
+
+       // ATM
+       setvarvar orientation 0
+       setvarvar digx 200
+       setvarvar digy 114
+       setvarvar digz 32768
+       state pal0
+       setvar tilenum 867
+       state rs
+
+       // Title Bar Text
+       state pal21
+       setvar tilenum 2822
+       setvar temp 1031
+       setvarvar orientation 0
+       setvarvar textscale 49152
+       setvarvar digz 49152
+       redefinequote 1031 ATM MACHINES
+       setvarvar digx 320
+       setvarvar digy 95
+       state gtz
+
+                       // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
+       redefinequote 1032  
+       redefinequote 1033  
+       redefinequote 1034  
+       redefinequote 1035 ATM MACHINES CAN BE USED BY CHARACTERS
+       redefinequote 1036 TO BOTH DEPOSIT AND WITHDRAW MONEY FOR
+       redefinequote 1037 LATER USE IN THE GAME. ATM ACCOUNTS ARE
+       redefinequote 1038 INDIVIDUAL FOR BOTH PLAYABLE CHARACTERS
+       redefinequote 1039 AND ALSO NON-PLAYABLE CHARACTERS YOU
+       redefinequote 1040 WILL ENCOUNTER IN THE GAME. GAINING
+       redefinequote 1041 ACCESS TO OTHER ACCOUNTS, WHILE QUESTI-
+       redefinequote 1042 ONABLE, WILL OPEN YOU UP TO MORE POSSI-
+       redefinequote 1043 BLE MONEY TO USE IN YOUR MISSION.
+       redefinequote 1044  
+       redefinequote 1045  
+       redefinequote 1046  
       }
       else
       {

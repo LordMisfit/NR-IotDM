@@ -772,7 +772,18 @@ else // ifvare mainmenu 0
       else
       {
        subvar CURRENTENERGYPOINTS 1
-       ifvare ESHIELDADVANCEMENT 1 addvar DAMAGEINCELL 8 else addvar DAMAGEINCELL 3
+       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 8 else addvar TEMPVAR 3
+       setvarvar tempb ESHIELDDMGFACTOR
+       divvar tempb 32
+       addvarvar TEMPVAR tempb
+
+       ifvare SKILLLEVEL 0 mulvar TEMPVAR 3
+       ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 mulvar TEMPVAR 2
+       ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar TEMPVAR 1
+       ifvarg SKILLLEVEL 6 { mulvar TEMPVAR 2 divvar TEMPVAR 3 }
+
+       addlogvar TEMPVAR
+       addvarvar DAMAGEINCELL TEMPVAR
        ifvarvare CURRENTCELLS MAXCELLS
        {
         ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR { setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
@@ -1971,8 +1982,8 @@ else
  state getpartime addvar mpresstime 1
  ifvarvare temppartime mpresstime nullop else
  {
-  ifvarn tipdisplayid -1 setvar tipdisplayid -1
-  else setvar tipdisplayid 0
+  addvar tipdisplayid -1
+  ifvarl tipdisplayid -1 setvar tipdisplayid 31
  }
  setvarvar mpresstime temppartime
  state setreturn-1 
@@ -2113,8 +2124,8 @@ else
  state getpartime addvar mpresstime 1
  ifvarvare temppartime mpresstime nullop else
  {
-  ifvarn tipdisplayid -1 setvar tipdisplayid -1
-  else setvar tipdisplayid 0
+  addvar tipdisplayid 1
+  ifvarg tipdisplayid 31 setvar tipdisplayid -1
  }
  setvarvar mpresstime temppartime
  state setreturn-1 
@@ -2848,7 +2859,6 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
         ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
         {
-         addlogvar SHOPCOMBOBITS
          ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS // Holding down Cheat Keys
          {
           ifvare mainmenusubmenu 256 // Using in cheats menu causes error sound
@@ -2937,8 +2947,6 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
      ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6 
      {
-//      ifvarand bits 4
-      addlogvar SHOPCOMBOBITS
       ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS // Holding down Cheat Keys
       {
        ifvare mainmenusubmenu 256

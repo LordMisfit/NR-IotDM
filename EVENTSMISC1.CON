@@ -47,15 +47,33 @@ onevent EVENT_SELECTWEAPON
      andvar temp 0xF
      switch temp
        case 11
-        ifvare weaponcount 0 { ifvare VEHICLEID -1 state shift-inusecharacter-left else state menuerrorsound }
+        ifvare weaponcount 0 
+        {
+         ifvare VEHICLEID -1 state shift-inusecharacter-left 
+         else 
+         {
+          state menuerrorsound
+          redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
+          setvarvar fta fta_normal setvar ftq 410
+         }
+        }
         state setreturn-1
        break
        case 12
-        ifvare weaponcount 0 { ifvare VEHICLEID -1 state shift-inusecharacter-right else state menuerrorsound }
+        ifvare weaponcount 0 
+        {
+         ifvare VEHICLEID -1 state shift-inusecharacter-right
+         else
+         {
+          state menuerrorsound
+          redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
+          setvarvar fta fta_normal setvar ftq 410
+         }
+        }
         state setreturn-1
        break
      endswitch
-	}
+    }
    }
    else
    {

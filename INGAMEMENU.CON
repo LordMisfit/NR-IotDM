@@ -539,7 +539,6 @@ ifvare mainmenu 1
       getkeyname 502 17 0
       getkeyname 503 18 0
 
-      addlogvar SHOPCHEATBITTOTAL
       ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS
       {
        redefinequote 506 ^12%s^23/^12%s^21=^14CHEATS 
@@ -2028,12 +2027,12 @@ ifvare mainmenu 1
     ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD6 32768 redefinequote 332 WORLDTILE #176: ^22"EXPLOSIVE POWER COMES IN SMALL PACKAGES!"
     ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD6 65536 redefinequote 332 WORLDTILE #177: ^22"THE SECRET OF BLUE WATER!"
     ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD6 131072 redefinequote 332 WORLDTILE #178: ^22"SUPER KAMIKAZE CHRISTMAS GHOST ATTACK!!"
-    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD6 262144 redefinequote 332 WORLDTILE #179: ^22"THE ENGIMATE HEERO YUY AND HIS FRTENDS!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD6 262144 redefinequote 332 WORLDTILE #179: ^22"THE ENGIMATE HEERO YUY AND HIS FRIENDS!"
     ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD6 524288 redefinequote 332 WORLDTILE #180: ^22"THE SHRINE MAIDEN OF GENSOYKO!"
     ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD6 1048576 redefinequote 332 WORLDTILE #181: ^22"'DAMMIT, MY NAME IS *NOT* CHINA!!'"
     ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD6 2097152 redefinequote 332 WORLDTILE #182: ^22"'EYE'M DA STRONGEST IN THE WORLD!!'"
     ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD6 4194304 redefinequote 332 WORLDTILE #183: ^22"THE BORDERLINES OF GENSOYKO!"
-    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD6 8388608 redefinequote 332 WORLDTILE #184: ^22"THE Z-WARRIORS GATHER ONCE AGAIN!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD6 8388608 redefinequote 332 WORLDTILE #184: ^22"THE Z-WARRIORS GATHER..."
     ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD6 16777216 redefinequote 332 WORLDTILE #185: ^22"THE SCARY WOMANIZING PIG-MASK IS ATTACKED!"
     ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD6 33554432 redefinequote 332 WORLDTILE #186: ^22"A PIZZA-DISPENSING ATM MACHINE?! WTH?!"
     ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD6 67108864 redefinequote 332 WORLDTILE #187: ^22"THE DOG OF CARBON AND SNOWBALL FIGHTS!"
@@ -2076,7 +2075,7 @@ ifvare mainmenu 1
     ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD7 268435456 redefinequote 332 WORLDTILE #221: ^22"THE GRIM REAPER NEVER LOOKED CUTER..."
     ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD7 536870912 redefinequote 332 WORLDTILE #222: ^22"DRAW ME LIKE ONE OF YOUR FRENCH DALEKS..."
     ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD7 1073741824 redefinequote 332 WORLDTILE #223: ^22"THE HORRIFYING CYBERDEMON!"
-    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD7 2147483648 redefinequote 332 WORLDTILE #224: ^22"THE Z-SENSHI GATHER..."
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD7 2147483648 redefinequote 332 WORLDTILE #224: ^22"THE Z-SENSHI GATHER ONCE AGAIN!"
     ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD8 1 redefinequote 332 WORLDTILE #225: ^22"ONE MAN VS. THE LEGIONS OF HELL!"
    }
    ifvare mainmenupage 9 // Page 10: #225-#250
@@ -10206,76 +10205,6 @@ ifvare mainmenusubmenu 6
    state tiledisplayr5c5
 
 
-
-
-  // Larger Picture Displays [when a picture IS selected]
-  state orientation2
-  setvar digz 16384 // 8192
-  state pal0
-
-  ifvare mainmenuselection 0 state tiledisplayr1c1
-  ifvare mainmenuselection 1 state tiledisplayr1c2
-  ifvare mainmenuselection 2 state tiledisplayr1c3
-  ifvare mainmenuselection 3 state tiledisplayr1c4
-  ifvare mainmenuselection 4 state tiledisplayr1c5
-
-  ifvare mainmenuselection 5 state tiledisplayr2c1
-  ifvare mainmenuselection 6 state tiledisplayr2c2
-  ifvare mainmenuselection 7 state tiledisplayr2c3
-  ifvare mainmenuselection 8 state tiledisplayr2c4
-  ifvare mainmenuselection 9 state tiledisplayr2c5
-
-  ifvare mainmenuselection 10 state tiledisplayr3c1
-  ifvare mainmenuselection 11 state tiledisplayr3c2
-  ifvare mainmenuselection 12 state tiledisplayr3c3
-  ifvare mainmenuselection 13 state tiledisplayr3c4
-  ifvare mainmenuselection 14 state tiledisplayr3c5
-
-  ifvare mainmenuselection 15 state tiledisplayr4c1
-  ifvare mainmenuselection 16 state tiledisplayr4c2
-  ifvare mainmenuselection 17 state tiledisplayr4c3
-  ifvare mainmenuselection 18 state tiledisplayr4c4
-  ifvare mainmenuselection 19 state tiledisplayr4c5
-
-  ifvare mainmenuselection 20 state tiledisplayr5c1
-  ifvare mainmenuselection 21 state tiledisplayr5c2
-  ifvare mainmenuselection 22 state tiledisplayr5c3
-  ifvare mainmenuselection 23 state tiledisplayr5c4
-  ifvare mainmenuselection 24 state tiledisplayr5c5
-
-  // Cursor
-
-  state orientation2
-  ifvare mainmenupage 10 { ifvarg mainmenuselection 5 setvar digz 16384 else setvar digz 32768 } else setvar digz 32768
-  setvar tilenum 8178
-  state pal0
-
-  ifvarg mainmenuselection -1 ifvarl mainmenuselection 5 setvar digy 47
-  ifvarg mainmenuselection 4 ifvarl mainmenuselection 10 setvar digy 73
-  ifvarg mainmenuselection 9 ifvarl mainmenuselection 15 setvar digy 99
-  ifvarg mainmenuselection 14 ifvarl mainmenuselection 20 setvar digy 125
-  ifvarg mainmenuselection 19 ifvarl mainmenuselection 25 setvar digy 151
-
-  switch mainmenuselection
-   case 0 case 5 case 10 case 15 case 20
-    setvar digx 78
-   break
-   case 1 case 6 case 11 case 16 case 21
-    setvar digx 119
-   break
-   case 2 case 7 case 12 case 17 case 22
-    state digx160
-   break
-   case 3 case 8 case 13 case 18 case 23
-    setvar digx 201
-   break
-   case 4 case 9 case 14 case 19 case 24
-    setvar digx 242
-   break
-  endswitch
-
-  state rs
-
 // Calculations
 
   setvar WORLDTILECOUNT 0
@@ -10578,6 +10507,76 @@ ifvare mainmenusubmenu 6
    qsprintf 553 554 PERCENTUPPER PERCENTLOWER
    setvar temp 553
    state mt
+
+
+  // Larger Picture Displays [when a picture IS selected]
+  state orientation2
+  setvar digz 16384 // 8192
+  state pal0
+
+  ifvare mainmenuselection 0 state tiledisplayr1c1
+  ifvare mainmenuselection 1 state tiledisplayr1c2
+  ifvare mainmenuselection 2 state tiledisplayr1c3
+  ifvare mainmenuselection 3 state tiledisplayr1c4
+  ifvare mainmenuselection 4 state tiledisplayr1c5
+
+  ifvare mainmenuselection 5 state tiledisplayr2c1
+  ifvare mainmenuselection 6 state tiledisplayr2c2
+  ifvare mainmenuselection 7 state tiledisplayr2c3
+  ifvare mainmenuselection 8 state tiledisplayr2c4
+  ifvare mainmenuselection 9 state tiledisplayr2c5
+
+  ifvare mainmenuselection 10 state tiledisplayr3c1
+  ifvare mainmenuselection 11 state tiledisplayr3c2
+  ifvare mainmenuselection 12 state tiledisplayr3c3
+  ifvare mainmenuselection 13 state tiledisplayr3c4
+  ifvare mainmenuselection 14 state tiledisplayr3c5
+
+  ifvare mainmenuselection 15 state tiledisplayr4c1
+  ifvare mainmenuselection 16 state tiledisplayr4c2
+  ifvare mainmenuselection 17 state tiledisplayr4c3
+  ifvare mainmenuselection 18 state tiledisplayr4c4
+  ifvare mainmenuselection 19 state tiledisplayr4c5
+
+  ifvare mainmenuselection 20 state tiledisplayr5c1
+  ifvare mainmenuselection 21 state tiledisplayr5c2
+  ifvare mainmenuselection 22 state tiledisplayr5c3
+  ifvare mainmenuselection 23 state tiledisplayr5c4
+  ifvare mainmenuselection 24 state tiledisplayr5c5
+
+  // Cursor
+
+  state orientation2
+  ifvare mainmenupage 10 { ifvarg mainmenuselection 5 setvar digz 16384 else setvar digz 32768 } else setvar digz 32768
+  setvar tilenum 8178
+  state pal0
+
+  ifvarg mainmenuselection -1 ifvarl mainmenuselection 5 setvar digy 47
+  ifvarg mainmenuselection 4 ifvarl mainmenuselection 10 setvar digy 73
+  ifvarg mainmenuselection 9 ifvarl mainmenuselection 15 setvar digy 99
+  ifvarg mainmenuselection 14 ifvarl mainmenuselection 20 setvar digy 125
+  ifvarg mainmenuselection 19 ifvarl mainmenuselection 25 setvar digy 151
+
+  switch mainmenuselection
+   case 0 case 5 case 10 case 15 case 20
+    setvar digx 78
+   break
+   case 1 case 6 case 11 case 16 case 21
+    setvar digx 119
+   break
+   case 2 case 7 case 12 case 17 case 22
+    state digx160
+   break
+   case 3 case 8 case 13 case 18 case 23
+    setvar digx 201
+   break
+   case 4 case 9 case 14 case 19 case 24
+    setvar digx 242
+   break
+  endswitch
+
+  state rs
+
 
    // WORLDTILECOUNT
  } // ifvare mainmenusubmenu 7
