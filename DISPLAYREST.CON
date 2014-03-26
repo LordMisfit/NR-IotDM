@@ -4063,71 +4063,12 @@ else
      else ifvare fta 0 addvar temp 1
      ifvarg temp 0
      {
-      setvar digx 1
-      addvar digy 6
-      getkeyname 401 30 0 
-      redefinequote 332 ^12%s ^21= ^22MENUS
-      qsprintf 332 332 401
-      state setquote332
-      state pal21
-      state mt    
-      state shade0
-     }
-
-     setvar digx 1
-     addvar digy 6
-     getkeyname 401 13 0 
-     getkeyname 402 14 0 
-     ifvare tipdisplayid -1 redefinequote 332 ^12%s^23/^12%s ^21= ^22DISPLAY TIPS
-     else
-     {
-      ifvare tipdisplayid 0 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS OFF^21/^22TIPS ^11FORWARD
-      else ifvarg tipdisplayid 0 ifvarl tipdisplayid 31 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS ^11BACK^21/^22FORWARD
-      else ifvare tipdisplayid 31 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS ^11BACK^21/^22TIPS OFF
-     }
-     qsprintf 332 332 401 402
-     state setquote332
-     state pal21
-     state mt    
-     state shade0
- 
-     ifvarn CURRENTWEAPON 0
-     {
-      ifvare DEFENSEMODE? 1 state shadepulse
-      setvar digx 1
-      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      getkeyname 401 42 0 
-      redefinequote 332 ^12%s ^21= ^22DEFEND
-      qsprintf 332 332 401
-      state setquote332
-      state pal21
-      state mt    
-      state shade0
-     }
- 
-     ifvarn SPRITEID-HOLDING -1
-     {
-      state shadepulse
-      setvar digx 1
-      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      getkeyname 401 5 0 
-      redefinequote 332 ^12%s ^21= ^22THROW
-      qsprintf 332 332 401
-      state setquote332
-      state pal21
-      state mt    
-      state shade0
-     }
- 
-     ifvare CHARACTERSELECTED? 3
-     {
-      ifvare VEHICLEID -1
+      ifvarn upperlefthandlegend 2
       {
-       ifvare GLIDING? 1 state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-       getkeyname 401 11 0 
-       redefinequote 332 ^12%s ^21= ^22GLIDE
+       addvar digy 6
+       getkeyname 401 30 0 
+       redefinequote 332 ^12%s ^21= ^22MENUS
        qsprintf 332 332 401
        state setquote332
        state pal21
@@ -4136,65 +4077,130 @@ else
       }
      }
 
-     ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
+     ifvare upperlefthandlegend 1
      {
-      ifvarand bits 262144 state shadepulse
       setvar digx 1
-      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+      addvar digy 6
+      getkeyname 401 13 0 
+      getkeyname 402 14 0 
+      ifvare tipdisplayid -1 redefinequote 332 ^12%s^23/^12%s ^21= ^22DISPLAY TIPS
+      else
+      {
+       ifvare tipdisplayid 0 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS OFF^21/^22TIPS ^11FORWARD
+       else ifvarg tipdisplayid 0 ifvarl tipdisplayid 31 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS ^11BACK^21/^22FORWARD
+       else ifvare tipdisplayid 31 redefinequote 332 ^12%s^23/^12%s ^21= ^22TIPS ^11BACK^21/^22TIPS OFF
+      }
+      qsprintf 332 332 401 402
       state setquote332
-      getkeyname 401 6 0
-      getkeyname 402 15 0
-      getkeyname 403 16 0
-      redefinequote 332 ^12%s ^23+ ^12%s ^23+ ^12%s ^21= ^22CHARGE BIO-SHIELD
-      qsprintf 332 332 401 402 403
       state pal21
       state mt    
       state shade0
-     } 
+  
+      ifvarn CURRENTWEAPON 0
+      {
+       ifvare DEFENSEMODE? 1 state shadepulse
+       setvar digx 1
+       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       getkeyname 401 42 0 
+       redefinequote 332 ^12%s ^21= ^22DEFEND
+       qsprintf 332 332 401
+       state setquote332
+       state pal21
+       state mt    
+       state shade0
+      }
+  
+      ifvarn SPRITEID-HOLDING -1
+      {
+       state shadepulse
+       setvar digx 1
+       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       getkeyname 401 5 0 
+       redefinequote 332 ^12%s ^21= ^22THROW
+       qsprintf 332 332 401
+       state setquote332
+       state pal21
+       state mt    
+       state shade0
+      }
+ 
+      ifvare CHARACTERSELECTED? 3
+      {
+       ifvare VEHICLEID -1
+       {
+        ifvare GLIDING? 1 state shadepulse
+        setvar digx 1
+        addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+        getkeyname 401 11 0 
+        redefinequote 332 ^12%s ^21= ^22GLIDE
+        qsprintf 332 332 401
+        state setquote332
+        state pal21
+        state mt    
+        state shade0
+       }
+      }
 
-     ifvare CHARACTERSELECTED? 9
-     {
-      ifvarand bits 262144 state shadepulse
-      setvar digx 1
-      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      getkeyname 401 41 0
-      redefinequote 332 ^12%s ^21= ^22TELEKENESIS
-      qsprintf 332 332 401
-      state setquote332
-      state pal21
-      state mt    
-      state shade0
-     }
+      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
+      {
+       ifvarand bits 262144 state shadepulse
+       setvar digx 1
+       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       state setquote332
+       getkeyname 401 6 0
+       getkeyname 402 15 0
+       getkeyname 403 16 0
+       redefinequote 332 ^12%s ^23+ ^12%s ^23+ ^12%s ^21= ^22CHARGE BIO-SHIELD
+       qsprintf 332 332 401 402 403
+       state pal21
+       state mt    
+       state shade0
+      } 
+
+      ifvare CHARACTERSELECTED? 9
+      {
+       ifvarand bits 262144 state shadepulse
+       setvar digx 1
+       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       getkeyname 401 41 0
+       redefinequote 332 ^12%s ^21= ^22TELEKENESIS
+       qsprintf 332 332 401
+       state setquote332
+       state pal21
+       state mt    
+       state shade0
+      }
  
-     ifvare PLAYERWEAPON? 3 // Chaingun Equipped
-     {
-      ifvarand bits 262144 state shadepulse
-      setvar digx 1
-      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      getkeyname 401 22 0
-      ifvare CHAINGUNMODE 0 redefinequote 332 ^12%s ^21= ^22ROCKETS [CHAINGUN]
-      else ifvare CHAINGUNMODE 1 redefinequote 332 ^12%s ^21= ^22BULLETS [CHAINGUN]
-      // else ifvare CHAINGUNMODE 2 redefinequote 332 ^12%s ^21= ^22LASERS [CHAINGUN]
-      qsprintf 332 332 401
-      state setquote332
-      state pal21
-      state mt    
-      state shade0
-     }
+      ifvare PLAYERWEAPON? 3 // Chaingun Equipped
+      {
+       ifvarand bits 262144 state shadepulse
+       setvar digx 1
+       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       getkeyname 401 22 0
+       ifvare CHAINGUNMODE 0 redefinequote 332 ^12%s ^21= ^22ROCKETS [CHAINGUN]
+       else ifvare CHAINGUNMODE 1 redefinequote 332 ^12%s ^21= ^22BULLETS [CHAINGUN]
+       // else ifvare CHAINGUNMODE 2 redefinequote 332 ^12%s ^21= ^22LASERS [CHAINGUN]
+       qsprintf 332 332 401
+       state setquote332
+       state pal21
+       state mt    
+       state shade0
+      }
  
-     ifvare PLAYERWEAPON? 4 // RPG Equipped
-     {
-      ifvarand bits 262144 state shadepulse
-      setvar digx 1
-      addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
-      getkeyname 401 23 0
-      ifvare DEATHMISSILEMODE 0 redefinequote 332 ^12%s ^21= ^22DEATHSTROKES [RPG]
-      else redefinequote 332 ^12%s ^21= ^22DEATHGATES [RPG]
-      qsprintf 332 332 401
-      state setquote332
-      state pal21
-      state mt    
-      state shade0
+      ifvare PLAYERWEAPON? 4 // RPG Equipped
+      {
+       ifvarand bits 262144 state shadepulse
+       setvar digx 1
+       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       getkeyname 401 23 0
+       ifvare DEATHMISSILEMODE 0 redefinequote 332 ^12%s ^21= ^22DEATHSTROKES [RPG]
+       else redefinequote 332 ^12%s ^21= ^22DEATHGATES [RPG]
+       qsprintf 332 332 401
+       state setquote332
+       state pal21
+       state mt    
+       state shade0
+      }
      }
 
       
@@ -11299,7 +11305,7 @@ else
        redefinequote 1032 PLAYABLE CHARACTER: ^20DUKE NUKEM^23
        redefinequote 1033  
        redefinequote 1034 THE ULTIMATE ALIEN ASS KICKER! HE HAS
-       redefinequote 1035 DEFEATED THE ^10TRIOCLADIAR^23 AT ALL TURNS
+       redefinequote 1035 DEFEATED THE ^21TRIOCLADIAR^23 AT ALL TURNS
        redefinequote 1036 SO FAR. YOU ARE HERE TO MAKE SURE THIS
        redefinequote 1037 ADVENTURE CONTINUES HIS WINNING 
        redefinequote 1038 STREAK! :)
@@ -11343,7 +11349,7 @@ else
        redefinequote 1032 PLAYABLE CHARACTER: ^20JACK WALKER^23
        redefinequote 1033  
        redefinequote 1034 A YOUTHFUL 'BRAT' WHO HELPED DUKE IN
-       redefinequote 1035 THE ^21D.C. INVASION^23. HE LOOKS AT DUKE
+       redefinequote 1035 THE ^12D.C. INVASION^23. HE LOOKS AT ^11DUKE^23
        redefinequote 1036 AS A TEACHER OF COMBAT, BUT NOT AS A
        redefinequote 1037 TECHER OF ETTIQUTTE. IS EXTREMELY OB-
        redefinequote 1038 SERVANT OF THINGS DESPITE HIS YOUTH
@@ -11388,9 +11394,9 @@ else
        redefinequote 1033  
        redefinequote 1034 AN ANTHROMORPHIC BOBCAT WITH A LIC-
        redefinequote 1035 ENSE TO ACT! STARRING IN MANY MOVIES,
-       redefinequote 1036 INCLUDING ^11"EYE OF HORNED SOLITUDE"^23
-       redefinequote 1037 ALONGSIDE DUKE HIMSELF! HAS ALSO
-       redefinequote 1038 THWARTED THE ALIEN 'WOOLIES' IN THE
+       redefinequote 1036 INCLUDING ^12"EYE OF HORNED SOLITUDE"^23
+       redefinequote 1037 ALONGSIDE ^11DUKE^23 HIMSELF! HAS ALSO
+       redefinequote 1038 THWARTED THE ALIEN ^21WOOLIES^23 IN THE
        redefinequote 1039 PAST.
        redefinequote 1040  
        redefinequote 1041  
@@ -11518,8 +11524,8 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20ESSENCE MARGALAN^23
        redefinequote 1033  
-       redefinequote 1034 MEDATARION ^24ESS-LEVEL^23 SOLDIER FORM-
-       redefinequote 1035 ERLY IN SERVICE TO ^21NAFERIA^23. WAS
+       redefinequote 1034 MEDATARION ^21ESS-LEVEL^23 SOLDIER FORM-
+       redefinequote 1035 ERLY IN SERVICE TO ^10NAFERIA^23. WAS
        redefinequote 1036 EXCILED FOR SUSPICIOUS REASONS, BUT
        redefinequote 1037 SOON TURNS TO GIVE DUKE HELP IN BOTH
        redefinequote 1038 ADVICE AND HELPING HANDS!
@@ -11698,7 +11704,7 @@ else
        redefinequote 1035 ABOUT HER LOOKS. CHRISTINA LOVES TO
        redefinequote 1036 HAVE FUN WITH TOY WITH HER MOST HAT-
        redefinequote 1037 ED ENEMIES. SHE ALSO HAS AN UNIQUE
-       redefinequote 1038 INTEREST IN LO WANG AND HIS BRAND OF
+       redefinequote 1038 INTEREST IN ^11LO WANG^23 AND HIS BRAND OF
        redefinequote 1039 HUMOR AND WOMANIZING.
        redefinequote 1040  
        redefinequote 1041  
@@ -11827,7 +11833,7 @@ else
                        // AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII
        redefinequote 1032 PLAYABLE CHARACTER: ^20LORI STEPHENS^23
        redefinequote 1033  
-       redefinequote 1034 STEPCOUSIN OF JACK. IS VERY CENTRAL
+       redefinequote 1034 STEPCOUSIN OF ^11JACK^23. IS VERY CENTRAL
        redefinequote 1035 TO NATURE AND FISHING. LOVES TO USE
        redefinequote 1036 A BAMBOO STAFF IN BATTLE. VERY STRONG
        redefinequote 1037 AND DURABLE IN PHYSICAL WAYS. IS ALSO
@@ -12111,8 +12117,8 @@ else
        redefinequote 1038 CONDITIONS. ADDITIONALLY, THIS ALLOWS
        redefinequote 1039 YOU TO SWAP BETWEEN CHARACTERS ON THE
        redefinequote 1040 FLY MID-GAME. NOPE, NONE OF THAT
-       redefinequote 1041 'PICK ONE CHARACTER AND USE ONLY THEM 
-       redefinequote 1042 THE ENTIRE GAME' STUFF LIKE OTHER 
+       redefinequote 1041 ^20'PICK ONE CHARACTER AND USE ONLY THEM 
+       redefinequote 1042 ^20THE ENTIRE GAME'^23 STUFF LIKE OTHER 
        redefinequote 1043 GAMES DO. :D
        redefinequote 1044  
        redefinequote 1045  

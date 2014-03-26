@@ -5048,9 +5048,8 @@ state initializer
  readgamevar rpgdmgdisplaytoggle
  readgamevar autosavetoggle
  readgamevar weapontoggleselect
-
-  readgamevar AUTOSAVEFREQUENCY
-
+ readgamevar upperlefthandlegend
+ readgamevar AUTOSAVEFREQUENCY
  readgamevar WORLDTILEBITFIELD1
  readgamevar WORLDTILEBITFIELD2
  readgamevar WORLDTILEBITFIELD3

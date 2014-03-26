@@ -890,6 +890,7 @@ gamevar TESTXREPEAT1 0 2
 gamevar TESTXREPEAT2 0 2
 gamevar TESTYREPEAT1 0 2
 
+gamevar upperlefthandlegend 1 131073
 gamevar weapontoggleselect 0 131073 // 0 = character toggle, 1 = weapon toggle
 gamevar statusdisplaytoggle 1 131073
 gamevar miscdisplaytoggle 1 131073
@@ -45618,6 +45619,7 @@ state menu-mainmenu-state
          ifvare mainmenuselection 10 { ifvare rpgdmgdisplaytoggle 0 setvar rpgdmgdisplaytoggle 1 else setvar rpgdmgdisplaytoggle 0 savegamevar rpgdmgdisplaytoggle }
          ifvare mainmenuselection 11 { ifvare autosavetoggle 0 { setvar autosavetoggle 1 state reset_autosavetimes } else { setvar autosavetoggle 0 } savegamevar autosavetoggle }
          ifvare mainmenuselection 12 { ifvare weapontoggleselect 0 setvar weapontoggleselect 1 else setvar weapontoggleselect 0 savegamevar weapontoggleselect }
+         ifvare mainmenuselection 13 { addvar upperlefthandlegend 1 ifvarg upperlefthandlegend 2 subvar upperlefthandlegend 3 savegamevar upperlefthandlegend }
         }
         sound PISTOL_BODYHIT // INTRUDER_ALERT
        }

@@ -1737,6 +1737,13 @@ ifvare mainmenu 1
      ifvare weapontoggleselect 0 redefinequote 332 "WEAPON LEFT/RIGHT" WILL CYCLE THROUGH CHARACTERS INSTEAD OF WEAPONS.
      ifvare weapontoggleselect 1 redefinequote 332 "WEAPON LEFT/RIGHT" WILL CYCLE THROUGH WEAPONS INSTEAD OF CHARACTERS.
     }
+    ifvare mainmenuselection 13
+    {
+     ifvare upperlefthandlegend 0 redefinequote 332 ONLY THE "MENU" KEY IN THE UPPERLEFT-HAND LEGEND IS VISIBLE.
+
+     ifvare upperlefthandlegend 1 redefinequote 332 ALL KEYS LISTED IN THE UPPERLEFT-HAND LEGEND ARE COMPLETELY VISIBLE.
+     ifvare upperlefthandlegend 2 redefinequote 332 NONE OF THE KEYS LISTED IN THE UPPERLEFT-HAND LEGEND ARE VISIBLE.
+    }
    }
    setvar temp 332
    setvar digx 160
@@ -5394,7 +5401,7 @@ ifvare mainmenusubmenu 2
   setvar digx 56
   state pal21
   state setquote332
-  setvar digy 45
+  setvar digy 40
   redefinequote 332 MISCELLANEOUS DISPLAYS
   ifvare mainmenuselection 0 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
@@ -5459,283 +5466,142 @@ ifvare mainmenusubmenu 2
   ifvare mainmenuselection 12 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
+  addvar digy 9 // setvar digy 150
+  redefinequote 332 UPPERLEFT-HAND KEY LEGEND
+  ifvare mainmenuselection 13 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
+  state mt
 
-  setvar digx 248 // 224
+
+  setvar temp 332
+  setvar digx 262
+  setvar orientation 26
+  setvar textflags 8193
+  setvar textscale 65536
   state pal21
   state shade0
-  setvar digy 45
-  ifvare miscdisplaytoggle 0
-  {
-   setvarvar digx 227
-   redefinequote 332 ALL OFF
-  }
-  ifvare miscdisplaytoggle 1
-  {
-   setvarvar digx 211
-   redefinequote 332 DAMAGE ONLY
-  }
-  ifvare miscdisplaytoggle 2
-  {
-   setvarvar digx 215
-   redefinequote 332 STATS ONLY
-  }
-  ifvare miscdisplaytoggle 3
-  {
-   setvarvar digx 198
-   redefinequote 332 DAMAGE & STATS
-  }
-  ifvare miscdisplaytoggle 4
-  {
-   setvarvar digx 215
-   redefinequote 332 MONEY ONLY
-  }
-  ifvare miscdisplaytoggle 5
-  {
-   setvarvar digx 198
-   redefinequote 332 DAMAGE & MONEY
-  }
-  ifvare miscdisplaytoggle 6
-  {
-   setvarvar digx 202
-   redefinequote 332 STATS & MONEY
-  }
-  ifvare miscdisplaytoggle 7
-  {
-   setvarvar digx 184
-   redefinequote 332 DAMAGE/STATS/MONEY
-  }
-  ifvare miscdisplaytoggle 8
-  {
-   setvarvar digx 207
-   redefinequote 332 REWARDS ONLY
-  }
-  ifvare miscdisplaytoggle 9
-  {
-   setvarvar digx 190
-   redefinequote 332 DAMAGE & REWARDS
-  }
-  ifvare miscdisplaytoggle 10
-  {
-   setvarvar digx 194
-   redefinequote 332 STATS & REWARDS
-  }
-  ifvare miscdisplaytoggle 11
-  {
-   setvarvar digx 176
-   redefinequote 332 DAMAGE/STATS/REWARDS
-  }
-  ifvare miscdisplaytoggle 12
-  {
-   setvarvar digx 194
-   redefinequote 332 MONEY & REWARDS
-  }
-  ifvare miscdisplaytoggle 13
-  {
-   setvarvar digx 176
-   redefinequote 332 DAMAGE/MONEY/REWARDS
-  }
-  ifvare miscdisplaytoggle 14
-  {
-   setvarvar digx 180
-   redefinequote 332 STATS/MONEY/REWARDS
-  }
-  ifvare miscdisplaytoggle 15
-  {
-   setvarvar digx 211
-   redefinequote 332 ALL ENABLED
-  }
+
+  // Misc Displays [Right Side]
+  setvar digy 40
+  ifvare miscdisplaytoggle 0 redefinequote 332 ALL OFF
+  ifvare miscdisplaytoggle 1 redefinequote 332 DAMAGE ONLY
+  ifvare miscdisplaytoggle 2 redefinequote 332 STATS ONLY
+  ifvare miscdisplaytoggle 3 redefinequote 332 DAMAGE & STATS
+  ifvare miscdisplaytoggle 4 redefinequote 332 MONEY ONLY
+  ifvare miscdisplaytoggle 5 redefinequote 332 DAMAGE & MONEY
+  ifvare miscdisplaytoggle 6 redefinequote 332 STATS & MONEY
+  ifvare miscdisplaytoggle 7 redefinequote 332 DAMAGE/STATS/MONEY
+  ifvare miscdisplaytoggle 8 redefinequote 332 REWARDS ONLY
+  ifvare miscdisplaytoggle 9 redefinequote 332 DAMAGE & REWARDS
+  ifvare miscdisplaytoggle 10 redefinequote 332 STATS & REWARDS
+  ifvare miscdisplaytoggle 11 redefinequote 332 DAMAGE/STATS/REWARDS
+  ifvare miscdisplaytoggle 12 redefinequote 332 MONEY & REWARDS
+  ifvare miscdisplaytoggle 13 redefinequote 332 DAMAGE/MONEY/REWARDS
+  ifvare miscdisplaytoggle 14 redefinequote 332 STATS/MONEY/REWARDS
+  ifvare miscdisplaytoggle 15 redefinequote 332 ALL ENABLED
   ifvare mainmenuselection 0 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 79
-  ifvare statusdisplaytoggle 0
-  {
-   setvar digx 244
-   redefinequote 332 OFF
-  }
-  ifvare statusdisplaytoggle 1
-  {
-   setvar digx 248
-   redefinequote 332 ON
-  }
+  // Status Displays [Right Side]
+  addvar digy 9
+  ifvare statusdisplaytoggle 0 redefinequote 332 OFF
+  ifvare statusdisplaytoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 1 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 88
-  ifvare debugtoggle 0
-  {
-   setvar digx 244
-   redefinequote 332 OFF
-  }
-  ifvare debugtoggle 1
-  {
-   setvar digx 248
-   redefinequote 332 ON
-  }
+  // Debug Displays [Right Side]
+  addvar digy 9
+  ifvare debugtoggle 0 redefinequote 332 OFF
+  ifvare debugtoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 2 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 97
-  ifvare lifebartogglemode 0
-  {
-   setvar digx 244
-   redefinequote 332 OFF
-  }
-  ifvare lifebartogglemode 1
-  {
-   setvar digx 248
-   redefinequote 332 ON
-  }
+  // Lifebar Displays [Right Side]
+  addvar digy 9
+  ifvare lifebartogglemode 0 redefinequote 332 OFF
+  ifvare lifebartogglemode 1 redefinequote 332 ON
   ifvare mainmenuselection 3 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 106
-  ifvare automedikittoggle 0
-  {
-   setvar digx 244
-   redefinequote 332 OFF
-  }
-  ifvare automedikittoggle 1
-  {
-   setvar digx 248
-   redefinequote 332 ON
-  }
+  // Auto Medikit [Right Side]
+  addvar digy 9
+  ifvare automedikittoggle 0 redefinequote 332 OFF
+  ifvare automedikittoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 4 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 115
-  ifvare automantletoggle 0
-  {
-   setvar digx 244
-   redefinequote 332 OFF
-  }
-  ifvare automantletoggle 1
-  {
-   setvar digx 248
-   redefinequote 332 ON
-  }
+  // Auto Mantle [Right Side]
+  addvar digy 9
+  ifvare automantletoggle 0 redefinequote 332 OFF
+  ifvare automantletoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 5 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 124
-  ifvare footstepsndtoggle 0
-  {
-   setvar digx 244
-   redefinequote 332 OFF
-  }
-  ifvare footstepsndtoggle 1
-  {
-   setvar digx 248
-   redefinequote 332 ON
-
-  }
+  // Footsteps [Right Side]
+  addvar digy 9
+  ifvare footstepsndtoggle 0 redefinequote 332 OFF
+  ifvare footstepsndtoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 6 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 133
-  ifvare normalhitscantoggle 0
-  {
-   setvar digx 244 // 256 - 12
-   redefinequote 332 OFF
-  }
-  ifvare normalhitscantoggle 1
-  {
-   setvar digx 248 // 256 - 8
-   redefinequote 332 ON
-  }
+  // Bioshock-style Hitscanning [Right Side]
+  addvar digy 9
+  ifvare normalhitscantoggle 0 redefinequote 332 OFF
+  ifvare normalhitscantoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 7 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 142
-  ifvare vehiclepickuptoggle 0
-  {
-   setvar digx 216 // 256 - 40
-   redefinequote 332 CHARACTERS
-  }
-  ifvare vehiclepickuptoggle 1
-  {
-   setvar digx 224 // 256 - 32
-   redefinequote 332 VEHICLES
-  }
-  ifvare vehiclepickuptoggle 2
-  {
-   setvar digx 220 // 256 - 36
-   redefinequote 332 CHAR/VEHI
-  }
-  ifvare vehiclepickuptoggle 3
-  {
-   setvar digx 220
-   redefinequote 332 VEHI/CHAR
-  }
+  // Vehicle Pickup Detection [Right Side]
+  addvar digy 9
+  ifvare vehiclepickuptoggle 0 redefinequote 332 CHARACTERS
+  ifvare vehiclepickuptoggle 1 redefinequote 332 VEHICLES
+  ifvare vehiclepickuptoggle 2 redefinequote 332 CHAR/VEHI
+  ifvare vehiclepickuptoggle 3 redefinequote 332 VEHI/CHAR
   ifvare mainmenuselection 8 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
  
-  addvar digy 9 // setvar digy 142
-  ifvare PAINSOUNDSTYPE 0
-  {
-   setvar digx 215 // 256 - 40
-   redefinequote 332 CURRENT HP
-  }
-  ifvare PAINSOUNDSTYPE 1
-  {
-   setvar digx 211 // 256 - 32
-   redefinequote 332 PERCENT DMG
-  }
+  // Pain Sound Determination [Right Side]
+  addvar digy 9
+  ifvare PAINSOUNDSTYPE 0 redefinequote 332 CURRENT HP
+  ifvare PAINSOUNDSTYPE 1 redefinequote 332 PERCENT DMG
   ifvare mainmenuselection 9 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 142
-  ifvare rpgdmgdisplaytoggle 0
-  {
-   setvar digx 244 // 256 - 12
-   redefinequote 332 OFF
-  }
-  ifvare rpgdmgdisplaytoggle 1
-  {
-   setvar digx 248 // 256 - 8
-   redefinequote 332 ON
-  }
+  // RPG-Style Damage# Indicators [Right Side]
+  addvar digy 9
+  ifvare rpgdmgdisplaytoggle 0 redefinequote 332 OFF
+  ifvare rpgdmgdisplaytoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 10 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 142
-  ifvare autosavetoggle 0
-  {
-   setvar digx 244 // 256 - 12
-   redefinequote 332 OFF
-  }
+  // Auto-Saving [Right Side]
+  addvar digy 9
+  ifvare autosavetoggle 0 redefinequote 332 OFF
   ifvare autosavetoggle 1
   {
    ifvarn AUTOSAVEFREQUENCY 0
    {
-    ifvarg AUTOSAVEFREQUENCY -1 ifvarl AUTOSAVEFREQUENCY 10 setvar digx 235
-    else ifvarg AUTOSAVEFREQUENCY 9 ifvarl AUTOSAVEFREQUENCY 100 setvar digx 231
-    else ifvarg AUTOSAVEFREQUENCY 99 ifvarl AUTOSAVEFREQUENCY 1000 setvar digx 227
     redefinequote 332 %d MIN
     qsprintf 332 332 AUTOSAVEFREQUENCY
    }
-   else
-   {
-    setvar digx 202
-    redefinequote 332 MAP LOAD ONLY
-   }   
+   else redefinequote 332 MAP LOAD ONLY
   }
   ifvare mainmenuselection 11 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
 
-  addvar digy 9 // setvar digy 142
-  ifvare weapontoggleselect 0
-  {
-   setvar digx 216 // 256 - 40
-   redefinequote 332 CHARACTERS
-  }
-  ifvare weapontoggleselect 1
-  {
-   setvar digx 228 // 256 - 28
-   redefinequote 332 WEAPONS
-  }
+  // Character/Weapon Toggle with Change-Weapon Keys [Right Side]
+  addvar digy 9
+  ifvare weapontoggleselect 0 redefinequote 332 CHARACTERS
+  ifvare weapontoggleselect 1 redefinequote 332 WEAPONS
   ifvare mainmenuselection 12 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
-  state mt
+  state mt_free
+
+  // Upperleft-Hand Key Legend [Right Side]
+  addvar digy 9
+  ifvare upperlefthandlegend 0 redefinequote 332 MENU KEY
+  ifvare upperlefthandlegend 1 redefinequote 332 ALL ON
+  ifvare upperlefthandlegend 2 redefinequote 332 OFF
+  ifvare mainmenuselection 13 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
+  state mt_free
 
 
   state shade0

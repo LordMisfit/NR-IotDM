@@ -935,7 +935,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
        ifvare mainmenusubmenu 2 // Toggles
        {
         subvar mainmenuselection 1
-        ifvarl mainmenuselection 0 addvar mainmenuselection 13
+        ifvarl mainmenuselection 0 addvar mainmenuselection 14
         sound KICK_HIT // EXITMENUSOUND
        }
        ifvare mainmenusubmenu 3 state menuerrorsound // Status
@@ -1148,7 +1148,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       ifvare mainmenusubmenu 2 // Toggle
       {
        addvar mainmenuselection 1
-       ifvarg mainmenuselection 12 subvar mainmenuselection 13
+       ifvarg mainmenuselection 13 subvar mainmenuselection 14
        sound KICK_HIT // EXITMENUSOUND
       }
       ifvare mainmenusubmenu 3 state menuerrorsound // Status
