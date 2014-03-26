@@ -784,6 +784,18 @@ else // ifvare mainmenu 0
 
        addlogvar TEMPVAR
        addvarvar DAMAGEINCELL TEMPVAR
+
+       ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+       {
+        ifvarg TEMPVAR 0
+        {
+         setvarvar SHOWDAMAGE TEMPVAR
+         setvar SHOWDAMAGETYPE 5
+         setvarvar SHOWDAMAGEACTORID PLAYERID
+         state showdamage
+        }
+       }
+
        ifvarvare CURRENTCELLS MAXCELLS
        {
         ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR { setvarvar DAMAGEINCELL ESHIELDDMGFACTOR soundonce ESHIELD_CHARGEDMAX }
