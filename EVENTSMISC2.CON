@@ -1004,24 +1004,14 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
        ifvare mainmenusubmenu 6 // Equipment
        {
         subvar mainmenuselection 1
-        ifvare EQUIPCHEAT? 0
-        {
-         ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarl mainmenuselection 0 setvar mainmenuselection 0 }
-         else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarl mainmenuselection 0 setvar mainmenuselection 1 }
-         else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarl mainmenuselection 0 setvar mainmenuselection 2 }
-         else ifvare SKILLLEVEL 0 { ifvarl mainmenuselection 0 setvar mainmenuselection 3 }
-        }
-        else
-        {
-         ifvare EQUIPCHEAT? 2
-         {
-          ifvarl mainmenuselection 0 setvar mainmenuselection 7
-         }
-         else
-         {
-          ifvarl mainmenuselection 0 setvar mainmenuselection 3
-         }
-        }
+        ifvare INVENTORYSLOTMAX 1 { ifvarl mainmenuselection 0 setvar mainmenuselection 0 }
+        ifvare INVENTORYSLOTMAX 2 { ifvarl mainmenuselection 0 setvar mainmenuselection 1 }
+        ifvare INVENTORYSLOTMAX 3 { ifvarl mainmenuselection 0 setvar mainmenuselection 2 }
+        ifvare INVENTORYSLOTMAX 4 { ifvarl mainmenuselection 0 setvar mainmenuselection 3 }
+        ifvare INVENTORYSLOTMAX 5 { ifvarl mainmenuselection 0 setvar mainmenuselection 4 }
+        ifvare INVENTORYSLOTMAX 6 { ifvarl mainmenuselection 0 setvar mainmenuselection 5 }
+        ifvare INVENTORYSLOTMAX 7 { ifvarl mainmenuselection 0 setvar mainmenuselection 6 }
+        ifvare INVENTORYSLOTMAX 8 { ifvarl mainmenuselection 0 setvar mainmenuselection 7 }
         sound KICK_HIT // EXITMENUSOUND
        }
        ifvare mainmenusubmenu 7 // WorldTiles
@@ -1217,24 +1207,14 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       ifvare mainmenusubmenu 6 // Equip
       {
        addvar mainmenuselection 1
-       ifvare EQUIPCHEAT? 0
-       {
-        ifvarg SKILLLEVEL 6 ifvarl SKILLLEVEL 10 { ifvarg mainmenuselection 0 setvar mainmenuselection 0 }
-        else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 { ifvarg mainmenuselection 1 setvar mainmenuselection 0 }
-        else ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { ifvarg mainmenuselection 2 setvar mainmenuselection 0 }
-        else ifvare SKILLLEVEL 0 { ifvarg mainmenuselection 3 setvar mainmenuselection 0 }
-       }
-       else
-       {
-        ifvare EQUIPCHEAT? 2
-        {
-         ifvarg mainmenuselection 7 setvar mainmenuselection 0
-        }
-        else
-        {
-         ifvarg mainmenuselection 3 setvar mainmenuselection 0
-        }
-       }
+       ifvare INVENTORYSLOTMAX 1 { ifvarg mainmenuselection 0 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 2 { ifvarg mainmenuselection 1 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 3 { ifvarg mainmenuselection 2 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 4 { ifvarg mainmenuselection 3 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 5 { ifvarg mainmenuselection 4 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 6 { ifvarg mainmenuselection 5 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 7 { ifvarg mainmenuselection 6 setvar mainmenuselection 0 }
+       ifvare INVENTORYSLOTMAX 8 { ifvarg mainmenuselection 7 setvar mainmenuselection 0 }
        sound KICK_HIT // EXITMENUSOUND
       }
       ifvare mainmenusubmenu 7 // WorldTiles

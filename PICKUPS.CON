@@ -16838,6 +16838,79 @@ else
 }
 enda
 
+// Mystic Satchel [increases max equip slots by 1 each]
+eventloadactor MYSTICSATCHEL state setpickupflags enda
+useractor notenemy MYSTICSATCHEL 0 
+
+ sizeat 10 10
+ state itemfullbright
+ setvar ACTORSHEIGHT 127 setvar ACTORSWIDTH 90
+ state checkoldskool_items
+ state checkitemflags
+ state checkitemflags2 // Checks Item Multiplications for Display Icon
+ ifvare mainmenu 0 state fallflags
+ifvarg ITEMDROPPEDTIME 0
+{
+ ifvare mainmenu 0 subvar ITEMDROPPEDTIME 1
+}
+else
+{
+
+ ifvarand ACTORFLAGS 8 nullop
+ else
+ {
+  ifmove RESPAWN_ACTOR_FLAG
+    state respawnit
+  else
+   ifvare mainmenu 0
+   {
+    ifp pshrunk nullop
+    else
+    {
+     ifvarg CURRENTHITPOINTS 0 // ifp palive
+     {
+      ifcanseetarget
+      {
+       ifpdistl RETRIEVEDISTANCE
+       {
+        ifcount 6
+        {
+         state checkexplodeflag
+ 
+         setvar ACTORPICKUPAMOUNT 1
+         state checkpickupamountflags state checkdoublepickupbonus
+         state checkmysticsatchels addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
+
+         ifvarand ACTORFLAGS 2 nullop
+         else
+         {
+          sound FOUND_INVENTORY
+          globalsound YEAH
+          ifvare ACTORPICKUPAMOUNT 1
+          { 
+           redefinequote 836 ^14FOUND A MYSTIC SATCHEL!
+          }
+          else
+          {
+           redefinequote 836 ^14FOUND %ld MYSTIC SATCHELS!
+           qsprintf 836 836 ACTORPICKUPAMOUNT
+          }
+          setvarvar fta fta_normal setvar ftq 836
+         }
+         ifspawnedby MYSTICSATCHEL
+          state getcode
+         else
+	    state quikget
+        }
+       }
+      }
+     }
+    }
+   }
+ }
+}
+enda
+
 
 // Teleporter Beacon
 
@@ -17169,7 +17242,7 @@ useractor notenemy GEMRINGSILVER 0
           ifvarand ACTORFLAGS 2 nullop
           else
           {
-    	     setvarvar fta fta_normal setvar ftq 335
+           setvarvar fta fta_normal setvar ftq 335
            ifspritepal 11 globalsound GEMSMALL
            else ifspritepal 16 globalsound GEMSMALL
            else ifspritepal 0 globalsound GEMSMALL
@@ -17329,7 +17402,7 @@ useractor notenemy GEMRINGGOLD 0
           ifvarand ACTORFLAGS 2 nullop
           else
           {
-    	     setvarvar fta fta_normal setvar ftq 335
+           setvarvar fta fta_normal setvar ftq 335
            ifspritepal 11 globalsound GEMSMALL
            else ifspritepal 16 globalsound GEMSMALL
            else ifspritepal 0 globalsound GEMSMALL

@@ -25,6 +25,8 @@ gamevar PERMADEATH? 0 0 // 1 = Character is removed on Death [except for the fin
 gamevar STARTSTATMULTI 1 0 // 
 gamevar STARTSTATDIVISOR 1 0 //
 
+gamevar INVENTORYSLOTMAX 1 132098 // 
+
 //*******************************************************************************************************************************************************************************
 //*******************************************************************************************************************************************************************************
 
@@ -2126,6 +2128,8 @@ gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept 
  // (ITEMARRAYID = 101) # of Blue Tank Capsules in Inventory		// gamevar BLUETANKCAPSULES 0 131073 
  // (ITEMARRAYID = 102) # of Red Tank Capsules in Inventory		// gamevar REDTANKCAPSULES 0 131073 
  // (ITEMARRAYID = 103) # of Bloodpact Shields in Inventory		// gamevar BLOODPACTSHIELDS 0 131073 
+ // (ITEMARRAYID = 104) # of Mystic Satchels in Inventory		// gamevar MYSTICSATCHELS 0 131073 
+
 
 gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
@@ -3128,6 +3132,11 @@ ends
 
 state checkbloodpactshields
   setvar ITEMARRAYID 103 // BLOODPACTSHIELDS
+  getactorvar[ITEMARRAYID].ITEMARRAYID_AMOUNT ITEMARRAYID_AMOUNTTEMP
+ends
+
+state checkmysticsatchels
+  setvar ITEMARRAYID 104 // MYSTICSATCHELS
   getactorvar[ITEMARRAYID].ITEMARRAYID_AMOUNT ITEMARRAYID_AMOUNTTEMP
 ends
 
@@ -9073,7 +9082,7 @@ ends
 
 state drop_randomized_item
    ifrnd 224 randvar RANDOMIZER 245
-   else randvar RANDOMIZER 319
+   else randvar RANDOMIZER 320
    addvar RANDOMIZER 1
 
    ifvarg RANDOMIZER 0 ifvarl RANDOMIZER 25 { espawn COLA state scatterdrops } // 1-24 [24]
@@ -9162,10 +9171,11 @@ state drop_randomized_item
    else ifvare RANDOMIZER 314 { ifrnd 192 { espawn STOCKOWNERSHIP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 314 [1] 
    else ifvare RANDOMIZER 315 { ifrnd 192 { espawn TRANSDIMENSIONALSAFE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 315 [1] 
    else ifvare RANDOMIZER 316 { ifrnd 192 { espawn BLOODPACTSHIELD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 316 [1] 
-   else ifvare RANDOMIZER 317 { ifvare GOTMONEYRADAR? 0 { espawn MONEYRADAR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 317 [1]
-   else ifvare RANDOMIZER 318 { ifvare GOTPORTABLEATM? 0 { espawn PORTABLEATM state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 318 [1]
-   else ifvare RANDOMIZER 319 { ifvare HAVEMERCURYCOMPUTER? 0 { espawn MERCURYCOMPUTER state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 319 [1]
-   else ifvare RANDOMIZER 320 { ifvarl CARDMEMBERSHIP? 5 { ifrnd 16 { espawn MEMBERSHIPCARD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 320 [1]
+   else ifvare RANDOMIZER 317 { ifrnd 128 { espawn MYSTICSATCHEL state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } // 317 [1]
+   else ifvare RANDOMIZER 318 { ifvare GOTMONEYRADAR? 0 { espawn MONEYRADAR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 318 [1]
+   else ifvare RANDOMIZER 319 { ifvare GOTPORTABLEATM? 0 { espawn PORTABLEATM state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 319 [1]
+   else ifvare RANDOMIZER 320 { ifvare HAVEMERCURYCOMPUTER? 0 { espawn MERCURYCOMPUTER state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 320 [1]
+   else ifvare RANDOMIZER 321 { ifvarl CARDMEMBERSHIP? 5 { ifrnd 16 { espawn MEMBERSHIPCARD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 321 [1]
 
 ends
 
@@ -31032,7 +31042,7 @@ state shoeequipmentslot1
      ifvare mainmenuselection 0 state pal23 else state pal21
      setvar tilenum 2822
      setvar digy 88
-     ifvare EQUIPCHEAT? 2 subvar digy 12
+     ifvarg INVENTORYSLOTMAX 4 subvar digy 12
      setvar textscale 49152
      state orientation2
      state setquote332
@@ -31053,7 +31063,7 @@ state shoeequipmentslot2
       ifvare mainmenuselection 1 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 100
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31074,7 +31084,7 @@ state shoeequipmentslot3
       ifvare mainmenuselection 2 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 112
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31095,7 +31105,7 @@ state shoeequipmentslot4
       ifvare mainmenuselection 3 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 124
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31116,7 +31126,7 @@ state shoeequipmentslot5
       ifvare mainmenuselection 4 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 136
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31137,7 +31147,7 @@ state shoeequipmentslot6
       ifvare mainmenuselection 5 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 148
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31158,7 +31168,7 @@ state shoeequipmentslot7
       ifvare mainmenuselection 6 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 160
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31179,7 +31189,7 @@ state shoeequipmentslot8
       ifvare mainmenuselection 7 state pal23 else state pal21
       setvar tilenum 2822
       setvar digy 172
-      ifvare EQUIPCHEAT? 2 subvar digy 12
+      ifvarg INVENTORYSLOTMAX 4 subvar digy 12
       setvar textscale 49152
       state orientation2
       state setquote332
@@ -31197,65 +31207,14 @@ state shoeequipmentslot8
 ends
 
 state showequipmentmenu
-    ifvare EQUIPCHEAT? 0
-    {
-     ifvarl SKILLLEVEL 10 // Accessory Slot #1 (All Skill Levels)
-     { 
-      state shoeequipmentslot1
-     }
-     state pal21
-
-     ifvarl SKILLLEVEL 7 // Accessory Slot #2 (Skill 0 to Skill 6 Only)
-     {
-      state shoeequipmentslot2
-     }
-     state pal21
-
-     ifvarl SKILLLEVEL 4 // Accessory Slot #3 (Skill 0 to Skill 3 Only)
-     {
-      state shoeequipmentslot3
-     }
-     state pal21
-
-     ifvarl SKILLLEVEL 1 // Accessory Slot #4 (Skill 0 Only)
-     {
-      state shoeequipmentslot4
-     }
-     state pal21
-    }
-    else // Equipment Cheat is On
-    {
-     // Accessory Slot #1 (All Skill Levels)
-     state shoeequipmentslot1
-     state pal21
-
-     // Accessory Slot #2 (Skill 0 to Skill 6 Only)
-     state shoeequipmentslot2
-     state pal21
-
-     // Accessory Slot #3 (Skill 0 to Skill 3 Only)
-     state shoeequipmentslot3
-     state pal21
-
-     // Accessory Slot #4
-     state shoeequipmentslot4
-     state pal21
-
-     ifvare EQUIPCHEAT? 2 // Accessory Slot #5 (Equipment Cheat Only)
-     {
-      state shoeequipmentslot5
-      state pal21
-
-      state shoeequipmentslot6
-      state pal21
-
-      state shoeequipmentslot7
-      state pal21
-
-      state shoeequipmentslot8
-      state pal21
-     }
-    }
+    ifvarg INVENTORYSLOTMAX 0 { state shoeequipmentslot1 state pal21 }
+    ifvarg INVENTORYSLOTMAX 1 { state shoeequipmentslot2 state pal21 }
+    ifvarg INVENTORYSLOTMAX 2 { state shoeequipmentslot3 state pal21 }
+    ifvarg INVENTORYSLOTMAX 3 { state shoeequipmentslot4 state pal21 }
+    ifvarg INVENTORYSLOTMAX 4 { state shoeequipmentslot5 state pal21 }
+    ifvarg INVENTORYSLOTMAX 5 { state shoeequipmentslot6 state pal21 }
+    ifvarg INVENTORYSLOTMAX 6 { state shoeequipmentslot7 state pal21 }
+    ifvarg INVENTORYSLOTMAX 7 { state shoeequipmentslot8 state pal21 }
 ends
 
 
@@ -31645,6 +31604,10 @@ ends
 
 state showtank3capsuledescript
       redefinequote 332 RIOT-TANK CAPSULE [RED]: UNCOMPRESSES A RED RIOT TANK FOR YOUR USE.
+ends
+
+state showmysticsatcheldescript
+      redefinequote 332 MYSTIC SATCHEL: EXTENDS THE NUMBER OF EQUIPPABLE ITEM SLOTS BY 1 EACH.
 ends
 
 // Equipment Description States
@@ -48236,7 +48199,7 @@ state dropinventoryitem
           ifvare mainmenuselection 20 { state checkredtankcapsules ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn REDTANKCAPSULE state checkredtankcapsules subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
 // Unused
           ifvare mainmenuselection 21 state menuerrorsound
-          ifvare mainmenuselection 22 state menuerrorsound
+          ifvare mainmenuselection 22 { state checkmysticsatchels ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn MYSTICSATCHEL state checkmysticsatchels subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
           ifvare mainmenuselection 23 state menuerrorsound
          }
          else

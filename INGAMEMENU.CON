@@ -1471,10 +1471,12 @@ ifvare mainmenu 1
     ifvare mainmenuselection 21
     {
     }
+*/
     ifvare mainmenuselection 22
     {
+     state checkmysticsatchels
+     ifvarg ITEMARRAYID_AMOUNTTEMP 0 state showmysticsatcheldescript
     }
-*/
     ifvare mainmenuselection 23
     {
      ifvarg CARDMEMBERSHIP? 0
@@ -4643,7 +4645,6 @@ ifvare mainmenusubmenu 1
    state itemplate
 
    setvar digx 142
-
    setvar digy 148 
    setvar digz 12288 // 14336
    setvar tilenum 177
@@ -4653,6 +4654,29 @@ ifvare mainmenusubmenu 1
    addvar digx 2 // setvar digx 78
    addvar digy 12
    state checkredtankcapsules
+   setvarvar varname ITEMARRAYID_AMOUNTTEMP
+   state pal23
+   state settile3087
+   state dn
+  }
+
+  state checkmysticsatchels
+  ifvarg ITEMARRAYID_AMOUNTTEMP 0
+  {
+   setvar digx 206
+   setvar digy 148
+   state itemplate
+
+   setvar digx 206
+   setvar digy 148 
+   setvar digz 10240 // 14336
+   setvar tilenum 5150
+   state pal0
+   state rs 
+
+   addvar digx 2 // setvar digx 78
+   addvar digy 12
+   state checkmysticsatchels
    setvarvar varname ITEMARRAYID_AMOUNTTEMP
    state pal23
    state settile3087

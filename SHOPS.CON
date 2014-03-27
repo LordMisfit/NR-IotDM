@@ -944,6 +944,13 @@ state calcshopitembaseprices
     setvar SHOPDOLLARSTEMPMULTI 1 
     setvar SHOPDOLLARSTEMPDIVISOR 1 
    }
+   ifvare shopitemid 11
+   {
+    redefinequote 1281 MYSTIC BANDOLIER
+    setvar SHOPDOLLARSTEMP2 20000000 
+    setvar SHOPDOLLARSTEMPMULTI 1 
+    setvar SHOPDOLLARSTEMPDIVISOR 1 
+   }
   }
  }
  else
@@ -1624,6 +1631,13 @@ state calcshopitembaseprices
     setvar SHOPDOLLARSTEMP2 64000
     setvar SHOPDOLLARSTEMPMULTI 1 
     setvar SHOPDOLLARSTEMPDIVISOR 2 
+   }
+   ifvare shopitemid 4
+   {
+    redefinequote 1281 MYSTIC BANDOLIER
+    setvar SHOPDOLLARSTEMP2 20000000 
+    setvar SHOPDOLLARSTEMPMULTI 1 
+    setvar SHOPDOLLARSTEMPDIVISOR 10
    }
   }
  }
@@ -2692,6 +2706,7 @@ state shop_display
    ifvare shopselection 8 state showtank1capsuledescript
    ifvare shopselection 9 state showtank2capsuledescript
    ifvare shopselection 10 state showtank3capsuledescript
+   ifvare shopselection 11 state showmysticsatcheldescript
   }
  }
  else
@@ -2803,6 +2818,7 @@ state shop_display
    ifvare shopselection 1 state showtank1capsuledescript
    ifvare shopselection 2 state showtank2capsuledescript
    ifvare shopselection 3 state showtank3capsuledescript
+   ifvare shopselection 4 state showmysticsatcheldescript
   }
  }
 
@@ -7535,6 +7551,14 @@ ifvare shop_id 0
    state shop_selection10cond
    state mt
 
+   setvar digy 101
+   setvar shopitemid 11
+   state calcshopitembaseprices // redefinequote 332 MYSTIC SATCHEL
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS setvar SHOPDOLLARSTEMP 0 else { setvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMP2 mulvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPMULTI divvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPDIVISOR state shop_calculatefinalprices }
+   addvar SHOPDOLLARSTEMP -1
+   state shop_selection11cond
+   state mt
+
 
 //***********************************
 //*Price Quote Displays - Buy Page 5*
@@ -7695,6 +7719,20 @@ ifvare shop_id 0
     state shop_displaypricequote
    }
    state shop_selection10cond
+   state mt
+
+   setvar digy 101
+   setvar shopitemid 11
+   state calcshopitembaseprices
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS state shop_cheatdisplay1
+   else
+   {
+    setvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMP2
+    mulvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPMULTI divvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPDIVISOR 
+    state shop_calculatefinalprices
+    state shop_displaypricequote
+   }
+   state shop_selection11cond
    state mt
 
 //****************************
@@ -7931,6 +7969,26 @@ ifvare shop_id 0
     state rs
 
     state checkredtankcapsules
+    setvarvar varname ITEMARRAYID_AMOUNTTEMP
+    state shop_showinventoryamounts
+   }
+   ifvare shopselection 11
+   {
+    state pal0
+    setvar digx 300 // 224
+    setvar digy 100 // 224
+    setvar digz 10240
+    setvar tilenum 5150
+    state rs
+
+    state pal0
+    // Inventory Amounts
+    setvar digx 300 // 224
+    setvar digy 122 // 224
+    state shop_showinventoryportraits
+    state rs
+
+    state checkmysticsatchels
     setvarvar varname ITEMARRAYID_AMOUNTTEMP
     state shop_showinventoryamounts
    }
@@ -10820,6 +10878,15 @@ ifvare shop_id 0
                      else { ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6 state pal20 else state pal10 }
    state mt
 
+   setvar digy 59
+   setvar shopitemid 4
+   state calcshopitembaseprices // redefinequote 332 RIOT TANK CAPSULE [RED]
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS setvar ITEMARRAYID_AMOUNTTEMP 1024 else state checkmysticsatchels
+   setvarvar TEMPVAR6 1 mulvarvar TEMPVAR6 shopamount subvar TEMPVAR6 1
+   ifvare shopselection 4 { ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6 state pal22 else state pal21 } 
+                     else { ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6 state pal20 else state pal10 }
+   state mt
+
 
 //************************************
 //*Price Quote Displays - Sell Page 5*
@@ -10880,6 +10947,19 @@ ifvare shop_id 0
                      else { ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6 state pal20 else state pal10 }
    state mt
 
+   setvar digy 59
+   setvar shopitemid 4
+   state calcshopitembaseprices 
+   setvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMP2
+   mulvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPMULTI divvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPDIVISOR
+   state shop_calculatefinalprices
+   state shop_displaypricequote
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS setvar ITEMARRAYID_AMOUNTTEMP 1024 else state checkmysticsatchels
+   setvarvar TEMPVAR6 1 mulvarvar TEMPVAR6 shopamount subvar TEMPVAR6 1
+   ifvare shopselection 4 { ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6 state pal22 else state pal21 } 
+                     else { ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6 state pal20 else state pal10 }
+   state mt
+
 //*****************************
 //*Item Pictures - Sell Page 5*
 //*****************************
@@ -10919,6 +10999,15 @@ ifvare shop_id 0
     setvar digz 10240
     setvar tilenum 177
     state checkredtankcapsules
+    setvarvar varname ITEMARRAYID_AMOUNTTEMP
+    state rs
+   }
+   ifvare shopselection 4
+   {
+    state pal0
+    setvar digz 10240
+    setvar tilenum 5150
+    state checkmysticsatchels
     setvarvar varname ITEMARRAYID_AMOUNTTEMP
     state rs
    }
@@ -11010,7 +11099,7 @@ state shop_moveup
      else
      ifvare shoppage 4
      {
-      ifvarl shopselection 0 addvar shopselection 11
+      ifvarl shopselection 0 addvar shopselection 12
      }
      else
      ifvare shoppage 5
@@ -11043,7 +11132,7 @@ state shop_moveup
      else
      ifvare shoppage 4
      {
-      ifvarl shopselection 0 addvar shopselection 4
+      ifvarl shopselection 0 addvar shopselection 5
      }
     }
    }
@@ -11062,63 +11151,21 @@ state shop_movedown
    {
     ifvare shopmode 0
     {
-     ifvare shoppage 0
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 1
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 2
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 3
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 4
-     {
-      ifvarg shopselection 10 subvar shopselection 11
-     }
-     else
-     ifvare shoppage 5
-     {
-      ifvare shopselection 0 setvar shopselection 0
-     }
+     ifvare shoppage 0 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 1 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 2 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 3 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 4 { ifvarg shopselection 11 subvar shopselection 12 }
+     ifvare shoppage 5 { ifvare shopselection 0 setvar shopselection 0 }
     }
     else
     ifvare shopmode 1
     {
-     ifvare shoppage 0
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 1
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 2
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 3
-     {
-      ifvarg shopselection 21 subvar shopselection 22
-     }
-     else
-     ifvare shoppage 4
-     {
-      ifvarg shopselection 3 subvar shopselection 4
-     }
+     ifvare shoppage 0 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 1 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 2 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 3 { ifvarg shopselection 21 subvar shopselection 22 }
+     ifvare shoppage 4 { ifvarg shopselection 4 subvar shopselection 5 }
     }
    }
 ends
@@ -18623,6 +18670,37 @@ ifvare com_pause 0
       }
       else state shop_buyfailed
      }
+     else
+     ifvare shopselection 11
+     {
+      setvar shopitemid 11
+      state calcshopitembaseprices 
+      ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS setvar SHOPDOLLARSTEMP 0 else { setvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMP2 mulvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPMULTI divvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPDIVISOR state shop_calculatefinalprices }
+      addvar SHOPDOLLARSTEMP -1
+      ifvarvarg DOLLARS SHOPDOLLARSTEMP
+      {
+       stopsound MENU_ERROR
+       stopsound SHOP_FAIL
+       state shop_buyitem
+       globalsound FOUND_INVENTORY
+       addvar SHOPDOLLARSTEMP 1
+       state selldisplays
+
+       state checkmysticsatchels addvarvar ITEMARRAYID_AMOUNTTEMP shopamount state setitemidarrayamount
+
+       ifvarg shopamount 1
+       {
+        redefinequote 341 ^20BOUGHT %d MYSTIC SATCHELS!
+        qsprintf 341 341 shopamount
+       }
+       else
+       {
+        redefinequote 341 ^20BOUGHT A MYSTIC SATCHEL!
+       }
+       setvarvar fta fta_normal setvar ftq 341
+      }
+      else state shop_buyfailed
+     }
     }
 /*
     ifvare shoppage 5
@@ -21418,6 +21496,35 @@ ifvare com_pause 0
         else
         {
          redefinequote 341 ^20SOLD A RED RIOT-TANK CAPSULE
+        }
+        setvarvar fta fta_normal setvar ftq 341
+      }
+      else state failedsell
+     }
+     ifvare shopselection 4
+     {
+      setvar shopitemid 4
+      state calcshopitembaseprices
+      ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS setvar ITEMARRAYID_AMOUNTTEMP 1024 else state checkmysticsatchels
+      setvar TEMPVAR6 1 mulvarvar TEMPVAR6 shopamount subvar TEMPVAR6 1
+      ifvarvarg ITEMARRAYID_AMOUNTTEMP TEMPVAR6
+      {
+        state shop_sellitem
+        ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS nullop else { state checkmysticsatchels subvarvar ITEMARRAYID_AMOUNTTEMP shopamount state setitemidarrayamount }
+
+        setvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMP2 mulvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPMULTI divvarvar SHOPDOLLARSTEMP SHOPDOLLARSTEMPDIVISOR state shop_calculatefinalprices
+        addvarvar DOLLARS SHOPDOLLARSTEMP
+        addvarvar DISPLAYDOLLARS SHOPDOLLARSTEMP
+        state displaymoney
+        ifvarg DOLLARS 2147483647 setvar DOLLARS 2147483647
+        ifvarg shopamount 1
+        {
+         redefinequote 341 ^20SOLD %d MYSTIC SATCHELS
+         qsprintf 341 341 shopamount
+        }
+        else
+        {
+         redefinequote 341 ^20SOLD A MYSTIC SATCHEL
         }
         setvarvar fta fta_normal setvar ftq 341
       }

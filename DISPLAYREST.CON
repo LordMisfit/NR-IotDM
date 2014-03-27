@@ -4400,7 +4400,7 @@ else
      else ifvare ATTACKINGACTORPICNUM 6737 setvar atkz 13107 // ANIMEGIRL2
      else ifvare ATTACKINGACTORPICNUM 6741 setvar atkz 13107 // ANIMEGIRL3
      else ifvare ATTACKINGACTORPICNUM 6746 setvar atkz 13107 // ANIMEGIRL4
-     else ifvarg ATTACKINGACTORPICNUM 5150 ifvarl ATTACKINGACTORPICNUM 5154 setvar atkz 1
+     else ifvarg ATTACKINGACTORPICNUM 5151 ifvarl ATTACKINGACTORPICNUM 5154 setvar atkz 1
      else ifvarg ATTACKINGACTORPICNUM 5159 ifvarl ATTACKINGACTORPICNUM 5169 setvar atkz 1
      else ifvare ATTACKINGACTORPICNUM 5920 // DRAGONICRIP
      {
@@ -4561,7 +4561,7 @@ else
      else ifvarg ATTACKINGACTORPICNUM 5119 ifvarl ATTACKINGACTORPICNUM 5126 nullop // Coin Money
      else ifvarg ATTACKINGACTORPICNUM 5125 ifvarl ATTACKINGACTORPICNUM 5146 nullop // Paper Money
      else ifvare ATTACKINGACTORPICNUM 5146 nullop // MONEYBAG
-     else ifvarg ATTACKINGACTORPICNUM 5150 ifvarl ATTACKINGACTORPICNUM 5154 nullop
+     else ifvarg ATTACKINGACTORPICNUM 5151 ifvarl ATTACKINGACTORPICNUM 5154 nullop
      else ifvarg ATTACKINGACTORPICNUM 5159 ifvarl ATTACKINGACTORPICNUM 5169 nullop
      else ifvare ATTACKINGACTORPICNUM 5920 nullop // ?
      else ifvare ATTACKINGACTORPICNUM 5921 nullop // ?
@@ -7511,6 +7511,12 @@ else
            else ifvare TARGETSPECIES PORTABLEATM
            {
             redefinequote 142 MOBILE ATM MACHINE 
+            state checkactorpickupamounts
+            state pal15
+           }
+           else ifvare TARGETSPECIES MYSTICSATCHEL
+           {
+            redefinequote 142 MYSTIC SATCHEL
             state checkactorpickupamounts
             state pal15
            }
