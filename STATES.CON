@@ -4278,7 +4278,7 @@ state initialize_worldtile
  ifvare SKILLSET? 1
  {
   addvar MAX_WORLDTILESFOUND_LEVEL 1
-  addlogvar MAX_WORLDTILESFOUND_LEVEL
+  // addlogvar MAX_WORLDTILESFOUND_LEVEL
   setvar SKILLSET? 2  
  }
 ends
@@ -4291,7 +4291,7 @@ ends
 
 state grab_worldtile
        addvar WORLDTILESFOUND_LEVEL 1
-       addlogvar WORLDTILESFOUND_LEVEL
+       // addlogvar WORLDTILESFOUND_LEVEL
        savegamevar WORLDTILEBITFIELD1
        savegamevar WORLDTILEBITFIELD2
        savegamevar WORLDTILEBITFIELD3

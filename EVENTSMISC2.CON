@@ -782,7 +782,7 @@ else // ifvare mainmenu 0
        ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar TEMPVAR 1
        ifvarg SKILLLEVEL 6 { mulvar TEMPVAR 2 divvar TEMPVAR 3 }
 
-       addlogvar TEMPVAR
+       // addlogvar TEMPVAR
        addvarvar DAMAGEINCELL TEMPVAR
 
        ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
