@@ -28,14 +28,14 @@ useractor notenemy DONUTS WEAK
      {
       ifvarg CURRENTHITPOINTS 0 // ifp palive
       {
-	 ifpdistl RETRIEVEDISTANCE
+       ifpdistl RETRIEVEDISTANCE
        {
- 	  ifcount 6
+        ifcount 6
         {
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTS // If Player's Health Var is less than the Maximum Var
          {
-	    ifcanseetarget
-	    {
+          ifcanseetarget
+          {
            state checkexplodeflag
            state medikitplayer
            ifvare oldskoolmode 0 qsprintf 152 265 TEMPHEALTH
@@ -49,7 +49,7 @@ useractor notenemy DONUTS WEAK
             ifvare CHARACTERSELECTED? 15 globalsound MAKEN_EATFOOD1
             sound DUKE_GET
            }
-  	     state activationflag killit 
+           state activationflag killit 
           }
          }
         }
@@ -90,12 +90,12 @@ useractor notenemy DONUTS2 WEAK
       { 
        ifpdistl RETRIEVEDISTANCE
        {
- 	  ifcount 6
+        ifcount 6
         {
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTS // If Player's Health Var is less than the Maximum Var
          {
-	    ifcanseetarget
-	    {
+          ifcanseetarget
+          {
            state checkexplodeflag
            state medikitplayer
            ifvare oldskoolmode 0 qsprintf 153 266 TEMPHEALTH
@@ -109,8 +109,8 @@ useractor notenemy DONUTS2 WEAK
             ifvare CHARACTERSELECTED? 15 globalsound MAKEN_EATFOOD1
             sound DUKE_GET
            }
-	     state activationflag killit
-	    }
+           state activationflag killit
+          }
          }
         }
        }
@@ -258,7 +258,7 @@ state pickupcharacter_boots
            }
            state playerstealjustbeforemonster
           }
-	    ifspawnedby BOOTS state getcode else state quikget
+          ifspawnedby BOOTS state getcode else state quikget
 ends
 
 state pickupvehicle_boots
@@ -291,7 +291,7 @@ state pickupvehicle_boots
            }
            state playerstealjustbeforemonster
           }
-	    ifspawnedby BOOTS state getcode else state quikget
+          ifspawnedby BOOTS state getcode else state quikget
 ends
 
 state pickupinventory_boots
@@ -574,7 +574,7 @@ else
         {
          ifcanseetarget
          {
-		  setvar TEMPVAR 1 // HEAT_AMOUNT
+          setvar TEMPVAR 1 // HEAT_AMOUNT
           ifvarvarl NIGHTVISIONTIME TEMPVAR state grabheatsensoritem else state grabheatsensorinventory
          }
         }
@@ -592,7 +592,7 @@ else
        {
         ifcanseetarget
         {
-   	     setvar TEMPVAR 1 // HEAT_AMOUNT
+         setvar TEMPVAR 1 // HEAT_AMOUNT
          ifvarvarl NIGHTVISIONTIME TEMPVAR state grabheatsensoritem else state grabheatsensorinventory
         }
        }
@@ -9165,130 +9165,25 @@ else
            ifvarvarg CURRENTARMORPOINTS STATLIMITATOMIC setvarvar CURRENTARMORPOINTS STATLIMITATOMIC
            ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
-           ifvare DUKE? 1 
-           {
-            ifvarn CHARACTERSELECTED? 1 
-            { 
-             setvar CHARACTERARRAY 1
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare JACK? 1 
-           {
-            ifvarn CHARACTERSELECTED? 2
-            { 
-             setvar CHARACTERARRAY 2
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare BUBSY? 1 
-           {
-            ifvarn CHARACTERSELECTED? 3
-            { 
-             setvar CHARACTERARRAY 3
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare AMI? 1 
-           {
-            ifvarn CHARACTERSELECTED? 4
-            { 
-             setvar CHARACTERARRAY 4
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare LOWANG? 1 
-           {
-            ifvarn CHARACTERSELECTED? 5
-            { 
-             setvar CHARACTERARRAY 5
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare ESSENCE? 1 
-           {
-            ifvarn CHARACTERSELECTED? 6
-            { 
-             setvar CHARACTERARRAY 6
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare TED? 1 
-           {
-            ifvarn CHARACTERSELECTED? 7
-            { 
-             setvar CHARACTERARRAY 7
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare LISA? 1 
-           {
-            ifvarn CHARACTERSELECTED? 8
-            { 
-             setvar CHARACTERARRAY 8
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare CYBANIS? 1 
-           {
-            ifvarn CHARACTERSELECTED? 9
-            { 
-             setvar CHARACTERARRAY 9
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare NETHRA? 1 
-           {
-            ifvarn CHARACTERSELECTED? 10
-            { 
-             setvar CHARACTERARRAY 10
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare PAULA? 1 
-           {
-            ifvarn CHARACTERSELECTED? 11
-            { 
-             setvar CHARACTERARRAY 11
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare LORI? 1 
-           {
-            ifvarn CHARACTERSELECTED? 12
-            { 
-             setvar CHARACTERARRAY 12
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare MINAKO? 1 
-           {
-            ifvarn CHARACTERSELECTED? 13
-            { 
-             setvar CHARACTERARRAY 13
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare MYSTERY1? 1 
-           {
-            ifvarn CHARACTERSELECTED? 14
-            { 
-             setvar CHARACTERARRAY 14
-             state hyperatomsetcharacter
-            } 
-           }
-           ifvare MAKEN? 1 
-           {
-            ifvarn CHARACTERSELECTED? 15
-            { 
-             setvar CHARACTERARRAY 15
-             state hyperatomsetcharacter
-            } 
-           }
+           ifvare DUKE? 1 ifvarn CHARACTERSELECTED? 1 { setvar CHARACTERARRAY 1 state hyperatomsetcharacter } 
+           ifvare JACK? 1 ifvarn CHARACTERSELECTED? 2 { setvar CHARACTERARRAY 2 state hyperatomsetcharacter } 
+           ifvare BUBSY? 1 ifvarn CHARACTERSELECTED? 3 { setvar CHARACTERARRAY 3 state hyperatomsetcharacter } 
+           ifvare AMI? 1 ifvarn CHARACTERSELECTED? 4 { setvar CHARACTERARRAY 4 state hyperatomsetcharacter } 
+           ifvare LOWANG? 1 ifvarn CHARACTERSELECTED? 5 { setvar CHARACTERARRAY 5 state hyperatomsetcharacter } 
+           ifvare ESSENCE? 1 ifvarn CHARACTERSELECTED? 6 { setvar CHARACTERARRAY 6 state hyperatomsetcharacter } 
+           ifvare TED? 1 ifvarn CHARACTERSELECTED? 7 { setvar CHARACTERARRAY 7 state hyperatomsetcharacter } 
+           ifvare LISA? 1 ifvarn CHARACTERSELECTED? 8 { setvar CHARACTERARRAY 8 state hyperatomsetcharacter } 
+           ifvare CYBANIS? 1 ifvarn CHARACTERSELECTED? 9 { setvar CHARACTERARRAY 9 state hyperatomsetcharacter } 
+           ifvare NETHRA? 1 ifvarn CHARACTERSELECTED? 10 { setvar CHARACTERARRAY 10 state hyperatomsetcharacter } 
+           ifvare PAULA? 1 ifvarn CHARACTERSELECTED? 11 { setvar CHARACTERARRAY 11 state hyperatomsetcharacter } 
+           ifvare LORI? 1 ifvarn CHARACTERSELECTED? 12 { setvar CHARACTERARRAY 12 state hyperatomsetcharacter } 
+           ifvare MINAKO? 1 ifvarn CHARACTERSELECTED? 13 { setvar CHARACTERARRAY 13 state hyperatomsetcharacter } 
+           ifvare MYSTERY1? 1 ifvarn CHARACTERSELECTED? 14 { setvar CHARACTERARRAY 14 state hyperatomsetcharacter } 
+           ifvare MAKEN? 1 ifvarn CHARACTERSELECTED? 15 { setvar CHARACTERARRAY 15 state hyperatomsetcharacter } 
            getactorvar[PLAYERID].VEHICLEID tempvehicleid
            ifvarn tempvehicleid -1
            {
-	      getactorvar[tempvehicleid].ENEMYHP temp
+            getactorvar[tempvehicleid].ENEMYHP temp
             ifvarg temp 0
             {
              setactorvar[tempvehicleid].ENEMYARMORPERCENT 1000
@@ -9309,12 +9204,10 @@ else
            else
            {
             redefinequote 432 ^12FOUND A HYPER-ATOM! 200% HP/AP/FA TO ALL!! :D
- 	      setvarvar fta fta_normal setvar ftq 432
+            setvarvar fta fta_normal setvar ftq 432
            }
-           ifspawnedby SUPERATOM
-            state getcode
-           else
-            state quikget
+           ifspawnedby SUPERATOM state getcode
+           else state quikget
           }
          }
         }
@@ -9616,6 +9509,7 @@ state givearmor2a_vehicle
           state playerstealjustbeforemonster
          }
 ends
+
 state givearmor2a
          // TEMP4 = Maximum AP % to reach
          // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
@@ -9870,14 +9764,14 @@ state pickupcharacter_colorshield
            { 
             globalsound KICK_HIT
             ifrnd 128 globalsound USE_ARMORITEM1 else globalsound USE_ARMORITEM2
-            state givearmor2a	      
+            state givearmor2a
            }
            else
            {
             ifrnd 128 globalsound USE_ARMORITEM1 else globalsound USE_ARMORITEM2
             state givearmor2
            }
-	    }
+          }
           else
           ifspritepal 16 // Blue-Class Armor
           {
@@ -9944,8 +9838,8 @@ state pickupcharacter_colorshield
            randvar TEMPVAR4 99
            addvar TEMPVAR4 900
            state assesspickuprequirements
-           ifvarvarg TEMPVAR TEMPVAR4 setvarvar TEMPVAR TEMPVAR4
-           ifvarvarl ARMORPERCENT TEMPVAR setvarvar ARMORPERCENT TEMPVAR
+           ifvarg TEMPVAR4 1000 setvar TEMPVAR4 1000
+           ifvarvarl ARMORPERCENT TEMPVAR4 setvarvar ARMORPERCENT TEMPVAR4
 
            ifvare ARMORISUSED? 1
            { 
@@ -10032,7 +9926,7 @@ state pickupvehicle_colorshield
             globalsound USE_ARMORITEM3
             state givearmor2_vehicle
            }
-	    }
+          }
           else
           ifspritepal 16 // Blue-Class Armor
           {
@@ -10099,8 +9993,8 @@ state pickupvehicle_colorshield
            randvar TEMPVAR4 99
            addvar TEMPVAR4 900
            state assesspickuprequirements
-           ifvarvarg TEMPVAR TEMPVAR4 setvarvar TEMPVAR TEMPVAR4
-           ifvarvarl TEMPVAR3 TEMPVAR setvarvar TEMPVAR3 TEMPVAR
+           ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
+           ifvarvarl TEMPVAR3 TEMPVAR4 setvarvar TEMPVAR3 TEMPVAR4
 
            ifvare ARMORISUSED? 1
            { 
