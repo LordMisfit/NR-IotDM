@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git29.03272014
+definequote 1337 ^22VERSION:^0 5.22.git30.03272014
 
 action ANULLACTION 0
 
@@ -20153,6 +20153,23 @@ ends
 
 state checkplayerinventoryitems
  setvarvar CHARACTERARRAY CHARACTERSELECTED?
+ ifvarg INVENTORYSLOTMAX 0 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 PLAYEREQUIPSLOTITEM1 else setvar PLAYEREQUIPSLOTITEM1 -1
+// addlogvar PLAYEREQUIPSLOTITEM1
+ ifvarg INVENTORYSLOTMAX 1 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 PLAYEREQUIPSLOTITEM2 else setvar PLAYEREQUIPSLOTITEM2 -1
+// addlogvar PLAYEREQUIPSLOTITEM2
+ ifvarg INVENTORYSLOTMAX 2 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 PLAYEREQUIPSLOTITEM3 else setvar PLAYEREQUIPSLOTITEM3 -1
+// addlogvar PLAYEREQUIPSLOTITEM3
+ ifvarg INVENTORYSLOTMAX 3 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 PLAYEREQUIPSLOTITEM4 else setvar PLAYEREQUIPSLOTITEM4 -1
+// addlogvar PLAYEREQUIPSLOTITEM4
+ ifvarg INVENTORYSLOTMAX 4 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 PLAYEREQUIPSLOTITEM5 else setvar PLAYEREQUIPSLOTITEM5 -1
+// addlogvar PLAYEREQUIPSLOTITEM5
+ ifvarg INVENTORYSLOTMAX 5 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 PLAYEREQUIPSLOTITEM6 else setvar PLAYEREQUIPSLOTITEM6 -1
+// addlogvar PLAYEREQUIPSLOTITEM6
+ ifvarg INVENTORYSLOTMAX 6 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 PLAYEREQUIPSLOTITEM7 else setvar PLAYEREQUIPSLOTITEM7 -1
+// addlogvar PLAYEREQUIPSLOTITEM7
+ ifvarg INVENTORYSLOTMAX 7 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 PLAYEREQUIPSLOTITEM8 else setvar PLAYEREQUIPSLOTITEM8 -1
+// addlogvar PLAYEREQUIPSLOTITEM8
+ /*
  ifvare EQUIPCHEAT? 0
  {
   ifvarl SKILLLEVEL 10 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 PLAYEREQUIPSLOTITEM1 else setvar PLAYEREQUIPSLOTITEM1 -1
@@ -20189,6 +20206,7 @@ state checkplayerinventoryitems
    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 PLAYEREQUIPSLOTITEM8
   }
  }
+ */
 ends
 
 state checkplayersupportlevels
@@ -27913,68 +27931,84 @@ ifvare FALLSOUND? 1
 
        // Check for ShockAb Boots [Equippable Item]
        setvar DAMAGEMODIFIER 10000
-       ifvare PLAYEREQUIPSLOTITEM1 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM1 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM2 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM2 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM3 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM3 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM4 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM4 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM5 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM5 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM6 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM6 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM7 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM7 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvare PLAYEREQUIPSLOTITEM8 14
+       ifvarg DAMAGEMODIFIER 1 ifvare PLAYEREQUIPSLOTITEM8 14
        {
         randvar TEMPVAR5 250
         ifrnd 128 mulvar TEMPVAR5 -1
         addvar TEMPVAR5 1750
         subvarvar DAMAGEMODIFIER TEMPVAR5
+        ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
+        addlogvar DAMAGEMODIFIER
        }
-       ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
        mulvarvar falldamageratio DAMAGEMODIFIER
        divvar falldamageratio 10000
 
-       ifvarl falldamageratio 0 setvar falldamageratio 0
+       ifvarl falldamageratio 1 setvar falldamageratio 1
        ifvarg falldamageratio 8320 setvar falldamageratio 8320
+       addlogvar falldamageratio
 
        // Up to 244
        mulvarvar tempd falldamageratio
