@@ -2151,11 +2151,59 @@ state expmulti // Affects EXP and RANK rewards
 
       ifvare SHRUNK? 1
       {
-       divvar EXPPTSTEMP 5
-       divvar RANKPOINTSTEMP 5
+       setvar TEMPVAR2 0
+       ifactor FEM1 setvar TEMPVAR2 1
+       ifactor FEM2 setvar TEMPVAR2 1
+       ifactor FEM3 setvar TEMPVAR2 1
+       ifactor FEM4 setvar TEMPVAR2 1
+       ifactor FEM5 setvar TEMPVAR2 1
+       ifactor FEM6 setvar TEMPVAR2 1
+       ifactor FEM7 setvar TEMPVAR2 1
+       ifactor FEM8 setvar TEMPVAR2 1
+       ifactor FEM9 setvar TEMPVAR2 1
+       ifactor FEM10 setvar TEMPVAR2 1
+       ifactor ROBOTDOG setvar TEMPVAR2 2
+       ifactor ROBOTDOG2 setvar TEMPVAR2 2
+       ifactor TOUGHGAL setvar TEMPVAR2 2
+       ifactor NAKED1 setvar TEMPVAR2 1
+       ifactor PODFEM1 setvar TEMPVAR2 1
+       ifactor DANCE1 setvar TEMPVAR2 3
+       ifactor DANCE2 setvar TEMPVAR2 3
+       ifactor DANCE3 setvar TEMPVAR2 3
+       ifactor DANCE5 setvar TEMPVAR2 3
+       ifactor DANCE6 setvar TEMPVAR2 3
+       ifactor DANCE7 setvar TEMPVAR2 3
+       ifactor DANCE9 setvar TEMPVAR2 3
+       ifactor STAND1 setvar TEMPVAR2 3
+       ifactor DEALER setvar TEMPVAR2 3
+       ifactor STAND3 setvar TEMPVAR2 3
+       ifactor STAND4 setvar TEMPVAR2 3
+       ifactor WOLFDUDE setvar TEMPVAR2 3
+       ifactor PUNKDUDE setvar TEMPVAR2 3
+       ifactor COP1 setvar TEMPVAR2 3
+       ifactor COP2 setvar TEMPVAR2 3
+       ifactor SITTINGDUDE setvar TEMPVAR2 3
+       ifactor ANIMEGIRL1 setvar TEMPVAR2 3
+       ifactor ANIMEGIRL2 setvar TEMPVAR2 3
+       ifactor ANIMEGIRL3 setvar TEMPVAR2 3
+       ifactor ANIMEGIRL4 setvar TEMPVAR2 3
 
-       ifvarl EXPPTSTEMP 1 setvar EXPPTSTEMP 1
-       ifvarl RANKPOINTSTEMP 1 setvar RANKPOINTSTEMP 1
+       ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 4
+       {
+        mulvar EXPPTSTEMP 5
+        mulvar RANKPOINTSTEMP 5
+
+        ifvarn EXPPTSTEMP 0 setvar EXPPTSTEMP 0
+        ifvarg RANKPOINTSTEMP -1 setvar RANKPOINTSTEMP -1
+       }
+       else
+       {
+        divvar EXPPTSTEMP 5
+        divvar RANKPOINTSTEMP 5
+
+        ifvarl EXPPTSTEMP 1 setvar EXPPTSTEMP 1
+        ifvarl RANKPOINTSTEMP 1 setvar RANKPOINTSTEMP 1
+       }
       }
       state setexpranklimits
 
@@ -2165,10 +2213,13 @@ state expmulti // Affects EXP and RANK rewards
 
       ifvare PUBLICBETA? 0
       {
-       divvar EXPPTSTEMP 8 // 10
-       divvar RANKPOINTSTEMP 8 // 10
-       // ifvarl EXPPTSTEMP 1 setvar EXPPTSTEMP 1
-       // ifvarl RANKPOINTSTEMP 1 setvar RANKPOINTSTEMP 1
+       divvar EXPPTSTEMP 8
+       divvar RANKPOINTSTEMP 8
+      }
+      else
+      {
+       mulvar EXPPTSTEMP 3 divvar EXPPTSTEMP 4
+       mulvar RANKPOINTSTEMP 3 divvar RANKPOINTSTEMP 4
       }
       state setexpranklimits
 
@@ -2672,7 +2723,100 @@ state exp_given
       ifvarn CHARACTERSELECTED? 11 
       {
        setvarvar INACTIVEXPPTSTEMP TEMPVAR
-       state exp_checksupportequip
+       setvarvar TEMPVAR2 PARTYSIZE subvarvar TEMPVAR2 PARTYALIVE addvar TEMPVAR2 8
+       ifvarl TEMPVAR2 8 setvar TEMPVAR2 8 // "Watch Over Me" Multiplies EXP Intake by 25% per dead character, up to a 287.5% EXP intake
+       // addlogvar TEMPVAR2
+       mulvarvar INACTIVEXPPTSTEMP TEMPVAR2
+       divvar INACTIVEXPPTSTEMP 8
+
+       setvar DAMAGEMODIFIER 100
+       // Support System
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Duke
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Duke
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Bubsy
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Bubsy
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Ami
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Ami
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Lo Wang
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Lo Wang
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ ESSence
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ ESSence
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Ted
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Ted
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Lisa
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Lisa
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Cybanis
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Cybanis
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Nethra
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Nethra
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Paula
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Paula
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Lori
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Lori
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Minako
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Minako
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ "Mystery Lady"
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ "Mystery Lady"
+       getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN tempb
+       ifvarg tempb 3 addvar DAMAGEMODIFIER 12 // "S" Support w/ Maken
+       ifvarg tempb 4 addvar DAMAGEMODIFIER 36 // "*" Support w/ Maken
+       ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+       ifvarg DAMAGEMODIFIER 234 setvar DAMAGEMODIFIER 234
+       mulvarvar INACTIVEXPPTSTEMP DAMAGEMODIFIER
+       divvar INACTIVEXPPTSTEMP 100
+       ifvarl INACTIVEXPPTSTEMP 0 setvar INACTIVEXPPTSTEMP 0
+       ifvarg INACTIVEXPPTSTEMP 9163600 setvar INACTIVEXPPTSTEMP 9163600
+
+       // EXP Badge
+       setvar TEMP3 0
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 tempb
+       ifvare tempb 7 addvar TEMP3 2 // EXP Badge
+       ifvare tempb 28 addvar TEMP3 10 // Jewel of Four Souls
+       ifvarg TEMP3 0 mulvarvar INACTIVEXPPTSTEMP TEMP3
+       ifvarl INACTIVEXPPTSTEMP 0 setvar INACTIVEXPPTSTEMP 0
+       ifvarg INACTIVEXPPTSTEMP 9163600 setvar INACTIVEXPPTSTEMP 9163600
+
+       state inactiveexp_checkdoubloons
+
+       getactorvar[CHARACTERARRAY].CHARACTEREXPPTS temp
+       addvarvar temp INACTIVEXPPTSTEMP 
+       ifvarl temp 0 setvar temp 0
+       ifvarg temp 9163600 setvar temp 9163600
+       setactorvar[CHARACTERARRAY].CHARACTEREXPPTS temp
       }
      }
     }
@@ -2743,6 +2887,14 @@ state exp_given
 
 	ifvare CHARACTERSELECTED? 2 { mulvar EXPPTSTEMP 5 divvar EXPPTSTEMP 4 } // Jack gets 25% more EXP
 	ifvare CHARACTERSELECTED? 9 { mulvar EXPPTSTEMP 11 divvar EXPPTSTEMP 8 } // Cybanis gets 37.5% more EXP
+    ifvare CHARACTERSELECTED? 11
+    {
+     setvarvar TEMPVAR2 PARTYSIZE subvarvar TEMPVAR2 PARTYALIVE addvar TEMPVAR2 8
+     ifvarl TEMPVAR2 8 setvar TEMPVAR2 8 // "Watch Over Me" Multiplies EXP Intake by 25% per dead character, up to a 287.5% EXP intake
+     mulvarvar EXPPTSTEMP TEMPVAR2
+     // addlogvar TEMPVAR2
+     divvar EXPPTSTEMP 8     
+    }
 	ifvare CHARACTERSELECTED? 12 { mulvar EXPPTSTEMP 3 divvar EXPPTSTEMP 2 } // Lori gets 50% more EXP
 	ifvare CHARACTERSELECTED? 15 { mulvar EXPPTSTEMP 5 divvar EXPPTSTEMP 4 } // Maken gets 25% more EXP
 
@@ -3358,7 +3510,8 @@ state checkkillerofciv
          addvar CIVILIANSKILLED_GAME 1
         }
 
-        getactor[THISACTOR].htowner TEMP
+        ifvare TEMPVAR 3 setvarvar TEMP PLAYERID
+        else getactor[THISACTOR].htowner TEMP
         ifvarvarn TEMP THISACTOR
         {
          ifvarvarn TEMP PLAYERID
@@ -16551,24 +16704,86 @@ state genericshrunkcode
      pstomp
      ifvare STOMPTIMER 3
      {
-      state addtokillamounts
-      state check_a_characters_kills
-      redefinequote 340 ^21SQUISH!!
-      userquote 340
-      ifactor SHARK state sharkawards
-      ifactor LIZTROOP state liztroopawards
-      ifactor PIGCOP state pigcopawards
-      ifactor LIZMAN state lizmanawards
-      ifactor OCTABRAIN state octabrainawards
-      ifactor COMMANDER state commanderawards
-      ifactor NEWBEAST state newbeastawards
-      ifactor BOSS1 state boss1awards
-      ifactor BOSS2 state boss2awards
-      ifactor BOSS3 state boss3awards
-      ifactor BOSS4 state boss4awards
-      setvar TEMPVAR 0
-      state expmulti
-      state exp_given      
+      setvar TEMPVAR2 0
+      ifactor FEM1 setvar TEMPVAR2 1
+      ifactor FEM2 setvar TEMPVAR2 1
+      ifactor FEM3 setvar TEMPVAR2 1
+      ifactor FEM4 setvar TEMPVAR2 1
+      ifactor FEM5 setvar TEMPVAR2 1
+      ifactor FEM6 setvar TEMPVAR2 1
+      ifactor FEM7 setvar TEMPVAR2 1
+      ifactor FEM8 setvar TEMPVAR2 1
+      ifactor FEM9 setvar TEMPVAR2 1
+      ifactor FEM10 setvar TEMPVAR2 1
+      ifactor ROBOTDOG setvar TEMPVAR2 2
+      ifactor ROBOTDOG2 setvar TEMPVAR2 2
+      ifactor TOUGHGAL setvar TEMPVAR2 2
+      ifactor NAKED1 setvar TEMPVAR2 1
+      ifactor PODFEM1 setvar TEMPVAR2 1
+      ifactor DANCE1 setvar TEMPVAR2 3
+      ifactor DANCE2 setvar TEMPVAR2 3
+      ifactor DANCE3 setvar TEMPVAR2 3
+      ifactor DANCE5 setvar TEMPVAR2 3
+      ifactor DANCE6 setvar TEMPVAR2 3
+      ifactor DANCE7 setvar TEMPVAR2 3
+      ifactor DANCE9 setvar TEMPVAR2 3
+      ifactor STAND1 setvar TEMPVAR2 3
+      ifactor DEALER setvar TEMPVAR2 3
+      ifactor STAND3 setvar TEMPVAR2 3
+      ifactor STAND4 setvar TEMPVAR2 3
+      ifactor WOLFDUDE setvar TEMPVAR2 3
+      ifactor PUNKDUDE setvar TEMPVAR2 3
+      ifactor COP1 setvar TEMPVAR2 3
+      ifactor COP2 setvar TEMPVAR2 3
+      ifactor SITTINGDUDE setvar TEMPVAR2 3
+      ifactor ANIMEGIRL1 setvar TEMPVAR2 3
+      ifactor ANIMEGIRL2 setvar TEMPVAR2 3
+      ifactor ANIMEGIRL3 setvar TEMPVAR2 3
+      ifactor ANIMEGIRL4 setvar TEMPVAR2 3
+
+      ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 4
+      {
+       ifvare TEMPVAR2 1
+       {
+        randvar RANKPOINTSTEMP FEMKILLRANKPOINTSRAND 
+        addvar RANKPOINTSTEMP FEMKILLRANKPOINTSSOLID 
+       }
+       ifvare TEMPVAR2 2
+       {
+        randvar RANKPOINTSTEMP DOGKILLRANKPOINTSRAND 
+        addvar RANKPOINTSTEMP DOGKILLRANKPOINTSSOLID 
+       }
+       ifvare TEMPVAR2 3
+       {
+        randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+        addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+       }
+       redefinequote 340 ^21SQUISH!!
+       userquote 340
+       setvar TEMPVAR 3 state checkkillerofciv
+       setvar TEMPVAR 1 state expmulti
+       state exp_given
+      }
+      else
+      {
+       state addtokillamounts
+       state check_a_characters_kills
+       redefinequote 340 ^21SQUISH!!
+       userquote 340
+       ifactor SHARK state sharkawards
+       ifactor LIZTROOP state liztroopawards
+       ifactor PIGCOP state pigcopawards
+       ifactor LIZMAN state lizmanawards
+       ifactor OCTABRAIN state octabrainawards
+       ifactor COMMANDER state commanderawards
+       ifactor NEWBEAST state newbeastawards
+       ifactor BOSS1 state boss1awards
+       ifactor BOSS2 state boss2awards
+       ifactor BOSS3 state boss3awards
+       ifactor BOSS4 state boss4awards
+       setvar TEMPVAR 0 state expmulti
+       state exp_given
+      }
      }
     }
   }
@@ -17171,6 +17386,7 @@ state unfreeze
       divvar TEMP 100
       ifvarl TEMP 1 setvar TEMP 1
       ifactor APLAYER { setactor[THISACTOR].extra 16384 ifvare oldskoolmode 1 addvar TEMP 2 setvarvar CURRENTHITPOINTS TEMP }
+      else ifactor PODFEM1POD { setactor[THISACTOR].extra 1 setvar ENEMYHP 1 }
       else { setactor[THISACTOR].extra 16384 setvarvar ENEMYHP TEMP }
       setactor[THISACTOR].htpicnum -1
       getlastpal

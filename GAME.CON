@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git31.03272014
+definequote 1337 ^22VERSION:^0 5.22.git33.03292014
 
 action ANULLACTION 0
 
@@ -13700,6 +13700,7 @@ useractor notenemy ROBOTDOG PIRATEGALSTRENGTH
    state breakobject
   }
  }
+
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
@@ -15033,6 +15034,8 @@ enda
 
 action ADEALERSTAND 0
 action ADEALERFROZEN 0
+action ADEALERSHRUNK 0
+action ADEALERGROW 0
 
 useractor notenemy DEALER TOUGH 
  ifvare SKILLSET? 0
@@ -15072,9 +15075,15 @@ useractor notenemy DEALER TOUGH
   cstat 257
   setvar SKILLSET? 1
  }
-  ifvare SKILLSET? 1 state rankstarbeta
-  state useswitchcheckwall
-  ifvarl FROZENTIMER 1 ifp pfacing
+ ifvare SKILLSET? 1 state rankstarbeta
+ state useswitchcheckwall
+
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+ state actorseekingitem
+
+ ifaction ADEALERSTAND
+ {
+  ifp pfacing
   {
    ifpdistl 1280 ifvare TEMP2 1
    {
@@ -15124,49 +15133,45 @@ useractor notenemy DEALER TOUGH
     }
    }
   }
-
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- state actorseekingitem
-// state breakobject 
- ifaction ADEALERSTAND
- {
-  ifhitweapon
-  {
-    ifdead
-    {
-     setvar ENEMYHP 0
-     ifwasweapon FREEZEBLAST
-     {
-      state freezeup
-      state frosty
-      spritepal 1
-      move 0
-      action ADEALERFROZEN
-      strength 0
-      break
-     }
-
-     soundonce MALENPC_DEATH1    
-     state drop_artifacts
-     state civiliankilled
-    }
-    else
-    {
-     ifvarl ENEMYINVULNTIME 1
-     {
-      ifvarg ENEMYLASTDAMAGE 0
-      {
-       spawn BLOOD
-       ifrnd 85 soundonce MALENPC_PAIN1
-       else ifrnd 128 soundonce MALENPC_PAIN2
-       else soundonce MALENPC_PAIN3
-      }
-      else sound NODAMAGE
-     }
-    }
-  }
  }
- else
+
+ ifaction ADEALERSHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ADEALERSTAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 26 23 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADEALERGROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
  ifaction ADEALERFROZEN
  {
   state actorcheck_frozentimer
@@ -15202,13 +15207,66 @@ useractor notenemy DEALER TOUGH
    sound GLASS_BREAKING
    killit
   }
-  /*
-   ifp pfacing
-    ifpdistl FROZENQUICKKICKDIST
-      pkick
-    break
-  */
  }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       action ADEALERGROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADEALERFROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ADEALERSHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
 
  state checkfallcounter_nonplayer
  state enemyfloorhurt
@@ -17806,6 +17864,10 @@ state femcode
         ifactor PODFEM1
           debris SCRAP3 4
       sound SQUISHED
+      sound PIPEBOMB_EXPLODE
+      hitradius 2048 60 70 80 90
+      { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+      spawn EXPLOSION2
       randvar RANKPOINTSTEMP FEMKILLRANKPOINTSRAND 
       addvar RANKPOINTSTEMP FEMKILLRANKPOINTSSOLID 
       setvar TEMPVAR 1
@@ -19076,17 +19138,131 @@ actor NAKED1 TOUGH FEMANIMATE
 enda
 
 useractor notenemy PODFEM1POD TOUGH
+  ifaction FEMSHRUNK
+  {
+   ifcount SHRUNKDONECOUNT
+   {
+     action FEMANIMATE
+     cstat 257
+   }
+   else
+     ifcount SHRUNKCOUNT
+      { sizeto 40 40 setvar SHRUNK? 0 }
+   else
+     state genericshrunkcode
+  }
+  else ifaction FEMGROW
+  {
+    ifcount 32
+    {
+      guts JIBS4 20
+      guts JIBS6 20
+      spritepal 6
+      debris SCRAP3 4
+      sound SQUISHED
+      sound PIPEBOMB_EXPLODE
+      hitradius 2048 60 70 80 90
+      spawn EXPLOSION2
+      setvar TEMPVAR 1
+      killit
+    }
+    else
+      sizeto MAXXSTRETCH MAXYSTRETCH
+  }
+  else ifaction FEMFROZEN2
+  {
+    state actorcheck_frozentimer
+    ifvarl FROZENTIMER 1 // ifcount THAWTIME
+    {
+      action FEMANIMATE
+
+      state unfreeze
+    }
+    else
+    {
+     ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+     {
+      ifactioncount 26
+      {
+        spawn WATERDRIP
+        resetactioncount
+      }
+     }
+    }
+
+    ifhitweapon
+    {
+      ifwasweapon FREEZEBLAST
+      {
+        strength 0
+        state freezeblast_frozen-actor
+        break
+      }
+
+      lotsofglass 30
+
+      sound GLASS_BREAKING setactor[THISACTOR].extra -1
+      ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+      respawnhitag
+
+      randvar RANKPOINTSTEMP FEMKILLRANKPOINTSRAND 
+      addvar RANKPOINTSTEMP FEMKILLRANKPOINTSSOLID 
+      setvar TEMPVAR 1
+      killit
+    }
+    else
+      ifp pfacing
+        ifpdistl FROZENQUICKKICKDIST
+          pkick
+    break
+  }
+
   ifhitweapon
   {
-    ifdead
+   ifwasweapon SHRINKSPARK
+   {
+        setvar SHRUNK? 1
+        sound ACTOR_SHRINKING
+        move 0
+        action FEMSHRUNK
+        cstat 0
+        break
+   }
+   ifdead
+   {
+    setvar ENEMYHP 0
+    ifwasweapon GROWSPARK
     {
-     spritepal 6
-     state standard_jibs
-     state random_wall_jibs
-     debris SCRAP3 18
-     sound SQUISHED
-     killit
+      state expanding
+      cstat 0
+      move 0
+      sound ACTOR_GROWING
+      action FEMGROW
+      break
     }
+    else ifwasweapon FREEZEBLAST
+    {
+     ifaction FEMSHRUNK
+       break
+
+     action FEMFROZEN2
+
+     move 0
+     spritepal 1
+     state frosty
+     strength 0
+
+     state freezeup
+
+     break
+    }
+    spritepal 6
+    state standard_jibs
+    state random_wall_jibs
+    debris SCRAP3 18
+    sound SQUISHED
+    killit
+   }
   }
 enda
 
