@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git33.03292014
+definequote 1337 ^22VERSION:^0 5.22.git34.03292014
 
 action ANULLACTION 0
 
@@ -13646,6 +13646,11 @@ useractor notenemy CHESTOFGOLD WEAK
  state breakobject
 enda
 
+action ADOGSIT 0 2 1 1 8
+action ADOGFROZEN 1
+action ADOGSHRUNK 0 2 1 1 8
+action ADOGGROW 0
+
 useractor notenemy ROBOTDOG PIRATEGALSTRENGTH
  ifvare SKILLSET? 0 
  {
@@ -13680,26 +13685,157 @@ useractor notenemy ROBOTDOG PIRATEGALSTRENGTH
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   state rankstarbeta
   sizeat 40 40
+  action ADOGSIT
   state maxcivsincrease 
   setvar SKILLSET? 1 
  }
  ifvare SKILLSET? 1 state rankstarbeta
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state dogsave }
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
- getactor[THISACTOR].htextra temp
- ifvarg temp -1
+
+ ifaction ADOGSIT
  {
-  ifvarg ENEMYINVULNTIME 0 
-  { 
-   setactor[THISACTOR].htextra -1
-   stopsound WHINING_DOG
-   sound INVULNITEM3
-  }
-  else 
+  ifvare oldskoolmode 0
+   ifvarn CANUSECOILS? 0 
+    state dogsave
+ }
+
+ ifaction ADOGFROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
   {
-   state breakobject
+   action ADOGSIT
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP DOGKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP DOGKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
   }
  }
+
+ ifaction ADOGSHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ADOGSIT
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 40 40 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADOGGROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 9
+     guts JIBS6 8
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP DOGKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP DOGKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       action ADOGGROW
+       soundonce DEAD_DOG
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADOGFROZEN
+      strength 0
+      break
+     }
+
+     soundonce DEAD_DOG
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce WHINING_DOG
+     }
+     else ifwasweapon SHRINKSPARK { stopsound WHINING_DOG } else sound NODAMAGE
+    }
+    else
+    { 
+     setactor[THISACTOR].htextra -1
+     stopsound WHINING_DOG
+     sound INVULNITEM3
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ADOGSHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
@@ -13708,6 +13844,11 @@ useractor notenemy ROBOTDOG PIRATEGALSTRENGTH
  state freezecode_actor
  state healingsector_actor
 enda
+
+action ADOG2SIT 0 3 1 1 8
+action ADOG2FROZEN 1
+action ADOG2SHRUNK 0 3 1 1 8
+action ADOG2GROW 0
 
 useractor notenemy ROBOTDOG2 PIRATEGALSTRENGTH
   ifvare SKILLSET? 0
@@ -13743,23 +13884,159 @@ useractor notenemy ROBOTDOG2 PIRATEGALSTRENGTH
    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
    state rankstarbeta 
    sizeat 40 40
+   action ADOG2SIT
    state maxcivsincrease 
    setvar SKILLSET? 1
   }
   ifvare SKILLSET? 1 state rankstarbeta
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state dogsave }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
-  getactor[THISACTOR].htextra temp
-  ifvarg temp -1 
+
+ ifaction ADOG2SIT
+ {
+  ifvare oldskoolmode 0
+   ifvarn CANUSECOILS? 0 
+    state dogsave
+ }
+
+ ifaction ADOG2FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
   {
-   ifvarg ENEMYINVULNTIME 0 
-   { 
-    setactor[THISACTOR].htextra -1
-    stopsound WHINING_DOG
-    sound INVULNITEM3
-   }
-   else state breakobject
+   action ADOG2SIT
+   state unfreeze
   }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP DOGKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP DOGKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+ ifaction ADOG2SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ADOG2SIT
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 40 40 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADOG2GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 9
+     guts JIBS6 8
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP DOGKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP DOGKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       action ADOG2GROW
+       soundonce DEAD_DOG
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADOG2FROZEN
+      strength 0
+      break
+     }
+
+     soundonce DEAD_DOG
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce WHINING_DOG
+     }
+     else ifwasweapon SHRINKSPARK { stopsound WHINING_DOG } else sound NODAMAGE
+    }
+    else
+    { 
+     setactor[THISACTOR].htextra -1
+     stopsound WHINING_DOG
+     sound INVULNITEM3
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ADOG2SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
   state actorseekingitem
   state checkfallcounter_nonplayer
   state enemyfloorhurt
@@ -14046,8 +14323,9 @@ useractor notenemy DANCE1 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown state enemyarmortype state freezecode_actor
@@ -14093,8 +14371,9 @@ useractor notenemy DANCE2 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14142,8 +14421,9 @@ useractor notenemy DANCE3 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14191,8 +14471,9 @@ useractor notenemy DANCE5 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14240,8 +14521,9 @@ useractor notenemy DANCE6 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14289,8 +14571,9 @@ useractor notenemy DANCE7 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14398,8 +14681,9 @@ useractor notenemy DANCE9 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14447,8 +14731,9 @@ useractor notenemy STAND1 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14496,8 +14781,9 @@ useractor notenemy STAND3 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14545,8 +14831,9 @@ useractor notenemy STAND4 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14593,8 +14880,9 @@ useractor notenemy COP1 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14642,8 +14930,9 @@ useractor notenemy COP2 TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer
  state enemyfloorhurt
  state enemyunderwater
@@ -14693,8 +14982,9 @@ useractor notenemy PUNKDUDE TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer
  state enemyfloorhurt
  state enemyunderwater
@@ -14743,8 +15033,9 @@ useractor notenemy SITTINGDUDE TOUGH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer
  state enemyfloorhurt
  state enemyunderwater
@@ -14797,8 +15088,9 @@ useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14850,8 +15142,9 @@ useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14903,8 +15196,9 @@ useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14956,8 +15250,9 @@ useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state actorseekingitem
  state breakobject 
+
+ state actorseekingitem
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -14966,8 +15261,10 @@ useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
  state healingsector_actor
 enda
 
-useractor notenemy BARSTOOL TOUGH state breakobject enda
-useractor notenemy TABLE TOUGH state breakobject enda
+action AWOLFDANCE 0 2 1 1 16
+action AWOLFFROZEN 0
+action AWOLFSHRUNK 0 2 1 1 16
+action AWOLFGROW
 
 useractor notenemy WOLFDUDE 1453
  ifvare SKILLSET? 0
@@ -14993,16 +15290,158 @@ useractor notenemy WOLFDUDE 1453
   setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 56 53
+  action AWOLFDANCE
   state maxcivsincrease 
   state rankstarbeta
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
- ifp pfacing ifpdistl 1280 ifhitspace soundonce GETBACKTOWORK
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ // ifp pfacing ifpdistl 1280 ifhitspace soundonce GETBACKTOWORK
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+ state useswitchcheckwall
+
+
+ ifaction AWOLFDANCE
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ ifaction AWOLFSHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action AWOLFDANCE
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 56 53 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction AWOLFGROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction AWOLFFROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action AWOLFDANCE
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
+       action AWOLFGROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action AWOLFFROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action AWOLFSHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
  state actorseekingitem
- state breakobject 
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
@@ -15220,6 +15659,7 @@ useractor notenemy DEALER TOUGH
        cstat 0
        move 0
        sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
        action ADEALERGROW
        break
      }
@@ -15276,6 +15716,9 @@ useractor notenemy DEALER TOUGH
  state freezecode_actor
  state healingsector_actor
 enda
+
+useractor notenemy BARSTOOL TOUGH state breakobject enda
+useractor notenemy TABLE TOUGH state breakobject enda
 
 action EXPBARRELFRAME     0   2   1   1   15
 actor EXPLODINGBARREL 26
