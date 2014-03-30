@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git34.03292014
+definequote 1337 ^22VERSION:^0 5.22.git35.03292014
 
 action ANULLACTION 0
 
@@ -15045,6 +15045,12 @@ useractor notenemy SITTINGDUDE TOUGH
  state healingsector_actor
 enda
 
+action AANIME1STAND 0 2 1 1 8
+action AANIME1DRILL 2 2 1 1 8
+action AANIME1SHRUNK 0 2 1 1 8
+action AANIME1GROW
+action AANIME1FROZEN
+
 useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
  ifvare SKILLSET? 0
  {
@@ -15081,15 +15087,156 @@ useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
   setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 16 16
+  action AANIME1STAND
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
 
+ ifaction AANIME1STAND
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+// ifaction AANIME1DRILL { }
+
+ ifaction AANIME1SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action AANIME1STAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 16 16 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction AANIME1GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction AANIME1FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action AANIME1STAND
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action AANIME1GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action AANIME1FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action AANIME1SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
@@ -15098,6 +15245,12 @@ useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
  state freezecode_actor
  state healingsector_actor
 enda
+
+action AANIME2STAND 0 2 1 1 8
+action AANIME2SHOOT 2 2 1 1 8
+action AANIME2SHRUNK 0 2 1 1 8
+action AANIME2GROW
+action AANIME2FROZEN
 
 useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
  ifvare SKILLSET? 0
@@ -15135,15 +15288,156 @@ useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
   setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 16 16
+  action AANIME2STAND
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
 
+ ifaction AANIME2STAND
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+// ifaction AANIME2SHOOT { }
+
+ ifaction AANIME2SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action AANIME2STAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 16 16 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction AANIME2GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction AANIME2FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action AANIME2STAND
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action AANIME2GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action AANIME2FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action AANIME2SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
@@ -15152,6 +15446,12 @@ useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
  state freezecode_actor
  state healingsector_actor
 enda
+
+action AANIME3SIT 0 2 1 1 8
+action AANIME3THROW 2 1 1 1 8
+action AANIME3SHRUNK 0 2 1 1 8
+action AANIME3GROW
+action AANIME3FROZEN
 
 useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
  ifvare SKILLSET? 0
@@ -15189,13 +15489,155 @@ useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
   setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 16 16
+  action AANIME3SIT
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+
+ ifaction AANIME3SIT
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+// ifaction AANIME3THROW { }
+
+ ifaction AANIME3SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action AANIME3SIT
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 16 16 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction AANIME3GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction AANIME3FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action AANIME3SIT
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action AANIME3GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action AANIME3FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action AANIME3SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
  state breakobject 
 
  state actorseekingitem
@@ -15206,6 +15648,12 @@ useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
  state freezecode_actor
  state healingsector_actor
 enda
+
+action AANIME4WASH 0 2 1 1 8
+action AANIME4SHOOT 2 2 1 1 8
+action AANIME4SHRUNK 0 2 1 1 8
+action AANIME4GROW
+action AANIME4FROZEN
 
 useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
  ifvare SKILLSET? 0
@@ -15243,14 +15691,154 @@ useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
   setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 16 16
+  action AANIME4WASH
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
+
+ ifaction AANIME4WASH
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+// ifaction AANIME4SHOOT { }
+
+ ifaction AANIME4SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action AANIME4WASH
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 16 16 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction AANIME4GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction AANIME4FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action AANIME4WASH
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action AANIME4GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action AANIME4FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action AANIME4SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
 
  state actorseekingitem
  state enemyfloorhurt
