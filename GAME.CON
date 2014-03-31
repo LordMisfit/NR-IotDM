@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git36.03312014
+definequote 1337 ^22VERSION:^0 5.22.git37.03312014
 
 action ANULLACTION 0
 
@@ -14692,6 +14692,11 @@ useractor notenemy DANCE9 TOUGH
  state healingsector_actor
 enda
 
+action ASTAND1STAND
+action ASTAND1SHRUNK
+action ASTAND1GROW
+action ASTAND1FROZEN
+
 useractor notenemy STAND1 TOUGH
  ifvare SKILLSET? 0 
  {
@@ -14724,15 +14729,156 @@ useractor notenemy STAND1 TOUGH
   setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 20 17 // 20 20 is about correct height
+  action ASTAND1STAND
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
 
+ ifaction ASTAND1STAND
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ ifaction ASTAND1SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ASTAND1STAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 20 17 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ASTAND1GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ASTAND1FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ASTAND1STAND
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
+       action ASTAND1GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ASTAND1FROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ASTAND1SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
@@ -14741,6 +14887,11 @@ useractor notenemy STAND1 TOUGH
  state freezecode_actor
  state healingsector_actor
 enda
+
+action ASTAND3STAND
+action ASTAND3SHRUNK
+action ASTAND3GROW
+action ASTAND3FROZEN
 
 useractor notenemy STAND3 TOUGH
  ifvare SKILLSET? 0
@@ -14773,16 +14924,157 @@ useractor notenemy STAND3 TOUGH
   setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
   setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 24 23 // 22 22 is about correct height
+  action ASTAND3STAND
   state rankstarbeta
-  sizeat 22 23 // 22 22 is about correct height
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
 
+ ifaction ASTAND3STAND
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ ifaction ASTAND3SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ASTAND3STAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 24 23 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ASTAND3GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ASTAND3FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ASTAND3STAND
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
+       action ASTAND3GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ASTAND3FROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ASTAND3SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
@@ -14791,6 +15083,11 @@ useractor notenemy STAND3 TOUGH
  state freezecode_actor
  state healingsector_actor
 enda 
+
+action ASTAND4STAND
+action ASTAND4SHRUNK
+action ASTAND4GROW
+action ASTAND4FROZEN
 
 useractor notenemy STAND4 TOUGH
  ifvare SKILLSET? 0
@@ -14824,15 +15121,156 @@ useractor notenemy STAND4 TOUGH
   setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 23 20 // 26 26 is about correct height
+  action ASTAND4STAND
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
 
+ ifaction ASTAND4STAND
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ ifaction ASTAND4SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ASTAND4STAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 23 20 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ASTAND4GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ASTAND4FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ASTAND4STAND
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
+       action ASTAND4GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ASTAND4FROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ASTAND4SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
  state enemyunderwater
