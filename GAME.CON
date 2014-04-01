@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git39.04012014
+definequote 1337 ^22VERSION:^0 5.22.git40.04012014
 
 action ANULLACTION 0
 
@@ -12327,20 +12327,26 @@ endswitch
 
 // End Character Checking Code here
 
- setvar TEMP 0
- ifvare mainmenu 0 ifvare oldskoolmode 0 ifp ponsteroids addvar TEMP 1
- ifvarg TEMP 0
- { 
-  ifvare SKILLLEVEL 0 { inittimer 60 setvar SOUNDPITCH -800 }
-  ifvare SKILLLEVEL 1 { inittimer 66 setvar SOUNDPITCH -720 }
-  ifvare SKILLLEVEL 2 { inittimer 72 setvar SOUNDPITCH -640 }
-  ifvare SKILLLEVEL 3 { inittimer 78 setvar SOUNDPITCH -560 } 
-  ifvare SKILLLEVEL 4 { inittimer 84 setvar SOUNDPITCH -480 }
-  ifvare SKILLLEVEL 5 { inittimer 90 setvar SOUNDPITCH -400 }
-  ifvare SKILLLEVEL 6 { inittimer 96 setvar SOUNDPITCH -320 }
-  ifvare SKILLLEVEL 7 { inittimer 102 setvar SOUNDPITCH -240 }
-  ifvare SKILLLEVEL 8 { inittimer 108 setvar SOUNDPITCH -160 }
-  ifvare SKILLLEVEL 9 { inittimer 114 setvar SOUNDPITCH -80 }
+ ifvare mainmenu 0
+ {
+  ifvare oldskoolmode 0 
+  {
+   ifp ponsteroids
+   {
+    ifvare SKILLLEVEL 0 { inittimer 60 setvar SOUNDPITCH -800 }
+    ifvare SKILLLEVEL 1 { inittimer 66 setvar SOUNDPITCH -720 }
+    ifvare SKILLLEVEL 2 { inittimer 72 setvar SOUNDPITCH -640 }
+    ifvare SKILLLEVEL 3 { inittimer 78 setvar SOUNDPITCH -560 } 
+    ifvare SKILLLEVEL 4 { inittimer 84 setvar SOUNDPITCH -480 }
+    ifvare SKILLLEVEL 5 { inittimer 90 setvar SOUNDPITCH -400 }
+    ifvare SKILLLEVEL 6 { inittimer 96 setvar SOUNDPITCH -320 }
+    ifvare SKILLLEVEL 7 { inittimer 102 setvar SOUNDPITCH -240 }
+    ifvare SKILLLEVEL 8 { inittimer 108 setvar SOUNDPITCH -160 }
+    ifvare SKILLLEVEL 9 { inittimer 114 setvar SOUNDPITCH -80 }
+   }
+   else { inittimer 120 setvar SOUNDPITCH 0 }
+  }
+  else { inittimer 120 setvar SOUNDPITCH 0 }
  }
  else { inittimer 120 setvar SOUNDPITCH 0 }
 
