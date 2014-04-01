@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git37.03312014
+definequote 1337 ^22VERSION:^0 5.22.git38.04012014
 
 action ANULLACTION 0
 
@@ -11876,105 +11876,105 @@ break
 case GATEMISSILE_MAIN
  state itemfullbright
  state projectiles_menufreeze
-// addvar TEMP3 1
-// ifvarg TEMP3 13
-ifvarg DEATHMISSILEACTIVATED 0
-{
- getactor[THISACTOR].htg_t 9 TEMP3
- // Top Middle
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR 0
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop -96
+ // addvar TEMP3 1
+ // ifvarg TEMP3 13
+ ifvarg DEATHMISSILEACTIVATED 0
+ {
+  getactor[THISACTOR].htg_t 9 TEMP3
+  // Top Middle
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR 0
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop -96
+ 
+  // Bottom Middle
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR 0
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop 96
+ 
+  // Top Left Missile
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR 16
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop -128
+ 
+  // Bottom Left Missile
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR 16
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop 128
+ 
+  // Top Right Missile
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR -16
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop -128
+ 
+  // Bottom Right Missile
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR -16
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop 128
+ 
+ 
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR 32
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop -64
+ 
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR 32
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop 64
+ 
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR -32
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop -64
+ 
+  ezshoot TEMP3 GATEMISSILE_SPLIT
+  getactor[THISACTOR].ang TEMPVAR
+  addvar TEMPVAR -32
+  state deathmissileangadjust
+  setactor[RETURN].extra 105
+  setthisprojectile[RETURN].drop 64
+ 
+  espawn EXPLOSION2CUSTOM
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  state randomshrapnel
+  setactor[RETURN].xrepeat 10
+  setactor[RETURN].yrepeat 10
+  sound GATEMISSILE_EXPLODE
 
- // Bottom Middle
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR 0
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop 96
-
- // Top Left Missile
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR 16
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop -128
-
- // Bottom Left Missile
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR 16
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop 128
-
- // Top Right Missile
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR -16
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop -128
-
- // Bottom Right Missile
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR -16
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop 128
-
-
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR 32
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop -64
-
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR 32
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop 64
-
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR -32
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop -64
-
- ezshoot TEMP3 GATEMISSILE_SPLIT
- getactor[THISACTOR].ang TEMPVAR
- addvar TEMPVAR -32
- state deathmissileangadjust
- setactor[RETURN].extra 105
- setthisprojectile[RETURN].drop 64
-
- espawn EXPLOSION2CUSTOM
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- state randomshrapnel
- setactor[RETURN].xrepeat 10
- setactor[RETURN].yrepeat 10
- sound GATEMISSILE_EXPLODE
-
- killit
-}
+  killit
+ }
 break
 
 case STROKEMISSILE_SPLIT
@@ -12327,26 +12327,20 @@ endswitch
 
 // End Character Checking Code here
 
- ifvare mainmenu 0
- {
-   ifvare oldskoolmode 0
-   {
-    ifp ponsteroids
-    { 
-     ifvare SKILLLEVEL 0 { inittimer 60 setvar SOUNDPITCH -800 }
-     else ifvare SKILLLEVEL 1 { inittimer 66 setvar SOUNDPITCH -720 }
-     else ifvare SKILLLEVEL 2 { inittimer 72 setvar SOUNDPITCH -640 }
-     else ifvare SKILLLEVEL 3 { inittimer 78 setvar SOUNDPITCH -560 } 
-     else ifvare SKILLLEVEL 4 { inittimer 84 setvar SOUNDPITCH -480 }
-     else ifvare SKILLLEVEL 5 { inittimer 90 setvar SOUNDPITCH -400 }
-     else ifvare SKILLLEVEL 6 { inittimer 96 setvar SOUNDPITCH -320 }
-     else ifvare SKILLLEVEL 7 { inittimer 102 setvar SOUNDPITCH -240 }
-     else ifvare SKILLLEVEL 8 { inittimer 108 setvar SOUNDPITCH -160 }
-     else ifvare SKILLLEVEL 9 { inittimer 114 setvar SOUNDPITCH -80 }
-    }
-    else { inittimer 120 setvar SOUNDPITCH 0 }
-   }
-   else { inittimer 120 setvar SOUNDPITCH 0 }
+ addvar TEMP 0
+ ifvare mainmenu 0 ifvare oldskoolmode 0 ifp ponsteroids addvar TEMP 1
+ ifvarg TEMP 0
+ { 
+  ifvare SKILLLEVEL 0 { inittimer 60 setvar SOUNDPITCH -800 }
+  ifvare SKILLLEVEL 1 { inittimer 66 setvar SOUNDPITCH -720 }
+  ifvare SKILLLEVEL 2 { inittimer 72 setvar SOUNDPITCH -640 }
+  ifvare SKILLLEVEL 3 { inittimer 78 setvar SOUNDPITCH -560 } 
+  ifvare SKILLLEVEL 4 { inittimer 84 setvar SOUNDPITCH -480 }
+  ifvare SKILLLEVEL 5 { inittimer 90 setvar SOUNDPITCH -400 }
+  ifvare SKILLLEVEL 6 { inittimer 96 setvar SOUNDPITCH -320 }
+  ifvare SKILLLEVEL 7 { inittimer 102 setvar SOUNDPITCH -240 }
+  ifvare SKILLLEVEL 8 { inittimer 108 setvar SOUNDPITCH -160 }
+  ifvare SKILLLEVEL 9 { inittimer 114 setvar SOUNDPITCH -80 }
  }
  else { inittimer 120 setvar SOUNDPITCH 0 }
 
@@ -12492,8 +12486,6 @@ endswitch
     setvar ENEMYMAXHP 1
     setvar ACTORATTACK 1
     setvar ACTORDEFENSE 1
-    // addvar MAX_ENEMIES_KILLED_LEVEL 1
-    // addvar MAX_ENEMIES_KILLED_GAME 1
     setvar SKILLSET? -1
    }
 /*
@@ -13523,6 +13515,10 @@ useractor notenemy DUKEBURGER PIRATEGALSTRENGTH ABURGERROTS
  state breakobject 
 enda
 
+state body
+  ifp pfacing ifpdistl 3840 ifhitspace globalsound GENERIC_AMBIENCE16
+ends
+
 useractor notenemy DCFLASK1EMPTY WEAK state breakobject enda
 useractor notenemy DCFLASK1FILLED WEAK state breakobject enda
 useractor notenemy DCFLASK2EMPTY WEAK state breakobject enda
@@ -14284,311 +14280,6 @@ useractor notenemy E-GLASS WEAK
  state breakobject 
 enda
 
-useractor notenemy DANCE1 TOUGH
- ifvare SKILLSET? 0 
- {
-  setvar ENEMYMAXHP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
-  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
-  divvar ENEMYMAXHP 100
-  setvarvar TEMPVAR ENEMYMAXHP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
-
-  setvar ENEMYMAXAP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
-  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
-  divvar ENEMYMAXAP 100
-  setvarvar TEMPVAR ENEMYMAXAP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
-
-  setvarvar ENEMYHP ENEMYMAXHP
-  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
-  mulvar ENEMYMAXHPATOMIC 2
-  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
-  mulvar ENEMYMAXAPATOMIC 2
-  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
-  setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  sizeat 20 17 // 20 20 is about Duke's Height
-  state rankstarbeta
-  state maxcivsincrease 
-  setvar SKILLSET? 1
- }
- ifvare SKILLSET? 1 state rankstarbeta
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
-
- state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
- state enemyunderwater
- state enemymaxhpcountdown state enemyarmortype state freezecode_actor
- state healingsector_actor
-enda 
-
-useractor notenemy DANCE2 TOUGH
- ifvare SKILLSET? 0 
- {
-  setvar ENEMYMAXHP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
-  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
-  divvar ENEMYMAXHP 100
-  setvarvar TEMPVAR ENEMYMAXHP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
-
-  setvar ENEMYMAXAP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
-  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
-  divvar ENEMYMAXAP 100
-  setvarvar TEMPVAR ENEMYMAXAP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
-
-  setvarvar ENEMYHP ENEMYMAXHP
-  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
-  mulvar ENEMYMAXHPATOMIC 2
-  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
-  mulvar ENEMYMAXAPATOMIC 2
-  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
-  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  sizeat 24 21 // 24 24 is about correct height
-  state rankstarbeta
-  state maxcivsincrease 
-  setvar SKILLSET? 1 
- }
- ifvare SKILLSET? 1 state rankstarbeta
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
-
- state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
- state enemyunderwater
- state enemymaxhpcountdown
- state enemyarmortype
- state freezecode_actor
- state healingsector_actor
-enda
-
-useractor notenemy DANCE3 TOUGH 
- ifvare SKILLSET? 0
- {
-  setvar ENEMYMAXHP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
-  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
-  divvar ENEMYMAXHP 100
-  setvarvar TEMPVAR ENEMYMAXHP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
-
-  setvar ENEMYMAXAP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
-  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
-  divvar ENEMYMAXAP 100
-  setvarvar TEMPVAR ENEMYMAXAP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
-
-  setvarvar ENEMYHP ENEMYMAXHP
-  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
-  mulvar ENEMYMAXHPATOMIC 2
-  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
-  mulvar ENEMYMAXAPATOMIC 2
-  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
-  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  sizeat 22 19 // 22 22 is about correct height
-  state rankstarbeta
-  state maxcivsincrease 
-  setvar SKILLSET? 1 
- }
- ifvare SKILLSET? 1 state rankstarbeta
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
-
- state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
- state enemyunderwater
- state enemymaxhpcountdown
- state enemyarmortype
- state freezecode_actor
- state healingsector_actor
-enda
-
-useractor notenemy DANCE5 TOUGH
- ifvare SKILLSET? 0
- { 
-  setvar ENEMYMAXHP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
-  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
-  divvar ENEMYMAXHP 100
-  setvarvar TEMPVAR ENEMYMAXHP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
-
-  setvar ENEMYMAXAP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
-  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
-  divvar ENEMYMAXAP 100
-  setvarvar TEMPVAR ENEMYMAXAP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
-
-  setvarvar ENEMYHP ENEMYMAXHP
-  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
-  mulvar ENEMYMAXHPATOMIC 2
-  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
-  mulvar ENEMYMAXAPATOMIC 2
-  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
-  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  sizeat 22 19 // 22 22 is about correct height
-  state rankstarbeta
-  state maxcivsincrease 
-  setvar SKILLSET? 1
- }
- ifvare SKILLSET? 1 state rankstarbeta
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
-
- state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
- state enemyunderwater
- state enemymaxhpcountdown
- state enemyarmortype
- state freezecode_actor
- state healingsector_actor
-enda
-
-useractor notenemy DANCE6 TOUGH 
- ifvare SKILLSET? 0
- {
-  setvar ENEMYMAXHP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
-  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
-  divvar ENEMYMAXHP 100
-  setvarvar TEMPVAR ENEMYMAXHP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
-
-  setvar ENEMYMAXAP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
-  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
-  divvar ENEMYMAXAP 100
-  setvarvar TEMPVAR ENEMYMAXAP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
-
-  setvarvar ENEMYHP ENEMYMAXHP
-  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
-  mulvar ENEMYMAXHPATOMIC 2
-  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
-  mulvar ENEMYMAXAPATOMIC 2
-  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
-  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  sizeat 20 17 // 20 20 is about correct height
-  state rankstarbeta
-  state maxcivsincrease 
-  setvar SKILLSET? 1 
- }
- ifvare SKILLSET? 1 state rankstarbeta
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
-
- state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
- state enemyunderwater
- state enemymaxhpcountdown
- state enemyarmortype
- state freezecode_actor
- state healingsector_actor
-enda
-
-useractor notenemy DANCE7 TOUGH 
- ifvare SKILLSET? 0
- {
-  setvar ENEMYMAXHP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
-  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
-  divvar ENEMYMAXHP 100
-  setvarvar TEMPVAR ENEMYMAXHP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
-
-  setvar ENEMYMAXAP TOUGH
-  randvar TEMPVAR 3
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
-  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
-  divvar ENEMYMAXAP 100
-  setvarvar TEMPVAR ENEMYMAXAP
-  divvar TEMPVAR 10
-  randvarvar TEMPVAR2 TEMPVAR
-  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
-
-  setvarvar ENEMYHP ENEMYMAXHP
-  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
-  mulvar ENEMYMAXHPATOMIC 2
-  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
-  mulvar ENEMYMAXAPATOMIC 2
-  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
-  setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  sizeat 22 19 // 22 22 is about correct height
-  state rankstarbeta
-  state maxcivsincrease 
-  setvar SKILLSET? 1
- }
- ifvare SKILLSET? 1 state rankstarbeta
- getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject
-
- state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
- state enemyunderwater
- state enemymaxhpcountdown
- state enemyarmortype
- state freezecode_actor
- state healingsector_actor
-enda
-
-state body
-	 ifp pfacing
-	 ifpdistl 3840
-	 ifhitspace
-	  globalsound GENERIC_AMBIENCE16
-ends
-
 useractor notenemy BODY1 WEAK 
  state body
  state breakobject 
@@ -14642,6 +14333,1218 @@ useractor notenemy OTTO TOUGH
  state healingsector_actor
 enda
 
+action ADANCE1DANCEFORWARDS 0 5 1 1 12
+action ADANCE1DANCEBACKWARDS 4 5 1 -1 12
+action ADANCE1SHRUNKFORWARDS 0 5 1 1 12
+action ADANCE1SHRUNKBACKWARDS 4 5 1 -1 12
+action ADANCE1GROW
+action ADANCE1FROZEN
+
+useractor notenemy DANCE1 TOUGH
+ ifvare SKILLSET? 0 
+ {
+  setvar ENEMYMAXHP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
+  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
+  divvar ENEMYMAXHP 100
+  setvarvar TEMPVAR ENEMYMAXHP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
+
+  setvar ENEMYMAXAP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
+  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
+  divvar ENEMYMAXAP 100
+  setvarvar TEMPVAR ENEMYMAXAP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
+
+  setvarvar ENEMYHP ENEMYMAXHP
+  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
+  mulvar ENEMYMAXHPATOMIC 2
+  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
+  mulvar ENEMYMAXAPATOMIC 2
+  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
+  setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
+  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 20 17 // 20 20 is about Duke's Height
+  action ADANCE1DANCEFORWARDS
+  state rankstarbeta
+  state maxcivsincrease 
+  cstat 257
+  setvar SKILLSET? 1
+ }
+ ifvare SKILLSET? 1 state rankstarbeta
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+
+ setvar TEMP 0
+ ifaction ADANCE1DANCEFORWARDS { addvar TEMP 1 ifactioncount 4 action ADANCE1DANCEBACKWARDS }
+ else ifaction ADANCE1DANCEBACKWARDS { addvar TEMP 1 ifactioncount 4 action ADANCE1DANCEFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ setvar TEMP 0
+ ifaction ADANCE1SHRUNKFORWARDS { addvar TEMP 1 ifactioncount 4 action ADANCE1SHRUNKBACKWARDS }
+ else ifaction ADANCE1SHRUNKBACKWARDS { addvar TEMP 1 ifactioncount 4 action ADANCE1SHRUNKFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   ifaction ADANCE1SHRUNKFORWARDS action ADANCE1DANCEFORWARDS
+   ifaction ADANCE1SHRUNKBACKWARDS action ADANCE1DANCEBACKWARDS
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 20 17 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE1GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE1FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE1DANCEFORWARDS
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
+       action ADANCE1GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE1FROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     ifaction ADANCE1DANCEFORWARDS action ADANCE1SHRUNKFORWARDS
+     ifaction ADANCE1DANCEBACKWARDS action ADANCE1SHRUNKBACKWARDS
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject
+ state actorseekingitem
+ state checkfallcounter_nonplayer state enemyfloorhurt
+ state enemyunderwater
+ state enemymaxhpcountdown state enemyarmortype state freezecode_actor
+ state healingsector_actor
+enda 
+
+action ADANCE2DANCE 0 2 1 1 12
+action ADANCE2SHRUNK 0 2 1 1 12
+action ADANCE2GROW
+action ADANCE2FROZEN
+
+useractor notenemy DANCE2 TOUGH
+ ifvare SKILLSET? 0 
+ {
+  setvar ENEMYMAXHP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
+  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
+  divvar ENEMYMAXHP 100
+  setvarvar TEMPVAR ENEMYMAXHP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
+
+  setvar ENEMYMAXAP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
+  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
+  divvar ENEMYMAXAP 100
+  setvarvar TEMPVAR ENEMYMAXAP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
+
+  setvarvar ENEMYHP ENEMYMAXHP
+  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
+  mulvar ENEMYMAXHPATOMIC 2
+  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
+  mulvar ENEMYMAXAPATOMIC 2
+  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
+  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
+  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 24 21 // 24 24 is about correct height
+  action ADANCE2DANCE
+  state rankstarbeta
+  state maxcivsincrease 
+  cstat 257
+  setvar SKILLSET? 1 
+ }
+ ifvare SKILLSET? 1 state rankstarbeta
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+
+ ifaction ADANCE2DANCE
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ ifaction ADANCE2SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ADANCE2DANCE
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 24 21 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE2GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE2FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE2DANCE
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action ADANCE2GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE2FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ADANCE2SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject  state actorseekingitem
+ state checkfallcounter_nonplayer state enemyfloorhurt
+ state enemyunderwater
+ state enemymaxhpcountdown
+ state enemyarmortype
+ state freezecode_actor
+ state healingsector_actor
+enda
+
+action ADANCE3DANCEFORWARDS 0 4 1 1 12
+action ADANCE3DANCEBACKWARDS 3 4 1 -1 12
+action ADANCE3SHRUNKFORWARDS 0 4 1 1 12
+action ADANCE3SHRUNKBACKWARDS 3 4 1 -1 12
+action ADANCE3GROW
+action ADANCE3FROZEN
+
+useractor notenemy DANCE3 TOUGH 
+ ifvare SKILLSET? 0
+ {
+  setvar ENEMYMAXHP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
+  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
+  divvar ENEMYMAXHP 100
+  setvarvar TEMPVAR ENEMYMAXHP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
+
+  setvar ENEMYMAXAP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
+  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
+  divvar ENEMYMAXAP 100
+  setvarvar TEMPVAR ENEMYMAXAP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
+
+  setvarvar ENEMYHP ENEMYMAXHP
+  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
+  mulvar ENEMYMAXHPATOMIC 2
+  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
+  mulvar ENEMYMAXAPATOMIC 2
+  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
+  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
+  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 22 19 // 22 22 is about correct height
+  action ADANCE3DANCEFORWARDS
+  state rankstarbeta
+  state maxcivsincrease 
+  cstat 257
+  setvar SKILLSET? 1 
+ }
+ ifvare SKILLSET? 1 state rankstarbeta
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+
+ setvar TEMP 0
+ ifaction ADANCE3DANCEFORWARDS { addvar TEMP 1 ifactioncount 3 action ADANCE3DANCEBACKWARDS }
+ else ifaction ADANCE3DANCEBACKWARDS { addvar TEMP 1 ifactioncount 3 action ADANCE3DANCEFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ setvar TEMP 0
+ ifaction ADANCE3SHRUNKFORWARDS { addvar TEMP 1 ifactioncount 3 action ADANCE3SHRUNKBACKWARDS }
+ else ifaction ADANCE3SHRUNKBACKWARDS { addvar TEMP 1 ifactioncount 3 action ADANCE3SHRUNKFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   ifaction ADANCE3SHRUNKFORWARDS action ADANCE3DANCEFORWARDS
+   ifaction ADANCE3SHRUNKBACKWARDS action ADANCE3DANCEBACKWARDS
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 22 19 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE3GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE3FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE3DANCEFORWARDS
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action ADANCE3GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE3FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     ifaction ADANCE3DANCEFORWARDS action ADANCE3SHRUNKFORWARDS
+     ifaction ADANCE3DANCEBACKWARDS action ADANCE3SHRUNKBACKWARDS
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
+ state actorseekingitem
+ state checkfallcounter_nonplayer state enemyfloorhurt
+ state enemyunderwater
+ state enemymaxhpcountdown
+ state enemyarmortype
+ state freezecode_actor
+ state healingsector_actor
+enda
+
+action ADANCE5DANCEFORWARDS 0 6 1 1 12
+action ADANCE5DANCEBACKWARDS 5 6 1 -1 12
+action ADANCE5SHRUNKFORWARDS 0 6 1 1 12
+action ADANCE5SHRUNKBACKWARDS 5 6 1 -1 12
+action ADANCE5GROW
+action ADANCE5FROZEN
+
+useractor notenemy DANCE5 TOUGH
+ ifvare SKILLSET? 0
+ { 
+  setvar ENEMYMAXHP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
+  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
+  divvar ENEMYMAXHP 100
+  setvarvar TEMPVAR ENEMYMAXHP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
+
+  setvar ENEMYMAXAP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
+  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
+  divvar ENEMYMAXAP 100
+  setvarvar TEMPVAR ENEMYMAXAP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
+
+  setvarvar ENEMYHP ENEMYMAXHP
+  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
+  mulvar ENEMYMAXHPATOMIC 2
+  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
+  mulvar ENEMYMAXAPATOMIC 2
+  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
+  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
+  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 20 17 // 22 22 is about correct height
+  action ADANCE5DANCEFORWARDS
+  state rankstarbeta
+  state maxcivsincrease 
+  cstat 257
+  setvar SKILLSET? 1
+ }
+ ifvare SKILLSET? 1 state rankstarbeta
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+
+ setvar TEMP 0
+ ifaction ADANCE5DANCEFORWARDS { addvar TEMP 1 ifactioncount 5 action ADANCE5DANCEBACKWARDS }
+ else ifaction ADANCE5DANCEBACKWARDS { addvar TEMP 1 ifactioncount 5 action ADANCE5DANCEFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ setvar TEMP 0
+ ifaction ADANCE5SHRUNKFORWARDS { addvar TEMP 1 ifactioncount 5 action ADANCE5SHRUNKBACKWARDS }
+ else ifaction ADANCE5SHRUNKBACKWARDS { addvar TEMP 1 ifactioncount 5 action ADANCE5SHRUNKFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   ifaction ADANCE5SHRUNKFORWARDS action ADANCE5DANCEFORWARDS
+   ifaction ADANCE5SHRUNKBACKWARDS action ADANCE5DANCEBACKWARDS
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 20 17 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE5GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE5FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE5DANCEFORWARDS
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action ADANCE5GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE5FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     ifaction ADANCE5DANCEFORWARDS action ADANCE5SHRUNKFORWARDS
+     ifaction ADANCE5DANCEBACKWARDS action ADANCE5SHRUNKBACKWARDS
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
+ state actorseekingitem
+ state checkfallcounter_nonplayer state enemyfloorhurt
+ state enemyunderwater
+ state enemymaxhpcountdown
+ state enemyarmortype
+ state freezecode_actor
+ state healingsector_actor
+enda
+
+action ADANCE6STAND
+action ADANCE6SHRUNK
+action ADANCE6GROW
+action ADANCE6FROZEN
+
+useractor notenemy DANCE6 TOUGH 
+ ifvare SKILLSET? 0
+ {
+  setvar ENEMYMAXHP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
+  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
+  divvar ENEMYMAXHP 100
+  setvarvar TEMPVAR ENEMYMAXHP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
+
+  setvar ENEMYMAXAP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
+  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
+  divvar ENEMYMAXAP 100
+  setvarvar TEMPVAR ENEMYMAXAP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
+
+  setvarvar ENEMYHP ENEMYMAXHP
+  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
+  mulvar ENEMYMAXHPATOMIC 2
+  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
+  mulvar ENEMYMAXAPATOMIC 2
+  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
+  setvar ACTORMAXFALLRESIST FEMALENPCFALLRESIST
+  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 20 17 // 20 20 is about correct height
+  action ADANCE6STAND
+  state rankstarbeta
+  state maxcivsincrease 
+  cstat 257
+  setvar SKILLSET? 1 
+ }
+ ifvare SKILLSET? 1 state rankstarbeta
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+
+ ifaction ADANCE6STAND
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ ifaction ADANCE6SHRUNK
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   action ADANCE6STAND
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 20 17 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE6GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE6FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE6STAND
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action ADANCE6GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE6FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     action ADANCE6SHRUNK
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject 
+ state actorseekingitem
+ state checkfallcounter_nonplayer state enemyfloorhurt
+ state enemyunderwater
+ state enemymaxhpcountdown
+ state enemyarmortype
+ state freezecode_actor
+ state healingsector_actor
+enda
+
+action ADANCE7DANCEFORWARDS 0 8 1 1 12
+action ADANCE7DANCEBACKWARDS 7 8 1 -1 12
+action ADANCE7SHRUNKFORWARDS 0 8 1 1 12
+action ADANCE7SHRUNKBACKWARDS 7 8 1 -1 12
+action ADANCE7GROW
+action ADANCE7FROZEN
+
+useractor notenemy DANCE7 TOUGH 
+ ifvare SKILLSET? 0
+ {
+  setvar ENEMYMAXHP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR else subvarvar ENEMYMAXHP TEMPVAR
+  mulvar ENEMYMAXHP DUKEHITPOINTSSTART
+  divvar ENEMYMAXHP 100
+  setvarvar TEMPVAR ENEMYMAXHP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXHP TEMPVAR2 else subvarvar ENEMYMAXHP TEMPVAR2
+
+  setvar ENEMYMAXAP TOUGH
+  randvar TEMPVAR 3
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR else subvarvar ENEMYMAXAP TEMPVAR
+  mulvar ENEMYMAXAP DUKEHITPOINTSSTART
+  divvar ENEMYMAXAP 100
+  setvarvar TEMPVAR ENEMYMAXAP
+  divvar TEMPVAR 10
+  randvarvar TEMPVAR2 TEMPVAR
+  ifrnd 128 addvarvar ENEMYMAXAP TEMPVAR2 else subvarvar ENEMYMAXAP TEMPVAR2
+
+  setvarvar ENEMYHP ENEMYMAXHP
+  setvarvar ENEMYMAXHPATOMIC ENEMYMAXHP
+  mulvar ENEMYMAXHPATOMIC 2
+  setvarvar ENEMYMAXAPATOMIC ENEMYMAXAP
+  mulvar ENEMYMAXAPATOMIC 2
+  setvar ENEMYMAXAIRTIME 390 setvarvar ENEMYAIRTIME ENEMYMAXAIRTIME
+  setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
+  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+  sizeat 22 19 // 22 22 is about correct height
+  action ADANCE7DANCEFORWARDS
+  state rankstarbeta
+  state maxcivsincrease 
+  cstat 257
+  setvar SKILLSET? 1
+ }
+ ifvare SKILLSET? 1 state rankstarbeta
+ getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
+
+ setvar TEMP 0
+ ifaction ADANCE7DANCEFORWARDS { addvar TEMP 1 ifactioncount 7 action ADANCE7DANCEBACKWARDS }
+ else ifaction ADANCE7DANCEBACKWARDS { addvar TEMP 1 ifactioncount 7 action ADANCE7DANCEFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ setvar TEMP 0
+ ifaction ADANCE7SHRUNKFORWARDS { addvar TEMP 1 ifactioncount 7 action ADANCE7SHRUNKBACKWARDS }
+ else ifaction ADANCE7SHRUNKBACKWARDS { addvar TEMP 1 ifactioncount 7 action ADANCE7SHRUNKFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   ifaction ADANCE7SHRUNKFORWARDS action ADANCE7DANCEFORWARDS
+   ifaction ADANCE7SHRUNKBACKWARDS action ADANCE7DANCEBACKWARDS
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 22 19 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE7GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE7FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE7DANCEFORWARDS
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce MALENPC_DEATH1    
+       action ADANCE7GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE7FROZEN
+      strength 0
+      break
+     }
+
+     soundonce MALENPC_DEATH1    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      ifrnd 85 soundonce MALENPC_PAIN1
+      else ifrnd 128 soundonce MALENPC_PAIN2
+      else soundonce MALENPC_PAIN3
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     ifaction ADANCE7DANCEFORWARDS action ADANCE7SHRUNKFORWARDS
+     ifaction ADANCE7DANCEBACKWARDS action ADANCE7SHRUNKBACKWARDS
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
+
+// state breakobject
+ state actorseekingitem
+ state checkfallcounter_nonplayer state enemyfloorhurt
+ state enemyunderwater
+ state enemymaxhpcountdown
+ state enemyarmortype
+ state freezecode_actor
+ state healingsector_actor
+enda
+
+action ADANCE9DANCEFORWARDS 0 3 1 1 12
+action ADANCE9DANCEBACKWARDS 2 3 1 -1 12
+action ADANCE9SHRUNKFORWARDS 0 3 1 1 12
+action ADANCE9SHRUNKBACKWARDS 2 3 1 -1 12
+action ADANCE9GROW
+action ADANCE9FROZEN
+
 useractor notenemy DANCE9 TOUGH
  ifvare SKILLSET? 0
  {
@@ -14674,14 +15577,160 @@ useractor notenemy DANCE9 TOUGH
   setvar ACTORMAXFALLRESIST MALENPCFALLRESIST
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
   sizeat 22 19 // 22 22 is about correct height
+  action ADANCE9DANCEFORWARDS
   state rankstarbeta
   state maxcivsincrease 
+  cstat 257
   setvar SKILLSET? 1
  }
  ifvare SKILLSET? 1 state rankstarbeta
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
- ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
- state breakobject 
+
+ setvar TEMP 0
+ ifaction ADANCE9DANCEFORWARDS { addvar TEMP 1 ifactioncount 2 action ADANCE9DANCEBACKWARDS }
+ else ifaction ADANCE9DANCEBACKWARDS { addvar TEMP 1 ifactioncount 2 action ADANCE9DANCEFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
+ }
+
+ setvar TEMP 0
+ ifaction ADANCE9SHRUNKFORWARDS { addvar TEMP 1 ifactioncount 2 action ADANCE9SHRUNKBACKWARDS }
+ else ifaction ADANCE9SHRUNKBACKWARDS { addvar TEMP 1 ifactioncount 2 action ADANCE9SHRUNKFORWARDS }
+ ifvarg TEMP 0
+ {
+  ifcount SHRUNKDONECOUNT
+  {
+   ifaction ADANCE9SHRUNKFORWARDS action ADANCE9DANCEFORWARDS
+   ifaction ADANCE9SHRUNKBACKWARDS action ADANCE9DANCEBACKWARDS
+   cstat 257
+  }
+  else
+    ifcount SHRUNKCOUNT { sizeto 22 19 setvar SHRUNK? 0 }
+  else
+    state genericshrunkcode
+ }
+
+ ifaction ADANCE9GROW
+ {
+   ifcount 32
+   {
+     guts JIBS4 26
+     guts JIBS6 24
+     sound SQUISHED
+     sound PIPEBOMB_EXPLODE
+     hitradius 2048 60 70 80 90
+     { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
+     spawn EXPLOSION2
+     randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+     addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+     setvar TEMPVAR 1
+     state checkkillerofciv
+     state expmulti
+     state exp_given
+
+     killit
+    }
+   else
+     sizeto MAXXSTRETCH MAXYSTRETCH
+ }
+
+ ifaction ADANCE9FROZEN
+ {
+  state actorcheck_frozentimer
+  ifvarl FROZENTIMER 1 // ifcount THAWTIME
+  {
+   action ADANCE9DANCEFORWARDS
+   state unfreeze
+  }
+  else
+  {
+   ifvarl FROZENTIMER 39 // ifcount FROZENDRIPTIME
+   {
+    ifactioncount 26
+    {
+     spawn WATERDRIP
+     resetactioncount 
+    }
+   }
+  }
+  ifhitweapon
+  {
+   ifwasweapon FREEZEBLAST { strength 0 state freezeblast_frozen-actor break }
+
+   randvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSRAND 
+   addvar RANKPOINTSTEMP CIVILIANKILLRANKPOINTSSOLID 
+   setvar TEMPVAR 1
+   state checkkillerofciv
+   state expmulti
+   state exp_given
+   ifrnd 84 { espawn NEWBLOODPOOL setactor[RETURN].cstat 34 setactor[RETURN].pal 1 }
+   lotsofglass 24
+   setactor[THISACTOR].extra -1
+   sound GLASS_BREAKING
+   killit
+  }
+ }
+
+  ifhitweapon
+  {
+   ifdead
+   {
+     setvar ENEMYHP 0
+     ifwasweapon GROWSPARK
+     {
+       state expanding
+       cstat 0
+       move 0
+       sound ACTOR_GROWING
+       soundonce LADY_SCREAM    
+       action ADANCE9GROW
+       break
+     }
+     else
+     ifwasweapon FREEZEBLAST
+     {
+      state freezeup
+      state frosty
+      spritepal 1
+      move 0
+      action ADANCE9FROZEN
+      strength 0
+      break
+     }
+
+     soundonce LADY_SCREAM    
+     state drop_artifacts
+     state civiliankilled
+   }
+   else
+   {
+    ifvarl ENEMYINVULNTIME 1
+    {
+     ifvarg ENEMYLASTDAMAGE 0
+     {
+      spawn BLOOD
+      soundonce LADY_SCREAM    
+     }
+     else ifwasweapon SHRINKSPARK nullop else sound NODAMAGE
+    }
+
+    ifwasweapon SHRINKSPARK
+    {
+     addlogvar SHRUNK?
+     setvar SHRUNK? 1
+     sound ACTOR_SHRINKING
+     move 0
+     ifaction ADANCE9DANCEFORWARDS action ADANCE9SHRUNKFORWARDS
+     ifaction ADANCE9DANCEBACKWARDS action ADANCE9SHRUNKBACKWARDS
+     cstat 0
+     break
+    }
+    else
+    ifwasweapon GROWSPARK sound EXPANDERHIT
+
+   }
+  }
 
  state actorseekingitem
  state checkfallcounter_nonplayer state enemyfloorhurt
