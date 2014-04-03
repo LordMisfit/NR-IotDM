@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git40.04012014
+definequote 1337 ^22VERSION:^0 5.22.git41.04012014
 
 action ANULLACTION 0
 
@@ -23438,21 +23438,217 @@ ends
 state checkplayerinventoryitems
  setvarvar CHARACTERARRAY CHARACTERSELECTED?
  ifvarg INVENTORYSLOTMAX 0 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 PLAYEREQUIPSLOTITEM1 else setvar PLAYEREQUIPSLOTITEM1 -1
-// addlogvar PLAYEREQUIPSLOTITEM1
  ifvarg INVENTORYSLOTMAX 1 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 PLAYEREQUIPSLOTITEM2 else setvar PLAYEREQUIPSLOTITEM2 -1
-// addlogvar PLAYEREQUIPSLOTITEM2
  ifvarg INVENTORYSLOTMAX 2 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 PLAYEREQUIPSLOTITEM3 else setvar PLAYEREQUIPSLOTITEM3 -1
-// addlogvar PLAYEREQUIPSLOTITEM3
  ifvarg INVENTORYSLOTMAX 3 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 PLAYEREQUIPSLOTITEM4 else setvar PLAYEREQUIPSLOTITEM4 -1
-// addlogvar PLAYEREQUIPSLOTITEM4
  ifvarg INVENTORYSLOTMAX 4 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 PLAYEREQUIPSLOTITEM5 else setvar PLAYEREQUIPSLOTITEM5 -1
-// addlogvar PLAYEREQUIPSLOTITEM5
  ifvarg INVENTORYSLOTMAX 5 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 PLAYEREQUIPSLOTITEM6 else setvar PLAYEREQUIPSLOTITEM6 -1
-// addlogvar PLAYEREQUIPSLOTITEM6
  ifvarg INVENTORYSLOTMAX 6 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 PLAYEREQUIPSLOTITEM7 else setvar PLAYEREQUIPSLOTITEM7 -1
-// addlogvar PLAYEREQUIPSLOTITEM7
  ifvarg INVENTORYSLOTMAX 7 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 PLAYEREQUIPSLOTITEM8 else setvar PLAYEREQUIPSLOTITEM8 -1
-// addlogvar PLAYEREQUIPSLOTITEM8
+ends
+
+state removeexcessinventory-checkids
+  ifvare TEMPVAR3 1 { state checksunrings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 2 { state checkaquarings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 3 { state checkplasmarings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 4 { state checkspiritrings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 5 { state checkcharmankhs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 6 { state checkmirrorshields addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 7 { state checkexpbadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 8 { state checkrankbadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 9 { state checkmoneybadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 10 { state checkriotshields addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 11 { state checknyxglovepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 12 { state checkrabbitsfoots addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 13 { state checkjumpbootpairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 14 { state checkshockabbootpairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 15 { state checkhappyshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 16 { state checkstyleshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 17 { state checkcharmshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 18 { state checkpowerwrists addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 19 { state checkhockeymasks addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 20 { state checkgemstonecrowns addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 21 { state checkironrunes addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 22 { state checktwilightcapes addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 23 { state checksnakearmbands addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 24 { state checkmedicbags addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 25 { state checkserpenthelmets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 26 { state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 27 { state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 28 { state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  setvar TEMPVAR3 0
+ends
+
+state characterperformremoveslot1
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR3 }
+ends
+state characterperformremoveslot2
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR3 }
+ends
+state characterperformremoveslot3
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR3 }
+ends
+state characterperformremoveslot4
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR3 }
+ends
+state characterperformremoveslot5
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 TEMPVAR3 }
+ends
+state characterperformremoveslot6
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 TEMPVAR3 }
+ends
+state characterperformremoveslot7
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 TEMPVAR3 }
+ends
+state characterperformremoveslot8
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR3 }
+ends
+
+state removeexcessinventoryslots
+ ifvarl INVENTORYSLOTMAX 8
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot8
+ }
+ ifvarl INVENTORYSLOTMAX 7
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot7
+ }
+ ifvarl INVENTORYSLOTMAX 6
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot6
+ }
+ ifvarl INVENTORYSLOTMAX 5
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot5
+ }
+ ifvarl INVENTORYSLOTMAX 4
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot4
+ }
+ ifvarl INVENTORYSLOTMAX 3
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot3
+ }
+ ifvarl INVENTORYSLOTMAX 2
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot2
+ }
+ ifvarl INVENTORYSLOTMAX 1
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot1
+ }
 ends
 
 state checkplayersupportlevels
@@ -25738,6 +25934,7 @@ ifvare TEMP 0 setvar DEFENSEMODE? 0 else ifvare TEMP 1 setvar DEFENSEMODE? 1
 
 state checkplayergrowthrates
 state checkplayerinventoryitems
+state removeexcessinventoryslots
 state checkplayersupportlevels
 
 state support-maxhp
