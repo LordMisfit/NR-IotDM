@@ -11,3 +11,20 @@ tilefromtexture 3581
  file "ART Files/Tiles013/3581.png"
  alphacut 255
 }
+
+tilefromtexture 6164
+{
+ file "ART Files/Tiles024/6164.png"
+ alphacut 255
+}
+tilefromtexture 6165
+{
+ file "ART Files/Tiles024/6165.png"
+ alphacut 255
+}
+tilefromtexture 6166
+{
+ file "ART Files/Tiles024/6166.png"
+ alphacut 255
+}
+
