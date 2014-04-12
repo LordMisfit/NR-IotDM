@@ -4052,6 +4052,8 @@ else
      ifvarg CENTS -1 ifvarl CENTS 10 setvar temp 193 else setvar temp 194 
      state mt
      setvar orientation_change 0
+// statusdisplaytoggle
+    } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0 [line 1991]
 
      setvar orientation_change 256
      //*****************
@@ -4205,7 +4207,6 @@ else
 
       
 
-    } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0 [line 1991]
     setvar orientation_change 0
     //************************** End of redisplay attempt **************************
  
