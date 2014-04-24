@@ -5475,7 +5475,7 @@ else
      //**Stat Boost Gains**
      //********************
  
-     setvarvar digx 464 // digx_test // 28
+     setvarvar digx 478 // 464 // digx_test // 28
      setvarvar digy 177 // 146 // digy_test // 20
      //*******************
      //*Show Max HP Gains*
