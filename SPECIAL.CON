@@ -7562,7 +7562,15 @@ state energycost_check
    ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
    mulvarvar ENERGYCOST_TEMP DAMAGEMODIFIER
    divvar ENERGYCOST_TEMP 1000
-   ifvarl ENERGYCOST_TEMP 1 setvar ENERGYCOST_TEMP 1
+
+   setvar TEMP2 0
+   ifvarand TEMP 32 addvar TEMP2 1 // Triad Refractor
+   ifvarand TEMP 64 addvar TEMP2 1 // Triad Ragnarok
+   ifvarand TEMP 256 addvar TEMP2 1 // Mercury Aqua Protection
+   ifvarand TEMP 2048 addvar TEMP2 1 // Triad Blitzkrieg
+   // addlogvar TEMP2
+   ifvarg TEMP2 0 { ifvarl ENERGYCOST_TEMP 0 setvar ENERGYCOST_TEMP 0 }
+   else { ifvarl ENERGYCOST_TEMP 1 setvar ENERGYCOST_TEMP 1 }
 ends
 
 state secretrecipecheck_text
