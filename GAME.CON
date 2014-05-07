@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git45.04292014
+definequote 1337 ^22VERSION:^0 5.22.git46.04292014
 
 action ANULLACTION 0
 
@@ -25395,6 +25395,7 @@ ifvare mainmenu 0
     {
      stopsound NITEVISION_ONOFF
      sound VRVISOR_OFF
+     redefinequote 334 ^10AMI HAS RUN OUT OF EP!
      setvar VISOROFFSOUND 1
      setvar VISORONSOUND 0 
     }
