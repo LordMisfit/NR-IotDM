@@ -12204,7 +12204,7 @@ state fortunecookie_fortunedisplays
              ifvare FORTUNECOOKIEQUOTE 20 redefinequote 272 FORTUNE SAY:^22 26-31-43-82-16-29
              ifvare FORTUNECOOKIEQUOTE 21 redefinequote 272 FORTUNE SAY:^22 YOU MUST FIND THE COMPUTER ROOM!
              ifvare FORTUNECOOKIEQUOTE 22 redefinequote 272 FORTUNE SAY:^22 SPOILER: YOU DIE!
-             ifvare FORTUNECOOKIEQUOTE 23 redefinequote 272 FORTUNE SAY:^22 WHA-CHOW! IT'S LIKE A KICK IN THE NUTS!
+             ifvare FORTUNECOOKIEQUOTE 23 redefinequote 272 FORTUNE SAY:^22 [ERROR 404: FORTUNE NOT FOUND.]
              ifvare FORTUNECOOKIEQUOTE 24
              {
                 redefinequote 272 FORTUNE SAY:^22 PROTIP: WATER IS WET!
