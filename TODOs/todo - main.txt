@@ -1,0 +1,9 @@
+- Make Invulnerability have different balance options, such as 'no reflection/instant-kill' and 'drain health on touch instead of kill' or different ratios of damage-reflection
+- MAKE THE DAMN SLOT MACHINE MINIGAME :P
+- Corrosion Ailment for 'Armor Poison'
+- Add alternate storyline route mode if all worldtiles are detected as found at least once.
+- 'maybe' make a custom shrink projectile to get around the 'no shrinking things with < 24 x/y-repeat' issue.
+- Make Tanks able to push crates within it's weight limit.
+- Equippable that will allow natural AP regeneration if you have an Armor item, but it will not set AB% to a specfic amount. It would make it more like how characters have natural and slow HP regen
+- Make an equippable item that splits damage taken by the wearer between all members of the group.
+
