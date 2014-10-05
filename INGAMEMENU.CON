@@ -736,8 +736,8 @@ ifvare mainmenu 1
    setvar orientation_change 512
    // Show Kills Counter [Label]
    setvar digy -5
-   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Kills [Level]
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Kills [Level]
    ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
@@ -784,8 +784,8 @@ ifvare mainmenu 1
    }
 
    // Show Worldtiles Counter [Label]
-   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WorldTiles Found [Level]
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max WorldTiles Found [Level]
    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
@@ -798,13 +798,14 @@ ifvare mainmenu 1
 
    // Show Kills Counter [Current]
    setvar digy -3
-   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Kills [Level]
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Kills [Level]
    ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 293
     addvar digy 6
+    setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Kills [Level]
     setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
@@ -853,8 +854,8 @@ ifvare mainmenu 1
    }
 
    // Show Worldtiles Counter [Current]
-   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WorldTiles Found [Level]
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max WorldTiles Found [Level]
    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
@@ -868,8 +869,8 @@ ifvare mainmenu 1
 
    // Show Kills Counter [/]
    setvar digy -5
-   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Kills [Level]
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Kills [Level]
    ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
@@ -916,8 +917,8 @@ ifvare mainmenu 1
    }
  
    // Show Worldtiles Counter [/]
-   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WorldTiles Found [Level]
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max WorldTiles Found [Level]
    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
@@ -929,13 +930,14 @@ ifvare mainmenu 1
 
    // Show Kills Counter [Maximum]
    setvar digy -3
-   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Kills [Level]
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Kills [Level]
    ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 313
     addvar digy 6
+    setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Kills [Level]
     setvarvar varname MISCARRAYID_AMOUNTTEMP2
     state orientation2
     state dn
@@ -984,8 +986,8 @@ ifvare mainmenu 1
    }
 
    // Show Worldtiles Counter [Maximum]
-   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WorldTiles Found [Level]
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max WorldTiles Found [Level]
    ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
     ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
@@ -10145,7 +10147,7 @@ ifvare mainmenusubmenu 6
 
 // Calculations
 
-  setvar MISCARRAYID 22 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
+  setvar MISCARRAYID 22 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Total World Tile Count
   ifvarand WORLDTILEBITFIELD1 1 state addworldtilecount
   ifvarand WORLDTILEBITFIELD1 2 state addworldtilecount
   ifvarand WORLDTILEBITFIELD1 4 state addworldtilecount
@@ -10407,7 +10409,7 @@ ifvare mainmenusubmenu 6
    setvar digx 148
    setvar digy 168
    state pal21
-   setvar MISCARRAYID 22 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 22 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Total World Tile Count
    setvarvar varname MISCARRAYID_AMOUNTTEMP
    state dn
 
@@ -10424,7 +10426,7 @@ ifvare mainmenusubmenu 6
 
    setvar digx 196
    setvar digy 166
-   setvar MISCARRAYID 22 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 22 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Total World Tile Count
    setvarvar TEMPVAR MISCARRAYID_AMOUNTTEMP
    mulvar TEMPVAR 10000
    divvar TEMPVAR 256 // Worldtile Maximum
@@ -10818,8 +10820,8 @@ ifvare mainmenusubmenu 6
   state orientation2
   setvar tilenum 7933
   state pal0
-  setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+  setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Kills [Level]
+  setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Kills [Level]
   ifvarvarl MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state shade0 else setvar shade 18
   state rs 
   state shade0

@@ -4444,7 +4444,7 @@ state initialize_worldtile
  else
  ifvare SKILLSET? 1
  {
-  setvar MISCARRAYID 21
+  setvar MISCARRAYID 21 // Max WorldTiles Found [level]
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
   addvar MISCARRAYID_AMOUNTTEMP 1
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
@@ -4459,7 +4459,7 @@ state spin_worldtile
 ends
 
 state grab_worldtile
-       setvar MISCARRAYID 20
+       setvar MISCARRAYID 20 // WorldTiles Found [level]
        getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
        addvar MISCARRAYID_AMOUNTTEMP 1
        setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
@@ -14838,24 +14838,24 @@ ends
 state saverank
       ifactor FEM10
       {
-       setvar MISCARRAYID 12
+       setvar MISCARRAYID 12 // Civilians Saved [Level]
        getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
        addvar MISCARRAYID_AMOUNTTEMP 2
        setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
-       setvar MISCARRAYID 13
+       setvar MISCARRAYID 13 // Civilians Saved [Game]
        getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
        addvar MISCARRAYID_AMOUNTTEMP 2
        setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
       }
       else
       {
-       setvar MISCARRAYID 12
+       setvar MISCARRAYID 12 // Civilians Saved [Level]
        getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
        addvar MISCARRAYID_AMOUNTTEMP 1
        setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
-       setvar MISCARRAYID 13
+       setvar MISCARRAYID 13 // Civilians Saved [Game]
        getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
        addvar MISCARRAYID_AMOUNTTEMP 1
        setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
@@ -14876,7 +14876,7 @@ state saverank
       addvarvar RANKPOINTS RANKPOINTSTEMP
       setvar RANKPOINTSTEMP 0
       sound TELEPORTER
-	spawn TRANSPORTERSTAR
+      spawn TRANSPORTERSTAR
       ifactor FEM2
       {
        espawn POLEFEM2
@@ -17051,12 +17051,12 @@ ends
 state calcrankitems
             state stopsearchsounds
 
-            setvar MISCARRAYID 8
+            setvar MISCARRAYID 8 // Memorbilia Found [Level]
             getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
             addvar MISCARRAYID_AMOUNTTEMP 1
             setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
-            setvar MISCARRAYID 9 
+            setvar MISCARRAYID 9 // Memorbilia Found [Game] 
             getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
             addvar MISCARRAYID_AMOUNTTEMP 1
             setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
