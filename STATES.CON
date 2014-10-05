@@ -2914,10 +2914,18 @@ state exp_given
       ifvare PLAYEREQUIPSLOTITEM2 7 addvar TEMP3 2 // EXP Badge
       ifvare PLAYEREQUIPSLOTITEM3 7 addvar TEMP3 2 // EXP Badge
       ifvare PLAYEREQUIPSLOTITEM4 7 addvar TEMP3 2 // EXP Badge
+      ifvare PLAYEREQUIPSLOTITEM5 7 addvar TEMP3 2 // EXP Badge
+      ifvare PLAYEREQUIPSLOTITEM6 7 addvar TEMP3 2 // EXP Badge
+      ifvare PLAYEREQUIPSLOTITEM7 7 addvar TEMP3 2 // EXP Badge
+      ifvare PLAYEREQUIPSLOTITEM8 7 addvar TEMP3 2 // EXP Badge
       ifvare PLAYEREQUIPSLOTITEM1 28 addvar TEMP3 10 // Jewel of Four Souls
       ifvare PLAYEREQUIPSLOTITEM2 28 addvar TEMP3 10 // Jewel of Four Souls
       ifvare PLAYEREQUIPSLOTITEM3 28 addvar TEMP3 10 // Jewel of Four Souls
       ifvare PLAYEREQUIPSLOTITEM4 28 addvar TEMP3 10 // Jewel of Four Souls
+      ifvare PLAYEREQUIPSLOTITEM5 28 addvar TEMP3 10 // Jewel of Four Souls
+      ifvare PLAYEREQUIPSLOTITEM6 28 addvar TEMP3 10 // Jewel of Four Souls
+      ifvare PLAYEREQUIPSLOTITEM7 28 addvar TEMP3 10 // Jewel of Four Souls
+      ifvare PLAYEREQUIPSLOTITEM8 28 addvar TEMP3 10 // Jewel of Four Souls
       ifvarg TEMP3 0 mulvarvar EXPPTSTEMP TEMP3
       ifvarl EXPPTSTEMP 0 setvar EXPPTSTEMP 0
       ifvarg EXPPTSTEMP 9163600 setvar EXPPTSTEMP 9163600

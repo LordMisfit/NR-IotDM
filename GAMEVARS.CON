@@ -357,7 +357,7 @@ gamevar CLOCKDIGITTIMER 0 2
 
 gamevar ITEMDROPPEDTIME 0 2 // If var is >0, then an item cannot be grabbed. For dropping items in your inventory.
 gamevar ARMORISUSED? 0 2 // If an Armor item is used, this flag is set to make it appear and work differently.
-gamevar ARMORAPPEARANCE? 0 0 // 0 = Males [Normal], 1 = Female, 2 = ESSence, 3 = Cybanis
+gamevar ARMORAPPEARANCE? 0 0 // 0 = Males [Normal], 1 = Females, 2 = ESSence, 3 = Cybanis
 
 gamevar DEFENSEMODE? 0 131073 // Player Defense mode means -50% damage from attacks, +33% faster natural healing rate
 
@@ -697,15 +697,6 @@ gamevar ONLYHPMETER? 0 2
 
 gamevar MONEYPAL 0 0
 
-/*
-// Actor-Locking for Menu Modes
-gamevar ACTORMENUSAVEDSTATE 0 2 // Intended to try to freeze things like projectiles and other attacks in place while the menus are open
-gamevar ACTORMENUSAVEDVEL 0 2 // For saving the vel of a projectile frozen by the menu to keep projectile continuity when the menu is abated
-gamevar ACTORMENUSAVEDVELMULT 0 2 // For saving the vel_multiplier of a projectile frozen by the menu to keep projectile continuity when the menu is abated
-gamevar ACTORMENUSAVEDDROP 0 2 // For saving the drop of a projectile frozen by the menu to keep projectile continuity when the menu is abated
-// End Actor-Locking for Menu Modes
-*/
-
 gamevar TEMPVAR 0 0
 gamevar TEMPVAR2 0 0
 gamevar TEMPVAR3 0 0
@@ -867,26 +858,22 @@ gamevar upperlefthandlegend 1 131073
 gamevar weapontoggleselect 0 131073 // 0 = character toggle, 1 = weapon toggle
 gamevar statusdisplaytoggle 1 131073
 gamevar miscdisplaytoggle 1 131073
-// 0 = Nothing turned on
-
-// 1 = Damage Displays Only
-// 2 = Stat-Increase Displays Only
-// 4 = Money-Get Displays Only
-// 8 = Reward Displays Only
-
-// 3 = Damage and Stat Increase Displays
-// 5 = Damage Displays and Money-Get
-// 6 = Stat-Increase and Money-Get
-// 9 = Damage and Reward Displays
-// 10 = Stat-Increase and Reward Displays
-// 12 = Money-Get and Reward Displays 
-
-// 7 = Damage, Stat-Increase and Money-Get
-// 11 = Damage, Stat-Increase and Reward Displays 
-// 13 = Damage, Money-Get and Reward Displays 
-// 14 = Stat-Increase, Money-Get and Reward Displays 
-
-// 15 = All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
+// 0 			= Nothing turned on
+// 1 			= Damage Displays Only
+// 2 			= Stat-Increase Displays Only
+// 3  [1+2]		= Damage and Stat Increase Displays
+// 4 			= Money-Get Displays Only
+// 5  [1+4]		= Damage Displays and Money-Get
+// 6  [2+4]		= Stat-Increase and Money-Get
+// 7  [1+2+4]	= Damage, Stat-Increase and Money-Get
+// 8			= Reward Displays Only
+// 9  [1+8]		= Damage and Reward Displays
+// 10 [2+8]		= Stat-Increase and Reward Displays
+// 11 [1+2+8]	= Damage, Stat-Increase and Reward Displays 
+// 12 [4+8]		= Money-Get and Reward Displays 
+// 13 [1+4+8]	= Damage, Money-Get and Reward Displays 
+// 14 [2+4+8]	= Stat-Increase, Money-Get and Reward Displays 
+// 15 [1+2+4+8]	= All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
 
 
 gamevar HPPERCENTAGE 0 131073
@@ -994,20 +981,21 @@ gamevar ACTORDEATHSWITCHDELAY 0 131074
 /* 
  Actor Statuses: (Bit Field)
  0 = Normal [=]
- 1 = ?
+ 1 = ['Dead' can't be given to a monster]
  2 = Hasted [+]
  4 = Slowed [-]
  8 = Poisoned [-]
  16 = Dimness [-]
- 32 = ?
- 64 = ?
+ 32 = ['Triad Refractor' can't be given to a monster]
+ 64 = ['Triad Ragnarok' can't be given to a monster]
  128 = Confusion [-]
- 256 = ?
+ 256 = ['Mercury Aqua Protection' can't be given to a monster]
  512 = Damage Shell [+]
  1024 = Psychic Shield [+]
- 2048 = ?
- 4096 = ?
+ 2048 = ['Triad Blitzkrieg' can't be given to a monster ]
+ 4096 = ['Triad Booster' can't be given to a monster ]
  8192 = Bloodlusting [+]
+ 16384 = Corrosion (Armor 'poison') [-] (unimplemented)
 */
 gamevar ACTORHASTETIMER 0 131074 // For having Haste Durations [2]
 gamevar ACTORSLOWTIMER 0 131074 // For having Slow Durations [4]
@@ -1175,7 +1163,6 @@ gamevar DEFLECTDAMAGESTATE 0 0
 gamevar DEFLECTEDDAMAGE 0 0
 
 gamevar PCRIT? 0 131072
-gamevar ATTACKERDISPLAYTIMER 0 131072
 gamevar TOTALNULLDAMAGE 0 131072
 gamevar NULLDAMAGE 0 131072
 gamevar ARMORNULLDAMAGE 0 131072
@@ -1185,6 +1172,7 @@ gamevar ATTACKERPAL 0 131072
 gamevar DEFENDERTILENUM 0 131072
 gamevar DEFENDERPAL 0 131072
 
+gamevar ATTACKERDISPLAYTIMER 0 131072
 gamevar RANKDISPLAYTIMER 0 131072
 gamevar EXPDISPLAYTIMER 0 131072
 gamevar HEALTHDAMAGETIMER 0 131072
@@ -1244,18 +1232,18 @@ gamevar MNTINCTEMPWHOLE 0 131073
 gamevar SPDINCTEMPPART 0 131073
 gamevar AIRINCTEMPPART 0 131073
 gamevar MNTINCTEMPPART 0 131073
-gamevar SPDINCTEMPDIV 145 131073
-gamevar AIRINCTEMPDIV 26 131073
-gamevar MNTINCTEMPDIV 26 131073
+gamevar SPDINCTEMPDIV 145 131073 // Speed Value Divisor [this value is how many units of .playerspeed are needed to have a full point of the 'Speed' stat]
+gamevar AIRINCTEMPDIV 26 131073 // Airtime Value Divisor [this is how many tics equal a second of AirTime]
+gamevar MNTINCTEMPDIV 26 131073 // MantleTime Value Divisor [this is how many tics equal a second of MantleTime]
 
-gamevar STEROIDSTICS 7 131072 // Player Var - Steroids
+gamevar STEROIDSTICS 7 131073 // Player Var - Steroids
 
 gamevar BOOTSTIME 0 131073 // Player Var - Boots
 gamevar SCUBATIME 0 131073 // Player Var - Scuba Gear
-gamevar STEROIDSTIME 0 131072 // Player Var - Steroids
-gamevar JETPACKTIME 0 131072 // Player Var - Jetpack
-gamevar NIGHTVISIONTIME 0 131072 // Player Var - NV Goggles
-gamevar HOLOFORMTIME 0 131072 // Player Var - Holo(name)
+gamevar STEROIDSTIME 0 131073 // Player Var - Steroids
+gamevar JETPACKTIME 0 131073 // Player Var - Jetpack
+gamevar NIGHTVISIONTIME 0 131073 // Player Var - NV Goggles
+gamevar HOLOFORMTIME 0 131073 // Player Var - Holo(name)
 gamevar QUADTIME 0 131073 // Player Var - Quad Damage
 gamevar INVULNTIME 0 131073 // Player Var - Invuln
 gamevar REGENTIME 0 131073 // Player Var - Regen
@@ -1287,15 +1275,15 @@ gamevar PLAYERID 0 131073 // The Sprite ID of the Player
 gamevar PLAYERHEALTH 0 131073
 gamevar PLAYERANGLE 0 131073 // Horizontal Viewing Angle
 gamevar PLAYERHORIZ 0 131073 // Vertical Viewing Angle
-gamevar PLAYERWEAPON? 0 131072
+gamevar PLAYERWEAPON? 0 131073
 gamevar PLAYERCEILINGTILE 0 131073
 gamevar PLAYERFLOORTILE 0 131073
 gamevar PLAYERONGROUND 0 131073
-gamevar PLAYERDISPLAYDAMAGE 0 131072
-gamevar PLAYERDAMAGETEMP 0 131072
-gamevar PLAYERDISPLAYARMORDAMAGE 0 131072
-gamevar PLAYERARMORDAMAGETEMP 0 131072
-gamevar PLAYERHITANGLE 0 131072
+gamevar PLAYERDISPLAYDAMAGE 0 131073
+gamevar PLAYERDAMAGETEMP 0 131073
+gamevar PLAYERDISPLAYARMORDAMAGE 0 131073
+gamevar PLAYERARMORDAMAGETEMP 0 131073
+gamevar PLAYERHITANGLE 0 131073
 gamevar PLAYERINVULNCOUNTER 0 131073
 gamevar PLAYERREGENCOUNTER 0 131073
 gamevar PLAYERREGENAMOUNT1 0 131073
@@ -1852,6 +1840,7 @@ gamevar PLAYERSTATUS? 0 131073
  2048 = Triad Blitzkrieg [+] [Maken Only]
  4096 = Triad Booster [+] [Anyone]
  8192 = Bloodlusting [+] [Anyone] (new as of 5.17, Cybanis's new skill)
+ 16384 = Corrosion (Armor 'poison') [-] (unimplemented)
 */
 
 gamevar PLAYERHPINCREASECURVE 0 131073
