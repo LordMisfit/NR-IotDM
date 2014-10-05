@@ -258,12 +258,12 @@ ifvare mainmenu 1
    redefinequote 1001 
   
    getkeyname 502 30 0
-   ifvarand bits 4 redefinequote 501 ^12%s^21=^22EXIT
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^21=^22EXIT
    else redefinequote 501 ^12%s^21=^22EXIT  
    qsprintf 501 501 502
    qstrcat 1001 501
  
-   ifvarand bits 4 nullop
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS nullop
    else
    {
     ifvare mainmenuselection 15
@@ -736,9 +736,11 @@ ifvare mainmenu 1
    setvar orientation_change 512
    // Show Kills Counter [Label]
    setvar digy -5
-   ifvarg MAX_ENEMIES_KILLED_LEVEL 0
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else ifvarvarg ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 255
     addvar digy 6
     redefinequote 332 KILLS =
@@ -746,9 +748,11 @@ ifvare mainmenu 1
    }
 
    // Show Secrets Counter [Label]
-   ifvarg MAX_SECRETSFOUND_LEVEL 0
+   setvar MISCARRAYID 4 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // Secrets Found [Level]
+   setvar MISCARRAYID 6 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2  // Max Secrets Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else ifvarvarg SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 247
     addvar digy 6
     redefinequote 332 SECRETS =
@@ -756,9 +760,11 @@ ifvare mainmenu 1
    }
 
    // Show Rank Items Counter [Label]
-   ifvarg MAX_RANKITEMSFOUND_LEVEL 0
+   setvar MISCARRAYID 8 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Memorbilia Found [Level]
+   setvar MISCARRAYID 10 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Memorbilia Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else ifvarvarg RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 235
     addvar digy 6
     redefinequote 332 MEMORBILIA =
@@ -766,9 +772,11 @@ ifvare mainmenu 1
    }
 
    // Show Saved Civilians Counter [Label]
-   ifvarg MAX_CIVILIANSSAVED_LEVEL 0
+   setvar MISCARRAYID 12 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Saved [Level]
+   setvar MISCARRAYID 14 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Civilians Saved [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else ifvarvarg CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 239
     addvar digy 6
     redefinequote 332 CIV-SAVES =
@@ -776,9 +784,11 @@ ifvare mainmenu 1
    }
 
    // Show Worldtiles Counter [Label]
-   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 235
     addvar digy 6
     redefinequote 332 WORLDTILES =
@@ -788,65 +798,81 @@ ifvare mainmenu 1
 
    // Show Kills Counter [Current]
    setvar digy -3
-   ifvarg MAX_ENEMIES_KILLED_LEVEL 0
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else ifvarvarg ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 293
     addvar digy 6
-    setvarvar varname ENEMIES_KILLED_LEVEL // getplayer[THISACTOR].actors_killed varname
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
    }
 
    // Show Secrets Counter [Current]
-   ifvarg MAX_SECRETSFOUND_LEVEL 0
+   setvar MISCARRAYID 4 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // Secrets Found [Level]
+   setvar MISCARRAYID 6 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2  // Max Secrets Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else ifvarvarg SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 293
     addvar digy 6
-    setvarvar varname SECRETSFOUND_LEVEL
+    setvar MISCARRAYID 4 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // Secrets Found [Level]
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
    }
 
    // Show Rank Items Counter [Current]
-   ifvarg MAX_RANKITEMSFOUND_LEVEL 0
+   setvar MISCARRAYID 8 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Memorbilia Found [Level]
+   setvar MISCARRAYID 10 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Memorbilia Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else ifvarvarg RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 293
     addvar digy 6
-    setvarvar varname RANKITEMSFOUND_LEVEL
+    setvar MISCARRAYID 8 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Memorbilia Found [Level]
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
    }
 
    // Show Saved Civilians Counter [Current]
-   ifvarg MAX_CIVILIANSSAVED_LEVEL 0
+   setvar MISCARRAYID 12 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Saved [Level]
+   setvar MISCARRAYID 14 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Civilians Saved [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else ifvarvarg CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 293
     addvar digy 6
-    setvarvar varname CIVILIANSSAVED_LEVEL
+    setvar MISCARRAYID 12 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Saved [Level]
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
    }
 
    // Show Worldtiles Counter [Current]
-   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 293
     addvar digy 6
-    setvarvar varname WORLDTILESFOUND_LEVEL
+    setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
    }
 
    // Show Kills Counter [/]
    setvar digy -5
-   ifvarg MAX_ENEMIES_KILLED_LEVEL 0
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else ifvarvarg ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 300
     addvar digy 6
     redefinequote 332 /
@@ -854,9 +880,11 @@ ifvare mainmenu 1
    }
  
    // Show Secrets Counter [/]
-   ifvarg MAX_SECRETSFOUND_LEVEL 0
+   setvar MISCARRAYID 4 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // Secrets Found [Level]
+   setvar MISCARRAYID 6 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2  // Max Secrets Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else ifvarvarg SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 300
     addvar digy 6
     redefinequote 332 /
@@ -864,9 +892,11 @@ ifvare mainmenu 1
    }
 
    // Show Rank Items Counter [/]
-   ifvarg MAX_RANKITEMSFOUND_LEVEL 0
+   setvar MISCARRAYID 8 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Memorbilia Found [Level]
+   setvar MISCARRAYID 10 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Memorbilia Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else ifvarvarg RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 300
     addvar digy 6
     redefinequote 332 /
@@ -874,9 +904,11 @@ ifvare mainmenu 1
    }
 
    // Show Saved Civilians Counter [/]
-   ifvarg MAX_CIVILIANSSAVED_LEVEL 0
+   setvar MISCARRAYID 12 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Saved [Level]
+   setvar MISCARRAYID 14 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Civilians Saved [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else ifvarvarg CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 300
     addvar digy 6
     redefinequote 332 /
@@ -884,9 +916,11 @@ ifvare mainmenu 1
    }
  
    // Show Worldtiles Counter [/]
-   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 300
     addvar digy 6
     redefinequote 332 /
@@ -895,56 +929,70 @@ ifvare mainmenu 1
 
    // Show Kills Counter [Maximum]
    setvar digy -3
-   ifvarg MAX_ENEMIES_KILLED_LEVEL 0
+   setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else ifvarvarg ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 313
     addvar digy 6
-    setvarvar varname MAX_ENEMIES_KILLED_LEVEL
+    setvarvar varname MISCARRAYID_AMOUNTTEMP2
     state orientation2
     state dn
    }
 
    // Show Secrets Counter [Maximum]
-   ifvarg MAX_SECRETSFOUND_LEVEL 0
+   setvar MISCARRAYID 4 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // Secrets Found [Level]
+   setvar MISCARRAYID 6 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2  // Max Secrets Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else ifvarvarg SECRETSFOUND_LEVEL MAX_SECRETSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 313
     addvar digy 6
-    setvarvar varname MAX_SECRETSFOUND_LEVEL
+    setvar MISCARRAYID 6 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2  // Max Secrets Found [Level]
+    setvarvar varname MISCARRAYID_AMOUNTTEMP2
     state orientation2
     state dn
    }
 
    // Show Rank Items Counter [Maximum]
-   ifvarg MAX_RANKITEMSFOUND_LEVEL 0
+   setvar MISCARRAYID 8 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Memorbilia Found [Level]
+   setvar MISCARRAYID 10 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Memorbilia Found [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else ifvarvarg RANKITEMSFOUND_LEVEL MAX_RANKITEMSFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 313
     addvar digy 6
-    setvarvar varname MAX_RANKITEMSFOUND_LEVEL
+    setvar MISCARRAYID 10 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Memorbilia Found [Level]
+    setvarvar varname MISCARRAYID_AMOUNTTEMP2
     state orientation2
     state dn
    }
 
    // Show Saved Civilians Counter [Maximum]
-   ifvarg MAX_CIVILIANSSAVED_LEVEL 0
+   setvar MISCARRAYID 12 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Saved [Level]
+   setvar MISCARRAYID 14 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Civilians Saved [Level]
+   ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else ifvarvarg CIVILIANSSAVED_LEVEL MAX_CIVILIANSSAVED_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 313
     addvar digy 6
-    setvarvar varname MAX_CIVILIANSSAVED_LEVEL
+    setvar MISCARRAYID 14 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // Max Civilians Saved [Level]
+    setvarvar varname MISCARRAYID_AMOUNTTEMP2
     state orientation2
     state dn
    }
 
    // Show Worldtiles Counter [Maximum]
-   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MAX_WORLDTILESFOUND_LEVEL 0
+   setvar MISCARRAYID 20 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+   ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS ifvarg MISCARRAYID_AMOUNTTEMP2 0
    {
-    ifvarvare WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else ifvarvarg WORLDTILESFOUND_LEVEL MAX_WORLDTILESFOUND_LEVEL state paletteflasher else state pal23
+    ifvarvare MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else ifvarvarg MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state paletteflasher else state pal23
     setvar digx 313
     addvar digy 6
-    setvarvar varname MAX_WORLDTILESFOUND_LEVEL
+    setvar MISCARRAYID 21 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+    setvarvar varname MISCARRAYID_AMOUNTTEMP2
     state orientation2
     state dn
    }
@@ -10097,7 +10145,7 @@ ifvare mainmenusubmenu 6
 
 // Calculations
 
-  setvar WORLDTILECOUNT 0
+  setvar MISCARRAYID 22 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
   ifvarand WORLDTILEBITFIELD1 1 state addworldtilecount
   ifvarand WORLDTILEBITFIELD1 2 state addworldtilecount
   ifvarand WORLDTILEBITFIELD1 4 state addworldtilecount
@@ -10359,7 +10407,8 @@ ifvare mainmenusubmenu 6
    setvar digx 148
    setvar digy 168
    state pal21
-   setvarvar varname WORLDTILECOUNT
+   setvar MISCARRAYID 22 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvarvar varname MISCARRAYID_AMOUNTTEMP
    state dn
 
    setvar digx 157
@@ -10375,7 +10424,8 @@ ifvare mainmenusubmenu 6
 
    setvar digx 196
    setvar digy 166
-   setvarvar TEMPVAR WORLDTILECOUNT
+   setvar MISCARRAYID 22 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   setvarvar TEMPVAR MISCARRAYID_AMOUNTTEMP
    mulvar TEMPVAR 10000
    divvar TEMPVAR 256 // Worldtile Maximum
    setvarvar varname TEMPVAR
@@ -10468,7 +10518,6 @@ ifvare mainmenusubmenu 6
   state rs
 
 
-   // WORLDTILECOUNT
  } // ifvare mainmenusubmenu 7
 
 
@@ -10769,7 +10818,9 @@ ifvare mainmenusubmenu 6
   state orientation2
   setvar tilenum 7933
   state pal0
-  ifvarvarl ENEMIES_KILLED_LEVEL MAX_ENEMIES_KILLED_LEVEL state shade0 else setvar shade 18
+  setvar MISCARRAYID 0 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+  setvar MISCARRAYID 2 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2
+  ifvarvarl MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2 state shade0 else setvar shade 18
   state rs 
   state shade0
 

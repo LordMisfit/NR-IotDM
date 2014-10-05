@@ -3013,44 +3013,44 @@ endevent
 
 onevent EVENT_ENTERLEVEL 
  // Reset Enemies Killed for the Current Level
- setvar ENEMIES_KILLED_LEVEL 0
+ setvar MISCARRAYID 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
  // Reset Max Enemies Killed for the Current Level
- setvar MAX_ENEMIES_KILLED_LEVEL 0
+ setvar MISCARRAYID 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
 
  // Reset In-Game Timer for the Current Level
  setvar TIMERRAWFORMAT_LEVEL 0
 
  // Reset Secrets Found for the Current Level
- setvar SECRETSFOUND_LEVEL 0
+ setvar MISCARRAYID 4 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
  // Reset Max Secrets Found for the Current Level
- setvar MAX_SECRETSFOUND_LEVEL 0
+ setvar MISCARRAYID 6 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
 
  // Reset Memorbilia Found for the Current Level
- setvar RANKITEMSFOUND_LEVEL 0
+ setvar MISCARRAYID 8 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
  // Reset Max Memorbilia Found for the Current Level
- setvar MAX_RANKITEMSFOUND_LEVEL 0
+ setvar MISCARRAYID 10 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
 
  // Reset Civilians Saved for the Current Level
- setvar CIVILIANSSAVED_LEVEL 0
+ setvar MISCARRAYID 12 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
  // Reset Max Civilians Saved for the Current Level
- setvar MAX_CIVILIANSSAVED_LEVEL 0
+ setvar MISCARRAYID 14 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
 
  // Reset Civilians Killed for the Current Level
- setvar CIVILIANSKILLED_LEVEL 0
+ setvar MISCARRAYID 16 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
  // Reset Max Civilians Killed for the Current Level
- setvar MAX_CIVILIANSKILLED_LEVEL 0
+ setvar MISCARRAYID 18 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
 
  // Reset WorldTiles found for the Current Level
- setvar WORLDTILESFOUND_LEVEL 0
+ setvar MISCARRAYID 20 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
  // Reset Max WorldTiles found for the Current Level
- setvar MAX_WORLDTILESFOUND_LEVEL 0
+ setvar MISCARRAYID 21 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
+
 
  // Reset All-Secrets Bonus Message/Stuff
  ifvare GOTALLSECRETSBONUS? 1 setvar GOTALLSECRETSBONUS? 0
 
  ifmultiplayer break
  // De-Pseudo
- gamevar TMP 0 131072
  readgamevar numruns
  addvar numruns 1 
  andvar numruns 65535 

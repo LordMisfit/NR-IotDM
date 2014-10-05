@@ -92,10 +92,11 @@ ifvarg temp 0
   setvarvar CHARACTERARRAY CHARACTERSELECTED?
   getactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED TEMPVAR
   setvarvar TEMPVAR4 TEMPVAR
-  ifvarn ENEMIES_KILLED_GAME 0
+  setvar MISCARRAYID 1 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+  ifvarn MISCARRAYID_AMOUNTTEMP 0
   {
    mulvar TEMPVAR4 10000
-   divvarvar TEMPVAR4 ENEMIES_KILLED_GAME
+   divvarvar TEMPVAR4 MISCARRAYID_AMOUNTTEMP
    setvarvar TEMPVAR2 TEMPVAR4
    divvar TEMPVAR2 100
    setvarvar TEMPVAR3 TEMPVAR4
@@ -149,23 +150,28 @@ ifvarg temp 0
 
   state pal16
   setvar digy 153
-  setvarvar varname ENEMIES_KILLED_GAME
+  setvar MISCARRAYID 1 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Enemies Killed [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal22
   setvar digy 160
-  setvarvar varname SECRETSFOUND_GAME
+  setvar MISCARRAYID 5 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Secrets Found [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal20
   setvar digy 167
-  setvarvar varname RANKITEMSFOUND_GAME
+  setvar MISCARRAYID 9 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Memorbilia Found [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal15
   setvar digy 174
-  setvarvar varname CIVILIANSSAVED_GAME
+  setvar MISCARRAYID 13 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Saved [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal10
   setvar digy 181
-  setvarvar varname CIVILIANSKILLED_GAME
+  setvar MISCARRAYID 17 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Civilians Killed [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
 
   state settilealphanum
@@ -209,23 +215,28 @@ ifvarg temp 0
 
   state pal16
   setvar digy 153
-  setvarvar varname MAX_ENEMIES_KILLED_GAME
+  setvar MISCARRAYID 3 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Max Enemies Killed [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal22
   setvar digy 160
-  setvarvar varname MAX_SECRETSFOUND_GAME
+  setvar MISCARRAYID 7 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Max Secrets Found [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal20
   setvar digy 167
-  setvarvar varname MAX_RANKITEMSFOUND_GAME
+  setvar MISCARRAYID 11 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Max Memorbilia Found [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal15
   setvar digy 174
-  setvarvar varname MAX_CIVILIANSSAVED_GAME
+  setvar MISCARRAYID 15 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Max Civilians Saved [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
   state pal10
   setvar digy 181
-  setvarvar varname MAX_CIVILIANSKILLED_GAME
+  setvar MISCARRAYID 19 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Max Civilians Killed [Game]
+  setvarvar varname MISCARRAYID_AMOUNTTEMP
   state dnz
  } // [line 9]
 } // [line 7]
