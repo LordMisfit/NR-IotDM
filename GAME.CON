@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git52.10052014
+definequote 1337 ^22VERSION:^0 5.22.git53.10052014
 
 action ANULLACTION 0
 
@@ -28015,26 +28015,26 @@ ifvare mainmenu 0
 
 // ifvare CHARACTERSELECTED? 4 { ifvare NIGHTVISION 1 { addvar VRVISORMSG1 1 ifvarg VRVISORMSG1 32 setvar VRVISORMSG1 0 } else { setvar VRVISORMSG1 0 } } else { setvar VRVISORMSG1 0 }
 
- ifvarg atm_button1timer 0 subvar atm_button1timer 1
- ifvarg atm_button2timer 0 subvar atm_button2timer 1
- ifvarg atm_button3timer 0 subvar atm_button3timer 1
- ifvarg atm_button4timer 0 subvar atm_button4timer 1
- ifvarg atm_button5timer 0 subvar atm_button5timer 1
- ifvarg atm_button6timer 0 subvar atm_button6timer 1
- ifvarg atm_button7timer 0 subvar atm_button7timer 1
- ifvarg atm_button8timer 0 subvar atm_button8timer 1
- ifvarg pad_button1timer 0 subvar pad_button1timer 1
- ifvarg pad_button2timer 0 subvar pad_button2timer 1
- ifvarg pad_button3timer 0 subvar pad_button3timer 1
- ifvarg pad_button4timer 0 subvar pad_button4timer 1
- ifvarg pad_button5timer 0 subvar pad_button5timer 1
- ifvarg pad_button6timer 0 subvar pad_button6timer 1
- ifvarg pad_button7timer 0 subvar pad_button7timer 1
- ifvarg pad_button8timer 0 subvar pad_button8timer 1
- ifvarg pad_button9timer 0 subvar pad_button9timer 1
- ifvarg pad_button10timer 0 subvar pad_button10timer 1
- ifvarg pad_button11timer 0 subvar pad_button11timer 1
- ifvarg pad_button12timer 0 subvar pad_button12timer 1
+ setvar MISCARRAYID 31 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button1timer
+ setvar MISCARRAYID 32 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button2timer
+ setvar MISCARRAYID 33 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button3timer
+ setvar MISCARRAYID 34 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button4timer
+ setvar MISCARRAYID 35 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button5timer
+ setvar MISCARRAYID 36 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button6timer
+ setvar MISCARRAYID 37 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button7timer
+ setvar MISCARRAYID 38 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button8timer
+ setvar MISCARRAYID 41 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button1timer
+ setvar MISCARRAYID 42 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button2timer
+ setvar MISCARRAYID 43 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button3timer
+ setvar MISCARRAYID 44 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button4timer
+ setvar MISCARRAYID 45 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button5timer
+ setvar MISCARRAYID 46 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button6timer
+ setvar MISCARRAYID 47 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button7timer
+ setvar MISCARRAYID 48 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button8timer
+ setvar MISCARRAYID 49 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button9timer
+ setvar MISCARRAYID 50 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button10timer
+ setvar MISCARRAYID 51 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button11timer
+ setvar MISCARRAYID 52 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP ifvarg MISCARRAYID_AMOUNTTEMP 0 { subvar MISCARRAYID_AMOUNTTEMP 1 } setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button12timer
 }
 ifvarg fta 0 { getuserdef[THISACTOR].pause_on temp ifvare temp 0 subvar fta 1 }
 
@@ -50626,7 +50626,7 @@ addvarvar KEYSCANNERZDOWN OBJECTDIFF2
          setvar WORLDTILESHUFFLES 0
          state getworldtile
          soundoncevar zvelsav
-         setvar pad_button12timer 6
+         setvar MISCARRAYID 52 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button12timer
          redefinequote 334 ^23PASSCODE ACCEPTED!!
          setvarvar fta fta_normal setvar ftq 334
          state clearpad 
@@ -50637,7 +50637,7 @@ addvarvar KEYSCANNERZDOWN OBJECTDIFF2
          state getworldtile
          soundoncevar yvelsav
          state keypadhandscannerdamage
-         setvar pad_button12timer 6
+         setvar MISCARRAYID 52 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button12timer
          redefinequote 334 ^10PASSCODE DENIED!!
          setvarvar fta fta_normal setvar ftq 334
          state clearpad

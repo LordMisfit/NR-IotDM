@@ -241,7 +241,7 @@ onevent EVENT_WEAPKEY4
    }
    else
    {
-    setvar pad_button4timer 6
+    setvar MISCARRAYID 44 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button6timer
     state enterdigit 
    }
   }
@@ -300,7 +300,7 @@ onevent EVENT_WEAPKEY5
    }
    else
    {
-    setvar pad_button5timer 6
+    setvar MISCARRAYID 45 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button6timer
     state enterdigit 
    }
   }

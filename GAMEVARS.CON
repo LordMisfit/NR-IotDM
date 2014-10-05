@@ -1635,25 +1635,6 @@ gamevar WORLDTILEBITFIELD8 0 131072
 gamevar WORLDTILESHUFFLES 0 131072
 gamevar WORLDTILEANG 0 2
 
-//
-
-gamevar pad_id -1 1 // This stores the id of the keypad that the player is using. 
-gamevar pnum 0 1 // This stores the passcode as they enter it. 
-gamevar param 0 2 
-
-gamevar pad_button1timer 0 131072
-gamevar pad_button2timer 0 131072
-gamevar pad_button3timer 0 131072
-gamevar pad_button4timer 0 131072
-gamevar pad_button5timer 0 131072
-gamevar pad_button6timer 0 131072
-gamevar pad_button7timer 0 131072
-gamevar pad_button8timer 0 131072
-gamevar pad_button9timer 0 131072
-gamevar pad_button10timer 0 131072
-gamevar pad_button11timer 0 131072
-gamevar pad_button12timer 0 131072
-
 gamevar oposxv 0 1 // velocities from last tick
 gamevar oposyv 0 1
 gamevar oposzv 0 1
@@ -1888,13 +1869,13 @@ gamevar NETHRA? 0 131072
 gamevar PAULA? 0 131072
 gamevar LORI? 0 131072
 gamevar MINAKO? 0 131072
-gamevar MYSTERY1? 0 131072	
+gamevar MYSTERY1? 0 131072
 gamevar MAKEN? 0 131072
 
 // The Following are for if a character 'transforms' or has different states at some point in the game [Bubsy/Ami/ESSence/Nethra/etc]
 gamevar DUKEFORM? 0 131072
 gamevar JACKFORM? 0 131072
-gamevar BUBSYFORM? 0 131072		// 0 = Normal Form, 1 = Bubsy w/ 'The Mask' on
+gamevar BUBSYFORM? 0 131072		// 0 = Normal Form, 1 = 'Loki Mask' on
 gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 gamevar LOWANGFORM? 0 131072
 gamevar ESSENCEFORM? 0 131072	// 0 = Normal Attire/Weapons, 1 = Armorless Attire/Weapons
@@ -1922,12 +1903,14 @@ gamevar MYSTERY1DEADTIMER 0 0	// "Mystery Lady's" Death Timer [for ressing her a
 
 // START OF CHARACTER MENU VARIABLES HERE
 
+// Menu Vars
 gamevar mainmenu 0 131072 // Is the primary menu turned on? 0 = No, 1 = Yes [In Main menu], -1 = Tips Being Shown
 gamevar mainmenutransitiontimer 0 131072 // For a future menu transition [entering/exiting]
 gamevar mainmenupage 0 131072 // The page of the menu you are on [in menus (aka mainmenu = 1)] or the tip number [for tips (aka mainmenu = -1)]
 gamevar mainmenusubmenu 0 131072 // 0 = Characters Page, 1 = Details for One Character, 2 = Items, 3+ = ?
 gamevar mainmenuselection 0 131072 // What selection # you are currently on
 
+// Shop Vars
 gamevar shop_id -1 131072 // -1 = turned off, 0+ = the shop id
 gamevar shoppage 0 131072 // The current page for the shop
 gamevar shopselection 0 131072 // The current selection on the shop's menu
@@ -1939,6 +1922,12 @@ gamevar shoptransitiontimer 0 131072 // Transition Timer [entering exiting]
 gamevar shopitemid -1 131072 // Assigns a Specfic Item Type [for getting prices or names]
 gamevar shopamount 1 131072 // Amount of an item to buy or sell.
 
+// Keypads
+gamevar pad_id -1 131072 // This stores the id of the keypad that the player is using. 
+gamevar pnum 0 131072 // This stores the passcode as they enter it. 
+gamevar param 0 2 
+
+// ATMs
 gamevar atm_id -1 131072 // -1 = turned off, 0+ = the sprite/wall id of the ATM in use
 gamevar atm_type 0 131072 // 0 = No Special Flag, 1 = Actor-based ATM, 2 = Wall-based ATM, 4 = Portable ATM
 gamevar atm_picnum -1 131072 // Used as a way of detecting if a wall-based ATM works or not
@@ -1956,33 +1945,20 @@ gamevar atm_serrortype 0 131072 // Type of small error message
 gamevar atm_background 0 131072 // Background screen for the ATM
 gamevar atm_wiresendarray 0 131072
 gamevar atm_wirereceivearray 0 131072
-
-gamevar INTERESTTIMER 0 1 //
-gamevar INTERESTINTERVAL 0 1 // Decides how long it takes for interest rates to kick in [in tics]
-gamevar INTERESTINTERVAL2 0 1 // Decides how long it takes for interest rates to kick in [in tics]
-
-gamevar RANKPAYMENTTIMER 0 1
-gamevar RANKPAYMENTINTERVAL 24576 1
-
-gamevar atm_button1timer 0 131072 // Upperleft Button Timer
-gamevar atm_button2timer 0 131072 // Middle-Upperleft Button Timer
-gamevar atm_button3timer 0 131072 // Middle-Lowerleft Button Timer
-gamevar atm_button4timer 0 131072 // Lowerleft Button Timer
-gamevar atm_button5timer 0 131072 // Upperright Button Timer
-gamevar atm_button6timer 0 131072 // Middle-Upperright Button Timer
-gamevar atm_button7timer 0 131072 // Middle-Lowerright Button Timer
-gamevar atm_button8timer 0 131072 // Lowerright Button Timer
-
-// Withdraw & Deposit
+// Withdraw & Deposit [ATM]
 gamevar atm_amount_dollars 0 131072
 gamevar atm_amount_cents 0 131072
 gamevar atm_amount_all 0 131072
-
 gamevar ATMMONEYDOLLARS 0 131072
 gamevar ATMMONEYCENTS 0 131072
+// Interests and Rank Timers/Intervals [ATM]
+gamevar INTERESTTIMER 0 131072 //
+gamevar INTERESTINTERVAL 0 131072 // Decides how long it takes for interest rates to kick in [in tics]
+gamevar INTERESTINTERVAL2 0 131072 // Decides how long it takes for interest rates to kick in [in tics]
+gamevar RANKPAYMENTTIMER 0 131072
+gamevar RANKPAYMENTINTERVAL 24576 131072
 
 // Item Types
-
 gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept in this away instead of using their own seperate var. :P See list below...
  // (ITEMARRAYID = 0) # of Resurrection Chalices in inventory	// gamevar RESURRECTIONCHALICES 0 131073
  // (ITEMARRAYID = 1) # of Eyedrops in inventory 			// gamevar EYEDROPS 0 131073
@@ -2093,30 +2069,59 @@ gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 
 gamevar MISCARRAYID -1 131072
-// [0] = ENEMIES-KILLED-LEVEL - Enemies Killed for the Current Level
-// [1] = ENEMIES-KILLED-GAME - Enemies Kill for the Entire Game [as of the current level]
-// [2] = MAX-ENEMIES-KILLED-LEVEL - Total Enemies Possible in the Current Level
-// [3] = MAX-ENEMIES-KILLED-GAME - Total Enemies possibly in the Entire Game [as of the current level]
-// [4] = SECRETSFOUND-LEVEL - Secrets Found for the current level
-// [5] = SECRETSFOUND-GAME - Secrets Found for the entire game [to the current level]
-// [6] = MAX-SECRETSFOUND-LEVEL - Secrets Found for the current level
-// [7] = MAX-SECRETSFOUND-GAME - Secrets Found for the entire game [to the current level]
-// [8] = RANKITEMSFOUND-LEVEL - Rank Items Found for the current level
-// [9] = RANKITEMSFOUND-GAME - Rank Items Found for the entire game [to the current level]
-// [10] = MAX-RANKITEMSFOUND-LEVEL - Rank Items Found for the current level
-// [11] = MAX-RANKITEMSFOUND-GAME - Rank Items Found for the entire game [to the current level]
-// [12] = CIVILIANSSAVED-LEVEL - Civilians Saved for the current level
-// [13] = CIVILIANSSAVED-GAME - Civilians Saved for the entire game [to the current level]
-// [14] = MAX-CIVILIANSSAVED-LEVEL - Civilians Saved for the current level
-// [15] = MAX-CIVILIANSSAVED-GAME - Civilians Saved for the entire game [to the current level]
-// [16] = CIVILIANSKILLED-LEVEL - Civilians Killed for the current level
-// [17] = CIVILIANSKILLED-GAME - Civilians Killed for the entire game [to the current level]
-// [18] = MAX-CIVILIANSKILLED-LEVEL - Civilians Killed for the current level
-// [19] = MAX-CIVILIANSKILLED-GAME - Civilians Killed for the entire game [to the current level]
-// [20] = WORLDTILESFOUND-LEVEL - WorldTiles Found for the current level
-// [21] = MAX-WORLDTILESFOUND-LEVEL - WorldTiles Found for the current level
-// [22] = WORLDTILECOUNT - Total Worldtiles Collected Overall
-// [23] = MAX-WORLDTILECOUNT - Maximum Possible Worldtiles to Collect [maybe?]
+ // [0] = ENEMIES-KILLED-LEVEL - Enemies Killed for the Current Level
+ // [1] = ENEMIES-KILLED-GAME - Enemies Kill for the Entire Game [as of the current level]
+ // [2] = MAX-ENEMIES-KILLED-LEVEL - Total Enemies Possible in the Current Level
+ // [3] = MAX-ENEMIES-KILLED-GAME - Total Enemies possibly in the Entire Game [as of the current level]
+ // [4] = SECRETSFOUND-LEVEL - Secrets Found for the current level
+ // [5] = SECRETSFOUND-GAME - Secrets Found for the entire game [to the current level]
+ // [6] = MAX-SECRETSFOUND-LEVEL - Secrets Found for the current level
+ // [7] = MAX-SECRETSFOUND-GAME - Secrets Found for the entire game [to the current level]
+ // [8] = RANKITEMSFOUND-LEVEL - Rank Items Found for the current level
+ // [9] = RANKITEMSFOUND-GAME - Rank Items Found for the entire game [to the current level]
+ // [10] = MAX-RANKITEMSFOUND-LEVEL - Rank Items Found for the current level
+ // [11] = MAX-RANKITEMSFOUND-GAME - Rank Items Found for the entire game [to the current level]
+ // [12] = CIVILIANSSAVED-LEVEL - Civilians Saved for the current level
+ // [13] = CIVILIANSSAVED-GAME - Civilians Saved for the entire game [to the current level]
+ // [14] = MAX-CIVILIANSSAVED-LEVEL - Civilians Saved for the current level
+ // [15] = MAX-CIVILIANSSAVED-GAME - Civilians Saved for the entire game [to the current level]
+ // [16] = CIVILIANSKILLED-LEVEL - Civilians Killed for the current level
+ // [17] = CIVILIANSKILLED-GAME - Civilians Killed for the entire game [to the current level]
+ // [18] = MAX-CIVILIANSKILLED-LEVEL - Civilians Killed for the current level
+ // [19] = MAX-CIVILIANSKILLED-GAME - Civilians Killed for the entire game [to the current level]
+ // [20] = WORLDTILESFOUND-LEVEL - WorldTiles Found for the current level
+ // [21] = MAX-WORLDTILESFOUND-LEVEL - WorldTiles Found for the current level
+ // [22] = WORLDTILECOUNT - Total Worldtiles Collected Overall
+ // [23] = MAX-WORLDTILECOUNT - Maximum Possible Worldtiles to Collect [maybe?]
+ // [24] = MENU-TILE - ?
+ // [25] = ??????
+ // [26] = ??????
+ // [27] = ??????
+ // [28] = ??????
+ // [29] = ??????
+ // [30] = ??????
+ // [31] = atm-button1timer
+ // [32] = atm-button2timer
+ // [33] = atm-button3timer
+ // [34] = atm-button4timer
+ // [35] = atm-button5timer
+ // [36] = atm-button6timer
+ // [37] = atm-button7timer
+ // [38] = atm-button8timer
+ // [39] = ??????
+ // [40] = ??????
+ // [41] = pad-button1timer
+ // [42] = pad-button2timer
+ // [43] = pad-button3timer
+ // [44] = pad-button4timer
+ // [45] = pad-button5timer
+ // [46] = pad-button6timer
+ // [47] = pad-button7timer
+ // [48] = pad-button8timer
+ // [49] = pad-button9timer
+ // [50] = pad-button10timer
+ // [51] = pad-button11timer
+ // [52] = pad-button12timer
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar MISCARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 gamevar MISCARRAYID_AMOUNTTEMP2 0 0 // Keeps a 2nd temporary var at the forefront for if-checks and array changes on item amounts
@@ -2480,7 +2485,6 @@ gamevar ACTORPAL-TEMP 0 0
 gamevar ACTORSKILL-TEMP 0 0
 gamevar TALLYSET-TEMP 0 0
 
-gamevar MENU_TILE 0 131072
 // 0 DEFAULT
 // 1 WOOD
 // 2 TIN

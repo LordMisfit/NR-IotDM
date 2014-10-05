@@ -14561,17 +14561,17 @@ ends
 
 state keypress
   ifvare atm_id -1
-  {
-   ifvare param 0 setvar pad_button10timer 6
-   ifvare param 1 setvar pad_button1timer 6
-   ifvare param 2 setvar pad_button2timer 6
-   ifvare param 3 setvar pad_button3timer 6
-   ifvare param 4 setvar pad_button4timer 6
-   ifvare param 5 setvar pad_button5timer 6
-   ifvare param 6 setvar pad_button6timer 6
-   ifvare param 7 setvar pad_button7timer 6
-   ifvare param 8 setvar pad_button8timer 6
-   ifvare param 9 setvar pad_button9timer 6
+  {                  
+   ifvare param 0 { setvar MISCARRAYID 50 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button10timer
+   ifvare param 1 { setvar MISCARRAYID 41 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button1timer
+   ifvare param 2 { setvar MISCARRAYID 42 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button2timer
+   ifvare param 3 { setvar MISCARRAYID 43 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button3timer
+   ifvare param 4 { setvar MISCARRAYID 44 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button4timer
+   ifvare param 5 { setvar MISCARRAYID 45 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button5timer
+   ifvare param 6 { setvar MISCARRAYID 46 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button6timer
+   ifvare param 7 { setvar MISCARRAYID 47 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button7timer
+   ifvare param 8 { setvar MISCARRAYID 48 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button8timer
+   ifvare param 9 { setvar MISCARRAYID 49 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 } // pad-button9timer
    state enterdigit 
   }
   else

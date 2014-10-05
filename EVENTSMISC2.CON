@@ -2207,14 +2207,14 @@ ifvare mainmenu 0
          {
           ifvare pnum 0 // If you hit backspace when the code is 0, you cancel out of the keypad
           {
-           setvar pad_button11timer 6
+           setvar MISCARRAYID 51 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button11timer
            state randomkeypadbeeps
            state clearpad
           }
           else
           ifvarg pnum 0 // Else if it's above 0, you divide by 10 to emulate a backspace key
           {
-           setvar pad_button11timer 6
+           setvar MISCARRAYID 51 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button11timer
            state randomkeypadbeeps
            divvar pnum 10
            ifvarl pnum 0 setvar pnum 0

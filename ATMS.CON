@@ -1798,186 +1798,80 @@ ifvarn atm_id -1
   else setvar tilenum 3580 // 3581
   state rs
 
-  // ATM BACKGROUND
-  ifvarand atm_type 4
+  //***************************
+  //* ATM BACKGROUND DISPLAYS *
+  //***************************
+
+  // Upper-Left Button Pressed
+  setvar MISCARRAYID 31 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button1timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
   {
-   ifvarg atm_button1timer 0 // Upper-Left Button Pressed
-   {
-    state pal0
-    setvarvar digx 32 // 28
-    setvarvar digy 53 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3582
-    state rs
-   }
-
-   ifvarg atm_button2timer 0 // MidUpper-Left Button Pressed
-   {
-    state pal0
-    setvarvar digx 32 // 28
-    setvarvar digy 84 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3582
-    state rs
-   }
-
-   ifvarg atm_button3timer 0 // MidLower-Left Button Pressed
-   {
-    state pal0
-    setvarvar digx 32 // 28
-    setvarvar digy 114 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3582
-    state rs
-   }
-
-   ifvarg atm_button4timer 0 // Lower-Left Button Pressed
-   {
-    state pal0
-    setvarvar digx 32 // 28
-    setvarvar digy 145 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3582
-    state rs
-   }
-
-   ifvarg atm_button5timer 0 // Upper-Right Button Pressed
-   {
-    state pal0
-    setvarvar digx 288 // 28
-    setvarvar digy 53 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3583
-    state rs
-   }
-
-   ifvarg atm_button6timer 0 // MidUpper-Right Button Pressed
-   {
-    state pal0
-    setvarvar digx 288 // 28
-    setvarvar digy 84 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3583
-    state rs
-   }
-
-   ifvarg atm_button7timer 0 // MidLower-Right Button Pressed
-   {
-    state pal0
-    setvarvar digx 288 // 28
-    setvarvar digy 114 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3583
-    state rs
-   }
-
-   ifvarg atm_button8timer 0 // Lower-Right Button Pressed
-   {
-    state pal0
-    setvarvar digx 288 // 28
-    setvarvar digy 145 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3583
-    state rs
-   }
+   ifvarand atm_type 4 { setvarvar digx 32 setvarvar digy 53 setvar tilenum 3582 }
+   else { setvar digx 28 setvar digy 48 setvar tilenum 3476 }
+   state pal0 state digz49152 state orientation2 state rs
   }
-  else
+
+  // MidUpper-Left Button Pressed
+  setvar MISCARRAYID 32 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button2timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
   {
-   ifvarg atm_button1timer 0 // Upper-Left Button Pressed
-   {
-    state pal0
-    setvar digx 28 // 28
-    setvar digy 48 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3476 // 3581
-    state rs
-   }
+   ifvarand atm_type 4 { setvarvar digx 32 setvarvar digy 84 setvar tilenum 3582 }
+   else { setvar digx 28 setvar digy 82 setvar tilenum 3477 }
+   state pal0 state digz49152 state orientation2 state rs
+  }
 
-   ifvarg atm_button2timer 0 // MidUpper-Left Button Pressed
-   {
-    state pal0
-    setvar digx 28 // 28
-    setvar digy 82 // 82
-    state digz49152
-    state orientation2
-    setvar tilenum 3477 // 3581
-    state rs
-   }
+  // MidLower-Left Button Pressed
+  setvar MISCARRAYID 33 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button3timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
+  {
+   ifvarand atm_type 4 { setvarvar digx 32 setvarvar digy 114 setvar tilenum 3582 }
+   else { setvar digx 28 setvar digy 118 setvar tilenum 3478 }
+   state pal0 state digz49152 state orientation2 state rs
+  }
 
-   ifvarg atm_button3timer 0 // MidLower-Left Button Pressed
-   {
-    state pal0
-    setvar digx 28 // 28
-    setvar digy 118 // 82
-    state digz49152
-    state orientation2
-    setvar tilenum 3478 // 3581
-    state rs
-   }
+  // Lower-Left Button Pressed
+  setvar MISCARRAYID 34 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button4timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
+  {
+   ifvarand atm_type 4 { setvarvar digx 32 setvarvar digy 145 setvar tilenum 3582 }
+   else { setvar digx 28 setvar digy 153 setvar tilenum 3479 }
+   state pal0 state digz49152 state orientation2 state rs
+  }
 
-   ifvarg atm_button4timer 0 // Lower-Left Button Pressed
-   {
-    state pal0
-    setvar digx 28 // 28
-    setvar digy 153 // 82
-    state digz49152
-    state orientation2
-    setvar tilenum 3479 // 3581
-    state rs
-   }
+  // Upper-Right Button Pressed
+  setvar MISCARRAYID 35 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button5timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
+  {
+   ifvarand atm_type 4 { setvarvar digx 288 setvarvar digy 53 setvar tilenum 3583 }
+   else { setvar digx 292 setvar digy 48 setvar tilenum 3480 }
+   state pal0 state digz49152 state orientation2 state rs
+  }
 
-   ifvarg atm_button5timer 0 // Upper-Right Button Pressed
-   {
-    state pal0
-    setvar digx 292 // 292
-    setvar digy 48 // 48
-    state digz49152
-    state orientation2
-    setvar tilenum 3480 // 3581
-    state rs
-   }
+  // MidUpper-Right Button Pressed
+  setvar MISCARRAYID 36 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button6timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
+  {
+   ifvarand atm_type 4 { setvarvar digx 288 setvarvar digy 84 setvar tilenum 3583 }
+   else { setvar digx 292 setvar digy 82 setvar tilenum 3481 }
+   state pal0 state digz49152 state orientation2 state rs
+  }
 
-   ifvarg atm_button6timer 0 // MidUpper-Right Button Pressed
-   {
-    state pal0
-    setvar digx 292 // 292
-    setvar digy 82 // 82
-    state digz49152
-    state orientation2
-    setvar tilenum 3481 // 3581
-    state rs
-   }
+  // MidLower-Right Button Pressed
+  setvar MISCARRAYID 37 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button7timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
+  {
+   ifvarand atm_type 4 { setvarvar digx 288 setvarvar digy 114 setvar tilenum 3583 }
+   else { setvar digx 292 setvar digy 118 setvar tilenum 3482 }
+   state pal0 state digz49152 state orientation2 state rs
+  }
 
-   ifvarg atm_button7timer 0 // MidLower-Right Button Pressed
-   {
-    state pal0
-    setvar digx 292 // 28
-    setvar digy 118 // 82
-    state digz49152
-    state orientation2
-    setvar tilenum 3482 // 3581
-    state rs
-   }
-
-   ifvarg atm_button8timer 0 // Lower-Right Button Pressed
-   {
-    state pal0
-    setvar digx 292 // 28
-    setvar digy 153 // 82
-    state digz49152
-    state orientation2
-    setvar tilenum 3483 // 3581
-    state rs
-   }
+  // Lower-Right Button Pressed
+  setvar MISCARRAYID 38 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // atm-button8timer
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
+  {
+   ifvarand atm_type 4 { setvarvar digx 288 setvarvar digy 145 setvar tilenum 3583 }
+   else { setvar digx 292 setvar digy 153 setvar tilenum 3483 }
+   state pal0 state digz49152 state orientation2 state rs
   }
 
   state shade0
@@ -9755,7 +9649,7 @@ state atm-upperleftbutton
       setvar atm_serrortype 0
       state randomatmbeeps
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -9886,7 +9780,7 @@ state atm-upperleftbutton
        sound MENU_ERROR
       }
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10017,7 +9911,7 @@ state atm-upperleftbutton
        sound MENU_ERROR
       }
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10060,7 +9954,7 @@ state atm-upperleftbutton
        }
       }
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10133,7 +10027,7 @@ state atm-upperleftbutton
 //*End Withdraw Code Here*
 //************************
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10208,7 +10102,7 @@ state atm-upperleftbutton
 //*End Deposit Code Here*
 //***********************
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10228,7 +10122,7 @@ state atm-upperleftbutton
       setvar atm_serrortype 0
       state randomatmbeeps
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10325,7 +10219,7 @@ state atm-upperleftbutton
 //*End Wire Funds Code Here*
 //**************************
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -10997,7 +10891,7 @@ state atm-upperleftbutton
 //*End Wire Funds Code Here*
 //**************************
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11017,7 +10911,7 @@ state atm-upperleftbutton
       setvar atm_serrortype 0
       state randomatmbeeps
      }
-     setvar atm_button1timer 13
+     setvar MISCARRAYID 31 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button1timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11033,7 +10927,7 @@ state atm-midupperleftbutton
       state randomatmbeeps sound MENU_ERROR
      }
      setvarvar mpresstime temppartime
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      state setreturn-1
     }
     else
@@ -11045,7 +10939,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11058,7 +10952,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11071,7 +10965,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11084,7 +10978,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11097,7 +10991,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11110,7 +11004,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11123,7 +11017,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11136,7 +11030,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11149,7 +11043,7 @@ state atm-midupperleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button2timer 13
+     setvar MISCARRAYID 32 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button2timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11164,7 +11058,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11177,7 +11071,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11190,7 +11084,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11203,7 +11097,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11216,7 +11110,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11229,7 +11123,7 @@ state atm-midlowerleftbutton
      {
       sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11242,7 +11136,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11255,7 +11149,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11268,7 +11162,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11281,7 +11175,7 @@ state atm-midlowerleftbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button3timer 13
+     setvar MISCARRAYID 33 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button3timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11296,7 +11190,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11309,7 +11203,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11322,7 +11216,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11365,7 +11259,7 @@ state atm-lowerleftbutton
              }
             }
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11378,7 +11272,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11391,7 +11285,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11404,7 +11298,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11417,7 +11311,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11430,7 +11324,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11443,7 +11337,7 @@ state atm-lowerleftbutton
            {
             state randomatmbeeps sound MENU_ERROR
            }
-           setvar atm_button4timer 13
+           setvar MISCARRAYID 34 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button4timer
            setvarvar mpresstime temppartime
            state setreturn-1
           }
@@ -11461,7 +11355,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_serrortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11477,7 +11371,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11493,7 +11387,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11535,7 +11429,7 @@ ifvare atm_mode 0 // Welcome Screen
        }
       }
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11551,7 +11445,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11567,7 +11461,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11583,7 +11477,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11599,7 +11493,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11615,7 +11509,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_errortype 0
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11634,7 +11528,7 @@ ifvare atm_mode 0 // Welcome Screen
       setvar atm_serrortype 0
       state randomatmbeeps
      }
-     setvar atm_button5timer 13
+     setvar MISCARRAYID 35 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button5timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11649,7 +11543,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11662,7 +11556,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11675,7 +11569,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11688,7 +11582,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11701,7 +11595,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11714,7 +11608,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11727,7 +11621,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11740,7 +11634,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11753,7 +11647,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11766,7 +11660,7 @@ state atm-midupperrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button6timer 13
+     setvar MISCARRAYID 36 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button6timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11781,7 +11675,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11794,7 +11688,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11807,7 +11701,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11820,7 +11714,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11833,7 +11727,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11846,7 +11740,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11859,7 +11753,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11872,7 +11766,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11885,7 +11779,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11898,7 +11792,7 @@ state atm-midlowerrightbutton
      {
       state randomatmbeeps sound MENU_ERROR
      }
-     setvar atm_button7timer 13
+     setvar MISCARRAYID 37 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button7timer
      setvarvar mpresstime temppartime
      state setreturn-1
     }
@@ -11923,7 +11817,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps sound MENU_EXIT 
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -11944,7 +11838,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -11965,7 +11859,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -11986,7 +11880,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -12007,7 +11901,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -12028,7 +11922,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -12051,7 +11945,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps sound MENU_EXIT 
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -12072,7 +11966,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps sound MENU_EXIT 
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -12093,7 +11987,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps sound MENU_EXIT 
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }
@@ -12116,7 +12010,7 @@ ifvare atm_mode 0 // Welcome Screen
           setvar atm_serrortype 0
           state randomatmbeeps sound MENU_EXIT 
          }
-         setvar atm_button8timer 13
+         setvar MISCARRAYID 38 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 13 // atm-button8timer
          setvarvar mpresstime temppartime
          state setreturn-1
         }

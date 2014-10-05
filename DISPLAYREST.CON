@@ -1323,10 +1323,14 @@ else
      state orientation26
      state rs
 
-     // Show Pressed Numbers
-     ifvarg pad_button1timer 0
+     //**********************************
+     //* [Keypads] Show Pressed Numbers *
+     //**********************************
+
+     // "1" Key Pressed
+     setvar MISCARRAYID 41 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button1timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 1
       setvar digx 110
       setvar digy 54
       setvar tilenum 3051
@@ -1334,9 +1338,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button2timer 0
+
+     // "2" Key Pressed
+     setvar MISCARRAYID 42 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button2timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 2
       setvar digx 133
       setvar digy 54
       setvar tilenum 3052
@@ -1344,9 +1350,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button3timer 0
+
+     // "3" Key Pressed
+     setvar MISCARRAYID 43 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button3timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 3
       setvar digx 156
       setvar digy 54
       setvar tilenum 3053
@@ -1354,9 +1362,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button4timer 0
+
+     // "4" Key Pressed
+     setvar MISCARRAYID 44 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button4timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 4
       setvar digx 111
       setvar digy 73
       setvar tilenum 3054
@@ -1364,9 +1374,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button5timer 0
+
+     // "5" Key Pressed
+     setvar MISCARRAYID 45 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button5timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 5
       setvar digx 133
       setvar digy 73
       setvar tilenum 3055
@@ -1374,9 +1386,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button6timer 0
+
+     // "6" Key Pressed
+     setvar MISCARRAYID 46 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button6timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 6
       setvar digx 156
       setvar digy 73
       setvar tilenum 3056
@@ -1384,9 +1398,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button7timer 0
+
+     // "7" Key Pressed
+     setvar MISCARRAYID 47 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button7timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 7
       setvar digx 111
       setvar digy 91
       setvar tilenum 3057
@@ -1394,9 +1410,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button8timer 0
+
+     // "8" Key Pressed
+     setvar MISCARRAYID 48 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button8timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 8
       setvar digx 133
       setvar digy 91
       setvar tilenum 3058
@@ -1404,9 +1422,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button9timer 0
+
+     // "9" Key Pressed
+     setvar MISCARRAYID 49 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button9timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 9
       setvar digx 156
       setvar digy 91
       setvar tilenum 3059
@@ -1414,9 +1434,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button10timer 0
+
+     // "0" Key Pressed
+     setvar MISCARRAYID 50 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button10timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // 0
       setvar digx 133
       setvar digy 109
       setvar tilenum 3060
@@ -1424,9 +1446,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button11timer 0
+
+     // "Cancel" Key Pressed
+     setvar MISCARRAYID 51 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button11timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // Backspace
       setvar digx 185
       setvar digy 73
       setvar tilenum 3061
@@ -1434,9 +1458,11 @@ else
       state orientation26
       state rs
      }
-     ifvarg pad_button12timer 0
+
+     // "Enter" Key Pressed
+     setvar MISCARRAYID 52 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // pad-button12timer
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      // Enter
       setvar digx 185
       setvar digy 91
       setvar tilenum 3062
