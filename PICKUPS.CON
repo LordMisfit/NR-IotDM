@@ -7281,7 +7281,7 @@ useractor notenemy MAXHPUP 0
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT A MAX HP BONUS! :O
      }
      state enemygrabitemflash
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
     }
    }
@@ -7435,7 +7435,7 @@ useractor notenemy MAXAPUP 0
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT A MAX AP BONUS! :O
      }
      state enemygrabitemflash
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
     }
    }
@@ -7996,7 +7996,7 @@ useractor notenemy ATKUP 0
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT AN ATTACK BONUS! :O
      }
      state enemygrabitemflash
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
     }
    }
@@ -8140,7 +8140,7 @@ useractor notenemy DEFUP 0
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT A DEFENSE BONUS! :O
      }
      state enemygrabitemflash
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
     }
    }
@@ -8619,7 +8619,7 @@ useractor notenemy AIRTIMEBONUS 0
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT A LUNG_TIME BONUS! :O
      }
      state enemygrabitemflash
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
     }
    }
@@ -9360,7 +9360,7 @@ else
             setactorvar[ITEMSEEK].ENEMYCURRENTFIRSTAID ENEMYFIRSTAID
             setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
             state resetitemtarget
-            setvar WORLDTILESHUFFLES 0
+            setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
             state getitemseekerspecies
 
@@ -10510,7 +10510,7 @@ else
              }
              setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
 
-      setvar WORLDTILESHUFFLES 0
+      setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
       state getworldtile
 
       ifvarand ACTORFLAGS 4 nullop
@@ -11083,7 +11083,7 @@ else
        else ifvarl CURRENTENEMYARMORPERCENT 900 setvar CURRENTENEMYARMORPERCENT 900
        setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
 
-       setvar WORLDTILESHUFFLES 0
+       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
        state getitemseekerspecies
 
@@ -11133,7 +11133,7 @@ else
        setactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
        ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
-       setvar WORLDTILESHUFFLES 0
+       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
        state getitemseekerspecies
 
@@ -11377,7 +11377,7 @@ state pickupcharacter_invuln
                else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABINVULN
               }
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
       		state activationflag killit
 ends
@@ -11403,7 +11403,7 @@ state pickupvehicle_invuln
    		 state artipickupsounds
               state playerstealjustbeforemonster
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
       		state activationflag killit
 ends
@@ -11467,7 +11467,7 @@ useractor notenemy ICONOFTHEDEFENDER 0
      addvarvar ITEMSEEKC POWERUPBENEFIT
      setactorvar[ITEMSEEK].ENEMYINVULNTIME ITEMSEEKC
      state resetitemtarget
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
      state getitemseekerspecies
      ifvarand ACTORFLAGS 4 nullop
@@ -11515,7 +11515,7 @@ state pickupcharacter_quad
                else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABQUAD
               }
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
 	       state activationflag killit
 ends
@@ -11541,7 +11541,7 @@ state pickupvehicle_quad
    		 state artipickupsounds
               state playerstealjustbeforemonster
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
       		state activationflag killit
 ends
@@ -11604,7 +11604,7 @@ useractor notenemy QUADDAMAGE 0
      addvarvar ITEMSEEKC POWERUPBENEFIT
      setactorvar[ITEMSEEK].ENEMYQUADTIME ITEMSEEKC
      state resetitemtarget
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
      state getitemseekerspecies
      ifvarand ACTORFLAGS 4 nullop
@@ -11653,7 +11653,7 @@ state pickupcharacter_regen
               }
              }
 	     	setvar PLAYERREGENCOUNTER 25
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
  	       state activationflag killit
 ends
@@ -11679,7 +11679,7 @@ state pickupvehicle_regen
               state playerstealjustbeforemonster
              }
 	     	setactorvar[tempvehicleid].ENEMYREGENCOUNTER 25
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
  	       state activationflag killit
 ends
@@ -11738,7 +11738,7 @@ useractor notenemy REGENITEM 0
      state resetitemtarget
      setvar ENEMYREGENCOUNTER 25
      state getitemseekerspecies
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
      ifvarand ACTORFLAGS 4 nullop
      else
@@ -11783,7 +11783,7 @@ state pickupcharacter_apregen
               }
              }
 	       setvar PLAYERAPREGENCOUNTER 25
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
 	       state activationflag killit
 ends
@@ -11809,7 +11809,7 @@ state pickupvehicle_apregen
               state playerstealjustbeforemonster
              }
 	     	setactorvar[tempvehicleid].ENEMYAPREGENCOUNTER 25
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
  	       state activationflag killit
 ends
@@ -11872,7 +11872,7 @@ useractor notenemy APREGENITEM 0
      addvarvar ITEMSEEKC POWERUPBENEFIT
      setactorvar[ITEMSEEK].ENEMYAPREGENTIME ITEMSEEKC
      state resetitemtarget
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
      setvar ENEMYAPREGENCOUNTER 25
      state getitemseekerspecies
@@ -11919,7 +11919,7 @@ state pickupcharacter_vampire
                else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABVAMPIRE
               }
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
 	       state activationflag killit
 ends
@@ -11944,7 +11944,7 @@ state pickupvehicle_vampire
   		 state artipickupsounds
               state playerstealjustbeforemonster
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
  	       state activationflag killit
 ends
@@ -12002,7 +12002,7 @@ useractor notenemy VAMPIREITEM 0
      addvarvar ITEMSEEKC POWERUPBENEFIT
      setactorvar[ITEMSEEK].ENEMYVAMPIRETIME ITEMSEEKC
      state resetitemtarget
-     setvar WORLDTILESHUFFLES 0
+     setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
      state getitemseekerspecies
      ifvarand ACTORFLAGS 4 nullop
@@ -12078,7 +12078,7 @@ useractor notenemy COILS 0
         setvarvar fta fta_normal setvar ftq 335
         palfrom 16 0 32 globalsound DUKE_GET
        }
-       setvar WORLDTILESHUFFLES 0
+       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
        state activationflag killit
       }
@@ -12676,7 +12676,7 @@ else
        	  setvarvar fta fta_normal setvar ftq 335
        	  globalsound FOUND_BIGITEM
               }
-              setvar WORLDTILESHUFFLES 0
+              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
               state getworldtile
               state activationflag killit
              }
@@ -12756,7 +12756,7 @@ else
       	        globalsound FOUND_BIGITEM
       	        setvarvar fta fta_normal setvar ftq 335               
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
@@ -12825,7 +12825,7 @@ else
             globalsound FORTUNECOOKIE1
             globalsound FOUND_BIGITEM
            }
-           setvar WORLDTILESHUFFLES 0
+           setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
            state getworldtile
            state activationflag killit
           }
@@ -13091,7 +13091,7 @@ useractor notenemy RESURRECTIONCHALICE 0
            globalsound FOUND_BIGITEM
            palfrom 32 0 32
           }
-          setvar WORLDTILESHUFFLES 0
+          setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
           state getworldtile
           state activationflag killit
          }
@@ -13560,7 +13560,7 @@ useractor notenemy ENERGYSHELL 0
              globalsound YEAH
              palfrom 32 0 32
             }
-            setvar WORLDTILESHUFFLES 0
+            setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
             state activationflag killit
            }
@@ -13902,7 +13902,7 @@ useractor notenemy MONEYRADAR 0
               setvarvar fta fta_normal setvar ftq 334
               palfrom 32 0 32
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
@@ -13977,7 +13977,7 @@ useractor notenemy MEMBERSHIPCARD 0
              ifvare CARDMEMBERSHIP? 0 setvar CARDMEMBERSHIP? 1
 
              // savegamevar CARDMEMBERSHIP?
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
@@ -14028,7 +14028,7 @@ useractor notenemy PORTABLEATM 0
               setvarvar fta fta_normal setvar ftq 334
               palfrom 32 0 32
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
@@ -14084,7 +14084,7 @@ useractor notenemy MERCURYCOMPUTER 0
               setvarvar fta fta_normal setvar ftq 334
               palfrom 32 0 32
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
@@ -14141,7 +14141,7 @@ useractor notenemy HACKERVISION 0
          globalsound YEAH
          globalsound YEAH
         }
-        setvar WORLDTILESHUFFLES 0
+        setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
         state getworldtile
         state activationflag killit
        }
@@ -17088,7 +17088,7 @@ useractor notenemy ENERGYSHELL_UPGRADED 0
               globalsound YEAH
               palfrom 32 0 32
              }
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
@@ -17253,7 +17253,7 @@ useractor notenemy GEMRINGSILVER 0
            else ifspritepal 12 globalsound GEMLARGE
            palfrom 32 0 32
           }
-          setvar WORLDTILESHUFFLES 0
+          setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
           state getworldtile
           state activationflag
           killit
@@ -17413,7 +17413,7 @@ useractor notenemy GEMRINGGOLD 0
            else ifspritepal 12 globalsound GEMLARGE
            palfrom 32 0 32
           }
-          setvar WORLDTILESHUFFLES 0
+          setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
           state getworldtile
           state activationflag
           killit

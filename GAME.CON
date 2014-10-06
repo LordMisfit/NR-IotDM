@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git54.10052014
+definequote 1337 ^22VERSION:^0 5.22.git55.10062014
 
 action ANULLACTION 0
 
@@ -888,8 +888,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar DUKE? 1
        redefinequote 334 DUKE ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1793,8 +1793,8 @@ state triadragnarok
      { 
       qsprintf 204 209 HPINCREASED 
       setvar HPLUPDISPLAY 0 
-	  qsprintf 160 261 HPINCREASED
-	  setvarvar fta fta_normal setvar ftq 160
+      qsprintf 160 261 HPINCREASED
+      setvarvar fta fta_normal setvar ftq 160
      } 
      ifvarg APINCREASED 0 
      { 
@@ -1815,14 +1815,14 @@ state triadragnarok
       qsprintf 206 211 ATKINCREASED 
       setvar ATKLUPDISPLAY 0 
       qsprintf 326 329 ATKINCREASED 
-	  setvarvar fta fta_normal setvar ftq 326
+      setvarvar fta fta_normal setvar ftq 326
      } 
      ifvarg DEFINCREASED 0 
      { 
       qsprintf 207 212 DEFINCREASED 
       setvar DEFLUPDISPLAY 0 
       qsprintf 327 330 DEFINCREASED 
-	  setvarvar fta fta_normal setvar ftq 327
+      setvarvar fta fta_normal setvar ftq 327
      } 
     }
 ends
@@ -5030,7 +5030,6 @@ state calccriticalhits
       mulvar CRITICALHITMULTI 5
       divvar CRITICALHITMULTI 4
      }
-     // setvarvar fta fta_normal setvar ftq 195 
     }    
     else setvar CRITICAL? 0
  }
@@ -27995,8 +27994,6 @@ getplayer[THISACTOR].curr_weapon CURRENTWEAPON
 setvarvar DAMAGEPERCENT 1000
 subvarvar DAMAGEPERCENT ARMORPERCENT
 
- ifvare ITEMUSEDALL 1 addvar ITEMUSETIMER 1
-
 ifvare mainmenu 0
 {
  ifvarg PLAYERDISPLAYTOTALDAMAGE 0
@@ -46670,7 +46667,7 @@ state newbeast_17heal
               setactorvar[HEALSEEK].ENEMYHPDAMAGED? -1
               redefinequote 185 ^10AN ENEMY WAS HEALED FOR 33% HP!! :O
               setvarvar fta fta_normal setvar ftq 185
-              setvar WORLDTILESHUFFLES 0
+              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
               state getworldtile
 ends
 
@@ -46697,7 +46694,7 @@ state newbeast_20heal
               setactorvar[HEALSEEK].ENEMYHPDAMAGED? -1
               redefinequote 185 ^10AN ENEMY WAS HEALED FOR 66% HP!! :O
               setvarvar fta fta_normal setvar ftq 185
-              setvar WORLDTILESHUFFLES 0
+              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
               state getworldtile
 ends
 
@@ -50654,7 +50651,7 @@ addvarvar KEYSCANNERZDOWN OBJECTDIFF2
          operatemasterswitches lotagsav
          operaterespawns lotagsav
          state checkforforcefields
-         setvar WORLDTILESHUFFLES 0
+         setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
          state getworldtile
          soundoncevar zvelsav
          setvar MISCARRAYID 52 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button12timer
@@ -50664,7 +50661,7 @@ addvarvar KEYSCANNERZDOWN OBJECTDIFF2
         }
         else // passcode rejected
         {
-         setvar WORLDTILESHUFFLES 0
+         setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
          state getworldtile
          soundoncevar yvelsav
          state keypadhandscannerdamage
@@ -50990,7 +50987,7 @@ useractor notenemy AIRBUBBLE 0
      {
       ifvarvarl AIRTIME MAXAIRTIME 
       {
-       setvar WORLDTILESHUFFLES 0
+       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
        globalsound DUKE_GET
        randvarvar tempd tempb
@@ -51005,7 +51002,7 @@ useractor notenemy AIRBUBBLE 0
       {
        ifvarg SCUBATIME 0 ifvarl SCUBATIME SCUBA_AMOUNT
        {
-        setvar WORLDTILESHUFFLES 0
+        setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
         state getworldtile
         globalsound DUKE_GET
         randvarvar tempd tempb
@@ -51032,7 +51029,7 @@ useractor notenemy AIRBUBBLE 0
            getactorvar[ITEMSEEK].ENEMYMAXAIRTIME TEMP
            ifvarvarl ITEMSEEKB TEMP
            {
-            setvar WORLDTILESHUFFLES 0
+            setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
             sound DUKE_GET
             randvarvar tempd tempb
@@ -51051,7 +51048,7 @@ useractor notenemy AIRBUBBLE 0
             ifvarg ITEMSEEKC 0
              ifvarl ITEMSEEKC SCUBA_AMOUNT
              {
-              setvar WORLDTILESHUFFLES 0
+              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
               state getworldtile
               sound DUKE_GET
               randvarvar tempd tempb

@@ -627,8 +627,6 @@ gamevar GENDER? 0 131073 // 0 = Male, 1 = Female
 gamevar DEFENDINGPAL 0 2
 gamevar ONLYHPMETER? 0 2
 
-gamevar MONEYPAL 0 0
-
 gamevar TEMPVAR 0 0
 gamevar TEMPVAR2 0 0
 gamevar TEMPVAR3 0 0
@@ -1563,7 +1561,6 @@ gamevar WORLDTILEBITFIELD5 0 131072
 gamevar WORLDTILEBITFIELD6 0 131072
 gamevar WORLDTILEBITFIELD7 0 131072
 gamevar WORLDTILEBITFIELD8 0 131072
-gamevar WORLDTILESHUFFLES 0 131072
 gamevar WORLDTILEANG 0 2
 
 gamevar oposxv 0 1 // velocities from last tick
@@ -1868,8 +1865,6 @@ gamevar atm_wirereceivearray 0 131072
 gamevar atm_amount_dollars 0 131072
 gamevar atm_amount_cents 0 131072
 gamevar atm_amount_all 0 131072
-gamevar ATMMONEYDOLLARS 0 131072
-gamevar ATMMONEYCENTS 0 131072
 // Interests and Rank Timers/Intervals [ATM]
 gamevar INTERESTTIMER 0 131072 //
 gamevar INTERESTINTERVAL 0 131072 // Decides how long it takes for interest rates to kick in [in tics]
@@ -1991,6 +1986,8 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 //*To Be Arrayed >.>*
 //*******************
 
+//gamevar dialougeactive -1 131072 // Determines the ID of the dialouge set in use.
+
 // More to be Added.
 
 //*******************
@@ -2020,7 +2017,7 @@ gamevar MISCARRAYID -1 131072
  // [21] = MAX-WORLDTILESFOUND-LEVEL - WorldTiles Found for the current level
  // [22] = WORLDTILECOUNT - Total Worldtiles Collected Overall
  // [23] = MAX-WORLDTILECOUNT - Maximum Possible Worldtiles to Collect [maybe?]
- // [24] = ??????
+ // [24] = WORLDTILE-SHUFFLES - How many times a worldtile suffles it's image for the map load screen
  // [25] = SWITCHOVER-DELAY [related to character-switching system]
  // [26] = DEATHSWITCH-DELAY [related to character-switching system (for death related mercy-invincibility]
  // [27] = ADD-DELAY [related to a special lotag sector effect that can add/remove characters]
@@ -2035,8 +2032,8 @@ gamevar MISCARRAYID -1 131072
  // [36] = atm-button6timer
  // [37] = atm-button7timer
  // [38] = atm-button8timer
- // [39] = FORDENTIMER [for 'Toasty/Frosty' images]
- // [40] = FORDENTYPE [determines which version of the 'Toasty/Frosty' image appears]
+ // [39] = FORDEN-TIMER [for 'Toasty/Frosty' images]
+ // [40] = FORDEN-TYPE [determines which version of the 'Toasty/Frosty' image appears]
  // [41] = pad-button1timer
  // [42] = pad-button2timer
  // [43] = pad-button3timer
@@ -2049,9 +2046,19 @@ gamevar MISCARRAYID -1 131072
  // [50] = pad-button10timer
  // [51] = pad-button11timer
  // [52] = pad-button12timer
+ // [53] = HEALING-FACTOR
+ // [54] = pause-quote
+ // [55] = pause-quote-new
+ // [56] = pause-timer
+ // [57] = pause-init
+ // [58] = pause-init2
+ // [59] = dialouge-id - Determines the ID of the dialouge set in use.
+ // [60] = dialouge-phase - Determines the phase of the current dialouge ID [how many things to print to screen at the current moment, such as if the second character in the conversation has spoke yet or just the first, etc]
+ // [61] = dialouge-picnum - Determines stuff like portraits in dialouge boxes
+
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
-gamevar MISCARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
-gamevar MISCARRAYID_AMOUNTTEMP2 0 0 // Keeps a 2nd temporary var at the forefront for if-checks and array changes on item amounts
+gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
+gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes on item amounts
 
 gamevar itemidinuse -1 0 // Indexes what item id is trying to be used in the menu [set to -1 when not in use]
 // ID #0 = Resurrection Chalice
@@ -2161,22 +2168,6 @@ gamevar EQUIPTEMP 0 131072
 // ID #34 = [undefined] 
 // ID #35 = [undefined] 
 // ID #36 = [undefined] 
-
-gamevar pausequote -1 131072 // current quote
-gamevar pausequotenew -1 131072 // to make sure the quote will change regardless of selection
-gamevar pausetimer 0 131072
-gamevar pausetimermax 7 131072
-gamevar pauseinit 0 131072
-gamevar pauseinit2 0 131072
-gamevar ticktemp 0 131072
-
-gamevar dialougeactive -1 131072 // Determines the ID of the dialouge set in use.
-gamevar dialougephase 0 131072 // Determines the phase of the current dialouge ID [how many things to print to screen at the current moment, such as if the second character in the conversation has spoke yet or just the first, etc]
-gamevar dialougepicnum -1 131072 //
-
-gamevar HEALINGFACTOR 0 131072
-gamevar ITEMUSETIMER 0 131072
-gamevar ITEMUSEDALL 0 131072
 
 // END OF CHARACTER MENU VARIABLES HERE
 

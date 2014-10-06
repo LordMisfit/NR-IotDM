@@ -10,7 +10,11 @@ ifvarg temp 0
   ifvare temp 1
   {
    setuserdef[THISACTOR].pause_on 2 // Removes the Old "GAME PAUSED"
-   displayrandvar pausequote 4
+
+   setvar MISCARRAYID 54 // pause-quote
+   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+   displayrandvar MISCARRAYID_AMOUNTTEMP 4
+   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
   }
 
   state vehicledisplays
@@ -242,11 +246,11 @@ ifvarg temp 0
 } // [line 7]
 else
 { // [line 15469]
- setvar pausequote -1
- setvar pausequotenew -1
- setvar pausetimer 0
- setvar pauseinit 0
- setvar pauseinit2 0
+ setvar MISCARRAYID 54 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT -1  // pause-quote
+ setvar MISCARRAYID 55 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT -1  // pause-quote-new
+ setvar MISCARRAYID 56 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0  // pause-timer
+ setvar MISCARRAYID 57 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0  // pause-init
+ setvar MISCARRAYID 58 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0  // pause-init2
 
  ifvarl gameover? 1 ifvarg TIMERRAWFORMAT 0
  { // ifvarl gameover? 1 ifvarg TIMERRAWFORMAT 0 [line 13411]

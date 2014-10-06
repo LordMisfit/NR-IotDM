@@ -4158,17 +4158,23 @@ state trashbagcode
 ends
 
 state tileshuffle_1
-   ifvarg WORLDTILESHUFFLES 8 nullop else jump TEMPVAR3
+   setvar MISCARRAYID 24 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-SHUFFLES
+   ifvarg MISCARRAYID_AMOUNTTEMP 8 nullop else jump TEMPVAR3
 ends
 
 state tileshuffle_2
-   ifvarg WORLDTILESHUFFLES 8 setvar TITLESCREEN 0 else jump TEMPVAR3
+   setvar MISCARRAYID 24 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-SHUFFLES
+   ifvarg MISCARRAYID_AMOUNTTEMP 8 setvar TITLESCREEN 0 else jump TEMPVAR3
 ends
 
 state getworldtile
  getcurraddress TEMPVAR3
  randvar TITLESCREEN 224
- addvar WORLDTILESHUFFLES 1
+
+ setvar MISCARRAYID 24 // WORLDTILE-SHUFFLES
+ getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+ addvar MISCARRAYID_AMOUNTTEMP 1
+ setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
   switch TITLESCREEN
   case 0 { state tileshuffle_1 break }
@@ -4438,7 +4444,8 @@ state getworldtile
   case 256 { ifvarand WORLDTILEBITFIELD8 2147483648 state tileshuffle_1 else state tileshuffle_2 break }
   endswitch
 
-  ifvarg WORLDTILESHUFFLES 8 break
+  setvar MISCARRAYID 24 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-SHUFFLES
+  ifvarg MISCARRAYID_AMOUNTTEMP 8 break
 ends
 
 state initialize_worldtile
@@ -4485,7 +4492,7 @@ state grab_worldtile
        globalsound YEAH
        setvarvar fta fta_normal setvar ftq 410
        spawn TRANSPORTERBEAM
-       setvar WORLDTILESHUFFLES 0
+       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
        killit
 ends
@@ -4498,7 +4505,7 @@ state grabinventory
              globalsound FOUND_INVENTORY
              palfrom 32 0 32
             }
-            setvar WORLDTILESHUFFLES 0
+            setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
             state activationflag
             killit
@@ -4512,7 +4519,7 @@ state grabequippable
              globalsound GRAB_EQUIPMENT
              palfrom 32 0 32
             }
-            setvar WORLDTILESHUFFLES 0
+            setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
             state activationflag
             killit
@@ -5270,7 +5277,7 @@ state initializer
   
  // readgamevar CARDMEMBERSHIP?
 
- setvar WORLDTILESHUFFLES 0
+ setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
  state getworldtile
 
 setvar ARRAYPOSITION 0
@@ -8833,7 +8840,7 @@ state medikitvehicle
 	  	 ifactor SURGERYKIT { state checksurgerykits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount }
 
               ifvarand ACTORFLAGS 2 setvar VEHICLEHPDAMAGED? -1
-              setvar WORLDTILESHUFFLES 0
+              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
               state getworldtile
               globalsound VEHICLE_HEAL
 ends
@@ -8969,7 +8976,7 @@ state medikitplayer
 	  	 ifactor SURGERYKIT { state checksurgerykits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount }
 
               ifvarand ACTORFLAGS 2 setvar PLAYERHPDAMAGED? -1
-              setvar WORLDTILESHUFFLES 0
+              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
               state getworldtile
               globalsound USE_MEDIKITITEM
 ends
@@ -12452,7 +12459,7 @@ state medikitmonster
               globalsound USE_MEDIKITITEM
              }
              state enemygrabitemflash
-             setvar WORLDTILESHUFFLES 0
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
             }
 ends
@@ -17081,7 +17088,7 @@ state calcrankitems
             setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
             ifvare PUBLICBETA? 1 nullop else divvar RANKPOINTSTEMP 4
-            setvar WORLDTILESHUFFLES 0
+            setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
             globalsound DUKE_GET
             globalsound DUKE_GET
@@ -19676,7 +19683,7 @@ state getcode
     setactorvar[CHARACTERARRAY].CHARACTERSHRINKINGRESIST tempd
    }
   }
-  setvar WORLDTILESHUFFLES 0
+  setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
   state getworldtile
   ifrespawn
   {
@@ -19735,7 +19742,7 @@ else
  }
  globalsound DUKE_GET
 }
-setvar WORLDTILESHUFFLES 0
+setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
 state getworldtile
 
 ends
@@ -19819,7 +19826,7 @@ state quikget
    setactorvar[CHARACTERARRAY].CHARACTERSHRINKINGRESIST tempd
   }
  }
- setvar WORLDTILESHUFFLES 0
+ setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
  state getworldtile
  state activationflag killit
 ends
@@ -27066,7 +27073,7 @@ state maxhpapbonusgive2
             ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT A MAX HP/AP BONUS! :O
            }
            state enemygrabitemflash
-           setvar WORLDTILESHUFFLES 0
+           setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
            state getworldtile
           }
 ends
@@ -27100,7 +27107,7 @@ state atkdefbonusgive2
             ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT AN ATK/DEF BONUS! :O
            }
            state enemygrabitemflash
-           setvar WORLDTILESHUFFLES 0
+           setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
            state getworldtile
           }
 ends
@@ -27125,8 +27132,8 @@ state hyperatomsetcharacter
 ends
 
 state checklisamoney
- getactor[THISACTOR].pal MONEYPAL
- ifvarn RETURN -1 setactor[RETURN].pal MONEYPAL
+ getactor[THISACTOR].pal tempi
+ ifvarn RETURN -1 setactor[RETURN].pal tempi
  ifvare CHARACTERSELECTED? 8
  {
   ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1 else killit 
@@ -27793,7 +27800,7 @@ state handscannercode
        ifvare CHARACTERSELECTED? 13 { ifvarand hitagsav 4096 state characterusescannersuccess else state characterusescannerfail } // Checks Minako if she's the current character...
        ifvare CHARACTERSELECTED? 14 { ifvarand hitagsav 8192 state characterusescannersuccess else state characterusescannerfail } // Checks ???????? if she's the current character...
        ifvare CHARACTERSELECTED? 15 { ifvarand hitagsav 16384 state characterusescannersuccess else state characterusescannerfail } // Checks Maken if she's the current character...
-       setvar WORLDTILESHUFFLES 0
+       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
        setvar com_pause 10 // This sets a delay between presses of space so that everything doesn't happen at once.
       }
@@ -28042,7 +28049,7 @@ ifvare mainmenu 0
          setvar param 0
          setplayer[THISACTOR].got_access ACCESSCARDS?
 
-         setvar WORLDTILESHUFFLES 0
+         setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
          state getworldtile
          redefinequote 334 ^23UNLOCKED
          setvarvar fta fta_normal setvar ftq 334
