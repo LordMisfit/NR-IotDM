@@ -29,59 +29,6 @@ gamevar INVENTORYSLOTMAX 1 132098 //
 //*******************************************************************************************************************************************************************************
 //*******************************************************************************************************************************************************************************
 
-define SCORPIONTANK 1870
-define DRAGONICRIPBULLET 5920
-define DRAGONICRIP 5921
-
-// cheatkeys KEYSC_D KEYSC_N
-// cheatkeys KEYSC_N KEYSC_R
-
-definecheat 0 cornholio
-definecheat 1 all
-definecheat 2 w###  // scotty###
-definecheat 3 coords
-definecheat 4 view
-definecheat 5 time
-definecheat 6 unlock
-definecheat 7 cash
-definecheat 8 items
-definecheat 9 rate
-definecheat 10 s#
-definecheat 11 beta
-definecheat 12 hyper
-definecheat 13 monsters
-definecheat 14 endepisode // <RESERVED>
-definecheat 15 restartlevel // <RESERVED>
-definecheat 16 todd
-definecheat 17 showmap
-definecheat 18 g
-definecheat 19 allen
-definecheat 20 clip
-definecheat 21 we
-definecheat 22 items
-definecheat 23 keys
-definecheat 24 debug
-definecheat 25 endvolume // <RESERVED>
-
-definegamefuncname 11 GLIDING_MODE
-definegamefuncname 30 MAIN_MENU
-definegamefuncname 49 ALT_FIRE
-// definegamefuncname 50 NEXT_CHAR/WEAP
-// definegamefuncname 51 PREV_CHAR/WEAP
-
-// Custom Attacks
-
-define EXPLOSION2CUSTOM 1891
-define RPG_NOAIM 5183
-define OCTANINE_RPG 5191
-define GENERAL_RPG 5221
-define COMMANDER_RPG 5228
-define LEADER_RPG 5235
-define BAALO_RPG 5242
-define ZAPPER1 6656
-define ZAPPER2 6672
-define ZAPPER3 6678
-
 //************
 //**GAMEVARS**
 //************
@@ -276,7 +223,6 @@ gamevar CHEATBITFIELD? 0 131073
 // 128 = Infinite EP/0 EP use [ENERGYCHEAT?] // gamevar ENERGYCHEAT? 0 1
 
 gamevar EQUIPCHEAT? 0 1
-// gamevar SPEEDCHEAT? 0 131072
 
 gamevar RNDVOICE 0 1
 
@@ -319,14 +265,11 @@ gamevar OVERHEADSPRITE 0 131073
 gamevar digx_test 1 0
 gamevar digy_test 1 0
 gamevar digz_test 1 0
-
-gamevar accel_test 100 0
 gamevar ACCELFACTOR 100 131073
 
 gamevar ftq -1 0
 gamevar fta 0 0
 gamevar fta_normal 100 0
-
 gamevar quotedigx 320 0
 gamevar quotedigy 4 0
 gamevar quotescale 49152 0
@@ -338,9 +281,6 @@ gamevar statincreasetempc 0 2
 gamevar statincreasetempd 0 2
 gamevar statincreasetempe 0 2
 //
-
-gamevar bloodpoolmaxxrepeat 0 2
-gamevar bloodpoolmaxyrepeat 0 2
 
 gamevar TRANSFORMTIMER 0 1
 gamevar TRANSFORMTIMERMAX 9 0
@@ -403,7 +343,7 @@ gamevar PICNUM-HOLDING 0 131073 // Picnum of the item the player is carrying aro
 gamevar DROPFLAG 0 2 // 
 gamevar FALLFLAG 0 2 // For if the item is supposed to fall after let go
 gamevar WEIGHTFLAG 0 2 // 
-gamevar HOLDINGID 0 0
+gamevar HOLDINGID 0 0 //
 gamevar BOUNCESND 0 2 // 
 
 gamevar SPRITEID-TELEKENESIS_P -1 1 // Sprite ID of the item the player is telekenetically holding
@@ -561,14 +501,6 @@ gamevar hitwalllotag 0 0
 gamevar hitwallextra 0 0
 
 gamevar GETCURRADDRESS 0 0
-
-gamevar TEMP2 0 2
-gamevar TEMP3 0 2
-gamevar TEMP4 0 2
-gamevar TEMP5 0 2
-gamevar TEMP6 0 2
-gamevar TEMP7 0 2
-gamevar TEMP8 0 2
 
 gamevar VENDINGQUANITY 0 1026
 
@@ -771,11 +703,6 @@ gamevar DIMNESSDIRECTION 0 131074
 gamevar DIMNESSSWITCHTIMER 0 131074
 gamevar ACTORANGLE 0 131074
 gamevar ACTORHORIZ 0 131074
-
-gamevar SWITCHOVERDELAY 1 131072 // Tries to block too many immediate setactor/setplayer() problems when switching occurs. If you are laggy, a higher amount gives better security against bleed-ins, but causes more delay in 'rebooting' various things. Set in tics. 26 = 1 second.
-gamevar DEATHSWITCHDELAY 0 131072 // Determines the time before damage can be suffered by most attacks [for "death switches" and perhaps for flickering time from a new item?
-gamevar ADDDELAY 0 131072
-gamevar THROWBACKDELAY 0 131072
 
 gamevar TITLESCREEN 0 0 // For deciding the random background for loading screens
 
@@ -1364,8 +1291,20 @@ gamevar MELEEDAMAGE 0 131073
 gamevar MELEEDAMAGEVAR 0 131073
 gamevar MELEEDAMAGETEMP 0 131073
 gamevar MELEEDAMAGEAFTER 0 131073
+
+gamevar TEMP 0 131074
+gamevar TEMP2 0 2
+gamevar TEMP3 0 2
+gamevar TEMP4 0 2
+gamevar TEMP5 0 2
+gamevar TEMP6 0 2
+gamevar TEMP7 0 2
+gamevar TEMP8 0 2
+gamevar TEMPHEALTH 0 131073
+gamevar TEMPARMOR 0 131073
+gamevar TEMPENERGY 0 131073
 gamevar temppartime 0 2
-gamevar temp 0 2	         // used for temporary storage
+gamevar temp 0 2         // used for temporary storage
 gamevar tempb 0 2
 gamevar tempc 0 2
 gamevar tempd 0 2
@@ -1376,6 +1315,11 @@ gamevar temph 0 2
 gamevar tempi 0 2
 gamevar tempvehicleid 0 2
 gamevar tempvehicletype 0 2
+gamevar tempvarname 0 131073
+gamevar tempvarname2 0 131073
+gamevar tempvarname3 0 131073
+gamevar tempvarname4 0 131073
+
 gamevar DEFENDERDISPLAYTIMER 0 0
 gamevar spriteid 0 0
 
@@ -1434,7 +1378,6 @@ gamevar ybetween 0 131073
 gamevar textflags 0 131073
 gamevar tilenum 0 131073
 gamevar varname 0 131073
-gamevar TEMP 0 131074
 gamevar bits 0 131073
 gamevar extbits 0 131073
 gamevar fpress 0 131073
@@ -1449,11 +1392,6 @@ gamevar countvarb 0 131074
 gamevar tsprcstat 0 2
 gamevar tsprpicnum 0 2
 gamevar tsprowner 0 2
-
-gamevar tempvarname 0 131073
-gamevar tempvarname2 0 131073
-gamevar tempvarname3 0 131073
-gamevar tempvarname4 0 131073
 
 gamevar FALLCOUNTER 0 131073
 
@@ -1508,10 +1446,6 @@ gamevar ACTORFALLCOUNTER 0 2
 gamevar ACTORFALLDAMAGERATIO 0 2
 gamevar ACTORFALLDAMAGE 0 2
 
-gamevar ACTORSE7XDIFFERENCE 0 2
-gamevar ACTORSE7YDIFFERENCE 0 2
-gamevar ACTORSE7ZDIFFERENCE 0 2
-
 gamevar ACTORABSORBFLAGS 0 2 // Bit Field
 gamevar ACTORIMMUNEFLAGS 0 2 // Bit Field
 gamevar ACTORSTRONGFLAGS 0 2 // Bit Field
@@ -1549,9 +1483,6 @@ gamevar MAXARMORPOINTS DUKEARMORPOINTSSTART 131073
 gamevar CURRENTENERGYPOINTS DUKEENERGYPOINTSSTART 131073
 gamevar MAXENERGYPOINTS DUKEENERGYPOINTSSTART 131073
 
-gamevar TEMPHEALTH 0 131073
-gamevar TEMPARMOR 0 131073
-gamevar TEMPENERGY 0 131073
 gamevar FIRSTAIDCURRENT 0 131073
 
 gamevar SECTORHITAG 0 131073
@@ -1652,8 +1583,6 @@ gamevar zvelsav 0 2
 gamevar com_pause 0 131073
 
 gamevar NPC_TYPE 0 0 // 0 = None, 1 = Enemy, 2 = Ally, 3 = Neutral, 4 = Important, 5 = Major Enemy
-gamevar FORDENTIMER 0 131072 // For Use of "Toasty/Frosty" graphic >.>
-gamevar FORDENTYPE 0 131072 // For Use of "Toasty/Frosty" graphic >.>
 gamevar lifebartogglemode 1 131072 // If you want to toggle lifebars on and off
 gamevar CHOKING? 0 2 // For choking/begging LIZTROOPs
 
@@ -1741,8 +1670,7 @@ gamevar telebeaconsectnum 0 131074
 gamevar telebeaconstatus 0 131074
 
 gamevar DAMAGEMODIFIER 0 131072 // For Calculating Complex Resistance Formulas [10000 = 100.00% Vulnerability]
-gamevar TEMPMOD 0 131072 //
-gamevar TEMPMOD2 0 131072
+gamevar TEMPMOD 0 131072
 
 //***********************************************
 //*BEGINNING OF CHARACTER-RELATED VARIABLES HERE*
@@ -1765,7 +1693,6 @@ gamevar CHARACTERSAVAILABLE 1 131072 // Bit-Based Variable which is used for var
 // 8192 = "Mystery Lady"
 // 16834 = Maken Shinkara
 
-gamevar CHARACTERGENDER 0 131072 // 0 = Male, 1 = Female, 2 = Neuter[if needed]
 gamevar CHARACTERSELECTED? 1 131072 // Defaults to Duke
 // 1 = Duke
 // 2 = Jack
@@ -1890,14 +1817,6 @@ gamevar MYSTERY1FORM? 0 131072
 gamevar MAKENFORM? 0 131072
 
 gamevar MYSTERY1DEADTIMER 0 0	// "Mystery Lady's" Death Timer [for ressing her after 10 minutes have passed]
-
-//*******************
-//*To Be Arrayed >.>*
-//*******************
-
-// Nothing for now! :D
-
-//*******************
 
 // END OF CHARACTER-RELATED VARIABLES HERE
 
@@ -2068,6 +1987,14 @@ gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept 
 gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 
+//*******************
+//*To Be Arrayed >.>*
+//*******************
+
+// More to be Added.
+
+//*******************
+
 gamevar MISCARRAYID -1 131072
  // [0] = ENEMIES-KILLED-LEVEL - Enemies Killed for the Current Level
  // [1] = ENEMIES-KILLED-GAME - Enemies Kill for the Entire Game [as of the current level]
@@ -2093,11 +2020,11 @@ gamevar MISCARRAYID -1 131072
  // [21] = MAX-WORLDTILESFOUND-LEVEL - WorldTiles Found for the current level
  // [22] = WORLDTILECOUNT - Total Worldtiles Collected Overall
  // [23] = MAX-WORLDTILECOUNT - Maximum Possible Worldtiles to Collect [maybe?]
- // [24] = MENU-TILE - ?
- // [25] = ??????
- // [26] = ??????
- // [27] = ??????
- // [28] = ??????
+ // [24] = ??????
+ // [25] = SWITCHOVER-DELAY [related to character-switching system]
+ // [26] = DEATHSWITCH-DELAY [related to character-switching system (for death related mercy-invincibility]
+ // [27] = ADD-DELAY [related to a special lotag sector effect that can add/remove characters]
+ // [28] = THROWBACK-DELAY [related to throwback from taking damage]
  // [29] = ??????
  // [30] = ??????
  // [31] = atm-button1timer
@@ -2108,8 +2035,8 @@ gamevar MISCARRAYID -1 131072
  // [36] = atm-button6timer
  // [37] = atm-button7timer
  // [38] = atm-button8timer
- // [39] = ??????
- // [40] = ??????
+ // [39] = FORDENTIMER [for 'Toasty/Frosty' images]
+ // [40] = FORDENTYPE [determines which version of the 'Toasty/Frosty' image appears]
  // [41] = pad-button1timer
  // [42] = pad-button2timer
  // [43] = pad-button3timer

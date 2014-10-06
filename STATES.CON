@@ -3626,7 +3626,8 @@ state dealinvulndmg
        state invulnauraseek
        ifvare temp 1
        {
-        ifvare DEATHSWITCHDELAY 0
+        setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+        ifvare MISCARRAYID_AMOUNTTEMP 0
         {
          ifvare CHARACTERSELECTED? 8
          {
@@ -3644,7 +3645,7 @@ state dealinvulndmg
              setvar CURRENTARMORPOINTS 0
              setvar CURRENTHITPOINTS 1
              setvar DEATHCHARACTERVAR 0
-             setvar DEATHSWITCHDELAY 39
+             setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
              state bioshieldhitsounds
              setactorvar[THISACTOR].ENEMYFIRSTAID 0
              setactorvar[THISACTOR].ENEMYAP 0
@@ -7112,7 +7113,8 @@ state addslow
       ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 nullop
       else
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         ifvarand PLAYERSTATUS? 4 
         { 
@@ -7164,7 +7166,8 @@ state addslow_overridevehicle
      ifvarg INVULNTIME 1 nullop
      else
      {
-      ifvare DEATHSWITCHDELAY 0
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarand PLAYERSTATUS? 4 
        { 
@@ -7229,7 +7232,8 @@ state addpoison
       ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 nullop
       else
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         ifvarand PLAYERSTATUS? 8 
         { 
@@ -7279,7 +7283,8 @@ state addpoison_overridevehicle
      ifvarg INVULNTIME 1 nullop
      else
      {
-      ifvare DEATHSWITCHDELAY 0
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarand PLAYERSTATUS? 8 
        { 
@@ -7343,7 +7348,8 @@ state adddimness
       ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 nullop
       else
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         ifvarand PLAYERSTATUS? 16 
         { 
@@ -7393,7 +7399,8 @@ state adddimness_overridevehicle
      ifvarg INVULNTIME 1 nullop
      else
      {
-      ifvare DEATHSWITCHDELAY 0
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarand PLAYERSTATUS? 16 
        { 
@@ -7457,7 +7464,8 @@ state addconfusion
       ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 nullop
       else
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         ifvarand PLAYERSTATUS? 128 
         { 
@@ -7507,7 +7515,8 @@ state addconfusion_overridevehicle
      ifvarg INVULNTIME 1 nullop
      else
      {
-      ifvare DEATHSWITCHDELAY 0
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarand PLAYERSTATUS? 128 
        { 
@@ -15041,8 +15050,10 @@ state civsave
 ends
 
 state fordencall
-    setvar FORDENTIMER 38
-    randvar FORDENTYPE 1
+    setvar MISCARRAYID 39 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 38 // FORDEN-TIMER
+
+    randvar MISCARRAYID_AMOUNTTEMP2 1
+    setvar MISCARRAYID 40 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // FORDEN-TYPE
 ends
 
 state frosty
@@ -22039,7 +22050,8 @@ ifvarg EDGEGRAPPLING 0
        {
         ifvarn CHARACTERSELECTED? 9 // Cybanis has unlimited mantle-strength
         {
-         ifvare DEATHSWITCHDELAY 0
+         setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+         ifvare MISCARRAYID_AMOUNTTEMP 0
          {
           ifvare EDGEGRAPPLING 1 // Drain at normal rate
           {
@@ -27221,7 +27233,8 @@ state keypadhandscannerdamage
  {
   ifvarl INVULNTIME 1
   {
-   ifvare DEATHSWITCHDELAY 0
+   setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+   ifvare MISCARRAYID_AMOUNTTEMP 0
    {
     ifvarg xvelsav 0 setvarvar tempe xvelsav
     else ifvare xvelsav 0 break
@@ -29150,7 +29163,8 @@ state grabconditions
 
           ifvarl INVULNTIME 1
           {
-           ifvarl DEATHSWITCHDELAY 1
+           setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+           ifvarl MISCARRAYID_AMOUNTTEMP 1
            {
             subvarvar MANTLINGTIMEREXTRA PHYSICSTEMPB
             ifvarl MANTLINGTIMEREXTRA 1
@@ -29250,7 +29264,8 @@ state pullconditions
 
           ifvarl INVULNTIME 1
           {
-           ifvarl DEATHSWITCHDELAY 1
+           setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+           ifvarl MISCARRAYID_AMOUNTTEMP 1
            {
             subvarvar MANTLINGTIMEREXTRA PHYSICSTEMPB
             ifvarl MANTLINGTIMEREXTRA 1
@@ -29768,7 +29783,8 @@ state moveitem
 
     ifvarl INVULNTIME 1
     {
-     ifvarl DEATHSWITCHDELAY 1
+     setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+     ifvarl MISCARRAYID_AMOUNTTEMP 1
      {
       subvarvar MANTLINGTIMEREXTRA PHYSICSTEMPB
       ifvarl MANTLINGTIMEREXTRA 1
@@ -30474,7 +30490,8 @@ state setknockback_player
  getuserdef[THISACTOR].god temp
  ifvare temp 1 break
  ifvarg INVULNTIME 0 break
- ifvarg DEATHSWITCHDELAY 0 break
+ setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+ ifvarg MISCARRAYID_AMOUNTTEMP 0 break
 
  getplayer[THISACTOR].posx mx
  getplayer[THISACTOR].posy my
@@ -30580,7 +30597,8 @@ state atmbroken_dealdamage
   ifvare mainmenu 0
   {
       state stopsearchsounds
-      ifvare DEATHSWITCHDELAY 0
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarand CHEATBITFIELD? 32 nullop else
        {
@@ -30760,7 +30778,8 @@ state plug_dealdamage
      ifcansee 
      {
       state stopsearchsounds
-      ifvare DEATHSWITCHDELAY 0
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarand CHEATBITFIELD? 32 nullop else
        {
@@ -31483,7 +31502,8 @@ state freezecode_player
    {
     ifvare VEHICLEID -1
     {
-     ifvarl DEATHSWITCHDELAY 1
+     setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+     ifvarl MISCARRAYID_AMOUNTTEMP 1
      {
       setvarvar tempe freezing
       ifvarl tempe 1 setvar tempe 1

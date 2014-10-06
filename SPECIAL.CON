@@ -1,3 +1,56 @@
+define SCORPIONTANK 1870
+define DRAGONICRIPBULLET 5920
+define DRAGONICRIP 5921
+
+// cheatkeys KEYSC_D KEYSC_N
+// cheatkeys KEYSC_N KEYSC_R
+
+definecheat 0 cornholio
+definecheat 1 all
+definecheat 2 w###  // scotty###
+definecheat 3 coords
+definecheat 4 view
+definecheat 5 time
+definecheat 6 unlock
+definecheat 7 cash
+definecheat 8 items
+definecheat 9 rate
+definecheat 10 s#
+definecheat 11 beta
+definecheat 12 hyper
+definecheat 13 monsters
+definecheat 14 endepisode // <RESERVED>
+definecheat 15 restartlevel // <RESERVED>
+definecheat 16 todd
+definecheat 17 showmap
+definecheat 18 g
+definecheat 19 allen
+definecheat 20 clip
+definecheat 21 we
+definecheat 22 items
+definecheat 23 keys
+definecheat 24 debug
+definecheat 25 endvolume // <RESERVED>
+
+definegamefuncname 11 GLIDING_MODE
+definegamefuncname 30 MAIN_MENU
+definegamefuncname 49 ALT_FIRE
+// definegamefuncname 50 NEXT_CHAR/WEAP
+// definegamefuncname 51 PREV_CHAR/WEAP
+
+// Custom Attacks
+
+define EXPLOSION2CUSTOM 1891
+define RPG_NOAIM 5183
+define OCTANINE_RPG 5191
+define GENERAL_RPG 5221
+define COMMANDER_RPG 5228
+define LEADER_RPG 5235
+define BAALO_RPG 5242
+define ZAPPER1 6656
+define ZAPPER2 6672
+define ZAPPER3 6678
+
 state checktip_isavailable
  getactorvar[tiparrayid].tiparray_toggle TEMPVAR8
  ifvare TEMPVAR8 0 { setactorvar[tiparrayid].tiparray_toggle 1 }
@@ -17115,7 +17168,7 @@ state resetstatusvars
   setvar CHARACTERCHEAT? 7
   state checkbubsylives setvar ITEMARRAYID_AMOUNTTEMP 0 state setitemidarrayamount
   setvar CHARACTERSELECTED? 1
-  setvar SWITCHOVERDELAY 1
+  setvar MISCARRAYID 25 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // SWITCHOVER-DELAY
   setvarvar DAMAGEINCELL ESHIELDDMGFACTOR
 
   setvar CHARACTERARRAY 1

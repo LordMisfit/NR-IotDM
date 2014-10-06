@@ -836,10 +836,10 @@ getplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
     }    //*******************************************************
     else //*If the game detects a change in the current character*
     {    //*******************************************************
-      setvar SWITCHOVERDELAY 1 // Set to >1 to prevent bleed ins for HP, AIRTIME and Inventory Times
+      setvar MISCARRAYID 25 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // SWITCHOVER-DELAY - Set to >1 to prevent bleed ins for HP, AIRTIME and Inventory Times
       setplayer[THISACTOR].holoduke_on -1 // Turns off Holoform automatically if the last character left it on[since switching back to that person will not make their holoform respawn and waste its' energy.
       setplayer[THISACTOR].scuba_on 0 // Turns off Scuba automatically if the last character left it on so the next character is not stuck with a 'perma-scubatank' even if they don't have one of their own
-	  setplayer[THISACTOR].random_club_frame 0 // SET THIS TO 0 IN ORDER TO RESET IT AND ALLOW THE SHOTGUN TO FIRE. FINALLY FIXED THIS CRAPHEAD OF A BUG!! :D
+      setplayer[THISACTOR].random_club_frame 0 // SET THIS TO 0 IN ORDER TO RESET IT AND ALLOW THE SHOTGUN TO FIRE. FINALLY FIXED THIS CRAPHEAD OF A BUG!! :D
       setvar HITPOINTREGENTICS 0
       setvar PLAYERREGENCOUNTER 0
       setvar PLAYERAPREGENCOUNTER 0
@@ -1137,7 +1137,7 @@ state checkforcontinues
 
    state checkcontinues subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
 
-   setvar DEATHSWITCHDELAY 39
+   setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
    globalsound CONTINUE_USED
    redefinequote 321 ^20YOUR GROUP WAS SAVED BY ONE OF YOUR CONTINUES!!
    setvarvar fta fta_normal setvar ftq 321
@@ -1160,7 +1160,7 @@ state checkbubsylives
       getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME temp
       setactorvar[CHARACTERARRAY].CHARACTERBREATHTIME temp
       state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
-      setvar DEATHSWITCHDELAY 39
+      setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
       setvarvar fta fta_normal setvar ftq 321
      }
@@ -1176,7 +1176,7 @@ state checkbubsylives2
       setvarvar AIRTIME MAXAIRTIME
       state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
       stopsound DUKE_GRUNT
-      setvar DEATHSWITCHDELAY 39
+      setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
       setvarvar fta fta_normal setvar ftq 321
       break 
@@ -1195,7 +1195,7 @@ state changechar
     stopsound LISA_FALLSCREAM
     stopsound MAKEN_FALLSCREAM
     setvar AUTOSWITCHATTEMPTS 0
-    setvar DEATHSWITCHDELAY 39
+    setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
     setactor[PLAYERID].extra 16384
 ends
 
@@ -1205,7 +1205,7 @@ state mortalblowstuff
    stopsound DUKE_GRUNT
    redefinequote 321 ^23SURVIVED A MORTAL BLOW!!   
    setvar DEATHCHARACTERVAR 0
-   setvar DEATHSWITCHDELAY 39
+   setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
    setvarvar fta fta_normal setvar ftq 321
 ends
 
@@ -1219,176 +1219,33 @@ state survivalcheck1
   }
 ends
 
+state switchcharactercheck
+   setvarvar CHARACTERARRAY CHARACTERNEW
+   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+ends
+
 state switchtorandomcharacter
  getcurraddress TEMPVAR3
  setvar CHARACTERNEW 0 // set to 0
  randvar CHARACTERNEW 14 // 0 to 14
  addvar CHARACTERNEW 1 // +1
 
- ifvare CHARACTERNEW 1
- {
-  ifvare DUKE? 1
-  {
-   setvar CHARACTERARRAY 1
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 2
- {
-  ifvare JACK? 1
-  {
-   setvar CHARACTERARRAY 2
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 3
- {
-  ifvare BUBSY? 1
-  {
-   setvar CHARACTERARRAY 3
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 4
- {
-  ifvare AMI? 1
-  {
-   setvar CHARACTERARRAY 4
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 5
- {
-  ifvare LOWANG? 1
-  {
-   setvar CHARACTERARRAY 5
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 6
- {
-  ifvare ESSENCE? 1
-  {
-   setvar CHARACTERARRAY 6
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 7
- {
-  ifvare TED? 1
-  {
-   setvar CHARACTERARRAY 7
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 8
- {
-  ifvare LISA? 1
-  {
-   setvar CHARACTERARRAY 8
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 9
- {
-  ifvare CYBANIS? 1
-  {
-   setvar CHARACTERARRAY 9
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 10
- {
-  ifvare NETHRA? 1
-  {
-   setvar CHARACTERARRAY 10
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 11
- {
-  ifvare PAULA? 1
-  {
-   setvar CHARACTERARRAY 11
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 12
- {
-  ifvare LORI? 1
-  {
-   setvar CHARACTERARRAY 12
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 13
- {
-  ifvare MINAKO? 1
-  {
-   setvar CHARACTERARRAY 13
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 14
- {
-  ifvare MYSTERY1? 1
-  {
-   setvar CHARACTERARRAY 14
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
- else
- ifvare CHARACTERNEW 15
- {
-  ifvare MAKEN? 1
-  {
-   setvar CHARACTERARRAY 15
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
-  }
-  else jump TEMPVAR3 // state switchtolivingcharacter
- }
+ ifvare CHARACTERNEW 1 { ifvare DUKE? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 2 { ifvare JACK? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 3 { ifvare BUBSY? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 4 { ifvare AMI? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 5 { ifvare LOWANG? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 6 { ifvare ESSENCE? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 7 { ifvare TED? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 8 { ifvare LISA? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 9 { ifvare CYBANIS? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 10 { ifvare NETHRA? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 11 { ifvare PAULA? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 12 { ifvare LORI? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 13 { ifvare MINAKO? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 14 { ifvare MYSTERY1? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare CHARACTERNEW 15 { ifvare MAKEN? 1 state switchcharactercheck else jump TEMPVAR3 }
 ends
 
 state switchtolivingcharacter

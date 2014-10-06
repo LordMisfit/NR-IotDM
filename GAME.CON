@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git53.10052014
+definequote 1337 ^22VERSION:^0 5.22.git54.10052014
 
 action ANULLACTION 0
 
@@ -1610,9 +1610,7 @@ state finaldmgcalc
        ifvarg TEMPVAR3 0 { ifvare PLAYERARMORDAMAGETEMP 0 setvar ARMORNULLDAMAGE 1 else setvar ARMORNULLDAMAGE 0 }
       }
 
-      // Setting up "invincibility frames" via items
-      // setvar DEATHSWITCHDELAY 15
-	  
+      // Setting up "invincibility frames" via items	  
       ifvare tempvehicleid -1
       {
        ifvare CHARACTERSELECTED? 8
@@ -2554,7 +2552,8 @@ state player_defense
    }
  
    // Allows a the incoming character a small reprieve from damage if the last character was killed by one of a series of attacks.
-   ifvarg DEATHSWITCHDELAY 0
+   setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+   ifvarg MISCARRAYID_AMOUNTTEMP 0
    {
     setactor[THISACTOR].htextra -1 // 0
     palfrom 0 0 
@@ -3308,7 +3307,8 @@ state player_defense
    }
    else
    {
-    ifvarn DEATHSWITCHDELAY 0 // Prevents Deflected Damage from hurting an incoming character after one has just died for 1.5 secs :P
+    setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+    ifvarn MISCARRAYID_AMOUNTTEMP 0 // Prevents Deflected Damage from hurting an incoming character after one has just died for 1.5 secs :P
     {
      setvar ENEMYDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTDAMAGESTATE 0
     }
@@ -10464,7 +10464,8 @@ switch ACTORPICNUM
       palfrom 0 0 0 0
       ifvare mainmenu 0
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
 
         ifvarand CHEATBITFIELD? 32 nullop else
@@ -10961,7 +10962,8 @@ switch ACTORPICNUM
       palfrom 0 0 0 0
       ifvare mainmenu 0
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
 
         ifvarand CHEATBITFIELD? 32 nullop else
@@ -19772,7 +19774,8 @@ actor FLOORFLAME 0 FFLAME_FR
       palfrom 0 0 0 0
       ifvare mainmenu 0
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
 
         ifvarand CHEATBITFIELD? 32 nullop else
@@ -25455,7 +25458,8 @@ ifvare mainmenu 0
     {
      ifvare VEHICLEID -1
      {
-      ifvarl DEATHSWITCHDELAY 1
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvarl MISCARRAYID_AMOUNTTEMP 1
       {
        ifvare CHARACTERSELECTED? 14 nullop // Mystery Lady is able to breath in spaaaaaaace! :P
        else
@@ -26427,7 +26431,8 @@ ifvare mainmenu 0 // Main Menu is NOT open
  {
   ifvare oldskoolmode 0
   {
-   ifvarl DEATHSWITCHDELAY 10
+   setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+   ifvarl MISCARRAYID_AMOUNTTEMP 10
    {
     ifvarg CURRENTHITPOINTS 0
     {
@@ -26956,7 +26961,9 @@ ifvarl CURRENTHITPOINTS 1
 } 
 else 
 {
- ifvarg DEATHSWITCHDELAY 0 setactor[PLAYERID].extra 16384
+ setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+ ifvarg MISCARRAYID_AMOUNTTEMP 0 setactor[PLAYERID].extra 16384
+
  ifsquished setvar CURRENTHITPOINTS 0
  getactor[PLAYERID].extra TEMPVAR
  ifvarl TEMPVAR 1 setvar CURRENTHITPOINTS 0
@@ -27019,7 +27026,9 @@ ifvarn GREENSLIMEID -1
      addvar tempe 5
     }
     addvarvar tempe TEMP
-    ifvare DEATHSWITCHDELAY 0 ifvare mainmenu 0
+
+    setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+    ifvare MISCARRAYID_AMOUNTTEMP 0 ifvare mainmenu 0
     {
      //*********************
      //*Check Malakian Gems*
@@ -27175,17 +27184,25 @@ ifvarg CURRENTHITPOINTS 0 { setvar gameover? 0 ifvarand PLAYERSTATUS? 1 subvar P
 
 state getcharactergender
 
-ifvarg THROWBACKDELAY 0 
+setvar MISCARRAYID 28 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // THROWBACK-DELAY
+ifvarg MISCARRAYID_AMOUNTTEMP 0 
 { 
  divvar posxv 2 
  setplayer[THISACTOR].posxv posxv
  divvar posyv 2 
  setplayer[THISACTOR].posyv posyv
- subvar THROWBACKDELAY 1
-}
-ifvarg ADDDELAY 0 subvar ADDDELAY 1
 
-ifvarg DEATHSWITCHDELAY 0 // Prevents potentially-fatal knockback when a death-switch occurs
+ subvar MISCARRAYID_AMOUNTTEMP 1
+ setvar MISCARRAYID 28 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // THROWBACK-DELAY
+}
+
+setvar MISCARRAYID 27 // ADD-DELAY
+getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+ifvarg MISCARRAYID_AMOUNTTEMP 0 subvar MISCARRAYID_AMOUNTTEMP 1
+setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+
+setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+ifvarg MISCARRAYID_AMOUNTTEMP 0 // Prevents potentially-fatal knockback when a death-switch occurs
 {
   getplayer[THISACTOR].player_par TEMPVAR4
   modvar TEMPVAR4 6
@@ -27200,7 +27217,12 @@ ifvarg DEATHSWITCHDELAY 0 // Prevents potentially-fatal knockback when a death-s
   ifvare TEMPVAR4 4 addvar TEMPVAR3 33282
   ifvare TEMPVAR4 5 addvar TEMPVAR3 33282
   setactor[THISACTOR].cstat TEMPVAR3
-  subvar DEATHSWITCHDELAY 1
+
+  setvar MISCARRAYID 26 // DEATHSWITCH-DELAY
+  getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+  subvar MISCARRAYID_AMOUNTTEMP 1
+  setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+
   setplayer[THISACTOR].falling_counter 0
 }
 else
@@ -27212,9 +27234,9 @@ else
   setactor[THISACTOR].cstat TEMPVAR3
 }
 
-ifvarg SWITCHOVERDELAY 0 subvar SWITCHOVERDELAY 1
-
-ifvare SWITCHOVERDELAY 0 
+setvar MISCARRAYID 25 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // SWITCHOVER-DELAY
+ifvarg MISCARRAYID_AMOUNTTEMP 0 subvar MISCARRAYID_AMOUNTTEMP 1
+ifvare MISCARRAYID_AMOUNTTEMP 0 
 {
  // Prevents Player from Exceeding 200% HP
  ifvarvarg CURRENTHITPOINTS MAXHITPOINTSATOMIC setvarvar CURRENTHITPOINTS MAXHITPOINTSATOMIC
@@ -27320,7 +27342,7 @@ ifvare CURRENTHITPOINTS 0 // ifp pdead
       stopsound DUKE_GRUNT
       redefinequote 321 ^23SURVIVED A MORTAL BLOW!!   
       setvar DEATHCHARACTERVAR 0
-      setvar DEATHSWITCHDELAY 39
+      setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       setvarvar fta fta_normal setvar ftq 321
       break 
      }
@@ -27379,7 +27401,7 @@ ifvare CURRENTHITPOINTS 0 // ifp pdead
       stopsound DUKE_GRUNT
       redefinequote 321 ^23SURVIVED A MORTAL BLOW!!   
       setvar DEATHCHARACTERVAR 0
-      setvar DEATHSWITCHDELAY 39
+      setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       setvarvar fta fta_normal setvar ftq 321
       break 
      }
@@ -29456,7 +29478,8 @@ ifvarg SECTORLOTAG 19998 ifvarl SECTORLOTAG 20001
 
 ifvare SECTORLOTAG 20003
 {
- ifvare ADDDELAY 0
+ setvar MISCARRAYID 27 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ADD-DELAY
+ ifvare MISCARRAYID_AMOUNTTEMP 0
  {
   ifvare SECTORHITAG 1 
   { 
@@ -29728,7 +29751,7 @@ ifvare SECTORLOTAG 20003
     }
    } 
   }
-   setvar ADDDELAY 26
+  setvar MISCARRAYID 27 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 26 // ADD-DELAY
  }
 }
 
@@ -29883,7 +29906,7 @@ ifvare SECTORLOTAG 666 state killallcharacters
   setplayer[THISACTOR].gotweapon 9 1
   setplayer[THISACTOR].gotweapon 11 1
   // setplayer[THISACTOR].knuckle_incs 21
-  setvar SWITCHOVERDELAY 1
+  setvar MISCARRAYID 25 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // SWITCHOVER-DELAY
   setvar INITPLAYER 1  
  }
 
@@ -30015,7 +30038,8 @@ ifvare HURTDELAY 17
 
  ifvare SECTORLOTAG 2
  {
-  ifvare SWITCHOVERDELAY 0 
+  setvar MISCARRAYID 25 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // SWITCHOVER-DELAY
+  ifvare MISCARRAYID_AMOUNTTEMP 0 
   { 
    ifvare mainmenu 1 nullop
    else
@@ -30026,7 +30050,8 @@ ifvare HURTDELAY 17
      {
       ifvarg AIRTIME 0
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         ifvarn VEHICLEID -1 
         {
@@ -30312,7 +30337,8 @@ ifvare HURTDELAY 17
      {
       ifvare INVULNTIME 0
       {
-       ifvare DEATHSWITCHDELAY 0
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         subvar SCUBATIME 1
         ifvarl SCUBATIME 0 setvar SCUBATIME 0
@@ -31336,7 +31362,8 @@ ifvare FALLSOUND? 1
    else ifvare SECTORLOTAG 2 nullop
    else
    {
-    ifvare DEATHSWITCHDELAY 0
+    setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+    ifvare MISCARRAYID_AMOUNTTEMP 0
     {
      ifvarl INVULNTIME 1
      {
@@ -31769,7 +31796,10 @@ setvar EMUCEILINGDAMAGETYPE? 0
 setvar EMUFLOORDAMAGETYPE? 0
 
 setvar CANDMGFLOOR? 0
-ifvare DEATHSWITCHDELAY 0 { ifvarg CURRENTHITPOINTS 0 { ifvarand CHEATBITFIELD? 32 nullop else { ifvare mainmenu 0 setvar CANDMGFLOOR? 1 } } } // Checks Conditions for being able to take damage from damagefloors
+
+setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+ifvare MISCARRAYID_AMOUNTTEMP 0 { ifvarg CURRENTHITPOINTS 0 { ifvarand CHEATBITFIELD? 32 nullop else { ifvare mainmenu 0 setvar CANDMGFLOOR? 1 } } } // Checks Conditions for being able to take damage from damagefloors
+
 setvar CANDMGFLOOR2? 0
 ifp ponground { state playergetcorrectz ifvarvarl PLAYERDMGFLRZ tempe { ifvarvarg PLAYERDMGFLRZ tempb setvar CANDMGFLOOR2? 1 } }
 setvar CANDMGFLOOR3? 0
@@ -33028,7 +33058,7 @@ state slipperycode_players getplayer[THISACTOR].posxv oposxv getplayer[THISACTOR
            setvarvar CURRENTHITPOINTS MAXHITPOINTS
            setvarvar AIRTIME MAXAIRTIME
            state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
-           setvar DEATHSWITCHDELAY 39
+           setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
            redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
            setvarvar fta fta_normal setvar ftq 321
           }
@@ -33039,7 +33069,7 @@ state slipperycode_players getplayer[THISACTOR].posxv oposxv getplayer[THISACTOR
             state switchtolivingcharacter 
             state setplayeraction_pstand
             state unfreeze
-            setvar DEATHSWITCHDELAY 39
+            setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
            } 
           }
          }
@@ -33050,7 +33080,7 @@ state slipperycode_players getplayer[THISACTOR].posxv oposxv getplayer[THISACTOR
            state switchtolivingcharacter 
            state setplayeraction_pstand
            state unfreeze
-           setvar DEATHSWITCHDELAY 39
+           setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
           } 
          }
         }
@@ -38400,7 +38430,8 @@ state checkdronenearplayer
           {
            ifvare mainmenu 0
            {
-            ifvare DEATHSWITCHDELAY 0 ifvarn INVULNTIME 0 ifvarg MELEEDAMAGE 0
+            setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+            ifvare MISCARRAYID_AMOUNTTEMP 0 ifvarn INVULNTIME 0 ifvarg MELEEDAMAGE 0
             {
              ifvarand CHEATBITFIELD? 32 nullop else
              {
@@ -60442,7 +60473,10 @@ useractor notenemy NEWBLOODPOOL
   setactor[THISACTOR].cstat TEMP
  }
 
-
+ // 'temp' = current X size
+ // 'tempb' = current Y size
+ // 'temph' = max X size
+ // 'tempi' = max Y size
  // Makes pool spread out when spawned
  ifvarl SKILLSET? 34
  {
@@ -60454,30 +60488,30 @@ useractor notenemy NEWBLOODPOOL
    getactor[TEMP].picnum TEMP2
    ifvare TEMP2 TIRE
    {
-    randvar bloodpoolmaxxrepeat 3
-    addvar bloodpoolmaxxrepeat 64
-    randvar bloodpoolmaxyrepeat 3
-    addvar bloodpoolmaxyrepeat 64
+    randvar temph 3
+    addvar temph 64
+    randvar tempi 3
+    addvar tempi 64
    }
    else
    {
-    randvar bloodpoolmaxxrepeat 3
-    addvar bloodpoolmaxxrepeat 32
-    randvar bloodpoolmaxyrepeat 3
-    addvar bloodpoolmaxyrepeat 32
+    randvar temph 3
+    addvar temph 32
+    randvar tempi 3
+    addvar tempi 32
    }
   }
 
-  ifvarvarl temp bloodpoolmaxxrepeat
+  ifvarvarl temp temph
   {
    addvar temp 2
-   ifvarvarg temp bloodpoolmaxxrepeat setvarvar temp bloodpoolmaxxrepeat
+   ifvarvarg temp temph setvarvar temp temph
    setactor[THISACTOR].xrepeat temp
   }
-  ifvarvarl tempb bloodpoolmaxyrepeat
+  ifvarvarl tempb tempi
   {
    addvar tempb 2
-   ifvarvarg tempb bloodpoolmaxyrepeat setvarvar tempb bloodpoolmaxyrepeat
+   ifvarvarg tempb tempi setvarvar tempb tempi
    setactor[THISACTOR].yrepeat tempb
   }
   addvar SKILLSET? 1
@@ -60502,7 +60536,8 @@ useractor notenemy NEWBLOODPOOL
       {
        ifvare mainmenu 0
        {
-        ifvare DEATHSWITCHDELAY 0
+        setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+        ifvare MISCARRAYID_AMOUNTTEMP 0
         {
          ifvarand CHEATBITFIELD? 32 nullop else
          {

@@ -1488,7 +1488,9 @@ else
     //************************************
     //*Fordenator Code - "MORTAL KOMBAT!"*
     //************************************
-    ifvarg FORDENTIMER 0
+    setvar MISCARRAYID 39 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FORDEN-TIMER
+    setvar MISCARRAYID 40 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // FORDEN-TYPE
+    ifvarg MISCARRAYID_AMOUNTTEMP 0
     {
      setvar digx 280
      setvar digy 161
@@ -1497,43 +1499,45 @@ else
      state pal0
      state shade0
      state orientation26
-     ifvare FORDENTYPE 0
+     ifvare MISCARRAYID_AMOUNTTEMP2 0
      {
-      ifvare FORDENTIMER 1 setvar tilenum 3833
-      ifvare FORDENTIMER 2 setvar tilenum 3833
-      ifvare FORDENTIMER 3 setvar tilenum 3835
-      ifvare FORDENTIMER 4 setvar tilenum 3835
-      ifvare FORDENTIMER 5 setvar tilenum 3837
-      ifvare FORDENTIMER 6 setvar tilenum 3837
-      ifvarg FORDENTIMER 6 { ifvarl FORDENTIMER 33 setvar tilenum 3839 } // 4-16
-      ifvare FORDENTIMER 33 setvar tilenum 3837
-      ifvare FORDENTIMER 34 setvar tilenum 3837
-      ifvare FORDENTIMER 35 setvar tilenum 3835
-      ifvare FORDENTIMER 36 setvar tilenum 3835
-      ifvare FORDENTIMER 37 setvar tilenum 3833
-      ifvare FORDENTIMER 38 setvar tilenum 3833
-      ifvarg FORDENTIMER 38 setvar tilenum 3831
+      ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 3833
+      ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 3833
+      ifvare MISCARRAYID_AMOUNTTEMP 3 setvar tilenum 3835
+      ifvare MISCARRAYID_AMOUNTTEMP 4 setvar tilenum 3835
+      ifvare MISCARRAYID_AMOUNTTEMP 5 setvar tilenum 3837
+      ifvare MISCARRAYID_AMOUNTTEMP 6 setvar tilenum 3837
+      ifvarg MISCARRAYID_AMOUNTTEMP 6 { ifvarl MISCARRAYID_AMOUNTTEMP 33 setvar tilenum 3839 } // 4-16
+      ifvare MISCARRAYID_AMOUNTTEMP 33 setvar tilenum 3837
+      ifvare MISCARRAYID_AMOUNTTEMP 34 setvar tilenum 3837
+      ifvare MISCARRAYID_AMOUNTTEMP 35 setvar tilenum 3835
+      ifvare MISCARRAYID_AMOUNTTEMP 36 setvar tilenum 3835
+      ifvare MISCARRAYID_AMOUNTTEMP 37 setvar tilenum 3833
+      ifvare MISCARRAYID_AMOUNTTEMP 38 setvar tilenum 3833
+      ifvarg MISCARRAYID_AMOUNTTEMP 38 setvar tilenum 3831
      }
-     ifvare FORDENTYPE 1
+     ifvare MISCARRAYID_AMOUNTTEMP2 1
      {
-      ifvare FORDENTIMER 1 setvar tilenum 3824
-      ifvare FORDENTIMER 2 setvar tilenum 3824
-      ifvare FORDENTIMER 3 setvar tilenum 3826
-      ifvare FORDENTIMER 4 setvar tilenum 3826
-      ifvare FORDENTIMER 5 setvar tilenum 3828
-      ifvare FORDENTIMER 6 setvar tilenum 3828
-      ifvarg FORDENTIMER 6 { ifvarl FORDENTIMER 33 setvar tilenum 3830 } // 4-16
-      ifvare FORDENTIMER 33 setvar tilenum 3828
-      ifvare FORDENTIMER 34 setvar tilenum 3828
-      ifvare FORDENTIMER 35 setvar tilenum 3826
-      ifvare FORDENTIMER 36 setvar tilenum 3826
-      ifvare FORDENTIMER 37 setvar tilenum 3824
-      ifvare FORDENTIMER 38 setvar tilenum 3824
-      ifvarg FORDENTIMER 38 setvar tilenum 3822
+      ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 3824
+      ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 3824
+      ifvare MISCARRAYID_AMOUNTTEMP 3 setvar tilenum 3826
+      ifvare MISCARRAYID_AMOUNTTEMP 4 setvar tilenum 3826
+      ifvare MISCARRAYID_AMOUNTTEMP 5 setvar tilenum 3828
+      ifvare MISCARRAYID_AMOUNTTEMP 6 setvar tilenum 3828
+      ifvarg MISCARRAYID_AMOUNTTEMP 6 { ifvarl MISCARRAYID_AMOUNTTEMP 33 setvar tilenum 3830 } // 4-16
+      ifvare MISCARRAYID_AMOUNTTEMP 33 setvar tilenum 3828
+      ifvare MISCARRAYID_AMOUNTTEMP 34 setvar tilenum 3828
+      ifvare MISCARRAYID_AMOUNTTEMP 35 setvar tilenum 3826
+      ifvare MISCARRAYID_AMOUNTTEMP 36 setvar tilenum 3826
+      ifvare MISCARRAYID_AMOUNTTEMP 37 setvar tilenum 3824
+      ifvare MISCARRAYID_AMOUNTTEMP 38 setvar tilenum 3824
+      ifvarg MISCARRAYID_AMOUNTTEMP 38 setvar tilenum 3822
      }
      state rs
-     subvar FORDENTIMER 1
+     subvar MISCARRAYID_AMOUNTTEMP 1
     }
+    setvar MISCARRAYID 39 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FORDEN-TIMER
+    setvar MISCARRAYID 40 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // FORDEN-TYPE
     setvar orientation_change 0
     // End Fordenator Code
 
