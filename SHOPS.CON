@@ -1914,17 +1914,39 @@ ends
 state shop_showcharacterportraits
     ifvare CHARACTERSELECTED? 1 setvar tilenum 7936 // Duke
     else ifvare CHARACTERSELECTED? 2 setvar tilenum 7937 // Jack
-    else ifvare CHARACTERSELECTED? 3 { ifvare BUBSYFORM? 0 setvar tilenum 7938 else ifvare BUBSYFORM? 1 setvar tilenum 7962 } // Bubsy
-    else ifvare CHARACTERSELECTED? 4 { ifvare AMIFORM? 0 setvar tilenum 7939 else ifvare AMIFORM? 1 setvar tilenum 7963 else ifvare AMIFORM? 2 setvar tilenum 7966 } // Ami
+    else ifvare CHARACTERSELECTED? 3 
+    {
+          setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938 
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962 
+    } // Bubsy
+    else ifvare CHARACTERSELECTED? 4 
+    {
+          setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+          ifvare AMIFORM? 0 setvar tilenum 7939 
+     else ifvare AMIFORM? 1 setvar tilenum 7963 
+     else ifvare AMIFORM? 2 setvar tilenum 7966 
+    } // Ami
     else ifvare CHARACTERSELECTED? 5 setvar tilenum 7940 // Lo Wang
     else ifvare CHARACTERSELECTED? 6 setvar tilenum 7941 // ESSence
     else ifvare CHARACTERSELECTED? 7 setvar tilenum 7942 // Ted
     else ifvare CHARACTERSELECTED? 8 setvar tilenum 7943 // Lisa
     else ifvare CHARACTERSELECTED? 9 setvar tilenum 7944 // Cybanis
-    else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvare NETHRAFORM? 1 setvar tilenum 7964 } // Nethra/Christina
+    else ifvare CHARACTERSELECTED? 10 
+    { 
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare NETHRAFORM? 0 setvar tilenum 7945 
+     else ifvare NETHRAFORM? 1 setvar tilenum 7964 
+    } // Nethra/Christina
     else ifvare CHARACTERSELECTED? 11 setvar tilenum 7946 // Paula
     else ifvare CHARACTERSELECTED? 12 setvar tilenum 7947 // Lori
-    else ifvare CHARACTERSELECTED? 13 { ifvare MINAKOFORM? 0 setvar tilenum 7948 else ifvare MINAKOFORM? 1 setvar tilenum 7965 else ifvare MINAKOFORM? 2 setvar tilenum 7968 } // Minako
+    else ifvare CHARACTERSELECTED? 13 
+    {
+          setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+          ifvare MINAKOFORM? 0 setvar tilenum 7948 
+     else ifvare MINAKOFORM? 1 setvar tilenum 7965 
+     else ifvare MINAKOFORM? 2 setvar tilenum 7968 
+    } // Minako
     else ifvare CHARACTERSELECTED? 14 setvar tilenum 7957 // Mystery Lady
     else ifvare CHARACTERSELECTED? 15 setvar tilenum 7971 // Maken
     else setvar tilenum 7955 // ?

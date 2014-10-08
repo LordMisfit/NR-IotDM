@@ -1870,13 +1870,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
    {
     ifvare mainmenuselection 2 ifvare BUBSY? 1 
     {
-     setvar CHARACTERARRAY 3
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
-     ifvare BUBSYFORM? 0
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0
      {
+      setvar CHARACTERARRAY 3 getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
       ifvarg TEMPVAR6 0
       {
-       setvar BUBSYFORM? 1 
+       setvar MISCARRAYID 103 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // BUBSY-FORM?
        globalsound TELEPORTER
       }
       else
@@ -1888,7 +1888,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
      }
      else
      {
-      setvar BUBSYFORM? 0
+      setvar MISCARRAYID 103 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // BUBSY-FORM?
       globalsound TELEPORTER
      }
     }
@@ -1923,7 +1923,14 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       globalsound TELEPORTER
      }
     }
-    else ifvare mainmenuselection 5 ifvare ESSENCE? 1 { subvar ESSENCEFORM? 1 { ifvarl ESSENCEFORM? 0 setvar ESSENCEFORM? 1 } globalsound TELEPORTER } // ESSence
+    else ifvare mainmenuselection 5 ifvare ESSENCE? 1 
+    {
+     setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+     subvar MISCARRAYID_AMOUNTTEMP 1 
+     setvar MISCARRAYID 106 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+     ifvarl MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 106 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 }
+     globalsound TELEPORTER 
+    } // ESSence
     else state menuerrorsound
    }
    else
@@ -2005,13 +2012,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
    {
     ifvare mainmenuselection 2 ifvare BUBSY? 1 
     {
-     setvar CHARACTERARRAY 3
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
-     ifvare BUBSYFORM? 0
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0
      {
+      setvar CHARACTERARRAY 3 getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
       ifvarg TEMPVAR6 0
       {
-       setvar BUBSYFORM? 1 
+       setvar MISCARRAYID 103 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // BUBSY-FORM?
        globalsound TELEPORTER
       }
       else
@@ -2023,7 +2030,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
      }
      else
      {
-      setvar BUBSYFORM? 0
+      setvar MISCARRAYID 103 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // BUBSY-FORM?
       globalsound TELEPORTER
      }
     }
@@ -2058,7 +2065,14 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       globalsound TELEPORTER
      }
     }
-    else ifvare mainmenuselection 5 ifvare ESSENCE? 1 { addvar ESSENCEFORM? 1 { ifvarg ESSENCEFORM? 1 setvar ESSENCEFORM? 0 } globalsound TELEPORTER } // ESSence
+    else ifvare mainmenuselection 5 ifvare ESSENCE? 1 
+    {
+     setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+     addvar MISCARRAYID_AMOUNTTEMP 1 
+     setvar MISCARRAYID 106 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+     ifvarg MISCARRAYID_AMOUNTTEMP 1 { setvar MISCARRAYID 106 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 }
+     globalsound TELEPORTER 
+    } // ESSence
     else state menuerrorsound
    }
    else
@@ -2572,17 +2586,17 @@ onevent EVENT_JUMP
       else
       {
        ifvare CHARACTERSELECTED? 1 
-	   { 
-	    stopsound DUKE_JUMP1 
-		stopsound DUKE_JUMP2 
-		ifrnd 128 sound DUKE_JUMP1 else sound DUKE_JUMP2 
-	   }
+       { 
+        stopsound DUKE_JUMP1 
+        stopsound DUKE_JUMP2 
+        ifrnd 128 sound DUKE_JUMP1 else sound DUKE_JUMP2 
+       }
        ifvare CHARACTERSELECTED? 5 
-	   {
-  	    stopsound WANG_JUMP1 
-		stopsound WANG_JUMP2 
-		ifrnd 128 sound WANG_JUMP1 else sound WANG_JUMP2 
-	   }
+       {
+        stopsound WANG_JUMP1 
+        stopsound WANG_JUMP2 
+        ifrnd 128 sound WANG_JUMP1 else sound WANG_JUMP2 
+       }
        ifvare CHARACTERSELECTED? 8 
 	   { 
 	    stopsound LISA_JUMP1 

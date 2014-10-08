@@ -4,9 +4,9 @@ setuserdef[THISACTOR].screen_size 3
 getuserdef[THISACTOR].pause_on temp
 ifvarg temp 0 { ifvarn gameover? 0 { setvar temp 0 setuserdef[THISACTOR].pause_on 0 } }
 ifvarg temp 0
-{ // [line 225]
+{ // [line 246]
  ifvare oldskoolmode 0
- { // [line 224]
+ { // [line 245]
   ifvare temp 1
   {
    setuserdef[THISACTOR].pause_on 2 // Removes the Old "GAME PAUSED"
@@ -245,7 +245,7 @@ ifvarg temp 0
  } // [line 9]
 } // [line 7]
 else
-{ // [line 15469]
+{ // [line 16208]
  setvar MISCARRAYID 54 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT -1  // pause-quote
  setvar MISCARRAYID 55 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT -1  // pause-quote-new
  setvar MISCARRAYID 56 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0  // pause-timer
@@ -1683,8 +1683,9 @@ else
      }
      ifvare CHARACTERSELECTED? 3
      { 
-      ifvare BUBSYFORM? 0 redefinequote 318 BUBSY BOBCAT
-      ifvare BUBSYFORM? 1
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 318 BUBSY BOBCAT
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        redefinequote 318 BUBSY BOBCAT [THE MASK FORM]
        setvarvar TEMPVAR6 CURRENTENERGYPOINTS
@@ -1715,7 +1716,9 @@ else
      }
      ifvare CHARACTERSELECTED? 6
      {
-      redefinequote 318 ESSENCE MARGALAN
+      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 318 ESSENCE MARGALAN
+      ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 318 ESSENCE MARGALAN [ARMORLESS]
       state pal12
      }
      ifvare CHARACTERSELECTED? 7
@@ -1990,8 +1993,9 @@ else
      ifvare CHARACTERSELECTED? 2 setvar tilenum 7937
      ifvare CHARACTERSELECTED? 3
      {
-      ifvare BUBSYFORM? 0 setvar tilenum 7938
-      else ifvare BUBSYFORM? 1
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
+      else ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        setvar tilenum 7962
        setvarvar TEMPVAR6 CURRENTENERGYPOINTS
@@ -4494,7 +4498,12 @@ else
         {
          ifvare TEMPHITCHARACTERVAR 1 setvar TEMPVAR2 7936 // Duke
          else ifvare TEMPHITCHARACTERVAR 2 setvar TEMPVAR2 7937 // Jack
-         else ifvare TEMPHITCHARACTERVAR 3 { ifvare BUBSYFORM? 0 setvar TEMPVAR2 7938 else ifvare BUBSYFORM? 1 setvar TEMPVAR2 7962 } // Bubsy
+         else ifvare TEMPHITCHARACTERVAR 3
+         {
+               setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7938 
+          else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7962 
+         } // Bubsy
          else ifvare TEMPHITCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar TEMPVAR2 7939 else ifvare AMIFORM? 1 setvar TEMPVAR2 7963 else ifvare AMIFORM? 2 setvar TEMPVAR2 7966 } // Ami
          else ifvare TEMPHITCHARACTERVAR 5 setvar TEMPVAR2 7940 // Lo Wang
          else ifvare TEMPHITCHARACTERVAR 6 setvar TEMPVAR2 7941 // ESSence
@@ -4514,7 +4523,12 @@ else
        {
         ifvare TEMPHITCHARACTERVAR 1 setvar TEMPVAR2 7936 // Duke
         else ifvare TEMPHITCHARACTERVAR 2 setvar TEMPVAR2 7937 // Jack
-        else ifvare TEMPHITCHARACTERVAR 3 { ifvare BUBSYFORM? 0 setvar TEMPVAR2 7938 else ifvare BUBSYFORM? 1 setvar TEMPVAR2 7962 } // Bubsy
+        else ifvare TEMPHITCHARACTERVAR 3 
+        {
+              setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+              ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7938 
+         else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7962 
+        } // Bubsy
         else ifvare TEMPHITCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar TEMPVAR2 7939 else ifvare AMIFORM? 1 setvar TEMPVAR2 7963 else ifvare AMIFORM? 2 setvar TEMPVAR2 7966 } // Ami
         else ifvare TEMPHITCHARACTERVAR 5 setvar TEMPVAR2 7940 // Lo Wang
         else ifvare TEMPHITCHARACTERVAR 6 setvar TEMPVAR2 7941 // ESSence
@@ -5105,7 +5119,12 @@ else
      {
       ifvare TEMPATKCHARACTERVAR 1 setvar TEMPVAR2 7936 // Duke
       else ifvare TEMPATKCHARACTERVAR 2 setvar TEMPVAR2 7937 // Jack
-      else ifvare TEMPATKCHARACTERVAR 3 { ifvare BUBSYFORM? 0 setvar TEMPVAR2 7938 else ifvare BUBSYFORM? 1 setvar TEMPVAR2 7962 } // Bubsy
+      else ifvare TEMPATKCHARACTERVAR 3 
+      {
+            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7938 
+       else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7962 
+      } // Bubsy
       else ifvare TEMPATKCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar TEMPVAR2 7939 else ifvare AMIFORM? 1 setvar TEMPVAR2 7963 else ifvare AMIFORM? 2 setvar TEMPVAR2 7966 } // Ami
       else ifvare TEMPATKCHARACTERVAR 5 setvar TEMPVAR2 7940 // Lo Wang
       else ifvare TEMPATKCHARACTERVAR 6 setvar TEMPVAR2 7941 // ESSence
@@ -16201,7 +16220,7 @@ else
    state rs
   }
  }
-} // [line 227]
+} // [line 248]
 
 state show_secondaryquotemethod
 

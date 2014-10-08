@@ -186,11 +186,10 @@ state dialouge-pausedgame
    }
    ifvare CHARACTERSELECTED? 3
    {
-    setvar MISCARRAYID 61  // dialouge-picnum
-    {
-     ifvare BUBSYFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7938
-     ifvare BUBSYFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7962
-    }
+    setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7938 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7962 }
+
     // Quote 1031 = Name of the Speaker
     redefinequote 1031 Bubsy
     setvar MISCARRAYID 54 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // pause-quote
@@ -257,11 +256,10 @@ state dialouge-pausedgame
    ifvare CHARACTERSELECTED? 4
    {
     setvar MISCARRAYID 61  // dialouge-picnum
-    {
-     ifvare AMIFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7939
-     ifvare AMIFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7963
-     ifvare AMIFORM? 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7966
-    }
+    ifvare AMIFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7939
+    ifvare AMIFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7963
+    ifvare AMIFORM? 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7966
+
     // Quote 1031 = Name of the Speaker
     redefinequote 1031 Ami
     setvar MISCARRAYID 54 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // pause-quote
@@ -925,11 +923,10 @@ state dialouge-pausedgame
    ifvare CHARACTERSELECTED? 13
    {
     setvar MISCARRAYID 61  // dialouge-picnum
-    {
-     ifvare MINAKOFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7948
-     ifvare MINAKOFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7965
-     ifvare MINAKOFORM? 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7968
-    }
+    ifvare MINAKOFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7948
+    ifvare MINAKOFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7965
+    ifvare MINAKOFORM? 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7968
+
     // Quote 1031 = Name of the Speaker
     redefinequote 1031 Minako
     setvar MISCARRAYID 54 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP  // pause-quote

@@ -1087,7 +1087,6 @@ gamevar ACTORCRITICAL? 0 131072
 gamevar DEFLECTDAMAGESTATE 0 0
 gamevar DEFLECTEDDAMAGE 0 0
 
-gamevar PCRIT? 0 131072
 gamevar TOTALNULLDAMAGE 0 131072
 gamevar NULLDAMAGE 0 131072
 gamevar ARMORNULLDAMAGE 0 131072
@@ -1422,6 +1421,7 @@ gamevar RANKPOINTSHIGHEST 262144000 0 //
 
 gamevar DOLLARS 200 131073
 gamevar CENTS 0 131073
+
 gamevar RANKPOINTS 0 131073
 gamevar RANKPOINTSTEMP 0 131073
 gamevar EXPPTS 0 131073
@@ -1796,25 +1796,6 @@ gamevar MINAKO? 0 131072
 gamevar MYSTERY1? 0 131072
 gamevar MAKEN? 0 131072
 
-// The Following are for if a character 'transforms' or has different states at some point in the game [Bubsy/Ami/ESSence/Nethra/etc]
-gamevar DUKEFORM? 0 131072
-gamevar JACKFORM? 0 131072
-gamevar BUBSYFORM? 0 131072		// 0 = Normal Form, 1 = 'Loki Mask' on
-gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
-gamevar LOWANGFORM? 0 131072
-gamevar ESSENCEFORM? 0 131072	// 0 = Normal Attire/Weapons, 1 = Armorless Attire/Weapons
-gamevar TEDFORM? 0 131072
-gamevar LISAFORM? 0 131072
-gamevar CYBANISFORM? 0 131072
-gamevar NETHRAFORM? 1 131072 	// 0 = 'Protector Drone' Form, 1 = 'Human' Form
-gamevar PAULAFORM? 0 131072
-gamevar LORIFORM? 0 131072
-gamevar MINAKOFORM? 0 131072	// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
-gamevar MYSTERY1FORM? 0 131072
-gamevar MAKENFORM? 0 131072
-
-gamevar MYSTERY1DEADTIMER 0 0	// "Mystery Lady's" Death Timer [for ressing her after 10 minutes have passed]
-
 // END OF CHARACTER-RELATED VARIABLES HERE
 
 // START OF CHARACTER MENU VARIABLES HERE
@@ -1986,9 +1967,12 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 //*To Be Arrayed >.>*
 //*******************
 
-//gamevar dialougeactive -1 131072 // Determines the ID of the dialouge set in use.
+// To Be Arrayed At a More Conveinent Time >_>
+gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
+gamevar NETHRAFORM? 1 131072 	// 0 = 'Protector Drone' Form, 1 = 'Human' Form
+gamevar MINAKOFORM? 0 131072	// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 
-// More to be Added.
+// In Queue Next...
 
 //*******************
 
@@ -2022,8 +2006,8 @@ gamevar MISCARRAYID -1 131072
  // [26] = DEATHSWITCH-DELAY [related to character-switching system (for death related mercy-invincibility]
  // [27] = ADD-DELAY [related to a special lotag sector effect that can add/remove characters]
  // [28] = THROWBACK-DELAY [related to throwback from taking damage]
- // [29] = ??????
- // [30] = ??????
+ // [29] = PCRIT?
+ // [30] = MYSTERY1-DEADTIMER
  // [31] = atm-button1timer
  // [32] = atm-button2timer
  // [33] = atm-button3timer
@@ -2055,7 +2039,21 @@ gamevar MISCARRAYID -1 131072
  // [59] = dialouge-id - Determines the ID of the dialouge set in use.
  // [60] = dialouge-phase - Determines the phase of the current dialouge ID [how many things to print to screen at the current moment, such as if the second character in the conversation has spoke yet or just the first, etc]
  // [61] = dialouge-picnum - Determines stuff like portraits in dialouge boxes
-
+ // [101] = DUKE-FORM?
+ // [102] = JACK-FORM?
+ // [103] = BUBSY-FORM?			// 0 = Normal Form, 1 = 'Loki Mask' on
+ // [104] = AMI-FORM?			// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
+ // [105] = LOWANG-FORM?
+ // [106] = ESSENCE-FORM?		// 0 = Normal Attire/Weapons, 1 = Armorless Attire/Weapons
+ // [107] = TED-FORM?
+ // [108] = LISA-FORM?
+ // [109] = CYBANIS-FORM?
+ // [110] = NETHRA-FORM?		// 0 = 'Protector Drone' Form, 1 = 'Human' Form
+ // [111] = PAULA-FORM?
+ // [112] = LORI-FORM?
+ // [113] = MINAKO-FORM?		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
+ // [114] = MYSTERY1-FORM?
+ // [115] = MAKEN-FORM?
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes on item amounts

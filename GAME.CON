@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git55.10062014
+definequote 1337 ^22VERSION:^0 5.22.git56.10082014
 
 action ANULLACTION 0
 
@@ -924,8 +924,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar JACK? 1
        redefinequote 334 JACK ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -948,8 +948,11 @@ action ICONBUBSYMASK 24 1 1 1 1
 
 useractor notenemy CHAR3ICON 0 
 setactor[THISACTOR].shade -63
-getplayervar[THISACTOR].BUBSYFORM? TEMP
-ifvare TEMP 0 action ICONBUBSYNORMAL else ifvare TEMP 1 action ICONBUBSYMASK
+
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 action ICONBUBSYNORMAL 
+else ifvare MISCARRAYID_AMOUNTTEMP 1 action ICONBUBSYMASK
+
 ifvarn TEMP3 0
 {
  ifvare BUBSY? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
@@ -965,8 +968,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar BUBSY? 1
        redefinequote 334 BUBSY ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -990,8 +993,11 @@ action ICONAMIBALANCED 27 1 1 1 1
 
 useractor notenemy CHAR4ICON 0 
 setactor[THISACTOR].shade -63
-getplayervar[THISACTOR].AMIFORM? TEMP
-ifvare TEMP 0 action ICONAMICIVILIAN else ifvare TEMP 1 action ICONAMISENSHI else ifvare TEMP 2 action ICONAMIBALANCED
+
+ifvare AMIFORM? 0 action ICONAMICIVILIAN 
+else ifvare AMIFORM? 1 action ICONAMISENSHI 
+else ifvare AMIFORM? 2 action ICONAMIBALANCED
+
 ifvarn TEMP3 0
 {
  ifvare AMI? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
@@ -1007,8 +1013,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar AMI? 1
        redefinequote 334 AMI ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1043,8 +1049,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar LOWANG? 1
        redefinequote 334 HIGA ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1079,8 +1085,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar ESSENCE? 1
        redefinequote 334 HIGA ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1115,8 +1121,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
- 	  {
+      ifcanseetarget
+      {
        setvar TED? 1
        redefinequote 334 TED ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1151,8 +1157,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar LISA? 1
        redefinequote 334 LISA ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1187,8 +1193,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar CYBANIS? 1
        redefinequote 334 CYBANIS ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1211,8 +1217,10 @@ action ICONNETHRAHUMAN 19 1 1 1 1
 
 useractor notenemy CHAR10ICON 0 
 setactor[THISACTOR].shade -63
-getplayervar[THISACTOR].NETHRAFORM? TEMP
-ifvare TEMP 0 action ICONNETHRAALIEN else ifvare TEMP 1 action ICONNETHRAHUMAN
+
+ifvare NETHRAFORM? 0 action ICONNETHRAALIEN 
+else ifvare NETHRAFORM? 1 action ICONNETHRAHUMAN
+
 ifvarn TEMP3 0
 {
  ifvare NETHRA? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
@@ -1228,8 +1236,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar NETHRA? 1
        redefinequote 334 CHRISTINA/NETHRA ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1264,8 +1272,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar PAULA? 1
        redefinequote 334 PAULA ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1300,8 +1308,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar LORI? 1
        redefinequote 334 LORI ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1325,8 +1333,11 @@ action ICONMINAKOBALANCED 20 1 1 1 1
 
 useractor notenemy CHAR13ICON 0 
 setactor[THISACTOR].shade -63
-getplayervar[THISACTOR].MINAKOFORM? TEMP
-ifvare TEMP 0 action ICONMINAKOCIVILIAN else ifvare TEMP 1 action ICONMINAKOSENSHI else ifvare TEMP 2 action ICONMINAKOBALANCED
+
+ifvare MINAKOFORM? 0 action ICONMINAKOCIVILIAN 
+else ifvare MINAKOFORM? 1 action ICONMINAKOSENSHI 
+else ifvare MINAKOFORM? 2 action ICONMINAKOBALANCED
+
 ifvarn TEMP3 0
 {
  ifvare MINAKO? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
@@ -1342,8 +1353,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar MINAKO? 1
        redefinequote 334 MINAKO ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1378,8 +1389,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar MYSTERY1? 1
        redefinequote 334 ???????? ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1414,8 +1425,8 @@ ifvarn TEMP3 0
     {
      ifcount 6
      {
-	  ifcanseetarget
-	  {
+      ifcanseetarget
+      {
        setvar MAKEN? 1
        redefinequote 334 MAKEN ADDED TO GROUP!
        setvar fta 100 setvar ftq 334
@@ -1645,121 +1656,30 @@ state triadragnarok
     getactorvar[CHARACTERARRAY].CHARACTERMAXHP tempb
     ifvarn tempb 0 divvarvar DAMAGEFACTOR tempb
     setvar DAMAGEFACTORB 0
-    ifvarg DAMAGEFACTOR 5 ifvarl DAMAGEFACTOR 26
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 125
-     divvar DAMAGEFACTORB 100
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 25 ifvarl DAMAGEFACTOR 51
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 150
-     divvar DAMAGEFACTORB 100
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 50 ifvarl DAMAGEFACTOR 76
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 175
-     divvar DAMAGEFACTORB 100
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 75 ifvarl DAMAGEFACTOR 101
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 2
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 100 ifvarl DAMAGEFACTOR 126
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 4
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 125 ifvarl DAMAGEFACTOR 151
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 8
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 150 ifvarl DAMAGEFACTOR 176
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 14
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 175 ifvarl DAMAGEFACTOR 201
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 20
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 200 ifvarl DAMAGEFACTOR 251
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 48
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 250 ifvarl DAMAGEFACTOR 301
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 76
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 301 ifvarl DAMAGEFACTOR 400
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 128
-     state checkdamagefactorb
-    }
-    else
-    ifvarg DAMAGEFACTOR 400
-    {
-     setvar CHARACTERARRAY 12
-     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-     randvarvar DAMAGEFACTORB templevel1
-     mulvar DAMAGEFACTORB 256
-     state checkdamagefactorb
-    }
+
+    setvar CHARACTERARRAY 12
+    getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
+    randvarvar DAMAGEFACTORB templevel1
+    ifvarg DAMAGEFACTOR 5 ifvarl DAMAGEFACTOR 26 { mulvar DAMAGEFACTORB 5 divvar DAMAGEFACTORB 7 } // 125%
+    else ifvarg DAMAGEFACTOR 25 ifvarl DAMAGEFACTOR 51 { mulvar DAMAGEFACTORB 3 divvar DAMAGEFACTORB 2 } // 150%
+    else ifvarg DAMAGEFACTOR 50 ifvarl DAMAGEFACTOR 76 { mulvar DAMAGEFACTORB 7 divvar DAMAGEFACTORB 4 } // 175%
+    else ifvarg DAMAGEFACTOR 75 ifvarl DAMAGEFACTOR 101 { mulvar DAMAGEFACTORB 2 } // 200%
+    else ifvarg DAMAGEFACTOR 100 ifvarl DAMAGEFACTOR 126 { mulvar DAMAGEFACTORB 7 divvar DAMAGEFACTORB 2 } // 350%
+    else ifvarg DAMAGEFACTOR 125 ifvarl DAMAGEFACTOR 151 { mulvar DAMAGEFACTORB 6 } // 600%
+    else ifvarg DAMAGEFACTOR 150 ifvarl DAMAGEFACTOR 176 { mulvar DAMAGEFACTORB 10 } // 1000%
+    else ifvarg DAMAGEFACTOR 175 ifvarl DAMAGEFACTOR 201 { mulvar DAMAGEFACTORB 17 } // 1700%
+    else ifvarg DAMAGEFACTOR 200 ifvarl DAMAGEFACTOR 251 { mulvar DAMAGEFACTORB 42 } // 4200%
+    else ifvarg DAMAGEFACTOR 250 ifvarl DAMAGEFACTOR 301 { mulvar DAMAGEFACTORB 67 } // 6700%
+    else ifvarg DAMAGEFACTOR 301 ifvarl DAMAGEFACTOR 400 { mulvar DAMAGEFACTORB 110 } // 11000%
+    else ifvarg DAMAGEFACTOR 400 { mulvar DAMAGEFACTORB 224 } // 22400%
+    state checkdamagefactorb
+
     ifvarg DAMAGEFACTORB 0
     {     
      ifrnd 53
      { 
       mulvar DAMAGEFACTORB 3 divvar DAMAGEFACTORB 5
+      ifvarl DAMAGEFACTORB 1 setvar DAMAGEFACTORB 1
       addvarvar MAXENERGYPOINTS DAMAGEFACTORB
       addvarvar CURRENTENERGYPOINTS DAMAGEFACTORB
       addvarvar EPINCREASED DAMAGEFACTORB
@@ -3156,7 +3076,8 @@ state player_defense
     ifvare CHARACTERSELECTED? 3 // Bubsy
     {
      setvar DAMAGEMODIFIER 1000
-     ifvare BUBSYFORM? 0 addvar DAMAGEMODIFIER 500 else ifvare BUBSYFORM? 1 addvar DAMAGEMODIFIER 250
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 addvar DAMAGEMODIFIER 500 else ifvare MISCARRAYID_AMOUNTTEMP 1 addvar DAMAGEMODIFIER 250
      state dmgmodcalc-player
      // * 150.0% Damage [normal], 125.0% Damage [mask form]
     }
@@ -3766,7 +3687,8 @@ state player_defense
       // *****************************************************
       // *Setting Up Bubsy's bonus defense when in "Mask Form*
       // *****************************************************
-      ifvare BUBSYFORM? 1 
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 
       {
        randvar tempd 200
        setvar tempe 600
@@ -3788,7 +3710,8 @@ state player_defense
       // ********************************************************
       // *Setting Up Bubsy's 25% Block Chance when in "Mask Form*
       // ********************************************************
-      ifvarg BUBSYFORM? 0
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvarg MISCARRAYID_AMOUNTTEMP 0
       {
        ifvarg PLAYERDAMAGE 0
        {
@@ -3868,7 +3791,8 @@ state player_defense
       // **********************************
       // *Setting Up ESSence's Armor Bonus*
       // **********************************
-      ifvare ESSENCEFORM? 0 addvar tempb 600
+      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 addvar tempb 600
       // 65%-75%/5%-15% (Wearing ESS Armor/Not Wearing ESS Armor)
   
       setvar tempc 1000
@@ -4413,7 +4337,8 @@ state player_defense
         {
          ifvare CHARACTERSELECTED? 3
          { 
-          ifvare BUBSYFORM? 1 nullop else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
+          setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 1 nullop else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
          } 
          else 
          ifvare CHARACTERSELECTED? 8 
@@ -5571,7 +5496,8 @@ state add_playermeleedamage
        // *****************************************************
        // *Setting Up Bubsy's bonus damage when in "Mask Form*
        // *****************************************************
-	   ifvarg BUBSYFORM? 0 { mulvar KNEEDAMAGE 5 divvar KNEEDAMAGE 2 }
+       setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+       ifvarg MISCARRAYID_AMOUNTTEMP 0 { mulvar KNEEDAMAGE 5 divvar KNEEDAMAGE 2 }
 	  }
 
 	  ifvare CHARACTERSELECTED? 4
@@ -9104,10 +9030,11 @@ ifvarg tempb 0
 
         ifvare CHARACTERSELECTED? 3 // Bubsy Bobcat
         {
-          // *****************************************************
-          // *Setting Up Bubsy's bonus damage when in "Mask Form*
-          // *****************************************************
-          ifvarg BUBSYFORM? 0 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 2 } // +150% Damage if Bubsy is in "Loki Mask" form
+         // *****************************************************
+         // *Setting Up Bubsy's bonus damage when in "Mask Form*
+         // *****************************************************
+         setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+         ifvarg MISCARRAYID_AMOUNTTEMP 0 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 2 } // +150% Damage if Bubsy is in "Loki Mask" form
         }
 
         ifvare CHARACTERSELECTED? 4 // Ami Mizuno
@@ -23802,11 +23729,31 @@ state getaccelerationlimits
     ifvare CALCVAR1 100 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 101 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 97 else setvar ACCELFACTOR 100 }
 
     ifvare SECTORLOTAG 1 { ifp ponground subvar ACCELFACTOR 3 }
-    ifvare CHARACTERSELECTED? 3 { ifvare BUBSYFORM? 1 addvar ACCELFACTOR 1 }
-    ifvare CHARACTERSELECTED? 4 { ifvare AMIFORM? 2 addvar ACCELFACTOR 1 }
-    ifvare CHARACTERSELECTED? 6 { ifvare ESSENCEFORM? 0 subvar ACCELFACTOR 5 }
-    ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 addvar ACCELFACTOR 1 }
-    ifvare CHARACTERSELECTED? 13 { ifvare MINAKOFORM? 2 addvar ACCELFACTOR 1 }
+    ifvare CHARACTERSELECTED? 3 
+    {
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 addvar ACCELFACTOR 1 
+    }
+    ifvare CHARACTERSELECTED? 4
+    {
+     setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+     ifvare AMIFORM? 2 addvar ACCELFACTOR 1 
+    }
+    ifvare CHARACTERSELECTED? 6
+    {
+     setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 subvar ACCELFACTOR 5 
+    }
+    ifvare CHARACTERSELECTED? 10 
+    {
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare NETHRAFORM? 1 addvar ACCELFACTOR 1 
+    }
+    ifvare CHARACTERSELECTED? 13
+    {
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+     ifvare MINAKOFORM? 2 addvar ACCELFACTOR 1 
+    }
 ends
 
 state liftaccelcap
@@ -25358,7 +25305,8 @@ ifvare mainmenu 0
 {
  ifvare CHARACTERSELECTED? 3 // Bubsy
  {
-  ifvare BUBSYFORM? 1
+  setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 1
   {
    addvar TRANSFORMTIMER 1
    ifvarvarg TRANSFORMTIMER TRANSFORMTIMERMAX
@@ -25372,7 +25320,7 @@ ifvare mainmenu 0
     globalsound TELEPORTER
     redefinequote 334 ^10BUBSY HAS RUN OUT OF EP!
     setvarvar fta fta_normal setvar ftq 334
-    setvar BUBSYFORM? 0     
+    setvar MISCARRAYID 103 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // BUBSY-FORM?
    }
   }
  }
@@ -25570,7 +25518,11 @@ ifvare mainmenu 0
  mulvarvar PLAYERLIFTSTRENGTHTEMP TEMPVAR5
  divvar PLAYERLIFTSTRENGTHTEMP 100
 
- ifvare CHARACTERSELECTED? 3 ifvare BUBSYFORM? 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 2 }
+ ifvare CHARACTERSELECTED? 3
+ { 
+  setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 2 }
+ }
  ifvare CHARACTERSELECTED? 4 ifvare AMIFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
  ifvare CHARACTERSELECTED? 10 ifvare NETHRAFORM? 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
  ifvare CHARACTERSELECTED? 13 ifvare MINAKOFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
@@ -26738,7 +26690,11 @@ ifp pjetpack
       ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR4 635
       ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 821
       ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 198
-      ifvare CHARACTERSELECTED? 6 { ifvare ESSENCEFORM? 0 mulvar TEMPVAR4 -783 else mulvar TEMPVAR4 -627 }
+      ifvare CHARACTERSELECTED? 6
+      {
+       setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 mulvar TEMPVAR4 -783 else mulvar TEMPVAR4 -627 
+      }
       ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR4 211
       ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR4 723
       ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR4 -811
@@ -26754,7 +26710,11 @@ ifp pjetpack
       ifvare CHARACTERSELECTED? 3 { ifvarg TEMPVAR4 1301 setvar TEMPVAR4 1301 }
       ifvare CHARACTERSELECTED? 4 { ifvarg TEMPVAR4 1682 setvar TEMPVAR4 1682 }
       ifvare CHARACTERSELECTED? 5 { ifvarg TEMPVAR4 405 setvar TEMPVAR4 405 }
-      ifvare CHARACTERSELECTED? 6 { ifvare ESSENCEFORM? 0 { ifvarg TEMPVAR4 -1603 setvar TEMPVAR4 -1603 } else { ifvarg TEMPVAR4 -1283 setvar TEMPVAR4 -1283 } }
+      ifvare CHARACTERSELECTED? 6 
+      { 
+       setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 { ifvarg TEMPVAR4 -1603 setvar TEMPVAR4 -1603 } else { ifvarg TEMPVAR4 -1283 setvar TEMPVAR4 -1283 } 
+      }
       ifvare CHARACTERSELECTED? 7 { ifvarg TEMPVAR4 432 setvar TEMPVAR4 432 }
       ifvare CHARACTERSELECTED? 8 { ifvarg TEMPVAR4 1481 setvar TEMPVAR4 1481 }
       ifvare CHARACTERSELECTED? 9 { ifvarg TEMPVAR4 -1661 setvar TEMPVAR4 -1661 }
@@ -26780,7 +26740,11 @@ ifp pjetpack
       ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR4 388
       ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 451
       ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 165
-      ifvare CHARACTERSELECTED? 6 { ifvare ESSENCEFORM? 0 mulvar TEMPVAR4 -3607 else mulvar TEMPVAR4 -2525 }
+      ifvare CHARACTERSELECTED? 6
+      {
+       setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 mulvar TEMPVAR4 -3607 else mulvar TEMPVAR4 -2525 
+      }
       ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR4 174
       ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR4 420
       ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR4 -4295
@@ -27465,8 +27429,10 @@ else
 
  setvar CHARACTERARRAY 14
  getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
- ifvarg TEMPVAR 0 { setvar MYSTERY1DEADTIMER 0 } else { ifvare mainmenu 0 addvar MYSTERY1DEADTIMER 1 }
- ifvarg MYSTERY1DEADTIMER 7799 // 15599
+ ifvarg TEMPVAR 0 { setvar MISCARRAYID 30 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 } else { ifvare mainmenu 0 { setvar MISCARRAYID 30 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP addvar MISCARRAYID_AMOUNTTEMP 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP } } // MYSTERY1-DEADTIMER
+
+ setvar MISCARRAYID 30 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MYSTERY1-DEADTIMER
+ ifvarg MISCARRAYID_AMOUNTTEMP 7799 // 15599
  {
   palfrom 32 64 64 64
   setvar CHARACTERARRAY 14
@@ -27475,7 +27441,7 @@ else
   globalsound RESURRECTED_ALLY 
   redefinequote 335 ^20??????? CAME BACK TO LIFE ON HER OWN!
   setvarvar fta fta_normal setvar ftq 335
-  setvar MYSTERY1DEADTIMER 0
+  setvar MISCARRAYID 30 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MYSTERY1-DEADTIMER
  }
 //*******************************************************************
 
@@ -28592,9 +28558,17 @@ ifvare mainmenu 0
   ifvarand PLAYERSTATUS? 2 { mulvar PLAYERMOVEPLUSVEL 125 divvar PLAYERMOVEPLUSVEL 100 }
   else ifvarand PLAYERSTATUS? 4 { mulvar PLAYERMOVEPLUSVEL 75 divvar PLAYERMOVEPLUSVEL 100 }
 
-  ifvare CHARACTERSELECTED? 3 { ifvare BUBSYFORM? 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
+  ifvare CHARACTERSELECTED? 3 
+  {
+   setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
+  }
   ifvare CHARACTERSELECTED? 4 { ifvare AMIFORM? 2 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
-  ifvare CHARACTERSELECTED? 6 { ifvare ESSENCEFORM? 0 { mulvar PLAYERMOVEPLUSVEL 80 divvar PLAYERMOVEPLUSVEL 100 } }
+  ifvare CHARACTERSELECTED? 6
+  {
+   setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar PLAYERMOVEPLUSVEL 80 divvar PLAYERMOVEPLUSVEL 100 } 
+  }
   ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
   ifvare CHARACTERSELECTED? 13 { ifvare MINAKOFORM? 2 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
 
@@ -28702,7 +28676,8 @@ ifvarn multijumpflag 0
  // Check Character Forms
  ifvare CHARACTERSELECTED? 3
  {
-  ifvare BUBSYFORM? 1 addvar PLAYERJUMPSTRENGTHTEMP 2
+  setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 1 addvar PLAYERJUMPSTRENGTHTEMP 2
  }
  ifvare CHARACTERSELECTED? 4
  {
@@ -28713,7 +28688,8 @@ ifvarn multijumpflag 0
  }
  ifvare CHARACTERSELECTED? 6
  {
-  ifvare ESSENCEFORM? 0 subvar PLAYERJUMPSTRENGTHTEMP 6
+  setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 subvar PLAYERJUMPSTRENGTHTEMP 6
  }
  ifvare CHARACTERSELECTED? 10
  {
@@ -28954,7 +28930,8 @@ ifvarn multijumpflag 0
   // Check Character Forms
   ifvare CHARACTERSELECTED? 3
   {
-   ifvare BUBSYFORM? 1
+   setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 1
    {
     ifvarl PLAYERFALLRESISTTEMP 0
     {
@@ -28984,7 +28961,8 @@ ifvarn multijumpflag 0
   }
   ifvare CHARACTERSELECTED? 6
   {
-   ifvare ESSENCEFORM? 0 
+   setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 
    {
     ifvarl PLAYERFALLRESISTTEMP 0
     {
@@ -60589,7 +60567,8 @@ useractor notenemy NEWBLOODPOOL
               ifvare CHARACTERSELECTED? 2 subvar tempe 2
               else ifvare CHARACTERSELECTED? 3
               {
-               ifvare BUBSYFORM? 1 divvar tempe 4
+               setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 4
               }
               else
               ifvare CHARACTERSELECTED? 4

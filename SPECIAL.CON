@@ -2546,8 +2546,6 @@ state checkmaxsupports
  subvarvar MAXSUPPORTLEVELS SKILLLEVEL
 ends
 
-// This sets up the CHARACTERSAVAILABLE bitfield by checking which people are a part of your group
-
 state accquiregroup
  setvar CHARACTERSAVAILABLE 0
  ifvarn DUKE? 0 addvar CHARACTERSAVAILABLE 1
@@ -8394,7 +8392,11 @@ state menububsystats
    setvar CHARACTERARRAY 3
    ifvare CHARACTERSELECTED? 3 state shadepulse4
    state characterplate
-   ifvare BUBSYFORM? 0 setvar tilenum 7938 else ifvarg BUBSYFORM? 0 setvar tilenum 7962 
+
+   setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938 
+   else ifvarg MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7962 
+
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1 state pal2 else state pal0
    state rs 
@@ -14209,13 +14211,15 @@ state hackervision
           state shade0
           ifvarand TEMPVAR 4 // Bubsy
           {
-	     setvar digx 150
-	     ifvare BUBSYFORM? 0 setvar tilenum 7938 else ifvare BUBSYFORM? 1 setvar tilenum 7962
+           setvar digx 150
+
+           setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+           ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
+
            ifvare BUBSY? 1 state shadepulse
-	     setvar CHARACTERARRAY 3
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 3 getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 8 // Ami
@@ -27883,8 +27887,9 @@ state showsupport_bubsyicon
     {
      getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY TEMPVAR
 
-     ifvare BUBSYFORM? 0 setvar tilenum 7938 
-     else ifvare BUBSYFORM? 1 setvar tilenum 7962
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938 
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
      state digz12288 // 16384
      state pal0
      state rs

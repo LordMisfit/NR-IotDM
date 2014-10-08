@@ -802,9 +802,10 @@ ends
 state char_firedamage_misc
            ifvare CHARACTERSELECTED? 3 // Bubsy
            {
-            ifvare BUBSYFORM? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage in Loki Mask form
+            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage in Loki Mask form
            }           
-		   ifvare CHARACTERSELECTED? 4 // Ami
+           ifvare CHARACTERSELECTED? 4 // Ami
            {
             ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6 // 16.6% Damage under water
             ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 } // 29% damage while in water
@@ -819,9 +820,10 @@ state char_firedamage_misc
             mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 // 133% Damage from Fire
            }
            
-		   ifvare CHARACTERSELECTED? 6 // ESSence
+           ifvare CHARACTERSELECTED? 6 // ESSence
            {
-            ifvare ESSENCEFORM? 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
+            setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
            }
            ifvare CHARACTERSELECTED? 7 divvar TEMPDAMAGEVAR 3 // Ted [33% Damage]
            ifvare CHARACTERSELECTED? 9 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Cybanis [60% Damage]
@@ -840,8 +842,9 @@ ends
 state char_icedamage_misc
            ifvare CHARACTERSELECTED? 3 // Bubsy
            {
-            ifvare BUBSYFORM? 0 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 2 } // 150% Damage
-            ifvare BUBSYFORM? 1 { mulvar TEMPDAMAGEVAR 5 divvar TEMPDAMAGEVAR 4 } // 125% Damage
+            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 2 } // 150% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 5 divvar TEMPDAMAGEVAR 4 } // 125% Damage
            }
            ifvare CHARACTERSELECTED? 4 // Ami
            {
@@ -860,7 +863,9 @@ state char_icedamage_misc
            }
            ifvare CHARACTERSELECTED? 6 // ESSence
            {
-            ifvare ESSENCEFORM? 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage
+            setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
+
             mulvar TEMPDAMAGEVAR 3 // 300% Damage
            }
            ifvare CHARACTERSELECTED? 9 // Cybanis
@@ -885,7 +890,8 @@ ends
 state char_elecdamage_misc
            ifvare CHARACTERSELECTED? 3 // Bubsy
            {
-            ifvare BUBSYFORM? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage
+            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage
            }
            ifvare CHARACTERSELECTED? 4 // Ami
            {
@@ -904,7 +910,8 @@ state char_elecdamage_misc
            }
            ifvare CHARACTERSELECTED? 6 // ESSence
            {
-            ifvare ESSENCEFORM? 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage
+            setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
            }
            ifvare CHARACTERSELECTED? 8 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Lisa [60% Damage]          
            ifvare CHARACTERSELECTED? 9 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Cybanis [60% Damage]
@@ -4919,12 +4926,12 @@ state maxcivsincrease
  {
   setvar MISCARRAYID 15 // Civs Saved [Game]
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addvar MISCARRAYID_AMOUNTTEMP 1 // addlogvar MISCARRAYID_AMOUNTTEMP
+  addvar MISCARRAYID_AMOUNTTEMP 1
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
   setvar MISCARRAYID 14 // Civs Saved [Level]
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addvar MISCARRAYID_AMOUNTTEMP 1 // addlogvar MISCARRAYID_AMOUNTTEMP
+  addvar MISCARRAYID_AMOUNTTEMP 1
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
  }
  setvar MISCARRAYID 19 // Civs Killed [Game]
@@ -4944,12 +4951,12 @@ state maxcivsincrease2
  {
   setvar MISCARRAYID 15 // Civs Saved [Game]
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addvar MISCARRAYID_AMOUNTTEMP 2 // addlogvar MISCARRAYID_AMOUNTTEMP
+  addvar MISCARRAYID_AMOUNTTEMP 2
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
   setvar MISCARRAYID 14 // Civs Saved [Level]
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addvar MISCARRAYID_AMOUNTTEMP 2 // addlogvar MISCARRAYID_AMOUNTTEMP
+  addvar MISCARRAYID_AMOUNTTEMP 2
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
  }
  setvar MISCARRAYID 19 // Civs Killed [Game]
@@ -23653,7 +23660,8 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
               ifvare CHARACTERSELECTED? 2 subvar TEMPVAR 2
               else ifvare CHARACTERSELECTED? 3
               {
-               ifvare BUBSYFORM? 1 divvar TEMPVAR 4
+               setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPVAR 4
               }
               else
               ifvare CHARACTERSELECTED? 4
@@ -23732,7 +23740,8 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
                else
                ifvare CHARACTERSELECTED? 3
                {
-                ifvare BUBSYFORM? 1
+                setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+                ifvare MISCARRAYID_AMOUNTTEMP 1
                 {
                  ifrnd 1 state addpoison
                 }
@@ -24677,7 +24686,8 @@ state player-newpurplelava_dmg
                ifvare CHARACTERSELECTED? 2 nullop
                else ifvare CHARACTERSELECTED? 3
                {
-                ifvare BUBSYFORM? 1
+                setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+                ifvare MISCARRAYID_AMOUNTTEMP 1
                 {
                  ifrnd 64 setvar TEMPVAR 1 else setvar TEMPVAR 0
                  ifrnd 3 state addpoison
@@ -25128,7 +25138,8 @@ state player-amoebaacid_dmg
               //*********************
               ifvare CHARACTERSELECTED? 3
               {
-               ifvare BUBSYFORM? 1 divvar TEMPVAR 4
+               setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPVAR 4
               }
               ifvare CHARACTERSELECTED? 4
               {
@@ -27260,7 +27271,8 @@ state keypadhandscannerdamage
 
      ifvare CHARACTERSELECTED? 3
      {
-      ifvare BUBSYFORM? 1
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        mulvar tempe 2
        divvar tempe 5
@@ -27280,7 +27292,8 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 6
      {
-      ifvare ESSENCEFORM? 0
+      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        mulvar tempe 2
        divvar tempe 5
@@ -27353,7 +27366,8 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 3
      {
-      ifvare BUBSYFORM? 1
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        mulvar tempe 2
        divvar tempe 5
@@ -27375,7 +27389,8 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 6
      {
-      ifvare ESSENCEFORM? 0
+      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0
       {
        mulvar tempe 2
        divvar tempe 5

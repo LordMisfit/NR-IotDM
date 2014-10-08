@@ -5751,12 +5751,15 @@ ifvare mainmenusubmenu 3
    { 
     setvar CHARACTERARRAY 3
     ifvare CHARACTERSELECTED? 3 state shadepulse4
-    ifvare BUBSYFORM? 0 setvar tilenum 7938
-    else ifvare BUBSYFORM? 1 setvar tilenum 7962
+
+    setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
     {
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvarl TEMPVAR 1 state pal2 else state pal0
     } 
+
     state rs 
     setvar digx 136
     setvar digy 38
@@ -7998,8 +8001,11 @@ ifvare mainmenusubmenu 5
    { 
     setvar CHARACTERARRAY 3
     ifvare CHARACTERSELECTED? 3 state shadepulse4
-    ifvare BUBSYFORM? 0 setvar tilenum 7938
-    else ifvare BUBSYFORM? 1 setvar tilenum 7962
+
+    setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
+
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
@@ -9718,8 +9724,10 @@ ifvare mainmenusubmenu 6
    { 
     setvar CHARACTERARRAY 3
     ifvare CHARACTERSELECTED? 3 state shadepulse4
-    ifvare BUBSYFORM? 0 setvar tilenum 7938
-    else ifvare BUBSYFORM? 1 setvar tilenum 7962
+
+    setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
     {
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvarl TEMPVAR 1
@@ -9731,6 +9739,7 @@ ifvare mainmenusubmenu 6
       state pal0
      }
     } 
+
     state rs 
     setvar digx 136
     setvar digy 38
@@ -10563,7 +10572,10 @@ ifvare mainmenusubmenu 6
   setvar digy 47
   state digz24576
   state orientation2
-  ifvare BUBSYFORM? 0 setvar tilenum 7938 else ifvare BUBSYFORM? 1 setvar tilenum 7962
+
+  setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
+
   setvar CHARACTERARRAY 3
   state checkcharacterstatuspic
   ifvare BUBSY? 1
