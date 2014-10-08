@@ -1,6 +1,6 @@
 - Make Invulnerability have different balance options, such as 'no reflection/instant-kill' and 'drain health on touch instead of kill' or different ratios of damage-reflection
 - MAKE THE DAMN SLOT MACHINE MINIGAME :P
-- Corrosion Ailment for 'Armor Poison'
+- Corrosion Ailment for 'Armor Poison' [based on DoomRPG]
 - Add alternate storyline route mode if all worldtiles are detected as found at least once.
 - 'maybe' make a custom shrink projectile to get around the 'no shrinking things with < 24 x/y-repeat' issue.
 - Make Tanks able to push crates within it's weight limit.
