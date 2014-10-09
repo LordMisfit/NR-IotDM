@@ -112,7 +112,7 @@ state reset_autosavetimes
               {
                setvarvar NEXTAUTOSAVEINTERVAL TIMERRAWFORMAT
                setvarvar TEMPVAR5 AUTOSAVEFREQUENCY
-               mulvarvar TEMPVAR5 AUTOSAVEMULTI
+               mulvar TEMPVAR5 1560 // TEMPVAR5 = tics per 'minute' [1560 is the proper amount]
                addvarvar NEXTAUTOSAVEINTERVAL TEMPVAR5
               }
               else
@@ -124,17 +124,13 @@ ends
 state checkoverflowmods // Future Checks for Overflows [extending HP/AP/Dmg systems more will require this if done]
 ifvarg OVERFLOW_RAWVALUE_OLD 0
 {
- // addlogvar OVERFLOW_TEMPMULTI
- // addlogvar OVERFLOW_RAWVALUE_OLD
  ifvarvarg OVERFLOW_RAWVALUE_OLD OVERFLOW_MODAMOUNT+ 
  {
   setvarvar OVERFLOW_LEFTOVER OVERFLOW_RAWVALUE_OLD
   modvarvar OVERFLOW_LEFTOVER OVERFLOW_MODAMOUNT+
-  // addlogvar OVERFLOW_LEFTOVER
   setvarvar OVERFLOW_MULTIPLERS OVERFLOW_RAWVALUE_OLD
   subvarvar OVERFLOW_MULTIPLERS OVERFLOW_LEFTOVER
   divvarvar OVERFLOW_MULTIPLERS OVERFLOW_MODAMOUNT+
-  // addlogvar OVERFLOW_MULTIPLERS
 
   setvar OVERFLOW_RAWVALUE_NEW 0
   whilevarn OVERFLOW_MULTIPLERS 0
@@ -151,14 +147,12 @@ ifvarg OVERFLOW_RAWVALUE_OLD 0
   divvar OVERFLOW_TEMP1 1000
 
   addvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMP1
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  else
  {
   setvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_RAWVALUE_OLD
   mulvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMPMULTI
   divvar OVERFLOW_RAWVALUE_NEW 1000
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  setvar OVERFLOW_TEMP1 0
  setvar OVERFLOW_RAWVALUE_OLD 0
@@ -169,17 +163,13 @@ else ifvare OVERFLOW_RAWVALUE_OLD 0 setvar OVERFLOW_RAWVALUE_NEW 0
 else
 ifvarl OVERFLOW_RAWVALUE_OLD 0
 {
- // addlogvar OVERFLOW_TEMPMULTI
- // addlogvar OVERFLOW_RAWVALUE_OLD
  ifvarvarl OVERFLOW_RAWVALUE_OLD OVERFLOW_MODAMOUNT- 
  {
   setvarvar OVERFLOW_LEFTOVER OVERFLOW_RAWVALUE_OLD
   modvarvar OVERFLOW_LEFTOVER OVERFLOW_MODAMOUNT-
-  // addlogvar OVERFLOW_LEFTOVER
   setvarvar OVERFLOW_MULTIPLERS OVERFLOW_RAWVALUE_OLD
   subvarvar OVERFLOW_MULTIPLERS OVERFLOW_LEFTOVER
   divvarvar OVERFLOW_MULTIPLERS OVERFLOW_MODAMOUNT-
-  // addlogvar OVERFLOW_MULTIPLERS
 
   setvar OVERFLOW_RAWVALUE_NEW 0
   whilevarn OVERFLOW_MULTIPLERS 0
@@ -196,14 +186,12 @@ ifvarl OVERFLOW_RAWVALUE_OLD 0
   divvar OVERFLOW_TEMP1 1000
 
   addvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMP1
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  else
  {
   setvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_RAWVALUE_OLD
   mulvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMPMULTI
   divvar OVERFLOW_RAWVALUE_NEW 1000
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  setvar OVERFLOW_TEMP1 0
  setvar OVERFLOW_RAWVALUE_OLD 0
@@ -215,18 +203,13 @@ ends
 state checkoverflow_custom // Future Checks for Overflows [extending HP/AP/Dmg systems more will require this if done]
 ifvarg OVERFLOW_RAWVALUE_OLD 0
 {
- // addlogvar OVERFLOW_TEMPMULTI
- // addlogvar OVERFLOW_TEMPDIVISOR
- // addlogvar OVERFLOW_RAWVALUE_OLD
  ifvarvarg OVERFLOW_RAWVALUE_OLD OVERFLOW_MODAMOUNT+ 
  {
   setvarvar OVERFLOW_LEFTOVER OVERFLOW_RAWVALUE_OLD
   modvarvar OVERFLOW_LEFTOVER OVERFLOW_MODAMOUNT+
-  // addlogvar OVERFLOW_LEFTOVER
   setvarvar OVERFLOW_MULTIPLERS OVERFLOW_RAWVALUE_OLD
   subvarvar OVERFLOW_MULTIPLERS OVERFLOW_LEFTOVER
   divvarvar OVERFLOW_MULTIPLERS OVERFLOW_MODAMOUNT+
-  // addlogvar OVERFLOW_MULTIPLERS
 
   setvar OVERFLOW_RAWVALUE_NEW 0
   whilevarn OVERFLOW_MULTIPLERS 0
@@ -243,14 +226,12 @@ ifvarg OVERFLOW_RAWVALUE_OLD 0
   divvarvar OVERFLOW_TEMP1 OVERFLOW_TEMPDIVISOR
 
   addvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMP1
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  else
  {
   setvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_RAWVALUE_OLD
   mulvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMPMULTI
   divvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMPDIVISOR
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  setvar OVERFLOW_TEMP1 0
  setvar OVERFLOW_RAWVALUE_OLD 0
@@ -261,18 +242,13 @@ else ifvare OVERFLOW_RAWVALUE_OLD 0 setvar OVERFLOW_RAWVALUE_NEW 0
 else
 ifvarl OVERFLOW_RAWVALUE_OLD 0
 {
- // addlogvar OVERFLOW_TEMPMULTI
- // addlogvar OVERFLOW_TEMPDIVISOR
- // addlogvar OVERFLOW_RAWVALUE_OLD
  ifvarvarl OVERFLOW_RAWVALUE_OLD OVERFLOW_MODAMOUNT- 
  {
   setvarvar OVERFLOW_LEFTOVER OVERFLOW_RAWVALUE_OLD
   modvarvar OVERFLOW_LEFTOVER OVERFLOW_MODAMOUNT-
-  // addlogvar OVERFLOW_LEFTOVER
   setvarvar OVERFLOW_MULTIPLERS OVERFLOW_RAWVALUE_OLD
   subvarvar OVERFLOW_MULTIPLERS OVERFLOW_LEFTOVER
   divvarvar OVERFLOW_MULTIPLERS OVERFLOW_MODAMOUNT-
-  // addlogvar OVERFLOW_MULTIPLERS
 
   setvar OVERFLOW_RAWVALUE_NEW 0
   whilevarn OVERFLOW_MULTIPLERS 0
@@ -289,14 +265,12 @@ ifvarl OVERFLOW_RAWVALUE_OLD 0
   divvarvar OVERFLOW_TEMP1 OVERFLOW_TEMPDIVISOR
 
   addvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMP1
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  else
  {
   setvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_RAWVALUE_OLD
   mulvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMPMULTI
   divvarvar OVERFLOW_RAWVALUE_NEW OVERFLOW_TEMPDIVISOR
-  // addlogvar OVERFLOW_RAWVALUE_NEW
  }
  setvar OVERFLOW_TEMP1 0
  setvar OVERFLOW_RAWVALUE_OLD 0
@@ -2542,8 +2516,10 @@ ends
 
 state checkmaxsupports
 
- setvar MAXSUPPORTLEVELS 19
- subvarvar MAXSUPPORTLEVELS SKILLLEVEL
+ setvar MISCARRAYID 66 // MAX-SUPPORT-LEVELS
+ getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID_AMOUNTTEMP 19 subvarvar MISCARRAYID_AMOUNTTEMP SKILLLEVEL
+ setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 ends
 
 state accquiregroup
@@ -5126,12 +5102,12 @@ state energycost_check
    mulvarvar ENERGYCOST_TEMP DAMAGEMODIFIER
    divvar ENERGYCOST_TEMP 1000
 
+   // Assures abilities which are toggleable remain free [cost 0 EP] to turn off, even if the EP cheat is turned on,
    setvar TEMP2 0
    ifvarand TEMP 32 addvar TEMP2 1 // Triad Refractor
    ifvarand TEMP 64 addvar TEMP2 1 // Triad Ragnarok
    ifvarand TEMP 256 addvar TEMP2 1 // Mercury Aqua Protection
    ifvarand TEMP 2048 addvar TEMP2 1 // Triad Blitzkrieg
-   // addlogvar TEMP2
    ifvarg TEMP2 0 { ifvarl ENERGYCOST_TEMP 0 setvar ENERGYCOST_TEMP 0 }
    else { ifvarl ENERGYCOST_TEMP 1 setvar ENERGYCOST_TEMP 1 }
 ends
@@ -6685,7 +6661,8 @@ state drop_randomized_item
    else ifvare RANDOMIZER 246 { espawn REDTANKCAPSULE state scatterdrops } // 246 [1]
 
    // Rare Items { 25% chance of attempting to select these }
-   else ifvare RANDOMIZER 247 { ifvare HAVEHACKERVISION? 0 { espawn HACKERVISION state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 247 [1]
+   else ifvare RANDOMIZER 247 { setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+                                ifvare MISCARRAYID_AMOUNTTEMP 0 { espawn HACKERVISION state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 247 [1]
    else ifvarg RANDOMIZER 247 ifvarl RANDOMIZER 250 { ifrnd 224 { espawn SUNRING state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 248-249 [2]
    else ifvarg RANDOMIZER 249 ifvarl RANDOMIZER 252 { ifrnd 224 { espawn AQUARING state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 250-251 [2]
    else ifvarg RANDOMIZER 251 ifvarl RANDOMIZER 254 { ifrnd 224 { espawn PLASMARING state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 252-253 [2]
@@ -6728,10 +6705,14 @@ state drop_randomized_item
    else ifvare RANDOMIZER 315 { ifrnd 192 { espawn TRANSDIMENSIONALSAFE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 315 [1] 
    else ifvare RANDOMIZER 316 { ifrnd 192 { espawn BLOODPACTSHIELD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 316 [1] 
    else ifvare RANDOMIZER 317 { ifrnd 128 { espawn MYSTICSATCHEL state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 317 [1]
-   else ifvare RANDOMIZER 318 { ifvare GOTMONEYRADAR? 0 { espawn MONEYRADAR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 318 [1]
-   else ifvare RANDOMIZER 319 { ifvare GOTPORTABLEATM? 0 { espawn PORTABLEATM state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 319 [1]
-   else ifvare RANDOMIZER 320 { ifvare HAVEMERCURYCOMPUTER? 0 { espawn MERCURYCOMPUTER state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 320 [1]
-   else ifvare RANDOMIZER 321 { ifvarl CARDMEMBERSHIP? 5 { ifrnd 16 { espawn MEMBERSHIPCARD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 321 [1]
+   else ifvare RANDOMIZER 318 { setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+                                ifvare MISCARRAYID_AMOUNTTEMP  0 { espawn MONEYRADAR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 318 [1]
+   else ifvare RANDOMIZER 319 { setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+                                ifvare MISCARRAYID_AMOUNTTEMP 0 { espawn PORTABLEATM state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 319 [1]
+   else ifvare RANDOMIZER 320 { setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+                                ifvare MISCARRAYID_AMOUNTTEMP 0 { espawn MERCURYCOMPUTER state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 320 [1]
+   else ifvare RANDOMIZER 321 { setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+                                ifvarl MISCARRAYID_AMOUNTTEMP 5 { ifrnd 16 { espawn MEMBERSHIPCARD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 321 [1]
 
 ends
 
@@ -7420,7 +7401,8 @@ state useitemshowinvvalues1
      ifvare CHARACTERARRAY 4 redefinequote 332 VRVISOR
      else ifvare CHARACTERARRAY 8
      {
-      ifvare HAVEHACKERVISION? 1 redefinequote 332 HACKVIS
+      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 HACKVIS
       else redefinequote 332 NIGHTVIS
      }
      else redefinequote 332 NIGHTVIS
@@ -7470,7 +7452,8 @@ state useitemshowinvvalues2
      ifvare CHARACTERARRAY 4 nullop
      else ifvare CHARACTERARRAY 8
      {
-      ifvare HAVEHACKERVISION? 1 nullop
+      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 nullop
       else
       {
        getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME varname
@@ -7525,7 +7508,8 @@ state useitemshowinvvalues2
      }
      else ifvare CHARACTERARRAY 8
      {
-      ifvare HAVEHACKERVISION? 1
+      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        addvar digx 196
        setvar tilenum 2822
@@ -17246,7 +17230,12 @@ state resetstatusvars
   setvar MISCARRAYID 18 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MAX-CIVILIANSKILLED-LEVEL
   setvar MISCARRAYID 19 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MAX-CIVILIANSKILLED-GAME
 
-//  ifvarg SKILLLEVEL -1 ifvarl SKILLLEVEL 5 { setvar automedikittoggle 1 } else { setvar automedikittoggle 0 }  
+  setvar MISCARRAYID 69 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // IS-MONEYRADAR-ON?
+
+  setvar MISCARRAYID 72 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // FREEZING-MODE?
+  setvar MISCARRAYID 73 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // SHOW-MULTI-ICONS?
+  setvar MISCARRAYID 74 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // ATTACHED-OBJECTS?
+
 ends
 
 //**********************
@@ -22625,7 +22614,8 @@ state statusscreenlist
   {
    ifvare mainmenupage 7
    {
-    ifvare HAVEHACKERVISION? 1
+    setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+    ifvare MISCARRAYID_AMOUNTTEMP 1
     {
      setvar digx 150 // 54
      setvar digy 46 // 44 (+26)
@@ -23782,7 +23772,13 @@ state chardisplaystatups // Character Level
         setvar HPINCTEMP 0 setvar APINCTEMP 0 setvar ATKINCTEMP 0 setvar DEFINCTEMP 0
         setvar SPDINCTEMP 0 setvar AIRINCTEMP 0 setvar MNTINCTEMP 0 setvar JUMINCTEMP 0
 
-        globalsound LEVELUP setvar LEVELUPTIMER 65 addvar SOMEONELEVELS? 1
+        globalsound LEVELUP setvar LEVELUPTIMER 65 
+
+        setvar MISCARRAYID 63  // SOMEONE-LEVELS?
+        getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+        addvar MISCARRAYID_AMOUNTTEMP 1
+        setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+
         addvar templeveltemp1 1
         setactorvar[CHARACTERARRAY].CHARACTERTEMPLEVEL templeveltemp1
 ends
@@ -26136,8 +26132,21 @@ ifvarg CURRENTHITPOINTS 0 // ifp palive
       // setvar ATKINCREASED 0
       // setvar DEFINCREASED 0
 
-      globalsound LEVELUP setvar LEVELUPTIMER 65 addvar SOMEONELEVELS? 1
-      ifrnd 39 addvar PLAYERLEVELSUP? 1
+      globalsound LEVELUP setvar LEVELUPTIMER 65 
+
+      setvar MISCARRAYID 63  // SOMEONE-LEVELS?
+      getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+      addvar MISCARRAYID_AMOUNTTEMP 1
+      setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+
+      ifrnd 39
+      {
+       setvar MISCARRAYID 64  // PLAYER-LEVELSUP?
+       getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+       addvar MISCARRAYID_AMOUNTTEMP 1
+       setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+      }
+
       addvar PLAYERTEMPLEVEL 1
   }
 }
@@ -27768,7 +27777,8 @@ state supportmenutext1
     setvar digx 172 // 160 [centered]
     setvar digy 50
     state pal20
-    setvarvar varname MAXSUPPORTLEVELS
+    setvar MISCARRAYID 66 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MAX-SUPPORT-LEVELS
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state dn
     setvar digx 144
     setvar digy 59
@@ -32201,16 +32211,32 @@ state givecheat_inventoryitems
   addvarvar ESHIELDDMGFACTOR TEMP2
   addvarvar DAMAGEINCELL ESHIELDDMGFACTOR
   ifvare HAVEENERGYSHIELD? 0 setvar HAVEENERGYSHIELD? 1
-  ifvare HAVEMERCURYCOMPUTER? 0 setvar HAVEMERCURYCOMPUTER? 1
-  ifvare HAVEHACKERVISION? 0 { setvar CHARACTERARRAY 8 setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME HEAT_AMOUNT setvar HAVEHACKERVISION? 1 }
-  ifvare GOTPORTABLEATM? 0 setvar GOTPORTABLEATM? 1
-  ifvare GOTMONEYRADAR? 0 setvar GOTMONEYRADAR? 1
+
+  setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 78 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 } // HAVE-MERCURY-COMPUTER?
+
+  setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 
+  {
+   setvar CHARACTERARRAY 8 setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME HEAT_AMOUNT 
+   setvar MISCARRAYID 77 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // HAVE-HACKERVISION?
+  }
+
+  setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 67 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 }
+
+  setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 68 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 }
+
   ifvare HAVEASHIKONJEWEL? 0 { state checkshikonjewels setvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
-  ifvare CARDMEMBERSHIP? 0 setvar CARDMEMBERSHIP? 1
-  else ifvare CARDMEMBERSHIP? 1 setvar CARDMEMBERSHIP? 2
-  else ifvare CARDMEMBERSHIP? 2 setvar CARDMEMBERSHIP? 3
-  else ifvare CARDMEMBERSHIP? 3 setvar CARDMEMBERSHIP? 4
-  else ifvare CARDMEMBERSHIP? 4 setvar CARDMEMBERSHIP? 5
+
+  setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 }
+  else ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 2 }
+  else ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 3 }
+  else ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 4 }
+  else ifvare MISCARRAYID_AMOUNTTEMP 4 { setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 5 }
+
  }
 ends
 
@@ -36986,10 +37012,8 @@ ends
 
 state useresurrectionultima
 
-           setvarvar PARTYDEAD PARTYSIZE
-           subvarvar PARTYDEAD PARTYALIVE
-           
-           ifvarg PARTYDEAD 1 // Do not waste use if 1 or less people are dead.
+           setvar MISCARRAYID 62 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NUMBER-OF-PARTY-DEAD
+           ifvarg MISCARRAYID_AMOUNTTEMP 1 // Do not waste use if 1 or less people are dead.
            {
             setvar SKILLUSERARRAY 14
             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
@@ -43020,8 +43044,11 @@ state menu-mainmenu-state
            ifvare mainmenuselection 1 { state checklargeenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 40 state itemusecheckpartysize } else state menuerrorsound }
            ifvare mainmenuselection 2 { state checkhyperenergydrinks ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 41 state itemusecheckpartysize } else state menuerrorsound }
            ifvare mainmenuselection 3 { state checkwintersuits ifvarg ITEMARRAYID_AMOUNTTEMP 0 { setvar itemidinuse 42 state itemusecheckpartysize } else state menuerrorsound }
-           ifvare mainmenuselection 4 { ifvare GOTPORTABLEATM? 1 { state exit_mainmenu setvar atm_id -4 setvar atm_type 4 setvar atm_mode 0 randvar atm_background 43 randvar atm_wscreen 3 addvar atm_wscreen 1 randvar atm_extquote 21 } else state menuerrorsound }
-           ifvare mainmenuselection 5 { ifvare GOTMONEYRADAR? 1 { ifvare ISRADARON? 0 { setvar ISRADARON? 1 } else ifvare ISRADARON? 1 { setvar ISRADARON? 0 } ifrnd 128 { sound KEYPAD_BEEP1 } else { sound KEYPAD_BEEP2 } } else state menuerrorsound }
+           ifvare mainmenuselection 4 { setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+                                        ifvare MISCARRAYID_AMOUNTTEMP 1 { state exit_mainmenu setvar atm_id -4 setvar atm_type 4 setvar atm_mode 0 randvar atm_background 43 randvar atm_wscreen 3 addvar atm_wscreen 1 randvar atm_extquote 21 } else state menuerrorsound }
+           ifvare mainmenuselection 5 { setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+                                        ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar MISCARRAYID 69 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // IS-MONEYRADAR-ON?
+                                                                          ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 69 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 } else ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar MISCARRAYID 69 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 } ifrnd 128 { sound KEYPAD_BEEP1 } else { sound KEYPAD_BEEP2 } } else state menuerrorsound }
            // Row #2
            ifvare mainmenuselection 6 state cannotuseitem
            ifvare mainmenuselection 7 state cannotuseitem

@@ -5,16 +5,16 @@
 
 * Modification Information *
 
-Title                   : Naferia's Reign: The Invasion/Revenge of the Dark Mistress (v5.22) [packed in with eduke32 r3078]
+Title                   : Naferia's Reign: The Invasion/Revenge of the Dark Mistress (v5.22.git58) [packed in with eduke32 r4593]
 Author                  : Jack "Lord Misfit" Walker
 E-mail                  : clint20@neo.rr.com
-Web Page                : http://naferia.duke4.net/ (there is also a link to it at "http://misfittechstudios.netii.net/", my new personal website)
-Misc Author Info        : 27 Years old, from Ohio, yadda yadda... who cares about my background? :P
-Other Levels/Mods?      : No Standalone Levels for Duke, although I once made what ended up a very crappy Doom mod a long time ago I will not name :P
+Web Page[s]             : https://github.com/LordMisfit/NR-IotDM/ & http://naferia.duke4.net/ (there is also a link to it at "http://misfittechstudios.duke4.net/", my new personal website)
+Misc Author Info        : 30 Years old, from Ohio, yadda yadda... who cares about my background? :P
+Other Levels/Mods?      : No Standalone Levels for Duke3D before this, although I once made what ended up a very crappy Doom mod a long time ago I will not name :P
 Future Levels?          : Yeah, the levels that will be made for this mod later, but I won't ruin the surprise :P
-Compile Size in EDuke32 : 765,937(x4) bytes [5.22]; was 778,412(x4) bytes [5.21]
+Compile Size in EDuke32 : 789,530(x4) bytes [5.22.git58]; was 765,937(x4) bytes [5.22]
 
-Description             : The most recent version of an [otherwise] 15-16 year-old modding project started long back in 1997. NR has been through many hardships and dire straits, but with certain sources of inspiration, I decided to reattempt making this mod back in late 2006, after a 3-4 year dead period after the unfortunate demise of version 3.x[which along with 2.x and 1.x died in HDD crashes/deaths]. This mod is a major alagmation of my modding and coding skills with CON files so far, but is not meant as a mere "blackbox" mod or an "enhancement" mod. There is a storyline in the works for this, else the sheer amount of coding[765,000+ compiled bytes] and features would be considered ridiciously overboard even by my standards. o_o;
+Description             : The most recent version of an [otherwise] 15-16 year-old modding project started long back in 1997. NR has been through many hardships and dire straits, but with certain sources of inspiration, I decided to reattempt making this mod back in late 2006, after a 3-4 year dead period after the unfortunate demise of version 3.x[which along with 2.x and 1.x died in HDD crashes/deaths]. This mod is a major alagmation of my modding and coding skills with CON files so far, but is not meant as a mere "blackbox" mod or an "enhancement" mod. There is a storyline in the works for this, else the sheer amount of coding[789,500+ compiled bytes] and features would be considered ridiciously overboard even by my standards. o_o;
 
 Synopsis                : "1 year after the initial alien invasion in Duke Nukem 3D and the death of the newborn Alien Queen in the Atomic Edition, the murderous aliens still persist despite Duke's efforts to destroy them, but after their recent invasion of Washington D.C. is ruined and the President of the United States is saved by Duke Nukem himself(the events of "Duke it out in D.C."), their true leader finally shows her real colors, in a cataclysmic show of hands that will rock the foundation of Duke Nukem's entire life and principles. Even the great alien ass-kicker himself soon finds he is outmatched on his own, and will against his pride need all the help he can get to defeat this Alien Super-Queen before not only Earth, but all life in the universe are left prey to her evil natures! 
                           So Duke, Are You Ready to Fend off the Invasion of Naferia, the Dark Mistress?"

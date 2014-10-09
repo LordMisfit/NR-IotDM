@@ -1281,8 +1281,9 @@ else
    ifvarg CURRENTARMORPOINTS 0 nullop else addvar digy 6
    ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 nullop else addvar digy 6
 
-   ifvarg FORTUNECOOKIETIMER 0 ifvarl FORTUNECOOKIETIMER 40 state orientation59
-   ifvarg FORTUNECOOKIETIMER 39 state orientation27
+   setvar MISCARRAYID 70 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FORTUNE-COOKIE-TIMER
+   ifvarg MISCARRAYID_AMOUNTTEMP 0 ifvarl MISCARRAYID_AMOUNTTEMP 40 state orientation59
+   ifvarg MISCARRAYID_AMOUNTTEMP 39 state orientation27
    setvar temp 272
    qstrlen TEMPVAR 272
    ifvarg TEMPVAR 0
@@ -1293,7 +1294,8 @@ else
     subvarvar digx TEMPVAR
    }
    state pal20
-   ifvarg FORTUNECOOKIETIMER 0 state mt
+   setvar MISCARRAYID 70 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FORTUNE-COOKIE-TIMER
+   ifvarg MISCARRAYID_AMOUNTTEMP 0 state mt
 
 
    // Display Entry Field for Passcode entries on Keypads :P
@@ -2070,9 +2072,11 @@ else
     ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0
     { // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0 [line 4182]
 
-     ifvare ISRADARON? 1
+     setvar MISCARRAYID 69 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // IS-MONEYRADAR-ON?
+     ifvare MISCARRAYID_AMOUNTTEMP 1
      {
-      ifvare GOTMONEYRADAR? 1
+      setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        setvar orientation_change 512
        //****************
@@ -5900,9 +5904,9 @@ else
         {
          ifvare hitsprite -1
          {
- 
-          ifvare HAVEMERCURYCOMPUTER? 1
-          { // ifvare HAVEMERCURYCOMPUTER? 1
+          setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+          ifvare MISCARRAYID_AMOUNTTEMP 1
+          { // ifvare HAVEMERCURY-COMPUTER? 1
            // Normal-Ceiling Scan
            getsector[hitsector].lotag TEMP
            ifvare TEMP 2 // Ceiling Picnum
@@ -6132,7 +6136,7 @@ else
             }
            }
 
-          } // ifvare HAVEMERCURYCOMPUTER? 1
+          } // ifvare HAVEMERCURY-COMPUTER? 1
          } // ifvare hitsprite -1
         } // ifvare hitwall -1
        } // ifvarn hitsector -1
@@ -7091,7 +7095,8 @@ else
     ifvarand CHEATBITFIELD? 2 { ifvarl AUTOMAPMODE 2 state hackervision }
     else
     {
-     ifvare CHARACTERSELECTED? 8 ifvare HAVEHACKERVISION? 1 ifvarl AUTOMAPMODE 2 // Makes Lisa Able to use "Hacker Vision" :P
+     setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+     ifvare CHARACTERSELECTED? 8 ifvare MISCARRAYID_AMOUNTTEMP 1 ifvarl AUTOMAPMODE 2 // Makes Lisa Able to use "Hacker Vision" :P
      {
       ifvarg CURRENTHITPOINTS 0 { ifvare NIGHTVISION 1 state hackervision }
      }
@@ -7587,11 +7592,12 @@ else
            }
            else ifvare TARGETSPECIES MEMBERSHIPCARD
            { 
-            ifvare CARDMEMBERSHIP? 0 redefinequote 142 BRONZE AKAIKUTSU CARD 
-            ifvare CARDMEMBERSHIP? 1 redefinequote 142 SILVER AKAIKUTSU CARD 
-            ifvare CARDMEMBERSHIP? 2 redefinequote 142 GOLD AKAIKUTSU CARD 
-            ifvare CARDMEMBERSHIP? 3 redefinequote 142 PLATINUM AKAIKUTSU CARD 
-            ifvare CARDMEMBERSHIP? 4 redefinequote 142 DIAMOND AKAIKUTSU CARD 
+            setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 142 BRONZE AKAIKUTSU CARD 
+            ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 142 SILVER AKAIKUTSU CARD 
+            ifvare MISCARRAYID_AMOUNTTEMP 2 redefinequote 142 GOLD AKAIKUTSU CARD 
+            ifvare MISCARRAYID_AMOUNTTEMP 3 redefinequote 142 PLATINUM AKAIKUTSU CARD 
+            ifvare MISCARRAYID_AMOUNTTEMP 4 redefinequote 142 DIAMOND AKAIKUTSU CARD 
             state checkactorpickupamounts
             state pal15
            }
@@ -10383,7 +10389,8 @@ else
        // Hacker-Vision Node [Lisa Only]
        ifvare CHARACTERSELECTED? 8
        {
-        ifvare HAVEHACKERVISION? 1
+        setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+        ifvare MISCARRAYID_AMOUNTTEMP 1
         {
          addvarvar digy -1
          setvar digx 318 // 8
@@ -10410,7 +10417,8 @@ else
        else
        ifvare CHARACTERSELECTED? 8
        {
-        ifvare HAVEHACKERVISION? 1
+        setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+        ifvare MISCARRAYID_AMOUNTTEMP 1
         {
          addvarvar digy -5
          setvar digx 310
@@ -10495,7 +10503,8 @@ else
         // Hacker-Vision Node [Lisa Only]
         ifvare CHARACTERSELECTED? 8
         {
-         ifvare HAVEHACKERVISION? 1
+         setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+         ifvare MISCARRAYID_AMOUNTTEMP 1
          {
           addvarvar digy -1
           setvar digx 318 // 8
@@ -11004,7 +11013,8 @@ else
 
       setvar orientation_change 512
       // display mercury computer
-      ifvare CHARACTERSELECTED? 4 ifvare HAVEMERCURYCOMPUTER? 1
+      setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+      ifvare CHARACTERSELECTED? 4 ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        setvar digx 311
        addvarvar digx 0
@@ -11773,7 +11783,7 @@ else
        redefinequote 1033  
        redefinequote 1034 STRONG, ENERGETIC, AND VERY UNMODEST
        redefinequote 1035 ABOUT HER LOOKS. CHRISTINA LOVES TO
-       redefinequote 1036 HAVE FUN WITH TOY WITH HER MOST HAT-
+       redefinequote 1036 HAVE FUN AND TOY WITH HER MOST HAT-
        redefinequote 1037 ED ENEMIES. SHE ALSO HAS AN UNIQUE
        redefinequote 1038 INTEREST IN ^11LO WANG^23 AND HIS BRAND OF
        redefinequote 1039 HUMOR AND WOMANIZING.

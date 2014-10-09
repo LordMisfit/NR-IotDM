@@ -1708,24 +1708,27 @@ state shop_calculatefinalprices
     ifvarl SHOPDOLLARSTEMP 0 setvar SHOPDOLLARSTEMP 0
    }
 
-   ifvarg CARDMEMBERSHIP? 0
+   setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+   ifvarg MISCARRAYID_AMOUNTTEMP 0
    {
     setvarvar OVERFLOW_RAWVALUE_OLD SHOPDOLLARSTEMP
     ifvare shopmode 0
     {
-     ifvare CARDMEMBERSHIP? 1 setvar OVERFLOW_TEMPMULTI 850
-     ifvare CARDMEMBERSHIP? 2 setvar OVERFLOW_TEMPMULTI 700
-     ifvare CARDMEMBERSHIP? 3 setvar OVERFLOW_TEMPMULTI 500
-     ifvare CARDMEMBERSHIP? 4 setvar OVERFLOW_TEMPMULTI 250
-     ifvarg CARDMEMBERSHIP? 4 setvar OVERFLOW_TEMPMULTI 10
+     setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 setvar OVERFLOW_TEMPMULTI 850
+     ifvare MISCARRAYID_AMOUNTTEMP 2 setvar OVERFLOW_TEMPMULTI 700
+     ifvare MISCARRAYID_AMOUNTTEMP 3 setvar OVERFLOW_TEMPMULTI 500
+     ifvare MISCARRAYID_AMOUNTTEMP 4 setvar OVERFLOW_TEMPMULTI 250
+     ifvarg MISCARRAYID_AMOUNTTEMP 4 setvar OVERFLOW_TEMPMULTI 10
     }
     else
     {
-     ifvare CARDMEMBERSHIP? 1 setvar OVERFLOW_TEMPMULTI 1075
-     ifvare CARDMEMBERSHIP? 2 setvar OVERFLOW_TEMPMULTI 1150
-     ifvare CARDMEMBERSHIP? 3 setvar OVERFLOW_TEMPMULTI 1250
-     ifvare CARDMEMBERSHIP? 4 setvar OVERFLOW_TEMPMULTI 1375
-     ifvarg CARDMEMBERSHIP? 4 setvar OVERFLOW_TEMPMULTI 1495
+     setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 setvar OVERFLOW_TEMPMULTI 1075
+     ifvare MISCARRAYID_AMOUNTTEMP 2 setvar OVERFLOW_TEMPMULTI 1150
+     ifvare MISCARRAYID_AMOUNTTEMP 3 setvar OVERFLOW_TEMPMULTI 1250
+     ifvare MISCARRAYID_AMOUNTTEMP 4 setvar OVERFLOW_TEMPMULTI 1375
+     ifvarg MISCARRAYID_AMOUNTTEMP 4 setvar OVERFLOW_TEMPMULTI 1495
     }
     setvarvar OVERFLOW_TEMPDIVISOR 1000
     state checkoverflow_custom
@@ -2551,23 +2554,26 @@ state shop_display
        ifvarl TEMPVAR7 0 setvar TEMPVAR7 0
       }
 
-      ifvarg CARDMEMBERSHIP? 0
+      setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+      ifvarg MISCARRAYID_AMOUNTTEMP 0
       {
        ifvare shopmode 0
        {
-        ifvare CARDMEMBERSHIP? 1 { mulvar TEMPVAR7 850 divvar TEMPVAR7 1000 }
-        ifvare CARDMEMBERSHIP? 2 { mulvar TEMPVAR7 700 divvar TEMPVAR7 1000 }
-        ifvare CARDMEMBERSHIP? 3 { mulvar TEMPVAR7 500 divvar TEMPVAR7 1000 }
-        ifvare CARDMEMBERSHIP? 4 { mulvar TEMPVAR7 250 divvar TEMPVAR7 1000 }
-        ifvarg CARDMEMBERSHIP? 4 { mulvar TEMPVAR7 10 divvar TEMPVAR7 1000 }
+        setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPVAR7 850 divvar TEMPVAR7 1000 }
+        ifvare MISCARRAYID_AMOUNTTEMP 2 { mulvar TEMPVAR7 700 divvar TEMPVAR7 1000 }
+        ifvare MISCARRAYID_AMOUNTTEMP 3 { mulvar TEMPVAR7 500 divvar TEMPVAR7 1000 }
+        ifvare MISCARRAYID_AMOUNTTEMP 4 { mulvar TEMPVAR7 250 divvar TEMPVAR7 1000 }
+        ifvarg MISCARRAYID_AMOUNTTEMP 4 { mulvar TEMPVAR7 10 divvar TEMPVAR7 1000 }
        }
        else
        {
-        ifvare CARDMEMBERSHIP? 1 { mulvar TEMPVAR7 1075 divvar TEMPVAR7 1000 }
-        ifvare CARDMEMBERSHIP? 2 { mulvar TEMPVAR7 1150 divvar TEMPVAR7 1000 }
-        ifvare CARDMEMBERSHIP? 3 { mulvar TEMPVAR7 1250 divvar TEMPVAR7 1000 }
-        ifvare CARDMEMBERSHIP? 4 { mulvar TEMPVAR7 1375 divvar TEMPVAR7 1000 }
-        ifvarg CARDMEMBERSHIP? 4 { mulvar TEMPVAR7 1495 divvar TEMPVAR7 1000 }
+        setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPVAR7 1075 divvar TEMPVAR7 1000 }
+        ifvare MISCARRAYID_AMOUNTTEMP 2 { mulvar TEMPVAR7 1150 divvar TEMPVAR7 1000 }
+        ifvare MISCARRAYID_AMOUNTTEMP 3 { mulvar TEMPVAR7 1250 divvar TEMPVAR7 1000 }
+        ifvare MISCARRAYID_AMOUNTTEMP 4 { mulvar TEMPVAR7 1375 divvar TEMPVAR7 1000 }
+        ifvarg MISCARRAYID_AMOUNTTEMP 4 { mulvar TEMPVAR7 1495 divvar TEMPVAR7 1000 }
        }
 
        ifvarl TEMPVAR7 0 setvar TEMPVAR7 0
@@ -2587,17 +2593,19 @@ state shop_display
  state mt
 
 // Membership Level?
- ifvarg CARDMEMBERSHIP? 0
+ setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+ ifvarg MISCARRAYID_AMOUNTTEMP 0
  {
   state pal0
   setvarvar digx 257 // digx_test
   setvarvar digy 29 // digy_test
   setvarvar digz 8000 // digz_test
-  ifvare CARDMEMBERSHIP? 1 setvar tilenum 5787
-  ifvare CARDMEMBERSHIP? 2 setvar tilenum 5788
-  ifvare CARDMEMBERSHIP? 3 setvar tilenum 5789
-  ifvare CARDMEMBERSHIP? 4 setvar tilenum 5790
-  ifvarg CARDMEMBERSHIP? 4 setvar tilenum 5791
+  setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+  ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 5787
+  ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 5788
+  ifvare MISCARRAYID_AMOUNTTEMP 3 setvar tilenum 5789
+  ifvare MISCARRAYID_AMOUNTTEMP 4 setvar tilenum 5790
+  ifvarg MISCARRAYID_AMOUNTTEMP 4 setvar tilenum 5791
   state rs
  }
 
@@ -3762,10 +3770,11 @@ ifvare shop_id 0
     state pal0
     setvar digx 300 // 224
     setvar digy 100 // 224
-    ifvare ARMORAPPEARANCE? 0 { state digz32768 setvar tilenum 66 }
-    ifvare ARMORAPPEARANCE? 1 { state digz32768 setvar tilenum 5383 }
-    ifvare ARMORAPPEARANCE? 2 { state digz32768 setvar tilenum 5381 }
-    ifvare ARMORAPPEARANCE? 3 { state digz32768 setvar tilenum 5382 }
+    setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { state digz32768 setvar tilenum 66 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { state digz32768 setvar tilenum 5383 }
+    ifvare MISCARRAYID_AMOUNTTEMP 2 { state digz32768 setvar tilenum 5381 }
+    ifvare MISCARRAYID_AMOUNTTEMP 3 { state digz32768 setvar tilenum 5382 }
     state rs
 
     // Character Stats
@@ -3808,10 +3817,11 @@ ifvare shop_id 0
     state pal24
     setvar digx 300 // 224
     setvar digy 98 // 224
-    ifvare ARMORAPPEARANCE? 0 { state digz49152 setvar tilenum 66 }
-    ifvare ARMORAPPEARANCE? 1 { state digz49152 setvar tilenum 5383 }
-    ifvare ARMORAPPEARANCE? 2 { state digz49152 setvar tilenum 5381 }
-    ifvare ARMORAPPEARANCE? 3 { state digz49152 setvar tilenum 5382 }
+    setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { state digz49152 setvar tilenum 66 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { state digz49152 setvar tilenum 5383 }
+    ifvare MISCARRAYID_AMOUNTTEMP 2 { state digz49152 setvar tilenum 5381 }
+    ifvare MISCARRAYID_AMOUNTTEMP 3 { state digz49152 setvar tilenum 5382 }
     state rs
 
     // Character Stats
@@ -3933,7 +3943,8 @@ ifvare shop_id 0
     {
      ifvare LISA? 1
      {
-      ifvare HAVEHACKERVISION? 1
+      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        setvar shade 0
        state pal20
@@ -7387,10 +7398,11 @@ ifvare shop_id 0
     ifvare shopselection 19 state pal15
     setvar digx 300 // 224
     setvar digy 100 // 224
-    ifvare ARMORAPPEARANCE? 0 { state digz32768 setvar tilenum 67 }
-    ifvare ARMORAPPEARANCE? 1 { state digz32768 setvar tilenum 5416 }
-    ifvare ARMORAPPEARANCE? 2 { state digz32768 setvar tilenum 5415 }
-    ifvare ARMORAPPEARANCE? 3 { state digz32768 setvar tilenum 5421 }
+    setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { state digz32768 setvar tilenum 67 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { state digz32768 setvar tilenum 5416 }
+    ifvare MISCARRAYID_AMOUNTTEMP 2 { state digz32768 setvar tilenum 5415 }
+    ifvare MISCARRAYID_AMOUNTTEMP 3 { state digz32768 setvar tilenum 5421 }
     state rs
 
     // Character Stats
@@ -8661,10 +8673,11 @@ ifvare shop_id 0
    ifvare shopselection 12
    {
     state pal0
-    ifvare ARMORAPPEARANCE? 0 { state digz32768 setvar tilenum 66 }
-    ifvare ARMORAPPEARANCE? 1 { state digz32768 setvar tilenum 5383 }
-    ifvare ARMORAPPEARANCE? 2 { state digz32768 setvar tilenum 5381 }
-    ifvare ARMORAPPEARANCE? 3 { state digz32768 setvar tilenum 5382 }
+    setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { state digz32768 setvar tilenum 66 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { state digz32768 setvar tilenum 5383 }
+    ifvare MISCARRAYID_AMOUNTTEMP 2 { state digz32768 setvar tilenum 5381 }
+    ifvare MISCARRAYID_AMOUNTTEMP 3 { state digz32768 setvar tilenum 5382 }
     state checkbodyarmors
     setvarvar varname ITEMARRAYID_AMOUNTTEMP
     state rs
@@ -8672,10 +8685,11 @@ ifvare shop_id 0
    ifvare shopselection 13
    {
     state pal24
-    ifvare ARMORAPPEARANCE? 0 { state digz49152 setvar tilenum 66 }
-    ifvare ARMORAPPEARANCE? 1 { state digz49152 setvar tilenum 5383 }
-    ifvare ARMORAPPEARANCE? 2 { state digz49152 setvar tilenum 5381 }
-    ifvare ARMORAPPEARANCE? 3 { state digz49152 setvar tilenum 5382 }
+    setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { state digz49152 setvar tilenum 66 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { state digz49152 setvar tilenum 5383 }
+    ifvare MISCARRAYID_AMOUNTTEMP 2 { state digz49152 setvar tilenum 5381 }
+    ifvare MISCARRAYID_AMOUNTTEMP 3 { state digz49152 setvar tilenum 5382 }
     state checksuperarmors
     setvarvar varname ITEMARRAYID_AMOUNTTEMP
     state rs
@@ -10100,10 +10114,13 @@ ifvare shop_id 0
     ifvare shopselection 16 state pal13
     ifvare shopselection 17 state pal20
     ifvare shopselection 18 state pal15
-    ifvare ARMORAPPEARANCE? 0 { state digz32768 setvar tilenum 67 }
-    ifvare ARMORAPPEARANCE? 1 { state digz32768 setvar tilenum 5416 }
-    ifvare ARMORAPPEARANCE? 2 { state digz32768 setvar tilenum 5415 }
-    ifvare ARMORAPPEARANCE? 3 { state digz32768 setvar tilenum 5421 }
+
+    setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 { state digz32768 setvar tilenum 67 }
+    ifvare MISCARRAYID_AMOUNTTEMP 1 { state digz32768 setvar tilenum 5416 }
+    ifvare MISCARRAYID_AMOUNTTEMP 2 { state digz32768 setvar tilenum 5415 }
+    ifvare MISCARRAYID_AMOUNTTEMP 3 { state digz32768 setvar tilenum 5421 }
+
     ifvare shopselection 12 { state checkgreenarmors setvarvar varname ITEMARRAYID_AMOUNTTEMP }
     ifvare shopselection 13 { state checkbluearmors setvarvar varname ITEMARRAYID_AMOUNTTEMP }
     ifvare shopselection 14 { state checkyellowarmors setvarvar varname ITEMARRAYID_AMOUNTTEMP }

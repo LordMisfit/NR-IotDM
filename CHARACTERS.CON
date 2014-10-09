@@ -1394,16 +1394,9 @@ state switchtolivingcharacter
    else
    ifvare TEMPVAR2 10
    {
-    ifvare NETHRAFORM? 0
-    {
-     redefinequote 321 ^21NETHRA HAS BEEN KILLED!! [-%d RANK PTS]
-     qsprintf 321 321 TEMPVAR6
-    }
-    else
-    {
-     redefinequote 321 ^21CHRISTINA HAS BEEN KILLED!! [-%d RANK PTS]
-     qsprintf 321 321 TEMPVAR6
-    }
+    ifvare NETHRAFORM? 0 redefinequote 321 ^21NETHRA HAS BEEN KILLED!! [-%d RANK PTS]
+    else redefinequote 321 ^21CHRISTINA HAS BEEN KILLED!! [-%d RANK PTS]
+    qsprintf 321 321 TEMPVAR6
     ifvare PERMADEATH? 1 setvar NETHRA? 0
    }
    else

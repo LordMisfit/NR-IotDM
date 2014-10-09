@@ -3,6 +3,7 @@ gamearray ACHIEVEMENTS_GLOBAL 512
 
 //********************************************************************************************************************************************************************************
 //********************************************************************************************************************************************************************************
+//********************************************************************************************************************************************************************************
 // CHANGING THE FOLLOWING VARS WILL/CAN HEAVILY CHANGE BALANCE ISSUES. 
 // THIS IS INTENDED TO ALLOW ME TO DEFINE DIFFERENCES BETWEEN BALANCE IN PUBLIC BETAS FROM THE BALANCE IN THE OFFICIAL RELEASES
 
@@ -10,10 +11,6 @@ gamevar PUBLICBETA? 1 0 // 1 means Public Beta, 0 means Official Versions
 
 gamevar RNDMIZER 0 0
 gamevar RNDMIZERLIMIT 0 0
-
-gamevar SHOWMULTIICONS? 1 0 // Multiplier Icons will appear above items that are worth more than their usual value.
-gamevar ATTACHEDOBJECTS? 1 0 // 0 = Monsters/Players will not have Lifebars, Arrows, Stars or any other icons attached to them. (For lower-end processors to lower spritecount)
-gamevar FREEZINGMODE? 1 0 // 0 = Lava-type floors will permenantly freeze when shot enough times with ice-based attacks [5x HP]. 1 = Floors will thaw out after some time [normal HP]
 
 gamevar PAINSOUNDSTYPE 1 1 // 0 = Normal [based on health when hit], 1 = Other [Based on % of damage taken in a single hit]
 gamevar PAINSOUNDFACTOR 0 1 // Out of 1000 [100.0%]
@@ -48,16 +45,11 @@ gamevar extra_orientation 0 0
 gamevar position 0 2
 gamevar itemtimer 0 2
 
-gamevar CHEAT_PHASE 0 1
-gamevar CARDMEMBERSHIP? 0 1 // 0 = None, 1 = Bronze, 2 = Silver, 3 = Gold, 4 = Platinum
-
 gamevar autosavetoggle 0 131073
 gamevar AUTOSAVEFREQUENCY 20 0
-gamevar AUTOSAVEMULTI 1560 0 // 1560 = 1 Minute
 gamevar LASTAUTOSAVEINTERVAL 0 0 // Time [in Raw format] of the last autosave that occured.
 gamevar NEXTAUTOSAVEINTERVAL 0 0 // Time [in Raw format] for the next autosave to occur.
 
-gamevar MINIQUOTESCALE 125 0
 gamevar SOUNDPITCH 0 0
 
 gamevar JUMP_ONWATER? 0 1
@@ -90,7 +82,7 @@ gamevar healsectormaxheal 0 131074 // Maximum of value to go heal to. [positive 
 gamevar healsectorarmorab 0 131074 // Minimum Armor AB% 
 gamevar healsectordelaycur 0 2
 
-// WEATHER VARS - from Duke Plus
+// WEATHER VARS - from Duke Plus [also appears in some of DeeperThought's other mods, like War of Attrition]
 gamevar rainstart 0 0 // only set if a weather sprite is in the map
 gamevar raining 0 0 // number of rain or snow sprites spawned per tick, negative when snowing
 gamevar rainpal 0 0
@@ -297,34 +289,25 @@ gamevar CLOCKDIGITTIMER 0 2
 
 gamevar ITEMDROPPEDTIME 0 2 // If var is >0, then an item cannot be grabbed. For dropping items in your inventory.
 gamevar ARMORISUSED? 0 2 // If an Armor item is used, this flag is set to make it appear and work differently.
-gamevar ARMORAPPEARANCE? 0 0 // 0 = Males [Normal], 1 = Females, 2 = ESSence, 3 = Cybanis
 
 gamevar DEFENSEMODE? 0 131073 // Player Defense mode means -50% damage from attacks, +33% faster natural healing rate
 
 gamevar ITEMWASDROPPED? 0 2 // Used to give dropped items a time limit before they vanish [mostly applies to extraneous bonus items and etc]
 gamevar ITEMDROPTIMER 390 2 // The default time a dropped item has on the map before it vanishes.
 
-gamevar MAXSUPPORTLEVELS 0 0
 gamevar HITSCANNINGNAMES 0 131073 // 0 = Traditional Duke3D Enemy names, 1 = Triocladiar Species Enemy Names
 gamevar normalhitscantoggle 1 131073 // 0 = Do not hitscan things normally [aka without VR Goggles/Hacker Vision], 1 = Show Entity names via hitscan [but not stats]
 
-// Push/Pull/Grab/Lift Related Variables [in the future]
-
+// Push/Pull/Grab/Lift Related Variables
 gamevar ACTORWEIGHT 0 2 // All objects/creatures/players/etc need this to determine how heavy or light they are [in lbs]
-gamevar PLAYERLIFTSTRENGTH 0 131073 // Holds the player[aka current character]'s lifting/holding strength [in lbs]
 gamevar CHARACTERLIFTSTRENGTH 0 132098 // Holds an individual character's lifting/holding strength [in lbs]
+gamevar PLAYERLIFTSTRENGTH 0 131073 // Holds the player[aka current character]'s lifting/holding strength [in lbs]
+gamevar PLAYERLIFTSTRENGTHTEMP 0 131073 // For post-calculations for things like Vitamin X, Power Wrist equippable, etc [used as the final value for getting STRENGTHRATIO]
 gamevar STRENGTHRATIO 0 0 // (Player's Strength / Object's weight * 100 = This) [intended as a % value]
-
-// gamevar ACTORLIFTSTRENGTH 0 2 // In the off-chance of a monster/actor/non-player based lifting system being made. >_>
-// gamevar STRENGTHRATIO2 0 0 // (Actor's Strength / Object's weight * 100 = This) [intended as a % value]
-
-gamevar PLAYERLIFTSTRENGTHTEMP 0 131073
-
 gamevar PUSHRATIO 17 0 // STRENGTHRATIO must exceed this to be able to Push the object forwards [intended as a % value]
 gamevar PULLRATIO 37 0 // STRENGTHRATIO must exceed this to be able to Pull the object backwards [intended as a % value]
 gamevar GRABRATIO 79 0 // STRENGTHRATIO must exceed this to be able to Grab and Hold the object in front of you[normal throwing strength/damage] [intended as a % value]
 gamevar LIFTRATIO 167 0 // STRENGTHRATIO must exceed this to be able to Lift the object over your head[+30% - +45% bonus throwing strength/damage] [intended as a % value]
-
 gamevar PLAYERPUSHINGTIMER 0 131073
 gamevar SPRITEID-MOVING -1 131073
 gamevar ACTORPHYSICSFLAGS 0 2 // 1 = Pushable, 2 = Pullable, 4 = Holdable, 8 = Liftable [bitfield]
@@ -389,8 +372,6 @@ gamevar DEATHMISSILEMODE 0 131073 // 0 = Deathgate, 1 = Deathstroke
 
 gamevar CHAINGUNMODE 0 131073 // 0 = Normal Bullets, 1 = RPG Rockets, 2 = Laser Blasts
 
-gamevar backview 0 131073
-
 gamevar SECTORSECRETCHECK 0 131073
 gamevar SECRETCHECKFLAG 0 131073
 
@@ -410,6 +391,7 @@ gamevar knockback 0 131073
 gamevar knockbackang 0 131073
 gamevar knockbackstr 0 131073
 
+gamevar backview 0 131073
 gamevar CAMERASPRITEX 0 0 // Cameras X Position
 gamevar CAMERASPRITEY 0 0 // Cameras Y Position
 gamevar CAMERASPRITEZ 0 0 // Cameras Z Position
@@ -464,10 +446,6 @@ gamevar GREENSLIMEID 0 131073
 gamevar BIOSHIELDABSORBSOLID 0 131073
 gamevar BIOSHIELDABSORBRANDOM 0 131073
 gamevar BIOSHIELDIGNOREDDAMAGE 0 131073
-
-gamevar GOTPORTABLEATM? 0 0
-gamevar GOTMONEYRADAR? 0 0
-gamevar ISRADARON? 1 0
 
 gamevar MONEYID 0 131073
 gamevar MONEYRIGGED 0 131073
@@ -656,8 +634,6 @@ gamevar SHRUNK? 0 2
 gamevar EXPANDING? 0 2
 gamevar FROZEN? 0 2
 gamevar FROZENTIMER 0 2
-gamevar HAVEHACKERVISION? 0 1
-gamevar HAVEMERCURYCOMPUTER? 0 1
 gamevar REFRACTORSTATE 0 0
 gamevar REFRACTORLEVEL 0 0
 gamevar MIRRORSHIELDSTATE 0 0
@@ -804,9 +780,6 @@ gamevar miscdisplaytoggle 1 131073
 gamevar HPPERCENTAGE 0 131073
 gamevar APPERCENTAGE 0 131073
 gamevar AMMOPERCENTAGE 0 131073
-
-gamevar FORTUNECOOKIETIMER 0 0
-gamevar FORTUNECOOKIEQUOTE 0 0
 
 gamevar ARMORPERCENTTEMP 0 0
 
@@ -1248,8 +1221,6 @@ gamevar MAXNUMBEROFSECRETS 0 0
 gamevar GOTALLSECRETSBONUS? 0 0
 gamevar FOUNDASECRET 0 131073
 
-gamevar ATTACKQUADTIME 0 131073 // ?
-
 gamevar DAMAGETEMP 0 0
 
 gamevar DRIVERID -1 2 // Get's a vehicle's player spriteID
@@ -1269,9 +1240,6 @@ gamevar ACTORPAL 0 2
 gamevar RANDOMVARIABLE 0 2
 gamevar SECTORFLOORPICNUM 0 131073
 
-gamevar DISPLAYEPISODE 0 0
-gamevar DISPLAYLEVEL 0 0
-
 gamevar SKILLLEVEL 0 0
 gamevar TARGETTYPE 0 0
 gamevar TARGETHEALTH 0 0
@@ -1287,7 +1255,6 @@ gamevar SHOWTARGETDEFENSE? 0 0
 gamevar MELEEDAMAGE 0 131073
 gamevar MELEEDAMAGEVAR 0 131073
 gamevar MELEEDAMAGETEMP 0 131073
-gamevar MELEEDAMAGEAFTER 0 131073
 
 gamevar TEMP 0 131074
 gamevar TEMP2 0 2
@@ -1391,10 +1358,7 @@ gamevar tsprpicnum 0 2
 gamevar tsprowner 0 2
 
 gamevar FALLCOUNTER 0 131073
-
 gamevar HITACTORTYPE? 0 0 // 0 = Enemy, 1 = Civilian, 2 = Allies
-gamevar SOMEONELEVELS? 0 0
-gamevar PLAYERLEVELSUP? 0 0
 
 gamevar ACTORPICNUM 0 2
 gamevar ACTORFLAGS 0 2
@@ -1707,13 +1671,6 @@ gamevar CHARACTERSELECTED? 1 131072 // Defaults to Duke
 // 14 = "Mystery Lady"
 // 15 = Maken
 
-gamevar CHARACTEROLD 1 131072 // For remembering your 'outgoing' character's stats when a new character is 'incoming'
-gamevar CHARACTERNEW 0 131072 // For trying to switch to a new character when one dies
-gamevar PARTYSIZE 0 131073 // Gets the total size of the group you have
-gamevar PARTYALIVE 0 131073 // Gets the number of your party that are still alive
-gamevar PARTYDEAD 0 131073 // Gets the number of your party that are dead
-gamevar AUTOSWITCHATTEMPTS 0 131072
-
 gamevar CHARACTERCHEAT? 8 131072
 // 1 for a quick addition of all characters. 
 // 2 will remove all but Duke.
@@ -1967,12 +1924,23 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 //*To Be Arrayed >.>*
 //*******************
 
-// To Be Arrayed At a More Conveinent Time >_>
+// To Possibly Be Arrayed... [7]
+gamevar DISPLAYEPISODE 0 0
+gamevar DISPLAYLEVEL 0 0
+
+gamevar CHARACTEROLD 1 131072	// For remembering your 'outgoing' character's stats when a new character is 'incoming'
+gamevar CHARACTERNEW 0 131072	// For trying to switch to a new character when one dies
+gamevar PARTYSIZE 0 131073		// Gets the total size of the group you have
+gamevar PARTYALIVE 0 131073		// Gets the number of your party that are still alive
+gamevar AUTOSWITCHATTEMPTS 0 131072
+
+
+// To Be Arrayed At a More Conveinent Time >_> [3]
 gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 gamevar NETHRAFORM? 1 131072 	// 0 = 'Protector Drone' Form, 1 = 'Human' Form
 gamevar MINAKOFORM? 0 131072	// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 
-// In Queue Next...
+// In Queue Next... [0]
 
 //*******************
 
@@ -2039,6 +2007,45 @@ gamevar MISCARRAYID -1 131072
  // [59] = dialouge-id - Determines the ID of the dialouge set in use.
  // [60] = dialouge-phase - Determines the phase of the current dialouge ID [how many things to print to screen at the current moment, such as if the second character in the conversation has spoke yet or just the first, etc]
  // [61] = dialouge-picnum - Determines stuff like portraits in dialouge boxes
+ // [62] = NUMBER-OF-PARTY-DEAD - Gets the number of your party that are dead
+ // [63] = SOMEONE-LEVELS?
+ // [64] = PLAYER-LEVELSUP?
+ // [65] = CHEAT-PHASE
+ // [66] = MAX-SUPPORT-LEVELS
+ // [67] = GOT-PORTABLE-ATM?
+ // [68] = GOT-MONEY-RADAR?
+ // [69] = IS-MONEYRADAR-ON?
+ // [70] = FORTUNE-COOKIE-TIMER 
+ // [71] = FORTUNE-COOKIE-QUOTE
+ // [72] = FREEZING-MODE?  -  0 = Lava-type floors will permenantly freeze when shot enough times with ice-based attacks [5x HP]. 1 = Floors will thaw out after some time [normal HP]
+ // [73] = SHOW-MULTI-ICONS?  -  1 = Multiplier Icons show above items
+ // [74] = ATTACHED-OBJECTS?  -  0 = Monsters/Players will not have Lifebars, Arrows, Stars or any other icons attached to them. (For lower-end processors to lower spritecount)
+ // [75] = ARMOR-APPEARANCE?  -  0 = Males [Normal], 1 = Females, 2 = ESSence, 3 = Cybanis
+ // [76] = CARD-MEMBERSHIP? -  0 = None, 1 = Bronze, 2 = Silver, 3 = Gold, 4 = Platinum
+ // [77] = HAVE-HACKERVISION?
+ // [78] = HAVE-MERCURY-COMPUTER?
+ // [79] = 
+ // [80] = 
+ // [81] = 
+ // [82] = 
+ // [83] = 
+ // [84] = 
+ // [85] = 
+ // [86] = 
+ // [87] = 
+ // [88] = 
+ // [89] = 
+ // [90] = 
+ // [91] = 
+ // [92] = 
+ // [93] = 
+ // [94] = 
+ // [95] = 
+ // [96] = 
+ // [97] = 
+ // [98] = 
+ // [99] = 
+ // [100] = 
  // [101] = DUKE-FORM?
  // [102] = JACK-FORM?
  // [103] = BUBSY-FORM?			// 0 = Normal Form, 1 = 'Loki Mask' on

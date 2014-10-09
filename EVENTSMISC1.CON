@@ -2031,27 +2031,27 @@ setvarvar CAMERAYTEMP cameray
 
 ifvarg backview 0
 {
-	switch backview
-	
-	case 52 addvar cameraang 128 break
-	case 51 addvar cameraang 256 break
-	case 50 addvar cameraang 384 break
-	case 49 addvar cameraang 512 break
-	case 48 addvar cameraang 640 break
-	case 47 addvar cameraang 768 break
-	case 46 addvar cameraang 896 break
-	
-	case 7 addvar cameraang 896 break
-	case 6 addvar cameraang 768 break
-	case 5 addvar cameraang 640 break
-	case 4 addvar cameraang 512 break
-	case 3 addvar cameraang 384 break
-	case 2 addvar cameraang 256 break
-	case 1 addvar cameraang 128 break
-	
-	default addvar cameraang 1024 break
-	
-	endswitch
+ switch backview
+ 
+ case 52 addvar cameraang 128 break
+ case 51 addvar cameraang 256 break
+ case 50 addvar cameraang 384 break
+ case 49 addvar cameraang 512 break
+ case 48 addvar cameraang 640 break
+ case 47 addvar cameraang 768 break
+ case 46 addvar cameraang 896 break
+
+ case 7 addvar cameraang 896 break
+ case 6 addvar cameraang 768 break
+ case 5 addvar cameraang 640 break
+ case 4 addvar cameraang 512 break
+ case 3 addvar cameraang 384 break
+ case 2 addvar cameraang 256 break
+ case 1 addvar cameraang 128 break
+
+ default addvar cameraang 1024 break
+ 
+ endswitch
 }
 
 ifvare nill 1 state showcam

@@ -1267,7 +1267,8 @@ ifvare mainmenu 1
     {
      ifvare AMI? 1
      {
-      ifvare HAVEMERCURYCOMPUTER? 1
+      setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        redefinequote 332 MERCURY COMPUTER: EXPLOITS ENEMY WEAKNESSES WHEN USED W/ VR GOGGLES.
       }
@@ -1304,7 +1305,8 @@ ifvare mainmenu 1
     {
      ifvare LISA? 1
      {
-      ifvare HAVEHACKERVISION? 1
+      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
       {
        redefinequote 332 HACKER VISION: ALLOWS LISA TO SEE SWITCH POSITIONS, KEYPAD CODES, ETC.
       }
@@ -1346,14 +1348,16 @@ ifvare mainmenu 1
     }
     ifvare mainmenuselection 4 // Portable ATM
     {
-     ifvarn GOTPORTABLEATM? 0
+     setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+     ifvarn MISCARRAYID_AMOUNTTEMP 0
      {
       redefinequote 332 MOBILE ATM: A MOBILE AND PORTABLE VERSION OF THE ATM. [PERMENANT ITEM]
      }
     }
     ifvare mainmenuselection 5 // Money Radar
     {
-     ifvarn GOTMONEYRADAR? 0
+     setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+     ifvarn MISCARRAYID_AMOUNTTEMP 0
      {
       redefinequote 332 MONEY RADAR: LOOKS FOR MONEY AND GEMS NEARBY. [PERMENANT ITEM]
      }
@@ -1529,13 +1533,14 @@ ifvare mainmenu 1
     }
     ifvare mainmenuselection 23
     {
-     ifvarg CARDMEMBERSHIP? 0
+     setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+     ifvarg MISCARRAYID_AMOUNTTEMP 0
      {
-      ifvare CARDMEMBERSHIP? 1 redefinequote 332 BRONZE AKAIKUTSU CARD: -15% BUY PRICE/+7.5% SELL PRICE/ETC
-      ifvare CARDMEMBERSHIP? 2 redefinequote 332 SILVER AKAIKUTSU CARD: -30% BUY PRICE/+15% SELL PRICE/ETC
-      ifvare CARDMEMBERSHIP? 3 redefinequote 332 GOLD AKAIKUTSU CARD: -50% BUY PRICE/+25% SELL PRICE/ETC
-      ifvare CARDMEMBERSHIP? 4 redefinequote 332 PLATINUM AKAIKUTSU CARD: -75% BUY PRICE/+37.5% SELL PRICE/ETC
-      ifvarg CARDMEMBERSHIP? 4 redefinequote 332 DIAMOND AKAIKUTSU CARD: -99% BUY PRICE/+49.5% SELL PRICE/ETC
+      ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 BRONZE AKAIKUTSU CARD: -15% BUY PRICE/+7.5% SELL PRICE/ETC
+      ifvare MISCARRAYID_AMOUNTTEMP 2 redefinequote 332 SILVER AKAIKUTSU CARD: -30% BUY PRICE/+15% SELL PRICE/ETC
+      ifvare MISCARRAYID_AMOUNTTEMP 3 redefinequote 332 GOLD AKAIKUTSU CARD: -50% BUY PRICE/+25% SELL PRICE/ETC
+      ifvare MISCARRAYID_AMOUNTTEMP 4 redefinequote 332 PLATINUM AKAIKUTSU CARD: -75% BUY PRICE/+37.5% SELL PRICE/ETC
+      ifvarg MISCARRAYID_AMOUNTTEMP 4 redefinequote 332 DIAMOND AKAIKUTSU CARD: -99% BUY PRICE/+49.5% SELL PRICE/ETC
      }
     }
    }
@@ -2848,10 +2853,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 78
    setvar digy 115
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5533 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5532 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5530 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5531 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5533 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5532 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5530 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5531 }
    state pal0
    state rs 
 
@@ -2873,10 +2879,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 110
    setvar digy 115
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 40960 setvar tilenum 5533 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 40960 setvar tilenum 5532 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 20480 setvar tilenum 5530 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 20480 setvar tilenum 5531 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 40960 setvar tilenum 5533 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 40960 setvar tilenum 5532 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 20480 setvar tilenum 5530 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 20480 setvar tilenum 5531 }
    state pal24
    state rs 
 
@@ -2899,10 +2906,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 142
    setvar digy 115
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 66 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5383 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5381 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5382 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 66 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5383 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5381 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5382 }
    state pal0
    state rs 
 
@@ -2924,10 +2932,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 174
    setvar digy 115
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 40960 setvar tilenum 66 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 40960 setvar tilenum 5383 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 20480 setvar tilenum 5381 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 20480 setvar tilenum 5382 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 40960 setvar tilenum 66 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 40960 setvar tilenum 5383 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 20480 setvar tilenum 5381 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 20480 setvar tilenum 5382 }
    state pal24
    state rs 
 
@@ -3141,10 +3150,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 78
    setvar digy 51
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal14
    state rs 
 
@@ -3166,10 +3176,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 110
    setvar digy 51 
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal16
    state rs 
 
@@ -3191,10 +3202,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 142
    setvar digy 51 
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal23
    state rs 
 
@@ -3216,10 +3228,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 174
    setvar digy 51
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal10
    state rs 
 
@@ -3241,10 +3254,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 206
    setvar digy 51
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal13
    state rs 
 
@@ -3266,10 +3280,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 238
    setvar digy 51
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal20
    state rs 
 
@@ -3292,10 +3307,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 78
    setvar digy 83
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal14
    state rs 
 
@@ -3317,10 +3333,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 110
    setvar digy 83
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal16
    state rs 
 
@@ -3342,10 +3359,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 142
    setvar digy 83 
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal23
    state rs 
 
@@ -3367,10 +3385,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 174
    setvar digy 83
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal10
    state rs 
 
@@ -3392,10 +3411,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 206
    setvar digy 83
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal13
    state rs 
 
@@ -3417,10 +3437,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 238
    setvar digy 83
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal20
    state rs 
 
@@ -3443,10 +3464,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 78
    setvar digy 115 
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 5529 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5528 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5526 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5527 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 5529 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5528 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5526 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5527 }
    state pal15
    state rs 
 
@@ -3468,10 +3490,11 @@ ifvare mainmenusubmenu 1
 
    setvar digx 110
    setvar digy 115 
-   ifvare ARMORAPPEARANCE? 0 { setvar digz 30720 setvar tilenum 67 }
-   ifvare ARMORAPPEARANCE? 1 { setvar digz 30720 setvar tilenum 5416 }
-   ifvare ARMORAPPEARANCE? 2 { setvar digz 15360 setvar tilenum 5415 }
-   ifvare ARMORAPPEARANCE? 3 { setvar digz 15360 setvar tilenum 5421 }
+   setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar digz 30720 setvar tilenum 67 }
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar digz 30720 setvar tilenum 5416 }
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { setvar digz 15360 setvar tilenum 5415 }
+   ifvare MISCARRAYID_AMOUNTTEMP 3 { setvar digz 15360 setvar tilenum 5421 }
    state pal15
    state rs 
 
@@ -3507,7 +3530,8 @@ ifvare mainmenusubmenu 1
     setvar tilenum 8182
     state rs
    }
-   ifvare HAVEMERCURYCOMPUTER? 1
+   setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+   ifvare MISCARRAYID_AMOUNTTEMP 1
    {
     setvar digx 174
     setvar digy 116 
@@ -3662,7 +3686,8 @@ ifvare mainmenusubmenu 1
   }
   ifvare LISA? 1
   {
-   ifvare HAVEHACKERVISION? 1
+   setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+   ifvare MISCARRAYID_AMOUNTTEMP 1
    {
     setvar digx 174
     setvar digy 148 
@@ -3831,7 +3856,8 @@ ifvare mainmenusubmenu 1
 
 //
 
-  ifvarn GOTPORTABLEATM? 0
+  setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+  ifvarn MISCARRAYID_AMOUNTTEMP 0
   {
    setvar digx 206
    setvar digy 52
@@ -3852,8 +3878,9 @@ ifvare mainmenusubmenu 1
    state mt
 
   }
-//
-  ifvarn GOTMONEYRADAR? 0
+
+  setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+  ifvarn MISCARRAYID_AMOUNTTEMP 0
   {
    setvar digx 238
    setvar digy 52
@@ -3866,7 +3893,8 @@ ifvare mainmenusubmenu 1
    state pal0
    state rs 
 
-   ifvare ISRADARON? 0
+   setvar MISCARRAYID 69 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // IS-MONEYRADAR-ON?
+   ifvare MISCARRAYID_AMOUNTTEMP 0
    {
     setvar digx 233
     setvar digy 62
@@ -4733,7 +4761,8 @@ ifvare mainmenusubmenu 1
    state dn
   }
 
-  ifvarg CARDMEMBERSHIP? 0
+  setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+  ifvarg MISCARRAYID_AMOUNTTEMP 0
   {
    setvar digx 238
    setvar digy 148 
@@ -4742,11 +4771,12 @@ ifvare mainmenusubmenu 1
    setvar digx 238
    setvar digy 148
    setvar digz 10240
-   ifvare CARDMEMBERSHIP? 1 setvar tilenum 5787
-   ifvare CARDMEMBERSHIP? 2 setvar tilenum 5788
-   ifvare CARDMEMBERSHIP? 3 setvar tilenum 5789
-   ifvare CARDMEMBERSHIP? 4 setvar tilenum 5790
-   ifvarg CARDMEMBERSHIP? 4 setvar tilenum 5791
+   setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+   ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 5787
+   ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 5788
+   ifvare MISCARRAYID_AMOUNTTEMP 3 setvar tilenum 5789
+   ifvare MISCARRAYID_AMOUNTTEMP 4 setvar tilenum 5790
+   ifvarg MISCARRAYID_AMOUNTTEMP 4 setvar tilenum 5791
    state pal0
    state rs
 

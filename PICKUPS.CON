@@ -496,7 +496,8 @@ ifvare FLAGSSET? 0
   {
    ifvare AMI? 1
    {
-    ifvare HAVEMERCURYCOMPUTER? 0
+    setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+    ifvare MISCARRAYID_AMOUNTTEMP 0
     {
      ifrnd 16
      { 
@@ -515,7 +516,8 @@ ifvare FLAGSSET? 0
   {
    ifvare LISA? 1
    {
-    ifvare HAVEHACKERVISION? 0
+    setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+    ifvare MISCARRAYID_AMOUNTTEMP 0
     {
      setvar CHARACTERARRAY 8
      getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
@@ -570,7 +572,8 @@ else
       {
        ifvare CHARACTERSELECTED? 8
        {
-        ifvare HAVEHACKERVISION? 0
+        setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+        ifvare MISCARRAYID_AMOUNTTEMP 0
         {
          ifcanseetarget
          {
@@ -1138,18 +1141,20 @@ else
  ifvare ARMORISUSED? 1
  {
   // Change Sprite based on the character in use
-  ifvare ARMORAPPEARANCE? 0 action SHIELD-MALE_USED
-  ifvare ARMORAPPEARANCE? 1 action SHIELD-FEMALE_USED
-  ifvare ARMORAPPEARANCE? 2 action SHIELD-ESSENCE_USED
-  ifvare ARMORAPPEARANCE? 3 action SHIELD-CYBANIS_USED
+  setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 action SHIELD-MALE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 1 action SHIELD-FEMALE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 2 action SHIELD-ESSENCE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 3 action SHIELD-CYBANIS_USED
  }
  else
  {
   // Change Sprite based on the character in use
-  ifvare ARMORAPPEARANCE? 0 action SHIELD-MALE
-  ifvare ARMORAPPEARANCE? 1 action SHIELD-FEMALE
-  ifvare ARMORAPPEARANCE? 2 action SHIELD-ESSENCE
-  ifvare ARMORAPPEARANCE? 3 action SHIELD-CYBANIS
+  setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 action SHIELD-MALE
+  ifvare MISCARRAYID_AMOUNTTEMP 1 action SHIELD-FEMALE
+  ifvare MISCARRAYID_AMOUNTTEMP 2 action SHIELD-ESSENCE
+  ifvare MISCARRAYID_AMOUNTTEMP 3 action SHIELD-CYBANIS
  }
 
 enda
@@ -10537,18 +10542,20 @@ else
  ifvare ARMORISUSED? 1
  {
   // Change Sprite based on the character in use
-  ifvare ARMORAPPEARANCE? 0 action COLORSHIELD-MALE_USED
-  ifvare ARMORAPPEARANCE? 1 action COLORSHIELD-FEMALE_USED
-  ifvare ARMORAPPEARANCE? 2 action COLORSHIELD-ESSENCE_USED
-  ifvare ARMORAPPEARANCE? 3 action COLORSHIELD-CYBANIS_USED
+  setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 action COLORSHIELD-MALE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 1 action COLORSHIELD-FEMALE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 2 action COLORSHIELD-ESSENCE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 3 action COLORSHIELD-CYBANIS_USED
  }
  else
  {
   // Change Sprite based on the character in use
-  ifvare ARMORAPPEARANCE? 0 action COLORSHIELD-MALE
-  ifvare ARMORAPPEARANCE? 1 action COLORSHIELD-FEMALE
-  ifvare ARMORAPPEARANCE? 2 action COLORSHIELD-ESSENCE
-  ifvare ARMORAPPEARANCE? 3 action COLORSHIELD-CYBANIS
+  setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 action COLORSHIELD-MALE
+  ifvare MISCARRAYID_AMOUNTTEMP 1 action COLORSHIELD-FEMALE
+  ifvare MISCARRAYID_AMOUNTTEMP 2 action COLORSHIELD-ESSENCE
+  ifvare MISCARRAYID_AMOUNTTEMP 3 action COLORSHIELD-CYBANIS
  }
 
 enda
@@ -11183,18 +11190,20 @@ else
  ifvare ARMORISUSED? 1
  {
   // Change Sprite based on the character in use
-  ifvare ARMORAPPEARANCE? 0 action SUPERSHIELD-MALE_USED
-  ifvare ARMORAPPEARANCE? 1 action SUPERSHIELD-FEMALE_USED
-  ifvare ARMORAPPEARANCE? 2 action SUPERSHIELD-ESSENCE_USED
-  ifvare ARMORAPPEARANCE? 3 action SUPERSHIELD-CYBANIS_USED
+  setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 action SUPERSHIELD-MALE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 1 action SUPERSHIELD-FEMALE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 2 action SUPERSHIELD-ESSENCE_USED
+  ifvare MISCARRAYID_AMOUNTTEMP 3 action SUPERSHIELD-CYBANIS_USED
  }
  else
  {
   // Change Sprite based on the character in use
-  ifvare ARMORAPPEARANCE? 0 action SUPERSHIELD-MALE
-  ifvare ARMORAPPEARANCE? 1 action SUPERSHIELD-FEMALE
-  ifvare ARMORAPPEARANCE? 2 action SUPERSHIELD-ESSENCE
-  ifvare ARMORAPPEARANCE? 3 action SUPERSHIELD-CYBANIS
+  setvar MISCARRAYID 75 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ARMOR-APPEARANCE?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 action SUPERSHIELD-MALE
+  ifvare MISCARRAYID_AMOUNTTEMP 1 action SUPERSHIELD-FEMALE
+  ifvare MISCARRAYID_AMOUNTTEMP 2 action SUPERSHIELD-ESSENCE
+  ifvare MISCARRAYID_AMOUNTTEMP 3 action SUPERSHIELD-CYBANIS
  }
 
 enda
@@ -12089,32 +12098,34 @@ useractor notenemy COILS 0
 enda
 
 state fortunecookie_fortunedisplays
-            // Defines the various quotes for a fortune cookie
-            setvar FORTUNECOOKIETIMER 78 // displays fortune for 3 seconds
-            randvar FORTUNECOOKIEQUOTE 99 // Determines how many of the fortunes on the list below are used
-            {
-             ifvare FORTUNECOOKIEQUOTE 0 redefinequote 272 FORTUNE SAY:^22 ALL YOUR BASE ARE BELONG TO US!
-             ifvare FORTUNECOOKIEQUOTE 1 redefinequote 272 FORTUNE SAY:^22 IT'S OVER NINE THOUSAAAND!!!
-             ifvare FORTUNECOOKIEQUOTE 2 redefinequote 272 FORTUNE SAY:^22 HIT THE BOSSES' WEAKPOINT FOR MASSIVE DAMAGE!
-             ifvare FORTUNECOOKIEQUOTE 3
+             // Defines the various quotes for a fortune cookie
+             setvar MISCARRAYID 70 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 78  // FORTUNE-COOKIE-TIMER - displays fortune for 3 seconds
+             setvar MISCARRAYID 71 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNT  // FORTUNE-COOKIE-QUOTE
+             randvar MISCARRAYID_AMOUNT 99 // Determines how many of the fortunes on the list below are used
+             setvar MISCARRAYID 71 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNT  // FORTUNE-COOKIE-QUOTE
+
+             ifvare MISCARRAYID_AMOUNT 0 redefinequote 272 FORTUNE SAY:^22 ALL YOUR BASE ARE BELONG TO US!
+             ifvare MISCARRAYID_AMOUNT 1 redefinequote 272 FORTUNE SAY:^22 IT'S OVER NINE THOUSAAAND!!!
+             ifvare MISCARRAYID_AMOUNT 2 redefinequote 272 FORTUNE SAY:^22 HIT THE BOSSES' WEAKPOINT FOR MASSIVE DAMAGE!
+             ifvare MISCARRAYID_AMOUNT 3
              {
                 redefinequote 272 FORTUNE SAY:^22 PROTIP: ICE IS COLD!
                 ifvare CHARACTERSELECTED? 4 redefinequote 272 FORTUNE SAY:^22 PROTIP: AMI TAKES WAY LESS DAMAGE FROM ICE!
                 ifvare CHARACTERSELECTED? 10 redefinequote 272 FORTUNE SAY:^22 PROTIP: NETHRA ABSORBS ICE-DAMAGE IN HER HUMAN FORM!
              }
-             ifvare FORTUNECOOKIEQUOTE 4 
+             ifvare MISCARRAYID_AMOUNT 4 
              {
                 redefinequote 272 FORTUNE SAY:^22 PROTIP: FIRE IS HOT!
                 ifvare CHARACTERSELECTED? 7 redefinequote 272 FORTUNE SAY:^22 PROTIP: TED TAKES LESS DAMAGE FROM EXPLOSIVES!
                 ifvare CHARACTERSELECTED? 13 redefinequote 272 FORTUNE SAY:^22 PROTIP: MAKEN TAKES WAY LESS DAMAGE FROM EXPLOSIVES AND FIRE!
              }
-             ifvare FORTUNECOOKIEQUOTE 5 redefinequote 272 FORTUNE SAY:^22 LOOKIN' AT ME, LOOKIN' AT YOU, LOOKIN' AT ME.
-             ifvare FORTUNECOOKIEQUOTE 6
+             ifvare MISCARRAYID_AMOUNT 5 redefinequote 272 FORTUNE SAY:^22 LOOKIN' AT ME, LOOKIN' AT YOU, LOOKIN' AT ME.
+             ifvare MISCARRAYID_AMOUNT 6
              {
               ifvare GENDER? 0 redefinequote 272 FORTUNE SAY:^22 YOU NEVER GOING TO SCORE.
               ifvare GENDER? 1 redefinequote 272 FORTUNE SAY:^22 LOVE WILL COME TO YOU EASY.
              }
-             ifvare FORTUNECOOKIEQUOTE 7
+             ifvare MISCARRAYID_AMOUNT 7
              {
                 ifvare CHARACTERSELECTED? 1 redefinequote 272 FORTUNE SAY:^22 TRY TO GET ALONG BETTER. BE A NICE MAN.
                 ifvare CHARACTERSELECTED? 2 redefinequote 272 FORTUNE SAY:^22 TRY TO GET ALONG BETTER. BE A NICE BOY.
@@ -12134,17 +12145,17 @@ state fortunecookie_fortunedisplays
                 ifvare CHARACTERSELECTED? 14 redefinequote 272 FORTUNE SAY:^22 TRY TO GET ALONG BETTER. BE A NICE QUEEN.
                 ifvare CHARACTERSELECTED? 15 redefinequote 272 FORTUNE SAY:^22 TRY TO GET ALONG BETTER. BE A NICE GIRL.
              }
-             ifvare FORTUNECOOKIEQUOTE 8
+             ifvare MISCARRAYID_AMOUNT 8
              {
               ifvare GENDER? 0 redefinequote 272 FORTUNE SAY:^22 YOUR CHI ATTRACTS MANY CHICKS.
               ifvare GENDER? 1 redefinequote 272 FORTUNE SAY:^22 YOUR CHI ATTRACTS MANY DUDES.
              }
-             ifvare FORTUNECOOKIEQUOTE 9 redefinequote 272 FORTUNE SAY:^22 MAN WHO STAND ON TOILET, HIGH ON POT.
-             ifvare FORTUNECOOKIEQUOTE 10 redefinequote 272 FORTUNE SAY:^22 BASEBALL WRONG, MAN WITH 4 BALLS CANNOT WALK.
-             ifvare FORTUNECOOKIEQUOTE 11 redefinequote 272 FORTUNE SAY:^22 WE COULD PUT SPACE BEHIND IT!
-             ifvare FORTUNECOOKIEQUOTE 12 redefinequote 272 FORTUNE SAY:^22 SORRY, YOU NO WIN THIS TIME, TRY AGAIN.
-             ifvare FORTUNECOOKIEQUOTE 13 redefinequote 272 FORTUNE SAY:^22 THERE IS MUCH DEATH IN FUTURE.
-             ifvare FORTUNECOOKIEQUOTE 14
+             ifvare MISCARRAYID_AMOUNT 9 redefinequote 272 FORTUNE SAY:^22 MAN WHO STAND ON TOILET, HIGH ON POT.
+             ifvare MISCARRAYID_AMOUNT 10 redefinequote 272 FORTUNE SAY:^22 BASEBALL WRONG, MAN WITH 4 BALLS CANNOT WALK.
+             ifvare MISCARRAYID_AMOUNT 11 redefinequote 272 FORTUNE SAY:^22 WE COULD PUT SPACE BEHIND IT!
+             ifvare MISCARRAYID_AMOUNT 12 redefinequote 272 FORTUNE SAY:^22 SORRY, YOU NO WIN THIS TIME, TRY AGAIN.
+             ifvare MISCARRAYID_AMOUNT 13 redefinequote 272 FORTUNE SAY:^22 THERE IS MUCH DEATH IN FUTURE.
+             ifvare MISCARRAYID_AMOUNT 14
              {
                 ifvare CHARACTERSELECTED? 1 redefinequote 272 FORTUNE SAY:^22 NO MAN IS ISLAND, EXCEPT DUKE NUKEM.
                 ifvare CHARACTERSELECTED? 2 redefinequote 272 FORTUNE SAY:^22 NO MAN IS ISLAND, EXCEPT JACK WALKER.
@@ -12178,9 +12189,9 @@ state fortunecookie_fortunedisplays
                 }
                 ifvare CHARACTERSELECTED? 15 redefinequote 272 FORTUNE SAY:^22 NO WOMAN IS ISLAND, EXCEPT MAKEN SHINKARA.
              }
-             ifvare FORTUNECOOKIEQUOTE 15 redefinequote 272 FORTUNE SAY:^22 MAN TRAPPED IN PANTRY, HAS ASS IN JAM.
-             ifvare FORTUNECOOKIEQUOTE 16 redefinequote 272 FORTUNE SAY:^22 1997 3DREALMS FORTUNE COOKIE COMPANY.
-             ifvare FORTUNECOOKIEQUOTE 17
+             ifvare MISCARRAYID_AMOUNT 15 redefinequote 272 FORTUNE SAY:^22 MAN TRAPPED IN PANTRY, HAS ASS IN JAM.
+             ifvare MISCARRAYID_AMOUNT 16 redefinequote 272 FORTUNE SAY:^22 1997 3DREALMS FORTUNE COOKIE COMPANY.
+             ifvare MISCARRAYID_AMOUNT 17
              {
                 redefinequote 272 FORTUNE SAY:^22 CONSPIRACY RULES YOUR FUTURE.
                 ifvare CHARACTERSELECTED? 1 redefinequote 272 FORTUNE SAY:^22 TAKE PISS, HAVE BAD KARMA.
@@ -12199,52 +12210,52 @@ state fortunecookie_fortunedisplays
                 ifvare CHARACTERSELECTED? 14 redefinequote 272 FORTUNE SAY:^22 THE PAST WILL RETURN WITH VIOLENT SHOVE.
                 ifvare CHARACTERSELECTED? 15 redefinequote 272 FORTUNE SAY:^22 DESTINY ALWAYS RUN COURSE.
              }
-             ifvare FORTUNECOOKIEQUOTE 18 redefinequote 272 FORTUNE SAY:^22 DON'T YOU KNOW YOU THE SCUM OF SOCIETY!?
-             ifvare FORTUNECOOKIEQUOTE 19 redefinequote 272 FORTUNE SAY:^22 YOU SHOULD KILL ALL BUSINESS ASSOCIATES.
-             ifvare FORTUNECOOKIEQUOTE 20 redefinequote 272 FORTUNE SAY:^22 26-31-43-82-16-29
-             ifvare FORTUNECOOKIEQUOTE 21 redefinequote 272 FORTUNE SAY:^22 YOU MUST FIND THE COMPUTER ROOM!
-             ifvare FORTUNECOOKIEQUOTE 22 redefinequote 272 FORTUNE SAY:^22 SPOILER: YOU DIE!
-             ifvare FORTUNECOOKIEQUOTE 23 redefinequote 272 FORTUNE SAY:^22 [ERROR 404: FORTUNE NOT FOUND.]
-             ifvare FORTUNECOOKIEQUOTE 24
+             ifvare MISCARRAYID_AMOUNT 18 redefinequote 272 FORTUNE SAY:^22 DON'T YOU KNOW YOU THE SCUM OF SOCIETY!?
+             ifvare MISCARRAYID_AMOUNT 19 redefinequote 272 FORTUNE SAY:^22 YOU SHOULD KILL ALL BUSINESS ASSOCIATES.
+             ifvare MISCARRAYID_AMOUNT 20 redefinequote 272 FORTUNE SAY:^22 26-31-43-82-16-29
+             ifvare MISCARRAYID_AMOUNT 21 redefinequote 272 FORTUNE SAY:^22 YOU MUST FIND THE COMPUTER ROOM!
+             ifvare MISCARRAYID_AMOUNT 22 redefinequote 272 FORTUNE SAY:^22 SPOILER: YOU DIE!
+             ifvare MISCARRAYID_AMOUNT 23 redefinequote 272 FORTUNE SAY:^22 [ERROR 404: FORTUNE NOT FOUND.]
+             ifvare MISCARRAYID_AMOUNT 24
              {
                 redefinequote 272 FORTUNE SAY:^22 PROTIP: WATER IS WET!
                 ifvare CHARACTERSELECTED? 3 redefinequote 272 FORTUNE SAY:^22 PROTIP: BUBSY'S DURABILITY IS WEAKER WHEN IN OR UNDER THE WATER!
                 ifvare CHARACTERSELECTED? 4 redefinequote 272 FORTUNE SAY:^22 PROTIP: AMI IS MORE POWERFUL WHEN IN OR UNDER THE WATER!
              }
-             ifvare FORTUNECOOKIEQUOTE 25 redefinequote 272 FORTUNE SAY:^22 DO A BARREL ROLL!
-             ifvare FORTUNECOOKIEQUOTE 26 redefinequote 272 FORTUNE SAY:^22 ALL LIFE BEGINS WITH NU, AND ENDS WITH NU.
-             ifvare FORTUNECOOKIEQUOTE 27 redefinequote 272 FORTUNE SAY:^22 WE LOOOOVEE THE MOOOON!!
-             ifvare FORTUNECOOKIEQUOTE 28
+             ifvare MISCARRAYID_AMOUNT 25 redefinequote 272 FORTUNE SAY:^22 DO A BARREL ROLL!
+             ifvare MISCARRAYID_AMOUNT 26 redefinequote 272 FORTUNE SAY:^22 ALL LIFE BEGINS WITH NU, AND ENDS WITH NU.
+             ifvare MISCARRAYID_AMOUNT 27 redefinequote 272 FORTUNE SAY:^22 WE LOOOOVEE THE MOOOON!!
+             ifvare MISCARRAYID_AMOUNT 28
              {
                 ifvare GENDER? 0 redefinequote 272 FORTUNE SAY:^22 CHEER UP EMO DUDE.
                 ifvare GENDER? 1 redefinequote 272 FORTUNE SAY:^22 CHEER UP EMO CHICK.
              }
-             ifvare FORTUNECOOKIEQUOTE 29 redefinequote 272 FORTUNE SAY:^22 REVENGE ALWAYS COMES FULL CIRCLE.
-             ifvare FORTUNECOOKIEQUOTE 30 redefinequote 272 FORTUNE SAY:^22 THERE IS MORE TO YOUR DESTINY THAN YOU THINK...
-             ifvare FORTUNECOOKIEQUOTE 31 redefinequote 272 FORTUNE SAY:^22 LET'S GET DANGEROUS!
-             ifvare FORTUNECOOKIEQUOTE 32 redefinequote 272 FORTUNE SAY:^22 TODAY IS A VERY DANGEROUS DAY.
-             ifvare FORTUNECOOKIEQUOTE 33 redefinequote 272 FORTUNE SAY:^22 THERE'S A BOMB IN THE LASAGNA!
-             ifvare FORTUNECOOKIEQUOTE 34 redefinequote 272 FORTUNE SAY:^22 YOU PLAY WITH FIRE, YOU GET BURNED!
-             ifvare FORTUNECOOKIEQUOTE 35 redefinequote 272 FORTUNE SAY:^22 THE WIND OF DEATH BEINGS TO HOWL INTENSELY...
-             ifvare FORTUNECOOKIEQUOTE 36 redefinequote 272 FORTUNE SAY:^22 8-16-23-42-4-15
-             ifvare FORTUNECOOKIEQUOTE 37 redefinequote 272 FORTUNE SAY:^22 THIS GAME STINKS!
-             ifvare FORTUNECOOKIEQUOTE 38 redefinequote 272 FORTUNE SAY:^22 A CHEESE PIZZA AND A LARGE DRINK IS $10.77
-             ifvare FORTUNECOOKIEQUOTE 39
+             ifvare MISCARRAYID_AMOUNT 29 redefinequote 272 FORTUNE SAY:^22 REVENGE ALWAYS COMES FULL CIRCLE.
+             ifvare MISCARRAYID_AMOUNT 30 redefinequote 272 FORTUNE SAY:^22 THERE IS MORE TO YOUR DESTINY THAN YOU THINK...
+             ifvare MISCARRAYID_AMOUNT 31 redefinequote 272 FORTUNE SAY:^22 LET'S GET DANGEROUS!
+             ifvare MISCARRAYID_AMOUNT 32 redefinequote 272 FORTUNE SAY:^22 TODAY IS A VERY DANGEROUS DAY.
+             ifvare MISCARRAYID_AMOUNT 33 redefinequote 272 FORTUNE SAY:^22 THERE'S A BOMB IN THE LASAGNA!
+             ifvare MISCARRAYID_AMOUNT 34 redefinequote 272 FORTUNE SAY:^22 YOU PLAY WITH FIRE, YOU GET BURNED!
+             ifvare MISCARRAYID_AMOUNT 35 redefinequote 272 FORTUNE SAY:^22 THE WIND OF DEATH BEINGS TO HOWL INTENSELY...
+             ifvare MISCARRAYID_AMOUNT 36 redefinequote 272 FORTUNE SAY:^22 8-16-23-42-4-15
+             ifvare MISCARRAYID_AMOUNT 37 redefinequote 272 FORTUNE SAY:^22 THIS GAME STINKS!
+             ifvare MISCARRAYID_AMOUNT 38 redefinequote 272 FORTUNE SAY:^22 A CHEESE PIZZA AND A LARGE DRINK IS $10.77
+             ifvare MISCARRAYID_AMOUNT 39
              {
                 redefinequote 272 FORTUNE SAY:^22 PROTIP: ELECTRIC IS SHOCKING!
                 ifvare CHARACTERSELECTED? 10 redefinequote 272 FORTUNE SAY:^22 PROTIP: NETHRA ABSORBS ELECTRIC-DAMAGE IN HER ALIEN FORM!
              }
-             ifvare FORTUNECOOKIEQUOTE 40 redefinequote 272 FORTUNE SAY:^22 MAN WHO FART IN CHURCH SIT IN OWN PEW.
-             ifvare FORTUNECOOKIEQUOTE 41 redefinequote 272 FORTUNE SAY:^22 MAN WHO BUY DROWNED CAT PAY FOR WET PUSSY.
-             ifvare FORTUNECOOKIEQUOTE 42
+             ifvare MISCARRAYID_AMOUNT 40 redefinequote 272 FORTUNE SAY:^22 MAN WHO FART IN CHURCH SIT IN OWN PEW.
+             ifvare MISCARRAYID_AMOUNT 41 redefinequote 272 FORTUNE SAY:^22 MAN WHO BUY DROWNED CAT PAY FOR WET PUSSY.
+             ifvare MISCARRAYID_AMOUNT 42
              {
                 ifvare GENDER? 0 redefinequote 272 FORTUNE SAY:^22 DON'T YOU WANNA BE "THE GUY"?!
                 ifvare GENDER? 1 redefinequote 272 FORTUNE SAY:^22 DON'T YOU WANNA BE "THE BABE"?!
              }
-             ifvare FORTUNECOOKIEQUOTE 43 redefinequote 272 FORTUNE SAY:^22 GIANT CHERRIES BAD FOR YOU.
-             ifvare FORTUNECOOKIEQUOTE 44 redefinequote 272 FORTUNE SAY:^22 IF YOU CAN'T SLAM WITH BEST, THEN JAM WITH REST!
-             ifvare FORTUNECOOKIEQUOTE 45 redefinequote 272 FORTUNE SAY:^22 A MOOSE ONCE BIT SISTER.
-             ifvare FORTUNECOOKIEQUOTE 46
+             ifvare MISCARRAYID_AMOUNT 43 redefinequote 272 FORTUNE SAY:^22 GIANT CHERRIES BAD FOR YOU.
+             ifvare MISCARRAYID_AMOUNT 44 redefinequote 272 FORTUNE SAY:^22 IF YOU CAN'T SLAM WITH BEST, THEN JAM WITH REST!
+             ifvare MISCARRAYID_AMOUNT 45 redefinequote 272 FORTUNE SAY:^22 A MOOSE ONCE BIT SISTER.
+             ifvare MISCARRAYID_AMOUNT 46
              {
                 ifvare CHARACTERSELECTED? 1 redefinequote 272 FORTUNE SAY:^22 FIGHT, DUKE NUKEM, FOR EVERLASTING PEACE!
                 ifvare CHARACTERSELECTED? 2 redefinequote 272 FORTUNE SAY:^22 FIGHT, JACK WALKER, FOR EVERLASTING PEACE!
@@ -12278,23 +12289,23 @@ state fortunecookie_fortunedisplays
                 }
                 ifvare CHARACTERSELECTED? 15 redefinequote 272 FORTUNE SAY:^22 FIGHT, MAKEN SHINKARA, FOR EVERLASTING PEACE!
              }
-             ifvare FORTUNECOOKIEQUOTE 47 redefinequote 272 FORTUNE SAY:^22 IT'S A TRAP!!
-             ifvare FORTUNECOOKIEQUOTE 48 redefinequote 272 FORTUNE SAY:^22 IT'S TIME TO K-K-KILL!!!
-             ifvare FORTUNECOOKIEQUOTE 49 redefinequote 272 FORTUNE SAY:^22 WANNA GO DO SOMETHING STUPID?
-             ifvare FORTUNECOOKIEQUOTE 50 redefinequote 272 FORTUNE SAY:^22 I CAN HAS CHEEZBURGER?!
-             ifvare FORTUNECOOKIEQUOTE 51 redefinequote 272 FORTUNE SAY:^22 LVL 30 WIZRDCAT CASTS SUM SPELLZ!!
-             ifvare FORTUNECOOKIEQUOTE 52 redefinequote 272 FORTUNE SAY:^22 IM N UR COOKI, TELLIN U UR FUTURE!
-             ifvare FORTUNECOOKIEQUOTE 53 redefinequote 272 FORTUNE SAY:^22 DO NOT PUT TOO MUCH FAITH IN YOUR 'SUPERIORS'...
-             ifvare FORTUNECOOKIEQUOTE 54 redefinequote 272 FORTUNE SAY:^22 DAMN YOU DOG!!! YOU RUINED MY ANGLE!!!
-             ifvare FORTUNECOOKIEQUOTE 55 redefinequote 272 FORTUNE SAY:^22 I HAS A HOTDOG?
-             ifvare FORTUNECOOKIEQUOTE 56 redefinequote 272 FORTUNE SAY:^22 BEWARE THE BAD WOLF...
-             ifvare FORTUNECOOKIEQUOTE 57 redefinequote 272 FORTUNE SAY:^22 WHAT IS A MAN?! A MISERABLE PILE OF SECRETS?!
-             ifvare FORTUNECOOKIEQUOTE 58 redefinequote 272 FORTUNE SAY:^22 TURN LEFT!
-             ifvare FORTUNECOOKIEQUOTE 59 redefinequote 272 FORTUNE SAY:^22 YOU ARE NOT ALONE...
-             ifvare FORTUNECOOKIEQUOTE 60 redefinequote 272 FORTUNE SAY:^22 THE CAKE IS NOT A LIE...
-             ifvare FORTUNECOOKIEQUOTE 61 redefinequote 272 FORTUNE SAY:^22 FAIL AT LIFE YOU WILL, NYA!
-             ifvare FORTUNECOOKIEQUOTE 62 redefinequote 272 FORTUNE SAY:^22 SMOOOOOOOOOORG!!!!
-             ifvare FORTUNECOOKIEQUOTE 63
+             ifvare MISCARRAYID_AMOUNT 47 redefinequote 272 FORTUNE SAY:^22 IT'S A TRAP!!
+             ifvare MISCARRAYID_AMOUNT 48 redefinequote 272 FORTUNE SAY:^22 IT'S TIME TO K-K-KILL!!!
+             ifvare MISCARRAYID_AMOUNT 49 redefinequote 272 FORTUNE SAY:^22 WANNA GO DO SOMETHING STUPID?
+             ifvare MISCARRAYID_AMOUNT 50 redefinequote 272 FORTUNE SAY:^22 I CAN HAS CHEEZBURGER?!
+             ifvare MISCARRAYID_AMOUNT 51 redefinequote 272 FORTUNE SAY:^22 LVL 30 WIZRDCAT CASTS SUM SPELLZ!!
+             ifvare MISCARRAYID_AMOUNT 52 redefinequote 272 FORTUNE SAY:^22 IM N UR COOKI, TELLIN U UR FUTURE!
+             ifvare MISCARRAYID_AMOUNT 53 redefinequote 272 FORTUNE SAY:^22 DO NOT PUT TOO MUCH FAITH IN YOUR 'SUPERIORS'...
+             ifvare MISCARRAYID_AMOUNT 54 redefinequote 272 FORTUNE SAY:^22 DAMN YOU DOG!!! YOU RUINED MY ANGLE!!!
+             ifvare MISCARRAYID_AMOUNT 55 redefinequote 272 FORTUNE SAY:^22 I HAS A HOTDOG?
+             ifvare MISCARRAYID_AMOUNT 56 redefinequote 272 FORTUNE SAY:^22 BEWARE THE BAD WOLF...
+             ifvare MISCARRAYID_AMOUNT 57 redefinequote 272 FORTUNE SAY:^22 WHAT IS A MAN?! A MISERABLE PILE OF SECRETS?!
+             ifvare MISCARRAYID_AMOUNT 58 redefinequote 272 FORTUNE SAY:^22 TURN LEFT!
+             ifvare MISCARRAYID_AMOUNT 59 redefinequote 272 FORTUNE SAY:^22 YOU ARE NOT ALONE...
+             ifvare MISCARRAYID_AMOUNT 60 redefinequote 272 FORTUNE SAY:^22 THE CAKE IS NOT A LIE...
+             ifvare MISCARRAYID_AMOUNT 61 redefinequote 272 FORTUNE SAY:^22 FAIL AT LIFE YOU WILL, NYA!
+             ifvare MISCARRAYID_AMOUNT 62 redefinequote 272 FORTUNE SAY:^22 SMOOOOOOOOOORG!!!!
+             ifvare MISCARRAYID_AMOUNT 63
              {
                 ifvare CHARACTERSELECTED? 1 redefinequote 272 FORTUNE SAY:^22 YEAH, YOU'RE DUKE, RIGHT? WHAT A GREAT NAME!
                 ifvare CHARACTERSELECTED? 2 redefinequote 272 FORTUNE SAY:^22 YEAH, YOU'RE JACK, RIGHT? WHAT A GREAT NAME!
@@ -12328,45 +12339,45 @@ state fortunecookie_fortunedisplays
                 }
                 ifvare CHARACTERSELECTED? 15 redefinequote 272 FORTUNE SAY:^22 YEAH, YOU'RE MAKEN, RIGHT? WHAT A GREAT NAME!
              }
-             ifvare FORTUNECOOKIEQUOTE 64 redefinequote 272 FORTUNE SAY:^22 GUESS WHO IT IS?! GHOST NAPPA!!!
-             ifvare FORTUNECOOKIEQUOTE 65 redefinequote 272 FORTUNE SAY:^22 WHO YOU GONNA CALL?! GHOST BUSTERS!!!
-             ifvare FORTUNECOOKIEQUOTE 66 redefinequote 272 FORTUNE SAY:^22 DID I JUST GET SHOT?!
-             ifvare FORTUNECOOKIEQUOTE 67 redefinequote 272 FORTUNE SAY:^22 DEATH WILL NOT BE YOUR END!
-             ifvare FORTUNECOOKIEQUOTE 68
+             ifvare MISCARRAYID_AMOUNT 64 redefinequote 272 FORTUNE SAY:^22 GUESS WHO IT IS?! GHOST NAPPA!!!
+             ifvare MISCARRAYID_AMOUNT 65 redefinequote 272 FORTUNE SAY:^22 WHO YOU GONNA CALL?! GHOST BUSTERS!!!
+             ifvare MISCARRAYID_AMOUNT 66 redefinequote 272 FORTUNE SAY:^22 DID I JUST GET SHOT?!
+             ifvare MISCARRAYID_AMOUNT 67 redefinequote 272 FORTUNE SAY:^22 DEATH WILL NOT BE YOUR END!
+             ifvare MISCARRAYID_AMOUNT 68
              { 
                 ifrnd 128 redefinequote 272 FORTUNE SAY:^22 YOUR SOUL WILL SHINE IN HEAVEN FOREVER!
                 else redefinequote 272 FORTUNE SAY:^22 YOUR SOUL WILL BURN IN HELL FOREVER!
              }
-             ifvare FORTUNECOOKIEQUOTE 69 redefinequote 272 FORTUNE SAY:^22 IN THE DARKNESS, LIES THE TRUTH!!
-             ifvare FORTUNECOOKIEQUOTE 70 redefinequote 272 FORTUNE SAY:^22 TIME?
-             ifvare FORTUNECOOKIEQUOTE 71 redefinequote 272 FORTUNE SAY:^22 YOU LIE!!
-             ifvare FORTUNECOOKIEQUOTE 72 redefinequote 272 FORTUNE SAY:^22 YO QUIERO TACO BELL!!
-             ifvare FORTUNECOOKIEQUOTE 73 redefinequote 272 FORTUNE SAY:^22 TAKE IT EASY!!
-             ifvare FORTUNECOOKIEQUOTE 74 redefinequote 272 FORTUNE SAY:^22 DID I DO THAT?
-             ifvare FORTUNECOOKIEQUOTE 75 redefinequote 272 FORTUNE SAY:^22 LOOK WHAT YOU DID!
-             ifvare FORTUNECOOKIEQUOTE 76 redefinequote 272 FORTUNE SAY:^22 DUKEWORLD: BACK FROM THE PAST TO KICK YOUR ASS!
-             ifvare FORTUNECOOKIEQUOTE 77 redefinequote 272 FORTUNE SAY:^22 CONGRATULATIONS! YOUR FOUND THE SECRET MESSAGE!
-             ifvare FORTUNECOOKIEQUOTE 78 redefinequote 272 FORTUNE SAY:^22 YOU MUST CONSTRUCT ADDITIONAL PYLONS!
-             ifvare FORTUNECOOKIEQUOTE 79 redefinequote 272 FORTUNE SAY:^22 I WAS FROZEN TODAY!
-             ifvare FORTUNECOOKIEQUOTE 80 redefinequote 272 FORTUNE SAY:^22 THIS IS MADNESS!!
-             ifvare FORTUNECOOKIEQUOTE 81 redefinequote 272 FORTUNE SAY:^22 THIS IS SPARTA!!
-             ifvare FORTUNECOOKIEQUOTE 82 redefinequote 272 FORTUNE SAY:^22 YOU HAVE SELECTED MICROSOFT SAM AS THE COMPUTER'S DEFAULT VOICE!
-             ifvare FORTUNECOOKIEQUOTE 83 redefinequote 272 FORTUNE SAY:^22 OF COURSE!!
-             ifvare FORTUNECOOKIEQUOTE 84 redefinequote 272 FORTUNE SAY:^22 FOR I BEHELD SATAN, AS HE FELL FROM HEAVEN, LIKE LIGHTNING!!
-             ifvare FORTUNECOOKIEQUOTE 85 redefinequote 272 FORTUNE SAY:^22 I DROPPED THE SCREW IN THE TUNA!
-             ifvare FORTUNECOOKIEQUOTE 86 redefinequote 272 FORTUNE SAY:^22 I MADE SOMETHING WRONG.
-             ifvare FORTUNECOOKIEQUOTE 87 redefinequote 272 FORTUNE SAY:^22 PROTIP: WHEN BEING SHOT AT, TRY TO AVOID BULLETS.
-             ifvare FORTUNECOOKIEQUOTE 88 redefinequote 272 FORTUNE SAY:^22 PROTIP: TAKE LESS DAMAGE TO AVOID BEING KILLED.
-             ifvare FORTUNECOOKIEQUOTE 89 redefinequote 272 FORTUNE SAY:^22 THIS CANNOT BE... NO, NO... NOOOOOOOOOO...[CUTOFF]
-             ifvare FORTUNECOOKIEQUOTE 90 redefinequote 272 FORTUNE SAY:^22 THE BLOOD MOON IS RISING...
-             ifvare FORTUNECOOKIEQUOTE 91 redefinequote 272 FORTUNE SAY:^22 SUCH A PITY...
-             ifvare FORTUNECOOKIEQUOTE 92 redefinequote 272 FORTUNE SAY:^22 TITTIES, GUNS AND ALIENS!!!
-             ifvare FORTUNECOOKIEQUOTE 93 redefinequote 272 FORTUNE SAY:^22 STOP FREAKIN' BETRAYING ME!!!!
-             ifvare FORTUNECOOKIEQUOTE 94 redefinequote 272 FORTUNE SAY:^22 I WILL KILL YOU AND I WILL EAT YOUR FIRST BORN CHILD!!!!
-             ifvare FORTUNECOOKIEQUOTE 95 redefinequote 272 FORTUNE SAY:^22 TAKE YOUR GAY LEOTARD AND DIE!!!!
-             ifvare FORTUNECOOKIEQUOTE 96 redefinequote 272 FORTUNE SAY:^22 WATER DROPLETS AND A RAZOR IS ALL YOU NEED...
-             ifvare FORTUNECOOKIEQUOTE 97 redefinequote 272 FORTUNE SAY:^22 PROTIP: PEOPLE DIE WHEN YOU KILL THEM!
-             ifvare FORTUNECOOKIEQUOTE 98
+             ifvare MISCARRAYID_AMOUNT 69 redefinequote 272 FORTUNE SAY:^22 IN THE DARKNESS, LIES THE TRUTH!!
+             ifvare MISCARRAYID_AMOUNT 70 redefinequote 272 FORTUNE SAY:^22 TIME?
+             ifvare MISCARRAYID_AMOUNT 71 redefinequote 272 FORTUNE SAY:^22 YOU LIE!!
+             ifvare MISCARRAYID_AMOUNT 72 redefinequote 272 FORTUNE SAY:^22 YO QUIERO TACO BELL!!
+             ifvare MISCARRAYID_AMOUNT 73 redefinequote 272 FORTUNE SAY:^22 TAKE IT EASY!!
+             ifvare MISCARRAYID_AMOUNT 74 redefinequote 272 FORTUNE SAY:^22 DID I DO THAT?
+             ifvare MISCARRAYID_AMOUNT 75 redefinequote 272 FORTUNE SAY:^22 LOOK WHAT YOU DID!
+             ifvare MISCARRAYID_AMOUNT 76 redefinequote 272 FORTUNE SAY:^22 DUKEWORLD: BACK FROM THE PAST TO KICK YOUR ASS!
+             ifvare MISCARRAYID_AMOUNT 77 redefinequote 272 FORTUNE SAY:^22 CONGRATULATIONS! YOUR FOUND THE SECRET MESSAGE!
+             ifvare MISCARRAYID_AMOUNT 78 redefinequote 272 FORTUNE SAY:^22 YOU MUST CONSTRUCT ADDITIONAL PYLONS!
+             ifvare MISCARRAYID_AMOUNT 79 redefinequote 272 FORTUNE SAY:^22 I WAS FROZEN TODAY!
+             ifvare MISCARRAYID_AMOUNT 80 redefinequote 272 FORTUNE SAY:^22 THIS IS MADNESS!!
+             ifvare MISCARRAYID_AMOUNT 81 redefinequote 272 FORTUNE SAY:^22 THIS IS SPARTA!!
+             ifvare MISCARRAYID_AMOUNT 82 redefinequote 272 FORTUNE SAY:^22 YOU HAVE SELECTED MICROSOFT SAM AS THE COMPUTER'S DEFAULT VOICE!
+             ifvare MISCARRAYID_AMOUNT 83 redefinequote 272 FORTUNE SAY:^22 OF COURSE!!
+             ifvare MISCARRAYID_AMOUNT 84 redefinequote 272 FORTUNE SAY:^22 FOR I BEHELD SATAN, AS HE FELL FROM HEAVEN, LIKE LIGHTNING!!
+             ifvare MISCARRAYID_AMOUNT 85 redefinequote 272 FORTUNE SAY:^22 I DROPPED THE SCREW IN THE TUNA!
+             ifvare MISCARRAYID_AMOUNT 86 redefinequote 272 FORTUNE SAY:^22 I MADE SOMETHING WRONG.
+             ifvare MISCARRAYID_AMOUNT 87 redefinequote 272 FORTUNE SAY:^22 PROTIP: WHEN BEING SHOT AT, TRY TO AVOID BULLETS.
+             ifvare MISCARRAYID_AMOUNT 88 redefinequote 272 FORTUNE SAY:^22 PROTIP: TAKE LESS DAMAGE TO AVOID BEING KILLED.
+             ifvare MISCARRAYID_AMOUNT 89 redefinequote 272 FORTUNE SAY:^22 THIS CANNOT BE... NO, NO... NOOOOOOOOOO...[CUTOFF]
+             ifvare MISCARRAYID_AMOUNT 90 redefinequote 272 FORTUNE SAY:^22 THE BLOOD MOON IS RISING...
+             ifvare MISCARRAYID_AMOUNT 91 redefinequote 272 FORTUNE SAY:^22 SUCH A PITY...
+             ifvare MISCARRAYID_AMOUNT 92 redefinequote 272 FORTUNE SAY:^22 TITTIES, GUNS AND ALIENS!!!
+             ifvare MISCARRAYID_AMOUNT 93 redefinequote 272 FORTUNE SAY:^22 STOP FREAKIN' BETRAYING ME!!!!
+             ifvare MISCARRAYID_AMOUNT 94 redefinequote 272 FORTUNE SAY:^22 I WILL KILL YOU AND I WILL EAT YOUR FIRST BORN CHILD!!!!
+             ifvare MISCARRAYID_AMOUNT 95 redefinequote 272 FORTUNE SAY:^22 TAKE YOUR GAY LEOTARD AND DIE!!!!
+             ifvare MISCARRAYID_AMOUNT 96 redefinequote 272 FORTUNE SAY:^22 WATER DROPLETS AND A RAZOR IS ALL YOU NEED...
+             ifvare MISCARRAYID_AMOUNT 97 redefinequote 272 FORTUNE SAY:^22 PROTIP: PEOPLE DIE WHEN YOU KILL THEM!
+             ifvare MISCARRAYID_AMOUNT 98
              {
               redefinequote 272 FORTUNE SAY:^22 ......SESAME UNDER WATCH - CAUSE OF DEATH: 
               randvar tempb 16
@@ -12389,8 +12400,7 @@ state fortunecookie_fortunedisplays
               ifvare tempb 16 redefinequote 501 ^22LASER IMPACT
               qstrcat 272 501
              }
-             ifvare FORTUNECOOKIEQUOTE 99 redefinequote 272 FORTUNE SAY:^22 GOBLINS ARE INVADING FROM THE WEST!
-            }
+             ifvare MISCARRAYID_AMOUNT 99 redefinequote 272 FORTUNE SAY:^22 GOBLINS ARE INVADING FROM THE WEST!
 ends
 
 state pickupcharacter_fortune
@@ -13869,7 +13879,8 @@ useractor notenemy MONEYRADAR 0
  state checkitemflags
  state checkitemflags2 // Checks Item Multiplications for Display Icon
 
- ifvare GOTMONEYRADAR? 1 killit
+ setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+ ifvare MISCARRAYID_AMOUNTTEMP 1 killit
  sizeat 5 5
  state itemfullbright
  ifvare mainmenu 0 state fallflags
@@ -13888,10 +13899,13 @@ useractor notenemy MONEYRADAR 0
        {
         ifpdistl RETRIEVEDISTANCE
           ifcount 6
-            ifvarn GOTMONEYRADAR? 1
+          {
+            setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+            ifvarn MISCARRAYID_AMOUNTTEMP 1
             {
              state checkexplodeflag
-             setvar GOTMONEYRADAR? 1
+             setvar MISCARRAYID 68 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // GOT-MONEY-RADAR?
+             setvar MISCARRAYID 69 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // IS-MONEYRADAR-ON?
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -13906,6 +13920,7 @@ useractor notenemy MONEYRADAR 0
              state getworldtile
              state activationflag killit
             }
+          }
        }
    }
  }
@@ -13926,12 +13941,13 @@ useractor notenemy MEMBERSHIPCARD 0
  state checkitemflags
  state checkitemflags2 // Checks Item Multiplications for Display Icon
 
- ifvare CARDMEMBERSHIP? 0 action MEMBERSHIPCARD1
- else ifvare CARDMEMBERSHIP? 1 action MEMBERSHIPCARD2
- else ifvare CARDMEMBERSHIP? 2 action MEMBERSHIPCARD3
- else ifvare CARDMEMBERSHIP? 3 action MEMBERSHIPCARD4
- else ifvare CARDMEMBERSHIP? 4 action MEMBERSHIPCARD5
- else ifvarg CARDMEMBERSHIP? 4 killit
+ setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+ ifvare MISCARRAYID_AMOUNTTEMP 0 action MEMBERSHIPCARD1
+ else ifvare MISCARRAYID_AMOUNTTEMP 1 action MEMBERSHIPCARD2
+ else ifvare MISCARRAYID_AMOUNTTEMP 2 action MEMBERSHIPCARD3
+ else ifvare MISCARRAYID_AMOUNTTEMP 3 action MEMBERSHIPCARD4
+ else ifvare MISCARRAYID_AMOUNTTEMP 4 action MEMBERSHIPCARD5
+ else ifvarg MISCARRAYID_AMOUNTTEMP 4 killit
 
  sizeat 8 8
  state itemfullbright
@@ -13951,7 +13967,9 @@ useractor notenemy MEMBERSHIPCARD 0
        {
         ifpdistl RETRIEVEDISTANCE
           ifcount 6
-            ifvarl CARDMEMBERSHIP? 5
+          {
+            setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+            ifvarl MISCARRAYID_AMOUNTTEMP 5
             {
              state checkexplodeflag
 
@@ -13961,26 +13979,26 @@ useractor notenemy MEMBERSHIPCARD 0
               globalsound YEAH
               globalsound YEAH
               globalsound YEAH
-              ifvare CARDMEMBERSHIP? 4 redefinequote 334 ^23YOU FOUND THE DIAMOND AKAIKUTSU CARD!!
-              ifvare CARDMEMBERSHIP? 3 redefinequote 334 ^23YOU FOUND THE PLATINUM AKAIKUTSU CARD!!
-              ifvare CARDMEMBERSHIP? 2 redefinequote 334 ^23YOU FOUND THE GOLD AKAIKUTSU CARD!!
-              ifvare CARDMEMBERSHIP? 1 redefinequote 334 ^23YOU FOUND THE SILVER AKAIKUTSU CARD!!
-              ifvare CARDMEMBERSHIP? 0 redefinequote 334 ^23YOU FOUND THE BRONZE AKAIKUTSU CARD!!
+              setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+              ifvare MISCARRAYID_AMOUNTTEMP 4 redefinequote 334 ^23YOU FOUND THE DIAMOND AKAIKUTSU CARD!!
+              ifvare MISCARRAYID_AMOUNTTEMP 3 redefinequote 334 ^23YOU FOUND THE PLATINUM AKAIKUTSU CARD!!
+              ifvare MISCARRAYID_AMOUNTTEMP 2 redefinequote 334 ^23YOU FOUND THE GOLD AKAIKUTSU CARD!!
+              ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 334 ^23YOU FOUND THE SILVER AKAIKUTSU CARD!!
+              ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 334 ^23YOU FOUND THE BRONZE AKAIKUTSU CARD!!
               setvarvar fta fta_normal setvar ftq 334
               palfrom 32 0 32
              }
 
-             ifvare CARDMEMBERSHIP? 4 setvar CARDMEMBERSHIP? 5
-             ifvare CARDMEMBERSHIP? 3 setvar CARDMEMBERSHIP? 4
-             ifvare CARDMEMBERSHIP? 2 setvar CARDMEMBERSHIP? 3
-             ifvare CARDMEMBERSHIP? 1 setvar CARDMEMBERSHIP? 2
-             ifvare CARDMEMBERSHIP? 0 setvar CARDMEMBERSHIP? 1
+             setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+             addvar MISCARRAYID_AMOUNTTEMP 1
+             ifvarg MISCARRAYID_AMOUNTTEMP 5 setvar MISCARRAYID_AMOUNTTEMP 5
+             setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
 
-             // savegamevar CARDMEMBERSHIP?
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
             }
+          }
        }
    }
  }
@@ -13995,7 +14013,8 @@ useractor notenemy PORTABLEATM 0
  state checkitemflags
  state checkitemflags2 // Checks Item Multiplications for Display Icon
 
- ifvare GOTPORTABLEATM? 1 killit
+ setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+ ifvare MISCARRAYID_AMOUNTTEMP 1 killit
  sizeat 3 3
  state itemfullbright
  ifvare mainmenu 0 state fallflags
@@ -14014,10 +14033,12 @@ useractor notenemy PORTABLEATM 0
        {
         ifpdistl RETRIEVEDISTANCE
           ifcount 6
-            ifvarn GOTPORTABLEATM? 1
+          {
+            setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+            ifvarn MISCARRAYID_AMOUNTTEMP 1
             {
              state checkexplodeflag
-             setvar GOTPORTABLEATM? 1
+             setvar MISCARRAYID 67 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -14032,6 +14053,7 @@ useractor notenemy PORTABLEATM 0
              state getworldtile
              state activationflag killit
             }
+          }
        }
    }
  }
@@ -14050,7 +14072,8 @@ useractor notenemy MERCURYCOMPUTER 0
  }
  else cstat 32768
 
- ifvare HAVEMERCURYCOMPUTER? 1 killit
+ setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+ ifvare MISCARRAYID_AMOUNTTEMP 1 killit
  sizeat 44 44 // sizeat 64 64
  state itemfullbright
  ifvare mainmenu 0 state fallflags
@@ -14070,10 +14093,12 @@ useractor notenemy MERCURYCOMPUTER 0
         ifpdistl RETRIEVEDISTANCE
           ifcount 6
            ifvare AMI? 1
-            ifvarn HAVEMERCURYCOMPUTER? 1
+           {
+            setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+            ifvarn MISCARRAYID_AMOUNTTEMP 1
             {
              state checkexplodeflag
-             setvar HAVEMERCURYCOMPUTER? 1
+             setvar MISCARRAYID 78 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -14088,6 +14113,7 @@ useractor notenemy MERCURYCOMPUTER 0
              state getworldtile
              state activationflag killit
             }
+           }
        }
    }
  }
@@ -14106,7 +14132,8 @@ useractor notenemy HACKERVISION 0
  }
  else cstat 32768
 
- ifvare HAVEHACKERVISION? 1 killit
+ setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+ ifvare MISCARRAYID_AMOUNTTEMP 1 killit
  sizeat 64 64
  state itemfullbright
  ifvare mainmenu 0 state fallflags
@@ -14123,14 +14150,15 @@ useractor notenemy HACKERVISION 0
     {
      ifvarg CURRENTHITPOINTS 0 ifcanseetarget ifpdistl RETRIEVEDISTANCE ifcount 6 ifvare LISA? 1
      {
-      ifvarn HAVEHACKERVISION? 1
+      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
+      ifvarn MISCARRAYID_AMOUNTTEMP 1
       {
        state checkexplodeflag
        setvar CHARACTERARRAY 8
        getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
        ifvarg TEMPVAR 0
        {
-        setvar HAVEHACKERVISION? 1
+        setvar MISCARRAYID 77 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // HAVE-HACKERVISION?
         ifvarand ACTORFLAGS 2 nullop
         else
         {
