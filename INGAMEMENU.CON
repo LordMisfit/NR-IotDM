@@ -707,7 +707,8 @@ ifvare mainmenu 1
    {
     setvar digx 45
     addvar digy 6 // setvar digy 9
-    setvarvar varname DISPLAYEPISODE
+    setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+    setvarvar varname MISCARRAYID_AMOUNTTEMP
     state orientation2
     state dn
    }
@@ -715,6 +716,7 @@ ifvare mainmenu 1
    setvar digx 37
    addvar digy 6 // setvar digy 15
    state orientation2
+   setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-LEVEL
    setvarvar varname DISPLAYLEVEL
    state dn
  

@@ -1924,15 +1924,11 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 //*To Be Arrayed >.>*
 //*******************
 
-// To Possibly Be Arrayed... [7]
-gamevar DISPLAYEPISODE 0 0
-gamevar DISPLAYLEVEL 0 0
-
+// To Possibly Be Arrayed... [4]
 gamevar CHARACTEROLD 1 131072	// For remembering your 'outgoing' character's stats when a new character is 'incoming'
 gamevar CHARACTERNEW 0 131072	// For trying to switch to a new character when one dies
 gamevar PARTYSIZE 0 131073		// Gets the total size of the group you have
 gamevar PARTYALIVE 0 131073		// Gets the number of your party that are still alive
-gamevar AUTOSWITCHATTEMPTS 0 131072
 
 
 // To Be Arrayed At a More Conveinent Time >_> [3]
@@ -1940,7 +1936,9 @@ gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balan
 gamevar NETHRAFORM? 1 131072 	// 0 = 'Protector Drone' Form, 1 = 'Human' Form
 gamevar MINAKOFORM? 0 131072	// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 
-// In Queue Next... [0]
+
+// In Queue Next... [1]
+gamevar DISPLAYLEVEL 0 0
 
 //*******************
 
@@ -2008,7 +2006,7 @@ gamevar MISCARRAYID -1 131072
  // [60] = dialouge-phase - Determines the phase of the current dialouge ID [how many things to print to screen at the current moment, such as if the second character in the conversation has spoke yet or just the first, etc]
  // [61] = dialouge-picnum - Determines stuff like portraits in dialouge boxes
  // [62] = NUMBER-OF-PARTY-DEAD - Gets the number of your party that are dead
- // [63] = SOMEONE-LEVELS?
+ // [63] = SOMEONE-LEVELS? - Used to reset/reroll inactive/unawakened NPCs' stats each time a levelup happens so the monsters can stay on semi-even terms with the player
  // [64] = PLAYER-LEVELSUP?
  // [65] = CHEAT-PHASE
  // [66] = MAX-SUPPORT-LEVELS
@@ -2020,13 +2018,13 @@ gamevar MISCARRAYID -1 131072
  // [72] = FREEZING-MODE?  -  0 = Lava-type floors will permenantly freeze when shot enough times with ice-based attacks [5x HP]. 1 = Floors will thaw out after some time [normal HP]
  // [73] = SHOW-MULTI-ICONS?  -  1 = Multiplier Icons show above items
  // [74] = ATTACHED-OBJECTS?  -  0 = Monsters/Players will not have Lifebars, Arrows, Stars or any other icons attached to them. (For lower-end processors to lower spritecount)
- // [75] = ARMOR-APPEARANCE?  -  0 = Males [Normal], 1 = Females, 2 = ESSence, 3 = Cybanis
- // [76] = CARD-MEMBERSHIP? -  0 = None, 1 = Bronze, 2 = Silver, 3 = Gold, 4 = Platinum
+ // [75] = ARMOR-APPEARANCE?  -  0 = Male Humans [Normal], 1 = Female Humans, 2 = ESSence, 3 = Cybanis
+ // [76] = CARD-MEMBERSHIP? -  0 = None, 1 = Bronze, 2 = Silver, 3 = Gold, 4 = Platinum, 5 = Diamond-White
  // [77] = HAVE-HACKERVISION?
  // [78] = HAVE-MERCURY-COMPUTER?
- // [79] = 
- // [80] = 
- // [81] = 
+ // [79] = AUTO-SWITCH-ATTEMPTS 
+ // [80] = DISPLAY-EPISODE - Gets the Episode/Volume/Chapter ID
+ // [81] = DISPLAY-LEVEL - Gets the ID of the level within the current Episode
  // [82] = 
  // [83] = 
  // [84] = 

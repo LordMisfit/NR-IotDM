@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22git)
-definequote 1337 ^22VERSION:^0 5.22.git58.10082014
+setgamename Naferia's Reign (5.22.git62)
+definequote 1337 ^22VERSION:^0 5.22.git62.10092014
 
 action ANULLACTION 0
 
@@ -3475,16 +3475,18 @@ state player_defense
        divvar PLAYERDAMAGE 1000
  
        // Determines the base damage ratio on each Episode
-       ifvare DISPLAYEPISODE 1 mulvar PLAYERDAMAGE 1000 // 100% Damage
-       ifvare DISPLAYEPISODE 2 mulvar PLAYERDAMAGE 1033 // 103.3% Damage
-       ifvare DISPLAYEPISODE 3 mulvar PLAYERDAMAGE 1066 // 106.6% Damage
-       ifvare DISPLAYEPISODE 4 mulvar PLAYERDAMAGE 1100 // 110% Damage
-       ifvare DISPLAYEPISODE 5 mulvar PLAYERDAMAGE 1134 // 113.4% Damage
-       ifvare DISPLAYEPISODE 6 mulvar PLAYERDAMAGE 1167 // 116.7% Damage
-       ifvare DISPLAYEPISODE 7 mulvar PLAYERDAMAGE 1200 // 120% Damage
+       setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar PLAYERDAMAGE 1000 // 100% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERDAMAGE 1033 // 103.3% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar PLAYERDAMAGE 1066 // 106.6% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar PLAYERDAMAGE 1100 // 110% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar PLAYERDAMAGE 1134 // 113.4% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar PLAYERDAMAGE 1167 // 116.7% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar PLAYERDAMAGE 1200 // 120% Damage
        divvar PLAYERDAMAGE 1000
  
        // Determines the base damage ratio on each Level
+       setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-LEVEL
        ifvare DISPLAYLEVEL 1 mulvar PLAYERDAMAGE 1000 // 100% Damage
        ifvare DISPLAYLEVEL 2 mulvar PLAYERDAMAGE 1006 // 100.6% Damage
        ifvare DISPLAYLEVEL 3 mulvar PLAYERDAMAGE 1013
@@ -27192,7 +27194,9 @@ ifvarg MISCARRAYID_AMOUNTTEMP 0 // Prevents potentially-fatal knockback when a d
 
   setvar MISCARRAYID 26 // DEATHSWITCH-DELAY
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+  addlogvar MISCARRAYID_AMOUNTTEMP
   subvar MISCARRAYID_AMOUNTTEMP 1
+  addlogvar MISCARRAYID_AMOUNTTEMP
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
   setplayer[THISACTOR].falling_counter 0
@@ -27208,6 +27212,7 @@ else
 
 setvar MISCARRAYID 25 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // SWITCHOVER-DELAY
 ifvarg MISCARRAYID_AMOUNTTEMP 0 subvar MISCARRAYID_AMOUNTTEMP 1
+setvar MISCARRAYID 25 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // SWITCHOVER-DELAY
 ifvare MISCARRAYID_AMOUNTTEMP 0 
 {
  // Prevents Player from Exceeding 200% HP
@@ -27325,14 +27330,30 @@ ifvare CURRENTHITPOINTS 0 // ifp pdead
      setvar TEMPVAR -1
     }
 
-    state checkbubsylives
     ifvarg ITEMARRAYID_AMOUNTTEMP 0 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
     { 
      state checkbubsylives2
      state canceldeadactions
-    } 
+    }
     else
-    ifvarl AUTOSWITCHATTEMPTS 26 
+    {
+     setvar MISCARRAYID 79 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AUTO-SWITCH-ATTEMPTS
+     ifvarl MISCARRAYID_AMOUNTTEMP 26 
+     { 
+      ifmove PSHRINKING
+      {
+       sizeat 42 36
+       setvar SHRUNK? 0
+      }
+      state switchtolivingcharacter 
+      state canceldeadactions
+     } 
+    }
+   }
+   else
+   {
+    setvar MISCARRAYID 79 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AUTO-SWITCH-ATTEMPTS
+    ifvarl MISCARRAYID_AMOUNTTEMP 26 
     { 
      ifmove PSHRINKING
      {
@@ -27343,17 +27364,6 @@ ifvare CURRENTHITPOINTS 0 // ifp pdead
      state canceldeadactions
     } 
    }
-   else
-   ifvarl AUTOSWITCHATTEMPTS 26 
-   { 
-    ifmove PSHRINKING
-    {
-     sizeat 42 36
-     setvar SHRUNK? 0
-    }
-    state switchtolivingcharacter 
-    state canceldeadactions
-   } 
   } 
   else // Last character dies X_x;
   {
@@ -27417,7 +27427,11 @@ ifvare CURRENTHITPOINTS 0 // ifp pdead
 }
 
 ifaction PFROZEN move 0
-ifvarg CURRENTHITPOINTS 0 { setvar AUTOSWITCHATTEMPTS 0 setactor[THISACTOR].cstat 257 }
+ifvarg CURRENTHITPOINTS 0 
+{
+ setvar MISCARRAYID 79 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // AUTO-SWITCH-ATTEMPTS
+ setactor[THISACTOR].cstat 257 
+}
 ifvarn CHARACTERSELECTED? 3
 {
  state checkbubsylives
@@ -33066,7 +33080,8 @@ setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
           }
           else
           {
-           ifvarl AUTOSWITCHATTEMPTS 26 
+           setvar MISCARRAYID 79 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AUTO-SWITCH-ATTEMPTS
+           ifvarl MISCARRAYID_AMOUNTTEMP 26 
            { 
             state switchtolivingcharacter 
             state setplayeraction_pstand
@@ -33077,7 +33092,8 @@ setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
          }
          else
          {
-          ifvarl AUTOSWITCHATTEMPTS 26 
+          setvar MISCARRAYID 79 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AUTO-SWITCH-ATTEMPTS
+          ifvarl MISCARRAYID_AMOUNTTEMP 26 
           { 
            state switchtolivingcharacter 
            state setplayeraction_pstand
@@ -40886,7 +40902,8 @@ state bossendgamestuff
     {
      ifvarand ACTORFLAGS 2
      {
-      setvarvar TEMP2 DISPLAYEPISODE
+      setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+      setvarvar TEMP2 MISCARRAYID_AMOUNTTEMP
       ifvare TEMP2 1 startlevel 1 0
       else ifvare TEMP2 2 startlevel 2 0
       else ifvare TEMP2 3 startlevel 3 0

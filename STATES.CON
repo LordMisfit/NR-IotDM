@@ -1847,26 +1847,29 @@ state expmulti // Affects EXP and RANK rewards
 
       ifvare PUBLICBETA? 1 // "Beta Modes" do calculations here based on both Episode and Level, and if the Map is in the "User Map" [E1L8] slot, similar to a Doom 1 format.
       {
-       ifvare DISPLAYEPISODE 1 mulvar EXPPTSTEMP 4
-       ifvare DISPLAYEPISODE 2 mulvar EXPPTSTEMP 5
-       ifvare DISPLAYEPISODE 3 mulvar EXPPTSTEMP 6
-       ifvare DISPLAYEPISODE 4 mulvar EXPPTSTEMP 7
-       ifvare DISPLAYEPISODE 5 mulvar EXPPTSTEMP 8
-       ifvare DISPLAYEPISODE 6 mulvar EXPPTSTEMP 9
-       ifvare DISPLAYEPISODE 7 mulvar EXPPTSTEMP 10
+       setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar EXPPTSTEMP 4
+       ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar EXPPTSTEMP 5
+       ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar EXPPTSTEMP 6
+       ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar EXPPTSTEMP 7
+       ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar EXPPTSTEMP 8
+       ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar EXPPTSTEMP 9
+       ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar EXPPTSTEMP 10
        divvar EXPPTSTEMP 5
        state setexpranklimits
 
-       ifvare DISPLAYEPISODE 1 mulvar RANKPOINTSTEMP 4
-       ifvare DISPLAYEPISODE 2 mulvar RANKPOINTSTEMP 5
-       ifvare DISPLAYEPISODE 3 mulvar RANKPOINTSTEMP 6
-       ifvare DISPLAYEPISODE 4 mulvar RANKPOINTSTEMP 7
-       ifvare DISPLAYEPISODE 5 mulvar RANKPOINTSTEMP 8
-       ifvare DISPLAYEPISODE 6 mulvar RANKPOINTSTEMP 9
-       ifvare DISPLAYEPISODE 7 mulvar RANKPOINTSTEMP 10
+       setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar RANKPOINTSTEMP 4
+       ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar RANKPOINTSTEMP 5
+       ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar RANKPOINTSTEMP 6
+       ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar RANKPOINTSTEMP 7
+       ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar RANKPOINTSTEMP 8
+       ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar RANKPOINTSTEMP 9
+       ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar RANKPOINTSTEMP 10
        divvar RANKPOINTSTEMP 5
        state setexpranklimits
 
+       setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-LEVEL
        ifvare DISPLAYLEVEL 1 mulvar EXPPTSTEMP 20
        ifvare DISPLAYLEVEL 2 mulvar EXPPTSTEMP 22
        ifvare DISPLAYLEVEL 3 mulvar EXPPTSTEMP 24
@@ -1933,6 +1936,7 @@ state expmulti // Affects EXP and RANK rewards
        divvar EXPPTSTEMP 20
        state setexpranklimits
 
+       setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-LEVEL
        ifvare DISPLAYLEVEL 1 mulvar RANKPOINTSTEMP 20
        ifvare DISPLAYLEVEL 2 mulvar RANKPOINTSTEMP 21
        ifvare DISPLAYLEVEL 3 mulvar RANKPOINTSTEMP 22
@@ -1999,7 +2003,9 @@ state expmulti // Affects EXP and RANK rewards
        divvar RANKPOINTSTEMP 20
        state setexpranklimits
 
-       ifvare DISPLAYEPISODE 1 ifvare DISPLAYLEVEL 8 { mulvar EXPPTSTEMP 4 divvar EXPPTSTEMP 3 mulvar RANKPOINTSTEMP 4 divvar RANKPOINTSTEMP 3 } // EXP: 1.33x, RANK: 1.33x
+       setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+       setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // DISPLAY-LEVEL
+       ifvare MISCARRAYID_AMOUNTTEMP 1 ifvare DISPLAYLEVEL 8 { mulvar EXPPTSTEMP 4 divvar EXPPTSTEMP 3 mulvar RANKPOINTSTEMP 4 divvar RANKPOINTSTEMP 3 } // EXP: 1.33x, RANK: 1.33x
        state setexpranklimits
       }
       else // "Final Modes" calculated based on a single "Map #", similar to a Doom 2 format.
@@ -13989,9 +13995,13 @@ ends
 
 state difficulty
  getuserdef[THISACTOR].player_skill SKILLLEVEL
- getuserdef[THISACTOR].volume_number DISPLAYEPISODE
+
+ setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+ getuserdef[THISACTOR].volume_number MISCARRAYID_AMOUNTTEMP
+ addvar MISCARRAYID_AMOUNTTEMP 1
+ setvar MISCARRAYID 80 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+
  getuserdef[THISACTOR].level_number DISPLAYLEVEL
- addvar DISPLAYEPISODE 1
  addvar DISPLAYLEVEL 1
 ends
 
@@ -14091,7 +14101,8 @@ state newenemystatcalc
  // Episode has the 2nd most influence on enemy HP levels [100.0%-275.0%]
  setvar TEMPVAR2 750
  setvar TEMPVAR3 250
- mulvarvar TEMPVAR3 DISPLAYEPISODE
+ setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+ mulvarvar TEMPVAR3 MISCARRAYID_AMOUNTTEMP
  addvarvar TEMPVAR2 TEMPVAR3
  mulvarvar ENEMYHP TEMPVAR2
  divvar ENEMYHP 1000
@@ -14099,6 +14110,7 @@ state newenemystatcalc
  // Level has the least influence on enemy HP levels [100.0%-1700.0%]
  setvar TEMPVAR2 975
  setvar TEMPVAR3 25
+ setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-LEVEL
  mulvarvar TEMPVAR3 DISPLAYLEVEL
  addvarvar TEMPVAR2 TEMPVAR3
  mulvarvar ENEMYHP TEMPVAR2
