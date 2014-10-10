@@ -3027,42 +3027,20 @@ else // ifvare mainmenu 0
 endevent
 
 onevent EVENT_ENTERLEVEL 
- // Reset Enemies Killed for the Current Level
- setvar MISCARRAYID 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
- // Reset Max Enemies Killed for the Current Level
- setvar MISCARRAYID 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
-
- // Reset In-Game Timer for the Current Level
- setvar TIMERRAWFORMAT_LEVEL 0
-
- // Reset Secrets Found for the Current Level
- setvar MISCARRAYID 4 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
- // Reset Max Secrets Found for the Current Level
- setvar MISCARRAYID 6 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
-
- // Reset Memorbilia Found for the Current Level
- setvar MISCARRAYID 8 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
- // Reset Max Memorbilia Found for the Current Level
- setvar MISCARRAYID 10 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
-
- // Reset Civilians Saved for the Current Level
- setvar MISCARRAYID 12 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
- // Reset Max Civilians Saved for the Current Level
- setvar MISCARRAYID 14 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
-
- // Reset Civilians Killed for the Current Level
- setvar MISCARRAYID 16 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
- // Reset Max Civilians Killed for the Current Level
- setvar MISCARRAYID 18 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
-
- // Reset WorldTiles found for the Current Level
- setvar MISCARRAYID 20 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
- // Reset Max WorldTiles found for the Current Level
- setvar MISCARRAYID 21 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0
-
-
- // Reset All-Secrets Bonus Message/Stuff
- ifvare GOTALLSECRETSBONUS? 1 setvar GOTALLSECRETSBONUS? 0
+ setvar MISCARRAYID 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Enemies Killed for the Current Level
+ setvar MISCARRAYID 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max Enemies Killed for the Current Level
+ setvar TIMERRAWFORMAT_LEVEL 0 // Reset In-Game Timer for the Current Level
+ setvar MISCARRAYID 4 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Secrets Found for the Current Level
+ setvar MISCARRAYID 6 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max Secrets Found for the Current Level
+ setvar MISCARRAYID 8 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Memorbilia Found for the Current Level
+ setvar MISCARRAYID 10 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max Memorbilia Found for the Current Level
+ setvar MISCARRAYID 12 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Civilians Saved for the Current Level
+ setvar MISCARRAYID 14 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max Civilians Saved for the Current Level
+ setvar MISCARRAYID 16 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Civilians Killed for the Current Level
+ setvar MISCARRAYID 18 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max Civilians Killed for the Current Level
+ setvar MISCARRAYID 20 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset WorldTiles found for the Current Level
+ setvar MISCARRAYID 21 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max WorldTiles found for the Current Level
+ setvar MISCARRAYID 84 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset All-Secrets Bonus Message/Stuff
 
  ifmultiplayer break
  // De-Pseudo
@@ -4207,17 +4185,15 @@ onevent EVENT_NEWGAME
   setvar MISCARRAYID 19 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MAX-CIVILIANSKILLED-GAME
 
   setvar MISCARRAYID 69 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // IS-MONEYRADAR-ON?
-  getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addlogvar MISCARRAYID_AMOUNTTEMP
+
   setvar MISCARRAYID 72 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // FREEZING-MODE?
-  getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addlogvar MISCARRAYID_AMOUNTTEMP
   setvar MISCARRAYID 73 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // SHOW-MULTI-ICONS?
-  getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addlogvar MISCARRAYID_AMOUNTTEMP
   setvar MISCARRAYID 74 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // ATTACHED-OBJECTS?
-  getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
-  addlogvar MISCARRAYID_AMOUNTTEMP
+
+  setvar MISCARRAYID 82 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // CHARACTER-OLD
+
+  //getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+  //addlogvar MISCARRAYID_AMOUNTTEMP
 endevent
 
 // END OF EVENTS

@@ -1214,12 +1214,7 @@ gamevar PLAYERBOOSTERTIMER 0 131073 // For having Triad Booster Duractions [4096
 gamevar PLAYERBLOODLUSTTIMER 0 131073 // For having Triad Booster Duractions [8192]
 
 gamevar SECTOREXTRA 0 1026
-
 gamevar SECTORISASECRET? 0 1026 // For an array
-gamevar NUMBEROFSECRETS 0 0
-gamevar MAXNUMBEROFSECRETS 0 0
-gamevar GOTALLSECRETSBONUS? 0 0
-gamevar FOUNDASECRET 0 131073
 
 gamevar DAMAGETEMP 0 0
 
@@ -1248,7 +1243,6 @@ gamevar TARGETSPECIES 0 0
 gamevar TARGETDISPLAYDAMAGE 0 0
 gamevar TARGETPAL 0 0
 gamevar TARGETCLOAKED? 0 0
-gamevar TARGETSHRUNKEN? 0 0
 gamevar SHOWTARGETNAME? 0 0
 gamevar SHOWTARGETHEALTH? 0 0
 gamevar SHOWTARGETDEFENSE? 0 0
@@ -1924,21 +1918,16 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 //*To Be Arrayed >.>*
 //*******************
 
-// To Possibly Be Arrayed... [4]
-gamevar CHARACTEROLD 1 131072	// For remembering your 'outgoing' character's stats when a new character is 'incoming'
-gamevar CHARACTERNEW 0 131072	// For trying to switch to a new character when one dies
+// To Possibly Be Arrayed... [2]
 gamevar PARTYSIZE 0 131073		// Gets the total size of the group you have
 gamevar PARTYALIVE 0 131073		// Gets the number of your party that are still alive
-
 
 // To Be Arrayed At a More Conveinent Time >_> [3]
 gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 gamevar NETHRAFORM? 1 131072 	// 0 = 'Protector Drone' Form, 1 = 'Human' Form
 gamevar MINAKOFORM? 0 131072	// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 
-
-// In Queue Next... [1]
-gamevar DISPLAYLEVEL 0 0
+// In Queue Next... [0]
 
 //*******************
 
@@ -2025,10 +2014,10 @@ gamevar MISCARRAYID -1 131072
  // [79] = AUTO-SWITCH-ATTEMPTS 
  // [80] = DISPLAY-EPISODE - Gets the Episode/Volume/Chapter ID
  // [81] = DISPLAY-LEVEL - Gets the ID of the level within the current Episode
- // [82] = 
- // [83] = 
- // [84] = 
- // [85] = 
+ // [82] = CHARACTER-OLD  -  For remembering your 'outgoing' character's stats when a new character is 'incoming'
+ // [83] = CHARACTER-NEW  -  For trying to switch to a new character when one dies
+ // [84] = GOT-ALL-SECRETS-BONUS?
+ // [85] = FOUND-A-SECRET
  // [86] = 
  // [87] = 
  // [88] = 
@@ -2041,7 +2030,7 @@ gamevar MISCARRAYID -1 131072
  // [95] = 
  // [96] = 
  // [97] = 
- // [98] = 
+ // [98] = TARGETSHRUNKEN?
  // [99] = 
  // [100] = 
  // [101] = DUKE-FORM?

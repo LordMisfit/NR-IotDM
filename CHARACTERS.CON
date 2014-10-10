@@ -99,7 +99,8 @@ state readchartoweapon
 ends
 
 state donotswitchchars
-        setvarvar CHARACTERSELECTED? CHARACTEROLD
+        setvar MISCARRAYID 82 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-OLD
+        setvarvar CHARACTERSELECTED? MISCARRAYID_AMOUNTTEMP
 ends
 
 state setcharacterarrays
@@ -469,7 +470,8 @@ getplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
 //*START OF CHARACTER SWITCHING CODES*
 //************************************
 
-    ifvarvare CHARACTERSELECTED? CHARACTEROLD // If the character hasn't changed yet
+    setvar MISCARRAYID 82 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-OLD
+    ifvarvare CHARACTERSELECTED? MISCARRAYID_AMOUNTTEMP // If the character hasn't changed yet
     {
       ifvare CHARACTERSELECTED? 1
       {
@@ -1017,7 +1019,7 @@ getplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
        }
       }
     }
-    setvarvar CHARACTEROLD CHARACTERSELECTED? // Sets the 'old' var to the current one to prevent repeats of the code.
+    setvar MISCARRAYID 82 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT CHARACTERSELECTED? // CHARACTER-OLD -- Sets the 'old' var to the current one to prevent repeats of the code.
 
 //**********************************
 //*END OF CHARACTER SWITCHING CODES*
@@ -1185,8 +1187,9 @@ ends
 
 state changechar
     ifvarn VEHICLEID -1 setvar bits 268435456
-    setvarvar CHARACTERSELECTED? CHARACTERNEW
-    setvar CHARACTERNEW 0
+    setvar MISCARRAYID 83 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-NEW
+    setvarvar CHARACTERSELECTED? MISCARRAYID_AMOUNTTEMP
+    setvar MISCARRAYID 83 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // CHARACTER-NEW
     stopsound DUKE_SCREAM
     stopsound DUKE_SCREAM2
     stopsound JACK_FALLSCREAM
@@ -1220,32 +1223,36 @@ state survivalcheck1
 ends
 
 state switchcharactercheck
-   setvarvar CHARACTERARRAY CHARACTERNEW
+   setvar MISCARRAYID 83 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-NEW
+   setvarvar CHARACTERARRAY MISCARRAYID_AMOUNTTEMP
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
 ends
 
 state switchtorandomcharacter
  getcurraddress TEMPVAR3
- setvar CHARACTERNEW 0 // set to 0
- randvar CHARACTERNEW 14 // 0 to 14
- addvar CHARACTERNEW 1 // +1
+ setvar MISCARRAYID 83 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-NEW
+ setvar MISCARRAYID_AMOUNTTEMP 0 // set to 0
+ randvar MISCARRAYID_AMOUNTTEMP 14 // 0 to 14
+ addvar MISCARRAYID_AMOUNTTEMP 1 // +1
+ setvar MISCARRAYID 83 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-NEW
 
- ifvare CHARACTERNEW 1 { ifvare DUKE? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 2 { ifvare JACK? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 3 { ifvare BUBSY? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 4 { ifvare AMI? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 5 { ifvare LOWANG? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 6 { ifvare ESSENCE? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 7 { ifvare TED? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 8 { ifvare LISA? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 9 { ifvare CYBANIS? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 10 { ifvare NETHRA? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 11 { ifvare PAULA? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 12 { ifvare LORI? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 13 { ifvare MINAKO? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 14 { ifvare MYSTERY1? 1 state switchcharactercheck else jump TEMPVAR3 }
- else ifvare CHARACTERNEW 15 { ifvare MAKEN? 1 state switchcharactercheck else jump TEMPVAR3 }
+ setvar MISCARRAYID 83 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-NEW
+ ifvare MISCARRAYID_AMOUNTTEMP 1 { ifvare DUKE? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 2 { ifvare JACK? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 3 { ifvare BUBSY? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 4 { ifvare AMI? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 5 { ifvare LOWANG? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 6 { ifvare ESSENCE? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 7 { ifvare TED? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 8 { ifvare LISA? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 9 { ifvare CYBANIS? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 10 { ifvare NETHRA? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 11 { ifvare PAULA? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 12 { ifvare LORI? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 13 { ifvare MINAKO? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 14 { ifvare MYSTERY1? 1 state switchcharactercheck else jump TEMPVAR3 }
+ else ifvare MISCARRAYID_AMOUNTTEMP 15 { ifvare MAKEN? 1 state switchcharactercheck else jump TEMPVAR3 }
 ends
 
 state switchtolivingcharacter
@@ -1292,7 +1299,8 @@ state switchtolivingcharacter
    sound CHARACTER_DIE
    palfrom 64 64
    state changecharacterdeathcount
-   setvarvar TEMPVAR2 CHARACTEROLD
+   setvar MISCARRAYID 82 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-OLD
+   setvarvar TEMPVAR2 MISCARRAYID_AMOUNTTEMP
 
    // Rank Point Penalty
    setvarvar TEMPVAR6 RANKPOINTS

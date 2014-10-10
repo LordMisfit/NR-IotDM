@@ -1672,7 +1672,11 @@ else
      setvar digy 193 // 182
      state settile3087 
 
-     ifvarl CHARACTERSELECTED? 1 setvarvar CHARACTERSELECTED? CHARACTEROLD
+     ifvarl CHARACTERSELECTED? 1
+     {
+      setvar MISCARRAYID 82 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-OLD
+      setvarvar CHARACTERSELECTED? MISCARRAYID_AMOUNTTEMP
+     }
      ifvare CHARACTERSELECTED? 1
      { 
       redefinequote 318 DUKE NUKEM 
@@ -1787,7 +1791,11 @@ else
       redefinequote 318 MAKEN SHINKARA
       state pal10
      }
-     ifvarg CHARACTERSELECTED? 15 setvarvar CHARACTERSELECTED? CHARACTEROLD
+     ifvarg CHARACTERSELECTED? 15
+     {
+      setvar MISCARRAYID 82 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-OLD
+      setvarvar CHARACTERSELECTED? MISCARRAYID_AMOUNTTEMP
+     }
      setvar orientation_change 0
 
      setvar orientation_change 256
