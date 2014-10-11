@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git62)
-definequote 1337 ^22VERSION:^0 5.22.git63.10102014
+setgamename Naferia's Reign (5.22.git64)
+definequote 1337 ^22VERSION:^0 5.22.git64.10102014
 
 action ANULLACTION 0
 
@@ -994,9 +994,10 @@ action ICONAMIBALANCED 27 1 1 1 1
 useractor notenemy CHAR4ICON 0 
 setactor[THISACTOR].shade -63
 
-ifvare AMIFORM? 0 action ICONAMICIVILIAN 
-else ifvare AMIFORM? 1 action ICONAMISENSHI 
-else ifvare AMIFORM? 2 action ICONAMIBALANCED
+setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+ifvare MISCARRAYID_AMOUNTTEMP 0 action ICONAMICIVILIAN 
+else ifvare MISCARRAYID_AMOUNTTEMP 1 action ICONAMISENSHI 
+else ifvare MISCARRAYID_AMOUNTTEMP 2 action ICONAMIBALANCED
 
 ifvarn TEMP3 0
 {
@@ -1334,9 +1335,10 @@ action ICONMINAKOBALANCED 20 1 1 1 1
 useractor notenemy CHAR13ICON 0 
 setactor[THISACTOR].shade -63
 
-ifvare MINAKOFORM? 0 action ICONMINAKOCIVILIAN 
-else ifvare MINAKOFORM? 1 action ICONMINAKOSENSHI 
-else ifvare MINAKOFORM? 2 action ICONMINAKOBALANCED
+setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+ifvare MISCARRAYID_AMOUNTTEMP 0 action ICONMINAKOCIVILIAN 
+else ifvare MISCARRAYID_AMOUNTTEMP 1 action ICONMINAKOSENSHI 
+else ifvare MISCARRAYID_AMOUNTTEMP 2 action ICONMINAKOBALANCED
 
 ifvarn TEMP3 0
 {
@@ -3737,7 +3739,8 @@ state player_defense
       // *******************************************************
       // *Setting Up Ami's bonus defense when in "Balanced Form*
       // *******************************************************
-      ifvare AMIFORM? 2
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 2
       {
        setvar tempe 100
        addvarvar tempb tempe 
@@ -3755,9 +3758,10 @@ state player_defense
       // *******************************
       // *Setting Up Ami's Form Bonuses*
       // *******************************
-      ifvarl AMIFORM? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
-      ifvare AMIFORM? 1 divvar PLAYERDAMAGE 2
-      ifvarg AMIFORM? 1 divvar PLAYERDAMAGE 3
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
+      ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 2
+      ifvarg MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 3
       // ********************************
       // *Mercury Aqua Protection (Buff)*
       // ********************************
@@ -4115,7 +4119,8 @@ state player_defense
       // **********************************************************
       // *Setting Up Minako's bonus defense when in "Balanced Form*
       // **********************************************************
-      ifvare MINAKOFORM? 2
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 2
       {
        setvar tempe 100
        addvarvar tempb tempe 
@@ -4128,9 +4133,10 @@ state player_defense
       // **********************************
       // *Setting Up Minako's Form Bonuses*
       // **********************************
-      ifvarl MINAKOFORM? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
-      ifvare MINAKOFORM? 1 { divvar PLAYERDAMAGE 2 }
-      ifvarg MINAKOFORM? 1 { divvar PLAYERDAMAGE 3 }
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+      ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
+      ifvare MISCARRAYID_AMOUNTTEMP 1 { divvar PLAYERDAMAGE 2 }
+      ifvarg MISCARRAYID_AMOUNTTEMP 1 { divvar PLAYERDAMAGE 3 }
      }
  
      // Mystery Woman
@@ -5512,9 +5518,10 @@ state add_playermeleedamage
        // *******************************
        // *Setting Up Ami's Form Bonuses*
        // *******************************
-	   ifvarl AMIFORM? 1 { mulvar KNEEDAMAGE 2 }
-	   ifvare AMIFORM? 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
-	   ifvarg AMIFORM? 1 { mulvar KNEEDAMAGE 3 }
+       setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+	   ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
+	   ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
+	   ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
        // ********************************
        // *Mercury Aqua Protection (Buff)*
        // ********************************
@@ -5561,15 +5568,16 @@ state add_playermeleedamage
        }
       }
 
-	  ifvare CHARACTERSELECTED? 13
-	  {
+      ifvare CHARACTERSELECTED? 13
+      {
        // **********************************
        // *Setting Up Minako's Form Bonuses*
        // **********************************
-	   ifvarl MINAKOFORM? 1 { mulvar KNEEDAMAGE 2 }
-	   ifvare MINAKOFORM? 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
-	   ifvarg MINAKOFORM? 1 { mulvar KNEEDAMAGE 3 }
-	  }
+       setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+       ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
+       ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
+      }
       state checkdamagecaps-knee
 
       // Stage 4p of Damage Formula
@@ -9050,9 +9058,10 @@ ifvarg tempb 0
          // *******************************
          // *Setting Up Ami's Form Bonuses*
          // *******************************
-         ifvarl AMIFORM? 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Ami is in Civilian Form
-         ifvare AMIFORM? 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Ami is in Senshi form
-         ifvarg AMIFORM? 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Ami is in Balanced Form
+         setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+         ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Ami is in Civilian Form
+         ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Ami is in Senshi form
+         ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Ami is in Balanced Form
          // ********************************
          // *Mercury Aqua Protection (Buff)*
          // ********************************
@@ -9157,9 +9166,10 @@ ifvarg tempb 0
          // **********************************
          // *Setting Up Minako's Form Bonuses*
          // **********************************
-         ifvarl MINAKOFORM? 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Minako is in Civilian Form
-         ifvare MINAKOFORM? 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Minako is in Senshi form
-         ifvarg MINAKOFORM? 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Minako is in Balanced Form
+         setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+         ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Minako is in Civilian Form
+         ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Minako is in Senshi form
+         ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Minako is in Balanced Form
         }
 
         // ifvare CHARACTERSELECTED? 14 { } // Mystery Lady
@@ -23742,7 +23752,7 @@ state getaccelerationlimits
     ifvare CHARACTERSELECTED? 4
     {
      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-     ifvare AMIFORM? 2 addvar ACCELFACTOR 1 
+     ifvare MISCARRAYID_AMOUNTTEMP 2 addvar ACCELFACTOR 1 
     }
     ifvare CHARACTERSELECTED? 6
     {
@@ -23756,8 +23766,8 @@ state getaccelerationlimits
     }
     ifvare CHARACTERSELECTED? 13
     {
-     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
-     ifvare MINAKOFORM? 2 addvar ACCELFACTOR 1 
+     setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 2 addvar ACCELFACTOR 1 
     }
 ends
 
@@ -25361,7 +25371,8 @@ ifvare mainmenu 0
     }
    }
   }
-  ifvare AMIFORM? 2 // If Ami's in her "Balanced" form, drain EP
+  setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 2 // If Ami's in her "Balanced" form, drain EP
   {
    addvar TRANSFORMTIMER 1
    ifvarvarg TRANSFORMTIMER TRANSFORMTIMERMAX
@@ -25375,14 +25386,16 @@ ifvare mainmenu 0
     globalsound TELEPORTER
     redefinequote 334 ^10AMI HAS RUN OUT OF EP!
     setvarvar fta fta_normal setvar ftq 334
-    ifrnd 128 setvar AMIFORM? 0 else setvar AMIFORM? 1
+    
+    ifrnd 128 { setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 } else { setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 } // AMI-FORM?
    }
   }
  }
  else
  ifvare CHARACTERSELECTED? 13 // Minako
  {
-  ifvare MINAKOFORM? 2 // If Ami's in her "Balanced" form, drain EP
+  setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 2 // If Minako's in her "Balanced" form, drain EP
   {
    addvar TRANSFORMTIMER 1
    ifvarvarg TRANSFORMTIMER TRANSFORMTIMERMAX
@@ -25396,7 +25409,7 @@ ifvare mainmenu 0
     globalsound TELEPORTER
     redefinequote 334 ^10MINAKO HAS RUN OUT OF EP!
     setvarvar fta fta_normal setvar ftq 334
-    ifrnd 128 setvar MINAKOFORM? 0 else setvar MINAKOFORM? 1
+    ifrnd 128 { setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 } else { setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 } // MINAKO-FORM? 
    }
   }
  }
@@ -25532,9 +25545,21 @@ ifvare mainmenu 0
   setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
   ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 2 }
  }
- ifvare CHARACTERSELECTED? 4 ifvare AMIFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
- ifvare CHARACTERSELECTED? 10 ifvare NETHRAFORM? 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
- ifvare CHARACTERSELECTED? 13 ifvare MINAKOFORM? 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
+ ifvare CHARACTERSELECTED? 4
+ {
+  setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
+ }
+ ifvare CHARACTERSELECTED? 10 
+ {
+  setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+  ifvare NETHRAFORM? 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
+ }
+ ifvare CHARACTERSELECTED? 13
+ {
+  setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERLIFTSTRENGTHTEMP 2
+ }
 
 
  // Check for Power Wrist [equippable item]
@@ -28594,14 +28619,26 @@ ifvare mainmenu 0
    setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
    ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
   }
-  ifvare CHARACTERSELECTED? 4 { ifvare AMIFORM? 2 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
+  ifvare CHARACTERSELECTED? 4
+  {
+   setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
+  }
   ifvare CHARACTERSELECTED? 6
   {
    setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
    ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar PLAYERMOVEPLUSVEL 80 divvar PLAYERMOVEPLUSVEL 100 } 
   }
-  ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
-  ifvare CHARACTERSELECTED? 13 { ifvare MINAKOFORM? 2 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } }
+  ifvare CHARACTERSELECTED? 10
+  {
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare NETHRAFORM? 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
+  }
+  ifvare CHARACTERSELECTED? 13 
+  { 
+   setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 2 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
+  }
 
   ifvarg PLAYERMOVEPLUSVEL 10405200 setvar PLAYERMOVEPLUSVEL 10405200
   // Set the Negative Speed Limit to an inverse of the positive speed limit
@@ -28712,7 +28749,8 @@ ifvarn multijumpflag 0
  }
  ifvare CHARACTERSELECTED? 4
  {
-  ifvare AMIFORM? 2
+  setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 2
   {
    mulvar PLAYERJUMPSTRENGTHTEMP 3 divvar PLAYERJUMPSTRENGTHTEMP 2
   }
@@ -28740,7 +28778,8 @@ ifvarn multijumpflag 0
  }
  ifvare CHARACTERSELECTED? 13
  {
-  ifvare MINAKOFORM? 2
+  setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 2
   {
    mulvar PLAYERJUMPSTRENGTHTEMP 3 divvar PLAYERJUMPSTRENGTHTEMP 2
   }
@@ -28977,7 +29016,8 @@ ifvarn multijumpflag 0
   }
   ifvare CHARACTERSELECTED? 4
   {
-   ifvare AMIFORM? 2
+   setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 2
    {
     ifvarl PLAYERFALLRESISTTEMP 0
     {
@@ -29023,7 +29063,8 @@ ifvarn multijumpflag 0
   }
   ifvare CHARACTERSELECTED? 13
   {
-   ifvare MINAKOFORM? 2
+   setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 2
    {
     ifvarl PLAYERFALLRESISTTEMP 0
     {
@@ -60618,9 +60659,10 @@ useractor notenemy NEWBLOODPOOL
                ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar tempe 6
                ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar tempe 2 divvar tempe 7 }
 
-               ifvare AMIFORM? 0 { mulvar tempe 4 divvar tempe 3 } // 133% Damage
-               else ifvare AMIFORM? 1 divvar tempe 2 // 50% Damage
-               else ifvare AMIFORM? 2 divvar tempe 3 // 33% Damage
+               setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 } // 133% Damage
+               else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2 // 50% Damage
+               else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3 // 33% Damage
                ifvarand PLAYERSTATUS? 256
                {
                 ifp pducking divvar tempe 25 else divvar tempe 5

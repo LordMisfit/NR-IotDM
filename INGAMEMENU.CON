@@ -5815,9 +5815,10 @@ ifvare mainmenusubmenu 3
    { 
     setvar CHARACTERARRAY 4
     ifvare CHARACTERSELECTED? 4 state shadepulse4
-    ifvare AMIFORM? 0 setvar tilenum 7939
-    else ifvare AMIFORM? 1 setvar tilenum 7963
-    else ifvare AMIFORM? 2 setvar tilenum 7966
+    setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
+    else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
     {
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvarl TEMPVAR 1 state pal2 else state pal0
@@ -6065,9 +6066,10 @@ ifvare mainmenusubmenu 3
    { 
     setvar CHARACTERARRAY 13
     ifvare CHARACTERSELECTED? 13 state shadepulse4
-    ifvare MINAKOFORM? 0 setvar tilenum 7948
-    else ifvare MINAKOFORM? 1 setvar tilenum 7965
-    else ifvare MINAKOFORM? 2 setvar tilenum 7968
+    setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
+    else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
     {
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvarl TEMPVAR 1 state pal2 else state pal0
@@ -8162,9 +8164,10 @@ ifvare mainmenusubmenu 5
    { 
     setvar CHARACTERARRAY 4
     ifvare CHARACTERSELECTED? 4 state shadepulse4
-    ifvare AMIFORM? 0 setvar tilenum 7939
-    else ifvare AMIFORM? 1 setvar tilenum 7963
-    else ifvare AMIFORM? 2 setvar tilenum 7966
+    setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
+    else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
@@ -9308,9 +9311,10 @@ ifvare mainmenusubmenu 5
    { 
     setvar CHARACTERARRAY 13
     ifvare CHARACTERSELECTED? 13 state shadepulse4
-    ifvare MINAKOFORM? 0 setvar tilenum 7948
-    else ifvare MINAKOFORM? 1 setvar tilenum 7965
-    else ifvare MINAKOFORM? 2 setvar tilenum 7968
+    setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
+    else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
@@ -9793,9 +9797,10 @@ ifvare mainmenusubmenu 6
    { 
     setvar CHARACTERARRAY 4
     ifvare CHARACTERSELECTED? 4 state shadepulse4
-    ifvare AMIFORM? 0 setvar tilenum 7939
-    else ifvare AMIFORM? 1 setvar tilenum 7963
-    else ifvare AMIFORM? 2 setvar tilenum 7966
+    setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
+    else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
@@ -10014,9 +10019,10 @@ ifvare mainmenusubmenu 6
    { 
     setvar CHARACTERARRAY 13
     ifvare CHARACTERSELECTED? 13 state shadepulse4
-    ifvare MINAKOFORM? 0 setvar tilenum 7948
-    else ifvare MINAKOFORM? 1 setvar tilenum 7965
-    else ifvare MINAKOFORM? 2 setvar tilenum 7968
+    setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
+    else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
@@ -10622,7 +10628,10 @@ ifvare mainmenusubmenu 6
   setvar digy 47
   state digz24576
   state orientation2
-  ifvare AMIFORM? 0 setvar tilenum 7939 else ifvare AMIFORM? 1 setvar tilenum 7963 else ifvare AMIFORM? 2 setvar tilenum 7966
+
+  setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963 else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
+
   setvar CHARACTERARRAY 4
   state checkcharacterstatuspic
   ifvare AMI? 1
@@ -10714,7 +10723,9 @@ ifvare mainmenusubmenu 6
   setvar digy 71
   state digz24576
   state orientation2
+
   ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvare NETHRAFORM? 1 setvar tilenum 7964
+
   setvar CHARACTERARRAY 10
   state checkcharacterstatuspic
   ifvare NETHRA? 1
@@ -10759,7 +10770,10 @@ ifvare mainmenusubmenu 6
   setvar digy 71
   state digz24576
   state orientation2
-  ifvare MINAKOFORM? 0 setvar tilenum 7948 else ifvare MINAKOFORM? 1 setvar tilenum 7965 else ifvare MINAKOFORM? 2 setvar tilenum 7968
+
+  setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+  ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965 else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
+
   setvar CHARACTERARRAY 13
   state checkcharacterstatuspic
   ifvare MINAKO? 1

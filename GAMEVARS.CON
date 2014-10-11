@@ -1922,10 +1922,8 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 gamevar PARTYSIZE 0 131073		// Gets the total size of the group you have
 gamevar PARTYALIVE 0 131073		// Gets the number of your party that are still alive
 
-// To Be Arrayed At a More Conveinent Time >_> [3]
-gamevar AMIFORM? 0 131072		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
+// To Be Arrayed At a More Conveinent Time >_> [1]
 gamevar NETHRAFORM? 1 131072 	// 0 = 'Protector Drone' Form, 1 = 'Human' Form
-gamevar MINAKOFORM? 0 131072	// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 
 // In Queue Next... [0]
 

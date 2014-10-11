@@ -255,10 +255,10 @@ state dialouge-pausedgame
    }
    ifvare CHARACTERSELECTED? 4
    {
-    setvar MISCARRAYID 61  // dialouge-picnum
-    ifvare AMIFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7939
-    ifvare AMIFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7963
-    ifvare AMIFORM? 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7966
+    setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // AMI-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP2 0 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7939 } // dialouge-picnum
+    ifvare MISCARRAYID_AMOUNTTEMP2 1 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7963 } // dialouge-picnum
+    ifvare MISCARRAYID_AMOUNTTEMP2 2 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7966 } // dialouge-picnum
 
     // Quote 1031 = Name of the Speaker
     redefinequote 1031 Ami
@@ -922,10 +922,10 @@ state dialouge-pausedgame
    }
    ifvare CHARACTERSELECTED? 13
    {
-    setvar MISCARRAYID 61  // dialouge-picnum
-    ifvare MINAKOFORM? 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7948
-    ifvare MINAKOFORM? 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7965
-    ifvare MINAKOFORM? 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7968
+    setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // MINAKO-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP2 0 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7948 } // dialouge-picnum
+    ifvare MISCARRAYID_AMOUNTTEMP2 1 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7965 } // dialouge-picnum
+    ifvare MISCARRAYID_AMOUNTTEMP2 2 { setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7968 } // dialouge-picnum
 
     // Quote 1031 = Name of the Speaker
     redefinequote 1031 Minako

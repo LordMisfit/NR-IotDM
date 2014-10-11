@@ -1896,11 +1896,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
      setvar CHARACTERARRAY 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
-     ifvare AMIFORM? 0
+     setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+     addlogvar MISCARRAYID_AMOUNTTEMP
+     ifvare MISCARRAYID_AMOUNTTEMP 0
      {
       ifvarg TEMPVAR6 0
       {
-       setvar AMIFORM? 2
+       setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 2 // AMI-FORM?
        globalsound TELEPORTER
       }
       else
@@ -1911,15 +1913,15 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       }
      }
      else
-     ifvare AMIFORM? 1
+     ifvare MISCARRAYID_AMOUNTTEMP 1
      {
-      setvar AMIFORM? 0
+      setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // AMI-FORM?
       globalsound TELEPORTER
      }
      else
-     ifvare AMIFORM? 2
+     ifvare MISCARRAYID_AMOUNTTEMP 2
      {
-      setvar AMIFORM? 1
+      setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // AMI-FORM?
       globalsound TELEPORTER
      }
     }
@@ -1941,11 +1943,12 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
      setvar CHARACTERARRAY 13
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
-     ifvare MINAKOFORM? 0
+     setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0
      {
       ifvarg TEMPVAR6 0
       {
-       setvar MINAKOFORM? 2
+       setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 2 // MINAKO-FORM?
        globalsound TELEPORTER
       }
       else
@@ -1956,15 +1959,15 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       }
      }
      else
-     ifvare MINAKOFORM? 1
+     ifvare MISCARRAYID_AMOUNTTEMP 1
      {
-      setvar MINAKOFORM? 0
+      setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MINAKO-FORM?
       globalsound TELEPORTER
      }
      else
-     ifvare MINAKOFORM? 2
+     ifvare MISCARRAYID_AMOUNTTEMP 2
      {
-      setvar MINAKOFORM? 1
+      setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // MINAKO-FORM?
       globalsound TELEPORTER
      }
     }
@@ -2038,17 +2041,19 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
      setvar CHARACTERARRAY 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
-     ifvare AMIFORM? 0
+     setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+     addlogvar MISCARRAYID_AMOUNTTEMP
+     ifvare MISCARRAYID_AMOUNTTEMP 0
      {
-      setvar AMIFORM? 1
+      setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // AMI-FORM?
       globalsound TELEPORTER
      }
      else
-     ifvare AMIFORM? 1
+     ifvare MISCARRAYID_AMOUNTTEMP 1
      {
       ifvarg TEMPVAR6 0
       {
-       setvar AMIFORM? 2
+       setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 2 // AMI-FORM?
        globalsound TELEPORTER
       }
       else
@@ -2059,9 +2064,9 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       }
      }
      else
-     ifvare AMIFORM? 2
+     ifvare MISCARRAYID_AMOUNTTEMP 2
      {
-      setvar AMIFORM? 0
+      setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // AMI-FORM?
       globalsound TELEPORTER
      }
     }
@@ -2083,17 +2088,18 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
     {
      setvar CHARACTERARRAY 13
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
-     ifvare MINAKOFORM? 0
+     setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0
      {
-      setvar MINAKOFORM? 1
+      setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // MINAKO-FORM?
       globalsound TELEPORTER
      }
      else
-     ifvare MINAKOFORM? 1
+     ifvare MISCARRAYID_AMOUNTTEMP 1
      {
       ifvarg TEMPVAR6 0
       {
-       setvar MINAKOFORM? 2
+       setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 2 // MINAKO-FORM?
        globalsound TELEPORTER
       }
       else
@@ -2104,9 +2110,9 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       }
      }
      else
-     ifvare MINAKOFORM? 2
+     ifvare MISCARRAYID_AMOUNTTEMP 2
      {
-      setvar MINAKOFORM? 0
+      setvar MISCARRAYID 113 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MINAKO-FORM?
       globalsound TELEPORTER
      }
     }

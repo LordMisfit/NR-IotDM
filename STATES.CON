@@ -809,9 +809,11 @@ state char_firedamage_misc
            {
             ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6 // 16.6% Damage under water
             ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 } // 29% damage while in water
-            ifvare AMIFORM? 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage in Civilian form
-            ifvare AMIFORM? 1 divvar TEMPDAMAGEVAR 2 // 50% Damage in Senshi Form
-            ifvare AMIFORM? 2 divvar TEMPDAMAGEVAR 3 // 33% Damage in Balanced Form
+
+            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage in Civilian form
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage in Senshi Form
+            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage in Balanced Form
             ifvarand PLAYERSTATUS? 256 // Mercury Aqua Protection buff
             {
              ifp pducking divvar TEMPDAMAGEVAR 25 // 4% Damage while crouching and using MAP
@@ -830,12 +832,13 @@ state char_firedamage_misc
            ifvare CHARACTERSELECTED? 11 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // Paula [66% Damage]
            ifvare CHARACTERSELECTED? 13 // Minako
            {
-            ifvare MINAKOFORM? 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage in Civilian form
-            ifvare MINAKOFORM? 1 divvar TEMPDAMAGEVAR 2 // 50% Damage in Senshi Form
-            ifvare MINAKOFORM? 2 divvar TEMPDAMAGEVAR 3 // 33% Damage in Balanced Form
+            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage in Civilian form
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage in Senshi Form
+            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage in Balanced Form
             mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 // 66% Damage from Fire
            }           
-		   ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
+           ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
            ifvare CHARACTERSELECTED? 15 divvar TEMPDAMAGEVAR 6 // Maken [17% Damage]
 ends
 
@@ -851,9 +854,10 @@ state char_icedamage_misc
             ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6
             ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 }
 
-            ifvare AMIFORM? 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare AMIFORM? 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare AMIFORM? 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
+            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
             ifvarand PLAYERSTATUS? 256
             {
              ifp pducking divvar TEMPDAMAGEVAR 25 // 4% Damage
@@ -880,9 +884,10 @@ state char_icedamage_misc
            }
            ifvare CHARACTERSELECTED? 13 // Minako
            {
-            ifvare MINAKOFORM? 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare MINAKOFORM? 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare MINAKOFORM? 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
+            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
            }
            ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
 ends
@@ -898,9 +903,10 @@ state char_elecdamage_misc
             ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6
             ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 }
 
-            ifvare AMIFORM? 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare AMIFORM? 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare AMIFORM? 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
+            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
             ifvarand PLAYERSTATUS? 256
             {
              ifp pducking divvar TEMPDAMAGEVAR 25 // 4% Damage
@@ -922,9 +928,10 @@ state char_elecdamage_misc
            }
            ifvare CHARACTERSELECTED? 13 // Minako
            {
-            ifvare MINAKOFORM? 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare MINAKOFORM? 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare MINAKOFORM? 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
+            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
            }
            ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
 ends
@@ -23718,9 +23725,10 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
                ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPVAR 6
                ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPVAR 2 divvar TEMPVAR 7 }
 
-               ifvare AMIFORM? 0 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133% Damage
-               else ifvare AMIFORM? 1 divvar TEMPVAR 2 // 50% Damage
-               else ifvare AMIFORM? 2 divvar TEMPVAR 3 // 33% Damage
+               setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133% Damage
+               else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPVAR 2 // 50% Damage
+               else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPVAR 3 // 33% Damage
                ifvarand PLAYERSTATUS? 256
                {
                 ifp pducking divvar TEMPVAR 25 else divvar TEMPVAR 5
@@ -24751,9 +24759,10 @@ state player-newpurplelava_dmg
                 ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPVAR 6
                 ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPVAR 2 divvar TEMPVAR 7 }
 
-                ifvare AMIFORM? 0 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133% Damage
-                else ifvare AMIFORM? 1 divvar TEMPVAR 2 // 50% Damage
-                else ifvare AMIFORM? 2 divvar TEMPVAR 3 // 33% Damage
+                setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+                ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133% Damage
+                else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPVAR 2 // 50% Damage
+                else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPVAR 3 // 33% Damage
                 ifvarand PLAYERSTATUS? 256
                 {
                  ifp pducking divvar TEMPVAR 25 else divvar TEMPVAR 5
@@ -27331,9 +27340,10 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 4
      {
-      ifvare AMIFORM? 0 { mulvar tempe 4 divvar tempe 3 }
-      else ifvare AMIFORM? 1 divvar tempe 2
-      else ifvare AMIFORM? 2 divvar tempe 3
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 }
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2
+      else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3
       ifvarand PLAYERSTATUS? 256
       {
        ifp pducking divvar tempe 25 else divvar tempe 5
@@ -27358,9 +27368,10 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 13
      {
-      ifvare MINAKOFORM? 0 { mulvar tempe 4 divvar tempe 3 }
-      else ifvare MINAKOFORM? 1 divvar tempe 2
-      else ifvare MINAKOFORM? 2 divvar tempe 3
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 }
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2
+      else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3
      }
      else ifvare CHARACTERSELECTED? 14 divvar tempe 3
     }
@@ -27429,9 +27440,10 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 4
      {
-      ifvare AMIFORM? 0 { mulvar tempe 4 divvar tempe 3 }
-      else ifvare AMIFORM? 1 divvar tempe 2
-      else ifvare AMIFORM? 2 divvar tempe 3
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 }
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2
+      else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3
 
       // Nyx Gloves Deterrant
       state nyxgloveschecker ifvare DAMAGEMODIFIER 0 { ifrnd 212 state addpoison_overridevehicle }
@@ -27496,9 +27508,10 @@ state keypadhandscannerdamage
      else
      ifvare CHARACTERSELECTED? 13
      {
-      ifvare MINAKOFORM? 0 { mulvar tempe 4 divvar tempe 3 }
-      else ifvare MINAKOFORM? 1 divvar tempe 2
-      else ifvare MINAKOFORM? 2 divvar tempe 3
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+      ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 }
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2
+      else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3
 
       // Nyx Gloves Deterrant
       state nyxgloveschecker ifvare DAMAGEMODIFIER 0 { ifrnd 212 state addpoison_overridevehicle }

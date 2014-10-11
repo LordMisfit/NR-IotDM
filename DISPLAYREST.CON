@@ -1703,9 +1703,10 @@ else
      }
      ifvare CHARACTERSELECTED? 4
      { 
-      ifvare AMIFORM? 0 redefinequote 318 AMI MIZUNO [CIVILIAN]
-      ifvare AMIFORM? 1 redefinequote 318 AMI MIZUNO [SENSHI]
-      ifvare AMIFORM? 2
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 318 AMI MIZUNO [CIVILIAN]
+      ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 318 AMI MIZUNO [SENSHI]
+      ifvare MISCARRAYID_AMOUNTTEMP 2
       {
        redefinequote 318 AMI MIZUNO [BALANCED]
        setvarvar TEMPVAR6 CURRENTENERGYPOINTS
@@ -1760,9 +1761,10 @@ else
      }
      ifvare CHARACTERSELECTED? 13
      {
-      ifvare MINAKOFORM? 0 redefinequote 318 MINAKO AINO [CIVILIAN]
-      ifvare MINAKOFORM? 1 redefinequote 318 MINAKO AINO [SENSHI]
-      ifvare MINAKOFORM? 2
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+      ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 318 MINAKO AINO [CIVILIAN]
+      ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 318 MINAKO AINO [SENSHI]
+      ifvare MISCARRAYID_AMOUNTTEMP 2
       {
        redefinequote 318 MINAKO AINO [BALANCED]
        setvarvar TEMPVAR6 CURRENTENERGYPOINTS
@@ -2016,9 +2018,10 @@ else
      }
      ifvare CHARACTERSELECTED? 4
      {
-      ifvare AMIFORM? 0 setvar tilenum 7939
-      else ifvare AMIFORM? 1 setvar tilenum 7963
-      else ifvare AMIFORM? 2
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
+      else ifvare MISCARRAYID_AMOUNTTEMP 2
       {
        setvar tilenum 7966
        setvarvar TEMPVAR6 CURRENTENERGYPOINTS
@@ -2037,9 +2040,10 @@ else
      ifvare CHARACTERSELECTED? 12 setvar tilenum 7947
      ifvare CHARACTERSELECTED? 13
      {
-      ifvare MINAKOFORM? 0 setvar tilenum 7948
-      else ifvare MINAKOFORM? 1 setvar tilenum 7965
-      else ifvare MINAKOFORM? 2 
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+      ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
+      else ifvare MISCARRAYID_AMOUNTTEMP 2 
       {
        setvar tilenum 7968
        setvarvar TEMPVAR6 CURRENTENERGYPOINTS
@@ -4516,7 +4520,13 @@ else
                ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7938 
           else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7962 
          } // Bubsy
-         else ifvare TEMPHITCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar TEMPVAR2 7939 else ifvare AMIFORM? 1 setvar TEMPVAR2 7963 else ifvare AMIFORM? 2 setvar TEMPVAR2 7966 } // Ami
+         else ifvare TEMPHITCHARACTERVAR 4
+         {
+               setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7939 
+          else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7963 
+          else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar TEMPVAR2 7966 
+         } // Ami
          else ifvare TEMPHITCHARACTERVAR 5 setvar TEMPVAR2 7940 // Lo Wang
          else ifvare TEMPHITCHARACTERVAR 6 setvar TEMPVAR2 7941 // ESSence
          else ifvare TEMPHITCHARACTERVAR 7 setvar TEMPVAR2 7942 // Ted
@@ -4525,7 +4535,13 @@ else
          else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar TEMPVAR2 7945 else ifvare NETHRAFORM? 1 setvar TEMPVAR2 7964 } // Nethra/Christina
          else ifvare TEMPHITCHARACTERVAR 11 setvar TEMPVAR2 7946 // Paula
          else ifvare TEMPHITCHARACTERVAR 12 setvar TEMPVAR2 7947 // Lori
-         else ifvare TEMPHITCHARACTERVAR 13 { ifvare MINAKOFORM? 0 setvar TEMPVAR2 7948 else ifvare MINAKOFORM? 1 setvar TEMPVAR2 7965 else ifvare MINAKOFORM? 2 setvar TEMPVAR2 7968 } // Minako
+         else ifvare TEMPHITCHARACTERVAR 13 
+         {
+               setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+               ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7948 
+          else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7965 
+          else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar TEMPVAR2 7968 
+         } // Minako
          else ifvare TEMPHITCHARACTERVAR 14 setvar TEMPVAR2 7957 // Mystery Lady
          else ifvare TEMPHITCHARACTERVAR 15 setvar TEMPVAR2 7971 // Maken
          else setvar TEMPVAR2 7955 // ?
@@ -4541,7 +4557,13 @@ else
               ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7938 
          else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7962 
         } // Bubsy
-        else ifvare TEMPHITCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar TEMPVAR2 7939 else ifvare AMIFORM? 1 setvar TEMPVAR2 7963 else ifvare AMIFORM? 2 setvar TEMPVAR2 7966 } // Ami
+        else ifvare TEMPHITCHARACTERVAR 4
+        {
+              setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+              ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7939 
+         else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7963 
+         else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar TEMPVAR2 7966 
+        } // Ami
         else ifvare TEMPHITCHARACTERVAR 5 setvar TEMPVAR2 7940 // Lo Wang
         else ifvare TEMPHITCHARACTERVAR 6 setvar TEMPVAR2 7941 // ESSence
         else ifvare TEMPHITCHARACTERVAR 7 setvar TEMPVAR2 7942 // Ted
@@ -4550,7 +4572,13 @@ else
         else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar TEMPVAR2 7945 else ifvare NETHRAFORM? 1 setvar TEMPVAR2 7964 } // Nethra/Christina
         else ifvare TEMPHITCHARACTERVAR 11 setvar TEMPVAR2 7946 // Paula
         else ifvare TEMPHITCHARACTERVAR 12 setvar TEMPVAR2 7947 // Lori
-        else ifvare TEMPHITCHARACTERVAR 13 { ifvare MINAKOFORM? 0 setvar TEMPVAR2 7948 else ifvare MINAKOFORM? 1 setvar TEMPVAR2 7965 else ifvare MINAKOFORM? 2 setvar TEMPVAR2 7968 } // Minako
+        else ifvare TEMPHITCHARACTERVAR 13 
+        {
+              setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+              ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7948 
+         else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7965 
+         else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar TEMPVAR2 7968 
+        } // Minako
         else ifvare TEMPHITCHARACTERVAR 14 setvar TEMPVAR2 7957 // Mystery Lady
         else ifvare TEMPHITCHARACTERVAR 15 setvar TEMPVAR2 7971 // Maken
         else setvar TEMPVAR2 7955 // ?
@@ -4581,7 +4609,11 @@ else
          ifvare TEMPHITCHARACTERVAR 1 setvar MELEEATTACKER 7911
          else ifvare TEMPHITCHARACTERVAR 2 setvar MELEEATTACKER 7912
          else ifvare TEMPHITCHARACTERVAR 3 setvar MELEEATTACKER 7913
-         else ifvare TEMPHITCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar MELEEATTACKER 7927 else setvar MELEEATTACKER 7914 }
+         else ifvare TEMPHITCHARACTERVAR 4 
+         {
+          setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar MELEEATTACKER 7927 else setvar MELEEATTACKER 7914 
+         }
          else ifvare TEMPHITCHARACTERVAR 5 { setvar MELEEATTACKER 7915 setvarvar MELEEATTACKERPAL 15 }
          else ifvare TEMPHITCHARACTERVAR 6 setvar MELEEATTACKER 7916
          else ifvare TEMPHITCHARACTERVAR 7 setvar MELEEATTACKER 7917
@@ -4590,7 +4622,11 @@ else
          else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar MELEEATTACKER 7926 else ifvare NETHRAFORM? 1 setvar MELEEATTACKER 7920 }
          else ifvare TEMPHITCHARACTERVAR 11 setvar MELEEATTACKER 7921
          else ifvare TEMPHITCHARACTERVAR 12 setvar MELEEATTACKER 7922
-         else ifvare TEMPHITCHARACTERVAR 13 { ifvare MINAKOFORM? 0 setvar MELEEATTACKER 7928 else setvar MELEEATTACKER 7923 }
+         else ifvare TEMPHITCHARACTERVAR 13 
+         {
+          setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar MELEEATTACKER 7928 else setvar MELEEATTACKER 7923 
+         }
          else ifvare TEMPHITCHARACTERVAR 14 setvar MELEEATTACKER 7924
          else ifvare TEMPHITCHARACTERVAR 15 setvar MELEEATTACKER 7925
          else { setvar MELEEATTACKER APLAYER setvar atkz 21845 }
@@ -5137,7 +5173,13 @@ else
             ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7938 
        else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7962 
       } // Bubsy
-      else ifvare TEMPATKCHARACTERVAR 4 { ifvare AMIFORM? 0 setvar TEMPVAR2 7939 else ifvare AMIFORM? 1 setvar TEMPVAR2 7963 else ifvare AMIFORM? 2 setvar TEMPVAR2 7966 } // Ami
+      else ifvare TEMPATKCHARACTERVAR 4 
+      {
+            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7939 
+       else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7963 
+       else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar TEMPVAR2 7966 
+      } // Ami
       else ifvare TEMPATKCHARACTERVAR 5 setvar TEMPVAR2 7940 // Lo Wang
       else ifvare TEMPATKCHARACTERVAR 6 setvar TEMPVAR2 7941 // ESSence
       else ifvare TEMPATKCHARACTERVAR 7 setvar TEMPVAR2 7942 // Ted
@@ -5146,7 +5188,13 @@ else
       else ifvare TEMPATKCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar TEMPVAR2 7945 else ifvare NETHRAFORM? 1 setvar TEMPVAR2 7964 } // Nethra/Christina
       else ifvare TEMPATKCHARACTERVAR 11 setvar TEMPVAR2 7946 // Paula
       else ifvare TEMPATKCHARACTERVAR 12 setvar TEMPVAR2 7947 // Lori
-      else ifvare TEMPATKCHARACTERVAR 13 { ifvare MINAKOFORM? 0 setvar TEMPVAR2 7948 else ifvare MINAKOFORM? 1 setvar TEMPVAR2 7965 else ifvare MINAKOFORM? 2 setvar TEMPVAR2 7968 } // Minako
+      else ifvare TEMPATKCHARACTERVAR 13 
+      {
+            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7948 
+       else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7965 
+       else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar TEMPVAR2 7968 
+      } // Minako
       else ifvare TEMPATKCHARACTERVAR 14 setvar TEMPVAR2 7957 // Mystery Lady
       else ifvare TEMPATKCHARACTERVAR 15 setvar TEMPVAR2 7971 // Maken
       else setvar TEMPVAR2 7955 // ?

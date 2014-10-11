@@ -8788,7 +8788,10 @@ state menuamistats
    setvar CHARACTERARRAY 4
    ifvare CHARACTERSELECTED? 4 state shadepulse4
    state characterplate
-   ifvare AMIFORM? 0 setvar tilenum 7939 else ifvare AMIFORM? 1 setvar tilenum 7963 else ifvarg AMIFORM? 1 setvar tilenum 7966 
+
+   setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963 else ifvarg MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7966 
+
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1 state pal2 else state pal0
    state rs 
@@ -12553,7 +12556,8 @@ state menuminakostats
    setvar CHARACTERARRAY 13
    ifvare CHARACTERSELECTED? 13 state shadepulse4
    state characterplate
-   ifvare MINAKOFORM? 0 setvar tilenum 7948 else ifvare MINAKOFORM? 1 setvar tilenum 7965 else ifvarg MINAKOFORM? 1 setvar tilenum 7968 
+   setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+   ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965 else ifvarg MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7968 
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1 state pal2 else state pal0
    state rs 
@@ -14208,24 +14212,27 @@ state hackervision
           state shade0
           ifvarand TEMPVAR 8 // Ami
           {
-	     setvar digx 170
-	     ifvare AMIFORM? 0 setvar tilenum 7939 else ifvare AMIFORM? 1 setvar tilenum 7963 else ifvare AMIFORM? 2 setvar tilenum 7966
+           setvar digx 170
+
+           setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+           ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963 else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
+
            ifvare AMI? 1 state shadepulse
-	     setvar CHARACTERARRAY 4
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 4
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 16 // Lo Wang
           {
-	     setvar digx 190
-	     setvar tilenum 7940
+           setvar digx 190
+           setvar tilenum 7940
            ifvare LOWANG? 1 state shadepulse
-	     setvar CHARACTERARRAY 5
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 5
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
    
@@ -14276,48 +14283,49 @@ state hackervision
           state shade0
           ifvarand TEMPVAR 512 // Nethra
           {
-	     setvar digx 190
+           setvar digx 190
            ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvare NETHRAFORM? 1 setvar tilenum 7964
            ifvare NETHRA? 1 state shadepulse
-	     setvar CHARACTERARRAY 10
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 10
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
 
-	    setvar digy 110
+          setvar digy 110
           ifvarand TEMPVAR 1024 // Paula
           {
-	     setvar digx 110 // 110
-	     setvar tilenum 7946
+           setvar digx 110 // 110
+           setvar tilenum 7946
            ifvare PAULA? 1 state shadepulse
-	     setvar CHARACTERARRAY 11
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 11
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 2048 // Lori
           {
-	     setvar digx 130 // 130
-	     setvar tilenum 7947
+           setvar digx 130 // 130
+           setvar tilenum 7947
            ifvare LORI? 1 state shadepulse
-	     setvar CHARACTERARRAY 12
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 12
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 4096 // Minako
           {
-	     setvar digx 150 // 150
-	     ifvare MINAKOFORM? 0 setvar tilenum 7948 else ifvare MINAKOFORM? 1 setvar tilenum 7965 else ifvare MINAKOFORM? 2 setvar tilenum 7968
+           setvar digx 150 // 150
+           setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+           ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965 else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
            ifvare MINAKO? 1 state shadepulse
-	     setvar CHARACTERARRAY 13
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 13
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 8192 // "Mystery Lady"
@@ -27943,9 +27951,10 @@ state showsupport_amiicon
     {
      getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI TEMPVAR
 
-     ifvare AMIFORM? 0 setvar tilenum 7939
-     else ifvare AMIFORM? 1 setvar tilenum 7963
-     else ifvare AMIFORM? 2 setvar tilenum 7966
+     setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
+     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
      state digz12288 // 16384
      state pal0
      state rs
@@ -28289,9 +28298,10 @@ state showsupport_minakoicon
     {
      getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO TEMPVAR
 
-     ifvare MINAKOFORM? 0 setvar tilenum 7948
-     else ifvare MINAKOFORM? 1 setvar tilenum 7965
-     else ifvare MINAKOFORM? 2 setvar tilenum 7968
+     setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
+     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
+     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
      state digz12288 // 16384
      state pal0
      state rs

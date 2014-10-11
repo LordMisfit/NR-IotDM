@@ -1926,9 +1926,9 @@ state shop_showcharacterportraits
     else ifvare CHARACTERSELECTED? 4 
     {
           setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-          ifvare AMIFORM? 0 setvar tilenum 7939 
-     else ifvare AMIFORM? 1 setvar tilenum 7963 
-     else ifvare AMIFORM? 2 setvar tilenum 7966 
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939 
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963 
+     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966 
     } // Ami
     else ifvare CHARACTERSELECTED? 5 setvar tilenum 7940 // Lo Wang
     else ifvare CHARACTERSELECTED? 6 setvar tilenum 7941 // ESSence
@@ -1946,9 +1946,9 @@ state shop_showcharacterportraits
     else ifvare CHARACTERSELECTED? 13 
     {
           setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM
-          ifvare MINAKOFORM? 0 setvar tilenum 7948 
-     else ifvare MINAKOFORM? 1 setvar tilenum 7965 
-     else ifvare MINAKOFORM? 2 setvar tilenum 7968 
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948 
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965 
+     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968 
     } // Minako
     else ifvare CHARACTERSELECTED? 14 setvar tilenum 7957 // Mystery Lady
     else ifvare CHARACTERSELECTED? 15 setvar tilenum 7971 // Maken
