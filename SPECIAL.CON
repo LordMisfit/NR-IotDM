@@ -3932,7 +3932,8 @@ addvar TEMPVAR NETHRALIFTSTRENGTHMIN
 setactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH TEMPVAR
 setactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED 0
 setactorvar[CHARACTERARRAY].CHARACTERDEATHS 0
-ifvare NETHRAFORM? 0 setvar TEMPVAR4 16 else setvar TEMPVAR4 2
+setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR4 16 else setvar TEMPVAR4 2
 mulvar TEMPVAR4 10
 setactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER TEMPVAR4
 setactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER 260
@@ -6581,7 +6582,8 @@ state addtokillamounts
  ifvarl TEMPVAR2 1 setvar TEMPVAR2 1
  ifvare CHARACTERSELECTED? 10
  {
-  ifvare NETHRAFORM? 1
+  setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 1
   {
    ifvarg TEMPVAR2 5 nullop else state gemring_drops // Christina has a 5/16 (31.25%) chance of making enemies drop gems upon death
   }
@@ -11300,7 +11302,8 @@ state menunethrastats
    setvar CHARACTERARRAY 10
    ifvare CHARACTERSELECTED? 10 state shadepulse4
    state characterplate
-   ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvarg NETHRAFORM? 0 setvar tilenum 7964 
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945 else ifvarg MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7964 
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1 state pal2 else state pal0
    state rs 
@@ -11310,8 +11313,9 @@ state menunethrastats
    setvar digx 194
    setvar digy 38
    state pal23
-   ifvare NETHRAFORM? 0 redefinequote 332 NETHRA MABOROSHI
-   else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA MITCHELL
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA MABOROSHI
+   else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA MITCHELL
    state mt
    setvar digy 44
    state pal20
@@ -14174,27 +14178,27 @@ state hackervision
 	    setvar diga 0
 	    state digz16384        
  
-	    setvar digy 70
+          setvar digy 70
           ifvarand TEMPVAR 1 // Duke
           {
-	     setvar digx 110
-	     setvar tilenum 7936
-	     ifvare DUKE? 1 state shadepulse
-	     setvar CHARACTERARRAY 1
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar digx 110
+           setvar tilenum 7936
+           ifvare DUKE? 1 state shadepulse
+           setvar CHARACTERARRAY 1
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 2 // Jack
           {
-	     setvar digx 130
-	     setvar tilenum 7937
+           setvar digx 130
+           setvar tilenum 7937
            ifvare JACK? 1 state shadepulse
-	     setvar CHARACTERARRAY 2
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 2
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 4 // Bubsy
@@ -14236,55 +14240,56 @@ state hackervision
           }
           state shade0
    
-	    setvar digy 90
+          setvar digy 90
           ifvarand TEMPVAR 32 // ESSence
           {
-	     setvar digx 110
-	     setvar tilenum 7941
+           setvar digx 110
+           setvar tilenum 7941
            ifvare ESSENCE? 1 state shadepulse
-	     setvar CHARACTERARRAY 6
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 6
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 64 // Ted
           {
-	     setvar digx 130
-	     setvar tilenum 7942
+           setvar digx 130
+           setvar tilenum 7942
            ifvare TED? 1 state shadepulse
-	     setvar CHARACTERARRAY 7
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 7
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 128 // Lisa
           {
-	     setvar digx 150
-	     setvar tilenum 7943
+           setvar digx 150
+           setvar tilenum 7943
            ifvare LISA? 1 state shadepulse
-	     setvar CHARACTERARRAY 8
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 8
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 256 // Cybanis
           {
-	     setvar digx 170
-	     setvar tilenum 7944
+           setvar digx 170
+           setvar tilenum 7944
            ifvare CYBANIS? 1 state shadepulse
-	     setvar CHARACTERARRAY 9
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 9
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 512 // Nethra
           {
            setvar digx 190
-           ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvare NETHRAFORM? 1 setvar tilenum 7964
+           setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+           ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
            ifvare NETHRA? 1 state shadepulse
            setvar CHARACTERARRAY 10
            getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
@@ -14330,24 +14335,24 @@ state hackervision
           state shade0
           ifvarand TEMPVAR 8192 // "Mystery Lady"
           {
-	     setvar digx 170 // 170
-	     setvar tilenum 7957
+           setvar digx 170 // 170
+           setvar tilenum 7957
            ifvare MYSTERY1? 1 state shadepulse
-	     setvar CHARACTERARRAY 14
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 14
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
           ifvarand TEMPVAR 16384 // Maken
           {
-	     setvar digx 190 // 100
-	     setvar tilenum 7971
+           setvar digx 190 // 100
+           setvar tilenum 7971
            ifvare MAKEN? 1 state shadepulse
-	     setvar CHARACTERARRAY 15
-	     getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
-	     ifvarand TEMP2 1 state pal2 else state pal0
-	     state rs
+           setvar CHARACTERARRAY 15
+           getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP2
+           ifvarand TEMP2 1 state pal2 else state pal0
+           state rs
           }
           state shade0
          }
@@ -25345,8 +25350,9 @@ state nonactivecharstatcalc
        ifvare CHARACTERARRAY 9 redefinequote 747 ^22CYBANIS LEVELS UP! (
        ifvare CHARACTERARRAY 10 
        { 
-        ifvare NETHRAFORM? 0 redefinequote 747 ^22NETHRA LEVELS UP! (
-        else ifvare NETHRAFORM? 1 redefinequote 747 ^22CHRISTINA LEVELS UP! (
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 747 ^22NETHRA LEVELS UP! (
+        else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 747 ^22CHRISTINA LEVELS UP! (
        }
        ifvare CHARACTERARRAY 11 redefinequote 747 ^22PAULA LEVELS UP! (
        ifvare CHARACTERARRAY 12 redefinequote 747 ^22LORI LEVELS UP! (
@@ -28184,8 +28190,9 @@ state showsupport_nethraicon
 
      state pal0
      state digz12288 // 16384
-     ifvare NETHRAFORM? 0 setvar tilenum 7945
-     else ifvare NETHRAFORM? 1 setvar tilenum 7964
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
      state rs
  
      addvar digx 82
@@ -28205,8 +28212,9 @@ state showsupport_nethraicon
      state supportfonts1
      state orientation2
      state setquote332
-     ifvare NETHRAFORM? 0 redefinequote 332 NETHRA MABOROSHI
-     else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA MITCHELL
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA MABOROSHI
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA MITCHELL
      state mt
 
      addvar digx 84

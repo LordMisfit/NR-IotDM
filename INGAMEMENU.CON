@@ -2245,7 +2245,8 @@ ifvare mainmenu 1
    }
    ifvare mainmenuselection 9 // Nethra Selected
    {
-    ifvare NETHRAFORM? 0
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0
     {
      ifvare NETHRA? 0 redefinequote 332 ADDS NETHRA MARBOROSHI TO YOUR CURRENT GROUP OF CHARACTERS.
      else redefinequote 332 REMOVES NETHRA MARBOROSHI TO YOUR CURRENT GROUP OF CHARACTERS.
@@ -5981,21 +5982,25 @@ ifvare mainmenusubmenu 3
    { 
     setvar CHARACTERARRAY 10
     ifvare CHARACTERSELECTED? 10 state shadepulse4
-    ifvare NETHRAFORM? 0 setvar tilenum 7945
-    else ifvare NETHRAFORM? 1 setvar tilenum 7964
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
     {
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvarl TEMPVAR 1 state pal2 else state pal0
     } 
     state rs 
-    ifvare NETHRAFORM? 0 setvar digx 126
-    else ifvare NETHRAFORM? 1 setvar digx 122
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar digx 126
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar digx 122
     setvar digy 38
     state pal23
     state orientation2
     state setquote332
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA MABOROSHI
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA MITCHELL
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA MABOROSHI
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA MITCHELL
         
     state mt
 
@@ -6786,14 +6791,16 @@ ifvare mainmenusubmenu 4
    { 
     setvar CHARACTERARRAY 10
     ifvare CHARACTERSELECTED? 10 state shadepulse4
-    ifvare NETHRAFORM? 0 setvar digx 126
-    else ifvare NETHRAFORM? 1 setvar digx 122
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar digx 126
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar digx 122
     setvar digy 38
     state pal23
     state orientation2
     state setquote332
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA MABOROSHI
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA MITCHELL
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA MABOROSHI
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA MITCHELL
         
     state mt
 
@@ -6838,8 +6845,9 @@ ifvare mainmenusubmenu 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
     }
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA RESURRECTS ONE CHARACTER WITH 40% OF
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA RESURRECTS ONE CHARACTER WITH 40% OF
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA RESURRECTS ONE CHARACTER WITH 40% OF
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA RESURRECTS ONE CHARACTER WITH 40% OF
     state mt
     setvar digx 70 // 88 (-34)
     setvar digy 58 // 44 (+26)
@@ -6897,8 +6905,9 @@ ifvare mainmenusubmenu 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
     }
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA WILL HEAL ONE PERSON'S HP BY 33%, UP
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA WILL HEAL ONE PERSON'S HP BY 33%, UP
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL HEAL ONE PERSON'S HP BY 33%, UP
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA WILL HEAL ONE PERSON'S HP BY 33%, UP
     state mt
     setvar digx 70 // 88 (-34)
     setvar digy 76 // 44 (+26)
@@ -6956,8 +6965,9 @@ ifvare mainmenusubmenu 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
     }
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA WILL CURE "DIMNESS", "POISON" AND 
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA WILL CURE "DIMNESS", "POISON" AND
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL CURE "DIMNESS", "POISON" AND 
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA WILL CURE "DIMNESS", "POISON" AND
     state mt
     setvar digx 70 // 88 (-34)
     setvar digy 94 // 44 (+26)
@@ -7015,8 +7025,9 @@ ifvare mainmenusubmenu 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
     }
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA WILL HEAL ONE PERSON'S HP BY 66%, UP
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA WILL HEAL ONE PERSON'S HP BY 66%, UP
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL HEAL ONE PERSON'S HP BY 66%, UP
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA WILL HEAL ONE PERSON'S HP BY 66%, UP
     state mt
     setvar digx 70 // 88 (-34)
     setvar digy 112 // 44 (+26)
@@ -7075,8 +7086,9 @@ ifvare mainmenusubmenu 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
     }
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA RESURRECTS ONE CHARACTER WITH 80% OF
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA RESURRECTS ONE CHARACTER WITH 80% OF
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA RESURRECTS ONE CHARACTER WITH 80% OF
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA RESURRECTS ONE CHARACTER WITH 80% OF
     state mt
     setvar digx 70 // 88 (-34)
     setvar digy 130 // 44 (+26)
@@ -7134,8 +7146,9 @@ ifvare mainmenusubmenu 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
     }
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA WILL CURE "DIMNESS", "POISON", 
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA WILL CURE "DIMNESS", "POISON",
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL CURE "DIMNESS", "POISON", 
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA WILL CURE "DIMNESS", "POISON",
     state mt
     setvar digx 70 // 88 (-34)
     setvar digy 148 // 44 (+26)
@@ -8927,19 +8940,27 @@ ifvare mainmenusubmenu 5
    { 
     setvar CHARACTERARRAY 10
     ifvare CHARACTERSELECTED? 10 state shadepulse4
-    ifvare NETHRAFORM? 0 setvar tilenum 7945
-    else ifvare NETHRAFORM? 1 setvar tilenum 7964
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
+
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
-    ifvare NETHRAFORM? 0 setvar digx 126
-    else ifvare NETHRAFORM? 1 setvar digx 122
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar digx 126
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar digx 122
+
     setvar digy 38
     state pal23
     state orientation2
     state setquote332
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA MABOROSHI
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA MITCHELL
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA MABOROSHI
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA MITCHELL
     state mt
 
     setvar tilenum 2822 // 3072 
@@ -9944,19 +9965,25 @@ ifvare mainmenusubmenu 6
    { 
     setvar CHARACTERARRAY 10
     ifvare CHARACTERSELECTED? 10 state shadepulse4
-    ifvare NETHRAFORM? 0 setvar tilenum 7945
-    else ifvare NETHRAFORM? 1 setvar tilenum 7964
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
     ifvarl TEMPVAR 1 state pal2 else state pal0
     state rs 
-    ifvare NETHRAFORM? 0 setvar digx 126
-    else ifvare NETHRAFORM? 1 setvar digx 122
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 setvar digx 126
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar digx 122
     setvar digy 38
     state pal23
     state orientation2
     state setquote332
-    ifvare NETHRAFORM? 0 redefinequote 332 NETHRA MABOROSHI
-    else ifvare NETHRAFORM? 1 redefinequote 332 CHRISTINA MITCHELL
+
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA MABOROSHI
+    else ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 332 CHRISTINA MITCHELL
     state mt
 
     state showequipmentmenu
@@ -10724,7 +10751,8 @@ ifvare mainmenusubmenu 6
   state digz24576
   state orientation2
 
-  ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvare NETHRAFORM? 1 setvar tilenum 7964
+  setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
 
   setvar CHARACTERARRAY 10
   state checkcharacterstatuspic

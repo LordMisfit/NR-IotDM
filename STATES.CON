@@ -163,7 +163,11 @@ state slipperycode_players
   ifvare CHARACTERSELECTED? 7 setvar TEMPVAR3 381 // Ted
   ifvare CHARACTERSELECTED? 8 setvar TEMPVAR3 375 // Lisa
   ifvare CHARACTERSELECTED? 9 setvar TEMPVAR3 157 // Cybanis
-  ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 { setvar TEMPVAR3 117 } else { setvar TEMPVAR3 234 } } // Christina/Nethra
+  ifvare CHARACTERSELECTED? 10 
+  { 
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar TEMPVAR3 117 } else { setvar TEMPVAR3 234 } 
+  } // Christina/Nethra
   ifvare CHARACTERSELECTED? 11 setvar TEMPVAR3 390 // Paula
   ifvare CHARACTERSELECTED? 12 setvar TEMPVAR3 371 // Lori
   ifvare CHARACTERSELECTED? 13 setvar TEMPVAR3 410 // Minako
@@ -227,7 +231,11 @@ state slipperycode_players
   ifvare CHARACTERSELECTED? 7 setvar TEMPVAR3 381 // Ted
   ifvare CHARACTERSELECTED? 8 setvar TEMPVAR3 375 // Lisa
   ifvare CHARACTERSELECTED? 9 setvar TEMPVAR3 157 // Cybanis
-  ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 { setvar TEMPVAR3 117 } else { setvar TEMPVAR3 234 } } // Christina/Nethra
+  ifvare CHARACTERSELECTED? 10 
+  { 
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar TEMPVAR3 117 } else { setvar TEMPVAR3 234 } 
+  } // Christina/Nethra
   ifvare CHARACTERSELECTED? 11 setvar TEMPVAR3 390 // Paula
   ifvare CHARACTERSELECTED? 12 setvar TEMPVAR3 371 // Lori
   ifvare CHARACTERSELECTED? 13 setvar TEMPVAR3 410 // Minako
@@ -879,8 +887,9 @@ state char_icedamage_misc
            }
            ifvare CHARACTERSELECTED? 10 // Nethra/Christina
            {
-            ifvare NETHRAFORM? 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // 66% Damage
-            ifvare NETHRAFORM? 1 { mulvar TEMPDAMAGEVAR -2 sound ABSORB_DAMAGE } // 200% Absorbsion
+            setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // 66% Damage
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR -2 sound ABSORB_DAMAGE } // 200% Absorbsion
            }
            ifvare CHARACTERSELECTED? 13 // Minako
            {
@@ -923,8 +932,9 @@ state char_elecdamage_misc
            ifvare CHARACTERSELECTED? 9 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Cybanis [60% Damage]
            ifvare CHARACTERSELECTED? 10 // Nethra/Christina
            {
-            ifvare NETHRAFORM? 0 { mulvar TEMPDAMAGEVAR -11 divvar TEMPDAMAGEVAR 2 sound ABSORB_DAMAGE } // 550% Absorbsion
-            ifvare NETHRAFORM? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // 66% Damage
+            setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR -11 divvar TEMPDAMAGEVAR 2 sound ABSORB_DAMAGE } // 550% Absorbsion
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // 66% Damage
            }
            ifvare CHARACTERSELECTED? 13 // Minako
            {
@@ -8589,7 +8599,8 @@ state queenshootzappers
 
          ifvare CHARACTERSELECTED? 10 
          {
-          ifvare NETHRAFORM? 0 
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 
           { 
            state calcplayermaxhealthatomic
            mulvar MELEEDAMAGE 2 
@@ -16086,7 +16097,8 @@ ifvarvarg RNDMIZER RNDMIZERLIMIT
    else
    ifvare CHARACTERSELECTED? 10
    {
-    ifvare NETHRAFORM? 0 // Alien Form
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 // Alien Form
     {
      randvar RANDOMIZER 17
      ifvare RANDOMIZER 0
@@ -16181,7 +16193,8 @@ ifvarvarg RNDMIZER RNDMIZERLIMIT
      }
      ifvare oldskoolmode 0 userquote 340
     }
-    ifvare NETHRAFORM? 1 // Human Form
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 1 // Human Form
     {
      randvar RANDOMIZER 17
      ifvare RANDOMIZER 0
@@ -17507,7 +17520,11 @@ state freezeblast_frozen-player
        ifvare CHARACTERSELECTED? 4 setvar tempc 4
        ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
        ifvare CHARACTERSELECTED? 9 setvar tempc 90
-       ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 setvar tempc 18 else setvar tempc 36 }
+       ifvare CHARACTERSELECTED? 10 
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempc 18 else setvar tempc 36 
+       }
        ifvare CHARACTERSELECTED? 14 { setvar tempc 22 ifrnd 128 addvar tempc 1 }
 
        mulvarvar tempc winterclothes
@@ -17519,7 +17536,11 @@ state freezeblast_frozen-player
        ifvare CHARACTERSELECTED? 4 setvar tempb 5
        ifvare CHARACTERSELECTED? 6 setvar tempb 75
        ifvare CHARACTERSELECTED? 9 setvar tempb 100
-       ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 setvar tempb 20 else setvar tempb 40 }
+       ifvare CHARACTERSELECTED? 10 
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 20 else setvar tempb 40 
+       }
        ifvare CHARACTERSELECTED? 14 setvar tempb 25
 
        subvarvar tempb tempc
@@ -22843,7 +22864,8 @@ state playerregenhealthnormal
         else
         ifvare CHARACTERSELECTED? 10 // Nethra Maboroshi / Christina Mitchell
         { 
-         ifvare NETHRAFORM? 0 // Nethra heals 8 times faster than Christina
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 // Nethra heals 8 times faster than Christina
          {
           ifvarand PLAYERSTATUS? 8 setvar HITPOINTREGENTICS -8 // - 8 tics of Poison Damage
           else setvar HITPOINTREGENTICS 16 // + 16 tics of Healing
@@ -24067,7 +24089,8 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
               // 1 to 4 dmg per tic (12.5% chance)
               ifvare CHARACTERSELECTED? 10 
               { 
-               ifvare NETHRAFORM? 0 // Nethra in Protector Drone form will absorb Electricity and heal :P
+               setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 // Nethra in Protector Drone form will absorb Electricity and heal :P
                {
                 mulvar TEMPVAR -11
                 divvar TEMPVAR 2
@@ -24242,7 +24265,8 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
                subvarvar temp TEMPVAR
               }
 
-              ifvare CHARACTERSELECTED? 10 ifvare NETHRAFORM? 0 nullop
+              setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+              ifvare CHARACTERSELECTED? 10 ifvare MISCARRAYID_AMOUNTTEMP 0 nullop
               else
               {
                state setplayerhealthondmgflr
@@ -24260,7 +24284,8 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
 
                ifvare CHARACTERSELECTED? 10
                {
-                ifvare NETHRAFORM? 0
+                setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+                ifvare MISCARRAYID_AMOUNTTEMP 0
                 {
 /*
                  palfrom 32 64 64 64
@@ -24278,7 +24303,7 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
                 setvarvar DAMAGEHUEFACTOR TEMPVAR
                 state playerdamagehues-electrictype
                }
-               ifvare CHARACTERSELECTED? 10 ifvare NETHRAFORM? 0 nullop else sound SHORT_CIRCUIT
+               ifvare CHARACTERSELECTED? 10 ifvare MISCARRAYID_AMOUNTTEMP 0 nullop else sound SHORT_CIRCUIT
               }
          }
         }
@@ -26141,7 +26166,8 @@ state player_do_hurtrail_checks1_c
         {
          ifvare CHARACTERSELECTED? 10
          {
-          ifvare NETHRAFORM? 0
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0
           {
            setvar CEILINGDAMAGETYPE? 0
            state player-newhurtrail_dmg-nethra
@@ -26167,7 +26193,8 @@ state player_do_hurtrail_checks1_f
         {
          ifvare CHARACTERSELECTED? 10
          {
-          ifvare NETHRAFORM? 0
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0
           {
            setvar FLOORDAMAGETYPE? 0
            state player-newhurtrail_dmg-nethra
@@ -26193,7 +26220,8 @@ state player_do_hurtrail_checks1_ec
         {
          ifvare CHARACTERSELECTED? 10
          {
-          ifvare NETHRAFORM? 0
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0
           {
            setvar EMUCEILINGDAMAGETYPE? 0
            state player-newhurtrail_dmg-nethra
@@ -26219,7 +26247,8 @@ state player_do_hurtrail_checks1_ef
         {
          ifvare CHARACTERSELECTED? 10
          {
-          ifvare NETHRAFORM? 0
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0
           {
            setvar EMUFLOORDAMAGETYPE? 0
            state player-newhurtrail_dmg-nethra
@@ -27783,8 +27812,9 @@ state characterusescannerfail
          ifvare CHARACTERSELECTED? 9 redefinequote 334 ^10CYBANIS CANNOT ACCESS THIS SCANNER!
          ifvare CHARACTERSELECTED? 10 
          { 
-          ifvare NETHRAFORM? 0 redefinequote 334 ^10NETHRA CANNOT ACCESS THIS SCANNER!
-          ifvare NETHRAFORM? 1 redefinequote 334 ^10CHRISTINA CANNOT ACCESS THIS SCANNER!
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 334 ^10NETHRA CANNOT ACCESS THIS SCANNER!
+          ifvare MISCARRAYID_AMOUNTTEMP 1 redefinequote 334 ^10CHRISTINA CANNOT ACCESS THIS SCANNER!
          }
          ifvare CHARACTERSELECTED? 11 redefinequote 334 ^10PAULA CANNOT ACCESS THIS SCANNER!
          ifvare CHARACTERSELECTED? 12 redefinequote 334 ^10LORI CANNOT ACCESS THIS SCANNER!
@@ -31465,7 +31495,8 @@ state dealfreezedamage-player
         else
         ifvare CHARACTERSELECTED? 10
         {
-         ifvare NETHRAFORM? 1 nullop 
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 1 nullop 
          else
          {
           state check_winterclothes_damage

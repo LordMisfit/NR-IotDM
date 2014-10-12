@@ -655,7 +655,8 @@ state dialouge-pausedgame
    }
    ifvare CHARACTERSELECTED? 10
    {
-    ifvare NETHRAFORM? 0
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP2 0
     {
      setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7945  // dialouge-picnum
      // Quote 1031 = Name of the Speaker
@@ -721,7 +722,7 @@ state dialouge-pausedgame
       redefinequote 1030  
      }
     }
-    ifvare NETHRAFORM? 1
+    ifvare MISCARRAYID_AMOUNTTEMP2 1
     {
      setvar MISCARRAYID 61 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 7964  // dialouge-picnum
      // Quote 1031 = Name of the Speaker

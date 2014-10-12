@@ -1938,8 +1938,8 @@ state shop_showcharacterportraits
     else ifvare CHARACTERSELECTED? 10 
     { 
           setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-          ifvare NETHRAFORM? 0 setvar tilenum 7945 
-     else ifvare NETHRAFORM? 1 setvar tilenum 7964 
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945 
+     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964 
     } // Nethra/Christina
     else ifvare CHARACTERSELECTED? 11 setvar tilenum 7946 // Paula
     else ifvare CHARACTERSELECTED? 12 setvar tilenum 7947 // Lori

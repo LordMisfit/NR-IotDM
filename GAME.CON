@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git64)
-definequote 1337 ^22VERSION:^0 5.22.git64.10102014
+setgamename Naferia's Reign (5.22.git65)
+definequote 1337 ^22VERSION:^0 5.22.git65.10122014
 
 action ANULLACTION 0
 
@@ -1219,8 +1219,9 @@ action ICONNETHRAHUMAN 19 1 1 1 1
 useractor notenemy CHAR10ICON 0 
 setactor[THISACTOR].shade -63
 
-ifvare NETHRAFORM? 0 action ICONNETHRAALIEN 
-else ifvare NETHRAFORM? 1 action ICONNETHRAHUMAN
+setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+ifvare MISCARRAYID_AMOUNTTEMP 0 action ICONNETHRAALIEN 
+else ifvare MISCARRAYID_AMOUNTTEMP 1 action ICONNETHRAHUMAN
 
 ifvarn TEMP3 0
 {
@@ -1545,7 +1546,29 @@ state dmgmodcalc-player
  ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
  mulvarvar PLAYERDAMAGE DAMAGEMODIFIER
  divvar PLAYERDAMAGE 1000
- ifvarl PLAYERDAMAGE 1 setvar PLAYERDAMAGE 1
+
+ ifvare CHARACTERSELECTED? 10
+ {
+  setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 // Protector Drone Form
+  {
+   ifvare ATTACKPICNUM ZAPPER1 { ifvarl PLAYERDAMAGE 0 setvar PLAYERDAMAGE 0 } // Nethra should NEVER take even minimal damage from electric attacks. :P
+   else ifvare ATTACKPICNUM ZAPPER2 { ifvarl PLAYERDAMAGE 0 setvar PLAYERDAMAGE 0 } // Nethra should NEVER take even minimal damage from electric attacks. :P
+   else ifvare ATTACKPICNUM ZAPPER3 { ifvarl PLAYERDAMAGE 0 setvar PLAYERDAMAGE 0 } // Nethra should NEVER take even minimal damage from electric attacks. :P
+   else { ifvarl PLAYERDAMAGE 1 setvar PLAYERDAMAGE 1 }
+  }
+  else
+  ifvare MISCARRAYID_AMOUNTTEMP 1 // Human Form
+  {
+   ifvare ATTACKPICNUM FREEZEBLAST { ifvarl PLAYERDAMAGE 0 setvar PLAYERDAMAGE 0 } // Christina should NEVER take even minimal damage from ice attacks. :P
+   else { ifvarl PLAYERDAMAGE 1 setvar PLAYERDAMAGE 1 }
+  }
+ }
+ else
+ {
+  ifvarl PLAYERDAMAGE 1 setvar PLAYERDAMAGE 1
+ }
+
  ifvarvarg PLAYERDAMAGE STATLIMITMAXIMUM setvarvar PLAYERDAMAGE STATLIMITMAXIMUM
 ends
 
@@ -1928,7 +1951,8 @@ state player_electricalattackdmg
       }
       ifvare CHARACTERSELECTED? 10
       {
-       ifvare NETHRAFORM? 0
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         state calcplayermaxhealthatomic
         mulvar PLAYERDAMAGE 2 
@@ -2234,7 +2258,11 @@ state freezeblast-chilleffect_player
        ifvare CHARACTERSELECTED? 4 setvar tempc 4
        ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
        ifvare CHARACTERSELECTED? 9 setvar tempc 90
-       ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 setvar tempc 18 else setvar tempc 36 }
+       ifvare CHARACTERSELECTED? 10
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempc 18 else setvar tempc 36 
+       }
        ifvare CHARACTERSELECTED? 14 { setvar tempc 22 ifrnd 128 addvar tempc 1 }
        mulvarvar tempc winterclothes
        divvar tempc 100
@@ -2245,7 +2273,11 @@ state freezeblast-chilleffect_player
        ifvare CHARACTERSELECTED? 4 setvar tempb 5
        ifvare CHARACTERSELECTED? 6 setvar tempb 75
        ifvare CHARACTERSELECTED? 9 setvar tempb 100
-       ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 1 setvar tempb 20 else setvar tempb 40 }
+       ifvare CHARACTERSELECTED? 10 
+       { 
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 20 else setvar tempb 40 
+       }
        ifvare CHARACTERSELECTED? 14 setvar tempb 25
        subvarvar tempb tempc
 
@@ -2536,8 +2568,8 @@ state player_defense
    {
     ifvare ATTACKPICNUM 3770 // Boss-Crushing
     {
-     ifvare NETHRAFORM? 0 divvar PLAYERDAMAGE 24
-     else divvar PLAYERDAMAGE 12
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 divvar PLAYERDAMAGE 24 else divvar PLAYERDAMAGE 12
     }
    }
  
@@ -2714,7 +2746,8 @@ state player_defense
     }
     ifvare CHARACTERSELECTED? 10 // Nethra
     {
-     ifvare NETHRAFORM? 0 // Protector Drone Form
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 // Protector Drone Form
      {
       setvar DAMAGEMODIFIER 1000
       addvar DAMAGEMODIFIER -500
@@ -3113,7 +3146,8 @@ state player_defense
     }
     ifvare CHARACTERSELECTED? 10 // Nethra
     { 
-     ifvare NETHRAFORM? 0 
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 
      { 
       setvar DAMAGEMODIFIER 1000
       addvar DAMAGEMODIFIER -333
@@ -3954,7 +3988,8 @@ state player_defense
     // Nethra
      ifvare CHARACTERSELECTED? 10
      {
-      ifvare NETHRAFORM? 0 // Alien Form
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 // Protector Drone Form
       {
        randvar temp 25
        setvar tempb 200
@@ -4569,7 +4604,8 @@ state player_defense
      else 
      ifvare CHARACTERSELECTED? 10
      {
-      ifvare NETHRAFORM? 0 { ifrnd 56 state addslow }
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 { ifrnd 56 state addslow }
      }
      else 
      ifvare CHARACTERSELECTED? 15
@@ -5455,14 +5491,25 @@ state add_playermeleedamage
       // ifvare CHARACTERSELECTED? 7 nullop
       // ifvare CHARACTERSELECTED? 8 nullop
       // ifvare CHARACTERSELECTED? 9 nullop
-      ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 { addvar KNEEDAMAGE 22 randvar TEMPVAR 5 addvarvar KNEEDAMAGE TEMPVAR sound NEWBEAST_ATTACK } else { addvar KNEEDAMAGE 36 randvar TEMPVAR 8 addvarvar KNEEDAMAGE TEMPVAR } } 
+      ifvare CHARACTERSELECTED? 10 
+      { 
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 { addvar KNEEDAMAGE 22 randvar TEMPVAR 5 addvarvar KNEEDAMAGE TEMPVAR sound NEWBEAST_ATTACK } else { addvar KNEEDAMAGE 36 randvar TEMPVAR 8 addvarvar KNEEDAMAGE TEMPVAR } 
+      } 
       // ifvare CHARACTERSELECTED? 11 { addvar KNEEDAMAGE 7 randvar TEMPVAR 3 addvarvar KNEEDAMAGE TEMPVAR }
       // ifvare CHARACTERSELECTED? 12 nullop
       // ifvare CHARACTERSELECTED? 13 nullop
       // ifvare CHARACTERSELECTED? 14 nullop
       ifvare CHARACTERSELECTED? 15 { ifrnd 128 { addvar KNEEDAMAGE 5 randvar TEMPVAR 1 addvarvar KNEEDAMAGE TEMPVAR } else { addvar KNEEDAMAGE 9 randvar TEMPVAR 1 addvarvar KNEEDAMAGE TEMPVAR } }
 
-      ifvare PUBLICBETA? 0 { ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 2 } else { mulvar KNEEDAMAGE 3 } } }
+      ifvare PUBLICBETA? 0 
+      {
+       ifvare CHARACTERSELECTED? 10 
+       { 
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 2 } else { mulvar KNEEDAMAGE 3 } 
+       } 
+      }
       ifvare PUBLICBETA? 0 { ifvare CHARACTERSELECTED? 14 mulvar KNEEDAMAGE 4 }
       state checkdamagecaps-knee
 
@@ -5550,7 +5597,8 @@ state add_playermeleedamage
        // **********************************
        // *Setting Up Nethra's Form Bonuses*
        // **********************************
-	   ifvare NETHRAFORM? 1
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 1
        {
         // "Christina's Crisis Booster": Inflict More damage on the enemy when injured
         setvarvar TEMP CURRENTHITPOINTS
@@ -5820,7 +5868,8 @@ state add_playermeleedamage
         else
         ifvare CHARACTERSELECTED? 10
         {
-         ifvare NETHRAFORM? 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
          else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 }
         }
         else
@@ -5860,7 +5909,8 @@ state add_playermeleedamage
        else
        ifvare CHARACTERSELECTED? 10
        {
-        ifvare NETHRAFORM? 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
         else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 }
        }
        else
@@ -6057,7 +6107,8 @@ state add_playermeleedamage
       {
        ifvare CHARACTERSELECTED? 10
        {
-        ifvare NETHRAFORM? 0
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0
         {
          ifrnd 51
          {
@@ -9127,13 +9178,15 @@ ifvarg tempb 0
          // **********************************
          // *Setting Up Nethra's Form Bonuses*
          // **********************************
-         ifvare NETHRAFORM? 0 // If Nethra is currently "Nethra"
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 // If Nethra is currently "Nethra"
          {
           ifvare tempc ZAPPER1 mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Electrical Blast #1[Medium] damage she inflicts in Protector Drone form
           ifvare tempc ZAPPER2 mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Electrical Blast #2[Small] damage she inflicts in Protector Drone form
           ifvare tempc ZAPPER3 mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Electrical Blast #3[Large] damage she inflicts in Protector Drone form
          }
-         ifvare NETHRAFORM? 1 // If Nethra is currently "Christina"
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
          {
           ifvare tempc FREEZEBLAST mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Freezethrower damage she inflicts in human form
 
@@ -23762,7 +23815,7 @@ state getaccelerationlimits
     ifvare CHARACTERSELECTED? 10 
     {
      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-     ifvare NETHRAFORM? 1 addvar ACCELFACTOR 1 
+     ifvare MISCARRAYID_AMOUNTTEMP 1 addvar ACCELFACTOR 1 
     }
     ifvare CHARACTERSELECTED? 13
     {
@@ -25553,7 +25606,7 @@ ifvare mainmenu 0
  ifvare CHARACTERSELECTED? 10 
  {
   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-  ifvare NETHRAFORM? 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
+  ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar PLAYERLIFTSTRENGTHTEMP 5 divvar PLAYERLIFTSTRENGTHTEMP 8 }
  }
  ifvare CHARACTERSELECTED? 13
  {
@@ -27468,7 +27521,11 @@ else
 {
  ifvare CHARACTERSELECTED? 6 spritepal 24
  else ifvare CHARACTERSELECTED? 9 spritepal 24
- else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 spritepal 20 else spritepal 0 }
+ else ifvare CHARACTERSELECTED? 10 
+ {
+  setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0 spritepal 20 else spritepal 0 
+ }
  else spritepal 0
 }
 */
@@ -28632,7 +28689,7 @@ ifvare mainmenu 0
   ifvare CHARACTERSELECTED? 10
   {
    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-   ifvare NETHRAFORM? 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
+   ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERMOVEPLUSVEL 110 divvar PLAYERMOVEPLUSVEL 100 } 
   }
   ifvare CHARACTERSELECTED? 13 
   { 
@@ -28762,13 +28819,14 @@ ifvarn multijumpflag 0
  }
  ifvare CHARACTERSELECTED? 10
  {
-  ifvare NETHRAFORM? 0
+  setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+  ifvare MISCARRAYID_AMOUNTTEMP 0
   {
    ifvarg PLAYERLEVEL 49 ifvarl PLAYERLEVEL 100 addvar PLAYERJUMPSTRENGTHTEMP 1
    ifvarg PLAYERLEVEL 99 addvar PLAYERJUMPSTRENGTHTEMP 2
   }
   else
-  ifvare NETHRAFORM? 1
+  ifvare MISCARRAYID_AMOUNTTEMP 1
   {
    ifvarg PLAYERLEVEL 0 ifvarl PLAYERLEVEL 25 subvar PLAYERJUMPSTRENGTHTEMP 4
    ifvarg PLAYERLEVEL 24 ifvarl PLAYERLEVEL 50 subvar PLAYERJUMPSTRENGTHTEMP 3
@@ -29048,7 +29106,8 @@ ifvarn multijumpflag 0
   }
   ifvare CHARACTERSELECTED? 10
   {
-   ifvare NETHRAFORM? 1
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 1
    {
     ifvarl PLAYERFALLRESISTTEMP 0
     {
@@ -29917,7 +29976,8 @@ ifvare CHARACTERSELECTED? 8 redefinequote 80 ^17NUNCHAKU ENGAGED
 ifvare CHARACTERSELECTED? 9 redefinequote 80 ^17CLAW GRIPPERS ENGAGED
 ifvare CHARACTERSELECTED? 10 
 {
- ifvare NETHRAFORM? 0 redefinequote 80 ^17SLASHING CLAWS ENGAGED
+ setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+ ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 80 ^17SLASHING CLAWS ENGAGED
  else redefinequote 80 ^17MARTIAL ARTS ENGAGED
 }
 ifvare CHARACTERSELECTED? 11 redefinequote 80 ^17FRYING PAN ENGAGED
@@ -31699,7 +31759,11 @@ ifvare FALLSOUND? 1
         ifvare TEMPHITCHARACTERVAR 5 setvarvar ATTACKINGACTORPICNUM 6911
         else ifvare TEMPHITCHARACTERVAR 6 setvarvar ATTACKINGACTORPICNUM 6911
         else ifvare TEMPHITCHARACTERVAR 9 setvarvar ATTACKINGACTORPICNUM 6911
-        else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvarvar ATTACKINGACTORPICNUM 6908 else setvarvar ATTACKINGACTORPICNUM 6911 }
+        else ifvare TEMPHITCHARACTERVAR 10 
+        {
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 setvarvar ATTACKINGACTORPICNUM 6908 else setvarvar ATTACKINGACTORPICNUM 6911 
+        }
         else setvarvar ATTACKINGACTORPICNUM 6911
         setvarvar ATTACKINGACTORPAL 0
         setvar ACTORCRITICAL? 0
@@ -31718,7 +31782,11 @@ ifvare FALLSOUND? 1
          ifvare TEMPHITCHARACTERVAR 5 setvarvar ATTACKINGACTORPICNUM 6911
          else ifvare TEMPHITCHARACTERVAR 6 setvarvar ATTACKINGACTORPICNUM 6911
          else ifvare TEMPHITCHARACTERVAR 9 setvarvar ATTACKINGACTORPICNUM 6911
-         else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvarvar ATTACKINGACTORPICNUM 6908 else setvarvar ATTACKINGACTORPICNUM 6911 }
+         else ifvare TEMPHITCHARACTERVAR 10 
+         {
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvarvar ATTACKINGACTORPICNUM 6908 else setvarvar ATTACKINGACTORPICNUM 6911 
+         }
          else setvarvar ATTACKINGACTORPICNUM 6911
         }
         else setvarvar ATTACKINGACTORPICNUM 6911
@@ -38500,7 +38568,11 @@ state checkdronenearplayer
               ifvare CHARACTERSELECTED? 7 setvar knockbackstr 426
               ifvare CHARACTERSELECTED? 8 setvar knockbackstr 607
               ifvare CHARACTERSELECTED? 9 setvar knockbackstr 66
-              ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar knockbackstr 692 else setvar knockbackstr 571 }
+              ifvare CHARACTERSELECTED? 10 
+              { 
+               setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 setvar knockbackstr 692 else setvar knockbackstr 571 
+              }
               ifvare CHARACTERSELECTED? 11 setvar knockbackstr 652
               ifvare CHARACTERSELECTED? 12 setvar knockbackstr 580
               ifvare CHARACTERSELECTED? 13 setvar knockbackstr 626

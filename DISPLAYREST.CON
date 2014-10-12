@@ -966,7 +966,11 @@ else
      else ifvare CHARACTERSELECTED? 5 setvar digz 12288
      else ifvare CHARACTERSELECTED? 6 setvar digz 12288
      else ifvare CHARACTERSELECTED? 9 setvar digz 10240
-     else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar digz 10240 else setvar digz 24576 }
+     else ifvare CHARACTERSELECTED? 10 
+     {
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 setvar digz 10240 else setvar digz 24576 
+     }
      else setvar digz 24576
     }
     else
@@ -1081,7 +1085,11 @@ else
       else ifvare CHARACTERSELECTED? 5 setvar tilenum 6178
       else ifvare CHARACTERSELECTED? 6 setvar tilenum 6186
       else ifvare CHARACTERSELECTED? 9 setvar tilenum 6190
-      else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 6194 else setvar tilenum 5276 }
+      else ifvare CHARACTERSELECTED? 10 
+      {
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 6194 else setvar tilenum 5276 
+      }
       else setvar tilenum 5276
      }
      else
@@ -1097,7 +1105,11 @@ else
       else ifvare CHARACTERSELECTED? 5 setvar tilenum 6178
       else ifvare CHARACTERSELECTED? 6 setvar tilenum 6186
       else ifvare CHARACTERSELECTED? 9 setvar tilenum 6190
-      else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 6194 else setvar tilenum 5276 }
+      else ifvare CHARACTERSELECTED? 10 
+      { 
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 6194 else setvar tilenum 5276 
+      }
       else setvar tilenum 5276
      }
      else
@@ -1113,7 +1125,11 @@ else
       else ifvare CHARACTERSELECTED? 5 setvar tilenum 6179
       else ifvare CHARACTERSELECTED? 6 setvar tilenum 6187
       else ifvare CHARACTERSELECTED? 9 setvar tilenum 6191
-      else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 6195 else setvar tilenum 5276 }
+      else ifvare CHARACTERSELECTED? 10 
+      {
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 6195 else setvar tilenum 5276 
+      }
       else setvar tilenum 5276
      }
      else
@@ -1129,7 +1145,11 @@ else
       else ifvare CHARACTERSELECTED? 5 setvar tilenum 6180
       else ifvare CHARACTERSELECTED? 6 setvar tilenum 6188
       else ifvare CHARACTERSELECTED? 9 setvar tilenum 6192
-      else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 6196 else setvar tilenum 5276 }
+      else ifvare CHARACTERSELECTED? 10 
+      { 
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 6196 else setvar tilenum 5276 
+      }
       else setvar tilenum 5276
      }
      else
@@ -1145,7 +1165,11 @@ else
       else ifvare CHARACTERSELECTED? 5 setvar tilenum 6181
       else ifvare CHARACTERSELECTED? 6 setvar tilenum 6189
       else ifvare CHARACTERSELECTED? 9 setvar tilenum 6193
-      else ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 6197 else setvar tilenum 5276 }
+      else ifvare CHARACTERSELECTED? 10 
+      {
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 6197 else setvar tilenum 5276 
+      }
       else setvar tilenum 5276
      }
      else
@@ -1745,8 +1769,9 @@ else
      }
      ifvare CHARACTERSELECTED? 10
      { 
-      ifvare NETHRAFORM? 0 redefinequote 318 NETHRA MABOROSHI
-      ifvarg NETHRAFORM? 0 redefinequote 318 CHRISTINA MITCHELL
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 318 NETHRA MABOROSHI
+      ifvarg MISCARRAYID_AMOUNTTEMP 0 redefinequote 318 CHRISTINA MITCHELL
       state pal0
      }
      ifvare CHARACTERSELECTED? 11
@@ -2035,7 +2060,11 @@ else
      ifvare CHARACTERSELECTED? 7 setvar tilenum 7942
      ifvare CHARACTERSELECTED? 8 setvar tilenum 7943
      ifvare CHARACTERSELECTED? 9 setvar tilenum 7944
-     ifvare CHARACTERSELECTED? 10 { ifvare NETHRAFORM? 0 setvar tilenum 7945 else ifvarg NETHRAFORM? 0 setvar tilenum 7964 }
+     ifvare CHARACTERSELECTED? 10 
+     {
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945 else ifvarg MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7964 
+     }
      ifvare CHARACTERSELECTED? 11 setvar tilenum 7946
      ifvare CHARACTERSELECTED? 12 setvar tilenum 7947
      ifvare CHARACTERSELECTED? 13
@@ -4532,7 +4561,11 @@ else
          else ifvare TEMPHITCHARACTERVAR 7 setvar TEMPVAR2 7942 // Ted
          else ifvare TEMPHITCHARACTERVAR 8 setvar TEMPVAR2 7943 // Lisa
          else ifvare TEMPHITCHARACTERVAR 9 setvar TEMPVAR2 7944 // Cybanis
-         else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar TEMPVAR2 7945 else ifvare NETHRAFORM? 1 setvar TEMPVAR2 7964 } // Nethra/Christina
+         else ifvare TEMPHITCHARACTERVAR 10 
+         { 
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7945 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7964 
+         } // Nethra/Christina
          else ifvare TEMPHITCHARACTERVAR 11 setvar TEMPVAR2 7946 // Paula
          else ifvare TEMPHITCHARACTERVAR 12 setvar TEMPVAR2 7947 // Lori
          else ifvare TEMPHITCHARACTERVAR 13 
@@ -4569,7 +4602,12 @@ else
         else ifvare TEMPHITCHARACTERVAR 7 setvar TEMPVAR2 7942 // Ted
         else ifvare TEMPHITCHARACTERVAR 8 setvar TEMPVAR2 7943 // Lisa
         else ifvare TEMPHITCHARACTERVAR 9 setvar TEMPVAR2 7944 // Cybanis
-        else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar TEMPVAR2 7945 else ifvare NETHRAFORM? 1 setvar TEMPVAR2 7964 } // Nethra/Christina
+        else ifvare TEMPHITCHARACTERVAR 10 
+        {
+              setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+              ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7945 
+         else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7964 
+        } // Nethra/Christina
         else ifvare TEMPHITCHARACTERVAR 11 setvar TEMPVAR2 7946 // Paula
         else ifvare TEMPHITCHARACTERVAR 12 setvar TEMPVAR2 7947 // Lori
         else ifvare TEMPHITCHARACTERVAR 13 
@@ -4619,7 +4657,11 @@ else
          else ifvare TEMPHITCHARACTERVAR 7 setvar MELEEATTACKER 7917
          else ifvare TEMPHITCHARACTERVAR 8 setvar MELEEATTACKER 7918
          else ifvare TEMPHITCHARACTERVAR 9 setvar MELEEATTACKER 7919
-         else ifvare TEMPHITCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar MELEEATTACKER 7926 else ifvare NETHRAFORM? 1 setvar MELEEATTACKER 7920 }
+         else ifvare TEMPHITCHARACTERVAR 10 
+         { 
+          setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 0 setvar MELEEATTACKER 7926 else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar MELEEATTACKER 7920 
+         }
          else ifvare TEMPHITCHARACTERVAR 11 setvar MELEEATTACKER 7921
          else ifvare TEMPHITCHARACTERVAR 12 setvar MELEEATTACKER 7922
          else ifvare TEMPHITCHARACTERVAR 13 
@@ -5185,7 +5227,12 @@ else
       else ifvare TEMPATKCHARACTERVAR 7 setvar TEMPVAR2 7942 // Ted
       else ifvare TEMPATKCHARACTERVAR 8 setvar TEMPVAR2 7943 // Lisa
       else ifvare TEMPATKCHARACTERVAR 9 setvar TEMPVAR2 7944 // Cybanis
-      else ifvare TEMPATKCHARACTERVAR 10 { ifvare NETHRAFORM? 0 setvar TEMPVAR2 7945 else ifvare NETHRAFORM? 1 setvar TEMPVAR2 7964 } // Nethra/Christina
+      else ifvare TEMPATKCHARACTERVAR 10 
+      {
+            setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+            ifvare MISCARRAYID_AMOUNTTEMP 0 setvar TEMPVAR2 7945 
+       else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar TEMPVAR2 7964 
+      } // Nethra/Christina
       else ifvare TEMPATKCHARACTERVAR 11 setvar TEMPVAR2 7946 // Paula
       else ifvare TEMPATKCHARACTERVAR 12 setvar TEMPVAR2 7947 // Lori
       else ifvare TEMPATKCHARACTERVAR 13 
@@ -7964,7 +8011,8 @@ else
             ifvare CHARACTERSELECTED? 9 redefinequote 142 HOLOCYBANIS 
             ifvare CHARACTERSELECTED? 10
             { 
-             ifvare NETHRAFORM? 0 redefinequote 142 HOLONETHRA 
+             setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+             ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 142 HOLONETHRA 
              else redefinequote 142 HOLOCHRISTINA 
             }
             ifvare CHARACTERSELECTED? 11 redefinequote 142 HOLOPAULA 

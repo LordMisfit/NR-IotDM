@@ -664,7 +664,8 @@ getplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
       else
       ifvare CHARACTERSELECTED? 10
       {
-       ifvare NETHRAFORM? 0
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0
        {
         redefinequote 47 ^19HOLONETHRA ON
         redefinequote 48 ^19HOLONETHRA OFF
@@ -1402,7 +1403,8 @@ state switchtolivingcharacter
    else
    ifvare TEMPVAR2 10
    {
-    ifvare NETHRAFORM? 0 redefinequote 321 ^21NETHRA HAS BEEN KILLED!! [-%d RANK PTS]
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 321 ^21NETHRA HAS BEEN KILLED!! [-%d RANK PTS]
     else redefinequote 321 ^21CHRISTINA HAS BEEN KILLED!! [-%d RANK PTS]
     qsprintf 321 321 TEMPVAR6
     ifvare PERMADEATH? 1 setvar NETHRA? 0

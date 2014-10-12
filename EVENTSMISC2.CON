@@ -1938,7 +1938,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
    else
    ifvare mainmenupage 1
    {
-    ifvare mainmenuselection 1 ifvare NETHRA? 1 { subvar NETHRAFORM? 1 { ifvarl NETHRAFORM? 0 setvar NETHRAFORM? 1 } globalsound TELEPORTER } // Nethra
+    setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+    ifvare mainmenuselection 1 ifvare NETHRA? 1 
+                               { 
+                                setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+                                subvar MISCARRAYID_AMOUNTTEMP 1 { ifvarl MISCARRAYID_AMOUNTTEMP 0 setvar MISCARRAYID_AMOUNTTEMP 1 } globalsound TELEPORTER 
+                                setvar MISCARRAYID 110 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+                               } // Nethra
     else ifvare mainmenuselection 4 ifvare MINAKO? 1
     {
      setvar CHARACTERARRAY 13
@@ -2083,7 +2089,12 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
    else
    ifvare mainmenupage 1
    {
-    ifvare mainmenuselection 1 ifvare NETHRA? 1 { addvar NETHRAFORM? 1 { ifvarg NETHRAFORM? 1 setvar NETHRAFORM? 0 } globalsound TELEPORTER } // Nethra
+    ifvare mainmenuselection 1 ifvare NETHRA? 1 
+                               {
+                                setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+                                addvar MISCARRAYID_AMOUNTTEMP 1 { ifvarg MISCARRAYID_AMOUNTTEMP 1 setvar MISCARRAYID_AMOUNTTEMP 0 } globalsound TELEPORTER 
+                                setvar MISCARRAYID 110 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+                               } // Nethra
     else ifvare mainmenuselection 4
     {
      setvar CHARACTERARRAY 13
@@ -3506,7 +3517,8 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
   else
   ifvare CHARACTERSELECTED? 10 // Nethra/Christina
   {
-   ifvare NETHRAFORM? 0 // Nethra
+   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+   ifvare MISCARRAYID_AMOUNTTEMP 0 // Nethra
    {
     getactor[THISACTOR].xrepeat temp
     mulvar temp 857
@@ -4197,6 +4209,8 @@ onevent EVENT_NEWGAME
   setvar MISCARRAYID 74 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // ATTACHED-OBJECTS?
 
   setvar MISCARRAYID 82 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // CHARACTER-OLD
+
+  setvar MISCARRAYID 110 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // NETHRA-FORM?
 
   //getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
   //addlogvar MISCARRAYID_AMOUNTTEMP
