@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git65)
-definequote 1337 ^22VERSION:^0 5.22.git65.10122014
+setgamename Naferia's Reign (5.22.git66)
+definequote 1337 ^22VERSION:^0 5.22.git66.10132014
 
 action ANULLACTION 0
 
@@ -23219,8 +23219,11 @@ state wallclimbspeedcheck
   addvar WALLCLIMBSNDTIMER 1
   getuserdef[THISACTOR].auto_run tempc
   setvarvar CHARACTERSPEEDVARTEMP CHARACTERSPEEDVAR
-  ifvarl HPFACTOR 101 { mulvar CHARACTERSPEEDVARTEMP 3 divvar CHARACTERSPEEDVARTEMP 5 }
-  else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar CHARACTERSPEEDVARTEMP 4 divvar CHARACTERSPEEDVARTEMP 5 }
+
+  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+  ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar CHARACTERSPEEDVARTEMP 3 divvar CHARACTERSPEEDVARTEMP 5 }
+  else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar CHARACTERSPEEDVARTEMP 4 divvar CHARACTERSPEEDVARTEMP 5 }
+
   ifvare tempc 0 // Walking...
   {
    ifvarg CHARACTERSPEEDVARTEMP -1 ifvarl CHARACTERSPEEDVARTEMP 14 setvar TEMP 17 // 0-13
@@ -23249,14 +23252,20 @@ state wallclimbspeedcheck
    ifvarg CHARACTERSPEEDVARTEMP 115 setvar TEMP 3 // 116+
   }
 
+  switch WALLCLIMBSOUND
+   case 535 case 536
+    ifvarvarg WALLCLIMBSNDTIMER TEMP { ifvare footstepsndtoggle 1 { ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2 } setvar WALLCLIMBSNDTIMER 0 }
+   break
+   default
+    ifvarvarg WALLCLIMBSNDTIMER TEMP { ifvare footstepsndtoggle 1 { ifvarn WALLCLIMBSOUND -1 soundvar WALLCLIMBSOUND } setvar WALLCLIMBSNDTIMER 0 }
+   break
+  endswitch
+/*
   ifvare WALLCLIMBSOUND 535 
   {
    ifvarvarg WALLCLIMBSNDTIMER TEMP
    {
-    ifvare footstepsndtoggle 1
-    {
-     ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2
-    }
+    ifvare footstepsndtoggle 1 { ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2 }
     setvar WALLCLIMBSNDTIMER 0
    }
   }
@@ -23265,10 +23274,7 @@ state wallclimbspeedcheck
   {
    ifvarvarg WALLCLIMBSNDTIMER TEMP
    {
-    ifvare footstepsndtoggle 1
-    {
-     ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2
-    }
+    ifvare footstepsndtoggle 1 { ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2 }
     setvar WALLCLIMBSNDTIMER 0
    }
   }
@@ -23280,6 +23286,7 @@ state wallclimbspeedcheck
     setvar WALLCLIMBSNDTIMER 0
    }
   }
+*/
 ends
 
 
@@ -23391,26 +23398,11 @@ state playershrink
 ends
 
 state canceldeadactions
-ifaction PEXPLODE 
-{
- ifvarg PARTYALIVE 0 state setplayeraction_pstand
-}
-ifaction PEXPLODEAD 
-{
- ifvarg PARTYALIVE 0 state setplayeraction_pstand
-}
-ifaction PFLINTCHING 
-{
- ifvarg PARTYALIVE 0 state setplayeraction_pstand
-}
-ifaction PTHROWNBACK 
-{
- ifvarg PARTYALIVE 0 state setplayeraction_pstand
-}
-ifaction PLYINGDEAD 
-{
- ifvarg PARTYALIVE 0 state setplayeraction_pstand
-}
+ifaction PEXPLODE { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ifaction PEXPLODEAD { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ifaction PFLINTCHING { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ifaction PTHROWNBACK { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ifaction PLYINGDEAD { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
 ends
 
 state mercurycomputerautomapcheck
@@ -23871,8 +23863,9 @@ ends
 state healthaccelcap
  ifvarn oldskoolmode 1
  {
-   ifvarl HPFACTOR 101 { mulvar ACCELFACTOR 3 divvar ACCELFACTOR 5 }
-   else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar ACCELFACTOR 4 divvar ACCELFACTOR 5 }
+  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+  ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar ACCELFACTOR 3 divvar ACCELFACTOR 5 }
+  else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar ACCELFACTOR 4 divvar ACCELFACTOR 5 }
  }
 ends
 
@@ -25088,23 +25081,30 @@ actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
 
 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
 {
- addvar cursorang 37
+ setvar MISCARRAYID 88 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-ang
+ addvar MISCARRAYID_AMOUNTTEMP 37
+ setvar MISCARRAYID 88 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-ang
+
  getplayer[THISACTOR].ang temp
  getplayer[THISACTOR].oang tempb
  getincangle angvar temp tempb
  divvar angvar 3
- subvarvar cursorx angvar
+ setvar MISCARRAYID 86 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-x
+ subvarvar MISCARRAYID_AMOUNTTEMP angvar
  setplayer[THISACTOR].ang player[THISACTOR].oang
- ifvarl cursorx 0 setvar cursorx 0
- ifvarg cursorx 320 setvar cursorx 320
+ ifvarl MISCARRAYID_AMOUNTTEMP 0 setvar MISCARRAYID_AMOUNTTEMP 0
+ ifvarg MISCARRAYID_AMOUNTTEMP 320 setvar MISCARRAYID_AMOUNTTEMP 320
+ setvar MISCARRAYID 86 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-x
 
  getplayer[THISACTOR].horiz temp
  getplayer[THISACTOR].ohoriz tempb
  subvarvar temp tempb
  getuserdef[THISACTOR].mouseflip tempc
- ifvare tempc 0 addvarvar cursory temp else subvarvar cursory temp
- ifvarl cursory 0 setvar cursory 0
- ifvarg cursory 200 setvar cursory 200
+ setvar MISCARRAYID 87 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-y
+ ifvare tempc 0 addvarvar MISCARRAYID_AMOUNTTEMP temp else subvarvar MISCARRAYID_AMOUNTTEMP temp
+ ifvarl MISCARRAYID_AMOUNTTEMP 0 setvar MISCARRAYID_AMOUNTTEMP 0
+ ifvarg MISCARRAYID_AMOUNTTEMP 200 setvar MISCARRAYID_AMOUNTTEMP 200
+ setvar MISCARRAYID 87 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-y
 }
 
 ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 3
@@ -25414,13 +25414,14 @@ ifvare mainmenu 0
    ifvarl CURRENTENERGYPOINTS 1
    {
     setplayer[THISACTOR].heat_on 0
-    ifvare VISOROFFSOUND 0 
+    setvar MISCARRAYID 100 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // VISOR-OFF-SOUND
+    ifvare MISCARRAYID_AMOUNTTEMP 0 
     {
      stopsound NITEVISION_ONOFF
      sound VRVISOR_OFF
      redefinequote 334 ^10AMI HAS RUN OUT OF EP!
-     setvar VISOROFFSOUND 1
-     setvar VISORONSOUND 0 
+     setvar MISCARRAYID 100 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // VISOR-OFF-SOUND
+     setvar MISCARRAYID 99 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // VISOR-ON-SOUND
     }
    }
   }
@@ -25641,8 +25642,9 @@ ifvare mainmenu 0
  ifvarl DAMAGEMODIFIER 1 setvar DAMAGEMODIFIER 1
  mulvarvar PLAYERLIFTSTRENGTHTEMP DAMAGEMODIFIER
 
- ifvarl HPFACTOR 101 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 5 }
- ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar PLAYERLIFTSTRENGTHTEMP 4 divvar PLAYERLIFTSTRENGTHTEMP 5 }
+ setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+ ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 5 }
+ ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar PLAYERLIFTSTRENGTHTEMP 4 divvar PLAYERLIFTSTRENGTHTEMP 5 }
 
  ifp ponsteroids { mulvar PLAYERLIFTSTRENGTHTEMP 9 divvar PLAYERLIFTSTRENGTHTEMP 2 }
 
@@ -27183,21 +27185,60 @@ else
 }
 
 ifvarg com_pause 0 subvar com_pause 1 // For Keypad Entry Delays
-setvarvar HPFACTOR CURRENTHITPOINTS
-mulvar HPFACTOR 1000
-ifvarn MAXHITPOINTS 0 divvarvar HPFACTOR MAXHITPOINTS
-setvarvar APFACTOR CURRENTARMORPOINTS
-mulvar APFACTOR 1000
-ifvarn MAXARMORPOINTS 0 divvarvar APFACTOR MAXARMORPOINTS
-setvarvar FAFACTOR FIRSTAIDCURRENT
-mulvar FAFACTOR 1000
-ifvarn MAXHITPOINTS 0 divvarvar FAFACTOR MAXHITPOINTS
+
+// Keeps Stats from being set to 0 for the current character-in-play through some random act of buggy fate :P
+ifvarl MAXHITPOINTS 1 setvar MAXHITPOINTS 1
+ifvarl MAXARMORPOINTS 1 setvar MAXARMORPOINTS 1
+ifvarl MAXENERGYPOINTS 1 setvar MAXENERGYPOINTS 1
+ifvarl PLAYERATTACK 1 setvar PLAYERATTACK 1
+ifvarl PLAYERDEFENSE 1 setvar PLAYERDEFENSE 1
+
+ifvarg MAXHITPOINTS 0 
+{ 
+ setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+ setvarvar MISCARRAYID_AMOUNTTEMP CURRENTHITPOINTS
+ mulvar MISCARRAYID_AMOUNTTEMP 1000
+ divvarvar MISCARRAYID_AMOUNTTEMP MAXHITPOINTS 
+ setvar MISCARRAYID 94 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+}
+ifvarg MAXARMORPOINTS 0 
+{
+ setvar MISCARRAYID 95 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AP-FACTOR
+ setvarvar MISCARRAYID_AMOUNTTEMP CURRENTARMORPOINTS
+ mulvar MISCARRAYID_AMOUNTTEMP 1000
+ divvarvar MISCARRAYID_AMOUNTTEMP MAXARMORPOINTS 
+ setvar MISCARRAYID 95 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AP-FACTOR
+}
+ifvarg MAXENERGYPOINTS 0 
+{
+ setvar MISCARRAYID 96 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // EP-FACTOR
+ setvarvar MISCARRAYID_AMOUNTTEMP CURRENTENERGYPOINTS
+ mulvar MISCARRAYID_AMOUNTTEMP 1000
+ divvarvar MISCARRAYID_AMOUNTTEMP MAXENERGYPOINTS 
+ setvar MISCARRAYID 96 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // EP-FACTOR
+}
+ifvarg MAXHITPOINTS 0 
+{ 
+ setvar MISCARRAYID 97 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FA-FACTOR
+ setvarvar MISCARRAYID_AMOUNTTEMP FIRSTAIDCURRENT
+ mulvar MISCARRAYID_AMOUNTTEMP 1000
+ divvarvar MISCARRAYID_AMOUNTTEMP MAXHITPOINTS 
+ setvar MISCARRAYID 97 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FA-FACTOR
+}
+ifvarg MAXBIOSHIELDPOWER 0 
+{
+ setvar MISCARRAYID 98 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ES-FACTOR
+ setvarvar MISCARRAYID_AMOUNTTEMP CURRENTBIOSHIELDPOWER
+ mulvar MISCARRAYID_AMOUNTTEMP 1000
+ divvarvar MISCARRAYID_AMOUNTTEMP MAXBIOSHIELDPOWER
+ setvar MISCARRAYID 98 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ES-FACTOR
+}
 ifvarg PLAYERMAXAIRJUMPS 0
 {
  setvarvar AIRJUMPRATIO PLAYERMAXAIRJUMPS
  subvarvar AIRJUMPRATIO multijumpflag
  mulvar AIRJUMPRATIO 1000
- ifvarn PLAYERMAXAIRJUMPS 0 divvarvar AIRJUMPRATIO PLAYERMAXAIRJUMPS
+ divvarvar AIRJUMPRATIO PLAYERMAXAIRJUMPS
 }
 
 setplayer[THISACTOR].airleft 16384
@@ -27739,13 +27780,14 @@ else
   {
    ifvare CHARACTERSELECTED? 4 
    { 
-    ifvare VISORONSOUND 0 
-	{ 
-	 stopsound NITEVISION_ONOFF
-	 sound VRVISOR_ON
-	 setvar VISORONSOUND 1
-	 setvar VISOROFFSOUND 0 
-	} 
+    setvar MISCARRAYID 99 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // VISOR-ON-SOUND
+    ifvare MISCARRAYID_AMOUNTTEMP 0 
+    { 
+     stopsound NITEVISION_ONOFF
+     sound VRVISOR_ON
+     setvar MISCARRAYID 99 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // VISOR-ON-SOUND
+     setvar MISCARRAYID 100 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // VISOR-OFF-SOUND
+    } 
    }
    ifvare CHARACTERSELECTED? 1 setvar TEMPVAR4 256
    ifvare CHARACTERSELECTED? 2 setvar TEMPVAR4 256 
@@ -27778,13 +27820,14 @@ else
   {
    ifvare CHARACTERSELECTED? 4 
    { 
-    ifvare VISOROFFSOUND 0 
-	{ 
-	 stopsound NITEVISION_ONOFF 
-	 sound VRVISOR_OFF 
-	 setvar VISOROFFSOUND 1 
-	 setvar VISORONSOUND 0 
-	} 
+    setvar MISCARRAYID 100 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // VISOR-OFF-SOUND
+    ifvare MISCARRAYID_AMOUNTTEMP 0 
+    { 
+     stopsound NITEVISION_ONOFF 
+     sound VRVISOR_OFF 
+     setvar MISCARRAYID 100 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // VISOR-OFF-SOUND
+     setvar MISCARRAYID 99 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // VISOR-ON-SOUND
+    } 
    }
    ifvare CHARACTERSELECTED? 1 setvar TEMPVAR4 512
    ifvare CHARACTERSELECTED? 2 setvar TEMPVAR4 512
@@ -27807,8 +27850,10 @@ else
    ifvarg mainmenutransitiontimer 6 setvar TEMPVAR4 16384
   }
  }
- ifvarl HPFACTOR 101 { mulvar TEMPVAR4 140 divvar TEMPVAR4 100 }
- else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar TEMPVAR4 120 divvar TEMPVAR4 100 }
+ setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+ ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar TEMPVAR4 140 divvar TEMPVAR4 100 }
+ else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar TEMPVAR4 120 divvar TEMPVAR4 100 }
+
  ifp ponsteroids
  {
   ifvare SKILLLEVEL 0 mulvar TEMPVAR4 50
@@ -27956,7 +28001,8 @@ else
 //*****************************
 //*****************************
  ifp ponsteroids mulvar CRITICALHITCHANCE2 2
- ifvarl HPFACTOR 250 mulvar CRITICALHITCHANCE2 2 // 100
+ setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+ ifvarl MISCARRAYID_AMOUNTTEMP 251 mulvar CRITICALHITCHANCE2 2
 
  ifvare PLAYEREQUIPSLOTITEM1 28 mulvar CRITICALHITCHANCE2 10
  ifvare PLAYEREQUIPSLOTITEM2 28 mulvar CRITICALHITCHANCE2 10
@@ -27981,7 +28027,6 @@ else
  mulvarvar CRITICALHITCHANCE2 DAMAGEMODIFIER
  divvar CRITICALHITCHANCE2 1000
  addvar CRITICALHITCHANCE2 1
-
 
 
 smaxammo 1 MAXPISTOL
@@ -28791,8 +28836,9 @@ ifvarn multijumpflag 0
  // Check Health Levels
  ifvarn oldskoolmode 1
  {
-  ifvarl HPFACTOR 101 { mulvar PLAYERJUMPSTRENGTHTEMP 3 divvar PLAYERJUMPSTRENGTHTEMP 5 }
-  else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar PLAYERJUMPSTRENGTHTEMP 4 divvar PLAYERJUMPSTRENGTHTEMP 5 }
+  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+  ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar PLAYERJUMPSTRENGTHTEMP 3 divvar PLAYERJUMPSTRENGTHTEMP 5 }
+  else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar PLAYERJUMPSTRENGTHTEMP 4 divvar PLAYERJUMPSTRENGTHTEMP 5 }
  }
 
  // Check Steroids
@@ -33539,7 +33585,8 @@ setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
        }
        else
        {
-        ifvarl HPFACTOR 251
+        setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+        ifvarl MISCARRAYID_AMOUNTTEMP 251
         {
          ifvare CHARACTERSELECTED? 1
          {
@@ -49423,30 +49470,16 @@ ifvarg TEMP 0
   ifvarg RANKSTARLEVEL 90 ifvarl RANKSTARLEVEL 100 setactor[THISACTOR].pal 10
   ifvare RANKSTARLEVEL 100
   {
-   ifvare shadepulsetimer 0 setactor[THISACTOR].pal 13
-   ifvare shadepulsetimer 1 setactor[THISACTOR].pal 13
-   ifvare shadepulsetimer 2 setactor[THISACTOR].pal 12
-   ifvare shadepulsetimer 3 setactor[THISACTOR].pal 12
-   ifvare shadepulsetimer 4 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 5 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 6 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 7 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 8 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 9 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 10 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 11 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 12 setactor[THISACTOR].pal 6
-   ifvare shadepulsetimer 13 setactor[THISACTOR].pal 6
-   ifvare shadepulsetimer 14 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 15 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 16 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 17 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 18 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 19 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 20 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 21 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 22 setactor[THISACTOR].pal 12
-   ifvare shadepulsetimer 23 setactor[THISACTOR].pal 12
+   setvar MISCARRAYID 89 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
+   switch MISCARRAYID_AMOUNTTEMP
+   case 0 case 1 setactor[THISACTOR].pal 13 break
+   case 2 case 3 case 22 case 23 setactor[THISACTOR].pal 12 break
+   case 4 case 5 case 20 case 21 setactor[THISACTOR].pal 17 break
+   case 6 case 7 case 18 case 19 setactor[THISACTOR].pal 21 break
+   case 8 case 9 case 16 case 17 setactor[THISACTOR].pal 15 break
+   case 10 case 11 case 14 case 15 setactor[THISACTOR].pal 14 break
+   case 12 case 13 setactor[THISACTOR].pal 16 break
+   endswitch
   }
 
   ifvarg RANKSTARLEVEL 0

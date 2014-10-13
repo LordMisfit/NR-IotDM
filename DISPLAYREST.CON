@@ -3287,7 +3287,8 @@ else
      //************************
      setvarvar TEMPVAR2 DISPLAYHPFLASHTIMER
      state displayhealthflashtimers
-     ifvarl HPFACTOR 251 state shadepulse
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     ifvarl MISCARRAYID_AMOUNTTEMP 251 state shadepulse
 
      // Meter [HP]
      setvar digy 162
@@ -3296,7 +3297,8 @@ else
      setvar digx 30
      setvar digz 58982 // 65536
      setvar tilenum 7680 // 746
-     setvarvar TEMPVAR5 HPFACTOR
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     setvarvar TEMPVAR5 MISCARRAYID_AMOUNTTEMP
      divvar TEMPVAR5 31
      addvarvar tilenum TEMPVAR5
      addvar shade 13
@@ -3378,7 +3380,8 @@ else
      {
       setvarvar TEMPVAR2 DISPLAYHPFLASHTIMER
       state displayhealthflashtimers
-      ifvarl FAFACTOR 251 state shadepulse else setvar shade 4
+      setvar MISCARRAYID 97 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // FA-FACTOR
+      ifvarl MISCARRAYID_AMOUNTTEMP 251 state shadepulse else setvar shade 4
  
       // Display Medikit Value
       setvar digy 163
@@ -3485,7 +3488,8 @@ else
      {
       setvarvar TEMPVAR2 DISPLAYAPFLASHTIMER
       state displayarmorflashtimers
-      ifvarl APFACTOR 251 state shadepulse 
+      setvar MISCARRAYID 95 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AP-FACTOR
+      ifvarl MISCARRAYID_AMOUNTTEMP 251 state shadepulse 
  
       // Meter [AP]
       setvar digy 168
@@ -3493,7 +3497,8 @@ else
       setvar digx 30
       setvar digz 58982 // 65536
       setvar tilenum 7680 // 746
-      setvarvar TEMPVAR5 APFACTOR
+      setvar MISCARRAYID 95 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AP-FACTOR
+      setvarvar TEMPVAR5 MISCARRAYID_AMOUNTTEMP
       divvar TEMPVAR5 31
       addvarvar tilenum TEMPVAR5
       addvar shade 13
@@ -3593,11 +3598,18 @@ else
        redefinequote 411 (
        qstrcat 332 411
        // Display Armor Absorbsion %
-       setvarvar PERCENTUPPER ARMORPERCENT
-       divvar PERCENTUPPER 10
-       setvarvar PERCENTLOWER ARMORPERCENT
-       modvar PERCENTLOWER 10
-       qsprintf 222 223 PERCENTUPPER PERCENTLOWER
+
+       setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+       setvarvar MISCARRAYID_AMOUNTTEMP ARMORPERCENT
+       divvar MISCARRAYID_AMOUNTTEMP 10
+       setvar MISCARRAYID 92 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+
+       setvar MISCARRAYID 93 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+       setvarvar MISCARRAYID_AMOUNTTEMP2 ARMORPERCENT
+       modvar MISCARRAYID_AMOUNTTEMP2 10
+       setvar MISCARRAYID 93 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+
+       qsprintf 222 223 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
        qstrcat 332 222
        redefinequote 412 )
        qstrcat 332 412
@@ -3608,11 +3620,8 @@ else
      state shade0 state pal0 // stops future shadepulses from leaking out
      state settile3087 
 
-
-     setvarvar EPFACTOR CURRENTENERGYPOINTS
-     mulvar EPFACTOR 1000
-     divvarvar EPFACTOR MAXENERGYPOINTS
-     ifvarl EPFACTOR 251 state shadepulse
+    setvar MISCARRAYID 96 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // EP-FACTOR
+    ifvarl MISCARRAYID_AMOUNTTEMP 251 state shadepulse
 
      // Meter [EP]
      setvar digy 174
@@ -3620,7 +3629,8 @@ else
      setvar digx 30
      setvar digz 58982 // 65536
      setvar tilenum 7680 // 746
-     setvarvar TEMPVAR5 EPFACTOR
+     setvar MISCARRAYID 96 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // EP-FACTOR
+     setvarvar TEMPVAR5 MISCARRAYID_AMOUNTTEMP
      divvar TEMPVAR5 31
      addvarvar tilenum TEMPVAR5
      addvar shade 13
@@ -3719,28 +3729,16 @@ else
       else ifvarg TEMPVAR5 255 ifvarl TEMPVAR5 1024 state pal21
       else ifvarg TEMPVAR5 1023 state pal20
  
-      ifvare ENERGYSHIELDMODE 0
-      {
-       setvar shade 0
-       addvar shade 12
-       setvarvar EPFACTOR CURRENTBIOSHIELDPOWER
-       mulvar EPFACTOR 1000
-       divvarvar EPFACTOR MAXBIOSHIELDPOWER
-      }
-      else
-      {
-       setvarvar EPFACTOR CURRENTBIOSHIELDPOWER
-       mulvar EPFACTOR 1000
-       divvarvar EPFACTOR MAXBIOSHIELDPOWER
-       ifvarl EPFACTOR 251 state shadepulse
-      }
+      setvar MISCARRAYID 98 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ES-FACTOR
+      ifvare ENERGYSHIELDMODE 0 { setvar shade 0 addvar shade 12 }
+      else { ifvarl MISCARRAYID_AMOUNTTEMP 251 state shadepulse }
  
       // Meter [EShield]
       setvar digy 180
       setvar digx 30
       setvar digz 58982 // 65536
       setvar tilenum 7680 // 746
-      setvarvar TEMPVAR5 EPFACTOR
+      setvarvar TEMPVAR5 MISCARRAYID_AMOUNTTEMP
       divvar TEMPVAR5 31
       addvarvar tilenum TEMPVAR5
       addvar shade 13
@@ -4845,11 +4843,17 @@ else
  
       ifvarl varname 2001 
       {
-       setvarvar PERCENTUPPER varname
-       divvar PERCENTUPPER 10
-       setvarvar PERCENTLOWER varname
-       modvar PERCENTLOWER 10
-       qsprintf 388 389 PERCENTUPPER PERCENTLOWER
+       setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+       setvarvar MISCARRAYID_AMOUNTTEMP varname
+       divvar MISCARRAYID_AMOUNTTEMP 10
+       setvar MISCARRAYID 92 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+
+       setvar MISCARRAYID 93 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+       setvarvar MISCARRAYID_AMOUNTTEMP2 varname
+       modvar MISCARRAYID_AMOUNTTEMP2 10
+       setvar MISCARRAYID 93 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+
+       qsprintf 388 389 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
        setvar temp 388
       }
       else
@@ -4962,11 +4966,17 @@ else
  
       ifvarl varname 2001 
       {
-       setvarvar PERCENTUPPER varname
-       divvar PERCENTUPPER 10
-       setvarvar PERCENTLOWER varname
-       modvar PERCENTLOWER 10
-       qsprintf 388 389 PERCENTUPPER PERCENTLOWER
+       setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+       setvarvar MISCARRAYID_AMOUNTTEMP varname
+       divvar MISCARRAYID_AMOUNTTEMP 10
+       setvar MISCARRAYID 92 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+
+       setvar MISCARRAYID 93 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+       setvarvar MISCARRAYID_AMOUNTTEMP2 varname
+       modvar MISCARRAYID_AMOUNTTEMP2 10
+       setvar MISCARRAYID 93 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+
+       qsprintf 388 389 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
        setvar temp 388
       }
       else
@@ -5320,11 +5330,17 @@ else
       ifvarn TEMPHITENEMYVARHP 0 divvarvar varname TEMPHITENEMYVARHP
       ifvarl varname 2001 
       {
-       setvarvar PERCENTUPPER varname
-       divvar PERCENTUPPER 10
-       setvarvar PERCENTLOWER varname
-       modvar PERCENTLOWER 10
-       qsprintf 388 389 PERCENTUPPER PERCENTLOWER
+       setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+       setvarvar MISCARRAYID_AMOUNTTEMP varname
+       divvar MISCARRAYID_AMOUNTTEMP 10
+       setvar MISCARRAYID 92 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+
+       setvar MISCARRAYID 93 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+       setvarvar MISCARRAYID_AMOUNTTEMP2 varname
+       modvar MISCARRAYID_AMOUNTTEMP2 10
+       setvar MISCARRAYID 93 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+
+       qsprintf 388 389 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
        setvar temp 388
       }
       else
@@ -5424,11 +5440,17 @@ else
       ifvarn TEMPHITENEMYVARAP 0 divvarvar varname TEMPHITENEMYVARAP
       ifvarl varname 2001 
       {
-       setvarvar PERCENTUPPER varname
-       divvar PERCENTUPPER 10
-       setvarvar PERCENTLOWER varname
-       modvar PERCENTLOWER 10
-       qsprintf 388 389 PERCENTUPPER PERCENTLOWER
+       setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+       setvarvar MISCARRAYID_AMOUNTTEMP varname
+       divvar MISCARRAYID_AMOUNTTEMP 10
+       setvar MISCARRAYID 92 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
+
+       setvar MISCARRAYID 93 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+       setvarvar MISCARRAYID_AMOUNTTEMP2 varname
+       modvar MISCARRAYID_AMOUNTTEMP2 10
+       setvar MISCARRAYID 93 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // PERCENT-LOWER
+
+       qsprintf 388 389 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
        setvar temp 388
       }
       else

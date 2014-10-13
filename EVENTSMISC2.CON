@@ -1099,16 +1099,18 @@ else // ifvare mainmenu 0
     setvarvar temp CHARACTERSPEEDTRUE
     ifp ponsteroids divvar temp -40 else divvar temp -50
     setvarvar tempc CHARACTERSPEEDSTAT
-    ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
-    else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }
+    setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+    ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar tempc 3 divvar tempc 5 }
+    else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar tempc 4 divvar tempc 5 }
 
     mulvar tempc 10
     subvarvar temp tempc
     ifp ponsteroids
     {
      setvarvar tempc CHARACTERSPEEDSTAT
-     ifvarl HPFACTOR 101 { mulvar tempc 3 divvar tempc 5 }
-     else ifvarg HPFACTOR 100 ifvarl HPFACTOR 251 { mulvar tempc 4 divvar tempc 5 }	   
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar tempc 3 divvar tempc 5 }
+     else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar tempc 4 divvar tempc 5 }	   
 
      mulvar tempc 20
      subvarvar temp tempc
@@ -2825,7 +2827,8 @@ onevent EVENT_GETLOADTILE
  ifvarn BOSSMETERID3 -1 setvar BOSSMETERID3 -1
  getuserdef[THISACTOR].player_skill SKILLLEVEL
  ifvarl SKILLLEVEL 0 { setvar SKILLLEVEL 9 setuserdef[THISACTOR].player_skill 9 }
- ifvare TITLESCREEN 0 
+ setvar MISCARRAYID 91 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-TITLE-SCREEN
+ ifvare MISCARRAYID_AMOUNTTEMP 0 
  {
   ifvare WORLDTILEBITFIELD1 -1
   {
@@ -2839,10 +2842,10 @@ onevent EVENT_GETLOADTILE
       {
        ifvare WORLDTILEBITFIELD6 -1
        {
-	    ifvare WORLDTILEBITFIELD7 -1
-	    {
-		 ifvare WORLDTILEBITFIELD8 -1 setvar RETURN 8706 else setvar RETURN 3281 // 3577
-		}
+        ifvare WORLDTILEBITFIELD7 -1
+        {
+         ifvare WORLDTILEBITFIELD8 -1 setvar RETURN 8706 else setvar RETURN 3281 // 3577
+        }
        }
        else setvar RETURN 3281
       }
@@ -2858,8 +2861,9 @@ onevent EVENT_GETLOADTILE
  }
  else
  {
+  setvar MISCARRAYID 91 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-TITLE-SCREEN
   setvar RETURN 8191
-  addvarvar RETURN TITLESCREEN
+  addvarvar RETURN MISCARRAYID_AMOUNTTEMP
  }
 endevent
 
@@ -4209,6 +4213,11 @@ onevent EVENT_NEWGAME
   setvar MISCARRAYID 74 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // ATTACHED-OBJECTS?
 
   setvar MISCARRAYID 82 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // CHARACTER-OLD
+
+  setvar MISCARRAYID 86 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 160 // mouse-cursor-x
+  setvar MISCARRAYID 87 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 100 // mouse-cursor-y
+
+  setvar MISCARRAYID 100 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // VISOR-OFF-SOUND
 
   setvar MISCARRAYID 110 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // NETHRA-FORM?
 

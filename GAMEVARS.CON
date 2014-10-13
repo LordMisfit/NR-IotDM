@@ -9,8 +9,8 @@ gamearray ACHIEVEMENTS_GLOBAL 512
 
 gamevar PUBLICBETA? 1 0 // 1 means Public Beta, 0 means Official Versions
 
-gamevar RNDMIZER 0 0
-gamevar RNDMIZERLIMIT 0 0
+gamevar RNDMIZER 0 0 // For customized 'ifrnd' blocks [or ones controlled by vars]. This is the actual randomized amount to compare vs. RNDMIZERLIMIT below.
+gamevar RNDMIZERLIMIT 0 0 // For customized 'ifrnd' blocks [or ones controlled by vars]. This value is the amount RNDMIZER must [usually] EXCEED in order for the intended code block to run.
 
 gamevar PAINSOUNDSTYPE 1 1 // 0 = Normal [based on health when hit], 1 = Other [Based on % of damage taken in a single hit]
 gamevar PAINSOUNDFACTOR 0 1 // Out of 1000 [100.0%]
@@ -30,10 +30,7 @@ gamevar INVENTORYSLOTMAX 1 132098 //
 //**GAMEVARS**
 //************
 
-gamevar cursorx 160 132098
-gamevar cursory 100 132098
-gamevar cursorang 0 132098
-
+// For remember where the cursor was last at in the menus when changing in and out
 gamevar cursormemorysubmenu 0 0
 gamevar cursormemorypagepos 0 132098
 gamevar cursormemorycursorpos 0 132098
@@ -45,7 +42,6 @@ gamevar extra_orientation 0 0
 gamevar position 0 2
 gamevar itemtimer 0 2
 
-gamevar autosavetoggle 0 131073
 gamevar AUTOSAVEFREQUENCY 20 0
 gamevar LASTAUTOSAVEINTERVAL 0 0 // Time [in Raw format] of the last autosave that occured.
 gamevar NEXTAUTOSAVEINTERVAL 0 0 // Time [in Raw format] for the next autosave to occur.
@@ -123,7 +119,6 @@ gamevar SHOWDAMAGEDIGIT1000000ID -1 2
 gamevar SHOWDAMAGEDIGIT10000000ID -1 2
 gamevar SHOWDAMAGECRITICALTYPEID -1 2
 gamevar SHOWDAMAGEPARENTID -1 2
-gamevar rpgdmgdisplaytoggle 1 131073
 
 gamevar USESKILLARRAY 0 1
 gamevar USESKILLPERCENTCOST 0 132098 // Defines a %-based cost for a skill [can be combined with USESKILLEXACTCOST below for complexer skill costs]
@@ -165,9 +160,6 @@ gamevar MONEYBAGCENTS 0 131074
 gamevar PROJECTILESPEED 0 2
 gamevar PROJECTILESPEEDMULTI 0 2
 
-gamevar shadepulsetimer 0 0
-gamevar dn3ditempulsetimer 0 0
-
 gamevar HEALPANEL_CHARGEHEALS 0 2 // XVEL of FIRSTAIDPANEL_ON actor [positives are % based (based on 1000 = 100.0% HP), negatives are exact (-1000 = +1000 HP)]
 gamevar HEALPANEL_CHARGES 0 2
 gamevar HEALPANEL_MAXCHARGES 0 2 // YVEL of FIRSTAIDPANEL_ON actor [when it hits zero, panel turns off and won't work anymore, unless charge is set]
@@ -205,14 +197,14 @@ gamevar RANDOMCHARACTEROPTION 0 1
 gamevar RANDOMCHARACTERCHEAT? 0 1
 
 gamevar CHEATBITFIELD? 0 131073
-// 1 = Infinite Ammo [AMMOCHEAT?] // gamevar AMMOCHEAT? 0 1
-// 2 = Hacker Vision [HACKVISIONCHEAT?] // gamevar HACKVISIONCHEAT? 0 1
-// 4 = Buddha Mode [BUDDHAMODE?] // gamevar BUDDHAMODE? 0 0
-// 8 = Damage Cheat [DAMAGECHEAT] // gamevar DAMAGECHEAT 0 131073
-// 16 = Defense Cheat [DEFENSECHEAT] // gamevar DEFENSECHEAT 0 131073
-// 32 = God Mode [CHEATGOD] // gamevar CHEATGOD 0 131073
-// 64 = Kill-All-Monsters Cheat [KILLCHEAT?] // gamevar KILLCHEAT? 0 1
-// 128 = Infinite EP/0 EP use [ENERGYCHEAT?] // gamevar ENERGYCHEAT? 0 1
+// 1 = Infinite Ammo [AMMOCHEAT?]
+// 2 = Hacker Vision [HACKVISIONCHEAT?]
+// 4 = Buddha Mode [BUDDHAMODE?]
+// 8 = Damage Cheat [DAMAGECHEAT]
+// 16 = Defense Cheat [DEFENSECHEAT]
+// 32 = God Mode [CHEATGOD]
+// 64 = Kill-All-Monsters Cheat [KILLCHEAT?]
+// 128 = Infinite EP/0 EP use [ENERGYCHEAT?]
 
 gamevar EQUIPCHEAT? 0 1
 
@@ -277,12 +269,6 @@ gamevar statincreasetempe 0 2
 gamevar TRANSFORMTIMER 0 1
 gamevar TRANSFORMTIMERMAX 9 0
 
-gamevar vehiclepickuptoggle 0 131073
-// 0 = Character always grabs items if needed, and never the Vehicle
-// 1 = Vehicle always takes items if needed, and never the Character
-// 2 = Character & Vehicle will take items, but Character is Prioritized before Vehicle
-// 3 = Character & Vehicle will take items, but Vehicle is Prioritized before Character
-
 gamevar CLOCKDIGITTYPE 0 2
 gamevar CLOCKDIGITFLAGS 0 2
 gamevar CLOCKDIGITTIMER 0 2
@@ -296,7 +282,7 @@ gamevar ITEMWASDROPPED? 0 2 // Used to give dropped items a time limit before th
 gamevar ITEMDROPTIMER 390 2 // The default time a dropped item has on the map before it vanishes.
 
 gamevar HITSCANNINGNAMES 0 131073 // 0 = Traditional Duke3D Enemy names, 1 = Triocladiar Species Enemy Names
-gamevar normalhitscantoggle 1 131073 // 0 = Do not hitscan things normally [aka without VR Goggles/Hacker Vision], 1 = Show Entity names via hitscan [but not stats]
+
 
 // Push/Pull/Grab/Lift Related Variables
 gamevar ACTORWEIGHT 0 2 // All objects/creatures/players/etc need this to determine how heavy or light they are [in lbs]
@@ -375,14 +361,17 @@ gamevar CHAINGUNMODE 0 131073 // 0 = Normal Bullets, 1 = RPG Rockets, 2 = Laser 
 gamevar SECTORSECRETCHECK 0 131073
 gamevar SECRETCHECKFLAG 0 131073
 
+// Player/Character Flash Timers [for meters and values when you gain/lose stats]
 gamevar DISPLAYHPFLASHTIMER 0 1
 gamevar DISPLAYAPFLASHTIMER 0 1
 gamevar DISPLAYFAFLASHTIMER 0 1
 
+// Actor/Monster Flash Timers 
 gamevar EDISPLAYHPFLASHTIMER 0 2
 gamevar EDISPLAYAPFLASHTIMER 0 2
 gamevar EDISPLAYFAFLASHTIMER 0 2
 
+// Vehicle Flash Timers 
 gamevar VDISPLAYHPFLASHTIMER 0 2
 gamevar VDISPLAYAPFLASHTIMER 0 2
 gamevar VDISPLAYFAFLASHTIMER 0 2
@@ -465,19 +454,6 @@ gamevar GEMY 0 2
 gamevar GEMDIST 0 131073
 gamevar GEMSEE 0 131073
 
-gamevar hitwallnextwall 0 0
-gamevar hitwallnextsector 0 0
-gamevar hitwallcstat 0 0
-gamevar hitwalloverpicnum 0 0
-gamevar hitwallshade 0 0
-gamevar hitwallpal 0 0
-gamevar hitwallxrepeat 0 0
-gamevar hitwallyrepeat 0 0
-gamevar hitwallxpanning 0 0
-gamevar hitwallypanning 0 0
-gamevar hitwalllotag 0 0
-gamevar hitwallextra 0 0
-
 gamevar GETCURRADDRESS 0 0
 
 gamevar VENDINGQUANITY 0 1026
@@ -531,8 +507,6 @@ gamevar TIMERWEEKS 0 0
 gamevar DEATHCHARACTERVAR 0 0
 gamevar TEMPHITCHARACTERVAR 0 0
 gamevar TEMPATKCHARACTERVAR 0 0
-gamevar PERCENTUPPER 0 0
-gamevar PERCENTLOWER 0 0
 gamevar TEMPHITENEMYVARHP 0 0
 gamevar TEMPHITENEMYVARAP 0 0
 
@@ -587,9 +561,6 @@ gamevar gameoverblacknessfade 0 0
 gamevar oldskoolmode 0 0
 gamevar startlevelvolume 0 0
 gamevar startlevellevel 0 0
-
-gamevar VISORONSOUND 0 0
-gamevar VISOROFFSOUND 1 0
 
 gamevar LIFEBARHP 0 2
 gamevar MELEEATTACKERID -1 131073
@@ -678,24 +649,12 @@ gamevar DIMNESSSWITCHTIMER 0 131074
 gamevar ACTORANGLE 0 131074
 gamevar ACTORHORIZ 0 131074
 
-gamevar TITLESCREEN 0 0 // For deciding the random background for loading screens
-
 gamevar HAVEASHIKONJEWEL? 0 1 // For Full-Version Games only
 gamevar SHIKONONMAP? 0 0 // 1 means no other Shikons will drop
 gamevar ENEMYHASSHIKON? 0 2 // For when the randomizer bestows the Shikon on a monster instead of elsewhere.
 gamevar SHIKONHOLDERENEMYID -1 0 // Global Var for which enemyID# holds a Shikon when the "Monster" section of the randomizer comes up.
 gamevar ENEMYIDGLOBAL 0 0 // Global Counter of how many enemies have popped up in the game so far.
 gamevar ENEMYIDLOCAL -1 2 // Set to the current Global Value when a monster officially wakes up.
-
-gamevar hitwallx 0 0
-gamevar hitwally 0 0
-gamevar hitwallhitag 0 0
-gamevar hitwallpicnum 0 0
-gamevar hitwallpoint2 0 0
-gamevar hitwallpoint2x 0 0
-gamevar hitwallpoint2y 0 0
-gamevar hitwallcenterx 0 0 // Needed for being able to get the center of a wall (x)
-gamevar hitwallcentery 0 0 // Needed for being able to get the center of a wall (y)
 
 gamevar SURVIVALVALUE_TEMP 0 1 //
 
@@ -755,26 +714,6 @@ gamevar TESTXREPEAT1 0 2
 gamevar TESTXREPEAT2 0 2
 gamevar TESTYREPEAT1 0 2
 
-gamevar upperlefthandlegend 1 131073
-gamevar weapontoggleselect 0 131073 // 0 = character toggle, 1 = weapon toggle
-gamevar statusdisplaytoggle 1 131073
-gamevar miscdisplaytoggle 1 131073
-// 0 			= Nothing turned on
-// 1 			= Damage Displays Only
-// 2 			= Stat-Increase Displays Only
-// 3  [1+2]		= Damage and Stat Increase Displays
-// 4 			= Money-Get Displays Only
-// 5  [1+4]		= Damage Displays and Money-Get
-// 6  [2+4]		= Stat-Increase and Money-Get
-// 7  [1+2+4]	= Damage, Stat-Increase and Money-Get
-// 8			= Reward Displays Only
-// 9  [1+8]		= Damage and Reward Displays
-// 10 [2+8]		= Stat-Increase and Reward Displays
-// 11 [1+2+8]	= Damage, Stat-Increase and Reward Displays 
-// 12 [4+8]		= Money-Get and Reward Displays 
-// 13 [1+4+8]	= Damage, Money-Get and Reward Displays 
-// 14 [2+4+8]	= Stat-Increase, Money-Get and Reward Displays 
-// 15 [1+2+4+8]	= All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
 
 
 gamevar HPPERCENTAGE 0 131073
@@ -1281,9 +1220,6 @@ gamevar tempvarname4 0 131073
 gamevar DEFENDERDISPLAYTIMER 0 0
 gamevar spriteid 0 0
 
-gamevar characterstattoggle 1 131073 // Determines if the stats for the current character will display [Level, EXP, Speed, Attack, Etc]
-gamevar debugtoggle 0 131073 // Determines if the Debug Variables will show or not. 0 = No, 1 = Yes.
-
 gamevar mpresstime 0 131073 // used for controlling the menu toggle, so it doesn't toggle when holding key
 gamevar fpresstime 0 131073 // like above, except for going up the menu
 gamevar bpresstime 0 131073 // like above, except for going down the menu
@@ -1471,11 +1407,6 @@ gamevar MAXDEVASTATOR MAXDEVISTATORAMMO 131073
 gamevar MAXTRIPBOMB MAXTRIPBOMBAMMO 131073
 gamevar MAXFREEZER MAXFREEZEAMMO 131073
 
-gamevar HPFACTOR 0 131073
-gamevar APFACTOR 0 131073
-gamevar EPFACTOR 0 131073
-gamevar FAFACTOR 0 131073
-
 gamevar MAXHITPOINTSATOMIC MAXPLAYERATOMICHEALTH 131073
 gamevar MAXARMORPOINTSATOMIC MAXPLAYERATOMICHEALTH 131073
 gamevar MAXENERGYPOINTSATOMIC 0 131073
@@ -1538,7 +1469,6 @@ gamevar zvelsav 0 2
 gamevar com_pause 0 131073
 
 gamevar NPC_TYPE 0 0 // 0 = None, 1 = Enemy, 2 = Ally, 3 = Neutral, 4 = Important, 5 = Major Enemy
-gamevar lifebartogglemode 1 131072 // If you want to toggle lifebars on and off
 gamevar CHOKING? 0 2 // For choking/begging LIZTROOPs
 
 gamevar ARRAYPOSITION 0 0
@@ -1552,8 +1482,41 @@ gamevar KEYSCANNERZ 0 2
 gamevar KEYSCANNERZUP 0 2
 gamevar KEYSCANNERZDOWN 0 2
 
+// Toggle Menu Options
+gamevar autosavetoggle 0 131073
+gamevar rpgdmgdisplaytoggle 1 131073
+gamevar vehiclepickuptoggle 0 131073
+ // 0 = Character always grabs items if needed, and never the Vehicle
+ // 1 = Vehicle always takes items if needed, and never the Character
+ // 2 = Character & Vehicle will take items, but Character is Prioritized before Vehicle
+ // 3 = Character & Vehicle will take items, but Vehicle is Prioritized before Character
+gamevar normalhitscantoggle 1 131073 // 0 = Do not hitscan things normally [aka without VR Goggles/Hacker Vision], 1 = Show Entity names via hitscan [but not stats]
+gamevar upperlefthandlegend 1 131073
+gamevar weapontoggleselect 0 131073 // 0 = character toggle, 1 = weapon toggle
+gamevar statusdisplaytoggle 1 131073
+gamevar miscdisplaytoggle 1 131073
+ // 0 			= Nothing turned on
+ // 1 			= Damage Displays Only
+ // 2 			= Stat-Increase Displays Only
+ // 3  [1+2]		= Damage and Stat Increase Displays
+ // 4 			= Money-Get Displays Only
+ // 5  [1+4]		= Damage Displays and Money-Get
+ // 6  [2+4]		= Stat-Increase and Money-Get
+ // 7  [1+2+4]	= Damage, Stat-Increase and Money-Get
+ // 8			= Reward Displays Only
+ // 9  [1+8]		= Damage and Reward Displays
+ // 10 [2+8]		= Stat-Increase and Reward Displays
+ // 11 [1+2+8]	= Damage, Stat-Increase and Reward Displays 
+ // 12 [4+8]		= Money-Get and Reward Displays 
+ // 13 [1+4+8]	= Damage, Money-Get and Reward Displays 
+ // 14 [2+4+8]	= Stat-Increase, Money-Get and Reward Displays 
+ // 15 [1+2+4+8]	= All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
+gamevar characterstattoggle 1 131073 // Determines if the stats for the current character will display [Level, EXP, Speed, Attack, Etc]
+gamevar debugtoggle 0 131073 // Determines if the Debug Variables will show or not. 0 = No, 1 = Yes.
+gamevar lifebartogglemode 1 131072 // If you want to toggle lifebars on and off
 gamevar automedikittoggle 0 0 // for if you want to auto-use the Portable Medikit when you lose health
 gamevar automantletoggle 0 0
+gamevar footstepsndtoggle 1 131072
 
 gamevar SWITCHEDTILENUM 0 2
 gamevar GLIDING? 0 131073
@@ -1610,7 +1573,6 @@ gamevar FLOORTEX 0 2
 gamevar FOOTSTEPCOUNT 0 2
 gamevar FOOTSTEPSNDCOUNT 0 2
 gamevar FOOTSTEPSND? 0 2
-gamevar footstepsndtoggle 1 131072
 
 gamevar PLAYERFOOTSTEPZ 0 131073
 gamevar ACTORFOOTSTEPZ 0 2
@@ -1804,6 +1766,9 @@ gamevar INTERESTINTERVAL2 0 131072 // Decides how long it takes for interest rat
 gamevar RANKPAYMENTTIMER 0 131072
 gamevar RANKPAYMENTINTERVAL 24576 131072
 
+gamevar PARTYSIZE 0 131073		// Gets the total size of the group you have
+gamevar PARTYALIVE 0 131073		// Gets the number of your party that are still alive
+
 // Item Types
 gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept in this away instead of using their own seperate var. :P See list below...
  // (ITEMARRAYID = 0) # of Resurrection Chalices in inventory	// gamevar RESURRECTIONCHALICES 0 131073
@@ -1914,13 +1879,34 @@ gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept 
 gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 
+// "hitwall" vars - when you 'hitscan' a wall by looking at it
+gamevar hitwallx 0 0
+gamevar hitwally 0 0
+gamevar hitwallhitag 0 0
+gamevar hitwallpicnum 0 0
+gamevar hitwallpoint2 0 0
+gamevar hitwallpoint2x 0 0
+gamevar hitwallpoint2y 0 0
+gamevar hitwallcenterx 0 0 // Needed for being able to get the center of a wall (x)
+gamevar hitwallcentery 0 0 // Needed for being able to get the center of a wall (y)
+gamevar hitwallnextwall 0 0
+gamevar hitwallnextsector 0 0
+gamevar hitwallcstat 0 0
+gamevar hitwalloverpicnum 0 0
+gamevar hitwallshade 0 0
+gamevar hitwallpal 0 0
+gamevar hitwallxrepeat 0 0
+gamevar hitwallyrepeat 0 0
+gamevar hitwallxpanning 0 0
+gamevar hitwallypanning 0 0
+gamevar hitwalllotag 0 0
+gamevar hitwallextra 0 0
+
 //*******************
 //*To Be Arrayed >.>*
 //*******************
 
-// To Possibly Be Arrayed... [2]
-gamevar PARTYSIZE 0 131073		// Gets the total size of the group you have
-gamevar PARTYALIVE 0 131073		// Gets the number of your party that are still alive
+// To Possibly Be Arrayed... [0]
 
 // To Be Arrayed At a More Conveinent Time >_> [0]
 
@@ -2015,21 +2001,21 @@ gamevar MISCARRAYID -1 131072
  // [83] = CHARACTER-NEW  -  For trying to switch to a new character when one dies
  // [84] = GOT-ALL-SECRETS-BONUS?
  // [85] = FOUND-A-SECRET
- // [86] = 
- // [87] = 
- // [88] = 
- // [89] = 
- // [90] = 
- // [91] = 
- // [92] = 
- // [93] = 
- // [94] = 
- // [95] = 
- // [96] = 
- // [97] = 
- // [98] = TARGETSHRUNKEN?
- // [99] = 
- // [100] = 
+ // [86] = mouse-cursor-x  -  Mouse Cursor's X
+ // [87] = mouse-cursor-y  -  Mouse Cursor's Y
+ // [88] = mouse-cursor-ang  -  Mouse Cursor's Angle
+ // [89] = shade-pulse-timer
+ // [90] = dn3d-item-pulse-timer
+ // [91] = WORLDTILE-TITLE-SCREEN  -  For deciding the random background for loading screens
+ // [92] = PERCENT-UPPER  -  Represents the "xx.##%" segement of percentage amounts
+ // [93] = PERCENT-LOWER  -  Represents the "##.xx%" segement of percentage amounts [taken from modulus/remainder]
+ // [94] = HP-FACTOR  -  Gets your HP %. 1000 = 100.0%
+ // [95] = AP-FACTOR  -  Gets your AP %. 1000 = 100.0% 
+ // [96] = EP-FACTOR  -  Gets your EP %. 1000 = 100.0%  
+ // [97] = FA-FACTOR  -  Gets your FirstAid %. 1000 = 100.0%   
+ // [98] = ES-FACTOR  -  Gets your EnergyShield %. 1000 = 100.0%   
+ // [99] = VISOR-ON-SOUND
+ // [100] = VISOR-OFF-SOUND
  // [101] = DUKE-FORM?
  // [102] = JACK-FORM?
  // [103] = BUBSY-FORM?			// 0 = Normal Form, 1 = 'Loki Mask' on
@@ -2048,6 +2034,7 @@ gamevar MISCARRAYID -1 131072
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes on item amounts
+//gamevar MISCARRAYID_AMOUNTTEMP3 0 131072 // Keeps a 3rd temporary var at the forefront for if-checks and array changes on item amounts
 
 gamevar itemidinuse -1 0 // Indexes what item id is trying to be used in the menu [set to -1 when not in use]
 // ID #0 = Resurrection Chalice

@@ -8,3 +8,4 @@
 - Make an equippable item that splits damage taken by the wearer between all members of the group.
 - Make a randomizer mode for monsters [monsters of a specfic 'species' can randomly upgrade into stronger [non-boss] counterparts, similar to DV-DS. Also can randomly flag non-boss enemies as elites.
 - Randomizer for where some non-captured NPCs might be able to turn into a shop/dealer.
+- Add a mouse-cursor to the menu systems that WORKS... somehow... good luck me <_<;

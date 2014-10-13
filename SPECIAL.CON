@@ -1373,23 +1373,27 @@ ends
 state shadepulse
   getplayer[THISACTOR].player_par temp
   shiftvarl temp 7
-	sin tempb temp
+  sin tempb temp
   shiftvarr tempb 11
   setvarvar shade tempb
 ends
 
 state shadepulse2
-  getplayer[THISACTOR].player_par shadepulsetimer
-  modvar shadepulsetimer 52
-  ifvarg shadepulsetimer 0 ifvarl shadepulsetimer 27 setvarvar shade shadepulsetimer
-  ifvarg shadepulsetimer 26 ifvarl shadepulsetimer 52 { setvar shade 52 subvarvar shade shadepulsetimer }
+  setvar MISCARRAYID 89 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
+  getplayer[THISACTOR].player_par MISCARRAYID_AMOUNTTEMP
+  modvar MISCARRAYID_AMOUNTTEMP 52
+  ifvarg MISCARRAYID_AMOUNTTEMP 0 ifvarl MISCARRAYID_AMOUNTTEMP 27 setvarvar shade MISCARRAYID_AMOUNTTEMP
+  ifvarg MISCARRAYID_AMOUNTTEMP 26 ifvarl MISCARRAYID_AMOUNTTEMP 52 { setvar shade 52 subvarvar shade MISCARRAYID_AMOUNTTEMP }
+  setvar MISCARRAYID 89 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
 ends
 
 state shadepulse3
-  getplayer[THISACTOR].player_par shadepulsetimer
-  modvar shadepulsetimer 28
-  ifvarg shadepulsetimer 0 ifvarl shadepulsetimer 15 setvarvar shade shadepulsetimer
-  ifvarg shadepulsetimer 14 ifvarl shadepulsetimer 28 { setvar shade 28 subvarvar shade shadepulsetimer }
+  setvar MISCARRAYID 89 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
+  getplayer[THISACTOR].player_par MISCARRAYID_AMOUNTTEMP
+  modvar MISCARRAYID_AMOUNTTEMP 28
+  ifvarg MISCARRAYID_AMOUNTTEMP 0 ifvarl MISCARRAYID_AMOUNTTEMP 15 setvarvar shade MISCARRAYID_AMOUNTTEMP
+  ifvarg MISCARRAYID_AMOUNTTEMP 14 ifvarl MISCARRAYID_AMOUNTTEMP 28 { setvar shade 28 subvarvar shade MISCARRAYID_AMOUNTTEMP }
+  setvar MISCARRAYID 89 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
 ends
 
 state shadepulse4
@@ -14382,12 +14386,12 @@ state hackervision
 ends
 
 state cheatersound
- stopsound CHEATER
- sound CHEATER
+ stopsound CHEATER sound CHEATER
 ends
 
 state gotmedsyoureallyneeded
- ifvarl HPFACTOR 251
+ setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+ ifvarl MISCARRAYID_AMOUNTTEMP 251
  {
   ifvare CHARACTERSELECTED? 1 globalsound DUKE_GOTHEALTHATLOW
   else ifvare CHARACTERSELECTED? 5 globalsound WANG_GOTHEALTHATLOW
@@ -22190,32 +22194,19 @@ state enemyhitscanchecker
 ends
 
 state paletteflasher
-     getplayer[THISACTOR].player_par shadepulsetimer
-     modvar shadepulsetimer 24
-     ifvare shadepulsetimer 0 state pal13
-     ifvare shadepulsetimer 1 state pal13
-     ifvare shadepulsetimer 2 state pal12
-     ifvare shadepulsetimer 3 state pal12
-     ifvare shadepulsetimer 4 state pal17
-     ifvare shadepulsetimer 5 state pal17
-     ifvare shadepulsetimer 6 state pal21
-     ifvare shadepulsetimer 7 state pal21
-     ifvare shadepulsetimer 8 state pal15
-     ifvare shadepulsetimer 9 state pal15
-     ifvare shadepulsetimer 10 state pal14
-     ifvare shadepulsetimer 11 state pal14
-     ifvare shadepulsetimer 12 state pal6
-     ifvare shadepulsetimer 13 state pal6
-     ifvare shadepulsetimer 14 state pal14
-     ifvare shadepulsetimer 15 state pal14
-     ifvare shadepulsetimer 16 state pal15
-     ifvare shadepulsetimer 17 state pal15
-     ifvare shadepulsetimer 18 state pal21
-     ifvare shadepulsetimer 19 state pal21
-     ifvare shadepulsetimer 20 state pal17
-     ifvare shadepulsetimer 21 state pal17
-     ifvare shadepulsetimer 22 state pal12
-     ifvare shadepulsetimer 23 state pal12
+     setvar MISCARRAYID 89 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
+     getplayer[THISACTOR].player_par MISCARRAYID_AMOUNTTEMP
+     modvar MISCARRAYID_AMOUNTTEMP 24
+     switch MISCARRAYID_AMOUNTTEMP
+     case 0 case 1 state pal13 break
+     case 2 case 3 case 22 case 23 state pal12 break
+     case 4 case 5 case 20 case 21 state pal17 break
+     case 6 case 7 case 18 case 19 state pal21 break
+     case 8 case 9 case 16 case 17 state pal15 break
+     case 10 case 11 case 14 case 15 state pal14 break
+     case 12 case 13 state pal16 break
+     endswitch
+     setvar MISCARRAYID 89 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
 ends
 
 state shownoskills
@@ -32028,65 +32019,43 @@ state loadnewsubmenustuff
 ends
 
 state pulsingdn3ditem
-  getplayer[THISACTOR].player_par dn3ditempulsetimer
-  modvar dn3ditempulsetimer 52
+  setvar MISCARRAYID 90 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // dn3d-item-pulse-timer
+  getplayer[THISACTOR].player_par MISCARRAYID_AMOUNTTEMP
+  modvar MISCARRAYID_AMOUNTTEMP 52
+  switch MISCARRAYID_AMOUNTTEMP
+  case 0 case 26 mulvar digz 750 break
+  case 1 case 25 mulvar digz 769 break
+  case 2 case 24 mulvar digz 788 break
+  case 3 case 23 mulvar digz 808 break
+  case 4 case 22 mulvar digz 827 break
+  case 5 case 21 mulvar digz 846 break
+  case 6 case 20 mulvar digz 865 break
+  case 7 case 19 mulvar digz 885 break
+  case 8 case 18 mulvar digz 904 break
+  case 9 case 17 mulvar digz 923 break
+  case 10 case 16 mulvar digz 942 break
+  case 11 case 15 mulvar digz 962 break
+  case 12 case 14 mulvar digz 981 break
+  case 13 mulvar digz 1000 break
+  case 27 case 51 mulvar digz 731 break
+  case 28 case 50 mulvar digz 712 break
+  case 29 case 49 mulvar digz 692 break
+  case 30 case 48 mulvar digz 673 break
+  case 31 case 47 mulvar digz 654 break
+  case 32 case 46 mulvar digz 635 break
+  case 33 case 45 mulvar digz 615 break
+  case 34 case 44 mulvar digz 596 break
+  case 35 case 43 mulvar digz 577 break
+  case 36 case 42 mulvar digz 558 break
+  case 37 case 41 mulvar digz 538 break
+  case 38 case 40 mulvar digz 519 break
+  case 39 mulvar digz 500 break
+  default mulvar digz 750 break
+  endswitch
 
-  ifvare dn3ditempulsetimer 0 mulvar digz 750
-  ifvare dn3ditempulsetimer 1 mulvar digz 769
-  ifvare dn3ditempulsetimer 2 mulvar digz 788
-  ifvare dn3ditempulsetimer 3 mulvar digz 808
-  ifvare dn3ditempulsetimer 4 mulvar digz 827
-  ifvare dn3ditempulsetimer 5 mulvar digz 846
-  ifvare dn3ditempulsetimer 6 mulvar digz 865
-  ifvare dn3ditempulsetimer 7 mulvar digz 885
-  ifvare dn3ditempulsetimer 8 mulvar digz 904
-  ifvare dn3ditempulsetimer 9 mulvar digz 923
-  ifvare dn3ditempulsetimer 10 mulvar digz 942
-  ifvare dn3ditempulsetimer 11 mulvar digz 962
-  ifvare dn3ditempulsetimer 12 mulvar digz 981
-
-  ifvare dn3ditempulsetimer 13 mulvar digz 1000
-  ifvare dn3ditempulsetimer 14 mulvar digz 981
-  ifvare dn3ditempulsetimer 15 mulvar digz 962
-  ifvare dn3ditempulsetimer 16 mulvar digz 942
-  ifvare dn3ditempulsetimer 17 mulvar digz 923
-  ifvare dn3ditempulsetimer 18 mulvar digz 904
-  ifvare dn3ditempulsetimer 19 mulvar digz 885
-  ifvare dn3ditempulsetimer 20 mulvar digz 865
-  ifvare dn3ditempulsetimer 21 mulvar digz 846
-  ifvare dn3ditempulsetimer 22 mulvar digz 827
-  ifvare dn3ditempulsetimer 23 mulvar digz 808
-  ifvare dn3ditempulsetimer 24 mulvar digz 788
-  ifvare dn3ditempulsetimer 25 mulvar digz 769
-
-  ifvare dn3ditempulsetimer 26 mulvar digz 750
-  ifvare dn3ditempulsetimer 27 mulvar digz 731
-  ifvare dn3ditempulsetimer 28 mulvar digz 712
-  ifvare dn3ditempulsetimer 29 mulvar digz 692
-  ifvare dn3ditempulsetimer 30 mulvar digz 673
-  ifvare dn3ditempulsetimer 31 mulvar digz 654
-  ifvare dn3ditempulsetimer 32 mulvar digz 635
-  ifvare dn3ditempulsetimer 33 mulvar digz 615
-  ifvare dn3ditempulsetimer 34 mulvar digz 596
-  ifvare dn3ditempulsetimer 35 mulvar digz 577
-  ifvare dn3ditempulsetimer 36 mulvar digz 558
-  ifvare dn3ditempulsetimer 37 mulvar digz 538
-  ifvare dn3ditempulsetimer 38 mulvar digz 519
-
-  ifvare dn3ditempulsetimer 39 mulvar digz 500
-  ifvare dn3ditempulsetimer 40 mulvar digz 519
-  ifvare dn3ditempulsetimer 41 mulvar digz 538
-  ifvare dn3ditempulsetimer 42 mulvar digz 558
-  ifvare dn3ditempulsetimer 43 mulvar digz 577
-  ifvare dn3ditempulsetimer 44 mulvar digz 596
-  ifvare dn3ditempulsetimer 45 mulvar digz 615
-  ifvare dn3ditempulsetimer 46 mulvar digz 635
-  ifvare dn3ditempulsetimer 47 mulvar digz 654
-  ifvare dn3ditempulsetimer 48 mulvar digz 673
-  ifvare dn3ditempulsetimer 49 mulvar digz 692
-  ifvare dn3ditempulsetimer 50 mulvar digz 712
-  ifvare dn3ditempulsetimer 51 mulvar digz 731
   divvar digz 1000
+
+  setvar MISCARRAYID 90 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // dn3d-item-pulse-timer
  ends
 
 //********************************
@@ -32269,9 +32238,6 @@ state usemedikit
    {
     ifvarg FIRSTAIDCURRENT 0           // If there is any First Aid Health left
     {
-     setvarvar HPFACTOR CURRENTHITPOINTS
-     mulvar HPFACTOR 1000  
-     divvarvar HPFACTOR MAXHITPOINTS
      state gotmedsyoureallyneeded
      setvarvar tempb MAXHITPOINTS    
      subvarvar tempb CURRENTHITPOINTS    // tempb now holds the amount you need to heal

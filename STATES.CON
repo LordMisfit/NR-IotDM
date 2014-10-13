@@ -1025,7 +1025,8 @@ state dukepainsounds
 
     ifvare PAINSOUNDSTYPE 0 // Sounds are based on CURRENTHITPOINTS amount when hit
     {
-     ifvarl HPFACTOR 251 ifvarg HPFACTOR -1
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     ifvarl MISCARRAYID_AMOUNTTEMP 251 ifvarg MISCARRAYID_AMOUNTTEMP -1
      {
       randvar RNDVOICE 2
       ifrnd 224
@@ -1036,7 +1037,7 @@ state dukepainsounds
       }
      }
      else
-     ifvarg HPFACTOR 250
+     ifvarg MISCARRAYID_AMOUNTTEMP 250
      {
       randvar RNDVOICE 3
       ifrnd 192
@@ -1091,7 +1092,8 @@ state lowangpainsounds
     ifvare PAINSOUNDSTYPE 0 // Sounds are based on CURRENTHITPOINTS amount when hit
     {
      randvar RNDVOICE 3
-     ifvarl HPFACTOR 251 ifvarg HPFACTOR -1
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     ifvarl MISCARRAYID_AMOUNTTEMP 251 ifvarg MISCARRAYID_AMOUNTTEMP -1
      {
       ifrnd 224
       {
@@ -1102,7 +1104,7 @@ state lowangpainsounds
       }
      }
      else
-     ifvarg HPFACTOR 250
+     ifvarg MISCARRAYID_AMOUNTTEMP 250
      {
       ifrnd 192
       {
@@ -1163,7 +1165,8 @@ state lisapainsounds
     ifvare PAINSOUNDSTYPE 0 // Sounds are based on CURRENTHITPOINTS amount when hit
     {
      randvar RNDVOICE 3
-     ifvarg HPFACTOR 750
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     ifvarg MISCARRAYID_AMOUNTTEMP 750
      {
       ifrnd 192
       {
@@ -1174,7 +1177,7 @@ state lisapainsounds
       }
      }
      else
-     ifvarl HPFACTOR 751 ifvarg HPFACTOR 500
+     ifvarl MISCARRAYID_AMOUNTTEMP 751 ifvarg MISCARRAYID_AMOUNTTEMP 500
      {
       ifrnd 203
       {
@@ -1185,7 +1188,7 @@ state lisapainsounds
       }
      }
      else
-     ifvarl HPFACTOR 501 ifvarg HPFACTOR 250
+     ifvarl MISCARRAYID_AMOUNTTEMP 501 ifvarg MISCARRAYID_AMOUNTTEMP 250
      {
       ifrnd 213
       {
@@ -1195,7 +1198,7 @@ state lisapainsounds
        ifvare RNDVOICE 3 sound LISA_PAINHIGH4
       }
      }
-     else ifvarl HPFACTOR 251 ifvarg HPFACTOR -1
+     else ifvarl MISCARRAYID_AMOUNTTEMP 251 ifvarg MISCARRAYID_AMOUNTTEMP -1
      {
       ifrnd 224
       {
@@ -1276,7 +1279,8 @@ state makenpainsounds
     ifvare PAINSOUNDSTYPE 0 // Sounds are based on CURRENTHITPOINTS amount when hit
     {
      randvar RNDVOICE 3
-     ifvarg HPFACTOR 750
+     setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+     ifvarg MISCARRAYID_AMOUNTTEMP 750
      {
       ifrnd 192
       {
@@ -1287,7 +1291,7 @@ state makenpainsounds
       }
      }
      else
-     ifvarl HPFACTOR 751 ifvarg HPFACTOR 500
+     ifvarl MISCARRAYID_AMOUNTTEMP 751 ifvarg MISCARRAYID_AMOUNTTEMP 500
      {
       ifrnd 203
       {
@@ -1298,7 +1302,7 @@ state makenpainsounds
       }
      }
      else
-     ifvarl HPFACTOR 501 ifvarg HPFACTOR 250
+     ifvarl MISCARRAYID_AMOUNTTEMP 501 ifvarg MISCARRAYID_AMOUNTTEMP 250
      {
       ifrnd 213
       {
@@ -1308,7 +1312,7 @@ state makenpainsounds
        ifvare RNDVOICE 3 sound MAKEN_PAINHIGH4
       }
      }
-     else ifvarl HPFACTOR 251 ifvarg HPFACTOR -1
+     else ifvarl MISCARRAYID_AMOUNTTEMP 251 ifvarg MISCARRAYID_AMOUNTTEMP -1
      {
       ifrnd 224
       {
@@ -4197,19 +4201,24 @@ ends
 
 state tileshuffle_2
    setvar MISCARRAYID 24 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-SHUFFLES
-   ifvarg MISCARRAYID_AMOUNTTEMP 8 setvar TITLESCREEN 0 else jump TEMPVAR3
+   ifvarg MISCARRAYID_AMOUNTTEMP 8 
+   {
+    setvar MISCARRAYID 91 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-TITLE-SCREEN
+   }
+   else jump TEMPVAR3
 ends
 
 state getworldtile
  getcurraddress TEMPVAR3
- randvar TITLESCREEN 224
-
- setvar MISCARRAYID 24 // WORLDTILE-SHUFFLES
- getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 24 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-SHUFFLES
  addvar MISCARRAYID_AMOUNTTEMP 1
- setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-SHUFFLES
 
-  switch TITLESCREEN
+ setvar MISCARRAYID 91 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-TITLE-SCREEN
+ randvar MISCARRAYID_AMOUNTTEMP 224
+ setvar MISCARRAYID 91 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // WORLDTILE-TITLE-SCREEN
+
+  switch MISCARRAYID_AMOUNTTEMP
   case 0 { state tileshuffle_1 break }
 // Set #1 (1-32)
   case 1 { ifvarand WORLDTILEBITFIELD1 1 state tileshuffle_1 else state tileshuffle_2 break }
@@ -28236,30 +28245,16 @@ state radararrow
   ifvarg RANKSTARLEVEL 90 ifvarl RANKSTARLEVEL 100 setactor[THISACTOR].pal 10
   ifvare RANKSTARLEVEL 100
   {
-   ifvare shadepulsetimer 0 setactor[THISACTOR].pal 13
-   ifvare shadepulsetimer 1 setactor[THISACTOR].pal 13
-   ifvare shadepulsetimer 2 setactor[THISACTOR].pal 12
-   ifvare shadepulsetimer 3 setactor[THISACTOR].pal 12
-   ifvare shadepulsetimer 4 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 5 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 6 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 7 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 8 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 9 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 10 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 11 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 12 setactor[THISACTOR].pal 6
-   ifvare shadepulsetimer 13 setactor[THISACTOR].pal 6
-   ifvare shadepulsetimer 14 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 15 setactor[THISACTOR].pal 14
-   ifvare shadepulsetimer 16 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 17 setactor[THISACTOR].pal 15
-   ifvare shadepulsetimer 18 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 19 setactor[THISACTOR].pal 21
-   ifvare shadepulsetimer 20 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 21 setactor[THISACTOR].pal 17
-   ifvare shadepulsetimer 22 setactor[THISACTOR].pal 12
-   ifvare shadepulsetimer 23 setactor[THISACTOR].pal 12
+   setvar MISCARRAYID 89 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // shade-pulse-timer
+   switch MISCARRAYID_AMOUNTTEMP
+   case 0 case 1 setactor[THISACTOR].pal 13 break
+   case 2 case 3 case 22 case 23 setactor[THISACTOR].pal 12 break
+   case 4 case 5 case 20 case 21 setactor[THISACTOR].pal 17 break
+   case 6 case 7 case 18 case 19 setactor[THISACTOR].pal 21 break
+   case 8 case 9 case 16 case 17 setactor[THISACTOR].pal 15 break
+   case 10 case 11 case 14 case 15 setactor[THISACTOR].pal 14 break
+   case 12 case 13 setactor[THISACTOR].pal 16 break
+   endswitch
   }
 
   getactor[PARENTID].ang temp
