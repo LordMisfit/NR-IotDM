@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git66)
-definequote 1337 ^22VERSION:^0 5.22.git66.10132014
+setgamename Naferia's Reign (5.22.git67)
+definequote 1337 ^22VERSION:^0 5.22.git67.10132014
 
 action ANULLACTION 0
 
@@ -30828,32 +30828,101 @@ ifvarn hitsector -1
 
 ifvarn hitwall -1 
 {
- getwall[hitwall].x hitwallx
- getwall[hitwall].y hitwally
- getwall[hitwall].hitag hitwallhitag
- getwall[hitwall].picnum hitwallpicnum
- getwall[hitwall].point2 hitwallpoint2
- getwall[hitwallpoint2].x hitwallpoint2x
- getwall[hitwallpoint2].y hitwallpoint2y
- setvarvar hitwallcenterx hitwallx
- addvarvar hitwallcenterx hitwallpoint2x
- divvar hitwallcenterx 2
- setvarvar hitwallcentery hitwally
- addvarvar hitwallcentery hitwallpoint2y
- divvar hitwallcentery 2
+// x
 
- getwall[hitwall].nextwall hitwallnextwall
- getwall[hitwall].nextsector hitwallnextsector
- getwall[hitwall].cstat hitwallcstat
- getwall[hitwall].overpicnum hitwalloverpicnum
- getwall[hitwall].shade hitwallshade
- getwall[hitwall].pal hitwallpal
- getwall[hitwall].xrepeat hitwallxrepeat
- getwall[hitwall].yrepeat hitwallyrepeat
- getwall[hitwall].xpanning hitwallxpanning
- getwall[hitwall].ypanning hitwallypanning
- getwall[hitwall].lotag hitwalllotag
- getwall[hitwall].extra hitwallextra
+ setvar MISCARRAYID 208 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-center-x
+ setvar MISCARRAYID 203 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-x
+ getwall[hitwall].x MISCARRAYID_AMOUNTTEMP2
+ setvar MISCARRAYID 203 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-x
+ setvarvar MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
+
+ setvar MISCARRAYID 205 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-point2
+ getwall[hitwall].point2 MISCARRAYID_AMOUNTTEMP2
+ setvar MISCARRAYID 205 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-point2
+ getwall[MISCARRAYID_AMOUNTTEMP2].x MISCARRAYID_AMOUNTTEMP2
+ setvar MISCARRAYID 206 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-point2-x
+ addvarvar MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
+
+ divvar MISCARRAYID_AMOUNTTEMP 2
+ setvar MISCARRAYID 208 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-center-x
+ //addlogvar MISCARRAYID_AMOUNTTEMP
+
+
+// y
+
+ setvar MISCARRAYID 209 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-center-y
+ setvar MISCARRAYID 204 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-y
+ getwall[hitwall].y MISCARRAYID_AMOUNTTEMP2
+ setvar MISCARRAYID 204 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-y
+ setvarvar MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
+
+ setvar MISCARRAYID 205 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-point2
+ getwall[hitwall].point2 MISCARRAYID_AMOUNTTEMP2
+ setvar MISCARRAYID 205 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-point2
+ getwall[MISCARRAYID_AMOUNTTEMP2].y MISCARRAYID_AMOUNTTEMP2
+ setvar MISCARRAYID 207 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP2 // hitwall-point2-y
+ addvarvar MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
+
+ divvar MISCARRAYID_AMOUNTTEMP 2
+ setvar MISCARRAYID 209 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-center-y
+ //addlogvar MISCARRAYID_AMOUNTTEMP
+
+// other vars
+
+ setvar MISCARRAYID 210 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-hitag
+ getwall[hitwall].hitag MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 210 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-hitag
+
+ setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
+ getwall[hitwall].lotag MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 211 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
+
+ setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+ getwall[hitwall].extra MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 212 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ getwall[hitwall].picnum MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 213 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+
+ setvar MISCARRAYID 214 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-overpicnum
+ getwall[hitwall].overpicnum MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 214 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-overpicnum
+
+ setvar MISCARRAYID 215 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-nextwall
+ getwall[hitwall].nextwall MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 215 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-nextwall
+
+ setvar MISCARRAYID 216 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-nextsector
+ getwall[hitwall].nextsector MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 216 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-nextsector
+
+ setvar MISCARRAYID 217 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-cstat
+ getwall[hitwall].cstat MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 217 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-cstat
+
+ setvar MISCARRAYID 218 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-shade
+ getwall[hitwall].shade MISCARRAYID_AMOUNTTEMP
+
+ setvar MISCARRAYID 219 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-pal
+ getwall[hitwall].pal MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 219 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-pal
+
+ setvar MISCARRAYID 220 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-xrepeat
+ getwall[hitwall].xrepeat MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 220 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-xrepeat
+
+ setvar MISCARRAYID 221 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-yrepeat
+ getwall[hitwall].yrepeat MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 221 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-yrepeat
+
+ setvar MISCARRAYID 222 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-xpanning
+ getwall[hitwall].xpanning MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 222 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-xpanning
+
+ setvar MISCARRAYID 223 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-ypanning
+ getwall[hitwall].ypanning MISCARRAYID_AMOUNTTEMP
+ setvar MISCARRAYID 223 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-ypanning
 
 }
 
@@ -30915,140 +30984,113 @@ ifvare mainmenu -1
 //*Usable Walls (Vending Machines/Cola Machines/ATMs/Etc)*
 //********************************************************
 
- setvarvar wallxdist hitwallcenterx
+ setvar MISCARRAYID 208 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-center-x
+ setvarvar wallxdist MISCARRAYID_AMOUNTTEMP
  subvarvar wallxdist posx
 
- setvarvar wallydist hitwallcentery
+ setvar MISCARRAYID 209 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-center-y
+ setvarvar wallydist MISCARRAYID_AMOUNTTEMP
  subvarvar wallydist posy
 
- ifvare hitwallpicnum 867
- { 
-  ifvarn hitwalllotag 16384
+ //addlogvar wallxdist
+ //addlogvar wallydist
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 867 
+ {
+  setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
+  ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
   {
-   ifvare oldskoolmode 0
+   ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
-    ifvarg wallxdist -845
-    {
-     ifvarl wallxdist 845
+    ifhitspace
+    { 
+     state stopsearchsounds
+     ifvare com_pause 0
      {
-      ifvarg wallydist -845
+      ifvare atm_id -1
       {
-       ifvarl wallydist 845
-       {
-        ifvarg CURRENTHITPOINTS 0 // ifp palive
-        {
-         ifhitspace
-         { 
-          state stopsearchsounds
-          ifvare com_pause 0
-          {
-           ifvare atm_id -1
-           {
-            setvarvar atm_id hitwall
-            setvar atm_type 2
-            setvar atm_mode 0
-            randvar atm_background 47
-            randvar atm_wscreen 3
-            addvar atm_wscreen 1
-            randvar atm_extquote 21
-           }
-           setvar com_pause 39
-          }
-         }
-        }
-       }
+       setvarvar atm_id hitwall
+       setvar atm_type 2
+       setvar atm_mode 0
+       randvar atm_background 47
+       randvar atm_wscreen 3
+       addvar atm_wscreen 1
+       randvar atm_extquote 21
       }
+      setvar com_pause 39
+     }
+    }
+   }
+  }
+ } 
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 888 
+ {
+  setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
+  ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
+  {
+   ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+   {
+    ifhitspace
+    { 
+     state stopsearchsounds
+     ifvare com_pause 0
+     {
+      ifvare CHARACTERSELECTED? 8
+      {
+       ifvarg DOLLARS 10499 ifvarg CURRENTENERGYPOINTS 39
+       {
+        setwall[hitwall].picnum 867 // fix the ATM machine :P
+        sound MENU_ENTER
+        ifvarand CHEATBITFIELD? 128 nullop else subvar CURRENTENERGYPOINTS 40
+        subvar DOLLARS 10500
+        subvar DISPLAYDOLLARS 10500
+        state displaymoney
+        setvarvar ARRAYPOSITION hitwall state createmusicsfx_atm
+        ifvarand CHEATBITFIELD? 128 redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00!
+        else redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00 AND 40 EP!
+        setvarvar fta fta_normal setvar ftq 321
+       }
+       else
+       {
+        state atmbroken_dealdamage
+        redefinequote 321 ^10THE ATM MACHINE IS BROKEN!
+        setvarvar fta fta_normal setvar ftq 321
+        }
+      }
+       else
+      {
+       state atmbroken_dealdamage
+       redefinequote 321 ^10THE ATM MACHINE IS BROKEN!
+       setvarvar fta fta_normal setvar ftq 321
+      }
+      setvar com_pause 39
      }
     }
    }
   }
  }
- else
- ifvare hitwallpicnum 888
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 1212
  {
-  ifvarn hitwalllotag 16384
-  {
-   ifvare oldskoolmode 0
-   {
-    ifvarg wallxdist -845
-    {
-     ifvarl wallxdist 845
-     {
-      ifvarg wallydist -845
-      {
-       ifvarl wallydist 845
-       {
-        ifvarg CURRENTHITPOINTS 0 // ifp palive
-        {
-         ifhitspace
-         { 
-          state stopsearchsounds
-          ifvare com_pause 0
-          {
-           ifvare CHARACTERSELECTED? 8
-           {
-            ifvarg DOLLARS 10499 ifvarg CURRENTENERGYPOINTS 39
-            {
-             setwall[hitwall].picnum 867 // fix the ATM machine :P
-             sound MENU_ENTER
-             ifvarand CHEATBITFIELD? 128 nullop else subvar CURRENTENERGYPOINTS 40
-             subvar DOLLARS 10500
-             subvar DISPLAYDOLLARS 10500
-             state displaymoney
-             setvarvar ARRAYPOSITION hitwall state createmusicsfx_atm
-             ifvarand CHEATBITFIELD? 128 redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00!
-             else redefinequote 321 ^20LISA FIXED THE ATM, FOR A COST OF $10500.00 AND 40 EP!
-             setvarvar fta fta_normal setvar ftq 321
-            }
-            else
-            {
-             state atmbroken_dealdamage
-             redefinequote 321 ^10THE ATM MACHINE IS BROKEN!
-             setvarvar fta fta_normal setvar ftq 321
-            }
-           }
-           else
-           {
-            state atmbroken_dealdamage
-            redefinequote 321 ^10THE ATM MACHINE IS BROKEN!
-            setvarvar fta fta_normal setvar ftq 321
-           }
-           setvar com_pause 39
-          }
-         }
-        }
-       }
-      }
-     }
-    }
-   }
-  }
- }
- else
- ifvare hitwallpicnum 1212
- {
-  ifvare hitwallextra -1
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1
   {
    state pressonsnackmachine
   }
  }
- else
- ifvare hitwallpicnum 1214
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 1214
  {
-  ifvare hitwallextra -1
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1 ifvare oldskoolmode 0
   {
-   ifvare oldskoolmode 0
+   ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
-    ifvarg wallxdist -845
-    {
-     ifvarl wallxdist 845
-     {
-      ifvarg wallydist -845
-      {
-       ifvarl wallydist 845
-       {
-        ifvarg CURRENTHITPOINTS 0 // ifp palive
-        {
          ifhitspace
          { 
           state stopsearchsounds
@@ -31083,36 +31125,27 @@ ifvare mainmenu -1
            setvar com_pause 39
           }
          }
-        }
-       }
-      }
-     }
-    }
    }
   }
  }
- else
- ifvare hitwallpicnum 1215
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 1215
  {
-  ifvare hitwallextra -1 state pressoncolamachine
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressoncolamachine
  }
- else
- ifvare hitwallpicnum 1217
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 1217
  {
-  ifvare hitwallextra -1
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1
   {
    ifvare oldskoolmode 0
    {
-    ifvarg wallxdist -845
+    ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
     {
-     ifvarl wallxdist 845
-     {
-      ifvarg wallydist -845
-      {
-       ifvarl wallydist 845
-       {
-        ifvarg CURRENTHITPOINTS 0 // ifp palive
-        {
          ifhitspace
          { 
           state stopsearchsounds
@@ -31147,46 +31180,42 @@ ifvare mainmenu -1
            setvar com_pause 39
           }
          }
-        }
-       }
-      }
-     }
     }
    }
   }
  }
- else
- ifvarg hitwallpicnum 7635 ifvarl hitwallpicnum 7677
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvarg MISCARRAYID_AMOUNTTEMP 7635 ifvarl MISCARRAYID_AMOUNTTEMP 7677
  {
-  ifvare hitwallextra -1 state pressoncolamachine
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressoncolamachine
  }
- else
- ifvarg hitwallpicnum 7676 ifvarl hitwallpicnum 7679
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvarg MISCARRAYID_AMOUNTTEMP 7676 ifvarl MISCARRAYID_AMOUNTTEMP 7679
  {
-  ifvare hitwallextra -1 state pressonsnackmachine
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressonsnackmachine
  }
- else
- ifvare hitwallpicnum 7679
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvare MISCARRAYID_AMOUNTTEMP 7679
  {
-  ifvare hitwallextra -1 state pressoncolamachine
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressoncolamachine
  }
- else
- ifvarg hitwallpicnum 10495 ifvarl hitwallpicnum 10750
+
+ setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
+ ifvarg MISCARRAYID_AMOUNTTEMP 10495 ifvarl MISCARRAYID_AMOUNTTEMP 10750
  {
-  ifvare hitwallextra -1
+  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
+  ifvare MISCARRAYID_AMOUNTTEMP -1
   {
    ifvare oldskoolmode 0
    {
-    ifvarg wallxdist -845
+    ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
     {
-     ifvarl wallxdist 845
-     {
-      ifvarg wallydist -845
-      {
-       ifvarl wallydist 845
-       {
-        ifvarg CURRENTHITPOINTS 0 // ifp palive
-        {
          ifhitspace
          { 
           state stopsearchsounds
@@ -31196,10 +31225,6 @@ ifvare mainmenu -1
           else { sound MENU_SELECTED setvarvar ARRAYPOSITION hitwall state swapscreen1 }
           setvarvar upresstime temppartime
          }
-        }
-       }
-      }
-     }
     }
    }
   }

@@ -6841,10 +6841,15 @@ state killallcharacters // for "instant death" situations [bottomless pit, space
 ends
 
 state useswitchcheckwall
-  ifvarn hitwall -1 getwall[hitwall].overpicnum hitwalloverpicnum
-  ifvare hitwalloverpicnum W_FORCEFIELD setvar TEMP2 0
-  else ifvare hitwalloverpicnum W_FORCEFIELDBLANK setvar TEMP2 0
-  else ifvare hitwalloverpicnum BIGFORCE setvar TEMP2 0
+  ifvarn hitwall -1 
+  {
+   setvar MISCARRAYID 214 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-overpicnum
+   getwall[hitwall].overpicnum MISCARRAYID_AMOUNTTEMP
+   setvar MISCARRAYID 214 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-overpicnum
+  }
+  ifvare MISCARRAYID_AMOUNTTEMP W_FORCEFIELD setvar TEMP2 0
+  else ifvare MISCARRAYID_AMOUNTTEMP W_FORCEFIELDBLANK setvar TEMP2 0
+  else ifvare MISCARRAYID_AMOUNTTEMP BIGFORCE setvar TEMP2 0
   else setvar TEMP2 1
 ends
 

@@ -1247,8 +1247,6 @@ gamevar mysector -1 131073 // The sector of the actor using hitscan
 gamevar mysin 0 131073  // The sine of the angle of the actor using hitscan
 gamevar mycos 0 131073
 gamevar hitsector -1 131073  // The sector that gets hit by the hitscan
-gamevar hitwall 0 131073   // The wall that gets hit by the hitscan
-gamevar hitwall2 0 131073
 gamevar hitsprite -1 131073 // The sprite that gets hit by the hitscan
 gamevar scannedsprite -1 131073
 gamevar hitx 0 131073 // The x coordinates that get hit by the hitscan
@@ -1879,28 +1877,9 @@ gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept 
 gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 
-// "hitwall" vars - when you 'hitscan' a wall by looking at it
-gamevar hitwallx 0 0
-gamevar hitwally 0 0
-gamevar hitwallhitag 0 0
-gamevar hitwallpicnum 0 0
-gamevar hitwallpoint2 0 0
-gamevar hitwallpoint2x 0 0
-gamevar hitwallpoint2y 0 0
-gamevar hitwallcenterx 0 0 // Needed for being able to get the center of a wall (x)
-gamevar hitwallcentery 0 0 // Needed for being able to get the center of a wall (y)
-gamevar hitwallnextwall 0 0
-gamevar hitwallnextsector 0 0
-gamevar hitwallcstat 0 0
-gamevar hitwalloverpicnum 0 0
-gamevar hitwallshade 0 0
-gamevar hitwallpal 0 0
-gamevar hitwallxrepeat 0 0
-gamevar hitwallyrepeat 0 0
-gamevar hitwallxpanning 0 0
-gamevar hitwallypanning 0 0
-gamevar hitwalllotag 0 0
-gamevar hitwallextra 0 0
+// Primary "hitwall" vars
+gamevar hitwall 0 131073   // The wall that gets hit by the hitscan
+gamevar hitwall2 0 131073  // The 2nd wall that gets hit by the hitscan
 
 //*******************
 //*To Be Arrayed >.>*
@@ -2031,10 +2010,35 @@ gamevar MISCARRAYID -1 131072
  // [113] = MINAKO-FORM?		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
  // [114] = MYSTERY1-FORM?
  // [115] = MAKEN-FORM?
+ // ***[116-200] are reserved for Party Member IDs***
+ // [201] = hitwall				**RESERVED FOR IF NEEDED**
+ // [202] = hitwall2			**RESERVED FOR IF NEEDED**
+ // [203] = hitwall-x
+ // [204] = hitwall-y
+ // [205] = hitwall-point2
+ // [206] = hitwall-point2-x
+ // [207] = hitwall-point2-y
+ // [208] = hitwall-center-x
+ // [209] = hitwall-center-y
+ // [210] = hitwall-hitag
+ // [211] = hitwall-lotag
+ // [212] = hitwall-extra
+ // [213] = hitwall-picnum
+ // [214] = hitwall-overpicnum
+ // [215] = hitwall-nextwall
+ // [216] = hitwall-nextsector
+ // [217] = hitwall-cstat
+ // [218] = hitwall-shade
+ // [219] = hitwall-pal
+ // [220] = hitwall-xrepeat
+ // [221] = hitwall-yrepeat
+ // [222] = hitwall-xpanning
+ // [223] = hitwall-ypanning
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
-gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
-gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes on item amounts
-//gamevar MISCARRAYID_AMOUNTTEMP3 0 131072 // Keeps a 3rd temporary var at the forefront for if-checks and array changes on item amounts
+gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes
+gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes
+//gamevar MISCARRAYID_AMOUNTTEMP3 0 131072 // Keeps a 3rd temporary var at the forefront for if-checks and array changes
+//gamevar MISCARRAYID_AMOUNTTEMP4 0 131072 // Keeps a 4th temporary var at the forefront for if-checks and array changes
 
 gamevar itemidinuse -1 0 // Indexes what item id is trying to be used in the menu [set to -1 when not in use]
 // ID #0 = Resurrection Chalice
