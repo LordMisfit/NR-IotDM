@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git67)
-definequote 1337 ^22VERSION:^0 5.22.git67.10132014
+setgamename Naferia's Reign (5.22.git68)
+definequote 1337 ^22VERSION:^0 5.22.git68.10142014
 
 action ANULLACTION 0
 
@@ -10152,18 +10152,18 @@ state projectiles_menufreeze
   {
    setthisprojectile[THISACTOR].vel PROJECTILESPEED
    setthisprojectile[THISACTOR].trail TEMP2
-   setactor[THISACTOR].xvel actorxvel
-   setactor[THISACTOR].yvel actoryvel
-   setactor[THISACTOR].zvel actorzvel
+   setactor[THISACTOR].xvel xvel
+   setactor[THISACTOR].yvel yvel
+   setactor[THISACTOR].zvel zvel
   }
   getthisprojectile[THISACTOR].vel PROJECTILESPEED
   getthisprojectile[THISACTOR].trail TEMP2
   getactor[THISACTOR].x x
   getactor[THISACTOR].y y
   getactor[THISACTOR].z z
-  getactor[THISACTOR].xvel actorxvel
-  getactor[THISACTOR].yvel actoryvel
-  getactor[THISACTOR].zvel actorzvel
+  getactor[THISACTOR].xvel xvel
+  getactor[THISACTOR].yvel yvel
+  getactor[THISACTOR].zvel zvel
  }
  else
  {
@@ -11666,18 +11666,18 @@ case FREEZEBLAST
   {
    setthisprojectile[THISACTOR].vel PROJECTILESPEED
    setthisprojectile[THISACTOR].trail TEMP2
-   setactor[THISACTOR].xvel actorxvel
-   setactor[THISACTOR].yvel actoryvel
-   setactor[THISACTOR].zvel actorzvel
+   setactor[THISACTOR].xvel xvel
+   setactor[THISACTOR].yvel yvel
+   setactor[THISACTOR].zvel zvel
   }
   getthisprojectile[THISACTOR].vel PROJECTILESPEED
   getthisprojectile[THISACTOR].trail TEMP2
   getactor[THISACTOR].x x
   getactor[THISACTOR].y y
   getactor[THISACTOR].z z
-  getactor[THISACTOR].xvel actorxvel
-  getactor[THISACTOR].yvel actoryvel
-  getactor[THISACTOR].zvel actorzvel
+  getactor[THISACTOR].xvel xvel
+  getactor[THISACTOR].yvel yvel
+  getactor[THISACTOR].zvel zvel
  }
  else
  {
@@ -32586,7 +32586,7 @@ else
 
 ifvare SECTORLOTAG 2 // Being in water should make the emulation damage throughout the whole vertical plane of the sector
 {
- ifvare TILEEMULATION 5385 // emulates NEWFLOORSLIME
+ ifvare TILEEMULATION 5385 // NEWFLOORSLIME
  {
    ifvare CANDMGFLOOR? 1
    {

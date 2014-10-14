@@ -2076,8 +2076,6 @@ onevent EVENT_DISPLAYMENUREST
  else
 */
  {
-  // rotatesprite 160 100 65536 0 5631 0 0 0 0 0 xdim ydim
-
   rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
   rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim
 

@@ -4405,97 +4405,97 @@ else
      }
 
      // DISPLAY ATTACKER'S SPRITE WHEN HIT
-     setvar atkx 160 // 160
-     setvar atky 132 // 136
-     subvarvar atky BOSSMETERTEMP      
+     setvar digx 160 // 160
+     setvar digy 132 // 136
+     subvarvar digy BOSSMETERTEMP      
 
      setvar TEMPVAR5 0
      ifvare ATTACKINGACTORPICNUM 4010 // ICYFLOOR
      {
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
      else
      ifvare ATTACKINGACTORPICNUM 888 // ATMBROKE
      {
       setvarvar ATTACKINGACTORPAL 0
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
      else
      ifvare ATTACKINGACTORPICNUM 3607 // COMPACTHANDSCANNER
      {
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
      else
      ifvare ATTACKINGACTORPICNUM 3620 // COMPACTHANDSCANNER2
      {
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
      else
      ifvare ATTACKINGACTORPICNUM 4082 // HANDSCANNER1
      {
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
      else
      ifvare ATTACKINGACTORPICNUM 4084 // HANDSCANNER2
      {
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
      else
      ifvare ATTACKINGACTORPICNUM 5175 // NEWPLUG
      {
-      setvar atkz 43690
+      setvar digz 43690
       addvar TEMPVAR5 1
      }
-     else ifvare ATTACKINGACTORPICNUM 5385 setvar atkz 40960 // NEWFLOORSLIME
-     else ifvare ATTACKINGACTORPICNUM 5388 setvar atkz 40960 // NEWHURTRAIL
-     else ifvare ATTACKINGACTORPICNUM 5389 setvar atkz 40960 // NEWFLOORPLASMA
-     else ifvare ATTACKINGACTORPICNUM 5395 setvar atkz 40960 // NEWPURPLELAVA
-     else ifvare ATTACKINGACTORPICNUM 3796 setvar atkz 40960 // AMOEBACID
-     else ifvare ATTACKINGACTORPICNUM 4091 setvar atkz 40960 // MEGALAVA
-     else ifvare ATTACKINGACTORPICNUM W_FORCEFIELD setvar atkz 40960
-     else ifvare ATTACKINGACTORPICNUM 5190 setvar atkz 30720 // NEWBLOODPOOL
-     else ifvare ATTACKINGACTORPICNUM 2375 setvar atkz 24756 // GREENSLIME+5
-     else ifvare ATTACKINGACTORPICNUM 2333 setvar atkz 24756 // FLOORFLAME
-     else ifvare ATTACKINGACTORPICNUM 3780 setvar atkz 20480 // HOTLAVA
-     else ifvare ATTACKINGACTORPICNUM 5401 setvar atkz 20480 // ULTRALAVA
-     else ifvare ATTACKINGACTORPICNUM 5443 setvar atkz 20480 // HYPERMAGMA
-     else ifvare ATTACKINGACTORPICNUM 6911 setvar atkz 20480 // FALLDAMAGEICONDUKE
+     else ifvare ATTACKINGACTORPICNUM 5385 setvar digz 40960 // NEWFLOORSLIME
+     else ifvare ATTACKINGACTORPICNUM 5388 setvar digz 40960 // NEWHURTRAIL
+     else ifvare ATTACKINGACTORPICNUM 5389 setvar digz 40960 // NEWFLOORPLASMA
+     else ifvare ATTACKINGACTORPICNUM 5395 setvar digz 40960 // NEWPURPLELAVA
+     else ifvare ATTACKINGACTORPICNUM 3796 setvar digz 40960 // AMOEBACID
+     else ifvare ATTACKINGACTORPICNUM 4091 setvar digz 40960 // MEGALAVA
+     else ifvare ATTACKINGACTORPICNUM W_FORCEFIELD setvar digz 40960
+     else ifvare ATTACKINGACTORPICNUM 5190 setvar digz 30720 // NEWBLOODPOOL
+     else ifvare ATTACKINGACTORPICNUM 2375 setvar digz 24756 // GREENSLIME+5
+     else ifvare ATTACKINGACTORPICNUM 2333 setvar digz 24756 // FLOORFLAME
+     else ifvare ATTACKINGACTORPICNUM 3780 setvar digz 20480 // HOTLAVA
+     else ifvare ATTACKINGACTORPICNUM 5401 setvar digz 20480 // ULTRALAVA
+     else ifvare ATTACKINGACTORPICNUM 5443 setvar digz 20480 // HYPERMAGMA
+     else ifvare ATTACKINGACTORPICNUM 6911 setvar digz 20480 // FALLDAMAGEICONDUKE
      else ifvare ATTACKINGACTORPICNUM 6909 // DROWNDAMAGEICONLOWANG
      {
-      setvar atkz 15855
+      setvar digz 15855
       setvarvar ATTACKINGACTORPAL 15
      }
      else ifvare ATTACKINGACTORPICNUM 6908 // FALLDAMAGEICONNETHRA
      {
-      setvar atkz 15855
+      setvar digz 15855
       setvarvar ATTACKINGACTORPAL 20
      }
      else ifvare ATTACKINGACTORPICNUM 5216 // POISONSYMBOL
      {
-      setvar atkz 16384
+      setvar digz 16384
       addvar TEMPVAR5 1
      }
-     else ifvarg ATTACKINGACTORPICNUM 5119 ifvarl ATTACKINGACTORPICNUM 5126 setvar atkz 16384 // Coin Money
-     else ifvarg ATTACKINGACTORPICNUM 5125 ifvarl ATTACKINGACTORPICNUM 5146 setvar atkz 12378 // Paper Money
-     else ifvare ATTACKINGACTORPICNUM 5146 setvar atkz 6189 // MONEYBAG
+     else ifvarg ATTACKINGACTORPICNUM 5119 ifvarl ATTACKINGACTORPICNUM 5126 setvar digz 16384 // Coin Money
+     else ifvarg ATTACKINGACTORPICNUM 5125 ifvarl ATTACKINGACTORPICNUM 5146 setvar digz 12378 // Paper Money
+     else ifvare ATTACKINGACTORPICNUM 5146 setvar digz 6189 // MONEYBAG
      else ifvare ATTACKINGACTORPICNUM 3069 // KEYPAD
      {
-      setvar atkz 8192
+      setvar digz 8192
       addvar TEMPVAR5 1
      }
-     else ifvare ATTACKINGACTORPICNUM 4890 setvar atkz 8192 // NATURALLIGHTNING
-     else ifvare ATTACKINGACTORPICNUM 6733 setvar atkz 13107 // ANIMEGIRL1
-     else ifvare ATTACKINGACTORPICNUM 6737 setvar atkz 13107 // ANIMEGIRL2
-     else ifvare ATTACKINGACTORPICNUM 6741 setvar atkz 13107 // ANIMEGIRL3
-     else ifvare ATTACKINGACTORPICNUM 6746 setvar atkz 13107 // ANIMEGIRL4
-     else ifvarg ATTACKINGACTORPICNUM 5151 ifvarl ATTACKINGACTORPICNUM 5154 setvar atkz 1
-     else ifvarg ATTACKINGACTORPICNUM 5159 ifvarl ATTACKINGACTORPICNUM 5169 setvar atkz 1
+     else ifvare ATTACKINGACTORPICNUM 4890 setvar digz 8192 // NATURALLIGHTNING
+     else ifvare ATTACKINGACTORPICNUM 6733 setvar digz 13107 // ANIMEGIRL1
+     else ifvare ATTACKINGACTORPICNUM 6737 setvar digz 13107 // ANIMEGIRL2
+     else ifvare ATTACKINGACTORPICNUM 6741 setvar digz 13107 // ANIMEGIRL3
+     else ifvare ATTACKINGACTORPICNUM 6746 setvar digz 13107 // ANIMEGIRL4
+     else ifvarg ATTACKINGACTORPICNUM 5151 ifvarl ATTACKINGACTORPICNUM 5154 setvar digz 1
+     else ifvarg ATTACKINGACTORPICNUM 5159 ifvarl ATTACKINGACTORPICNUM 5169 setvar digz 1
      else ifvare ATTACKINGACTORPICNUM 5920 // DRAGONICRIP
      {
       setvar ATTACKINGACTORPICNUM 1820
@@ -4511,13 +4511,13 @@ else
       setvar ATTACKINGACTORPICNUM 1898
       setvar ATTACKINGACTORPAL 0
      }
-     else setvar atkz 21845
+     else setvar digz 21845
 
-     setvar atka 0
+     setvar diga 0
      setvarvar ATTACKERTILENUM ATTACKINGACTORPICNUM
      setvarvar ATTACKERPAL ATTACKINGACTORPAL
-     ifvarg ATTACKERDISPLAYTIMER -1 ifvarl ATTACKERDISPLAYTIMER 27 setvar atkorientation 3
-     else ifvarg ATTACKERDISPLAYTIMER 26 ifvarl ATTACKERDISPLAYTIMER 54 setvar atkorientation 35
+     ifvarg ATTACKERDISPLAYTIMER -1 ifvarl ATTACKERDISPLAYTIMER 27 setvar orientation 3
+     else ifvarg ATTACKERDISPLAYTIMER 26 ifvarl ATTACKERDISPLAYTIMER 54 setvar orientation 35
  
      ifvarg ATTACKERDISPLAYTIMER -1
      {
@@ -4620,20 +4620,20 @@ else
         else ifvare TEMPHITCHARACTERVAR 15 setvar TEMPVAR2 7971 // Maken
         else setvar TEMPVAR2 7955 // ?
        }
-       rotatesprite atkx atky 30720 atka TEMPVAR2 shade 0 35 ZERO ZERO xdim ydim // 40960
+       rotatesprite digx digy 30720 diga TEMPVAR2 shade 0 35 ZERO ZERO xdim ydim // 40960
  
-       mulvar atkz 750
-       divvar atkz 1000
+       mulvar digz 750
+       divvar digz 1000
        // Show Attacking Monster/Player
        ifvarn ATTACKERTILENUM APLAYER
        { 
-        rotatesprite atkx atky atkz atka ATTACKERTILENUM shade ATTACKERPAL atkorientation ZERO ZERO xdim ydim
+        rotatesprite digx digy digz diga ATTACKERTILENUM shade ATTACKERPAL orientation ZERO ZERO xdim ydim
        }
        else
        { 
         ifvarn VEHICLEID -1
         {
-         ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 { setvar MELEEATTACKER EMPTYTANK setvar atkz 30720 }
+         ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 { setvar MELEEATTACKER EMPTYTANK setvar digz 30720 }
          ifvare VEHICLETYPE 0 setvar MELEEATTACKERPAL 0
          else ifvare VEHICLETYPE 1 setvar MELEEATTACKERPAL 17
          else ifvare VEHICLETYPE 2 setvar MELEEATTACKERPAL 19
@@ -4641,7 +4641,7 @@ else
         }
         else
         {
-         setvar atkz 20480
+         setvar digz 20480
          setvarvar MELEEATTACKERPAL 0
          ifvare TEMPHITCHARACTERVAR 1 setvar MELEEATTACKER 7911
          else ifvare TEMPHITCHARACTERVAR 2 setvar MELEEATTACKER 7912
@@ -4670,9 +4670,9 @@ else
          }
          else ifvare TEMPHITCHARACTERVAR 14 setvar MELEEATTACKER 7924
          else ifvare TEMPHITCHARACTERVAR 15 setvar MELEEATTACKER 7925
-         else { setvar MELEEATTACKER APLAYER setvar atkz 21845 }
+         else { setvar MELEEATTACKER APLAYER setvar digz 21845 }
         }
-        rotatesprite atkx atky atkz atka MELEEATTACKER 0 MELEEATTACKERPAL atkorientation ZERO ZERO xdim ydim
+        rotatesprite digx digy digz diga MELEEATTACKER 0 MELEEATTACKERPAL orientation ZERO ZERO xdim ydim
        }
       } 
      }
@@ -5196,20 +5196,20 @@ else
     ifvarand miscdisplaytoggle 1
     { // line [5178]
      // Shows the Target's Picture and Pal
-     setvar defx 160
-     setvar defy 27
+     setvar digx 160
+     setvar digy 27
  
-     ifvare DEFENDINGACTORDEBUG 6733 setvar defz 13107 // ANIMEGIRL1
-     else ifvare DEFENDINGACTORDEBUG 6737 setvar defz 13107 // ANIMEGIRL2
-     else ifvare DEFENDINGACTORDEBUG 6741 setvar defz 13107 // ANIMEGIRL3
-     else ifvare DEFENDINGACTORDEBUG 6746 setvar defz 13107 // ANIMEGIRL4
-     else setvar defz 21845
+     ifvare DEFENDINGACTORDEBUG 6733 setvar digz 13107 // ANIMEGIRL1
+     else ifvare DEFENDINGACTORDEBUG 6737 setvar digz 13107 // ANIMEGIRL2
+     else ifvare DEFENDINGACTORDEBUG 6741 setvar digz 13107 // ANIMEGIRL3
+     else ifvare DEFENDINGACTORDEBUG 6746 setvar digz 13107 // ANIMEGIRL4
+     else setvar digz 21845
  
-     setvar defa 0
+     setvar diga 0
      setvarvar DEFENDERTILENUM DEFENDINGACTORDEBUG // DEFENDINGACTORDEBUG
      setvarvar DEFENDERPAL DEFENDINGACTORPAL
-     ifvarg DEFENDERDISPLAYTIMER -1 ifvarl DEFENDERDISPLAYTIMER 17 setvar deforientation 3
-     else ifvarg DEFENDERDISPLAYTIMER 26 ifvarl DEFENDERDISPLAYTIMER 54 setvar deforientation 35
+     ifvarg DEFENDERDISPLAYTIMER -1 ifvarl DEFENDERDISPLAYTIMER 17 setvar orientation 3
+     else ifvarg DEFENDERDISPLAYTIMER 26 ifvarl DEFENDERDISPLAYTIMER 54 setvar orientation 35
  
      setvar TEMPVAR4 0
      ifvarg ENEMYNULLDAMAGE 0 addvar TEMPVAR4 1
@@ -5256,19 +5256,19 @@ else
       else ifvare TEMPATKCHARACTERVAR 14 setvar TEMPVAR2 7957 // Mystery Lady
       else ifvare TEMPATKCHARACTERVAR 15 setvar TEMPVAR2 7971 // Maken
       else setvar TEMPVAR2 7955 // ?
-      rotatesprite defx defy 30720 defa TEMPVAR2 shade 0 35 ZERO ZERO xdim ydim
+      rotatesprite digx digy 30720 diga TEMPVAR2 shade 0 35 ZERO ZERO xdim ydim
       ifvarn VEHICLEID -1
       {
        ifvare VEHICLETYPE 0 setvar TEMPVAR2 7950 // Green Riot Tank
        else ifvare VEHICLETYPE 1 setvar TEMPVAR2 7951 // Blue Riot Tank
        else ifvare VEHICLETYPE 2 setvar TEMPVAR2 7952 // Red Riot Tank
        else setvar TEMPVAR2 7955 // ?
-       rotatesprite defx defy 30720 defa TEMPVAR2 shade 0 35 ZERO ZERO xdim ydim
+       rotatesprite digx digy 30720 diga TEMPVAR2 shade 0 35 ZERO ZERO xdim ydim
       }
  
-      mulvar defz 750
-      divvar defz 1000
-      rotatesprite defx defy defz defa DEFENDERTILENUM shade DEFENDINGACTORPAL deforientation ZERO ZERO xdim ydim
+      mulvar digz 750
+      divvar digz 1000
+      rotatesprite digx digy digz diga DEFENDERTILENUM shade DEFENDINGACTORPAL orientation ZERO ZERO xdim ydim
      }
  
      setvar digx 320

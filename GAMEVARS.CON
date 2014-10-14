@@ -946,18 +946,7 @@ gamevar ARMORDAMAGE 0 131073
 
 // Armor is done as following: "1 = 0.1% to 1000 = 100.0%"
 gamevar ARMORPERCENT 0 131073 // SET THIS VALUE FOR THE DEFAULT LEVEL 1 ARMOR PROTECTION RATE
-gamevar DAMAGEPERCENT 0 131073 // Calculated Automatically From C0MPLETEDAMAGE - ARMORPERCENT
-
-gamevar atkx 0 0
-gamevar atky 0 0
-gamevar atkz 0 0
-gamevar atka 0 0
-gamevar atkorientation 0 0
-gamevar defx 0 0
-gamevar defy 0 0
-gamevar defz 0 0
-gamevar defa 0 0
-gamevar deforientation 0 0
+gamevar DAMAGEPERCENT 0 131073 // Calculated Automatically From COMPLETEDAMAGE - ARMORPERCENT
 
 gamevar posx 0 131073
 gamevar posxv 0 131073
@@ -972,12 +961,6 @@ gamevar xvel 0 131073
 gamevar yvel 0 131073
 gamevar zvel 0 131073
 gamevar angvel 0 131073
-
-gamevar actorxvel 0 131073
-gamevar actoryvel 0 131073
-gamevar actorzvel 0 131073
-gamevar actorangvel 0 131073
-
 
 gamevar wallxdist 0 131073
 gamevar wallydist 0 131073
