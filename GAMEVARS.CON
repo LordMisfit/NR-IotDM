@@ -2013,7 +2013,8 @@ gamevar MISCARRAYID -1 131072
  // [225] = RANDOMSPAWN-Y
  // [226] = RANDOMSPAWN-ANGLE
  // [227] = RANDOMSPAWN-MOVEMENT
- // [228+] are not defined yet
+ // [228] = GLOBAL-PLAYER-INIT
+ // [229+] are not defined yet
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes
 gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes
@@ -2092,42 +2093,43 @@ gamevar equipmenupage 0 131072 // Determines the page of the equip menu when try
 gamevar equipmenuselection 0 131072 // Determines what equip option is highlighted when trying to equip an item
 gamevar EQUIPTEMP 0 131072
 // ID #0 = Nothing Equipped
-// ID #1 = Sun Ring
-// ID #2 = Aqua Ring
-// ID #3 = Plasma Ring
-// ID #4 = Spirit Ring
-// ID #5 = Charm Ankh
-// ID #6 = Mirror Shield
-// ID #7 = EXP Badge
-// ID #8 = Rank Badge
-// ID #9 = Money Badge
-// ID #10 = Riot Shield
-// ID #11 = Nyx Gloves
-// ID #12 = Rabbit's Foot
-// ID #13 = Jump Boots
-// ID #14 = ShockAb Boots
-// ID #15 = Happy Shoes
-// ID #16 = Style Shoes
-// ID #17 = Charm Shoes
-// ID #18 = Power Wrist
-// ID #19 = Hockey Mask
-// ID #20 = Gemstone Crown
-// ID #21 = Iron Rune
-// ID #22 = Twilight Cape
-// ID #23 = Snake Armband
-// ID #24 = Medic Bags
-// ID #25 = Serpent Helmet
-// ID #26 = Energy Incurment
-// ID #27 = Yin-Yang Orb
-// ID #28 = Jewel of Four Souls
-// ID #29 = [undefined] (gives a few [8-12] tics of invincibility when damage is suffered, similar to death-switching [each])
-// ID #30 = [undefined] (adds 25% to the Max Airjumps of the current character [or 1 Airjump if they have less than 4])
-// ID #31 = [undefined] (extends underwater-airtime 10% and increases swimming speed by 5% for each)
-// ID #32 = [undefined] (gives immunity to all damagefloors EXCEPT HyperMagma, but reduces HyperMagma damage by 66% for each)
-// ID #33 = [undefined] 
-// ID #34 = [undefined] 
-// ID #35 = [undefined] 
-// ID #36 = [undefined] 
+// ID #1 = Sun Ring (-25% Fire Damage, -22.5% Explode Damage [each])
+// ID #2 = Aqua Ring (-25% Water Damage, -22.5% Ice Damage [each])
+// ID #3 = Plasma Ring (-25% Electric Damage, -22.5% Energy Damage [each])
+// ID #4 = Spirit Ring (-33.3% Magic/PK/Mystic Damage [each])
+// ID #5 = Charm Ankh (3x natural HP regen rate; 1.5x HPRegen/APRegen rates [each])
+// ID #6 = Mirror Shield (cuts damage in half and deflects the rest to the attacking entity [each])
+// ID #7 = EXP Badge (doubles EXP gained in combat [each])
+// ID #8 = Rank Badge (doubles RANK gained [each])
+// ID #9 = Money Badge (doubles the value of all money grabbed [each])
+// ID #10 = Riot Shield (-25% Metal Damage, -10% AP Damage from attacks [each])
+// ID #11 = Nyx Gloves (No damage is suffered from 'usable' hazards)
+// ID #12 = Rabbit's Foot (+12.5% chance of surviving a mortal hit [each])
+// ID #13 = Jump Boots (+25% Jump Strength [each])
+// ID #14 = ShockAb Boots (-15-20% Fall Damage [each])
+// ID #15 = Happy Shoes (Minor EXP increase per few steps of movement [each])
+// ID #16 = Style Shoes (Minor Rank increase per few steps of movement [each])
+// ID #17 = Charm Shoes (Minor Money increase per few steps of movement [each])
+// ID #18 = Power Wrist (+25% Lift Strength, +25% Melee Damage, +10% Non-Melee Damage [each])
+// ID #19 = Hockey Mask (Critical Hit rate increases by 1/3 of it's base value [each])
+// ID #20 = Gemstone Crown (+10% chance of Gold-Ringed gems dropping [each])
+// ID #21 = Iron Rune (+25% Overall Damage Resistance, but -25% Critical Hit Rate [each])
+// ID #22 = Twilight Cape (+10% HP & AP Vampire Effect for all attacks [also adds to the Vampire Rune's drain bonus] [each])
+// ID #23 = Snake Armband (+10% for each attack to inflict 'Slow' and 'Poison' on enemies [each])
+// ID #24 = Medic Bags (+10% Healing from all items is also given to all other party members [each])
+// ID #25 = Serpent Helmet (Scares/Unsettles Enemies, ignoring half of their current defense [each])
+// ID #26 = Energy Incurment (Recovers [1/4]% EP from HP damage [each])
+// ID #27 = Yin-Yang Orb (-20% EP Cost for all Skills and Attacks [each])
+// ID #28 = Jewel of Four Souls (SUPER item, one of a kind, gives multiple effects >.>)
+//---
+ // ID #29 = [undefined] Mandala Offering (gives a few [9-13] tics of invincibility when most types of damage ar suffered (with a few exceptions), similar to death-switching [each])
+ // ID #30 = [undefined] Winged Bracer (adds 25% to the Max Airjumps of the current character [or 1 Airjump if they have less than 4] [each])
+ // ID #31 = [undefined] Divinity Snorkel (extends underwater-airtime by 10% and increases swimming speed by 5% [each])
+ // ID #32 = [undefined] Obsidian Band (reduces damage from damagefloors [except HyperMagma] by 20% and HyperMagma by 8% [each])
+ // ID #33 = [undefined] Liquid Metal Amulet (allows natural AP regeneration if wearing any kind of armor item [each]) 
+ // ID #34 = [undefined] Flame of Soul (marginally slows down the loss of the 'WARM' meter in hypothermic environments [each]) 
+ // ID #35 = [undefined] Bond of Trust Bracelet (reduces damage suffered by the point character by 10% and then splits the rest between all characters in the party, damage-reduction effects might be stronger between wearer and his/her support members [each])
+ // ID #36 = [undefined] 
 
 // END OF CHARACTER MENU VARIABLES HERE
 
@@ -2163,38 +2165,38 @@ gamevar hubsavekeys 0 131073
 gamevar tipdisplayid -1 1 // Designates which tip# [based on the "tiparrayid" above] the player is looking at [-1 means it's turned off]
 gamevar tiparray_toggle 0 131074 // 0 = Off, 1+ = 0n
 gamevar tiparrayid 0 1 // // Array ID to check each tip.
-// Tip #0 = Welcome Screen												[finished]
+// Tip #0 = Welcome Screen													[finished]
 // Tip #1 = Difficulty Level (current)										[finished]
-// Tip #2 = Playable Character: Duke Nukem
-// Tip #3 = Playable Character: Jack Walker
-// Tip #4 = Playable Character: Bubsy Bobcat
-// Tip #5 = Playable Character: Ami Mizuno
-// Tip #6 = Playable Character: Higa "Lo Wang" Hakaisha
-// Tip #7 = Playable Character: ESSence Margalan
-// Tip #8 = Playable Character: Ted Maldoras
-// Tip #9 = Playable Character: Lisa Bates
-// Tip #10 = Playable Character: Cybanis Morgandos
-// Tip #11 = Playable Character: Christina Mitchell
-// Tip #12 = Playable Character: Nethra Maboroshi
-// Tip #13 = Playable Character: Paula Polestar
-// Tip #14 = Playable Character: Lori Stephens
-// Tip #15 = Playable Character: Minako Aino
-// Tip #16 = Playable Character: ??????? ????????
-// Tip #17 = Playable Character: Maken Shinkara
-// Tip #18 = In-Game Menu Access
-// Tip #19 = "Characters" Submenu
-// Tip #20 = "Items" Submenu
-// Tip #21 = "System" Submenu
-// Tip #22 = "Status" Submenu
-// Tip #23 = "Skills" Submenu
-// Tip #24 = "Support" Submenu
-// Tip #25 = "Equipment" Submenu
-// Tip #26 = "Worldtile" Submenu
-// Tip #27 = Using Shops/Dealers
-// Tip #28 = Rescuing Innocent Civilians
-// Tip #29 = Memorbilia Items											[finished]
-// Tip #30 = Using Vending Machines
-// Tip #31 = Using ATMs
+// Tip #2 = Playable Character: Duke Nukem									[finished]
+// Tip #3 = Playable Character: Jack Walker									[finished]
+// Tip #4 = Playable Character: Bubsy Bobcat								[finished]
+// Tip #5 = Playable Character: Ami Mizuno									[finished]
+// Tip #6 = Playable Character: Higa "Lo Wang" Hakaisha						[finished]
+// Tip #7 = Playable Character: ESSence Margalan							[finished]
+// Tip #8 = Playable Character: Ted Maldoras								[finished]
+// Tip #9 = Playable Character: Lisa Bates									[finished]
+// Tip #10 = Playable Character: Cybanis Morgandos							[finished]
+// Tip #11 = Playable Character: Christina Mitchell							[finished]
+// Tip #12 = Playable Character: Nethra Maboroshi							[finished]
+// Tip #13 = Playable Character: Paula Polestar								[finished]
+// Tip #14 = Playable Character: Lori Stephens								[finished]
+// Tip #15 = Playable Character: Minako Aino								[finished]
+// Tip #16 = Playable Character: ??????? ????????							[finished]
+// Tip #17 = Playable Character: Maken Shinkara								[finished]
+// Tip #18 = In-Game Menu Access											[finished]
+// Tip #19 = "Characters" Submenu											[finished]
+// Tip #20 = "Items" Submenu												[finished]
+// Tip #21 = "System" Submenu												[finished]
+// Tip #22 = "Status" Submenu												[finished]
+// Tip #23 = "Skills" Submenu												[finished]
+// Tip #24 = "Support" Submenu												[finished]
+// Tip #25 = "Equipment" Submenu											[finished]
+// Tip #26 = "Worldtile" Submenu											[finished]
+// Tip #27 = Using Shops/Dealers											[finished]
+// Tip #28 = Rescuing Innocent Civilians									[finished]
+// Tip #29 = Memorbilia Items												[finished]
+// Tip #30 = Using Vending Machines											[finished]
+// Tip #31 = Using ATMs														[finished]
 // Tip #32 = Level and EXP Points
 // Tip #33 = RANK Points
 // Tip #34 = Powerup: Quad Damage
@@ -2215,7 +2217,6 @@ gamevar tiparrayid 0 1 // // Array ID to check each tip.
 //*CHARACTER ARRAY SYSTEM >_>*
 //****************************
 
-gamevar GLOBALPLAYERINIT 0 0
 gamevar CHARACTERARRAY 0 0
 gamevar CHARACTERARRAY2 0 0
 
@@ -2341,7 +2342,6 @@ gamevar CHARACTERDROWNDMGFACTOR 0 132098 // Character's Current Drown Damage Fac
 gamevar CHARACTERFREEZETIMER 0 132098 // Characters Freeze-time Threshold
 gamevar CHARACTERWINTERCLOTHES 0 132098 // Characters Winter Clothing Strength %
 gamevar CHARACTERTRANSFORMTIMER 0 132098
-// gamevar CHARACTERWEAPONCOUNT 0 132098 // Saves weaponcount for the current character so players can't hack weapon use.
 
 gamevar HPSUPPORTTEMP1 0 132098
 gamevar HPSUPPORTTEMP2 0 132098

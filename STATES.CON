@@ -5289,10 +5289,11 @@ state initializer
  setarray ACHIEVEMENTS_GLOBAL[1] 1
  writearraytofile ACHIEVEMENTS_GLOBAL 902
 */
- ifvare GLOBALPLAYERINIT 0
+ setvar MISCARRAYID 228 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GLOBAL-PLAYER-INIT
+ ifvare MISCARRAYID_AMOUNTTEMP 0
  {
   state setarrayvars
-  setvar GLOBALPLAYERINIT 1
+  setvar MISCARRAYID 228 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // GLOBAL-PLAYER-INIT
  }
  readgamevar debugtoggle
  readgamevar statusdisplaytoggle
