@@ -4514,8 +4514,8 @@ else
      else setvar digz 21845
 
      setvar diga 0
-     setvarvar ATTACKERTILENUM ATTACKINGACTORPICNUM
-     setvarvar ATTACKERPAL ATTACKINGACTORPAL
+     setvarvar tilenum ATTACKINGACTORPICNUM
+     setvarvar pal ATTACKINGACTORPAL
      ifvarg ATTACKERDISPLAYTIMER -1 ifvarl ATTACKERDISPLAYTIMER 27 setvar orientation 3
      else ifvarg ATTACKERDISPLAYTIMER 26 ifvarl ATTACKERDISPLAYTIMER 54 setvar orientation 35
  
@@ -4625,9 +4625,9 @@ else
        mulvar digz 750
        divvar digz 1000
        // Show Attacking Monster/Player
-       ifvarn ATTACKERTILENUM APLAYER
+       ifvarn tilenum APLAYER
        { 
-        rotatesprite digx digy digz diga ATTACKERTILENUM shade ATTACKERPAL orientation ZERO ZERO xdim ydim
+        rotatesprite digx digy digz diga tilenum shade pal orientation ZERO ZERO xdim ydim
        }
        else
        { 
@@ -4723,7 +4723,7 @@ else
       state digx160 // 160
       setvar digy 132 // 136
       subvarvar digy BOSSMETERTEMP      
-      setvarvar ATTACKERPAL ATTACKINGACTORPAL
+      setvarvar pal ATTACKINGACTORPAL
       ifvarg ATTACKERDISPLAYTIMER -1 ifvarl ATTACKERDISPLAYTIMER 27 state orientation3 
       else ifvarg ATTACKERDISPLAYTIMER 26 ifvarl ATTACKERDISPLAYTIMER 54 state orientation35
  
@@ -4735,7 +4735,7 @@ else
  
        ifvarg TEMPVAR4 0
        {
-        ifvarn ATTACKERTILENUM APLAYER // ifvarn tilenum APLAYER
+        ifvarn tilenum APLAYER // ifvarn tilenum APLAYER
         { 
          setvar digz 4096
          setvarvar diga SYSDIFFANGLEREFINED
@@ -5206,10 +5206,10 @@ else
      else setvar digz 21845
  
      setvar diga 0
-     setvarvar DEFENDERTILENUM DEFENDINGACTORDEBUG // DEFENDINGACTORDEBUG
-     setvarvar DEFENDERPAL DEFENDINGACTORPAL
-     ifvarg DEFENDERDISPLAYTIMER -1 ifvarl DEFENDERDISPLAYTIMER 17 setvar orientation 3
-     else ifvarg DEFENDERDISPLAYTIMER 26 ifvarl DEFENDERDISPLAYTIMER 54 setvar orientation 35
+     setvarvar tilenum DEFENDINGACTORDEBUG // DEFENDINGACTORDEBUG
+     //setvarvar DEFENDERPAL DEFENDINGACTORPAL
+     ifvarg DEFENDERDISPLAYTIMER -1 ifvarl DEFENDERDISPLAYTIMER 27 state orientation3
+     else ifvarg DEFENDERDISPLAYTIMER 26 ifvarl DEFENDERDISPLAYTIMER 54 state orientation35
  
      setvar TEMPVAR4 0
      ifvarg ENEMYNULLDAMAGE 0 addvar TEMPVAR4 1
@@ -5268,7 +5268,7 @@ else
  
       mulvar digz 750
       divvar digz 1000
-      rotatesprite digx digy digz diga DEFENDERTILENUM shade DEFENDINGACTORPAL orientation ZERO ZERO xdim ydim
+      rotatesprite digx digy digz diga tilenum shade DEFENDINGACTORPAL orientation ZERO ZERO xdim ydim
      }
  
      setvar digx 320
@@ -13841,6 +13841,24 @@ else
       addvar digy 4
       getactorvar[hitsprite].ACTORSWIDTH varname
       redefinequote 332 ACTOR'S PIXEL WIDTH: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].x varname
+      redefinequote 332 ACTOR'S X-COORD: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].y varname
+      redefinequote 332 ACTOR'S Y-COORD: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].z varname
+      redefinequote 332 ACTOR'S Z-COORD: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      

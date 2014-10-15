@@ -924,10 +924,6 @@ gamevar DISPLAYCENTS 0 0
 gamevar DISPLAYDOLLARS 0 0
 gamevar DISPLAYMONEYTIMER 0 0
 gamevar MONEYGAIN 0 0
-gamevar RANDOMSPAWNX 0 0
-gamevar RANDOMSPAWNY 0 0
-gamevar RANDOMSPAWNANGLE 0 0
-gamevar RANDOMMOVEMENT 0 0
 
 gamevar MONEYPICKUPTOGGLE 0 0
 gamevar MELEEATTACK? 0 0
@@ -986,10 +982,6 @@ gamevar TOTALNULLDAMAGE 0 131072
 gamevar NULLDAMAGE 0 131072
 gamevar ARMORNULLDAMAGE 0 131072
 gamevar BIOSHIELDNULLDAMAGE 0 131072
-gamevar ATTACKERTILENUM 0 131072
-gamevar ATTACKERPAL 0 131072
-gamevar DEFENDERTILENUM 0 131072
-gamevar DEFENDERPAL 0 131072
 
 gamevar ATTACKERDISPLAYTIMER 0 131072
 gamevar RANKDISPLAYTIMER 0 131072
@@ -2017,6 +2009,11 @@ gamevar MISCARRAYID -1 131072
  // [221] = hitwall-yrepeat
  // [222] = hitwall-xpanning
  // [223] = hitwall-ypanning
+ // [224] = RANDOMSPAWN-X
+ // [225] = RANDOMSPAWN-Y
+ // [226] = RANDOMSPAWN-ANGLE
+ // [227] = RANDOMSPAWN-MOVEMENT
+ // [228+] are not defined yet
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes
 gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes
