@@ -1717,7 +1717,7 @@ ifvare mainmenu 1
    {
     ifvare mainmenuselection 0 // Damage / Pickup Displays
     {
-     ifvare miscdisplaytoggle 0 redefinequote 332 NEITTHER DAMAGE, STATS, MONEY OR REWARDS WILL SHOW ON SCREEN.
+     ifvare miscdisplaytoggle 0 redefinequote 332 NEITHER DAMAGE, STATS, MONEY OR REWARDS WILL SHOW ON SCREEN.
      ifvare miscdisplaytoggle 1 redefinequote 332 ONLY DAMAGE WILL SHOW ON SCREEN.
      ifvare miscdisplaytoggle 2 redefinequote 332 ONLY STATS WILL SHOW ON SCREEN.
      ifvare miscdisplaytoggle 3 redefinequote 332 DAMAGE & STATS WILL SHOW ON SCREEN.

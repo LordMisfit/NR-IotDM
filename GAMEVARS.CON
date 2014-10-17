@@ -18,8 +18,8 @@ gamevar PAINSOUNDFACTOR 0 1 // Out of 1000 [100.0%]
 gamevar DMGFLRTYPE 1 0 // 0 = Older, 1 = Refined
 gamevar PERMADEATH? 0 0 // 1 = Character is removed on Death [except for the final character], for specialized challenge games.
 
-gamevar STARTSTATMULTI 1 0 // 
-gamevar STARTSTATDIVISOR 1 0 //
+gamevar STARTSTATMULTI 1 131072 // 
+gamevar STARTSTATDIVISOR 1 131072 //
 
 gamevar INVENTORYSLOTMAX 1 132098 // 
 

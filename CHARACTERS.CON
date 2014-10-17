@@ -1152,7 +1152,7 @@ state checkforcontinues
   }
 ends
 
-state checkbubsylives
+state death-checkbubsylives
      setvar CHARACTERARRAY 3
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvare TEMPVAR 0  
@@ -1165,11 +1165,12 @@ state checkbubsylives
       state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
       setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
+      addlogvar fta
       setvarvar fta fta_normal setvar ftq 321
      }
 ends
 
-state checkbubsylives2
+state death-checkbubsylives2
      setvar CHARACTERARRAY 3
      getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
      ifvare TEMPVAR 0  
@@ -1181,6 +1182,7 @@ state checkbubsylives2
       stopsound DUKE_GRUNT
       setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
+      addlogvar ftq
       setvarvar fta fta_normal setvar ftq 321
       break 
      }
@@ -1278,7 +1280,7 @@ state switchtolivingcharacter
   ifvare CURRENTHITPOINTS 0
   {
    state checkbubsylives
-   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
+   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state death-checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
   }
  }
  else
@@ -1288,7 +1290,7 @@ state switchtolivingcharacter
   ifvare TEMPVAR 0
   {
    state checkbubsylives
-   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
+   ifvarg ITEMARRAYID_AMOUNTTEMP 0 state death-checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
   }
  }
  
