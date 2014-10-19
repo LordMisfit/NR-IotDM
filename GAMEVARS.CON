@@ -624,8 +624,9 @@ gamevar TILEEMULATION 0 131073
 
 gamevar LISAMONEYTURNS0 0 2
 gamevar LISAMONEYTURNS 0 2
+
 gamevar LISAMONEYTURNS2 0 0
-gamevar LISAMONEYMAXLEVEL 0 131073
+gamevar LISAMONEYMAXLEVEL 0 131073 // Sets to 1 if Lisa's Level is 100 [maxed]
 
 gamevar HAVEENERGYSHIELD? 0 131072
 gamevar CURRENTCELLS 0 131072
@@ -1855,6 +1856,9 @@ gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for
 // Primary "hitwall" vars
 gamevar hitwall 0 131073   // The wall that gets hit by the hitscan
 gamevar hitwall2 0 131073  // The 2nd wall that gets hit by the hitscan
+
+// WorldTile Menu 'Full Screen' View stuff
+gamevar WORLDTILEVIEWMODE 0 0 // 0 = Cursor and images are default menu size. 1 = 'Expanded' but not 'fullscreen' size. 2 is for 'full screen'
 
 //*******************
 //*To Be Arrayed >.>*

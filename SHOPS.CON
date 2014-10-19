@@ -946,7 +946,7 @@ state calcshopitembaseprices
    }
    ifvare shopitemid 11
    {
-    redefinequote 1281 MYSTIC BANDOLIER
+    redefinequote 1281 MYSTIC SATCHEL
     setvar SHOPDOLLARSTEMP2 20000000 
     setvar SHOPDOLLARSTEMPMULTI 1 
     setvar SHOPDOLLARSTEMPDIVISOR 1 
@@ -1634,7 +1634,7 @@ state calcshopitembaseprices
    }
    ifvare shopitemid 4
    {
-    redefinequote 1281 MYSTIC BANDOLIER
+    redefinequote 1281 MYSTIC SATCHEL
     setvar SHOPDOLLARSTEMP2 20000000 
     setvar SHOPDOLLARSTEMPMULTI 1 
     setvar SHOPDOLLARSTEMPDIVISOR 10

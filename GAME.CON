@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git71)
-definequote 1337 ^22VERSION:^0 5.22.git71.10162014
+setgamename Naferia's Reign (5.22.git72)
+definequote 1337 ^22VERSION:^0 5.22.git72.10182014
 
 action ANULLACTION 0
 
@@ -25069,6 +25069,18 @@ state rank_payment_stuff
  globalsound GEMLARGE
 ends
 
+state checkpkshieldamounts
+ getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR7
+ getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER TEMPVAR8
+ ifvarand TEMPVAR7 1024 nullop
+ else
+ {
+  ifvarg TEMPVAR8 0 addvar TEMPVAR7 1024
+  setactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR7
+  setactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER TEMPVAR8
+ }
+ends
+
 //************************************************************************************************************************
 //************************************************************************************************************************
 //************************************************************************************************************************
@@ -25078,6 +25090,15 @@ ends
 //************************************************************************************************************************
 
 actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
+
+ifvarn mainmenusubmenu 7 
+{
+ ifvare WORLDTILEVIEWMODE 2 { setvar WORLDTILEVIEWMODE 1 savegamevar WORLDTILEVIEWMODE }
+}
+else
+{
+ ifvare WORLDTILEVIEWMODE 2 { ifvare mainmenupage 10 ifvarg mainmenuselection 5 { setvar WORLDTILEVIEWMODE 1 savegamevar WORLDTILEVIEWMODE } }
+}
 
 ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
 {
@@ -26041,10 +26062,26 @@ else
  }
 }
 
+// Checks a Character's PK Shield Hits, and makes sure they stay intact even if a character dies.
+setvar CHARACTERARRAY 1 state checkpkshieldamounts
+setvar CHARACTERARRAY 2 state checkpkshieldamounts
+setvar CHARACTERARRAY 3 state checkpkshieldamounts
+setvar CHARACTERARRAY 4 state checkpkshieldamounts
+setvar CHARACTERARRAY 5 state checkpkshieldamounts
+setvar CHARACTERARRAY 6 state checkpkshieldamounts
+setvar CHARACTERARRAY 7 state checkpkshieldamounts
+setvar CHARACTERARRAY 8 state checkpkshieldamounts
+setvar CHARACTERARRAY 9 state checkpkshieldamounts
+setvar CHARACTERARRAY 10 state checkpkshieldamounts
+setvar CHARACTERARRAY 11 state checkpkshieldamounts
+setvar CHARACTERARRAY 12 state checkpkshieldamounts
+setvar CHARACTERARRAY 13 state checkpkshieldamounts
+setvar CHARACTERARRAY 14 state checkpkshieldamounts
+setvar CHARACTERARRAY 15 state checkpkshieldamounts
+
 //********************
 //* MAIN MENU CHECKS *
 //********************
-
 
 ifvare mainmenu 0 // Main Menu is NOT open
 {
@@ -26410,6 +26447,11 @@ ifvare mainmenu 0 // Main Menu is NOT open
    setvar PLAYERSHELLTIMER 0
    state removedamageshell
   }
+ }
+ ifvarand PLAYERSTATUS? 1024 nullop
+ else
+ {
+  ifvarg PLAYERPSISHIELDTIMER 0 addvar PLAYERSTATUS? 1024
  }
  ifvarand PLAYERSTATUS? 4096
  {
@@ -28193,11 +28235,11 @@ getplayer[THISACTOR].poszv poszv
  else ifvarg templevel1 60 setvar LISAMONEYTURNS2 3
  ifvare templevel1 100 setvar LISAMONEYMAXLEVEL 1 else setvar LISAMONEYMAXLEVEL 0
 
+ // Bio-Shield Stuff
  ifvarg ESHIELDDMGFACTOR 1024 setvar ESHIELDDMGFACTOR 1024
  ifvarg MAXCELLS 2050 setvar MAXCELLS 2050
  ifvarvarg CURRENTCELLS MAXCELLS setvarvar CURRENTCELLS MAXCELLS
 
- // Bio-Shield Stuff
  setvarvar CURRENTBIOSHIELDPOWER CURRENTCELLS
  mulvarvar CURRENTBIOSHIELDPOWER ESHIELDDMGFACTOR
  addvarvar CURRENTBIOSHIELDPOWER DAMAGEINCELL
@@ -48981,8 +49023,10 @@ useractor notenemy RANDOMDOLLAR 0
 
    randvar RANDOMVARIABLE 46
    addvar RANDOMVARIABLE 1
-   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 47 setvar RANDOMVARIABLE 47 } }
-   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 47 setvar RANDOMVARIABLE 47 } }
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 } }
+   ifvarg RANDOMVARIABLE 46 { ifrnd 32 setvar RANDOMVARIABLE 47 else setvar RANDOMVARIABLE 46 }
+
    ifvare RANDOMVARIABLE 1 { espawn ONEDOLLAR state checkmoneyowner }
    else ifvare RANDOMVARIABLE 2 { espawn TWODOLLARS state checkmoneyowner }
    else ifvare RANDOMVARIABLE 3 { espawn TWODOLLARBUNDLE state checkmoneyowner }
@@ -49047,8 +49091,10 @@ useractor notenemy RANDOMDOLLAR_GREATEST 0
 
    randvar RANDOMVARIABLE 34
    addvar RANDOMVARIABLE 1
-   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 35 setvar RANDOMVARIABLE 35 } }
-   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 35 setvar RANDOMVARIABLE 35 } }
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 } }
+   ifvarg RANDOMVARIABLE 34 { ifrnd 32 setvar RANDOMVARIABLE 35 else setvar RANDOMVARIABLE 34 }
+
    ifvarg RANDOMVARIABLE 0 ifvarl RANDOMVARIABLE 9 { espawn ONETHOUSANDDOLLARS state checkmoneyowner } // 1-8 (8)
    else ifvarg RANDOMVARIABLE 8 ifvarl RANDOMVARIABLE 17 { espawn FIVETHOUSANDDOLLARS state checkmoneyowner } // 9-16 (8)
    else ifvarg RANDOMVARIABLE 16 ifvarl RANDOMVARIABLE 25 { espawn TENTHOUSANDDOLLARS state checkmoneyowner } // 17-24 (8)

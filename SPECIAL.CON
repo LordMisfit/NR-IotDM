@@ -29566,8 +29566,8 @@ state displayresisticons
 ends
 
 state tiledisplayr1c1
-   setvar digx 78
-   setvar digy 47
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 78
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 47
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 1 setvar tilenum 8192 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 33554432 setvar tilenum 8217 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 262144 setvar tilenum 8242 else setvar tilenum 8704 }
@@ -29583,8 +29583,8 @@ state tiledisplayr1c1
 ends
 
 state tiledisplayr1c2
-   setvar digx 119 // +41
-   setvar digy 47
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 119 // +41
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 47
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 2 setvar tilenum 8193 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 67108864 setvar tilenum 8218 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 524288 setvar tilenum 8243 else setvar tilenum 8704 }
@@ -29601,7 +29601,7 @@ ends
 
 state tiledisplayr1c3
    state digx160
-   setvar digy 47
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 47
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 4 setvar tilenum 8194 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 134217728 setvar tilenum 8219 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 1048576 setvar tilenum 8244 else setvar tilenum 8704 }
@@ -29617,8 +29617,8 @@ state tiledisplayr1c3
 ends
 
 state tiledisplayr1c4
-   setvar digx 201
-   setvar digy 47
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 201
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 47
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 8 setvar tilenum 8195 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 268435456 setvar tilenum 8220 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 2097152 setvar tilenum 8245 else setvar tilenum 8704 }
@@ -29634,8 +29634,8 @@ state tiledisplayr1c4
 ends
 
 state tiledisplayr1c5
-   setvar digx 242
-   setvar digy 47
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 242
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 47
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 16 setvar tilenum 8196 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 536870912 setvar tilenum 8221 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 4194304 setvar tilenum 8246 else setvar tilenum 8704 }
@@ -29651,8 +29651,8 @@ state tiledisplayr1c5
 ends
 
 state tiledisplayr2c1
-   setvar digx 78
-   setvar digy 73 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 78
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 73 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 32 setvar tilenum 8197 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 1073741824 setvar tilenum 8222 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 8388608 setvar tilenum 8247 else setvar tilenum 8704 }
@@ -29668,8 +29668,8 @@ state tiledisplayr2c1
 ends
 
 state tiledisplayr2c2
-   setvar digx 119
-   setvar digy 73 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 119
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 73 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 64 setvar tilenum 8198 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD1 2147483648 setvar tilenum 8223 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 16777216 setvar tilenum 8248 else setvar tilenum 8704 }
@@ -29685,7 +29685,7 @@ ends
 
 state tiledisplayr2c3
    state digx160
-   setvar digy 73 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 73 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 128 setvar tilenum 8199 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 1 setvar tilenum 8224 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 33554432 setvar tilenum 8249 else setvar tilenum 8704 }
@@ -29700,8 +29700,8 @@ state tiledisplayr2c3
 ends
 
 state tiledisplayr2c4
-   setvar digx 201
-   setvar digy 73 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 201
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 73 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 256 setvar tilenum 8200 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 2 setvar tilenum 8225 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 67108864 setvar tilenum 8250 else setvar tilenum 8704 }
@@ -29716,8 +29716,8 @@ state tiledisplayr2c4
 ends
 
 state tiledisplayr2c5
-   setvar digx 242
-   setvar digy 73 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 242
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 73 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 512 setvar tilenum 8201 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 4 setvar tilenum 8226 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 134217728 setvar tilenum 8251 else setvar tilenum 8704 }
@@ -29732,8 +29732,8 @@ state tiledisplayr2c5
 ends
 
 state tiledisplayr3c1
-   setvar digx 78
-   setvar digy 99 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 78
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 99 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 1024 setvar tilenum 8202 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 8 setvar tilenum 8227 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 268435456 setvar tilenum 8252 else setvar tilenum 8704 }
@@ -29748,8 +29748,8 @@ state tiledisplayr3c1
 ends
 
 state tiledisplayr3c2
-   setvar digx 119
-   setvar digy 99 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 119
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 99 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 2048 setvar tilenum 8203 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 16 setvar tilenum 8228 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 536870912 setvar tilenum 8253 else setvar tilenum 8704 }
@@ -29765,7 +29765,7 @@ ends
 
 state tiledisplayr3c3
    state digx160
-   setvar digy 99 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 99 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 4096 setvar tilenum 8204 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 32 setvar tilenum 8229 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 1073741824 setvar tilenum 8254 else setvar tilenum 8704 }
@@ -29780,8 +29780,8 @@ state tiledisplayr3c3
 ends
 
 state tiledisplayr3c4
-   setvar digx 201
-   setvar digy 99 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 201
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 99 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 8192 setvar tilenum 8205 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 64 setvar tilenum 8230 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD2 2147483648 setvar tilenum 8255 else setvar tilenum 8704 }
@@ -29796,8 +29796,8 @@ state tiledisplayr3c4
 ends
 
 state tiledisplayr3c5
-   setvar digx 242
-   setvar digy 99 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 242
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 99 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 16384 setvar tilenum 8206 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 128 setvar tilenum 8231 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 1 setvar tilenum 8256 else setvar tilenum 8704 }
@@ -29812,8 +29812,8 @@ state tiledisplayr3c5
 ends
 
 state tiledisplayr4c1
-   setvar digx 78
-   setvar digy 125 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 78
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 125 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 32768 setvar tilenum 8207 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 256 setvar tilenum 8232 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 2 setvar tilenum 8257 else setvar tilenum 8704 }
@@ -29828,8 +29828,8 @@ state tiledisplayr4c1
 ends
 
 state tiledisplayr4c2
-   setvar digx 119
-   setvar digy 125 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 119
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 125 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 65536 setvar tilenum 8208 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 512 setvar tilenum 8233 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 4 setvar tilenum 8258 else setvar tilenum 8704 }
@@ -29845,7 +29845,7 @@ ends
 
 state tiledisplayr4c3
    state digx160
-   setvar digy 125 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 125 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 131072 setvar tilenum 8209 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 1024 setvar tilenum 8234 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 8 setvar tilenum 8259 else setvar tilenum 8704 }
@@ -29860,8 +29860,8 @@ state tiledisplayr4c3
 ends
 
 state tiledisplayr4c4
-   setvar digx 201
-   setvar digy 125 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 201
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 125 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 262144 setvar tilenum 8210 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 2048 setvar tilenum 8235 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 16 setvar tilenum 8260 else setvar tilenum 8704 }
@@ -29876,8 +29876,8 @@ state tiledisplayr4c4
 ends
 
 state tiledisplayr4c5
-   setvar digx 242
-   setvar digy 125 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 242
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 125 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 524288 setvar tilenum 8211 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 4096 setvar tilenum 8236 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 32 setvar tilenum 8261 else setvar tilenum 8704 }
@@ -29892,8 +29892,8 @@ state tiledisplayr4c5
 ends
 
 state tiledisplayr5c1
-   setvar digx 78
-   setvar digy 151 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 78
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 151 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 1048576 setvar tilenum 8212 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 8192 setvar tilenum 8237 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 64 setvar tilenum 8262 else setvar tilenum 8704 }
@@ -29908,8 +29908,8 @@ state tiledisplayr5c1
 ends
 
 state tiledisplayr5c2
-   setvar digx 119
-   setvar digy 151 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 119
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 151 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 2097152 setvar tilenum 8213 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 16384 setvar tilenum 8238 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 128 setvar tilenum 8263 else setvar tilenum 8704 }
@@ -29925,7 +29925,7 @@ ends
 
 state tiledisplayr5c3
    state digx160
-   setvar digy 151 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 151 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 4194304 setvar tilenum 8214 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 32768 setvar tilenum 8239 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 256 setvar tilenum 8264 else setvar tilenum 8704 }
@@ -29940,8 +29940,8 @@ state tiledisplayr5c3
 ends
 
 state tiledisplayr5c4
-   setvar digx 201
-   setvar digy 151 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 201
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 151 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 8388608 setvar tilenum 8215 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 65536 setvar tilenum 8240 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 512 setvar tilenum 8265 else setvar tilenum 8704 }
@@ -29956,8 +29956,8 @@ state tiledisplayr5c4
 ends
 
 state tiledisplayr5c5
-   setvar digx 242
-   setvar digy 151 // +26
+   ifvare WORLDTILEVIEWMODE 2 setvar digx 160 else setvar digx 242
+   ifvare WORLDTILEVIEWMODE 2 setvar digy 100 else setvar digy 151 // +26
    ifvare mainmenupage 0 { ifvarand WORLDTILEBITFIELD1 16777216 setvar tilenum 8216 else setvar tilenum 8704 }
    ifvare mainmenupage 1 { ifvarand WORLDTILEBITFIELD2 131072 setvar tilenum 8241 else setvar tilenum 8704 }
    ifvare mainmenupage 2 { ifvarand WORLDTILEBITFIELD3 1024 setvar tilenum 8266 else setvar tilenum 8704 }
@@ -29969,6 +29969,339 @@ state tiledisplayr5c5
    ifvare mainmenupage 8 { ifvarand WORLDTILEBITFIELD8 1 setvar tilenum 8416 else setvar tilenum 8704 }
    ifvare mainmenupage 9 { ifvarand WORLDTILEBITFIELD8 33554432 setvar tilenum 8441 else setvar tilenum 8704 }
    ifvarg mainmenupage -1 ifvarl mainmenupage 10 state rs
+ends
+
+state showworldtile-titles
+  state setquote332
+  ifvare mainmenusubmenu 7 // WorldTile Menu
+  {
+   setvar digy 177
+   setvar digx 160
+   redefinequote 332 ^10[WORLDTILE NOT YET FOUND!]
+   ifvare mainmenupage 0 // Page 1: #1-#25
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD1 1 redefinequote 332 WORLDTILE #1: ^22"WENDY IN CONFUSION!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD1 2 redefinequote 332 WORLDTILE #2: ^22"AMI AT THE BEACH!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD1 4 redefinequote 332 WORLDTILE #3: ^22"AMI MIZUNO: SENSHI OF ICE AND WATER!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD1 8 redefinequote 332 WORLDTILE #4: ^22"MINAKO AND THE ROSES!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD1 16 redefinequote 332 WORLDTILE #5: ^22"MINAKO AINO: SENSHI OF LOVE AND METAL!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD1 32 redefinequote 332 WORLDTILE #6: ^22"BUBSY: 'SSSSSMOKIN'!!!'"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD1 64 redefinequote 332 WORLDTILE #7: ^22"BUBSY WITH THE NERF BALLZOOKA OF DOOM!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD1 128 redefinequote 332 WORLDTILE #8: ^22"SERIA HASSELBAG: LEADER OF TEAM GUPPY!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD1 256 redefinequote 332 WORLDTILE #9: ^22"THE MYSTERIOUS GREEN-HAIRED MAID!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD1 512 redefinequote 332 WORLDTILE #10: ^22"SHAO KAHN: THE CRUEL EMPEROR OF OUTWORLD!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD1 1024 redefinequote 332 WORLDTILE #11: ^22"HAN AND SERENIA: GUARDIAN HEROES!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD1 2048 redefinequote 332 WORLDTILE #12: ^22"THE OMNIOUS MEOW OF KURONEKO-SAMA!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD1 4096 redefinequote 332 WORLDTILE #13: ^22"PAULA POLESTAR: POSSESSOR OF PSYCHIC POWERS!"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD1 8192 redefinequote 332 WORLDTILE #14: ^22"PILZ-E HIDES FROM THE PHONE!"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD1 16384 redefinequote 332 WORLDTILE #15: ^22"DEEP IMPACT! OH NOES!!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD1 32768 redefinequote 332 WORLDTILE #16: ^22"JANMICHEL HASSELBAG: MUSCLE OF TEAM GUPPY!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD1 65536 redefinequote 332 WORLDTILE #17: ^22"EMILIA ALCANETT: LEADER OF TEAM PINK DOLPHIN!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD1 131072 redefinequote 332 WORLDTILE #18: ^22"LIZA KITSANA: THE BLADE OF TEAM PINK DOLPHIN!""
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD1 262144 redefinequote 332 WORLDTILE #19: ^22"MURDOCH HOOPER: BRAINS OF TEAM GUPPY!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD1 524288 redefinequote 332 WORLDTILE #20: ^22"WENDY WILKINSON: MAID AND MEDIC OF TEAM GUPPY!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD1 1048576 redefinequote 332 WORLDTILE #21: ^22"SHIZA READY TO NUKE SOMETHING!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD1 2097152 redefinequote 332 WORLDTILE #22: ^22"AMI'S HAPPY AND INFECTOUS SMILE!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD1 4194304 redefinequote 332 WORLDTILE #23: ^22"BUBSY BOBCAT: MOVIE STAR AND YARN LOVER!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD1 8388608 redefinequote 332 WORLDTILE #24: ^22"SERIA RUSHES INTO BATTLE!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD1 16777216 redefinequote 332 WORLDTILE #25: ^22"JANMICHEL ABOUT TO FIRE AWAY!"
+   }
+   ifvare mainmenupage 1 // Page 2: #26-#50
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD1 33554432 redefinequote 332 WORLDTILE #26: ^22"THE MYSTERIOUS WOMAN IN THOUGHT!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD1 67108864 redefinequote 332 WORLDTILE #27: ^22"MINAKO SINGS FOR US ALL!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD1 134217728 redefinequote 332 WORLDTILE #28: ^22"A NIGHT ON THE TOWN!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD1 268435456 redefinequote 332 WORLDTILE #29: ^22"DUKE NUKEM AND THE 3D REALMS STAFF!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD1 536870912 redefinequote 332 WORLDTILE #30: ^22"MINAKO LYING DOWN WITH CHARM!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD1 1073741824 redefinequote 332 WORLDTILE #31: ^22"AMI LYING DOWN AND SHY!"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD1 2147483648 redefinequote 332 WORLDTILE #32: ^22"LO WANG'S TRAINING!"
+
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD2 1 redefinequote 332 WORLDTILE #33: ^22"THE FURY OF THE ANFACIAR!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD2 2 redefinequote 332 WORLDTILE #34: ^22"THE MYSTERIOUS PREDATAR OF DOOM!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD2 4 redefinequote 332 WORLDTILE #35: ^22"KINTARO THE FOUR-ARMED TIGER MAN!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD2 8 redefinequote 332 WORLDTILE #36: ^22"DUKE NUKEM CLEANING UP AROUND TOWN!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD2 16 redefinequote 332 WORLDTILE #37: ^22"MORE OF THE MYSTERIOUS LADY!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD2 32 redefinequote 332 WORLDTILE #38: ^22"A FATED BATTLE: GOKU VERSUS VEGETA!"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD2 64 redefinequote 332 WORLDTILE #39: ^22"EMILIA WINKS FROM THE COCKPIT!"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD2 128 redefinequote 332 WORLDTILE #40: ^22"NINA WYNDIA: THE BLACK-WINGED PRODIGY!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD2 256 redefinequote 332 WORLDTILE #41: ^22"ED-209: CORRUPTED PROGRAMMING UNLEASHED!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD2 512 redefinequote 332 WORLDTILE #42: ^22"LIZA'S ABOUT TO OWN SOMEONE!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD2 1024 redefinequote 332 WORLDTILE #43: ^22"POTPOURRI VANPU: SPECIALIST OF TEAM PINK DOLPHIN!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD2 2048 redefinequote 332 WORLDTILE #44: ^22"ARIN HITTING A 'PANGYA'!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD2 4096 redefinequote 332 WORLDTILE #45: ^22"THE STORMRAGE OF OUTLAND!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD2 8192 redefinequote 332 WORLDTILE #46: ^22"THE SERPENT RIDERS: TRINITY OF DESTRUCTION!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD2 16384 redefinequote 332 WORLDTILE #47: ^22"THE FEARSOME FIVE: CRIME DONE WITH STYLE!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD2 32768 redefinequote 332 WORLDTILE #48: ^22"NORMAN: THE FEARLESS BODYGUARD OF THE CAPBEARER!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD2 65536 redefinequote 332 WORLDTILE #49: ^22"THE SKYLINES OF TOKYO!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD2 131072 redefinequote 332 WORLDTILE #50: ^22"THE FROG AND THE GRANDLEON!"
+   }
+   ifvare mainmenupage 2 // Page 3: #51-#75
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD2 262144 redefinequote 332 WORLDTILE #51: ^22"SCARY LIVING FOREST IS SCARY!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD2 524288 redefinequote 332 WORLDTILE #52: ^22"TEAM GUPPY AND THE GALAXY POLICE!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD2 1048576 redefinequote 332 WORLDTILE #53: ^22"LO WANG MARKS ANOTHER KILL ON HIS LIST!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD2 2097152 redefinequote 332 WORLDTILE #54: ^22"JANMICHEAL'S SPECIAL INTERFACE MODE!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD2 4194304 redefinequote 332 WORLDTILE #55: ^22"THE PALACE OF THE ELEMENTAL GODS!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD2 8388608 redefinequote 332 WORLDTILE #56: ^22"THE ICON OF THE SIN BARES DOWN ON YOU!"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD2 16777216 redefinequote 332 WORLDTILE #57: ^22"NICHOLE NEIL: MAGE OF THE GUARDIAN HEROES!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD2 33554432 redefinequote 332 WORLDTILE #58: ^22"THE BIBLOPHILE AND THE WRITER!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD2 67108864 redefinequote 332 WORLDTILE #59: ^22"CHRISTOPHER BERGERT: ARTIST OF MYSTERY!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD2 134217728 redefinequote 332 WORLDTILE #60: ^22"THE LEGEND OF THE EVOLUTIA!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD2 268435456 redefinequote 332 WORLDTILE #61: ^22"PAULA FRIES THE BOOGEY TENT!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD2 536870912 redefinequote 332 WORLDTILE #62: ^22"HAX. LOL K NOOB."
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD2 1073741824 redefinequote 332 WORLDTILE #63: ^22"ANNET MAYA: THE POWER OF 'EL VIENTO'"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD2 2147483648 redefinequote 332 WORLDTILE #64: ^22"THE JUNKYARD LAIR OF THE WYVERNS!"
+
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD3 1 redefinequote 332 WORLDTILE #65: ^22"ALL EYES ARE ON POTPOURRI!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD3 2 redefinequote 332 WORLDTILE #66: ^22"TEAM PINK DOLPHIN'S SHOCK AND AWE!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD3 4 redefinequote 332 WORLDTILE #67: ^22"DORAN CARMOTHAS: MUSCLE OF TEAM PINK DOLPHIN!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD3 8 redefinequote 332 WORLDTILE #68: ^22"LIZA AND DORAN IN COMBAT WITH ROBOTS!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD3 16 redefinequote 332 WORLDTILE #69: ^22"THE CONDUCTOR LOOKS ON WITH FRUSTRATION!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD3 32 redefinequote 332 WORLDTILE #70: ^22"TEAM GUPPY MINUS SERIA!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD3 64 redefinequote 332 WORLDTILE #71: ^22"THE ENIGMATIC PAN-G AND THE THIEF DOLPH FISCHER!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD3 128 redefinequote 332 WORLDTILE #72: ^22"THE GALAXY POLICE LEADERS: SYLVIA AND DICKS!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD3 256 redefinequote 332 WORLDTILE #73: ^22"EMILIA LOOKS AHEAD!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD3 512 redefinequote 332 WORLDTILE #74: ^22"SHIZA KANAGUSK: GRAPPLER OF TEAM GUPPY!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD3 1024 redefinequote 332 WORLDTILE #75: ^22"EMILIA'S CURIOSITY!"
+   }
+   ifvare mainmenupage 3 // Page 4: #76-#100
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD3 2048 redefinequote 332 WORLDTILE #76: ^22"DORAN: EXTREME CLOSEUP!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD3 4096 redefinequote 332 WORLDTILE #77: ^22"POTPOURRI IS ON THE CASE!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD3 8192 redefinequote 332 WORLDTILE #78: ^22"SERIA, SHIZA AND WENDY IN WAIT!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD3 16384 redefinequote 332 WORLDTILE #79: ^22"SERIA AND MURDOCH'S CONFUSION!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD3 32768 redefinequote 332 WORLDTILE #80: ^22"BATES HAMILL: GALAXY OFFICER OF TRAGEDY!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD3 65536 redefinequote 332 WORLDTILE #81: ^22"CELL WITH A HEAD OF HAIR?!"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD3 131072 redefinequote 332 WORLDTILE #82: ^22"ARIN: THE MAGI OF PANGYA!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD3 262144 redefinequote 332 WORLDTILE #83: ^22"ARIN GIVES YOU GREETINGS!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD3 524288 redefinequote 332 WORLDTILE #84: ^22"OOZARU VERSES THE NINE-TAILED FOX!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD3 1048576 redefinequote 332 WORLDTILE #85: ^22"DOG AT THE COUNTER!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD3 2097152 redefinequote 332 WORLDTILE #86: ^22"TTA: KIRBOPHER15 VERSUS CAILEN CROW!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD3 4194304 redefinequote 332 WORLDTILE #87: ^22"TTA: THE MAIN TEAM TOGETHER!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD3 8388608 redefinequote 332 WORLDTILE #88: ^22"THE DESTINED CHILD AND HIS FRIENDS!"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD3 16777216 redefinequote 332 WORLDTILE #89: ^22"THE CYBERDEMON, UPGRADED HORROR!"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD3 33554432 redefinequote 332 WORLDTILE #90: ^22"LESTAT AND HIS DOBERMAN PALS!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD3 67108864 redefinequote 332 WORLDTILE #91: ^22"RADDITZ WITH COMBAT DAMAGE!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD3 134217728 redefinequote 332 WORLDTILE #92: ^22"RADDITZ: SUPER SAIYA-JIN!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD3 268435456 redefinequote 332 WORLDTILE #93: ^22"AMI DRESSED UP FOR CHRISTMAS!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD3 536870912 redefinequote 332 WORLDTILE #94: ^22"GOKU, RADDITZ AND BARDOCK: FAMILY TIES!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD3 1073741824 redefinequote 332 WORLDTILE #95: ^22"BUBSY: GUITARIST PUNK!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD3 2147483648 redefinequote 332 WORLDTILE #96: ^22"THE CREW OF THE OUTLAW STAR!"
+
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD4 1 redefinequote 332 WORLDTILE #97: ^22"THE BEARDED MISFIT GLARES!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD4 2 redefinequote 332 WORLDTILE #98: ^22"DEVIN AND THE POPCORN!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD4 4 redefinequote 332 WORLDTILE #99: ^22"CLINT: KA... ME... HA... ME..."
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD4 8 redefinequote 332 WORLDTILE #100: ^22"ALEX: EXTREMELY CLOSEUP!"
+   }
+   ifvare mainmenupage 4 // Page 5: #101-#125
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD4 16 redefinequote 332 WORLDTILE #101: ^22"DEVIN AT THE COMPUTER!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD4 32 redefinequote 332 WORLDTILE #102: ^22"CLINT: HA!!!!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD4 64 redefinequote 332 WORLDTILE #103: ^22"LINEAR EXTENDS HER GREETINGS!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD4 128 redefinequote 332 WORLDTILE #104: ^22"MINA WYNDIA: THE BLUE HAIRED ANGEL!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD4 256 redefinequote 332 WORLDTILE #105: ^22"NINA'S GLANCE TO YOU!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD4 512 redefinequote 332 WORLDTILE #106: ^22"TOKYO'S SCRAMBLE CROSSINGS!"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD4 1024 redefinequote 332 WORLDTILE #107: ^22"THE FACE OF ALL NIGHTMARES!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD4 2048 redefinequote 332 WORLDTILE #108: ^22"THE HEROES OF TOME!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD4 4096 redefinequote 332 WORLDTILE #109: ^22"THE STREETS OF LONDON!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD4 8192 redefinequote 332 WORLDTILE #110: ^22"LINEAR AND YURKA'S CONCERN!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD4 16384 redefinequote 332 WORLDTILE #111: ^22"MAKOTO KINO: SENSHI OF THUNDER AND WOOK!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD4 32768 redefinequote 332 WORLDTILE #112: ^22"REI HINO: SENSHI OF FIRE AND MIND!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD4 65536 redefinequote 332 WORLDTILE #113: ^22"MINAKO'S TENNIS MATCH!"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD4 131072 redefinequote 332 WORLDTILE #114: ^22"AMI IN HER SWIMSUIT!"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD4 262144 redefinequote 332 WORLDTILE #115: ^22"MONTAGE TO THE GIRL!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD4 524288 redefinequote 332 WORLDTILE #116: ^22"OLD SCHOOL STARGATE SG-1!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD4 1048576 redefinequote 332 WORLDTILE #117: ^22"THE TEAM OF STARGATE ATLANTIS!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD4 2097152 redefinequote 332 WORLDTILE #118: ^22"KENICHI SHIRAHAMA AND MIU FURINJI!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD4 4194304 redefinequote 332 WORLDTILE #119: ^22"AN AIREAL SHOT OF MCKINLEY MONUMENT!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD4 8388608 redefinequote 332 WORLDTILE #120: ^22"HOLLYWOOD ON FIRE!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD4 16777216 redefinequote 332 WORLDTILE #121: ^22"THE GREAY SAIYAMAN AND SAILOR V!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD4 33554432 redefinequote 332 WORLDTILE #122: ^22"ANNET IN LONDON!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD4 67108864 redefinequote 332 WORLDTILE #123: ^22"PAULA AND VEGETA?!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD4 134217728 redefinequote 332 WORLDTILE #124: ^22"PAULA AND THE STRANGE PINK HAIRED GIRL!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD4 268435456 redefinequote 332 WORLDTILE #125: ^22"ANNET MAYA MONTAGE!"
+   }
+   ifvare mainmenupage 5 // Page 6: #126-#150
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD4 536870912 redefinequote 332 WORLDTILE #126: ^22"THE BIBLOPHILE AND HER BOOKS!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD4 1073741824 redefinequote 332 WORLDTILE #127: ^22"THE SORCERESS WEAVES HER MAGIC!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD4 2147483648 redefinequote 332 WORLDTILE #128: ^22"THE RED BLAZER!"
+
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD5 1 redefinequote 332 WORLDTILE #129: ^22"GUESS WHO IT IS?! GHOST NAPPA!!!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD5 2 redefinequote 332 WORLDTILE #130: ^22"THE SCIENTIST AND THE ARTIST!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD5 4 redefinequote 332 WORLDTILE #131: ^22"DARKWING IN THE MOONLIGHT!"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD5 8 redefinequote 332 WORLDTILE #132: ^22"THE OMINOUS GLARE OF THE LICH KING!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD5 16 redefinequote 332 WORLDTILE #133: ^22"MAGMA ISLAND ON THE EDGE OF HELL!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD5 32 redefinequote 332 WORLDTILE #134: ^22"SICHTE MEISTER: THE MAGI OF SPACE-TIME!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD5 64 redefinequote 332 WORLDTILE #135: ^22"SCHWER-MUTA MERKLE: THE MAGI OF TRICKERY!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD5 128 redefinequote 332 WORLDTILE #136: ^22"FREUDIA NEUWAHL: THE MAGI OF ICE!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD5 256 redefinequote 332 WORLDTILE #137: ^22"THE DESTROYER OF UNIVERSES!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD5 512 redefinequote 332 WORLDTILE #138: ^22"AMI: 'IT'S OVER... 9000?!'"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD5 1024 redefinequote 332 WORLDTILE #139: ^22"BUBSY: 'WHAT'RE YOU LOOKIN' AT?'"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD5 2048 redefinequote 332 WORLDTILE #140: ^22"BUBSY AND FRIENDS VERSUS THE AMAZITORIUM!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD5 4096 redefinequote 332 WORLDTILE #141: ^22"PINK-SKINNED DEATH ON VACATION!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD5 8192 redefinequote 332 WORLDTILE #142: ^22"LISA: 'BOOT TO THE HEAD!'"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD5 16384 redefinequote 332 WORLDTILE #143: ^22"PRINCESS DAISY IN THE SUMMER!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD5 32768 redefinequote 332 WORLDTILE #144: ^22"THE GOTHIC GIRL IN THE FOREST!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD5 65536 redefinequote 332 WORLDTILE #145: ^22"THE MANICIAL ORDER AND THE SIGIL!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD5 131072 redefinequote 332 WORLDTILE #146: ^22"THE CONSERVATION OF ENERGY THEOREM!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD5 262144 redefinequote 332 WORLDTILE #147: ^22"PAULA PREPARES FOR THE FUTURE!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD5 524288 redefinequote 332 WORLDTILE #148: ^22"TRIBUTE TO AN OLD FRIEND..."
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD5 1048576 redefinequote 332 WORLDTILE #149: ^22"A TRUE MISFIT BEYOND ALL DOUBT!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD5 2097152 redefinequote 332 WORLDTILE #150: ^22"A KISS UNDER THE MISTLETOE?!"
+   }
+   ifvare mainmenupage 6 // Page 7: #151-#175
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD5 4194304 redefinequote 332 WORLDTILE #151: ^22"SERIA THE ANGEL?!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD5 8388608 redefinequote 332 WORLDTILE #152: ^22"THE THREE SIDES OF INUYASHA!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD5 16777216 redefinequote 332 WORLDTILE #153: ^22"THE TENKA OF EARTH!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD5 33554432 redefinequote 332 WORLDTILE #154: ^22"THE MISCHEVIOUS GIRL WITH PINK HAIR?!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD5 67108864 redefinequote 332 WORLDTILE #155: ^22"THE HERO, THE SIGIL AND THE FALLEN GOD!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD5 134217728 redefinequote 332 WORLDTILE #156: ^22"SOME SAY THIS IS THE WORST OF HELL!"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD5 268435456 redefinequote 332 WORLDTILE #157: ^22"AMI THE WAITRESS!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD5 536870912 redefinequote 332 WORLDTILE #158: ^22"PRINCESS PEACH IN THE SUMMER!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD5 1073741824 redefinequote 332 WORLDTILE #159: ^22"THE POWER OF MARX WRATH!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD5 2147483648 redefinequote 332 WORLDTILE #160: ^22"THE FURHER IN THE IRON ARMOR!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD6 1 redefinequote 332 WORLDTILE #161: ^22"THE GIRL IN THE RED PLUGSUIT!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD6 2 redefinequote 332 WORLDTILE #162: ^22"A LEGENDARY BATTLE IN THREES!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD6 4 redefinequote 332 WORLDTILE #163: ^22"MY WHAT A BIG GUN YOU HAVE!"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD6 8 redefinequote 332 WORLDTILE #164: ^22"TWO HALVES OF A WHOLE, PART 1!"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD6 16 redefinequote 332 WORLDTILE #165: ^22"TWO HALVES OF A WHOLE, PART 2!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD6 32 redefinequote 332 WORLDTILE #166: ^22"THE DARK TEMPLE OF HELL!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD6 64 redefinequote 332 WORLDTILE #167: ^22"IS HIS HEAD ON A TOUNGE?! EW!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD6 128 redefinequote 332 WORLDTILE #168: ^22"THE GATES TO HELL AND DAMNATION!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD6 256 redefinequote 332 WORLDTILE #169: ^22"THE LONE MARINE AND HIS BIG F'N GUN!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD6 512 redefinequote 332 WORLDTILE #170: ^22"AMT: READING WHILE EATING!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD6 1024 redefinequote 332 WORLDTILE #171: ^22"MINAKO: BRIGHT AND HAPPY!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD6 2048 redefinequote 332 WORLDTILE #172: ^22"A DESERT OF GUNS, SHELLS AND GUTS!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD6 4096 redefinequote 332 WORLDTILE #173: ^22"THE CASTLE FORGED IN MAGMA!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD6 8192 redefinequote 332 WORLDTILE #174: ^22"RINPOO STRIKES WITH GREAT VEGENANCE!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD6 16384 redefinequote 332 WORLDTILE #175: ^22"SUPER BUU: MIND TRAP!!"
+   }
+   ifvare mainmenupage 7 // Page 8: #176-#200
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD6 32768 redefinequote 332 WORLDTILE #176: ^22"EXPLOSIVE POWER COMES IN SMALL PACKAGES!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD6 65536 redefinequote 332 WORLDTILE #177: ^22"THE SECRET OF BLUE WATER!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD6 131072 redefinequote 332 WORLDTILE #178: ^22"SUPER KAMIKAZE CHRISTMAS GHOST ATTACK!!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD6 262144 redefinequote 332 WORLDTILE #179: ^22"THE ENGIMATE HEERO YUY AND HIS FRIENDS!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD6 524288 redefinequote 332 WORLDTILE #180: ^22"THE SHRINE MAIDEN OF GENSOYKO!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD6 1048576 redefinequote 332 WORLDTILE #181: ^22"'DAMMIT, MY NAME IS *NOT* CHINA!!'"
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD6 2097152 redefinequote 332 WORLDTILE #182: ^22"'EYE'M DA STRONGEST IN THE WORLD!!'"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD6 4194304 redefinequote 332 WORLDTILE #183: ^22"THE BORDERLINES OF GENSOYKO!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD6 8388608 redefinequote 332 WORLDTILE #184: ^22"THE Z-WARRIORS GATHER..."
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD6 16777216 redefinequote 332 WORLDTILE #185: ^22"THE SCARY WOMANIZING PIG-MASK IS ATTACKED!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD6 33554432 redefinequote 332 WORLDTILE #186: ^22"A PIZZA-DISPENSING ATM MACHINE?! WTH?!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD6 67108864 redefinequote 332 WORLDTILE #187: ^22"THE DOG OF CARBON AND SNOWBALL FIGHTS!"
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD6 134217728 redefinequote 332 WORLDTILE #188: ^22"'IT'S JUST GRAPE JUICE...'"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD6 268435456 redefinequote 332 WORLDTILE #189: ^22"THE CAKE IS NOT A LIE..."
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD6 536870912 redefinequote 332 WORLDTILE #190: ^22"THE BUBSY TWINS MEET OINKER P. HAMM!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD6 1073741824 redefinequote 332 WORLDTILE #191: ^22"BUBSY DEFENDS THE FOREST CREATURES!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD6 2147483648 redefinequote 332 WORLDTILE #192: ^22"EXPERIENCING 'TECHINCAL DIFFICULTIES'..."
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD7 1 redefinequote 332 WORLDTILE #193: ^22"THE STAFF OF THE SCARLET DEVIL MANSION!"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD7 2 redefinequote 332 WORLDTILE #194: ^22"A PEACH WRAPPED IN RIBBONS!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD7 4 redefinequote 332 WORLDTILE #195: ^22"CHICKEN-MAN IN A SUIT..."
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD7 8 redefinequote 332 WORLDTILE #196: ^22"THE WRATH OF THE HADES OVERLORD!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD7 16 redefinequote 332 WORLDTILE #197: ^22"EXTERMINATE...!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD7 32 redefinequote 332 WORLDTILE #198: ^22"VIDEL FOUND THE HIDDEN CAMERA!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD7 64 redefinequote 332 WORLDTILE #199: ^22"THE WRATH OF PAULA POLESTAR!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD7 128 redefinequote 332 WORLDTILE #200: ^22"DEVIN AND HIS FURRY, FELINE FRIEND!"
+   }
+   ifvare mainmenupage 8 // Page 9: #201-#225
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD7 256 redefinequote 332 WORLDTILE #201: ^22"SCOTT PILGRIM AND THE FANBOY FANTASY..."
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD7 512 redefinequote 332 WORLDTILE #202: ^22"THE ROMA-FRENCH FORTUNE TELLER..."
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD7 1024 redefinequote 332 WORLDTILE #203: ^22"ISABELLE THE GREAT WITCH OF TIME..."
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD7 2048 redefinequote 332 WORLDTILE #204: ^22"SOME MEN JUST WANT TO WATCH THE WORLD BURN!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD7 4096 redefinequote 332 WORLDTILE #205: ^22"CHINA LOOKS DOWN UPON YOUR MEAGER SELF..."
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD7 8192 redefinequote 332 WORLDTILE #206: ^22"A CROWDED WEDDING..."
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD7 16384 redefinequote 332 WORLDTILE #207: ^22"THE THREE OF YAMI!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD7 32768 redefinequote 332 WORLDTILE #208: ^22"THE GLORY OF CASTLE VAN JESSENSTEIN!"
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD7 65536 redefinequote 332 WORLDTILE #209: ^22"CHIIVISTAN: TITLATING MASCOT OF WINDOWS VISTA!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD7 131072 redefinequote 332 WORLDTILE #210: ^22"SAURON VS. THE FREE PEOPLE OF MIDDLE EARTH!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD7 262144 redefinequote 332 WORLDTILE #211: ^22"COCA-COLA VS. PEPSI?!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD7 524288 redefinequote 332 WORLDTILE #212: ^22"OUT OF THE FIRE AND FLAMES..."
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD7 1048576 redefinequote 332 WORLDTILE #213: ^22"THAT'S... GONNA LEAVE A MARK..."
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD7 2097152 redefinequote 332 WORLDTILE #214: ^22"THE MASSIVELY EVIL RHAPTHORNE..."
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD7 4194304 redefinequote 332 WORLDTILE #215: ^22"THE LAKE TO HELL!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD7 8388608 redefinequote 332 WORLDTILE #216: ^22"SAURON IN YO' FACE!"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD7 16777216 redefinequote 332 WORLDTILE #217: ^22"AN UNEXPECTED TEA PARTY..."
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD7 33554432 redefinequote 332 WORLDTILE #218: ^22"THE BATTLE OF THE CATHEDRAL!""
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD7 67108864 redefinequote 332 WORLDTILE #219: ^22"MALROTH, THE UNTAMED WICKEDNESS!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD7 134217728 redefinequote 332 WORLDTILE #220: ^22"A MAN AND HIS MONSTER FRIENDS..."
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD7 268435456 redefinequote 332 WORLDTILE #221: ^22"THE GRIM REAPER NEVER LOOKED CUTER..."
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD7 536870912 redefinequote 332 WORLDTILE #222: ^22"DRAW ME LIKE ONE OF YOUR FRENCH DALEKS..."
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD7 1073741824 redefinequote 332 WORLDTILE #223: ^22"THE HORRIFYING CYBERDEMON!"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD7 2147483648 redefinequote 332 WORLDTILE #224: ^22"THE Z-SENSHI GATHER ONCE AGAIN!"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD8 1 redefinequote 332 WORLDTILE #225: ^22"ONE MAN VS. THE LEGIONS OF HELL!"
+   }
+   ifvare mainmenupage 9 // Page 10: #225-#250
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD8 2 redefinequote 332 WORLDTILE #226: ^22"MEET FLORA BRISCOLETTI..."
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD8 4 redefinequote 332 WORLDTILE #227: ^22"MEET BIANCA WHITAKER..."
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD8 8 redefinequote 332 WORLDTILE #228: ^22"THE SCORPION IN HELL!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD8 16 redefinequote 332 WORLDTILE #229: ^22"WHO IS THIS BLUSHING BRIDE?!"
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD8 32 redefinequote 332 WORLDTILE #230: ^22"THE GREAT CRYSTAL CAVE!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD8 64 redefinequote 332 WORLDTILE #231: ^22"TOOTSIE-TOY SHOTGUN ON DISPLAY..."
+    ifvare mainmenuselection 6 ifvarand WORLDTILEBITFIELD8 128 redefinequote 332 WORLDTILE #232: ^22"BROXIGAR VERSES THE FALLEN TITAN!"
+    ifvare mainmenuselection 7 ifvarand WORLDTILEBITFIELD8 256 redefinequote 332 WORLDTILE #233: ^22"THE REMAINTS OF AN OLD LEGACY..."
+    ifvare mainmenuselection 8 ifvarand WORLDTILEBITFIELD8 512 redefinequote 332 WORLDTILE #234: ^22"WELCOME TO BETRUGER'S DOMAIN!!"
+    ifvare mainmenuselection 9 ifvarand WORLDTILEBITFIELD8 1024 redefinequote 332 WORLDTILE #235: ^22"SAURON VS. ISILDUR... TENSION MOUNTS!"
+    ifvare mainmenuselection 10 ifvarand WORLDTILEBITFIELD8 2048 redefinequote 332 WORLDTILE #236: ^22"BATTLE OF THE DEMONIC WET NURSES!"
+    ifvare mainmenuselection 11 ifvarand WORLDTILEBITFIELD8 4096 redefinequote 332 WORLDTILE #237: ^22"THE FIVE OF THE T.O.M.E."
+    ifvare mainmenuselection 12 ifvarand WORLDTILEBITFIELD8 8192 redefinequote 332 WORLDTILE #238: ^22"WHEN THE FAIL IS SO BAD, REALITY ACTS UP!"
+    ifvare mainmenuselection 13 ifvarand WORLDTILEBITFIELD8 16384 redefinequote 332 WORLDTILE #239: ^22"THE ROCK BAND OF OUR MOTHERS!"
+    ifvare mainmenuselection 14 ifvarand WORLDTILEBITFIELD8 32768 redefinequote 332 WORLDTILE #240: ^22"THE GAZE OF THE DEVIL!"
+    ifvare mainmenuselection 15 ifvarand WORLDTILEBITFIELD8 65536 redefinequote 332 WORLDTILE #241: ^22"INTO THE EYES OF SARUMAN"
+    ifvare mainmenuselection 16 ifvarand WORLDTILEBITFIELD8 131072 redefinequote 332 WORLDTILE #242: ^22"THE TWO AGAINST THE LEGIONS OF HELL!"
+    ifvare mainmenuselection 17 ifvarand WORLDTILEBITFIELD8 262144 redefinequote 332 WORLDTILE #243: ^22"BEST FRIENDS: FREUDIA AND SPIRITIA"
+    ifvare mainmenuselection 18 ifvarand WORLDTILEBITFIELD8 524288 redefinequote 332 WORLDTILE #244: ^22"PSARO THE MANSLAYER EVOLVES!"
+    ifvare mainmenuselection 19 ifvarand WORLDTILEBITFIELD8 1048576 redefinequote 332 WORLDTILE #245: ^22"THE STRONGEST ARM WRESTLERS IN THE UNIVERSE!"
+    ifvare mainmenuselection 20 ifvarand WORLDTILEBITFIELD8 2097152 redefinequote 332 WORLDTILE #246: ^22"KORAX: CHAOS CORRUPTED BEYOND KNOWLEDGE!"
+    ifvare mainmenuselection 21 ifvarand WORLDTILEBITFIELD8 4194304 redefinequote 332 WORLDTILE #247: ^22"FIONA STRIKES BACK!"
+    ifvare mainmenuselection 22 ifvarand WORLDTILEBITFIELD8 8388608 redefinequote 332 WORLDTILE #248: ^22"THE SOLIDERS OF PLANET HERA"
+    ifvare mainmenuselection 23 ifvarand WORLDTILEBITFIELD8 16777216 redefinequote 332 WORLDTILE #249: ^22"GANDALF VS. DURIN'S BANE: THE CLIMAX OF AGES"
+    ifvare mainmenuselection 24 ifvarand WORLDTILEBITFIELD8 33554432 redefinequote 332 WORLDTILE #250: ^22"ZOMA'S SLOUCH OF VILLAINY"
+   }
+   ifvare mainmenupage 10 // Page 11: #251-#256
+   {
+    ifvare mainmenuselection 0 ifvarand WORLDTILEBITFIELD8 67108864 redefinequote 332 WORLDTILE #251: ^22"TETROLOGY OF THE NINJA DRAGON!"
+    ifvare mainmenuselection 1 ifvarand WORLDTILEBITFIELD8 134217728 redefinequote 332 WORLDTILE #252: ^22"THE COMBINED MIGHT OF JASHIN AND JAQUIO!"
+    ifvare mainmenuselection 2 ifvarand WORLDTILEBITFIELD8 268435456 redefinequote 332 WORLDTILE #253: ^22"DETERMINATOR IN PINK!"
+    ifvare mainmenuselection 3 ifvarand WORLDTILEBITFIELD8 536870912 redefinequote 332 WORLDTILE #254: ^22"RELAX, HAVE A CUP OF COFFEE FOR LUCK..."
+    ifvare mainmenuselection 4 ifvarand WORLDTILEBITFIELD8 1073741824 redefinequote 332 WORLDTILE #255: ^22"THE MIRACLE DOGS OF THE GREAT DEPRESSION!"
+    ifvare mainmenuselection 5 ifvarand WORLDTILEBITFIELD8 2147483648 redefinequote 332 WORLDTILE #256: ^22"INTRODUCTING... MISFITTECH STUDIOS!"
+   }
+
+   state pal20
+   setvar temp 332
+   setvar textflags 8194
+   ifvare WORLDTILEVIEWMODE 2 
+   {
+    setvar orientation 26
+    setvar digx 320 // 320 centers gametext[z] quotes
+    setvar digy 196
+    setvar textscale 32768
+    setvar tilenum STARTALPHANUM
+    state gtz
+
+    getkeyname 502 6 0
+    redefinequote 506 ^12%s^21=^22REVERT BACK TO NORMAL SIZE
+    qsprintf 506 506 502
+    setvarvar digx digx_test // 320 centers gametext[z] quotes
+    setvarvar digy digy_test // 196
+    setvar textscale 32768
+    setvar tilenum STARTALPHANUM
+    setvar temp 506
+    state gtz
+   }
+   else
+   {
+    setvar orientation 26
+    setvar digx 160
+    setvar textscale 65536
+    state mt_free
+   }
+  }
 ends
 
 state calculateingametimers
@@ -43800,7 +44133,7 @@ state menu-mainmenu-state
           else state menuerrorsound
          }
 /*
-	   ifvare mainmenusubmenu 5 // Support Menu
+         ifvare mainmenusubmenu 5 // Support Menu
          {
           ifvare mainmenupage 0 // Duke Nukem
           {
@@ -43883,11 +44216,17 @@ state menu-mainmenu-state
           }
           else state menuerrorsound
          }
-/*
-	   ifvare mainmenusubmenu 7 // Worldtile Menu
+
+
+         ifvare mainmenusubmenu 7 // Worldtile Menu
          {
+          ifvare WORLDTILEVIEWMODE 0 setvar WORLDTILEVIEWMODE 1
+          else ifvare WORLDTILEVIEWMODE 1 setvar WORLDTILEVIEWMODE 2
+          else ifvare WORLDTILEVIEWMODE 2 setvar WORLDTILEVIEWMODE 0
+
+          savegamevar WORLDTILEVIEWMODE
+          sound MENU_SELECTED 
          }
-*/
 
          ifvare mainmenusubmenu 256 // Cheats
          {

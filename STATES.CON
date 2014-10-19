@@ -5317,7 +5317,8 @@ state initializer
  readgamevar WORLDTILEBITFIELD6
  readgamevar WORLDTILEBITFIELD7
  readgamevar WORLDTILEBITFIELD8
-  
+ readgamevar WORLDTILEVIEWMODE
+ 
  setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
  state getworldtile
 
@@ -20457,8 +20458,9 @@ ends
 state mbag_rnddollargreatest2
    randvar RANDOMVARIABLE 34
    addvar RANDOMVARIABLE 1
-   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 35 setvar RANDOMVARIABLE 35 } }
-   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 35 setvar RANDOMVARIABLE 35 } }
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 } }
+   ifvarg RANDOMVARIABLE 34 { ifrnd 32 setvar RANDOMVARIABLE 35 else setvar RANDOMVARIABLE 34 }
 
    ifvarg RANDOMVARIABLE 0 ifvarl RANDOMVARIABLE 9 addvar TEMP2 1000
    ifvarg RANDOMVARIABLE 8 ifvarl RANDOMVARIABLE 17 addvar TEMP2 5000
@@ -26902,7 +26904,6 @@ ifvarg MONEYRTIME 3 // 6
  ifvare MONEYID -1 findnearsprite PENNY 2048 MONEYID state checkmoneyforbooby
  ifvare MONEYID -1 findnearsprite MONEYBAG 2048 MONEYID state checkmoneyforbooby
  // Short Range - 4096 Units
- ifvare MONEYID -1 findnearsprite ONEBILLIONDOLLARS 2048 MONEYID state checkmoneyforbooby
  ifvare MONEYID -1 findnearsprite ONEBILLIONDOLLARS 4096 MONEYID state checkmoneyforbooby
  ifvare MONEYID -1 findnearsprite ONEMILLIONDOLLARS 4096 MONEYID state checkmoneyforbooby
  ifvare MONEYID -1 findnearsprite ONEHUNDREDTHOUSANDDOLLARS 4096 MONEYID state checkmoneyforbooby
