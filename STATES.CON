@@ -15042,12 +15042,14 @@ state dogsave
       }
       else 
       { 
+       sound MENU_ERROR
        redefinequote 130 ^10NOT ENOUGH MONEY, MAN! 
        setvarvar fta fta_normal setvar ftq 130
       }
      }
      else
      {
+      sound MENU_ERROR
       redefinequote 130 ^10YOU HAVE NO TELEPORTER COILS! 
       setvarvar fta fta_normal setvar ftq 130
      }
@@ -15083,12 +15085,14 @@ state femsave
       }
       else 
       { 
+       sound MENU_ERROR
        redefinequote 130 ^10NOT ENOUGH MONEY, MAN! 
        setvarvar fta fta_normal setvar ftq 130
       }
      }
      else
      {
+      sound MENU_ERROR
       redefinequote 130 ^10YOU HAVE NO TELEPORTER COILS! 
       setvarvar fta fta_normal setvar ftq 130
      }
@@ -15124,12 +15128,14 @@ state civsave
       }
       else 
       { 
+       sound MENU_ERROR
        redefinequote 130 ^10NOT ENOUGH MONEY, MAN! 
        setvarvar fta fta_normal setvar ftq 130
       }
      }
      else
      {
+      sound MENU_ERROR
       redefinequote 130 ^10YOU HAVE NO TELEPORTER COILS! 
       setvarvar fta fta_normal setvar ftq 130
      }
@@ -23181,11 +23187,23 @@ state pressoncolamachine
             }
             setvar PLAYERHPDAMAGED? -1
            }
-           else redefinequote 321 ^23YOU DO NOT NEED TO DRINK ANYTHING!
+           else
+           {
+            sound MENU_ERROR
+            redefinequote 321 ^23YOU DO NOT NEED TO DRINK ANYTHING!
+           }
           }
-          else redefinequote 321 ^21YOU DO NOT HAVE ENOUGH MONEY ($50)!
+          else
+          {
+           sound MENU_ERROR
+           redefinequote 321 ^21YOU DO NOT HAVE ENOUGH MONEY ($50)!
+          }
          }
-         else redefinequote 321 ^21THE COLA MACHINE IS OUT OF ORDER!
+         else 
+         {
+          sound MENU_ERROR
+          redefinequote 321 ^21THE COLA MACHINE IS OUT OF ORDER!
+         }
 
          setvarvar fta fta_normal setvar ftq 321
          state stopsearchsounds
@@ -23280,11 +23298,23 @@ state pressonsnackmachine
             }      
             setvar PLAYERHPDAMAGED? -1
            }
-           else redefinequote 321 ^23YOU DO NOT NEED TO EAT ANYTHING!
+           else
+           {
+            sound MENU_ERROR
+            redefinequote 321 ^23YOU DO NOT NEED TO EAT ANYTHING!
+           }
           }
-          else redefinequote 321 ^21YOU DO NOT HAVE ENOUGH MONEY ($25)!
+          else
+          {
+           sound MENU_ERROR
+           redefinequote 321 ^21YOU DO NOT HAVE ENOUGH MONEY ($25)!
+          }
          }
-         else redefinequote 321 ^21THE SNACK MACHINE IS OUT OF ORDER!
+         else
+         {
+          sound MENU_ERROR
+          redefinequote 321 ^21THE SNACK MACHINE IS OUT OF ORDER!
+         }
 
          setvarvar fta fta_normal setvar ftq 321
          state stopsearchsounds

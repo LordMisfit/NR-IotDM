@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git74)
-definequote 1337 ^22VERSION:^0 5.22.git74.10212014
+setgamename Naferia's Reign (5.22.git75)
+definequote 1337 ^22VERSION:^0 5.22.git75.10212014
 
 action ANULLACTION 0
 
@@ -18312,6 +18312,7 @@ useractor notenemy DEALER TOUGH
        }
        else
        {
+        sound MENU_ERROR
         ifvare GENDER? 0 redefinequote 130 ^10NOT ENOUGH MONEY, MAN!
         else ifvare GENDER? 1 redefinequote 130 ^10NOT ENOUGH MONEY, LADY!
         else redefinequote 130 ^10NOT ENOUGH MONEY, YOU!
@@ -21388,8 +21389,9 @@ state tipme
      }
      else 
      { 
-	redefinequote 130 ^10NOT ENOUGH MONEY, MAN! 
-	setvarvar fta fta_normal setvar ftq 130
+      sound MENU_ERROR
+      redefinequote 130 ^10NOT ENOUGH MONEY, MAN! 
+      setvarvar fta fta_normal setvar ftq 130
      }
     }
  
@@ -31254,6 +31256,7 @@ ifvare mainmenu -1
        }
        else
        {
+        sound MENU_ERROR
         state atmbroken_dealdamage
         redefinequote 321 ^10THE ATM MACHINE IS BROKEN!
         setvarvar fta fta_normal setvar ftq 321
@@ -31261,6 +31264,7 @@ ifvare mainmenu -1
       }
        else
       {
+       sound MENU_ERROR
        state atmbroken_dealdamage
        redefinequote 321 ^10THE ATM MACHINE IS BROKEN!
        setvarvar fta fta_normal setvar ftq 321
@@ -31312,12 +31316,14 @@ ifvare mainmenu -1
             }
             else
             {
-            redefinequote 321 ^10THE VENDING MACHINE IS BROKEN!
+             sound MENU_ERROR
+             redefinequote 321 ^10THE VENDING MACHINE IS BROKEN!
              setvarvar fta fta_normal setvar ftq 321
             }
            }
            else
            {
+            sound MENU_ERROR
             redefinequote 321 ^10THE VENDING MACHINE IS BROKEN!
             setvarvar fta fta_normal setvar ftq 321
            }
@@ -31367,12 +31373,14 @@ ifvare mainmenu -1
             }
             else
             {
+             sound MENU_ERROR
              redefinequote 321 ^10THE COLA MACHINE IS BROKEN!
              setvarvar fta fta_normal setvar ftq 321
             }
            }
            else
            {
+            sound MENU_ERROR
             redefinequote 321 ^10THE COLA MACHINE IS BROKEN!
             setvarvar fta fta_normal setvar ftq 321
            }
@@ -61720,6 +61728,10 @@ state calc_emptytank_stats
 ends
 
 useractor notenemy EMPTYTANK TANKSTRENGTH AEMPTYTANKWAIT
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   setvar ACTORSHEIGHT 74 setvar ACTORSWIDTH 88
   ifvare oldskoolmode 1 killit
   ifvare SKILLSET? 0

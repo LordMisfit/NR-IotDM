@@ -11094,7 +11094,7 @@ state shop_buyfailed
        else ifvare shoptype 1 globalsound SHOP_FAIL
 
        redefinequote 341 ^10YOU DON'T HAVE ENOUGH MONEY, CHEAPSKATE!
-	 setvarvar fta fta_normal setvar ftq 341
+       setvarvar fta fta_normal setvar ftq 341
 ends
 
 state shop_sellfailed

@@ -3226,44 +3226,6 @@ state invuln-paletteflash
   ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 7
   ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
   ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
-
-/*
-  modvar TEMPVAR4 34
-  ifvare TEMPVAR4 0 settspr[THISACTOR].tsprpal 10
-  ifvare TEMPVAR4 1 settspr[THISACTOR].tsprpal 10
-  ifvare TEMPVAR4 2 settspr[THISACTOR].tsprpal 11
-  ifvare TEMPVAR4 3 settspr[THISACTOR].tsprpal 11
-  ifvare TEMPVAR4 4 settspr[THISACTOR].tsprpal 12
-  ifvare TEMPVAR4 5 settspr[THISACTOR].tsprpal 12
-  ifvare TEMPVAR4 6 settspr[THISACTOR].tsprpal 13
-  ifvare TEMPVAR4 7 settspr[THISACTOR].tsprpal 13
-  ifvare TEMPVAR4 8 settspr[THISACTOR].tsprpal 14
-  ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 14
-  ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 15
-  ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 15
-  ifvare TEMPVAR4 12 settspr[THISACTOR].tsprpal 16
-  ifvare TEMPVAR4 13 settspr[THISACTOR].tsprpal 16
-  ifvare TEMPVAR4 14 settspr[THISACTOR].tsprpal 17
-  ifvare TEMPVAR4 15 settspr[THISACTOR].tsprpal 17
-  ifvare TEMPVAR4 16 settspr[THISACTOR].tsprpal 18
-  ifvare TEMPVAR4 17 settspr[THISACTOR].tsprpal 18
-  ifvare TEMPVAR4 18 settspr[THISACTOR].tsprpal 19
-  ifvare TEMPVAR4 19 settspr[THISACTOR].tsprpal 19
-  ifvare TEMPVAR4 20 settspr[THISACTOR].tsprpal 20
-  ifvare TEMPVAR4 21 settspr[THISACTOR].tsprpal 20
-  ifvare TEMPVAR4 22 settspr[THISACTOR].tsprpal 21
-  ifvare TEMPVAR4 23 settspr[THISACTOR].tsprpal 21
-  ifvare TEMPVAR4 24 settspr[THISACTOR].tsprpal 22
-  ifvare TEMPVAR4 25 settspr[THISACTOR].tsprpal 22
-  ifvare TEMPVAR4 26 settspr[THISACTOR].tsprpal 23
-  ifvare TEMPVAR4 27 settspr[THISACTOR].tsprpal 23
-  ifvare TEMPVAR4 28 settspr[THISACTOR].tsprpal 24
-  ifvare TEMPVAR4 29 settspr[THISACTOR].tsprpal 24
-  ifvare TEMPVAR4 30 settspr[THISACTOR].tsprpal 25
-  ifvare TEMPVAR4 31 settspr[THISACTOR].tsprpal 25
-  ifvare TEMPVAR4 32 settspr[THISACTOR].tsprpal 3
-  ifvare TEMPVAR4 33 settspr[THISACTOR].tsprpal 3
-*/
  }
 ends
 
@@ -3495,6 +3457,11 @@ ifvare TEMPVAR5 NEWBEAST
 }
 
 ifvare TEMPVAR5 COMMANDER
+{
+ state invuln-paletteflash
+}
+
+ifvare TEMPVAR5 EMPTYTANK
 {
  state invuln-paletteflash
 }
@@ -4003,59 +3970,46 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
   settspr[THISACTOR].tsprshade shade
  }
 
- ifvarg INVULNTIME 0
+ ifvarn VEHICLEID -1
  {
-  getplayer[THISACTOR].player_par TEMPVAR4
-  modvar TEMPVAR4 12
-  ifvare TEMPVAR4 0 settspr[THISACTOR].tsprpal 1
-  ifvare TEMPVAR4 1 settspr[THISACTOR].tsprpal 1
-  ifvare TEMPVAR4 2 settspr[THISACTOR].tsprpal 2
-  ifvare TEMPVAR4 3 settspr[THISACTOR].tsprpal 2
-  ifvare TEMPVAR4 4 settspr[THISACTOR].tsprpal 4
-  ifvare TEMPVAR4 5 settspr[THISACTOR].tsprpal 4
-  ifvare TEMPVAR4 6 settspr[THISACTOR].tsprpal 6
-  ifvare TEMPVAR4 7 settspr[THISACTOR].tsprpal 6
-  ifvare TEMPVAR4 8 settspr[THISACTOR].tsprpal 7
-  ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 7
-  ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
-  ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
-/*
-  modvar TEMPVAR4 34
-  ifvare TEMPVAR4 0 settspr[THISACTOR].tsprpal 10
-  ifvare TEMPVAR4 1 settspr[THISACTOR].tsprpal 10
-  ifvare TEMPVAR4 2 settspr[THISACTOR].tsprpal 11
-  ifvare TEMPVAR4 3 settspr[THISACTOR].tsprpal 11
-  ifvare TEMPVAR4 4 settspr[THISACTOR].tsprpal 12
-  ifvare TEMPVAR4 5 settspr[THISACTOR].tsprpal 12
-  ifvare TEMPVAR4 6 settspr[THISACTOR].tsprpal 13
-  ifvare TEMPVAR4 7 settspr[THISACTOR].tsprpal 13
-  ifvare TEMPVAR4 8 settspr[THISACTOR].tsprpal 14
-  ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 14
-  ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 15
-  ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 15
-  ifvare TEMPVAR4 12 settspr[THISACTOR].tsprpal 16
-  ifvare TEMPVAR4 13 settspr[THISACTOR].tsprpal 16
-  ifvare TEMPVAR4 14 settspr[THISACTOR].tsprpal 17
-  ifvare TEMPVAR4 15 settspr[THISACTOR].tsprpal 17
-  ifvare TEMPVAR4 16 settspr[THISACTOR].tsprpal 18
-  ifvare TEMPVAR4 17 settspr[THISACTOR].tsprpal 18
-  ifvare TEMPVAR4 18 settspr[THISACTOR].tsprpal 19
-  ifvare TEMPVAR4 19 settspr[THISACTOR].tsprpal 19
-  ifvare TEMPVAR4 20 settspr[THISACTOR].tsprpal 20
-  ifvare TEMPVAR4 21 settspr[THISACTOR].tsprpal 20
-  ifvare TEMPVAR4 22 settspr[THISACTOR].tsprpal 21
-  ifvare TEMPVAR4 23 settspr[THISACTOR].tsprpal 21
-  ifvare TEMPVAR4 24 settspr[THISACTOR].tsprpal 22
-  ifvare TEMPVAR4 25 settspr[THISACTOR].tsprpal 22
-  ifvare TEMPVAR4 26 settspr[THISACTOR].tsprpal 23
-  ifvare TEMPVAR4 27 settspr[THISACTOR].tsprpal 23
-  ifvare TEMPVAR4 28 settspr[THISACTOR].tsprpal 24
-  ifvare TEMPVAR4 29 settspr[THISACTOR].tsprpal 24
-  ifvare TEMPVAR4 30 settspr[THISACTOR].tsprpal 25
-  ifvare TEMPVAR4 31 settspr[THISACTOR].tsprpal 25
-  ifvare TEMPVAR4 32 settspr[THISACTOR].tsprpal 3
-  ifvare TEMPVAR4 33 settspr[THISACTOR].tsprpal 3
-*/
+  getactorvar[VEHICLEID].ENEMYINVULNTIME TEMPVAR6
+  ifvarg TEMPVAR6 0
+  {
+   getplayer[THISACTOR].player_par TEMPVAR4
+   modvar TEMPVAR4 12
+   ifvare TEMPVAR4 0 settspr[THISACTOR].tsprpal 1
+   ifvare TEMPVAR4 1 settspr[THISACTOR].tsprpal 1
+   ifvare TEMPVAR4 2 settspr[THISACTOR].tsprpal 2
+   ifvare TEMPVAR4 3 settspr[THISACTOR].tsprpal 2
+   ifvare TEMPVAR4 4 settspr[THISACTOR].tsprpal 4
+   ifvare TEMPVAR4 5 settspr[THISACTOR].tsprpal 4
+   ifvare TEMPVAR4 6 settspr[THISACTOR].tsprpal 6
+   ifvare TEMPVAR4 7 settspr[THISACTOR].tsprpal 6
+   ifvare TEMPVAR4 8 settspr[THISACTOR].tsprpal 7
+   ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 7
+   ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
+   ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
+  }
+ }
+ else
+ {
+  ifvarg INVULNTIME 0
+  {
+   getplayer[THISACTOR].player_par TEMPVAR4
+   modvar TEMPVAR4 12
+   ifvare TEMPVAR4 0 settspr[THISACTOR].tsprpal 1
+   ifvare TEMPVAR4 1 settspr[THISACTOR].tsprpal 1
+   ifvare TEMPVAR4 2 settspr[THISACTOR].tsprpal 2
+   ifvare TEMPVAR4 3 settspr[THISACTOR].tsprpal 2
+   ifvare TEMPVAR4 4 settspr[THISACTOR].tsprpal 4
+   ifvare TEMPVAR4 5 settspr[THISACTOR].tsprpal 4
+   ifvare TEMPVAR4 6 settspr[THISACTOR].tsprpal 6
+   ifvare TEMPVAR4 7 settspr[THISACTOR].tsprpal 6
+   ifvare TEMPVAR4 8 settspr[THISACTOR].tsprpal 7
+   ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 7
+   ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
+   ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
+  }
  }
 
 } // APLAYER actor
