@@ -4699,7 +4699,7 @@ definesound BONUSMUSIC          bonus.voc         0 0 255 1 0
 // Duke's Body Sounds                                                                   
 definesound DUKE_BREATHING      hlminhal.voc       0   0   255 4   0
 definesound DUKE_EXHALING       hlmexhal.voc       0   0   255 4   0
-definesound DUKE_GASP           null.wav           0   0   255 4   0
+definesound DUKE_GASP           null.wav           0   0   0   0   0
 definesound DUKE_URINATE        pissing.voc        0   0   4   0   0
 definesound DUKE_CRACK2         COMEON02.voc       0   0   255 4   0
 definesound DUKE_CRACK          WAITIN03.voc       0   0   255 4   0
@@ -4713,9 +4713,9 @@ definesound DUKE_GETWEAPON4     wansom4a.voc       0   0   255 4   0
 definesound DUKE_GETWEAPON6     HAIL01.VOC         0   0   255 4   0
 definesound DUKE_GOTHEALTHATLOW needed03.voc       0   0   255 4   0
 
-definesound DUKE_SEARCH         null.wav       0   0   2   4     0
-definesound DUKE_SEARCH2        null.wav       0   0   255 4   0
-definesound DUKE_LONGTERM_PAIN  null.wav     -192   0   255 4   0
+definesound DUKE_SEARCH         null.wav       0   0   0   0    0
+definesound DUKE_SEARCH2        null.wav       0   0   0   0    0
+definesound DUKE_LONGTERM_PAIN  null.wav     -192   0   0 0   0
 definesound DUKE_LONGTERM_PAIN2 DSCREM15.VOC      0   0   255 4   0
 definesound DUKE_LONGTERM_PAIN3 DSCREM16.VOC      0   0   255 4   0
 definesound DUKE_LONGTERM_PAIN4 DSCREM17.VOC      0   0   255 4   0
@@ -4737,12 +4737,12 @@ definesound DUKE_KILLED5        pisses01.voc       0   0   255 12  0
 definesound DUKE_GRUNT          exert.voc          0   0   2   4   0
 definesound DUKE_DEAD           DMDEATH.VOC      -64  64   255 4  0
 definesound DUKE_HARTBEAT       hartbeat.voc       0   0   0   0   0
-definesound DUKE_STEPONFECES    null.wav       0   0   0   12  0
+definesound DUKE_STEPONFECES    null.wav       0   0   0   0  0
 
 // Duke Movement Sounds                                                                 
 definesound DUKE_ONWATER        wetfeet.voc        0   0    4   0   0
 definesound DUKE_LAND           land02.voc         0   0    2   0   0
-definesound DUKE_LAND_HURT      null.wav           0   0    255 4   0
+definesound DUKE_LAND_HURT      null.wav           0   0    0   0   0
 definesound DUKE_WALKINDUCTS    ductwlk.voc      -64   128  2   0   0
 definesound DUKE_LOOKINTOMIRROR null.wav           0   0    255 4   0
 
@@ -4759,7 +4759,7 @@ definesound BONUS_SPEECH3       ripem08.voc        0   0   255  4   0
 definesound BONUS_SPEECH4       rockin02.voc       0   0   255  4   0
 definesound DUKE_YES            yes.voc            0   0   255  4   0
 definesound DUKE_USEMEDKIT      ahh04.voc          0   0   255  4   0
-definesound DUKE_TAKEPILLS      null.wav           0   0   255  4   0
+definesound DUKE_TAKEPILLS      null.wav           0   0   0  0   0
 definesound DUKETALKTOBOSS      duknuk14.voc       0   0   255  12  0
 definesound BOSSTALKTODUKE      !boss.voc          0   0   255  0   0
 definesound SHRINKER_HIT        thud.voc           0   0   3    0   0
@@ -4788,7 +4788,7 @@ definesound FAN                 fan.voc            0   0   0   0   0
 definesound FLUSH_TOILET        flush.voc          0   0   3   2   0
 definesound HOVER_CRAFT         hover.voc          0   0   0   0   0
 definesound EARTHQUAKE          quake.voc          0   0   0   0   0
-                                                                                        
+
 // Warning Sounds                                                                       
 definesound INTRUDER_ALERT      alert.voc          0   0   0   0   0
 definesound END_OF_LEVEL_WARN   monitor.voc        0   0   0   0   0
@@ -4872,7 +4872,7 @@ definesound JIBBED_ACTOR8       BLOWIT01.VOC      0   0   255 12  0
 definesound JIBBED_ACTOR9       EATSHT01.VOC      0   0   255 12  0
 definesound JIBBED_ACTOR10      FACE01.VOC        0   0   255 12  0
 definesound JIBBED_ACTOR11      INHELL01.VOC      0   0   255 12  0
-definesound WHIPYOURASS         null.wav          0   0   255 4   0
+definesound WHIPYOURASS         null.wav          0   0   0   0   0 // Replaced by DUKETALKTOBOSS2 [or other character equalvalents]
 definesound JIBBED_ACTOR12      SUKIT01.VOC       0   0   255 4   0
 definesound JIBBED_ACTOR13      LETGOD01.VOC      0   0   255 12  0
 definesound JIBBED_ACTOR14      getcrap1.voc      0   0    0  12   0
@@ -4907,8 +4907,8 @@ definesound ALIEN_SWITCH1     aswtch23.voc      0   0   0  0   0
 definesound COMPANB2          CTRLRM25.VOC  0  0  0  2   0
 definesound HELICOP_IDLE      hlidle03.voc  0  0  255  3   0
 definesound FOUNDJONES        jones04.voc   0  0  0  4  0
-definesound STEPNIT           null.wav     0  0  254  12  0
-definesound RIPHEADNECK       null.wav     0  0  254  12 0 // Replaced by DUKETALKTOBOSS4
+definesound STEPNIT           null.wav      0  0  0  0  0
+definesound RIPHEADNECK       null.wav      0  0  0  0  0 // Replaced by DUKETALKTOBOSS3 [or other character equalvalents]
 
 definesound ENDSEQVOL2SND1    gunhit2.voc     0   0   249 0   0
 definesound ENDSEQVOL2SND2    headrip3.VOC    0   0   250 0   0
@@ -4976,7 +4976,7 @@ definesound INTRO4_5               clang1.voc      0   0   255 0   0
 definesound INTRO4_6               introc.voc      0   0   255 0   0
 
 definesound BOSS4_DEADSPEECH       abort01.voc     0   0   255  4   0
-definesound BOSS4_FIRSTSEE         null.wav        0   0   255 12   0 // Replaced by DUKETALKTOBOSS4
+definesound BOSS4_FIRSTSEE         null.wav        0   0   0    0   0 // Replaced by DUKETALKTOBOSS4 [or other character equalvalents]
 definesound PARTY_SPEECH           party03.voc     0   0   255 12   0
 definesound POSTAL_SPEECH          postal01.voc    0   0   255  4   0
 definesound TGSPEECH               vocal02.voc     0   0   254  8   0
@@ -5166,10 +5166,10 @@ definesound SHOP_SOLD2             sold2.wav        0   0   255 4   0
 definesound SHOP_SOLD3             sold3.wav        0   0   255 4   0
 definesound SHOP_FAIL              pcash1.wav       0   0   255 4   0
 
-definesound DUKETALKTOBOSS1        dukesurg.wav      0   0   255 4   0
-definesound DUKETALKTOBOSS2        WHIPYU01.VOC      0   0   255 4   0
-definesound DUKETALKTOBOSS3        rip01.voc     0  0  254  12 0
-definesound DUKETALKTOBOSS4        kick01-i.voc    0   0   255 12   0
+definesound DUKETALKTOBOSS1        dukesurg.wav      0   0   255  4   0
+definesound DUKETALKTOBOSS2        WHIPYU01.VOC      0   0   255  4   0
+definesound DUKETALKTOBOSS3        rip01.voc         0   0   255  12  0
+definesound DUKETALKTOBOSS4        kick01-i.voc      0   0   255  12  0
 
 definesound STEPINIT               happen01.voc       0   0   0   12  0
 definesound DUKE_LAND_HURT2        PAIN39.VOC         0   0    255 4   0

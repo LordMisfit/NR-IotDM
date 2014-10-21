@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git73)
-definequote 1337 ^22VERSION:^0 5.22.git73.10212014
+setgamename Naferia's Reign (5.22.git74)
+definequote 1337 ^22VERSION:^0 5.22.git74.10212014
 
 action ANULLACTION 0
 
@@ -41804,6 +41804,27 @@ state boss1shootenemy
  }
 ends
 
+state boss1death-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound DUKE_TALKTOBOSSFALL
+      redefinequote 340 ^17Duke: Die you son of a bitch!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8
+     {
+      globalsound LISA_KILLBOSS1 
+      redefinequote 340 ^7Lisa: I guess you didn't know you were facing the terrifying 'Sunset Lisa'!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15
+     {
+      globalsound MAKEN_KILLBOSS1 
+      redefinequote 340 ^10Maken: In the end, you were always worthless scum!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state checkboss1hitstate
   ifvarl ENEMYINVULNTIME 1
   {
@@ -41815,41 +41836,14 @@ state checkboss1hitstate
   ifdead
   {
     setvar ENEMYHP 0
-    ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS1
-    }
-    else
-    ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS1
-    }
-    else
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS1
-    }
-    else
-    ifspritepal 24
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS1
-    }
+    ifspritepal 0 state boss1death-chartaunts
+    else ifspritepal 3 state boss1death-chartaunts
+    else ifspritepal 9 state boss1death-chartaunts
+    else ifspritepal 24 state boss1death-chartaunts
     else
     {
-     ifrnd 64
-     {
-      ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-      ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS1
-      ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS1
-     }
+     ifrnd 64 state boss1death-chartaunts
+
      ifwasweapon FREEZEBLAST
      {
       state freezeup
@@ -42110,6 +42104,33 @@ state checkboss1hitstate
   }
 ends
 
+state boss1-chartaunts
+     ifvare CHARACTERSELECTED? 1 
+     {
+      globalsound DUKETALKTOBOSS1
+      redefinequote 340 ^17Duke: Eww... Who's your plastic surgeon!?
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 5 
+     {
+      globalsound WANG_TAUNTBOSS1
+      redefinequote 340 ^15Higa: Hey!! You look like you need ass kicked!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8 
+     {
+      globalsound LISA_TAUNTBOSS1
+      redefinequote 340 ^7Lisa: Ha! Do you actually know how to use that gun of yours?!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15
+     {
+      globalsound MAKEN_TAUNTBOSS1 
+      redefinequote 340 ^10Maken: Sooo... you wanna challenge me now...? Burn alien scumbag!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state boss1code
   ifvare SKILLSET? -1 state rankstarbeta // tries to regenerate any attached-objects not spawned or that vanish prematurely
 
@@ -42165,27 +42186,9 @@ state boss1code
 
   ifai 0
   {
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS1
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS1
-    }
-    else ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS1
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS1
-    }
-    else ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS1
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS1
-    }
+    ifspritepal 9 state boss1-chartaunts
+    else ifspritepal 0 state boss1-chartaunts
+    else ifspritepal 3 state boss1-chartaunts
 
     state setboss1health
     ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -42878,6 +42881,27 @@ state boss2shootenemy
   }
 ends
 
+state boss2death-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound DUKE_TALKTOBOSSFALL
+      redefinequote 340 ^17Duke: Die you son of a bitch!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8
+     {
+      globalsound LISA_KILLBOSS2 
+      redefinequote 340 ^7Lisa: I take it back!! You weren't a terrible fighter, for an alien scumbag!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15
+     {
+      globalsound MAKEN_KILLBOSS2 
+      redefinequote 340 ^10Maken: Oh how the mighty, one-eyed freak has fallen!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state checkboss2hitstate
   ifvarl ENEMYINVULNTIME 1
   {
@@ -42889,41 +42913,13 @@ state checkboss2hitstate
   ifdead
   {
     setvar ENEMYHP 0
-    ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS2
-    }
-    else
-    ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS2
-    }
-    else
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS2
-    }
-    else
-    ifspritepal 24
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS2
-    }
+    ifspritepal 0 state boss2death-chartaunts
+    else ifspritepal 3 state boss2death-chartaunts
+    else ifspritepal 9 state boss2death-chartaunts
+    else ifspritepal 24 state boss2death-chartaunts
     else
     {
-     ifrnd 64
-     {
-      ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-      ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS2
-      ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS2
-     }
+     ifrnd 64 state boss2death-chartaunts
      ifwasweapon FREEZEBLAST
      {
       state freezeup
@@ -43234,6 +43230,33 @@ state checkboss2hitstate
   }
 ends
 
+state boss2-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound DUKETALKTOBOSS2
+      redefinequote 340 ^17Duke: It's down to you and me... you one-eyed freak!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 5
+     {
+      globalsound WANG_TAUNTBOSS1 
+      redefinequote 340 ^15Higa: Hey!! You look like you need ass kicked!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8 
+     {
+      globalsound LISA_TAUNTBOSS2 
+      redefinequote 340 ^7Lisa: I doubt your bite is that much worse than your bark!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15 
+     {
+      globalsound MAKEN_TAUNTBOSS2 
+      redefinequote 340 ^10Maken: You think you can destroy me!?!? BRING IT ON, CYCLOPS!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state boss2code
   ifvare SKILLSET? -1 state rankstarbeta // tries to regenerate any attached-objects not spawned or that vanish prematurely
 
@@ -43288,29 +43311,12 @@ state boss2code
   }
   ifai 0
   {
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS2
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS2
-    }
-    else ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS2
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS2
-    }
-    else ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS2
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS2
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS2
-    }
-
     soundonce BOS2_RECOG
+
+    ifspritepal 9 state boss2-chartaunts
+    else ifspritepal 0 state boss2-chartaunts
+    else ifspritepal 3 state boss2-chartaunts
+
     state setboss2health
     ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   }
@@ -43933,6 +43939,27 @@ state boss3lobbedstate
 */
 ends
 
+state boss3death-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound DUKE_TALKTOBOSSFALL
+      redefinequote 340 ^17Duke: Die you son of a bitch!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8
+     {
+      globalsound LISA_KILLBOSS3 
+      redefinequote 340 ^7Lisa: Wow... your attacks were waaay too predictable!! No, wait... you just suck!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15
+     {
+      globalsound MAKEN_KILLBOSS3 
+      redefinequote 340 ^10Maken: I knew your species were always a bunch of has-beens!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state checkboss3hitstate
   ifvarl ENEMYINVULNTIME 1
   {
@@ -43944,41 +43971,13 @@ state checkboss3hitstate
   ifdead
   {
     setvar ENEMYHP 0
-    ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS3
-    }
-    else
-    ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS3
-    }
-    else
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS3
-    }
-    else
-    ifspritepal 24
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS3
-    }
+    ifspritepal 0 state boss3death-chartaunts
+    else ifspritepal 3 state boss3death-chartaunts
+    else ifspritepal 9 state boss3death-chartaunts
+    else ifspritepal 24 state boss3death-chartaunts
     else
     {
-     ifrnd 64
-     {
-      ifvare CHARACTERSELECTED? 1 globalsound DUKE_TALKTOBOSSFALL
-      ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS3
-      ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS3
-     }
+     ifrnd 64 state boss3death-chartaunts
      ifwasweapon FREEZEBLAST
      {
       state freezeup
@@ -44242,6 +44241,33 @@ state checkboss3hitstate
   }
 ends
 
+state boss3-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound DUKETALKTOBOSS3
+      redefinequote 340 ^17Duke: I'll rip your head off and shit down your neck!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 5
+     {
+      globalsound WANG_TAUNTBOSS1 
+      redefinequote 340 ^15Higa: Hey!! You look like you need ass kicked!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8 
+     {
+      globalsound LISA_TAUNTBOSS3 
+      redefinequote 340 ^7Lisa: JESUS!! Did you get hit with the ugly stick, or WHAT?!?!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15 
+     {
+      globalsound MAKEN_TAUNTBOSS3 
+      redefinequote 340 ^10Maken: Man, you're all still big, fat, and UGGGLLLLY!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state boss3code
 
 // Custom
@@ -44301,33 +44327,14 @@ state boss3code
 
   ifai 0
   {
-    // Character Sighting Taunts
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS3
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS3
-    }
-    else
-    ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS3
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS3
-    }
-    else
-    ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS3
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS3
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS3
-    }
-
     ifvarn CHARACTERSELECTED? 1 stopsound RIPHEADNECK
     soundonce BOS3_RECOG
+
+    // Character Sighting Taunts
+    ifspritepal 9 state boss3-chartaunts
+    else ifspritepal 0 state boss3-chartaunts
+    else ifspritepal 3 state boss3-chartaunts
+
     state setboss3health
     ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   }
@@ -46485,6 +46492,27 @@ state boss4layeggs
 */
 ends
 
+state boss4death-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound BOSS4_DEADSPEECH
+      redefinequote 340 ^17Duke: It's time to abort your whole friggin' species!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8
+     {
+      globalsound LISA_KILLBOSS4 
+      redefinequote 340 ^7Lisa: If you can't fight with the best, then you DIE with the rest!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15
+     {
+      globalsound MAKEN_KILLBOSS4 
+      redefinequote 340 ^10Maken: You were all just a waste of Naferia's time... AND mine!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state checkboss4hitstate
 
   ifvarl ENEMYINVULNTIME 1 ifvarg ENEMYLASTDAMAGE 0 ifrnd 2 { espawn NEWBLOODPOOL setactor[RETURN].pal 2 setactor[RETURN].cstat 34 }
@@ -46492,41 +46520,13 @@ state checkboss4hitstate
   ifdead
   {
     setvar ENEMYHP 0
-    ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound BOSS4_DEADSPEECH
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS4
-    }
-    else
-    ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound BOSS4_DEADSPEECH
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS4
-    }
-    else
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound BOSS4_DEADSPEECH
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS4
-    }
-    else
-    ifspritepal 24
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound BOSS4_DEADSPEECH
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS4
-    }
+    ifspritepal 0 state boss4death-chartaunts
+    else ifspritepal 3 state boss4death-chartaunts
+    else ifspritepal 9 state boss4death-chartaunts
+    else ifspritepal 24 state boss4death-chartaunts
     else
     {
-     ifrnd 64
-     {
-      ifvare CHARACTERSELECTED? 1 globalsound BOSS4_DEADSPEECH
-      ifvare CHARACTERSELECTED? 8 globalsound LISA_KILLBOSS4
-      ifvare CHARACTERSELECTED? 15 globalsound MAKEN_KILLBOSS4
-     }
+     ifrnd 64 state boss4death-chartaunts
      ifwasweapon FREEZEBLAST
      {
       state freezeup
@@ -46808,6 +46808,33 @@ state boss4getitemstate
  ifvare ITEMTARGET -1 ai AIBOSS4LAYEGGS
 ends
 
+state boss4-chartaunts
+     ifvare CHARACTERSELECTED? 1
+     {
+      globalsound DUKETALKTOBOSS4
+      redefinequote 340 ^17Duke: I'm gonna kick your ass, BITCH!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 5
+     {
+      globalsound WANG_TAUNTBOSS1 
+      redefinequote 340 ^15Higa: Hey!! You look like you need ass kicked!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 8 
+     {
+      globalsound LISA_TAUNTBOSS4 
+      redefinequote 340 ^7Lisa: Ha... my stepaunt twice-removed is scarier than you are!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+     ifvare CHARACTERSELECTED? 15 
+     {
+      globalsound MAKEN_TAUNTBOSS4 
+      redefinequote 340 ^10Maken: Queen, Smeen!! Big, clumsy and slow is all you are!!
+      ifvare oldskoolmode 0 userquote 340
+     }
+ends
+
 state boss4code
   state rankstarbeta // tries to regenerate any attached-objects not spawned or that vanish prematurely
 
@@ -46862,32 +46889,13 @@ state boss4code
   }
    ifai 0
    { 
-    ifspritepal 9
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS4
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS4
-    }
-    else
-    ifspritepal 0
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS4
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS4
-    }
-    else
-    ifspritepal 3
-    {
-     ifvare CHARACTERSELECTED? 1 globalsound DUKETALKTOBOSS4
-     ifvare CHARACTERSELECTED? 5 globalsound WANG_TAUNTBOSS1
-     ifvare CHARACTERSELECTED? 8 globalsound LISA_TAUNTBOSS4
-     ifvare CHARACTERSELECTED? 15 globalsound MAKEN_TAUNTBOSS4
-    }
-
     ifvarn CHARACTERSELECTED? 1 stopsound BOSS4_FIRSTSEE
     soundonce BOS4_RECOG
+
+    ifspritepal 9 state boss4-chartaunts
+    else ifspritepal 0 state boss4-chartaunts
+    else ifspritepal 3 state boss4-chartaunts
+
     state setboss4health 
     ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
    }
