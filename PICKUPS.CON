@@ -11253,7 +11253,7 @@ else
         ifcount 6
         {
          state checkexplodeflag
-         ifvarl winterclothes 100
+         ifvare winterclothes 0
          {
           setvar ACTORPICKUPAMOUNT 1
           state checkpickupamountflags state checkdoublepickupbonus
@@ -11283,7 +11283,7 @@ else
           ifspawnedby WINTERCLOTHES
            state getcode
           else
- 	     state quikget
+           state quikget
          }
          else
          {

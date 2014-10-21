@@ -2388,11 +2388,11 @@ ifvarn atm_id -1
   ifvare atm_extquote 13 redefinequote 332 "Got any food?  :O"
   ifvare atm_extquote 14 redefinequote 332 "Shadow Warrior rocks!  XD"
   ifvare atm_extquote 15 redefinequote 332 "That mysterious chick is hot!  :)"
-  ifvare atm_extquote 16 redefinequote 332 "http://naferia.duke4.net"
-  ifvare atm_extquote 17 redefinequote 332 "http://www.zxdware.net"
-  ifvare atm_extquote 18 redefinequote 332 "http://www.fireball20xl.com"
-  ifvare atm_extquote 19 redefinequote 332 "http://www.fetchquest.com"
-  ifvare atm_extquote 20 redefinequote 332 "http://deeperthought.dukertcm.com"
+  ifvare atm_extquote 16 redefinequote 332 "https://github.com/LordMisfit/NR-IotDM"
+  ifvare atm_extquote 17 redefinequote 332 "https://github.com/Kyle873/DoomRPG"
+  ifvare atm_extquote 18 redefinequote 332 "http://www.dragonsoftstudio.com/"
+  ifvare atm_extquote 19 redefinequote 332 "http://www.pinkkittyrose.com/forums/"
+  ifvare atm_extquote 20 redefinequote 332 "http://fissile.duke4.net/"
   ifvare atm_extquote 21 redefinequote 332 "http://misfittechstudios.duke4.net"
   state pal22
   state gtz

@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git72)
-definequote 1337 ^22VERSION:^0 5.22.git72.10182014
+setgamename Naferia's Reign (5.22.git73)
+definequote 1337 ^22VERSION:^0 5.22.git73.10212014
 
 action ANULLACTION 0
 
@@ -12780,6 +12780,10 @@ ends
 
 actor SHARK SHARKSTRENGTH ASHARKCRUZING SHARKVELS randomangle geth
 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
 state actorproperangle
 state enemyfloorhurt
 state accquireenemystats
@@ -13650,6 +13654,10 @@ action ADOGSHRUNK 0 2 1 1 8
 action ADOGGROW 0
 
 useractor notenemy ROBOTDOG PIRATEGALSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0 
  {
   setactor[THISACTOR].cstat 257
@@ -13849,6 +13857,10 @@ action ADOG2SHRUNK 0 3 1 1 8
 action ADOG2GROW 0
 
 useractor notenemy ROBOTDOG2 PIRATEGALSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   ifvare SKILLSET? 0
   {
    setactor[THISACTOR].cstat 257
@@ -14214,6 +14226,10 @@ useractor notenemy COFFEEMUG WEAK
 enda
 
 useractor notenemy PRESIDENTCLINTON MANWOMANSTRENGTH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP MANWOMANSTRENGTH
@@ -14298,6 +14314,10 @@ useractor notenemy BODY3 WEAK
 enda
  
 useractor notenemy OTTO TOUGH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -14343,6 +14363,10 @@ action ADANCE1GROW
 action ADANCE1FROZEN
 
 useractor notenemy DANCE1 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0 
  {
   setvar ENEMYMAXHP TOUGH
@@ -14545,6 +14569,10 @@ action ADANCE2GROW
 action ADANCE2FROZEN
 
 useractor notenemy DANCE2 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0 
  {
   setvar ENEMYMAXHP TOUGH
@@ -14740,6 +14768,10 @@ action ADANCE3GROW
 action ADANCE3FROZEN
 
 useractor notenemy DANCE3 TOUGH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -14944,6 +14976,10 @@ action ADANCE5GROW
 action ADANCE5FROZEN
 
 useractor notenemy DANCE5 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  { 
   setvar ENEMYMAXHP TOUGH
@@ -15146,6 +15182,10 @@ action ADANCE6GROW
 action ADANCE6FROZEN
 
 useractor notenemy DANCE6 TOUGH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -15342,6 +15382,10 @@ action ADANCE7GROW
 action ADANCE7FROZEN
 
 useractor notenemy DANCE7 TOUGH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -15548,6 +15592,10 @@ action ADANCE9GROW
 action ADANCE9FROZEN
 
 useractor notenemy DANCE9 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -15749,6 +15797,10 @@ action ASTAND1GROW
 action ASTAND1FROZEN
 
 useractor notenemy STAND1 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0 
  {
   setvar ENEMYMAXHP TOUGH
@@ -15945,6 +15997,10 @@ action ASTAND3GROW
 action ASTAND3FROZEN
 
 useractor notenemy STAND3 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -16141,6 +16197,10 @@ action ASTAND4GROW
 action ASTAND4FROZEN
 
 useractor notenemy STAND4 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -16336,6 +16396,10 @@ action ACOP1GROW
 action ACOP1FROZEN
 
 useractor notenemy COP1 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP REALLYTOUGH
@@ -16532,6 +16596,10 @@ action ACOP2GROW
 action ACOP2FROZEN
 
 useractor notenemy COP2 TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP REALLYTOUGH
@@ -16731,6 +16799,10 @@ action APUNKDUDEGROW
 action APUNKDUDEFROZEN
 
 useractor notenemy PUNKDUDE TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -16928,6 +17000,10 @@ action ASITDUDEGROW
 action ASITDUDEFROZEN
 
 useractor notenemy SITTINGDUDE TOUGH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP TOUGH
@@ -17125,6 +17201,10 @@ action AANIME1GROW
 action AANIME1FROZEN
 
 useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP MANWOMANSTRENGTH
@@ -17326,6 +17406,10 @@ action AANIME2GROW
 action AANIME2FROZEN
 
 useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP MANWOMANSTRENGTH
@@ -17527,6 +17611,10 @@ action AANIME3GROW
 action AANIME3FROZEN
 
 useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP MANWOMANSTRENGTH
@@ -17729,6 +17817,10 @@ action AANIME4GROW
 action AANIME4FROZEN
 
 useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP MANWOMANSTRENGTH
@@ -17928,6 +18020,10 @@ action AWOLFSHRUNK 0 2 1 1 16
 action AWOLFGROW
 
 useractor notenemy WOLFDUDE 1453
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP 1453
@@ -18138,6 +18234,10 @@ action ADEALERSHRUNK 0
 action ADEALERGROW 0
 
 useractor notenemy DEALER TOUGH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP GOTTASMART
@@ -20427,6 +20527,10 @@ action ASATWAIT      0 1 5 1 1
 move TURRVEL
 
 actor ROTATEGUN ROTTURRETSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state accquireenemystats
   state enemyunderwater
@@ -21335,6 +21439,10 @@ eventloadactor FEM1
  }
 enda
 actor FEM1 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21434,6 +21542,10 @@ eventloadactor FEM2
  }
 enda
 actor FEM2 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21516,6 +21628,10 @@ eventloadactor FEM3
  }
 enda
 actor FEM3 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21598,6 +21714,10 @@ eventloadactor FEM4
  }
 enda
 actor FEM4 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21680,6 +21800,10 @@ eventloadactor FEM5
  }
 enda
 actor FEM5 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21763,6 +21887,10 @@ eventloadactor FEM6
  }
 enda
 actor FEM6 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21846,6 +21974,10 @@ eventloadactor FEM7
  }
 enda
 actor FEM7 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -21902,6 +22034,10 @@ eventloadactor FEM8
  }
 enda
 actor FEM8 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP 0
@@ -21947,6 +22083,10 @@ eventloadactor FEM9
  }
 enda
 actor FEM9 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -22029,6 +22169,10 @@ eventloadactor FEM10
  }
 enda
 actor FEM10 TOUGH FEMANIMATESLOW
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -22112,6 +22256,10 @@ eventloadactor TOUGHGAL
  }
 enda
 actor TOUGHGAL MANWOMANSTRENGTH TOUGHGALANIM
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP MANWOMANSTRENGTH
@@ -22195,6 +22343,10 @@ eventloadactor NAKED1
  }
 enda
 actor NAKED1 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -22408,6 +22560,10 @@ eventloadactor PODFEM1
 enda
 
 actor PODFEM1 TOUGH FEMANIMATE
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare SKILLSET? 0
  {
   setvar ENEMYMAXHP FEMSTRENGTH
@@ -36633,6 +36789,10 @@ actor LIZTROOP TROOPSTRENGTH ATROOPSTAND
   state getactorxyrepeat
 
   state getliztroopspeeds
+
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
 enda
 
 //
@@ -38092,6 +38252,10 @@ state getlizmanspeeds
 ends
 
 actor LIZMAN LIZSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state enemyarmortype
   state freezecode_actor
@@ -38929,6 +39093,10 @@ state getdronespeeds
 ends
 
 actor DRONE DRONESTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state enemyarmortype
   // state freezecode_actor
@@ -39637,6 +39805,10 @@ state getoctabrainspeeds
 ends
 
 actor OCTABRAIN OCTASTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state enemyarmortype
   state freezecode_actor
@@ -40890,6 +41062,10 @@ state getpigcopspeeds
 ends
 
 actor PIGCOP PIGCOPSTRENGTH APIGSTAND
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   ifvare mainmenu 0 fall
   state actorproperangle
   state enemyarmortype
@@ -42142,6 +42318,10 @@ state getboss1speeds
 ends
 
 actor BOSS1 BOSS1STRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare mainmenu 0 fall
  state actorproperangle
  state enemyarmortype
@@ -43263,6 +43443,10 @@ state getboss2speeds
 ends
 
 actor BOSS2 BOSS2STRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare mainmenu 0 fall
  state actorproperangle
  state enemyarmortype
@@ -44260,6 +44444,10 @@ state getboss3speeds
 ends
 
 actor BOSS3 BOSS3STRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
  ifvare mainmenu 0 fall
  state actorproperangle
  state enemyarmortype
@@ -44657,6 +44845,10 @@ state getcommanderspeeds
 ends
 
 actor COMMANDER COMMANDERSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state enemyarmortype
   state freezecode_actor
@@ -45529,6 +45721,10 @@ state gettankspeeds
 ends
 
 useractor enemy TANK TANKSTRENGTH 
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   ifvare mainmenu 0 fall
   state actorproperangle
   state enemyarmortype
@@ -46786,6 +46982,10 @@ state getboss4speeds
 ends
 
 actor BOSS4 BOSS4STRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state enemyarmortype
   state freezecode_actor
@@ -48542,6 +48742,10 @@ state getnewbeastspeeds
 ends
 
 useractor enemy NEWBEAST NEWBEASTSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   state actorproperangle
   state enemyarmortype
   state freezecode_actor
@@ -48683,6 +48887,10 @@ state getscorpiontankspeeds
 ends
 
 useractor enemy SCORPIONTANK SCORPIONTANKSTRENGTH
+  getactor[THISACTOR].mdflags TEMP
+  orvar TEMP 16
+  setactor[THISACTOR].mdflags TEMP 
+
   ifvare mainmenu 0 fall
   state actorproperangle
   state enemyarmortype
@@ -50131,7 +50339,7 @@ ifvarg TEMP 0
  {
   setvarvar APMETERPERCENT APMETERCURRENT
   mulvar APMETERPERCENT 100
-  ifvarn APMETERMAX 0  divvarvar APMETERPERCENT APMETERMAX
+  ifvarn APMETERMAX 0 divvarvar APMETERPERCENT APMETERMAX
   setvarvar METERTEMP APMETERPERCENT
 
 // Show the different notches on the lifebar
