@@ -1402,8 +1402,8 @@ define WANG_SEARCH1                   526
 define WANG_SEARCH2                   527
 
 define DUKE_LOOKINTOMIRRORA           528
-define WANG_LOOKINTOMIRROR            529
-define WANG_LOOKINTOMIRROR2           530
+define WANG_REFLECTION1               529
+define WANG_REFLECTION2               530
 define SECRETLEVELSND2                531
 
 define WANG_EMERGEFROMWATER           532
@@ -2245,7 +2245,13 @@ define CONTINUE_USED             1286
 define RAREDROP_LESSER           1287
 define RAREDROP_GREATER          1288
 
-define ESHIELD_CHARGEDMAX      1289
+define ESHIELD_CHARGEDMAX        1289
+
+define DUKE_GRABQUAD             1290
+define DUKE_GRABINVULN           1291
+define DUKE_GRABREGEN            1292
+define DUKE_GRABAPREGEN          1293
+define DUKE_GRABVAMPIRE          1294
 
 // MAXIMUM NUMBER OF SOUNDS: 4096 ( 0-4095 ) [from 2560 sounds]
 
@@ -5199,8 +5205,8 @@ definesound WANG_SEARCH1           GRUNT06.VOC       0   0   2   4     0
 definesound WANG_SEARCH2           JG2020.VOC       0   0   255 4   0
 
 definesound DUKE_LOOKINTOMIRRORA   lookin01.voc     0   0    255 4   0
-definesound WANG_LOOKINTOMIRROR    JG2005.VOC     0   0    255 4   0
-definesound WANG_LOOKINTOMIRROR2   JG2000.VOC     0   0    255 4   0
+definesound WANG_REFLECTION1       JG2005.VOC     0   0    255 4   0
+definesound WANG_REFLECTION2       JG2000.VOC     0   0    255 4   0
 
 definesound SECRETLEVELSND2        ML26011.VOC      0   0   255 4   0
 definesound WANG_EMERGEFROMWATER   JG7009.VOC       0   0   255 4   0
@@ -5489,6 +5495,12 @@ definesound DUKE_JUMP1           c01-jump1.wav          0    0   255   4   0
 definesound DUKE_JUMP2           c01-jump2.wav          0    0   255   4   0
 definesound DUKE_AIRJUMP1        c01-airjump1.wav       0    0   255   4   0
 definesound DUKE_AIRJUMP2        c01-airjump2.wav       0    0   255   4   0
+definesound DUKE_GRABQUAD        c01-grabquad.wav       0    0   255   4   0
+definesound DUKE_GRABINVULN      c01-grabinvuln.wav     0    0   255   4   0
+definesound DUKE_GRABREGEN       c01-grabregen.wav      0    0   255   4   0
+definesound DUKE_GRABAPREGEN     c01-grabapregen.wav    0    0   255   4   0
+definesound DUKE_GRABVAMPIRE     c01-grabvampire.wav    0    0   255   4   0
+
 
 definesound JACK_ONELINER01      c02-oneliner01.wav     0    0   255   4   0
 definesound JACK_ONELINER02      c02-oneliner02.wav     0    0   255   4   0

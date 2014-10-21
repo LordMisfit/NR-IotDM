@@ -12302,8 +12302,18 @@ state playerstealjustbeforemonster
   getactorvar[ITEMSEEK].ITEMTARGET TEMPVAR
   ifvarn TEMPVAR -1
   {
-   ifvare CHARACTERSELECTED? 8 globalsound LISA_STEALITEM
-   ifvare CHARACTERSELECTED? 15 globalsound MAKEN_STEALITEM
+   ifvare CHARACTERSELECTED? 8
+   {
+    globalsound LISA_STEALITEM 
+    redefinequote 340 ^7Lisa: Ahaha!! You're too slow, dirtbag!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare CHARACTERSELECTED? 15
+   {
+    globalsound MAKEN_STEALITEM 
+    redefinequote 340 ^10Maken: Nah-nah-nah-nah-nah, you can't catch me!!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
  }
 ends
@@ -12314,8 +12324,18 @@ state monsterstealjustbeforeplayer
  {
   ifvarg CURRENTHITPOINTS 0
   {
-   ifvare CHARACTERSELECTED? 8 globalsound LISA_ITEMSTOLEN
-   ifvare CHARACTERSELECTED? 15 globalsound MAKEN_ITEMSTOLEN
+   ifvare CHARACTERSELECTED? 8
+   {
+    globalsound LISA_ITEMSTOLEN
+    redefinequote 340 ^7Lisa: Dammit!! Come back here with that!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare CHARACTERSELECTED? 15
+   {
+    globalsound MAKEN_ITEMSTOLEN 
+    redefinequote 340 ^10Maken: You son of a friggin' bitch!! Come back here!!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
  }
 ends
@@ -14627,8 +14647,18 @@ state ryansitems
      {
       ifrnd 128
       {
-       ifvare CHARACTERSELECTED? 8 globalsound LISA_SAVEREWARD
-       ifvare CHARACTERSELECTED? 15 globalsound MAKEN_SAVEREWARD
+       ifvare CHARACTERSELECTED? 8 
+       {
+        globalsound LISA_SAVEREWARD
+        redefinequote 340 ^7Lisa: All right! All in a day's work!
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 15
+       {
+        globalsound MAKEN_SAVEREWARD 
+        redefinequote 340 ^10Maken: So... I guess the EDF does give a damn about SOME people!
+        ifvare oldskoolmode 0 userquote 340
+       }
       }
       espawn MONEYBAG state setdroppedmoneyowner
       getactorvar[RETURN].MONEYBAGDOLLARS TEMP2
@@ -14893,8 +14923,18 @@ state ryansitems
       {
        ifrnd 224 
        {
-        ifvare CHARACTERSELECTED? 8 globalsound LISA_SAVETRAP
-        ifvare CHARACTERSELECTED? 15 globalsound MAKEN_SAVETRAP
+        ifvare CHARACTERSELECTED? 8
+        {
+         globalsound LISA_SAVETRAP 
+         redefinequote 340 ^7Lisa: Agh! You alien bastards will pay for that!
+         ifvare oldskoolmode 0 userquote 340
+        }
+        ifvare CHARACTERSELECTED? 15
+        {
+         globalsound MAKEN_SAVETRAP 
+         redefinequote 340 ^10Maken: AUGH! You alien sons of bitches!!
+         ifvare oldskoolmode 0 userquote 340
+        }
        }
        eshoot MORTER 
        ifvarn RETURN -1
@@ -14912,8 +14952,18 @@ state ryansitems
       {
        ifrnd 252 
        {
-        ifvare CHARACTERSELECTED? 8 globalsound LISA_SAVEENEMY
-        ifvare CHARACTERSELECTED? 15 globalsound MAKEN_SAVEENEMY
+        ifvare CHARACTERSELECTED? 8
+        {
+         globalsound LISA_SAVEENEMY 
+         redefinequote 340 ^7Lisa: Oh geez... you're kidding me... you aliens SUCK!!
+         ifvare oldskoolmode 0 userquote 340
+        }
+        ifvare CHARACTERSELECTED? 15
+        {
+         globalsound MAKEN_SAVEENEMY 
+         redefinequote 340 ^10Maken: Ahohohoho, you just entered MY slaughterhouse, BITCH!!
+         ifvare oldskoolmode 0 userquote 340
+        }
        }
        ifrnd 85
        {
@@ -19802,41 +19852,141 @@ else
  ifvare CHARACTERSELECTED? 1
  {
   randvar RNDVOICE 4
-  ifvare RNDVOICE 0 globalsound DUKE_GETWEAPON1
-  ifvare RNDVOICE 1 globalsound DUKE_GETWEAPON2
-  ifvare RNDVOICE 2 globalsound DUKE_GETWEAPON3
-  ifvare RNDVOICE 3 globalsound DUKE_GETWEAPON4
-  ifvare RNDVOICE 4 globalsound DUKE_GETWEAPON6
+  ifvare RNDVOICE 0
+  {
+   globalsound DUKE_GETWEAPON1 
+   redefinequote 340 ^17Duke: Cool!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1 
+  {
+   globalsound DUKE_GETWEAPON2 
+   redefinequote 340 ^17Duke: Come get some!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2 
+  {
+   globalsound DUKE_GETWEAPON3 
+   redefinequote 340 ^17Duke: Groovy!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3
+  {
+   globalsound DUKE_GETWEAPON4 
+   redefinequote 340 ^17Duke: Who wants some?!?!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 4 
+  {
+   globalsound DUKE_GETWEAPON6 
+   redefinequote 340 ^17Duke: Hail to the King, baby!!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
  else
  ifvare CHARACTERSELECTED? 5
  {
   randvar RNDVOICE 4
-  ifvare RNDVOICE 0 globalsound WANG_GETWEAPON1
-  ifvare RNDVOICE 1 globalsound WANG_GETWEAPON2
-  ifvare RNDVOICE 2 globalsound WANG_GETWEAPON3
-  ifvare RNDVOICE 3 globalsound WANG_GETWEAPON4
-  ifvare RNDVOICE 4 globalsound WANG_GETWEAPON5
+  ifvare RNDVOICE 0
+  {
+   globalsound WANG_GETWEAPON1 
+   redefinequote 340 ^15Higa: BANZAI!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1 
+  {
+   globalsound WANG_GETWEAPON2 
+   redefinequote 340 ^15Higa: Hehe-hahahaha!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2
+  {
+   globalsound WANG_GETWEAPON3 
+   redefinequote 340 ^15Higa: Ehehehehehehe...!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3 
+  { 
+   globalsound WANG_GETWEAPON4 
+   redefinequote 340 ^15Higa: Ah-so!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 4 
+  { 
+   globalsound WANG_GETWEAPON5 
+   redefinequote 340 ^15Higa: Cowabunga!!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
  else
  ifvare CHARACTERSELECTED? 8
  {
   randvar RNDVOICE 4
-  ifvare RNDVOICE 0 globalsound LISA_GETWEAPON1
-  ifvare RNDVOICE 1 globalsound LISA_GETWEAPON2
-  ifvare RNDVOICE 2 globalsound LISA_GETWEAPON3
-  ifvare RNDVOICE 3 globalsound LISA_GETWEAPON4
-  ifvare RNDVOICE 4 globalsound LISA_GETWEAPON5
+  ifvare RNDVOICE 0
+  {
+   globalsound LISA_GETWEAPON1
+   redefinequote 340 ^7Lisa: Hmmm... this could be useful!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1
+  {
+   globalsound LISA_GETWEAPON2
+   redefinequote 340 ^7Lisa: Clear out... get out of my way!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2
+  {
+   globalsound LISA_GETWEAPON3
+   redefinequote 340 ^7Lisa: I just heard a collective gasp of alien fear!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3
+  {
+   globalsound LISA_GETWEAPON4
+   redefinequote 340 ^7Lisa: Lisa Bates: Judge, Jury AND Executioner!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 4
+  {
+   globalsound LISA_GETWEAPON5
+   redefinequote 340 ^7Lisa: Time to give you alien scum the 'Boot To The Head'!!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
  else
  ifvare CHARACTERSELECTED? 15
  {
   randvar RNDVOICE 4
-  ifvare RNDVOICE 0 globalsound MAKEN_GETWEAPON1
-  ifvare RNDVOICE 1 globalsound MAKEN_GETWEAPON2
-  ifvare RNDVOICE 2 globalsound MAKEN_GETWEAPON3
-  ifvare RNDVOICE 3 globalsound MAKEN_GETWEAPON4
-  ifvare RNDVOICE 4 globalsound MAKEN_GETWEAPON5
+  ifvare RNDVOICE 0
+  {
+   globalsound MAKEN_GETWEAPON1 
+   redefinequote 340 ^10Maken: It's time to hack these guys to pieces!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1
+  {
+   globalsound MAKEN_GETWEAPON2 
+   redefinequote 340 ^10Maken: Death to the enemies of Maken Shinkara!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2
+  {
+   globalsound MAKEN_GETWEAPON3 
+   redefinequote 340 ^10Maken: Once I load this, I'll be on the warpath!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3
+  {
+   globalsound MAKEN_GETWEAPON4 
+   redefinequote 340 ^10Maken: Time to do a little alien reprogrammin'!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 4
+  {
+   globalsound MAKEN_GETWEAPON5 
+   redefinequote 340 ^10Maken: Just point and shoot! I love it!!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
  globalsound DUKE_GET
 }
@@ -27989,26 +28139,86 @@ state character_keycard_sounds
   ifvare CHARACTERSELECTED? 1
   {
    randvar RNDVOICE 3
-   ifvare RNDVOICE 0 sound DUKE_KEYCARD1
-   ifvare RNDVOICE 1 sound DUKE_KEYCARD2
-   ifvare RNDVOICE 2 sound DUKE_KEYCARD3
-   ifvare RNDVOICE 3 sound DUKE_KEYCARD4
+   ifvare RNDVOICE 0
+   {
+    sound DUKE_KEYCARD1 
+    redefinequote 340 ^17Duke: Mother[BEEP] keycards!! 
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 1
+   {
+    sound DUKE_KEYCARD2 
+    redefinequote 340 ^17Duke: Surprise, surprise... I need a keycard!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 2
+   {
+    sound DUKE_KEYCARD3 
+    redefinequote 340 ^17Duke: These colored keycards suck!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 3
+   {
+    sound DUKE_KEYCARD4 
+    redefinequote 340 ^17Duke: Someone's gonna pay for making me find these friggin... keycards!!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
   ifvare CHARACTERSELECTED? 8
   {
    randvar RNDVOICE 3
-   ifvare RNDVOICE 0 sound LISA_KEYCARD1
-   ifvare RNDVOICE 1 sound LISA_KEYCARD2
-   ifvare RNDVOICE 2 sound LISA_KEYCARD3
-   ifvare RNDVOICE 3 sound LISA_KEYCARD4
+   ifvare RNDVOICE 0
+   {
+    sound LISA_KEYCARD1 
+    redefinequote 340 ^7Lisa: Ah... I need another freaking key?! Argh... [incoherent grumbling]
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 1
+   {
+    sound LISA_KEYCARD2 
+    redefinequote 340 ^7Lisa: Red key... Blue key... Yellow key... SCREW KEYS!!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 2
+   {
+    sound LISA_KEYCARD3 
+    redefinequote 340 ^7Lisa: Arrrgh!!! Now I know how players in most video games feel...!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 3
+   {
+    sound LISA_KEYCARD4 
+    redefinequote 340 ^7Lisa: Son of a BITCH!! Why does every door need a key these days?!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
   ifvare CHARACTERSELECTED? 15
   {
    randvar RNDVOICE 3
-   ifvare RNDVOICE 0 sound MAKEN_KEYCARD1
-   ifvare RNDVOICE 1 sound MAKEN_KEYCARD2
-   ifvare RNDVOICE 2 sound MAKEN_KEYCARD3
-   ifvare RNDVOICE 3 sound MAKEN_KEYCARD4
+   ifvare RNDVOICE 0
+   {
+    sound MAKEN_KEYCARD1 
+    redefinequote 340 ^10Maken: [grumbles]... Looks like I can't hack this... I need a stupid key! [more incoherant grumbling]
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 1
+   {
+    sound MAKEN_KEYCARD2 
+    redefinequote 340 ^10Maken: Key hunts are not, and NEVER will be fun, you ASSHOLES!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 2
+   {
+    sound MAKEN_KEYCARD3 
+    redefinequote 340 ^10Maken: If I have to find another friggin' key, I'M GONNA LOSE IT!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   ifvare RNDVOICE 3
+   {
+    sound MAKEN_KEYCARD4 
+    redefinequote 340 ^10Maken: How do so many keys just get tossed around carelessly anyway?!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
 ends
 
@@ -28537,6 +28747,7 @@ state iconstripconditions
 ends
 
 state artipickupsounds
+/*
  ifvare CHARACTERSELECTED? 1 // Duke
  {
   ifrnd 85 sound WAR_AMBIENCE10 
@@ -28544,6 +28755,7 @@ state artipickupsounds
   else sound WAR_AMBIENCE8
  }
  else
+*/
  ifvare CHARACTERSELECTED? 5 // Lo Wang
  {
   ifrnd 32 sound WANG_GRABART8

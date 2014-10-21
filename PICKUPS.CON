@@ -4834,7 +4834,7 @@ useractor notenemy HYPERENERGYDRINK
            }
            state playerstealjustbeforemonster
           }
-    	    ifspawnedby HYPERENERGYDRINK state getcode else state quikget
+          ifspawnedby HYPERENERGYDRINK state getcode else state quikget
          }
          else // If not, store in inventory
          {
@@ -4876,27 +4876,87 @@ enda
 //***************
 
 state moneypickupsounds-small
-       ifvare CHARACTERSELECTED? 1 globalsound DUKE_GETWEAPON3
-       ifvare CHARACTERSELECTED? 8 globalsound LISA_GETMONEYSMALL
-       ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GETMONEYSMALL
+       ifvare CHARACTERSELECTED? 1
+       {
+        globalsound DUKE_GETWEAPON3
+        redefinequote 340 ^17Duke: Groovy!!
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 8
+       {
+        globalsound LISA_GETMONEYSMALL 
+        redefinequote 340 ^7Lisa: Hmmm... I found some money...
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 15
+       {
+        globalsound MAKEN_GETMONEYSMALL 
+        redefinequote 340 ^10Maken: Hmmm... I found some change over here!
+        ifvare oldskoolmode 0 userquote 340
+       }
 ends
 
 state moneypickupsounds-medium
-       ifvare CHARACTERSELECTED? 1 globalsound DUKE_GETWEAPON1
-       ifvare CHARACTERSELECTED? 8 globalsound LISA_GETMONEYMEDIUM
-       ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GETMONEYMEDIUM
+       ifvare CHARACTERSELECTED? 1
+       {
+        globalsound DUKE_GETWEAPON1
+        redefinequote 340 ^17Duke: Cool!!
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 8
+       {
+        globalsound LISA_GETMONEYMEDIUM
+        redefinequote 340 ^7Lisa: Why is money just laying around??
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 15
+       {
+        globalsound MAKEN_GETMONEYMEDIUM 
+        redefinequote 340 ^10Maken: I can probably buy some decent food with this!
+        ifvare oldskoolmode 0 userquote 340
+       }
 ends
 
 state moneypickupsounds-large
-       ifvare CHARACTERSELECTED? 1 globalsound JIBBED_ACTOR2
-       ifvare CHARACTERSELECTED? 8 globalsound LISA_GETMONEYLARGE
-       ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GETMONEYLARGE
+       ifvare CHARACTERSELECTED? 1
+       {
+        globalsound JIBBED_ACTOR2 
+        redefinequote 340 ^17Duke: Bitchin'!!
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 8
+       {
+        globalsound LISA_GETMONEYLARGE 
+        redefinequote 340 ^7Lisa: You can never have enough money I guess...?
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 15
+       {
+        globalsound MAKEN_GETMONEYLARGE 
+        redefinequote 340 ^10Maken: Helllllo new computer, my name's Maken Shinkara!
+        ifvare oldskoolmode 0 userquote 340
+       }
 ends
 
 state moneypickupsounds-larger
-       ifvare CHARACTERSELECTED? 1 globalsound JIBBED_ACTOR4
-       ifvare CHARACTERSELECTED? 8 globalsound LISA_GETMONEYLARGER
-       ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GETMONEYLARGER
+       ifvare CHARACTERSELECTED? 1
+       {
+        globalsound JIBBED_ACTOR4 
+        redefinequote 340 ^17Duke: Holy shit!!
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 8
+       {
+        globalsound LISA_GETMONEYLARGER 
+        redefinequote 340 ^7Lisa: All right!! This could prove useful!
+        ifvare oldskoolmode 0 userquote 340
+       }
+       ifvare CHARACTERSELECTED? 15
+       {
+        globalsound MAKEN_GETMONEYLARGER 
+        redefinequote 340 ^10Maken: Oh son of a bitch! I must be dreamin'!
+        ifvare oldskoolmode 0 userquote 340
+       }
 ends
 
 eventloadactor MONEYBAG
@@ -11365,31 +11425,72 @@ state pickupcharacter_invuln
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-   	 	addvarvar INVULNTIME POWERUPBENEFIT
+             addvarvar INVULNTIME POWERUPBENEFIT
              ifvarand ACTORFLAGS 2 nullop
              else
              {
-   		 setvarvar fta fta_normal setvar ftq 156
+              setvarvar fta fta_normal setvar ftq 156
               ifvarg INVULNTIME 104 stopsound INVULNITEM2
-   		 sound INVULNITEM1
-   		 sound DUKE_GET
-   		 state artipickupsounds
+              sound INVULNITEM1
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
               ifvare PUBLICBETA? 0 setvar RNDMIZERLIMIT 192 else setvar RNDMIZERLIMIT 64 state rndmizer256
               ifvarvarg RNDMIZER RNDMIZERLIMIT
               {
-               ifvare CHARACTERSELECTED? 2 globalsound JACK_GRABINVULN
-               else ifvare CHARACTERSELECTED? 3 globalsound BUBSY_GRABINVULN
-               else ifvare CHARACTERSELECTED? 6 globalsound ESSENCE_GRABINVULN
-               else ifvare CHARACTERSELECTED? 8 globalsound LISA_GRABINVULN
-               else ifvare CHARACTERSELECTED? 9 globalsound CYBANIS_GRABINVULN
-               else ifvare CHARACTERSELECTED? 13 globalsound MINAKO_GRABINVULN
-               else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABINVULN
+               ifvare CHARACTERSELECTED? 1
+               {
+                globalsound DUKE_GRABINVULN
+                redefinequote 340 ^17Duke: Oooh, your ass is grass... and I've got the weed-whacker!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 2
+               {
+                globalsound JACK_GRABINVULN
+                redefinequote 340 ^17Jack: Time to go 'Starman-rage' on your alien asses!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 3 
+               {
+                globalsound BUBSY_GRABINVULN
+                redefinequote 340 ^23Bubsy: What could possibly go wrong now that I have this?! Ahahahaha!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 6
+               {
+                globalsound ESSENCE_GRABINVULN 
+                redefinequote 340 ^12ESSence: I am unstoppable!! Muahahahaha!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 8
+               {
+                globalsound LISA_GRABINVULN 
+                redefinequote 340 ^7Lisa: Wahahaha!! Sunset Lisa's ready to own all your asses!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 9 
+               {
+                globalsound CYBANIS_GRABINVULN 
+                redefinequote 340 ^12Cybanis: Come closer and give me a hug!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 13
+               {
+                globalsound MINAKO_GRABINVULN 
+                redefinequote 340 ^23Minako: Did I mention? I looooove being invincible! Ehehehehe...!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 15
+               {
+                globalsound MAKEN_GRABINVULN 
+                redefinequote 340 ^10Maken: Now you're nothing but ants to me!!
+                ifvare oldskoolmode 0 userquote 340
+               }
               }
              }
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
-      		state activationflag killit
+             state activationflag killit
 ends
 
 state pickupvehicle_invuln
@@ -11400,22 +11501,22 @@ state pickupvehicle_invuln
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
              getactorvar[tempvehicleid].ENEMYINVULNTIME TEMPVAR5
-   	 	addvarvar TEMPVAR5 POWERUPBENEFIT
+             addvarvar TEMPVAR5 POWERUPBENEFIT
              setactorvar[tempvehicleid].ENEMYINVULNTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
               redefinequote 836 ^15YOUR VEHICLE ACCQUIRED AN ICON OF THE DEFENDER! >:D
-   		 setvarvar fta fta_normal setvar ftq 836
+              setvarvar fta fta_normal setvar ftq 836
               ifvarg TEMPVAR5 104 stopsound INVULNITEM2
-   		 sound INVULNITEM1
-   		 sound DUKE_GET
-   		 state artipickupsounds
+              sound INVULNITEM1
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
              }
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
-      		state activationflag killit
+             state activationflag killit
 ends
 
 action DEFENDERSPIN 347 //  5502 - 5155 = 347
@@ -11503,31 +11604,72 @@ state pickupcharacter_quad
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-	       addvarvar QUADTIME POWERUPBENEFIT
+             addvarvar QUADTIME POWERUPBENEFIT
              ifvarand ACTORFLAGS 2 nullop
              else
              {
- 	        setvarvar fta fta_normal setvar ftq 164
+              setvarvar fta fta_normal setvar ftq 164
               ifvarg QUADTIME 104 stopsound QUADDAMAGE2
-	        sound QUADDAMAGE1
-	        sound DUKE_GET
-   	        state artipickupsounds
+              sound QUADDAMAGE1
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
               ifvare PUBLICBETA? 0 setvar RNDMIZERLIMIT 192 else setvar RNDMIZERLIMIT 64 state rndmizer256
               ifvarvarg RNDMIZER RNDMIZERLIMIT
               {
-               ifvare CHARACTERSELECTED? 2 globalsound JACK_GRABQUAD
-               else ifvare CHARACTERSELECTED? 3 globalsound BUBSY_GRABQUAD
-               else ifvare CHARACTERSELECTED? 6 globalsound ESSENCE_GRABQUAD
-               else ifvare CHARACTERSELECTED? 8 globalsound LISA_GRABQUAD
-               else ifvare CHARACTERSELECTED? 9 globalsound CYBANIS_GRABQUAD
-               else ifvare CHARACTERSELECTED? 13 globalsound MINAKO_GRABQUAD
-               else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABQUAD
+               ifvare CHARACTERSELECTED? 1
+               {
+                globalsound DUKE_GRABQUAD 
+                redefinequote 340 ^17Duke: It's ass kicking time!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 2
+               {
+                globalsound JACK_GRABQUAD 
+                redefinequote 340 ^17Jack: I feel four times stronger, and four times greater!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 3
+               {
+                globalsound BUBSY_GRABQUAD 
+                redefinequote 340 ^23Bubsy: Ahahahahaha! I'll rip and tear you apart now!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 6
+               {
+                globalsound ESSENCE_GRABQUAD 
+                redefinequote 340 ^12ESSence: It's time to splatter you throughout the entire block!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 8
+               {
+                globalsound LISA_GRABQUAD 
+                redefinequote 340 ^7Lisa: My powers are suddenly much stronger and unstable!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 9
+               {
+                globalsound CYBANIS_GRABQUAD 
+                redefinequote 340 ^12Cybanis: If I shoot you with this, the hole will be four times bigger!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 13
+               {
+                globalsound MINAKO_GRABQUAD 
+                redefinequote 340 ^23Minako: My powers are becoming unstable... Wicked cool!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 15
+               {
+                globalsound MAKEN_GRABQUAD 
+                redefinequote 340 ^10Maken: Time to inflict four times the suffering!
+                ifvare oldskoolmode 0 userquote 340
+               }
               }
              }
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
-	       state activationflag killit
+             state activationflag killit
 ends
 
 state pickupvehicle_quad
@@ -11538,22 +11680,22 @@ state pickupvehicle_quad
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
              getactorvar[tempvehicleid].ENEMYQUADTIME TEMPVAR5
-   	 	addvarvar TEMPVAR5 POWERUPBENEFIT
+             addvarvar TEMPVAR5 POWERUPBENEFIT
              setactorvar[tempvehicleid].ENEMYQUADTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
               redefinequote 836 ^15YOUR VEHICLE ACCQUIRED A QUAD DAMAGE! >:D
-   		 setvarvar fta fta_normal setvar ftq 836
+              setvarvar fta fta_normal setvar ftq 836
               ifvarg TEMPVAR5 104 stopsound QUADDAMAGE2
-   		 sound QUADDAMAGE1
-   		 sound DUKE_GET
-   		 state artipickupsounds
+              sound QUADDAMAGE1
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
              }
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
-      		state activationflag killit
+             state activationflag killit
 ends
 
 action QUADSPIN 5458 // 5494 - 36 = 5458
@@ -11641,31 +11783,72 @@ state pickupcharacter_regen
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-	       addvarvar REGENTIME POWERUPBENEFIT
+             addvarvar REGENTIME POWERUPBENEFIT
              ifvarand ACTORFLAGS 2 nullop
              else
              {
-	        setvarvar fta fta_normal setvar ftq 229
-	        sound REGEN_GRAB
-	        sound DUKE_GET
-  		 state artipickupsounds
+              setvarvar fta fta_normal setvar ftq 229
+              sound REGEN_GRAB
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
               ifvare PUBLICBETA? 0 setvar RNDMIZERLIMIT 192 else setvar RNDMIZERLIMIT 64 state rndmizer256
               ifvarvarg RNDMIZER RNDMIZERLIMIT
               {
-               ifvare CHARACTERSELECTED? 2 globalsound JACK_GRABREGEN
-               else ifvare CHARACTERSELECTED? 3 globalsound BUBSY_GRABREGEN
-               else ifvare CHARACTERSELECTED? 6 globalsound ESSENCE_GRABREGEN
-               else ifvare CHARACTERSELECTED? 8 globalsound LISA_GRABREGEN
-               else ifvare CHARACTERSELECTED? 9 globalsound CYBANIS_GRABREGEN
-               else ifvare CHARACTERSELECTED? 13 globalsound MINAKO_GRABREGEN
-               else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABREGEN
+               ifvare CHARACTERSELECTED? 1
+               {
+                globalsound DUKE_GRABREGEN
+                redefinequote 340 ^17Duke: Like Duke always says: 'No Guts, No Glory'!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 2
+               {
+                globalsound JACK_GRABREGEN 
+                redefinequote 340 ^17Jack: Nothing like self-replenishing lifefore to wake you up!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 3
+               {
+                globalsound BUBSY_GRABREGEN 
+                redefinequote 340 ^23Bubsy: This bobcat isn't just healthy, he's SUPER healthy!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 6
+               {
+                globalsound ESSENCE_GRABREGEN 
+                redefinequote 340 ^12ESSence: I'm not keeling over anytime soon, buddy!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 8
+               {
+                globalsound LISA_GRABREGEN 
+                redefinequote 340 ^7Lisa: Having a few lifelines never kills you, does it!?
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 9
+               {
+                globalsound CYBANIS_GRABREGEN 
+                redefinequote 340 ^12Cybanis: Hah! And here was me thinking I lost a finger!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 13
+               {
+                globalsound MINAKO_GRABREGEN
+                redefinequote 340 ^23Minako: Vitality flows through my veins like light!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 15
+               {
+                globalsound MAKEN_GRABREGEN 
+                redefinequote 340 ^10Maken: I've always loved the concept of regeneration!
+                ifvare oldskoolmode 0 userquote 340
+               }
               }
              }
-	     	setvar PLAYERREGENCOUNTER 25
+             setvar PLAYERREGENCOUNTER 25
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
- 	       state activationflag killit
+             state activationflag killit
 ends
 
 state pickupvehicle_regen
@@ -11676,22 +11859,22 @@ state pickupvehicle_regen
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
              getactorvar[tempvehicleid].ENEMYREGENTIME TEMPVAR5
-   	 	addvarvar TEMPVAR5 POWERUPBENEFIT
+             addvarvar TEMPVAR5 POWERUPBENEFIT
              setactorvar[tempvehicleid].ENEMYREGENTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
               redefinequote 836 ^15YOUR VEHICLE ACCQUIRED A REGENERATION ANKH! >:D
-   		 setvarvar fta fta_normal setvar ftq 836
-	        sound REGEN_GRAB
-	        sound DUKE_GET
-  		 state artipickupsounds
+              setvarvar fta fta_normal setvar ftq 836
+              sound REGEN_GRAB
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
              }
-	     	setactorvar[tempvehicleid].ENEMYREGENCOUNTER 25
+             setactorvar[tempvehicleid].ENEMYREGENCOUNTER 25
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
- 	       state activationflag killit
+             state activationflag killit
 ends
 
 eventloadactor REGENITEM state setpickupflags enda
@@ -11771,31 +11954,72 @@ state pickupcharacter_apregen
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-	       addvarvar APREGENTIME POWERUPBENEFIT
+             addvarvar APREGENTIME POWERUPBENEFIT
              ifvarand ACTORFLAGS 2 nullop
              else
              {
-	        setvarvar fta fta_normal setvar ftq 233
-	        sound REGEN_GRABAP
-	        sound DUKE_GET
-   		 state artipickupsounds
+              setvarvar fta fta_normal setvar ftq 233
+              sound REGEN_GRABAP
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
               ifvare PUBLICBETA? 0 setvar RNDMIZERLIMIT 192 else setvar RNDMIZERLIMIT 64 state rndmizer256
               ifvarvarg RNDMIZER RNDMIZERLIMIT
               {
-               ifvare CHARACTERSELECTED? 2 globalsound JACK_GRABAPREGEN
-               else ifvare CHARACTERSELECTED? 3 globalsound BUBSY_GRABAPREGEN
-               else ifvare CHARACTERSELECTED? 6 globalsound ESSENCE_GRABAPREGEN
-               else ifvare CHARACTERSELECTED? 8 globalsound LISA_GRABAPREGEN
-               else ifvare CHARACTERSELECTED? 9 globalsound CYBANIS_GRABAPREGEN
-               else ifvare CHARACTERSELECTED? 13 globalsound MINAKO_GRABAPREGEN
-               else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABAPREGEN
+               ifvare CHARACTERSELECTED? 1
+               {
+                globalsound DUKE_GRABAPREGEN
+                redefinequote 340 ^17Duke: I've got Balls Of Steel!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 2
+               {
+                globalsound JACK_GRABAPREGEN 
+                redefinequote 340 ^17Jack: Armor is very important folks! Don't be like the aliens who forgot that!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 3
+               {
+                globalsound BUBSY_GRABAPREGEN 
+                redefinequote 340 ^23Bubsy: A regenerating wardrobe of power works wonders!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 6
+               {
+                globalsound ESSENCE_GRABAPREGEN 
+                redefinequote 340 ^12ESSence: My armor returns to me, as your life slowly fades away!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 8
+               {
+                globalsound LISA_GRABAPREGEN 
+                redefinequote 340 ^7Lisa: Wooow!! Regenerating armor! Who would've thought of such a thing?!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 9
+               {
+                globalsound CYBANIS_GRABAPREGEN 
+                redefinequote 340 ^12Cybanis: You thought I was a tank before?! NOW try and stop me!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 13
+               {
+                globalsound MINAKO_GRABAPREGEN
+                redefinequote 340 ^23Minako: The power of Love is my protection!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 15
+               {
+                globalsound MAKEN_GRABAPREGEN 
+                redefinequote 340 ^10Maken: Damn, they've got regeneration for armor too?!
+                ifvare oldskoolmode 0 userquote 340
+               }
               }
              }
-	       setvar PLAYERAPREGENCOUNTER 25
+             setvar PLAYERAPREGENCOUNTER 25
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
-	       state activationflag killit
+             state activationflag killit
 ends
 
 state pickupvehicle_apregen
@@ -11806,22 +12030,22 @@ state pickupvehicle_apregen
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
              getactorvar[tempvehicleid].ENEMYAPREGENTIME TEMPVAR5
-   	 	addvarvar TEMPVAR5 POWERUPBENEFIT
+             addvarvar TEMPVAR5 POWERUPBENEFIT
              setactorvar[tempvehicleid].ENEMYAPREGENTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
               redefinequote 836 ^15YOUR VEHICLE ACCQUIRED A SHIELD EMBLEM! >:D
-   		 setvarvar fta fta_normal setvar ftq 836
-	        sound REGEN_GRABAP
-	        sound DUKE_GET
-  		 state artipickupsounds
+              setvarvar fta fta_normal setvar ftq 836
+              sound REGEN_GRABAP
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
              }
-	     	setactorvar[tempvehicleid].ENEMYAPREGENCOUNTER 25
+             setactorvar[tempvehicleid].ENEMYAPREGENCOUNTER 25
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
- 	       state activationflag killit
+             state activationflag killit
 ends
 
 action SPINNINGSHIELD -414 // 5900 - 5486 = -414
@@ -11908,30 +12132,71 @@ state pickupcharacter_vampire
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-	       addvarvar VAMPIRETIME POWERUPBENEFIT
+             addvarvar VAMPIRETIME POWERUPBENEFIT
              ifvarand ACTORFLAGS 2 nullop
              else
              {
-	        setvarvar fta fta_normal setvar ftq 235
-	        sound GRAB_VAMPIREITEM
-	        sound DUKE_GET
-   		 state artipickupsounds
+              setvarvar fta fta_normal setvar ftq 235
+              sound GRAB_VAMPIREITEM
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
               ifvare PUBLICBETA? 0 setvar RNDMIZERLIMIT 192 else setvar RNDMIZERLIMIT 64 state rndmizer256
               ifvarvarg RNDMIZER RNDMIZERLIMIT
               {
-               ifvare CHARACTERSELECTED? 2 globalsound JACK_GRABVAMPIRE
-               else ifvare CHARACTERSELECTED? 3 globalsound BUBSY_GRABVAMPIRE
-               else ifvare CHARACTERSELECTED? 6 globalsound ESSENCE_GRABVAMPIRE
-               else ifvare CHARACTERSELECTED? 8 globalsound LISA_GRABVAMPIRE
-               else ifvare CHARACTERSELECTED? 9 globalsound CYBANIS_GRABVAMPIRE
-               else ifvare CHARACTERSELECTED? 13 globalsound MINAKO_GRABVAMPIRE
-               else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GRABVAMPIRE
+               ifvare CHARACTERSELECTED? 1
+               {
+                globalsound DUKE_GRABVAMPIRE
+                redefinequote 340 ^17Duke: The bigger they are, the more they bleed!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 2
+               {
+                globalsound JACK_GRABVAMPIRE
+                redefinequote 340 ^17Jack: This is an awkward power... but I guess it can help me out!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 3
+               {
+                globalsound BUBSY_GRABVAMPIRE
+                redefinequote 340 ^23Bubsy: This is interesting... never played the role of a vampire before!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 6
+               {
+                globalsound ESSENCE_GRABVAMPIRE
+                redefinequote 340 ^12ESSence: It's time... to feast on the GUILTY!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 8
+               {
+                globalsound LISA_GRABVAMPIRE
+                redefinequote 340 ^7Lisa: Blegh... I don't liiiike sucking alien blood!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 9
+               {
+                globalsound CYBANIS_GRABVAMPIRE
+                redefinequote 340 ^12Cybanis: Time to steal some blood!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 13
+               {
+                globalsound MINAKO_GRABVAMPIRE
+                redefinequote 340 ^23Minako: The Goddess of Love is NOT a slimy leech!!
+                ifvare oldskoolmode 0 userquote 340
+               }
+               ifvare CHARACTERSELECTED? 15
+               {
+                globalsound MAKEN_GRABVAMPIRE
+                redefinequote 340 ^10Maken: I can't wait to sink my teeth into you clowns!!
+                ifvare oldskoolmode 0 userquote 340
+               }
               }
              }
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
-	       state activationflag killit
+             state activationflag killit
 ends
 
 state pickupvehicle_vampire
@@ -11942,21 +12207,21 @@ state pickupvehicle_vampire
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
              getactorvar[tempvehicleid].ENEMYVAMPIRETIME TEMPVAR5
-   	 	addvarvar TEMPVAR5 POWERUPBENEFIT
+             addvarvar TEMPVAR5 POWERUPBENEFIT
              setactorvar[tempvehicleid].ENEMYVAMPIRETIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
               redefinequote 836 ^15YOUR VEHICLE ACCQUIRED A VAMPIRE MASK! >:D
-   		 setvarvar fta fta_normal setvar ftq 836
-	        sound GRAB_VAMPIREITEM
-	        sound DUKE_GET
-  		 state artipickupsounds
+              setvarvar fta fta_normal setvar ftq 836
+              sound GRAB_VAMPIREITEM
+              sound DUKE_GET
+              state artipickupsounds
               state playerstealjustbeforemonster
              }
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
- 	       state activationflag killit
+             state activationflag killit
 ends
 
 // Vampire/Drain Artifact

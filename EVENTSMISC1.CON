@@ -778,10 +778,30 @@ ifsound GENERIC_AMBIENCE5 // Phone busy-tone
  {
   stopsound GENERIC_AMBIENCE5
   displayrandvar RNDVOICE 3
-  ifvare RNDVOICE 0 sound WANG_PHONEUSE1
-  ifvare RNDVOICE 1 sound WANG_PHONEUSE2
-  ifvare RNDVOICE 2 sound WANG_PHONEUSE3
-  ifvare RNDVOICE 3 sound WANG_PHONEUSE4
+  ifvare RNDVOICE 0 
+  {
+   sound WANG_PHONEUSE1
+   redefinequote 340 ^15Higa: Helllllo...? Anybody there??
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1
+  {
+   sound WANG_PHONEUSE2
+   redefinequote 340 ^15Higa: Hello? Is your refrigerator running? Better catch it! Hahahahaha!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2
+  {
+   sound WANG_PHONEUSE3
+   redefinequote 340 ^15Higa: Hello? Bowl-a-rama? You got 16-pound balls? Ehahahaha!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3
+  {
+   sound WANG_PHONEUSE4
+   redefinequote 340 ^15Higa: Hello? Is uh, "Big Bottom" there? First name "Iva"? "Iva Big Bottom?" Hahahahaha!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
 }
 
@@ -1005,6 +1025,11 @@ ifvarand TEMP 1 // Dead
   ifsound DUKE_KEYCARD2 stopsound DUKE_KEYCARD2
   ifsound DUKE_KEYCARD3 stopsound DUKE_KEYCARD3
   ifsound DUKE_KEYCARD4 stopsound DUKE_KEYCARD4
+  ifsound DUKE_GRABQUAD stopsound DUKE_GRABQUAD
+  ifsound DUKE_GRABINVULN stopsound DUKE_GRABINVULN
+  ifsound DUKE_GRABREGEN stopsound DUKE_GRABREGEN
+  ifsound DUKE_GRABAPREGEN stopsound DUKE_GRABAPREGEN
+  ifsound DUKE_GRABVAMPIRE stopsound DUKE_GRABVAMPIRE
 }
 
 setvar CHARACTERARRAY 2 // Jack
@@ -1529,22 +1554,52 @@ ifvare RETURN DUKE_CRACK
   ifvare CHARACTERSELECTED? 8 // Lisa
   {
    displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 globalsound LISA_IMPATIENT1
-   else ifvare TEMPVAR 1 globalsound LISA_IMPATIENT2
+   ifvare TEMPVAR 0 
+   { 
+    globalsound LISA_IMPATIENT1
+    redefinequote 340 ^7Lisa: Oh how exciting! I'm standing around doing nothing... YAY ME!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   else ifvare TEMPVAR 1
+   {
+    globalsound LISA_IMPATIENT2 
+    redefinequote 340 ^7Lisa: Watching the paint dry? Or kicking ass and taking names? Hmmmm....
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
   else
   ifvare CHARACTERSELECTED? 9 // Cybanis
   {
    displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 globalsound CYBANIS_IMPATIENT1
-   else ifvare TEMPVAR 1 globalsound CYBANIS_IMPATIENT2
+   ifvare TEMPVAR 0
+   {
+    globalsound CYBANIS_IMPATIENT1 
+    redefinequote 340 ^12Cybanis: *Sigh* Are we gonna go yet, or do I have to order chinese?!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   else ifvare TEMPVAR 1
+   {
+    globalsound CYBANIS_IMPATIENT2 
+    redefinequote 340 ^12Cybanis: *Sigh* If I gotta wait here much longer, I'm going to come over there and kick your ass!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
   else
   ifvare CHARACTERSELECTED? 15 // Maken
   {
    displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 globalsound MAKEN_IMPATIENT1
-   else ifvare TEMPVAR 1 globalsound MAKEN_IMPATIENT2
+   ifvare TEMPVAR 0
+   {
+    globalsound MAKEN_IMPATIENT1 
+    redefinequote 340 ^10Maken: COME ON! We got things do to, and asses to kick!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   else ifvare TEMPVAR 1
+   {
+    globalsound MAKEN_IMPATIENT2 
+    redefinequote 340 ^10Maken: Well I have the time, I might as well just take out my laptop!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
  }
 }
@@ -1557,22 +1612,52 @@ ifvare RETURN DUKE_CRACK2
   ifvare CHARACTERSELECTED? 8 // Lisa
   {
    displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 globalsound LISA_IMPATIENT1
-   else ifvare TEMPVAR 1 globalsound LISA_IMPATIENT2
+   ifvare TEMPVAR 0 
+   { 
+    globalsound LISA_IMPATIENT1
+    redefinequote 340 ^7Lisa: Oh how exciting! I'm standing around doing nothing... YAY ME!!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   else ifvare TEMPVAR 1
+   {
+    globalsound LISA_IMPATIENT2 
+    redefinequote 340 ^7Lisa: Watching the paint dry? Or kicking ass and taking names? Hmmmm....
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
   else
   ifvare CHARACTERSELECTED? 9 // Cybanis
   {
    displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 globalsound CYBANIS_IMPATIENT1
-   else ifvare TEMPVAR 1 globalsound CYBANIS_IMPATIENT2
+   ifvare TEMPVAR 0
+   {
+    globalsound CYBANIS_IMPATIENT1 
+    redefinequote 340 ^12Cybanis: *Sigh* Are we gonna go yet, or do I have to order chinese?!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   else ifvare TEMPVAR 1
+   {
+    globalsound CYBANIS_IMPATIENT2 
+    redefinequote 340 ^12Cybanis: *Sigh* If I gotta wait here much longer, I'm going to come over there and kick your ass!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
   else
   ifvare CHARACTERSELECTED? 15 // Maken
   {
    displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 globalsound MAKEN_IMPATIENT1
-   else ifvare TEMPVAR 1 globalsound MAKEN_IMPATIENT2
+   ifvare TEMPVAR 0
+   {
+    globalsound MAKEN_IMPATIENT1 
+    redefinequote 340 ^10Maken: COME ON! We got things do to, and asses to kick!
+    ifvare oldskoolmode 0 userquote 340
+   }
+   else ifvare TEMPVAR 1
+   {
+    globalsound MAKEN_IMPATIENT2 
+    redefinequote 340 ^10Maken: Well I have the time, I might as well just take out my laptop!
+    ifvare oldskoolmode 0 userquote 340
+   }
   }
  }
 }
@@ -1641,41 +1726,120 @@ ifvare RETURN DUKE_LOOKINTOMIRROR
 {
          stopsound DUKE_LOOKINTOMIRROR
          ifvare CHARACTERSELECTED? 1 // Duke
+         {
           globalsound DUKE_LOOKINTOMIRRORA
+          redefinequote 340 ^17Duke: Damn! I'm lookin' good!
+          ifvare oldskoolmode 0 userquote 340
+        }
          else
          ifvare CHARACTERSELECTED? 5 // Lo Wang
          {
           displayrandvar TEMPVAR 1
-          ifvare TEMPVAR 0 globalsound WANG_LOOKINTOMIRROR
-          else ifvare TEMPVAR 1 globalsound WANG_LOOKINTOMIRROR2
+          ifvare TEMPVAR 0
+          {
+           globalsound WANG_REFLECTION1
+           redefinequote 340 ^15Higa: That's no ordinary Wang!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 1
+          {
+           globalsound WANG_REFLECTION2
+           redefinequote 340 ^15Higa: Hah hah hah! That's me!!
+           ifvare oldskoolmode 0 userquote 340
+          }
          }
          else
          ifvare CHARACTERSELECTED? 8 // Lisa
          {
           displayrandvar TEMPVAR 3
-          ifvare TEMPVAR 0 globalsound LISA_REFLECTION1
-          else ifvare TEMPVAR 1 globalsound LISA_REFLECTION2
-          else ifvare TEMPVAR 2 globalsound LISA_REFLECTION3
-          else ifvare TEMPVAR 3 globalsound LISA_REFLECTION4
+          ifvare TEMPVAR 0
+          {
+           globalsound LISA_REFLECTION1 
+           redefinequote 340 ^7Lisa: Aw geez! Look at those split-ends!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 1
+          {
+           globalsound LISA_REFLECTION2 
+           redefinequote 340 ^7Lisa: Mirror mirror... no, I'm not going there...!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 2
+          {
+           globalsound LISA_REFLECTION3 
+           redefinequote 340 ^7Lisa: Man, Lara Croft ain't got nothin' on me!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 3
+          {
+           globalsound LISA_REFLECTION4 
+           redefinequote 340 ^7Lisa: The beauty of a sunset in a nice, neat package!
+           ifvare oldskoolmode 0 userquote 340
+          }
          }
          else
          ifvare CHARACTERSELECTED? 9 // Cybanis
          {
           displayrandvar TEMPVAR 4
-          ifvare TEMPVAR 0 globalsound CYBANIS_REFLECTION1
-          else ifvare TEMPVAR 1 globalsound CYBANIS_REFLECTION2
-          else ifvare TEMPVAR 2 globalsound CYBANIS_REFLECTION3
-          else ifvare TEMPVAR 3 globalsound CYBANIS_REFLECTION4
-          else ifvare TEMPVAR 4 globalsound CYBANIS_REFLECTION5
+          ifvare TEMPVAR 0
+          {
+           globalsound CYBANIS_REFLECTION1 
+           redefinequote 340 ^12Cybanis: I don't really have time to stare at myself right now!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 1
+          {
+           globalsound CYBANIS_REFLECTION2 
+           redefinequote 340 ^12Cybanis: Huh?! Whew, it's just me!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 2
+          {
+           globalsound CYBANIS_REFLECTION3 
+           redefinequote 340 ^12Cybanis: Heh, still lookin' good!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 3
+          {
+           globalsound CYBANIS_REFLECTION4 
+           redefinequote 340 ^12Cybanis: Hey, who's that big tough guy over there? Oh wait, that's me!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 4
+          {
+           globalsound CYBANIS_REFLECTION5 
+           redefinequote 340 ^12Cybanis: Here's me wondering why I haven't been chosen by the ladies yet!
+           ifvare oldskoolmode 0 userquote 340
+          }
          }
          else
          ifvare CHARACTERSELECTED? 15 // Maken
          {
           displayrandvar TEMPVAR 4
-          ifvare TEMPVAR 0 globalsound MAKEN_REFLECTION1
-          else ifvare TEMPVAR 1 globalsound MAKEN_REFLECTION2
-          else ifvare TEMPVAR 2 globalsound MAKEN_REFLECTION3
-          else ifvare TEMPVAR 3 globalsound MAKEN_REFLECTION4
+          ifvare TEMPVAR 0
+          {
+           globalsound MAKEN_REFLECTION1 
+           redefinequote 340 ^10Maken: What, is it against the law to wear dark colors?!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 1
+          {
+           globalsound MAKEN_REFLECTION2 
+           redefinequote 340 ^10Maken: Looks... and brains... I got it all!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 2
+          {
+           globalsound MAKEN_REFLECTION3 
+           redefinequote 340 ^10Maken: Ya should judge a book by a cover... or a girl by her clothes!
+           ifvare oldskoolmode 0 userquote 340
+          }
+          else ifvare TEMPVAR 3
+          {
+           globalsound MAKEN_REFLECTION4 
+           redefinequote 340 ^10Maken: Lookin' fine... sunshine!
+           ifvare oldskoolmode 0 userquote 340
+          }
          }
 }
 
@@ -1840,6 +2004,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound MAKEN_WALLPUSH1
           stopsound MAKEN_WALLPUSH2
           globalsound DUKE_SEARCH2A
+          redefinequote 340 ^17Duke: Where is it?!
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          ifvare CHARACTERSELECTED? 2
@@ -1857,6 +2023,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound MAKEN_WALLPUSH1
           stopsound MAKEN_WALLPUSH2
           globalsound JACK_WALLPUSH2
+          redefinequote 340 ^17Jack: []
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          ifvare CHARACTERSELECTED? 5
@@ -1874,6 +2042,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound MAKEN_WALLPUSH1
           stopsound MAKEN_WALLPUSH2
           globalsound WANG_SEARCH2
+          redefinequote 340 ^15Higa: Oh damn, I'm running into walls now!!
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          ifvare CHARACTERSELECTED? 6
@@ -1891,6 +2061,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound MAKEN_WALLPUSH1
           stopsound MAKEN_WALLPUSH2
           globalsound ESSENCE_WALLPUSH2
+          redefinequote 340 ^12ESSence: Dammit, who put this here?!
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          ifvare CHARACTERSELECTED? 8
@@ -1908,6 +2080,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound MAKEN_WALLPUSH1
           stopsound MAKEN_WALLPUSH2
           globalsound LISA_WALLPUSH2
+          redefinequote 340 ^7Lisa: Who's bright idea was it to put a wall here?!
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          ifvare CHARACTERSELECTED? 9
@@ -1925,6 +2099,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound MAKEN_WALLPUSH1
           stopsound MAKEN_WALLPUSH2
           globalsound CYBANIS_WALLPUSH2
+          redefinequote 340 ^12Cybanis: It's gotta be around here somewhere, dammit!
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          ifvare CHARACTERSELECTED? 15
@@ -1942,6 +2118,8 @@ ifvare RETURN DUKE_SEARCH2
           stopsound CYBANIS_WALLPUSH1
           stopsound CYBANIS_WALLPUSH2
           globalsound MAKEN_WALLPUSH2
+          redefinequote 340 ^10Maken: You know, this ain't supposed to be here!
+          ifvare oldskoolmode 0 userquote 340
          }
          else
          {

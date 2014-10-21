@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git75)
-definequote 1337 ^22VERSION:^0 5.22.git75.10212014
+setgamename Naferia's Reign (5.22.git76)
+definequote 1337 ^22VERSION:^0 5.22.git76.10212014
 
 action ANULLACTION 0
 
@@ -29676,18 +29676,58 @@ ifvarg MISCARRAYID_AMOUNTTEMP 0
  ifvare CHARACTERSELECTED? 8
  {
   randvar RNDVOICE 3
-  ifvare RNDVOICE 0 globalsound LISA_LEVELUP1
-  ifvare RNDVOICE 1 globalsound LISA_LEVELUP2
-  ifvare RNDVOICE 2 globalsound LISA_LEVELUP3
-  ifvare RNDVOICE 3 globalsound LISA_LEVELUP4
+  ifvare RNDVOICE 0
+  {
+   globalsound LISA_LEVELUP1 
+   redefinequote 340 ^7Lisa: All right! Now I'm refreshed, and ready to continue!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1
+  {
+   globalsound LISA_LEVELUP2 
+   redefinequote 340 ^7Lisa: I smell your fear, and boy does it reek!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2
+  {
+   globalsound LISA_LEVELUP3 
+   redefinequote 340 ^7Lisa: Why do I suddenly feel months younger?!?!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3
+  {
+   globalsound LISA_LEVELUP4 
+   redefinequote 340 ^7Lisa: Looks like you guys will be yesterday's news soon enough!!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
  ifvare CHARACTERSELECTED? 15
  {
   randvar RNDVOICE 3
-  ifvare RNDVOICE 0 globalsound MAKEN_LEVELUP1
-  ifvare RNDVOICE 1 globalsound MAKEN_LEVELUP2
-  ifvare RNDVOICE 2 globalsound MAKEN_LEVELUP3
-  ifvare RNDVOICE 3 globalsound MAKEN_LEVELUP4
+  ifvare RNDVOICE 0
+  {
+   globalsound MAKEN_LEVELUP1 
+   redefinequote 340 ^10Maken: Surgin' to power like a storm!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 1
+  {
+   globalsound MAKEN_LEVELUP2 
+   redefinequote 340 ^10Maken: Time to rock like an earthquake!!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 2
+  {
+   globalsound MAKEN_LEVELUP3 
+   redefinequote 340 ^10Maken: Limits?! WHAT limits?!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  ifvare RNDVOICE 3
+  {
+   globalsound MAKEN_LEVELUP4 
+   redefinequote 340 ^10Maken: My inner power swells over!!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
  setvar MISCARRAYID 64 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // PLAYER-LEVELSUP?
 }

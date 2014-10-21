@@ -14402,10 +14402,30 @@ state gotmedsyoureallyneeded
  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
  ifvarl MISCARRAYID_AMOUNTTEMP 251
  {
-  ifvare CHARACTERSELECTED? 1 globalsound DUKE_GOTHEALTHATLOW
-  else ifvare CHARACTERSELECTED? 5 globalsound WANG_GOTHEALTHATLOW
-  else ifvare CHARACTERSELECTED? 8 globalsound LISA_GOTHEALTHATLOW
-  else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_GOTHEALTHATLOW
+  ifvare CHARACTERSELECTED? 1
+  {
+   globalsound DUKE_GOTHEALTHATLOW
+   redefinequote 340 ^17Duke: Woooo... I needed that!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  else ifvare CHARACTERSELECTED? 5
+  {
+   globalsound WANG_GOTHEALTHATLOW 
+   redefinequote 340 ^15Higa: Ahhh... better than acupuncture!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  else ifvare CHARACTERSELECTED? 8
+  {
+   globalsound LISA_GOTHEALTHATLOW 
+   redefinequote 340 ^7Lisa: Maaaan... I thought I wasn't gonna make it there!
+   ifvare oldskoolmode 0 userquote 340
+  }
+  else ifvare CHARACTERSELECTED? 15
+  {
+   globalsound MAKEN_GOTHEALTHATLOW 
+   redefinequote 340 ^10Maken: Woooo.... I was at the skin of my teeth there!
+   ifvare oldskoolmode 0 userquote 340
+  }
  }
 ends
 
@@ -26194,16 +26214,46 @@ state characterbonussnds
      ifvare CHARACTERSELECTED? 8
      {
       randvar RNDVOICE 2
-      ifvare RNDVOICE 0 globalsound LISA_GRABBONUS1
-      ifvare RNDVOICE 1 globalsound LISA_GRABBONUS2
-      ifvare RNDVOICE 2 globalsound LISA_GRABBONUS3
+      ifvare RNDVOICE 0 
+      {
+       globalsound LISA_GRABBONUS1
+       redefinequote 340 ^7Lisa: That rocked!!
+       ifvare oldskoolmode 0 userquote 340
+      }
+      ifvare RNDVOICE 1
+      {
+       globalsound LISA_GRABBONUS2
+       redefinequote 340 ^7Lisa: Cowabunga!!
+       ifvare oldskoolmode 0 userquote 340
+      }
+      ifvare RNDVOICE 2
+      {
+       globalsound LISA_GRABBONUS3
+       redefinequote 340 ^7Lisa: Kickass!!
+       ifvare oldskoolmode 0 userquote 340
+      }
      }
      ifvare CHARACTERSELECTED? 15
      {
       randvar RNDVOICE 2
-      ifvare RNDVOICE 0 globalsound MAKEN_GRABBONUS1
-      ifvare RNDVOICE 1 globalsound MAKEN_GRABBONUS2
-      ifvare RNDVOICE 2 globalsound MAKEN_GRABBONUS3
+      ifvare RNDVOICE 0 
+      {
+       globalsound MAKEN_GRABBONUS1 
+       redefinequote 340 ^10Maken: Rockin'!!
+       ifvare oldskoolmode 0 userquote 340
+      }
+      ifvare RNDVOICE 1
+      {
+       globalsound MAKEN_GRABBONUS2 
+       redefinequote 340 ^10Maken: Bitchin'!!
+       ifvare oldskoolmode 0 userquote 340
+      }
+      ifvare RNDVOICE 2
+      {
+       globalsound MAKEN_GRABBONUS3 
+       redefinequote 340 ^10Maken: Allll right!!
+       ifvare oldskoolmode 0 userquote 340
+      }
      }
 ends
 
