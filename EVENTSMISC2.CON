@@ -4548,4 +4548,12 @@ onevent EVENT_NEWGAME
   //addlogvar MISCARRAYID_AMOUNTTEMP
 endevent
 
+/*
+onevent EVENT_DISPLAYBONUSSCREEN
+ setvar RETURN -1
+ rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
+ rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim
+endevent
+*/
+
 // END OF EVENTS

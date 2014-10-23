@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git76)
-definequote 1337 ^22VERSION:^0 5.22.git76.10212014
+setgamename Naferia's Reign (5.22.git77)
+definequote 1337 ^22VERSION:^0 5.22.git77.10232014
 
 action ANULLACTION 0
 
@@ -1646,7 +1646,7 @@ state finaldmgcalc
        ifvarg TEMPVAR3 0 { ifvare PLAYERARMORDAMAGETEMP 0 setvar ARMORNULLDAMAGE 1 else setvar ARMORNULLDAMAGE 0 }
       }
 
-      // Setting up "invincibility frames" via items	  
+      // Setting up "invincibility frames" via items
       ifvare tempvehicleid -1
       {
        ifvare CHARACTERSELECTED? 8
@@ -2318,7 +2318,7 @@ state freezeblast-chilleffect_player
        ifvarl freezetimer 0 setvar freezetimer 0
        state dealfreezedamage-player
       }
-	ends
+ends
 
 state watchovermeskill-defense
    ifvare CHARACTERSELECTED? 11 // Paula
@@ -3264,198 +3264,212 @@ state player_defense
    }
    else
    {
-    setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
-    ifvarn MISCARRAYID_AMOUNTTEMP 0 // Prevents Deflected Damage from hurting an incoming character after one has just died for 1.5 secs :P
+    // General Damage Reduction or Increase for reflected damage [to sooth the screaming masses of people who hate overwhelming amounts of deflected damage :P]
+    addlogvar ENEMYDEFLECTEDDAMAGE
+    mulvarvar ENEMYDEFLECTEDDAMAGE INVULNREFLECTRATE
+    divvar ENEMYDEFLECTEDDAMAGE 1000
+    addlogvar ENEMYDEFLECTEDDAMAGE
+
+    ifvare INVULNREFLECTRATE 0
     {
      setvar ENEMYDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTDAMAGESTATE 0
     }
     else
-    {
-     ifvare tempvehicleid -1 // Player/Character is not in a vehicle
+    { 
+     setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+     ifvarn MISCARRAYID_AMOUNTTEMP 0 // Prevents Deflected Damage from hurting an incoming character after one has just died for 1.5 secs :P
      {
-      ifvare CHARACTERSELECTED? 8
+      setvar ENEMYDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTDAMAGESTATE 0
+     }
+     else
+     {
+      ifvare tempvehicleid -1 // Player/Character is not in a vehicle
       {
-       ifvare DEFLECTATTACKPICNUM BIOMETRICBLAST1 divvar ENEMYDEFLECTEDDAMAGE 20
-      }
-      ifvare CHARACTERSELECTED? 10
-      {
-       ifvare PUBLICBETA? 0
+       ifvare CHARACTERSELECTED? 8
        {
-        ifrnd 255
+        ifvare DEFLECTATTACKPICNUM BIOMETRICBLAST1 divvar ENEMYDEFLECTEDDAMAGE 20
+       }
+       ifvare CHARACTERSELECTED? 10
+       {
+        ifvare PUBLICBETA? 0
+        {
+         ifrnd 255
+         {
+          setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTEDDAMAGE 0 setvar ENEMYDEFLECTDAMAGESTATE 0 break
+         }
+        }
+       }
+       ifvare CHARACTERSELECTED? 14
+       {
+        ifvare PUBLICBETA? 0
         {
          setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTEDDAMAGE 0 setvar ENEMYDEFLECTDAMAGESTATE 0 break
         }
        }
       }
-      ifvare CHARACTERSELECTED? 14
+      else // Player/Character is in a vehicle...
       {
-       ifvare PUBLICBETA? 0
+       setvar TEMPVAR3 0
+       getactorvar[tempvehicleid].ENEMYINVULNTIME TEMPVAR3
+       ifvarg TEMPVAR3 0
        {
         setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTEDDAMAGE 0 setvar ENEMYDEFLECTDAMAGESTATE 0 break
        }
       }
-     }
-     else // Player/Character is in a vehicle...
-     {
-      setvar TEMPVAR3 0
-      getactorvar[tempvehicleid].ENEMYINVULNTIME TEMPVAR3
-      ifvarg TEMPVAR3 0
-      {
-       setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ENEMYDEFLECTEDDAMAGE 0 setvar ENEMYDEFLECTDAMAGESTATE 0 break
-      }
-     }
 
-     ifvare ATTACKPICNUM FREEZEBLAST state freezeblast-chilleffect_player
+      ifvare ATTACKPICNUM FREEZEBLAST state freezeblast-chilleffect_player
 
-     // Check Malakian Gems
-     setvarvar TEMP7 ENEMYDEFLECTEDDAMAGE
-     state malakiangemcheck
-     setvarvar ENEMYDEFLECTEDDAMAGE TEMP7
+      // Check Malakian Gems
+      setvarvar TEMP7 ENEMYDEFLECTEDDAMAGE
+      state malakiangemcheck
+      setvarvar ENEMYDEFLECTEDDAMAGE TEMP7
 
-     ifvarand CHEATBITFIELD? 8 divvar ENEMYDEFLECTEDDAMAGE 1000
-     getactor[ATTACKINGACTOR].picnum ATTACKINGACTORPICNUM
-     getactor[ATTACKINGACTOR].pal ATTACKINGACTORPAL
-     getactor[ATTACKINGACTOR].ang ATTACKERANGLE
-     getactor[PLAYERID].ang PLAYERHITANGLE
-     setvarvar SYSDIFFANGLE ATTACKERANGLE
-     subvarvar SYSDIFFANGLE PLAYERHITANGLE
-     ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+      ifvarand CHEATBITFIELD? 8 divvar ENEMYDEFLECTEDDAMAGE 1000
+      getactor[ATTACKINGACTOR].picnum ATTACKINGACTORPICNUM
+      getactor[ATTACKINGACTOR].pal ATTACKINGACTORPAL
+      getactor[ATTACKINGACTOR].ang ATTACKERANGLE
+      getactor[PLAYERID].ang PLAYERHITANGLE
+      setvarvar SYSDIFFANGLE ATTACKERANGLE
+      subvarvar SYSDIFFANGLE PLAYERHITANGLE
+      ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
      
-     ifvare tempvehicleid -1 // Player/Character is not in a vehicle
-     {
-      ifvare BIOSHIELDBLOCKINVULN? 1 // Allows the Bio-Shield to parry invuln-deflected damage
+      ifvare tempvehicleid -1 // Player/Character is not in a vehicle
       {
-       ifvare CHARACTERSELECTED? 8
+       ifvare BIOSHIELDBLOCKINVULN? 1 // Allows the Bio-Shield to parry invuln-deflected damage
        {
-        ifvare HAVEENERGYSHIELD? 1 
-        { 
-         ifvare ENERGYSHIELDMODE 1 
-         {
-          ifvarg ENEMYDEFLECTEDDAMAGE 0
+        ifvare CHARACTERSELECTED? 8
+        {
+         ifvare HAVEENERGYSHIELD? 1 
+         { 
+          ifvare ENERGYSHIELDMODE 1 
           {
-           ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+           ifvarg ENEMYDEFLECTEDDAMAGE 0
            {
-            setvarvar CELLDAMAGE ENEMYDEFLECTEDDAMAGE 
-
-            ifvare ESHIELDADVANCEMENT 1 { divvar CELLDAMAGE 2 divvar ENEMYDEFLECTEDDAMAGE 2 }
-
-            setvarvar CELLDAMAGETEMP CELLDAMAGE setvar CELLDAMAGETIMER 0 // For the displays
-            ifvarn ESHIELDDMGFACTOR 0 divvarvar CELLDAMAGE ESHIELDDMGFACTOR
-            ifvarvarg CELLDAMAGE CURRENTCELLS setvarvar CELLDAMAGE CURRENTCELLS
-            setvarvar tempc CELLDAMAGE
-            mulvarvar tempc ESHIELDDMGFACTOR
-            subvarvar ENEMYDEFLECTEDDAMAGE tempc
-            ifvarg ENEMYDEFLECTEDDAMAGE 0 subvarvar CELLDAMAGETEMP ENEMYDEFLECTEDDAMAGE // For the displays
-            subvarvar CURRENTCELLS CELLDAMAGE
-            setvar CELLDAMAGELEFT 0
-
-            // Now to Calculate to deal with remaining ENEMYDEFLECTEDDAMAGE
-            ifvarg CURRENTCELLS 0 // 1 or more cells left
+            ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
             {
-             ifvarvarg ENEMYDEFLECTEDDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the current cell
+             setvarvar CELLDAMAGE ENEMYDEFLECTEDDAMAGE 
+
+             ifvare ESHIELDADVANCEMENT 1 { divvar CELLDAMAGE 2 divvar ENEMYDEFLECTEDDAMAGE 2 }
+
+             setvarvar CELLDAMAGETEMP CELLDAMAGE setvar CELLDAMAGETIMER 0 // For the displays
+             ifvarn ESHIELDDMGFACTOR 0 divvarvar CELLDAMAGE ESHIELDDMGFACTOR
+             ifvarvarg CELLDAMAGE CURRENTCELLS setvarvar CELLDAMAGE CURRENTCELLS
+             setvarvar tempc CELLDAMAGE
+             mulvarvar tempc ESHIELDDMGFACTOR
+             subvarvar ENEMYDEFLECTEDDAMAGE tempc
+             ifvarg ENEMYDEFLECTEDDAMAGE 0 subvarvar CELLDAMAGETEMP ENEMYDEFLECTEDDAMAGE // For the displays
+             subvarvar CURRENTCELLS CELLDAMAGE
+             setvar CELLDAMAGELEFT 0
+
+             // Now to Calculate to deal with remaining ENEMYDEFLECTEDDAMAGE
+             ifvarg CURRENTCELLS 0 // 1 or more cells left
              {
-              setvarvar TEMP3 ENEMYDEFLECTEDDAMAGE
-              setvar ENEMYDEFLECTEDDAMAGE 0
-              addvarvar CELLDAMAGETEMP TEMP3
-              subvarvar DAMAGEINCELL TEMP3
-              ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              ifvarvarg ENEMYDEFLECTEDDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the current cell
+              {
+               setvarvar TEMP3 ENEMYDEFLECTEDDAMAGE
+               setvar ENEMYDEFLECTEDDAMAGE 0
+               addvarvar CELLDAMAGETEMP TEMP3
+               subvarvar DAMAGEINCELL TEMP3
+               ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              }
+              else // Damage is less than or equal to the remaining power in the current cell
+              {
+               addvarvar CELLDAMAGETEMP ENEMYDEFLECTEDDAMAGE
+               subvarvar DAMAGEINCELL ENEMYDEFLECTEDDAMAGE
+               setvar ENEMYDEFLECTEDDAMAGE 0
+               ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              }
              }
-             else // Damage is less than or equal to the remaining power in the current cell
+             else // 0 cells
              {
-              addvarvar CELLDAMAGETEMP ENEMYDEFLECTEDDAMAGE
-              subvarvar DAMAGEINCELL ENEMYDEFLECTEDDAMAGE
-              setvar ENEMYDEFLECTEDDAMAGE 0
-              ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              ifvarvarg ENEMYDEFLECTEDDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the last cell
+              {
+               addvarvar CELLDAMAGETEMP DAMAGEINCELL
+               subvarvar ENEMYDEFLECTEDDAMAGE DAMAGEINCELL
+               setvar DAMAGEINCELL 0
+              }
+              else // Damage is less than the remaining power in the last cell
+              {
+               addvarvar CELLDAMAGETEMP ENEMYDEFLECTEDDAMAGE
+               subvarvar DAMAGEINCELL ENEMYDEFLECTEDDAMAGE
+               setvar ENEMYDEFLECTEDDAMAGE 0
+              }
              }
+
+             stopsound NODAMAGE
+             ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
+             state bioshieldhitsounds
+             palfrom 32 0 0 64
+             ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
+             state showdamage_playerbioshield
+             setvar ATTACKERDISPLAYTIMER 0
             }
-            else // 0 cells
-            {
-             ifvarvarg ENEMYDEFLECTEDDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the last cell
-             {
-              addvarvar CELLDAMAGETEMP DAMAGEINCELL
-              subvarvar ENEMYDEFLECTEDDAMAGE DAMAGEINCELL
-              setvar DAMAGEINCELL 0
-             }
-             else // Damage is less than the remaining power in the last cell
-             {
-              addvarvar CELLDAMAGETEMP ENEMYDEFLECTEDDAMAGE
-              subvarvar DAMAGEINCELL ENEMYDEFLECTEDDAMAGE
-              setvar ENEMYDEFLECTEDDAMAGE 0
-             }
-            }
- 
-            stopsound NODAMAGE
-            ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
-            state bioshieldhitsounds
-            palfrom 32 0 0 64
-            ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
-            state showdamage_playerbioshield
-            setvar ATTACKERDISPLAYTIMER 0
            }
           }
          }
         }
        }
       }
-     }
+ 
+      setvarvar PLAYERDAMAGETEMP ENEMYDEFLECTEDDAMAGE 
+      setvar ATTACKERDISPLAYTIMER 0
+      setvar HEALTHDAMAGETIMER 0
+      setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+      setvarvar PLAYERDAMAGE ENEMYDEFLECTEDDAMAGE
 
-     setvarvar PLAYERDAMAGETEMP ENEMYDEFLECTEDDAMAGE 
-     setvar ATTACKERDISPLAYTIMER 0
-     setvar HEALTHDAMAGETIMER 0
-     setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
-     setvarvar PLAYERDAMAGE ENEMYDEFLECTEDDAMAGE
-
-     setactor[THISACTOR].htpicnum -1
-     ifvare tempvehicleid -1
-     {
-      subvarvar CURRENTHITPOINTS PLAYERDAMAGE
-      state checkbuddhamode
-      state showdamage_playerhp
-      setvarvar PAINSOUNDFACTOR PLAYERDAMAGE
-      state checkpainfactor
-      ifvarg PLAYERDAMAGE 0 state characterpainsounds
-     }
-     else
-     {
-      getactorvar[tempvehicleid].ENEMYHP TEMPVAR3
-      subvarvar TEMPVAR3 PLAYERDAMAGE
-      state showdamage_playerhp
-      setactorvar[tempvehicleid].ENEMYHP TEMPVAR3
-      state checkbuddhamode
-     }
-
-     ifvarg CURRENTHITPOINTS 0
-     {
-      setactor[THISACTOR].htextra -1
-      ifvarg PLAYERDAMAGE 0
+      setactor[THISACTOR].htpicnum -1
+      ifvare tempvehicleid -1
       {
-       setvarvar TEMPVAR PLAYERDAMAGE
-       mulvar TEMPVAR 100
-       ifvarn MAXHITPOINTS 0 divvarvar TEMPVAR MAXHITPOINTS
-       ifvare tempvehicleid -1 setactor[THISACTOR].htextra TEMPVAR else setactor[THISACTOR].htextra -1 
-
-       setactor[THISACTOR].extra 16384
-       setplayer[THISACTOR].last_extra 16384
-       ifvarn tempvehicleid -1 setactor[tempvehicleid].extra 16384
-
-       setvarvar DAMAGEHUEFACTOR PLAYERDAMAGE
-       ifvare tempvehicleid -1 state playerdamagehues
-       else state playerdamagehues_vehicle
+       subvarvar CURRENTHITPOINTS PLAYERDAMAGE
+       state checkbuddhamode
+       state showdamage_playerhp
+       setvarvar PAINSOUNDFACTOR PLAYERDAMAGE
+       state checkpainfactor
+       ifvarg PLAYERDAMAGE 0 state characterpainsounds
       }
-     }
-     else setactor[THISACTOR].htextra -1
+      else
+      {
+       getactorvar[tempvehicleid].ENEMYHP TEMPVAR3
+       subvarvar TEMPVAR3 PLAYERDAMAGE
+       state showdamage_playerhp
+       setactorvar[tempvehicleid].ENEMYHP TEMPVAR3
+       state checkbuddhamode
+      }
 
-     setvarvar ATTACKINGACTORPICNUM DEFENDINGACTOR
-     setvarvar ATTACKINGACTORPAL DEFENDINGACTORPAL
-     globalsound DEFLECT2
-     stopsound NODAMAGE
-     state invulnflash 
-     setvar ENEMYDEFLECTEDDAMAGE 0
-     setvar ACTORCRITICAL? 0
-     setvar ENEMYDEFLECTDAMAGESTATE 0
-     setvar PLAYERDAMAGE 0
-     break
+      ifvarg CURRENTHITPOINTS 0
+      {
+       setactor[THISACTOR].htextra -1
+       ifvarg PLAYERDAMAGE 0
+       {
+        setvarvar TEMPVAR PLAYERDAMAGE
+        mulvar TEMPVAR 100
+        ifvarn MAXHITPOINTS 0 divvarvar TEMPVAR MAXHITPOINTS
+        ifvare tempvehicleid -1 setactor[THISACTOR].htextra TEMPVAR else setactor[THISACTOR].htextra -1 
+
+        setactor[THISACTOR].extra 16384
+        setplayer[THISACTOR].last_extra 16384
+        ifvarn tempvehicleid -1 setactor[tempvehicleid].extra 16384
+
+        setvarvar DAMAGEHUEFACTOR PLAYERDAMAGE
+        ifvare tempvehicleid -1 state playerdamagehues
+        else state playerdamagehues_vehicle
+       }
+      }
+      else setactor[THISACTOR].htextra -1
+
+      setvarvar ATTACKINGACTORPICNUM DEFENDINGACTOR
+      setvarvar ATTACKINGACTORPAL DEFENDINGACTORPAL
+      globalsound DEFLECT2
+      stopsound NODAMAGE
+      state invulnflash 
+      setvar ENEMYDEFLECTEDDAMAGE 0
+      setvar ACTORCRITICAL? 0
+      setvar ENEMYDEFLECTDAMAGESTATE 0
+      setvar PLAYERDAMAGE 0
+      break
+     }
     }
+
    }
   }
 
@@ -5463,7 +5477,7 @@ state add_playermeleedamage
      state monster_defense_calc
 
      ifvare PICNUMTEMP APLAYER // If the attacking actor is the Player themself...
-     {
+     { // ifvare PICNUMTEMP APLAYER
       setvarvar DEFENDINGACTORDEBUG DEFENDINGACTOR
 
       setvarvar PLAYERATTACKTEMP PLAYERATTACK
@@ -5537,47 +5551,47 @@ state add_playermeleedamage
       //*******************************
 
       // Stage 3p of Damage Formula
-	  ifvare CHARACTERSELECTED? 1
-	  {
+      ifvare CHARACTERSELECTED? 1
+      {
        // ***************************************************
        // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
        // ***************************************************
        ifvare FLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
        ifvare FLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
-	  }
+      }
 
-	  ifvare CHARACTERSELECTED? 3
-	  {
+      ifvare CHARACTERSELECTED? 3
+      {
        // *****************************************************
        // *Setting Up Bubsy's bonus damage when in "Mask Form*
        // *****************************************************
        setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
        ifvarg MISCARRAYID_AMOUNTTEMP 0 { mulvar KNEEDAMAGE 5 divvar KNEEDAMAGE 2 }
-	  }
+      }
 
-	  ifvare CHARACTERSELECTED? 4
-	  {
+      ifvare CHARACTERSELECTED? 4
+      {
        // **************************************
        // *Setting up Ami's Water-Bonus Damage *
        // **************************************
-	   ifvare SECTORLOTAG 2 ifvare WATER? 2 { mulvar KNEEDAMAGE 6 } // 6x Damage
-	   ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar KNEEDAMAGE 7 divvar KNEEDAMAGE 2 } // 3.5x Damage
+       ifvare SECTORLOTAG 2 ifvare WATER? 2 { mulvar KNEEDAMAGE 6 } // 6x Damage
+       ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar KNEEDAMAGE 7 divvar KNEEDAMAGE 2 } // 3.5x Damage
        // *******************************
        // *Setting Up Ami's Form Bonuses*
        // *******************************
        setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-	   ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
-	   ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
-	   ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
+       ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
+       ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
        // ********************************
        // *Mercury Aqua Protection (Buff)*
        // ********************************
        setvar CHARACTERARRAY 4
        getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
-	   ifvarand TEMPVAR 256
-	   {
-	     ifp pducking divvar KNEEDAMAGE 20 else divvar KNEEDAMAGE 5
-	   }
+       ifvarand TEMPVAR 256
+       {
+         ifp pducking divvar KNEEDAMAGE 20 else divvar KNEEDAMAGE 5
+       }
        // ************************
        // *Mercury Super-Computer*
        // ************************
@@ -5590,10 +5604,10 @@ state add_playermeleedamage
          divvar KNEEDAMAGE 4
         }
        }
-	  }
+      }
 
-	  ifvare CHARACTERSELECTED? 10
-	  {
+      ifvare CHARACTERSELECTED? 10
+      {
        // **********************************
        // *Setting Up Nethra's Form Bonuses*
        // **********************************
@@ -5702,7 +5716,7 @@ state add_playermeleedamage
       divvar KNEEDAMAGE 1000
       state checkdamagecaps-knee
 
-	  
+
       // Stage 5p of Damage Formula
       // **********************************
       // *Jewel of Four Souls [Equippable]*
@@ -6081,24 +6095,24 @@ state add_playermeleedamage
       ifvarand ACTORFLAGS 512 // Elite
       {
        ifvarand ACTORFLAGS 1024 // Elite Boss
-	   {
+       {
         randvar TEMP2 125 addvar TEMP2 250	// 25.0%-37.5%
-	   }
+       }
        else // Only Elite
-	   {
+       {
         randvar TEMP2 50 addvar TEMP2 200	// 20.0%-25.0%
-	   }
+       }
       }
       else
       {
        ifvarand ACTORFLAGS 1024 // Elite Boss
-	   {
+       {
         randvar TEMP2 125 addvar TEMP2 100	// 10.0%-22.5%
-	   }
+       }
        else
-	   {
+       {
         randvar TEMP2 50 addvar TEMP2 50	// 5.0%-10.0%
-	   }
+       }
       }
       mulvarvar TEMP3 TEMP2
       divvar TEMP3 1000
@@ -6391,9 +6405,9 @@ state add_playermeleedamage
       setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
       setvar DEFENDERDISPLAYTIMER 0
       state checkdamagecaps-knee
-     }
+     } // ifvare PICNUMTEMP APLAYER
      else // if the attacking actor is not either the player or the same species, damage is divided by half BEFORE defense is factored in
-     {
+     { // ifvarn PICNUMTEMP APLAYER
       // Stage 2e of Damage Formula
       state calccriticalhits_actor
       mulvarvar KNEEDAMAGE CRITICALHITMULTI
@@ -6426,7 +6440,7 @@ state add_playermeleedamage
 
       state checkdamagecaps-knee
       // FINAL DAMAGE COUNT HERE
-     }
+     } // ifvarn PICNUMTEMP APLAYER
    
     } // ifvarn KNEEDAMAGE 0 
   } // ifvarg tempb 0
@@ -6841,7 +6855,13 @@ ifvarg tempb 0
   else
   ifvare DEFLECTDAMAGESTATE 1 // If the player is in God Mode or under the effect of an Invuln item, they deflect all enemy damage
   {
-   ifvarg ENEMYINVULNTIME 0
+   // General Damage Reduction or Increase for reflected damage [to sooth the screaming masses of people who hate overwhelming amounts of deflected damage :P]
+   addlogvar DEFLECTEDDAMAGE
+   mulvarvar DEFLECTEDDAMAGE INVULNREFLECTRATE
+   divvar DEFLECTEDDAMAGE 1000
+   addlogvar DEFLECTEDDAMAGE
+
+   ifvare INVULNREFLECTRATE 0
    {
     setvar CRITICAL? 0
     setvar DEFLECTEDDAMAGE 0
@@ -6851,73 +6871,85 @@ ifvarg tempb 0
    }
    else
    {
-    setvar CRITICAL? 0
-    getactor[THISACTOR].picnum DEFENDINGACTORDEBUG
-    getactor[THISACTOR].pal DEFENDINGACTORPAL
-    addvarvar DEFLECTEDDAMAGE GENERALDAMAGE
-    addvarvar DEFLECTEDDAMAGE MELEEDAMAGE
-
-    ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+    ifvarg ENEMYINVULNTIME 0
     {
-     randvar TEMPVAR 25
-     addvar TEMPVAR 25
-     mulvarvar DEFLECTEDDAMAGE TEMPVAR
-     divvar DEFLECTEDDAMAGE 100
+     setvar CRITICAL? 0
+     setvar DEFLECTEDDAMAGE 0
+     state nullgendamage
+     setactor[THISACTOR].htextra 0 // TODO: LEAVE-THIS
+     setvar DEFLECTDAMAGESTATE 0
     }
-
-    // Freeze-Chill Effect from Ice-Elemental Attacks
-    ifvare tempc FREEZEBLAST
+    else
     {
-     state freeze-chilleffect_actors
-
+     setvar CRITICAL? 0
+     getactor[THISACTOR].picnum DEFENDINGACTORDEBUG
+     getactor[THISACTOR].pal DEFENDINGACTORPAL
+     addvarvar DEFLECTEDDAMAGE GENERALDAMAGE
+     addvarvar DEFLECTEDDAMAGE MELEEDAMAGE
+ 
      ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
      {
       randvar TEMPVAR 25
       addvar TEMPVAR 25
-      mulvarvar temph TEMPVAR
-      divvar temph 100
+      mulvarvar DEFLECTEDDAMAGE TEMPVAR
+      divvar DEFLECTEDDAMAGE 100
+     }
+ 
+     // Freeze-Chill Effect from Ice-Elemental Attacks
+     ifvare tempc FREEZEBLAST
+     {
+      state freeze-chilleffect_actors
+ 
+      ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+      {
+       randvar TEMPVAR 25
+       addvar TEMPVAR 25
+       mulvarvar temph TEMPVAR
+       divvar temph 100
+      }
+ 
+      randvarvar tempg temph
+      addvarvar tempg temph
+      addvarvar freezetimer tempg
+      state dealfreezedamage-actor
      }
 
-     randvarvar tempg temph
-     addvarvar tempg temph
-     addvarvar freezetimer tempg
-     state dealfreezedamage-actor
+     setvarvar DAMAGETEMP DEFLECTEDDAMAGE 
+     setvarvar TEMPHITENEMYVARHP ENEMYMAXHP
+     setvarvar TEMPHITENEMYVARAP ENEMYMAXAP
+     setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+     setvar DEFENDERDISPLAYTIMER 0
+     state nullgendamage
+     setvar MELEEDAMAGE 0
+     globalsound DEFLECT1
+
+     subvarvar ENEMYHP DEFLECTEDDAMAGE state showdamage_actor-deflecthp
+     ifvarg DEFLECTEDDAMAGE 0 setvar ENEMYHPDAMAGED? 1
+     setvarvar ENEMYLASTDAMAGE DEFLECTEDDAMAGE
+     ifvarg ENEMYHP 0
+     {
+      ifvarg DEFLECTEDDAMAGE 0 setactor[THISACTOR].htextra 1
+      setactor[THISACTOR].extra 8193
+      setvar DEFLECTEDDAMAGE 0
+      setvar DEFLECTDAMAGESTATE 0
+      setvar MIRRORSHIELDSTATE 0
+      setvar REFRACTORSTATE 0
+      break
+     }
+     else
+     {
+      setvar ENEMYHP 0
+      setactor[THISACTOR].extra 0
+      state checkactorsurvivalvalue
+      ifvarg DEFLECTEDDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra DEFLECTEDDAMAGE
+      setvar DEFLECTEDDAMAGE 0
+      setvar DEFLECTDAMAGESTATE 0
+      setvar MIRRORSHIELDSTATE 0
+      setvar REFRACTORSTATE 0
+      break
+     }
     }
 
-    setvarvar DAMAGETEMP DEFLECTEDDAMAGE 
-    setvarvar TEMPHITENEMYVARHP ENEMYMAXHP
-    setvarvar TEMPHITENEMYVARAP ENEMYMAXAP
-    setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
-    setvar DEFENDERDISPLAYTIMER 0
-    state nullgendamage
-    setvar MELEEDAMAGE 0
-    globalsound DEFLECT1
-
-    subvarvar ENEMYHP DEFLECTEDDAMAGE state showdamage_actor-deflecthp
-    ifvarg DEFLECTEDDAMAGE 0 setvar ENEMYHPDAMAGED? 1
-    setvarvar ENEMYLASTDAMAGE DEFLECTEDDAMAGE
-    ifvarg ENEMYHP 0
-    {
-     ifvarg DEFLECTEDDAMAGE 0 setactor[THISACTOR].htextra 1
-     setactor[THISACTOR].extra 8193
-     setvar DEFLECTEDDAMAGE 0
-     setvar DEFLECTDAMAGESTATE 0
-     setvar MIRRORSHIELDSTATE 0
-     setvar REFRACTORSTATE 0
-     break
-    }
-    else
-    {
-     setvar ENEMYHP 0
-     setactor[THISACTOR].extra 0
-     state checkactorsurvivalvalue
-     ifvarg DEFLECTEDDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra DEFLECTEDDAMAGE
-     setvar DEFLECTEDDAMAGE 0
-     setvar DEFLECTDAMAGESTATE 0
-     setvar MIRRORSHIELDSTATE 0
-     setvar REFRACTORSTATE 0
-     break
-    }
    }
   }
   else
@@ -19978,9 +20010,9 @@ actor FLOORFLAME 0 FFLAME_FR
    
            ifvare CHARACTERSELECTED? 8
            {
- 	      ifvare HAVEENERGYSHIELD? 1
+            ifvare HAVEENERGYSHIELD? 1
             {
-  	       ifvare ENERGYSHIELDMODE 1 
+             ifvare ENERGYSHIELDMODE 1 
              {
               ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
               {
@@ -20019,9 +20051,9 @@ actor FLOORFLAME 0 FFLAME_FR
            }
            ifvare CHARACTERSELECTED? 8
            {
-	      ifvare HAVEENERGYSHIELD? 1
+            ifvare HAVEENERGYSHIELD? 1
             {
-  	       ifvare ENERGYSHIELDMODE 1 
+             ifvare ENERGYSHIELDMODE 1 
              {
               ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0 nullop
               else state floorflamedmgdisplays
@@ -25248,6 +25280,9 @@ ends
 //************************************************************************************************************************
 
 actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
+
+addvar TEMPCOUNT 1
+ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT
 
 ifvarn mainmenusubmenu 7 
 {

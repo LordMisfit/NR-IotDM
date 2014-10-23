@@ -3617,8 +3617,120 @@ ends
 
 define INVULNICON 6143
 
-state invulnauraseek
-      canseespr THISACTOR INVULNAURATARGET temp
+state invulndrainplayer
+           ifvare CHARACTERSELECTED? 8 // If Lisa is selected...
+           {
+            ifvare HAVEENERGYSHIELD? 1 // Has the Bio-Cell Shield...
+            {
+             ifvare ENERGYSHIELDMODE 1 // And it's turned on...
+             {
+              ifvarg CURRENTCELLS -1
+              {
+               ifvarg DAMAGEINCELL 0 setvar TEMPVAR8 1 // TEMPVAR8 [here] = checks to see if the Bio-Shield requirements are all met
+               else setvar TEMPVAR8 0
+              }
+              else setvar TEMPVAR8 0              
+             }
+             else setvar TEMPVAR8 0
+            }
+            else setvar TEMPVAR8 0
+           }
+           else setvar TEMPVAR8 0
+
+           addvar TEMPCOUNT2 1
+           ifvarg TEMPCOUNT2 35
+           {
+            ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT2
+            setvar TEMPCOUNT2 0
+            ifvare TEMPVAR8 1
+            {
+             setvarvar TEMPVAR7 MAXHITPOINTS
+             mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
+             divvar TEMPVAR7 1000
+             ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
+             //addlogvar TEMPVAR7
+
+             setvarvar CELLDAMAGE TEMPVAR7
+             setvarvar CELLDAMAGETEMP CELLDAMAGE setvar CELLDAMAGETIMER 0 // For the displays
+             ifvarn ESHIELDDMGFACTOR 0 divvarvar CELLDAMAGE ESHIELDDMGFACTOR
+             ifvarvarg CELLDAMAGE CURRENTCELLS setvarvar CELLDAMAGE CURRENTCELLS
+             setvarvar tempc CELLDAMAGE
+             mulvarvar tempc ESHIELDDMGFACTOR
+             subvarvar TEMPVAR7 tempc
+             subvarvar CURRENTCELLS CELLDAMAGE
+             setvar CELLDAMAGELEFT 0 
+             ifvarg TEMPVAR7 0 subvarvar CELLDAMAGETEMP TEMPVAR7 // For the displays 
+
+             // Now to Calculate to deal with remaining TEMPVAR7
+             ifvarg CURRENTCELLS 0 // 1 or more cells left
+             {
+              ifvarvarg TEMPVAR7 DAMAGEINCELL // Damage exceeds the remaining power in the current cell
+              {
+               setvarvar TEMP3 TEMPVAR7
+               setvar TEMPVAR7 0
+               addvarvar CELLDAMAGETEMP TEMP3
+               subvarvar DAMAGEINCELL TEMP3
+               ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              }
+              else // Damage is less than or equal to the remaining power in the current cell
+              {
+               addvarvar CELLDAMAGETEMP TEMPVAR7
+               subvarvar DAMAGEINCELL TEMPVAR7
+               setvar TEMPVAR7 0
+               ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              }
+             }
+             else // 0 cells
+             {
+              ifvarvarg TEMPVAR7 DAMAGEINCELL // Damage exceeds the remaining power in the last cell
+              {
+               addvarvar CELLDAMAGETEMP DAMAGEINCELL
+               subvarvar TEMPVAR7 DAMAGEINCELL
+               setvar DAMAGEINCELL 0
+              }
+              else // Damage is less than the remaining power in the last cell
+              {
+               addvarvar CELLDAMAGETEMP TEMPVAR7
+               subvarvar DAMAGEINCELL TEMPVAR7
+               setvar TEMPVAR7 0
+              }
+             }
+
+             stopsound NODAMAGE
+             ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
+             state bioshieldhitsounds
+             palfrom 32 0 0 64
+            }
+            else
+            {
+             setvarvar TEMPVAR5 MAXHITPOINTS
+             mulvarvar TEMPVAR5 INVULNHEALTHDRAIN
+             divvar TEMPVAR5 1000
+             ifvarl TEMPVAR5 1 setvar TEMPVAR5 1
+             //addlogvar TEMPVAR5
+
+             subvarvar CURRENTHITPOINTS TEMPVAR5
+             setvarvar PLAYERDAMAGETEMP TEMPVAR5
+
+             setvar HEALTHDAMAGETIMER 0
+             setvar NULLDAMAGE 0
+
+             setvar PLAYERDISPLAYARMORDAMAGE 0 
+             setvar ARMORDAMAGETIMER 53 
+             state checkbuddhamode
+            }
+            setactor[INVULNAURATARGET].htowner THISACTOR
+            setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+            setvar ATTACKERDISPLAYTIMER 0
+            getactor[THISACTOR].picnum ATTACKINGACTORPICNUM
+            getactor[THISACTOR].pal ATTACKINGACTORPAL
+            getactor[THISACTOR].ang ATTACKERANGLE
+            getactor[PLAYERID].ang PLAYERHITANGLE
+            setvarvar SYSDIFFANGLE ATTACKERANGLE
+            subvarvar SYSDIFFANGLE PLAYERHITANGLE
+            ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+           }
+
 ends
 
 state invulnkillplayer
@@ -3649,33 +3761,7 @@ state invulnkillplayer
          palfrom 64 64
 ends
 
-state dealinvulndmg
-     ifvarand CHEATBITFIELD? 32
-     {
-      soundonce INVULNITEM3
-      palfrom 32 64 64 64
-     }
-     else
-     {
-      getactorvar[INVULNAURATARGET].INVULNTIME tempb
-      ifvare tempb 0
-      {
-       state invulnauraseek
-       ifvare temp 1
-       {
-        setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
-        ifvare MISCARRAYID_AMOUNTTEMP 0
-        {
-         ifvare CHARACTERSELECTED? 8
-         {
-          ifvare HAVEENERGYSHIELD? 1
-          {
-           ifvare ENERGYSHIELDMODE 1
-           {
-            setvarvar TEMPVAR5 CURRENTBIOSHIELDPOWER
-            divvarvar TEMPVAR5 MAXHITPOINTS
-            ifvarg TEMPVAR5 15
-            {
+state bioshield-invulnsave
              setvar CURRENTCELLS 0
              setvar DAMAGEINCELL 0
              setvar FIRSTAIDCURRENT 0
@@ -3684,27 +3770,69 @@ state dealinvulndmg
              setvar DEATHCHARACTERVAR 0
              setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
              state bioshieldhitsounds
+             setactorvar[THISACTOR].ENEMYINVULNTIME 0 // Completely eliminates enemy's Invuln-Aura now >:D [as of 5.22.git77]
              setactorvar[THISACTOR].ENEMYFIRSTAID 0
              setactorvar[THISACTOR].ENEMYAP 0
              setactorvar[THISACTOR].ENEMYHP 1
              redefinequote 321 ^23SAVED BY THE BIO-CELLULAR ENERGY SHIELD!
              setvarvar fta fta_normal setvar ftq 321
              palfrom 63 64
+ends
+
+// Deals with invuln-damage against players
+state dealinvulndmg
+     ifvarand CHEATBITFIELD? 32 // God Mode is on, meaning invuln doesn't work
+     {
+      soundonce INVULNITEM3 palfrom 32 64 64 64
+     }
+     else // Under normal circumstances...
+     {
+      getactorvar[INVULNAURATARGET].INVULNTIME tempb // check for invulntimer
+      ifvare tempb 0 // if none...
+      {
+       canseespr THISACTOR INVULNAURATARGET temp
+       ifvare temp 1
+       {
+        setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+        ifvare MISCARRAYID_AMOUNTTEMP 0 // do not attempt against someone in the middle of a 'mercy switch'
+        {
+
+          ifvarg INVULNHEALTHDRAIN 2000 // If >2000, execute the instant-death script
+          {
+           ifvare CHARACTERSELECTED? 8 // If Lisa is selected...
+           {
+            ifvare HAVEENERGYSHIELD? 1 // Has the Bio-Cell Shield...
+            {
+             ifvare ENERGYSHIELDMODE 1 // And it's turned on...
+             {
+              setvarvar TEMPVAR5 CURRENTBIOSHIELDPOWER
+              divvarvar TEMPVAR5 MAXHITPOINTS
+              ifvarg TEMPVAR5 15 // and she has 16 or more times the total Bio-Cell damageblock than her Max HP...
+              {
+               state bioshield-invulnsave // Then it will save her from death at the cost of all her energy cells, AP, FA and all but 1 HP, and give her 1.5sec mercy invincibility
+              }
+              else state invulnkillplayer
+             }
+             else state invulnkillplayer
             }
             else state invulnkillplayer
            }
            else state invulnkillplayer
           }
-          else state invulnkillplayer
-         }
-         else state invulnkillplayer
+          else
+          {
+           ifvarg INVULNHEALTHDRAIN 0 // if between 1 & 2000, set a % drain for damage per tic
+           {
+            state invulndrainplayer
+           }
+          }
+
         }
        }
       }
-      else
+      else // If the player is also invulnerable, take no damage and the auras clash endlessly until one runs out :P
       {
-       soundonce INVULNITEM3
-       palfrom 32 64 64 64
+       soundonce INVULNITEM3 palfrom 32 64 64 64
       }
      }
 ends
@@ -3714,6 +3842,7 @@ ifvare mainmenu 0
 {
  ifvarn INVULNAURATARGET -1
  { 
+
    getactor[INVULNAURATARGET].owner TEMPVAR
    // addlogvar TEMPVAR
    ifvare TEMPVAR -1 { setvar INVULNAURATARGET -1 break }
@@ -3739,6 +3868,7 @@ ifvare mainmenu 0
   // Attempt to inflict a killing blow if target is alive
   ifvarg tempc 0
   {
+
    getactor[INVULNAURATARGET].picnum tempe
    ifvarn tempe APLAYER
    {
@@ -3746,14 +3876,49 @@ ifvare mainmenu 0
      ifvarn tempb 0
      {
       getactorvar[INVULNAURATARGET].ENEMYINVULNTIME tempb
-      ifvare tempb 0 // If they have no Invuln, KILL 'EM! XD
+      ifvare tempb 0 // If they have no Invuln, HIT 'EM! XD
       {
-       state invulnauraseek
+       canseespr THISACTOR INVULNAURATARGET temp
        ifvare temp 1
        {
-         setactor[INVULNAURATARGET].htowner THISACTOR
-         setactor[INVULNAURATARGET].htextra 1
-         setactor[INVULNAURATARGET].htpicnum INVULNICON
+        addvar TEMPCOUNT2 1
+
+        ifvarg TEMPCOUNT2 7
+        {
+         ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT2
+         setvar TEMPCOUNT2 0
+         ifvarg INVULNHEALTHDRAIN 2000 // Instant Kill Effect
+         {
+          setactor[INVULNAURATARGET].htowner THISACTOR
+          setactor[INVULNAURATARGET].htextra 1
+          setactor[INVULNAURATARGET].htpicnum INVULNICON
+         }
+         else // Health Drain Effect
+         {
+          getactorvar[INVULNAURATARGET].ENEMYMAXHP TEMPVAR5
+          setvarvar TEMPVAR7 TEMPVAR5
+          mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
+          divvar TEMPVAR7 1000
+          ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
+          getactorvar[INVULNAURATARGET].ENEMYHP TEMPVAR5
+          subvarvar TEMPVAR5 TEMPVAR7
+          setactorvar[INVULNAURATARGET].ENEMYHP TEMPVAR5
+          setactor[INVULNAURATARGET].htowner THISACTOR
+
+          ifvarg TEMPVAR7 0 
+          {
+           setvar ENEMYNULLDAMAGE 0
+           setvar ENEMYARMORDISPLAYTIMER 53
+          }
+          getactor[INVULNAURATARGET].picnum DEFENDINGACTORDEBUG
+          getactor[INVULNAURATARGET].pal DEFENDINGACTORPAL
+          setvarvar DAMAGETEMP TEMPVAR7 
+          getactorvar[INVULNAURATARGET].ENEMYMAXHP TEMPVAR5
+          setvarvar TEMPHITENEMYVARHP TEMPVAR5
+          setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+          setvar DEFENDERDISPLAYTIMER 0
+         }
+        }
        }
       }
       else soundonce INVULNITEM3
@@ -3790,28 +3955,69 @@ ifvare mainmenu 0
      getactorvar[tempvehicleid].ENEMYINVULNTIME tempb
      ifvare tempb 0
      {
-      ifvarand CHEATBITFIELD? 4 setactorvar[tempvehicleid].ENEMYHP 1 else setactorvar[tempvehicleid].ENEMYHP 0
-      setactor[tempvehicleid].htowner THISACTOR
-      setactor[tempvehicleid].htextra 1
-      setactor[tempvehicleid].htpicnum INVULNICON
-      ifvare CHARACTERSELECTED? 10
+      ifvarg INVULNHEALTHDRAIN 2000
       {
-       ifvare PUBLICBETA? 0
+       ifvarand CHEATBITFIELD? 4 setactorvar[tempvehicleid].ENEMYHP 1 else setactorvar[tempvehicleid].ENEMYHP 0
+       setactor[tempvehicleid].htowner THISACTOR
+       setactor[tempvehicleid].htextra 1
+       setactor[tempvehicleid].htpicnum INVULNICON
+       ifvare CHARACTERSELECTED? 10
        {
-        ifrnd 1 { ifrnd 32 state dealinvulndmg }
+        ifvare PUBLICBETA? 0
+        {
+         ifrnd 1 { ifrnd 32 state dealinvulndmg }
+        }
+        else state dealinvulndmg
+       }
+       else
+       ifvare CHARACTERSELECTED? 14
+       {
+        ifvare PUBLICBETA? 0 nullop else state dealinvulndmg
        }
        else state dealinvulndmg
       }
       else
-      ifvare CHARACTERSELECTED? 14
       {
-       ifvare PUBLICBETA? 0 nullop else state dealinvulndmg
+       addvar TEMPCOUNT2 1
+       ifvarg TEMPCOUNT2 35
+       {
+        ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT2
+        setvar TEMPCOUNT2 0
+
+        getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+        setvarvar TEMPVAR7 TEMPVAR5
+        mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
+        divvar TEMPVAR7 1000
+        ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
+        getactorvar[tempvehicleid].ENEMYHP TEMPVAR5
+        subvarvar TEMPVAR5 TEMPVAR7
+        setactorvar[tempvehicleid].ENEMYHP TEMPVAR5
+        setactor[tempvehicleid].htowner THISACTOR
+
+        setvarvar PLAYERDAMAGETEMP TEMPVAR7
+        setvar HEALTHDAMAGETIMER 0
+        setvar NULLDAMAGE 0
+
+        setvar PLAYERDISPLAYARMORDAMAGE 0 
+        setvar ARMORDAMAGETIMER 53 
+
+        setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+        setvar ATTACKERDISPLAYTIMER 0
+        getactor[THISACTOR].picnum ATTACKINGACTORPICNUM
+        getactor[THISACTOR].pal ATTACKINGACTORPAL
+        getactor[THISACTOR].ang ATTACKERANGLE
+        getactor[PLAYERID].ang PLAYERHITANGLE
+        setvarvar SYSDIFFANGLE ATTACKERANGLE
+        subvarvar SYSDIFFANGLE PLAYERHITANGLE
+        ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+       }
       }
-      else state dealinvulndmg
+
      }
      else soundonce INVULNITEM3
     }
    }
+
   }
  }
 }
@@ -3921,10 +4127,7 @@ state invulnicon
   getactor[PARENTID].y TESTY
   getactor[PARENTID].z TESTZ
   getactor[PARENTID].picnum TEMP
-  ifvare TEMP APLAYER
-  {
-   subvar TESTZ 512
-  }
+  ifvare TEMP APLAYER subvar TESTZ 512
   setactor[THISACTOR].x TESTX
   setactor[THISACTOR].y TESTY 
   setactor[THISACTOR].z TESTZ
@@ -3939,11 +4142,11 @@ state invulnicon
   addvarvar INVULNAURARANGEZ TESTYREPEAT1
   addvarvar INVULNAURARANGEZ TESTYREPEAT1
 
-  getactor[PARENTID].picnum TEMP
-  ifvare TEMP APLAYER
+  getactor[PARENTID].picnum TEMP // Gets the Picnum of the activator
+  ifvare TEMP APLAYER // The activator is a Player
   {
    getactorvar[PLAYERID].VEHICLEID tempvehicleid
-   ifvare tempvehicleid -1
+   ifvare tempvehicleid -1 // If the player's not in a vehicle
    {
     getactorvar[PARENTID].INVULNTIME TEMP
     ifvarg TEMP 0
@@ -3953,7 +4156,7 @@ state invulnicon
     }
     else setactor[THISACTOR].cstat 32768 // Sets Invisible
    }
-   else
+   else // If the player IS in a vehicle, check it's invuln timer instead
    {
     getactorvar[tempvehicleid].ENEMYINVULNTIME TEMP
     ifvarg TEMP 0
@@ -3964,7 +4167,7 @@ state invulnicon
     else setactor[THISACTOR].cstat 32768 // Sets Invisible
    }
   }
-  else
+  else // The activator is NOT a Player, but either an NPC or monster
   {
    getactorvar[PARENTID].ENEMYINVULNTIME TEMP
    ifvarg TEMP 0
@@ -28747,15 +28950,6 @@ state iconstripconditions
 ends
 
 state artipickupsounds
-/*
- ifvare CHARACTERSELECTED? 1 // Duke
- {
-  ifrnd 85 sound WAR_AMBIENCE10 
-  else ifrnd 128 sound WAR_AMBIENCE5 
-  else sound WAR_AMBIENCE8
- }
- else
-*/
  ifvare CHARACTERSELECTED? 5 // Lo Wang
  {
   ifrnd 32 sound WANG_GRABART8

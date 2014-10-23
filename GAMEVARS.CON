@@ -23,6 +23,11 @@ gamevar STARTSTATDIVISOR 1 131072 //
 
 gamevar INVENTORYSLOTMAX 1 132098 // 
 
+gamevar INVULNREFLECTRATE 1000 0 // % of base damage deflected by invulnerabilities [1000 = 100.0%, 0 = No Reflection at all]
+gamevar INVULNHEALTHDRAIN 2001 0 // % of health drained per tick [1000 = 100.0% [AP/Defense-ignoring] HP damage/tic, >2000 = Instant Death [HP and AP set to 0], 0 = No Damage/Death when close]
+gamevar TEMPCOUNT 0 0
+gamevar TEMPCOUNT2 0 0
+
 //*******************************************************************************************************************************************************************************
 //*******************************************************************************************************************************************************************************
 
@@ -1466,21 +1471,21 @@ gamevar upperlefthandlegend 1 131073
 gamevar weapontoggleselect 0 131073 // 0 = character toggle, 1 = weapon toggle
 gamevar statusdisplaytoggle 1 131073
 gamevar miscdisplaytoggle 1 131073
- // 0 			= Nothing turned on
- // 1 			= Damage Displays Only
- // 2 			= Stat-Increase Displays Only
+ // 0 				= Nothing turned on
+ // 1 				= Damage Displays Only
+ // 2 				= Stat-Increase Displays Only
  // 3  [1+2]		= Damage and Stat Increase Displays
- // 4 			= Money-Get Displays Only
+ // 4 				= Money-Get Displays Only
  // 5  [1+4]		= Damage Displays and Money-Get
  // 6  [2+4]		= Stat-Increase and Money-Get
- // 7  [1+2+4]	= Damage, Stat-Increase and Money-Get
- // 8			= Reward Displays Only
+ // 7  [1+2+4]		= Damage, Stat-Increase and Money-Get
+ // 8				= Reward Displays Only
  // 9  [1+8]		= Damage and Reward Displays
  // 10 [2+8]		= Stat-Increase and Reward Displays
- // 11 [1+2+8]	= Damage, Stat-Increase and Reward Displays 
+ // 11 [1+2+8]		= Damage, Stat-Increase and Reward Displays 
  // 12 [4+8]		= Money-Get and Reward Displays 
- // 13 [1+4+8]	= Damage, Money-Get and Reward Displays 
- // 14 [2+4+8]	= Stat-Increase, Money-Get and Reward Displays 
+ // 13 [1+4+8]		= Damage, Money-Get and Reward Displays 
+ // 14 [2+4+8]		= Stat-Increase, Money-Get and Reward Displays 
  // 15 [1+2+4+8]	= All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
 gamevar characterstattoggle 1 131073 // Determines if the stats for the current character will display [Level, EXP, Speed, Attack, Etc]
 gamevar debugtoggle 0 131073 // Determines if the Debug Variables will show or not. 0 = No, 1 = Yes.
