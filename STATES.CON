@@ -3700,6 +3700,18 @@ state invulndrainplayer
              ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
              state bioshieldhitsounds
              palfrom 32 0 0 64
+
+             getplayer[THISACTOR].over_shoulder_on SHOWDAMAGEPLAYER
+             ifvarn SHOWDAMAGEPLAYER 0
+             {
+              ifvarg TEMPVAR5 0
+              {
+               setvarvar SHOWDAMAGE TEMPVAR5
+               setvar SHOWDAMAGETYPE 2
+               setvarvar SHOWDAMAGEACTORID INVULNAURATARGET
+               state showdamage
+              }
+             }
             }
             else
             {
@@ -3718,6 +3730,18 @@ state invulndrainplayer
              setvar PLAYERDISPLAYARMORDAMAGE 0 
              setvar ARMORDAMAGETIMER 53 
              state checkbuddhamode
+
+             getplayer[THISACTOR].over_shoulder_on SHOWDAMAGEPLAYER
+             ifvarn SHOWDAMAGEPLAYER 0
+             {
+              ifvarg TEMPVAR5 0
+              {
+               setvarvar SHOWDAMAGE TEMPVAR5
+               setvar SHOWDAMAGETYPE 0
+               setvarvar SHOWDAMAGEACTORID INVULNAURATARGET
+               state showdamage
+              }
+             }
             }
             setactor[INVULNAURATARGET].htowner THISACTOR
             setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
@@ -3919,6 +3943,14 @@ ifvare mainmenu 0
            setvarvar TEMPHITENEMYVARHP TEMPVAR5
            setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
            setvar DEFENDERDISPLAYTIMER 0
+
+           ifvarg TEMPVAR7 0
+           {
+            setvarvar SHOWDAMAGE TEMPVAR7
+            setvar SHOWDAMAGETYPE 0
+            setvarvar SHOWDAMAGEACTORID INVULNAURATARGET
+            state showdamage
+           }
           }
          }
         }
@@ -4016,6 +4048,18 @@ ifvare mainmenu 0
          setvarvar SYSDIFFANGLE ATTACKERANGLE
          subvarvar SYSDIFFANGLE PLAYERHITANGLE
          ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+
+         getplayer[THISACTOR].over_shoulder_on SHOWDAMAGEPLAYER
+         ifvarn SHOWDAMAGEPLAYER 0
+         {
+          ifvarg TEMPVAR7 0
+          {
+           setvarvar SHOWDAMAGE TEMPVAR7
+           setvar SHOWDAMAGETYPE 0
+           setvarvar SHOWDAMAGEACTORID INVULNAURATARGET
+           state showdamage
+          }
+         }
         }
        }
 
