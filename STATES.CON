@@ -3640,7 +3640,7 @@ state invulndrainplayer
            addvar TEMPCOUNT2 1
            ifvarg TEMPCOUNT2 35
            {
-            ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT2
+            //addlogvar TEMPCOUNT2
             setvar TEMPCOUNT2 0
             ifvare TEMPVAR8 1
             {
@@ -3881,44 +3881,48 @@ ifvare mainmenu 0
        canseespr THISACTOR INVULNAURATARGET temp
        ifvare temp 1
        {
-        addvar TEMPCOUNT2 1
 
-        ifvarg TEMPCOUNT2 7
+        ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 // if between 1 & 2000, set a % drain for damage per tic
         {
-         ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT2
-         setvar TEMPCOUNT2 0
-         ifvarg INVULNHEALTHDRAIN 2000 // Instant Kill Effect
+         addvar TEMPCOUNT2 1
+         ifvarg TEMPCOUNT2 7
          {
-          setactor[INVULNAURATARGET].htowner THISACTOR
-          setactor[INVULNAURATARGET].htextra 1
-          setactor[INVULNAURATARGET].htpicnum INVULNICON
-         }
-         else // Health Drain Effect
-         {
-          getactorvar[INVULNAURATARGET].ENEMYMAXHP TEMPVAR5
-          setvarvar TEMPVAR7 TEMPVAR5
-          mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
-          divvar TEMPVAR7 1000
-          ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
-          getactorvar[INVULNAURATARGET].ENEMYHP TEMPVAR5
-          subvarvar TEMPVAR5 TEMPVAR7
-          setactorvar[INVULNAURATARGET].ENEMYHP TEMPVAR5
-          setactor[INVULNAURATARGET].htowner THISACTOR
-
-          ifvarg TEMPVAR7 0 
+          //addlogvar TEMPCOUNT2
+          setvar TEMPCOUNT2 0
+          ifvarg INVULNHEALTHDRAIN 2000 // Instant Kill Effect
           {
-           setvar ENEMYNULLDAMAGE 0
-           setvar ENEMYARMORDISPLAYTIMER 53
+           setactor[INVULNAURATARGET].htowner THISACTOR
+           setactor[INVULNAURATARGET].htextra 1
+           setactor[INVULNAURATARGET].htpicnum INVULNICON
           }
-          getactor[INVULNAURATARGET].picnum DEFENDINGACTORDEBUG
-          getactor[INVULNAURATARGET].pal DEFENDINGACTORPAL
-          setvarvar DAMAGETEMP TEMPVAR7 
-          getactorvar[INVULNAURATARGET].ENEMYMAXHP TEMPVAR5
-          setvarvar TEMPHITENEMYVARHP TEMPVAR5
-          setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
-          setvar DEFENDERDISPLAYTIMER 0
+          else // Health Drain Effect
+          {
+           getactorvar[INVULNAURATARGET].ENEMYMAXHP TEMPVAR5
+           setvarvar TEMPVAR7 TEMPVAR5
+           mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
+           divvar TEMPVAR7 1000
+           ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
+           getactorvar[INVULNAURATARGET].ENEMYHP TEMPVAR5
+           subvarvar TEMPVAR5 TEMPVAR7
+           setactorvar[INVULNAURATARGET].ENEMYHP TEMPVAR5
+           setactor[INVULNAURATARGET].htowner THISACTOR
+
+           ifvarg TEMPVAR7 0 
+           {
+            setvar ENEMYNULLDAMAGE 0
+            setvar ENEMYARMORDISPLAYTIMER 53
+           }
+           getactor[INVULNAURATARGET].picnum DEFENDINGACTORDEBUG
+           getactor[INVULNAURATARGET].pal DEFENDINGACTORPAL
+           setvarvar DAMAGETEMP TEMPVAR7 
+           getactorvar[INVULNAURATARGET].ENEMYMAXHP TEMPVAR5
+           setvarvar TEMPHITENEMYVARHP TEMPVAR5
+           setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+           setvar DEFENDERDISPLAYTIMER 0
+          }
          }
         }
+
        }
       }
       else soundonce INVULNITEM3
@@ -3978,41 +3982,44 @@ ifvare mainmenu 0
       }
       else
       {
-       addvar TEMPCOUNT2 1
-       ifvarg TEMPCOUNT2 35
+       ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 // if between 1 & 2000, set a % drain for damage per tic
        {
-        ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT2
-        setvar TEMPCOUNT2 0
-
-        getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
-        setvarvar TEMPVAR7 TEMPVAR5
-        mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
-        divvar TEMPVAR7 1000
-        ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
-        getactorvar[tempvehicleid].ENEMYHP TEMPVAR5
-        subvarvar TEMPVAR5 TEMPVAR7
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR5
-        setactor[tempvehicleid].htowner THISACTOR
-
-        setvarvar PLAYERDAMAGETEMP TEMPVAR7
-        setvar HEALTHDAMAGETIMER 0
-        setvar NULLDAMAGE 0
-
-        setvar PLAYERDISPLAYARMORDAMAGE 0 
-        setvar ARMORDAMAGETIMER 53 
-
-        setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
-        setvar ATTACKERDISPLAYTIMER 0
-        getactor[THISACTOR].picnum ATTACKINGACTORPICNUM
-        getactor[THISACTOR].pal ATTACKINGACTORPAL
-        getactor[THISACTOR].ang ATTACKERANGLE
-        getactor[PLAYERID].ang PLAYERHITANGLE
-        setvarvar SYSDIFFANGLE ATTACKERANGLE
-        subvarvar SYSDIFFANGLE PLAYERHITANGLE
-        ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+        addvar TEMPCOUNT2 1
+        ifvarg TEMPCOUNT2 35
+        {
+         //addlogvar TEMPCOUNT2
+         setvar TEMPCOUNT2 0
+ 
+         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         setvarvar TEMPVAR7 TEMPVAR5
+         mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
+         divvar TEMPVAR7 1000
+         ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
+         getactorvar[tempvehicleid].ENEMYHP TEMPVAR5
+         subvarvar TEMPVAR5 TEMPVAR7
+         setactorvar[tempvehicleid].ENEMYHP TEMPVAR5
+         setactor[tempvehicleid].htowner THISACTOR
+ 
+         setvarvar PLAYERDAMAGETEMP TEMPVAR7
+         setvar HEALTHDAMAGETIMER 0
+         setvar NULLDAMAGE 0
+ 
+         setvar PLAYERDISPLAYARMORDAMAGE 0 
+         setvar ARMORDAMAGETIMER 53 
+ 
+         setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+         setvar ATTACKERDISPLAYTIMER 0
+         getactor[THISACTOR].picnum ATTACKINGACTORPICNUM
+         getactor[THISACTOR].pal ATTACKINGACTORPAL
+         getactor[THISACTOR].ang ATTACKERANGLE
+         getactor[PLAYERID].ang PLAYERHITANGLE
+         setvarvar SYSDIFFANGLE ATTACKERANGLE
+         subvarvar SYSDIFFANGLE PLAYERHITANGLE
+         ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+        }
        }
-      }
 
+      }
      }
      else soundonce INVULNITEM3
     }
@@ -5512,6 +5519,8 @@ state initializer
  readgamevar weapontoggleselect
  readgamevar upperlefthandlegend
  readgamevar AUTOSAVEFREQUENCY
+ readgamevar INVULNREFLECTRATE
+ readgamevar INVULNHEALTHDRAIN
  readgamevar WORLDTILEBITFIELD1
  readgamevar WORLDTILEBITFIELD2
  readgamevar WORLDTILEBITFIELD3

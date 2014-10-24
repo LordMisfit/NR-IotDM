@@ -947,7 +947,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
        ifvare mainmenusubmenu 2 // Toggles
        {
         subvar mainmenuselection 1
-        ifvarl mainmenuselection 0 addvar mainmenuselection 14
+        ifvarl mainmenuselection 0 addvar mainmenuselection 16
         sound KICK_HIT // EXITMENUSOUND
        }
        ifvare mainmenusubmenu 3 state menuerrorsound // Status
@@ -1152,7 +1152,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       ifvare mainmenusubmenu 2 // Toggle
       {
        addvar mainmenuselection 1
-       ifvarg mainmenuselection 13 subvar mainmenuselection 14
+       ifvarg mainmenuselection 15 subvar mainmenuselection 16
        sound KICK_HIT // EXITMENUSOUND
       }
       ifvare mainmenusubmenu 3 state menuerrorsound // Status
@@ -1370,6 +1370,22 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
                state reset_autosavetimes
               }
              }
+             ifvare mainmenuselection 14
+             {
+              subvar INVULNREFLECTRATE 1
+              ifvarl INVULNREFLECTRATE 0 setvar INVULNREFLECTRATE 0
+              savegamevar INVULNREFLECTRATE
+             }
+             ifvare mainmenuselection 15
+             {
+              ifvare INVULNHEALTHDRAIN 2001 setvar INVULNHEALTHDRAIN 2000
+              else
+              {
+               subvar INVULNHEALTHDRAIN 1
+               ifvarl INVULNHEALTHDRAIN 0 setvar INVULNHEALTHDRAIN 0
+               savegamevar INVULNHEALTHDRAIN
+              }
+             }
              sound PISTOL_BODYHIT
             }
             ifvare mainmenusubmenu 3 // Status
@@ -1496,10 +1512,26 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
              {
               ifvare autosavetoggle 1
               {
-               subvar AUTOSAVEFREQUENCY 1
+               subvar AUTOSAVEFREQUENCY 10
                ifvarl AUTOSAVEFREQUENCY 0 addvar AUTOSAVEFREQUENCY 121
                savegamevar AUTOSAVEFREQUENCY
                state reset_autosavetimes
+              }
+             }
+             ifvare mainmenuselection 14
+             {
+              subvar INVULNREFLECTRATE 10
+              ifvarl INVULNREFLECTRATE 0 setvar INVULNREFLECTRATE 0
+              savegamevar INVULNREFLECTRATE
+             }
+             ifvare mainmenuselection 15
+             {
+              ifvare INVULNHEALTHDRAIN 2001 setvar INVULNHEALTHDRAIN 2000
+              else
+              {
+               subvar INVULNHEALTHDRAIN 10
+               ifvarl INVULNHEALTHDRAIN 0 setvar INVULNHEALTHDRAIN 0
+               savegamevar INVULNHEALTHDRAIN
               }
              }
              sound PISTOL_BODYHIT
@@ -1634,6 +1666,23 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
                state reset_autosavetimes
               }
              }
+             ifvare mainmenuselection 14
+             {
+              addvar INVULNREFLECTRATE 1
+              ifvarg INVULNREFLECTRATE 2000 setvar INVULNREFLECTRATE 2000
+              savegamevar INVULNREFLECTRATE
+             }
+             ifvare mainmenuselection 15
+             {
+              ifvare INVULNHEALTHDRAIN 2001 nullop
+              else ifvare INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2001
+              else
+              {
+               addvar INVULNHEALTHDRAIN 1
+               ifvarg INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2000
+              }
+              savegamevar INVULNHEALTHDRAIN
+             }
              sound PISTOL_BODYHIT
             }
             ifvare mainmenusubmenu 3 // Status
@@ -1760,11 +1809,28 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
              {
               ifvare autosavetoggle 1
               {
-               addvar AUTOSAVEFREQUENCY 1
+               addvar AUTOSAVEFREQUENCY 10
                ifvarg AUTOSAVEFREQUENCY 120 subvar AUTOSAVEFREQUENCY 121
                savegamevar AUTOSAVEFREQUENCY
                state reset_autosavetimes
               }
+             }
+             ifvare mainmenuselection 14
+             {
+              addvar INVULNREFLECTRATE 10
+              ifvarg INVULNREFLECTRATE 2000 setvar INVULNREFLECTRATE 2000
+              savegamevar INVULNREFLECTRATE
+             }
+             ifvare mainmenuselection 15
+             {
+              ifvare INVULNHEALTHDRAIN 2001 nullop
+              else ifvare INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2001
+              else
+              {
+               addvar INVULNHEALTHDRAIN 10
+               ifvarg INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2000
+              }
+              savegamevar INVULNHEALTHDRAIN
              }
              sound PISTOL_BODYHIT
             }
