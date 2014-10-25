@@ -1,5 +1,3 @@
-- [WORKING ON NOW] Make Invulnerability have different balance options, such as 'no reflection/instant-kill' and 'drain health on touch instead of kill' or different ratios of damage-reflection
-
 - MAKE THE DAMN SLOT MACHINE MINIGAME :P
 - Corrosion Ailment for 'Armor Poison' [based on DoomRPG]
 - Add alternate storyline route mode if all worldtiles are detected as found at least once.

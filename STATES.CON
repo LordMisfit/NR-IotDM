@@ -3906,7 +3906,7 @@ ifvare mainmenu 0
        ifvare temp 1
        {
 
-        ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 // if between 1 & 2000, set a % drain for damage per tic
+        ifvarg INVULNHEALTHDRAIN 0 // if between 1 & 2000, set a % drain for damage per tic
         {
          addvar TEMPCOUNT2 1
          ifvarg TEMPCOUNT2 7
