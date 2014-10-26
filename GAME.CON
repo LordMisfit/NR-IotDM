@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git80)
-definequote 1337 ^22VERSION:^0 5.22.git80.10242014
+setgamename Naferia's Reign (5.22.git81)
+definequote 1337 ^22VERSION:^0 5.22.git81.10262014
 
 action ANULLACTION 0
 
@@ -51760,6 +51760,7 @@ ifvarn lotagsav 0
   ifvarl hitagsav 1 { randvar hitagsav 14 addvar hitagsav 1 }
   ifvarg hitagsav 15 { randvar hitagsav 14 addvar hitagsav 1 }
   setvarvar CHARACTERSELECTED? hitagsav
+  getplayer[THISACTOR].player_par TEMPVAR4 addlogvar TEMPVAR4
   killit
  }
 }
