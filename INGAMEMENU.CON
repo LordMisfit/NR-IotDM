@@ -1756,6 +1756,7 @@ ifvare mainmenu 1
     {
      ifvare debugtoggle 0 redefinequote 332 DEBUGGING VARS NOT ON SCREEN.
      ifvare debugtoggle 1 redefinequote 332 DEBUGGING VARS ON SCREEN.
+     ifvare debugtoggle 2 redefinequote 332 DEBUGGING VARS ON SCREEN.
     }
     ifvare mainmenuselection 3 
     {
@@ -5426,7 +5427,8 @@ ifvare mainmenusubmenu 2
   // Debug Displays [Right Side]
   addvar digy 8
   ifvare debugtoggle 0 redefinequote 332 OFF
-  ifvare debugtoggle 1 redefinequote 332 ON
+  ifvare debugtoggle 1 redefinequote 332 ON [1]
+  ifvare debugtoggle 2 redefinequote 332 ON [2]
   ifvare mainmenuselection 2 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 

@@ -3911,7 +3911,7 @@ else
      // display the actual speed [ ([CHARACTERSPEEDTRUE - 46500 ] / CHARACTERSPEEDVAL (145) = CHARACTERSPEEDVAR), so '50' is Duke's normal speed with a runspeed of 53200 ]
      setvar digy 187
      setvar digx 22
-     ifvare debugtoggle 1 setvarvar CHARACTERSPEEDVISUAL CHARACTERSPEEDDEBUG else setvarvar CHARACTERSPEEDVISUAL CHARACTERSPEEDSTAT
+     ifvarg debugtoggle 0 setvarvar CHARACTERSPEEDVISUAL CHARACTERSPEEDDEBUG else setvarvar CHARACTERSPEEDVISUAL CHARACTERSPEEDSTAT
      setvarvar varname CHARACTERSPEEDVISUAL
      ifvarg PLAYERATTACK -1 ifvarl PLAYERATTACK 10 addvar digx 21
      else ifvarg PLAYERATTACK 9 ifvarl PLAYERATTACK 100 addvar digx 25
@@ -3970,7 +3970,7 @@ else
       else ifvarg PLAYERDEFENSE 99999 ifvarl PLAYERDEFENSE 1000000 addvar digx 41
       else ifvarg PLAYERDEFENSE 999999 ifvarl PLAYERDEFENSE 10000000 addvar digx 45
       else ifvarg PLAYERDEFENSE 9999999 ifvarl PLAYERDEFENSE 100000000 addvar digx 49
-      ifvarn debugtoggle 1
+      ifvare debugtoggle 0
       {
        ifvarg CHARACTERSPEEDVISUAL -1 ifvarl CHARACTERSPEEDVISUAL 10 addvar digx 21
        else ifvarg CHARACTERSPEEDVISUAL 9 ifvarl CHARACTERSPEEDVISUAL 100 addvar digx 25
@@ -4015,7 +4015,7 @@ else
       else ifvarg PLAYERDEFENSE 99999 ifvarl PLAYERDEFENSE 1000000 addvar digx 41
       else ifvarg PLAYERDEFENSE 999999 ifvarl PLAYERDEFENSE 10000000 addvar digx 45
       else ifvarg PLAYERDEFENSE 9999999 ifvarl PLAYERDEFENSE 100000000 addvar digx 49
-      ifvarn debugtoggle 1
+      ifvare debugtoggle 0
       {
        ifvarg CHARACTERSPEEDVISUAL -1 ifvarl CHARACTERSPEEDVISUAL 10 addvar digx 21
        else ifvarg CHARACTERSPEEDVISUAL 9 ifvarl CHARACTERSPEEDVISUAL 100 addvar digx 25
@@ -5816,7 +5816,7 @@ else
       setvarvar SPDINCREASEDPART SPDINCREASED
       modvarvar SPDINCREASEDPART SPDINCREASEDDIV
       qsprintf 721 724 SPDINCREASEDWHOLE SPDINCREASEDPART SPDINCREASEDDIV
-      ifvare debugtoggle 1 setvar temp 208 else setvar temp 721
+      ifvarg debugtoggle 0 setvar temp 208 else setvar temp 721
       setvar textscale 48152
       mulvar textscale 750
       divvar textscale 1000
@@ -5843,7 +5843,7 @@ else
       setvarvar AIRINCREASEDPART AIRINCREASED
       modvarvar AIRINCREASEDPART AIRINCREASEDDIV
       qsprintf 722 725 AIRINCREASEDWHOLE AIRINCREASEDPART AIRINCREASEDDIV
-      ifvare debugtoggle 1 setvar temp 709 else setvar temp 722
+      ifvarg debugtoggle 0 setvar temp 709 else setvar temp 722
       setvar textscale 48152
       mulvar textscale 750
       divvar textscale 1000
@@ -5869,7 +5869,7 @@ else
       setvarvar MNTINCREASEDPART MNTINCREASED
       modvarvar MNTINCREASEDPART MNTINCREASEDDIV
       qsprintf 723 726 MNTINCREASEDWHOLE MNTINCREASEDPART MNTINCREASEDDIV
-      ifvare debugtoggle 1 setvar temp 710 else setvar temp 723
+      ifvarg debugtoggle 0 setvar temp 710 else setvar temp 723
       setvar textscale 48152
       mulvar textscale 750
       divvar textscale 1000
@@ -9724,7 +9724,7 @@ else
      }
 
      // Debug
-     ifvare debugtoggle 1
+     ifvarg debugtoggle 0
      {
       // varname DEBUGAIRTIME
       getplayervar[THISACTOR].AIRTIME varname
@@ -9817,7 +9817,7 @@ else
       }
 
       // Debug
-      ifvare debugtoggle 1
+      ifvarg debugtoggle 0
       {
        getplayervar[THISACTOR].AIRTIME varname
        setvar digx 146 // 164
@@ -10457,7 +10457,7 @@ else
        setvar tilenum 3087 // Blue Digital Text
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
        state settile3010
-       ifvarn debugtoggle 1 divvar varname 4 // 4
+       ifvare debugtoggle 0 divvar varname 4 // 4
        state orientation17
        state dnz
 
@@ -10606,7 +10606,7 @@ else
          addvarvar digy -6
          setvar digx 311
          state settile3010
-         ifvarn debugtoggle 1 divvar varname 12 // 12
+         ifvare debugtoggle 0 divvar varname 12 // 12
          state orientation17
          setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
          state dnz
@@ -10617,7 +10617,7 @@ else
         addvarvar digy -6
         setvar digx 311
         state settile3010
-        ifvarn debugtoggle 1 divvar varname 12 // 12
+        ifvare debugtoggle 0 divvar varname 12 // 12
         state orientation17
         setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
         state dnz
@@ -10750,7 +10750,7 @@ else
        addvarvar digy -10
        ifvarn VEHICLEID -1 state pal2 else state pal0
        state settile3010
-       ifvarn debugtoggle 1 divvar varname 16 // 16
+       ifvare debugtoggle 0 divvar varname 16 // 16
        state orientation17
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
        state dnz
@@ -10851,7 +10851,7 @@ else
        setvar digy 123
        addvarvar digy -14
        state settile3010
-       ifvarn debugtoggle 1 divvar varname 24 // 24
+       ifvare debugtoggle 0 divvar varname 24 // 24
        state orientation17
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
        state dnz
@@ -10967,7 +10967,7 @@ else
        setvar digy 144
        addvarvar digy -18
        state settile3010
-       ifvarn debugtoggle 1 divvar varname 64 // 64
+       ifvare debugtoggle 0 divvar varname 64 // 64
        state pal17
        state orientation17
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
@@ -11032,7 +11032,7 @@ else
        setvar digy 165
        addvarvar digy -23
        state settile3010
-       ifvarn debugtoggle 1 divvar varname 2 // 2
+       ifvare debugtoggle 0 divvar varname 2 // 2
        state pal17
        state orientation17
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
@@ -11139,7 +11139,7 @@ else
        setvar textscale 65536 mulvar textscale 750 divvar textscale 1000
        state dnz
 
-       ifvare debugtoggle 1
+       ifvarg debugtoggle 0
        {
         setvar digx 311
         setvar digy 181
@@ -13038,7 +13038,7 @@ else
      {
       state pal15
       setvar digx 352
-      setvar digy 28
+      setvar digy 2
       setvarvar varname PLAYERLIFTSTRENGTH
       redefinequote 332 BASE LIFT STR: %d LBS
       qsprintf 332 332 varname
@@ -13376,7 +13376,6 @@ else
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
-/*
       addvar digy 4
       getplayer[THISACTOR].autostep varname
       redefinequote 332 AUTOSTEP: ^21%d
@@ -13389,7 +13388,7 @@ else
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
-*/
+
      }
     }
 
@@ -13699,6 +13698,7 @@ else
       state gtz // state dnz
 
       setvar digx 356 // 294
+      addvar digx 32
       setvar digy 2
       addvar digy 4
       getactor[hitsprite].xrepeat varname
@@ -13725,12 +13725,6 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactor[hitsprite].httimetosleep varname
-      redefinequote 332 .HTTIMETOSLEEP: ^21%d
-      qsprintf 332 332 varname
-      setvar temp 332
-      state gtz // state dnz
-      addvar digy 4
       getactor[hitsprite].lotag varname
       redefinequote 332 .LOTAG: ^21%d
       qsprintf 332 332 varname
@@ -13739,18 +13733,6 @@ else
       addvar digy 4
       getactor[hitsprite].hitag varname
       redefinequote 332 .HITAG: ^21%d
-      qsprintf 332 332 varname
-      setvar temp 332
-      state gtz // state dnz
-      addvar digy 4
-      getactor[hitsprite].htpicnum varname
-      redefinequote 332 .HTPICNUM: ^21%d
-      qsprintf 332 332 varname
-      setvar temp 332
-      state gtz // state dnz
-      addvar digy 4
-      getactor[hitsprite].htowner varname
-      redefinequote 332 .HTOWNER: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
@@ -13796,24 +13778,29 @@ else
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
-      addvar digy 4
-      getactorvar[hitsprite].ITEMDROPPEDTIME varname
-      redefinequote 332 ITEM DROPPED TIME: ^21%d
-      qsprintf 332 332 varname
-      setvar temp 332
-      state gtz // state dnz
-      addvar digy 4
+
       getactorvar[hitsprite].ITEMWASDROPPED? varname
-      redefinequote 332 ITEM WAS DROPPED?: ^21%d
-      qsprintf 332 332 varname
-      setvar temp 332
-      state gtz // state dnz
-      addvar digy 4
-      getactorvar[hitsprite].ITEMDROPTIMER varname
-      redefinequote 332 DROPPED ITEM LIFESPAN: ^21%d
-      qsprintf 332 332 varname
-      setvar temp 332
-      state gtz // state dnz
+      ifvarg varname 0 
+      {
+       addvar digy 4
+       redefinequote 332 ITEM WAS DROPPED?: ^21%d
+       qsprintf 332 332 varname
+       setvar temp 332
+       state gtz // state dnz
+       addvar digy 4
+       getactorvar[hitsprite].ITEMDROPPEDTIME varname
+       redefinequote 332 ITEM DROPPED TIME: ^21%d
+       qsprintf 332 332 varname
+       setvar temp 332
+       state gtz // state dnz
+       addvar digy 4
+       getactorvar[hitsprite].ITEMDROPTIMER varname
+       redefinequote 332 DROPPED ITEM LIFESPAN: ^21%d
+       qsprintf 332 332 varname
+       setvar temp 332
+       state gtz // state dnz
+      }
+ 
       addvar digy 4
       getactorvar[hitsprite].FROZEN? varname
       redefinequote 332 FROZEN?: ^21%d
@@ -13822,43 +13809,176 @@ else
       state gtz // state dnz
       addvar digy 4
       getactorvar[hitsprite].FROZENTIMER varname
-      redefinequote 332 FROZEN-TIMER: ^21%d
+      redefinequote 332 FROZENTIMER: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
+
       getactorvar[hitsprite].ENEMYIDLOCAL varname
-      redefinequote 332 ENEMY ID#: ^21%d
+      redefinequote 332 ENEMYID#: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      
       addvar digy 4
       getactorvar[hitsprite].ACTORSHEIGHT varname
-      redefinequote 332 ACTOR'S PIXEL HEIGHT: ^21%d
+      redefinequote 332 .ACTORPIXELHEIGHT: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      
       addvar digy 4
       getactorvar[hitsprite].ACTORSWIDTH varname
-      redefinequote 332 ACTOR'S PIXEL WIDTH: ^21%d
+      redefinequote 332 .ACTORPIXELWIDTH: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      
       addvar digy 4
       getactor[hitsprite].x varname
-      redefinequote 332 ACTOR'S X-COORD: ^21%d
+      redefinequote 332 .X: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      
       addvar digy 4
       getactor[hitsprite].y varname
-      redefinequote 332 ACTOR'S Y-COORD: ^21%d
+      redefinequote 332 .Y: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      
       addvar digy 4
       getactor[hitsprite].z varname
-      redefinequote 332 ACTOR'S Z-COORD: ^21%d
+      redefinequote 332 .Z: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htbposx varname
+      redefinequote 332 .HTBPOSX: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htbposy varname
+      redefinequote 332 .HTBPOSY: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htbposz varname
+      redefinequote 332 .HTBPOSZ: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htdispicnum varname
+      redefinequote 332 .HTDISPICNUM: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htextra varname
+      redefinequote 332 .HTEXTRA: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htlastvx varname
+      redefinequote 332 .HTLASTVX: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htlastvy varname
+      redefinequote 332 .HTLASTVY: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htmovflag varname
+      redefinequote 332 .HTMOVFLAG: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
+      getactor[hitsprite].htowner varname
+      redefinequote 332 .HTOWNER: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
+      getactor[hitsprite].htpicnum varname
+      redefinequote 332 .HTPICNUM: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
+      getactor[hitsprite].httempang varname
+      redefinequote 332 .HTTEMPANG: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
+      getactor[hitsprite].httimetosleep varname
+      redefinequote 332 .HTTIMETOSLEEP: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
+      getactor[hitsprite].htg_t 0 varname
+      redefinequote 332 .HTG_T 0: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 1 varname
+      redefinequote 332 .HTG_T 1: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 2 varname
+      redefinequote 332 .HTG_T 2: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 3 varname
+      redefinequote 332 .HTG_T 3: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 4 varname
+      redefinequote 332 .HTG_T 4: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 5 varname
+      redefinequote 332 .HTG_T 5: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 6 varname
+      redefinequote 332 .HTG_T 6: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 7 varname
+      redefinequote 332 .HTG_T 7: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 8 varname
+      redefinequote 332 .HTG_T 8: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz      
+      addvar digy 4
+      getactor[hitsprite].htg_t 9 varname
+      redefinequote 332 .HTG_T 9: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz      
@@ -13866,7 +13986,7 @@ else
 
      ifvarn hitwall -1 state orientation27 else state orientation59
      setvar digx 2
-     setvar digy 16
+     setvar digy 2
      state pal20
      setvarvar varname hitwall
      redefinequote 332 WALL ID: ^21%d
@@ -14217,30 +14337,12 @@ else
 
      addvar digx 0 // 110
      addvar digy 4 // 53
-     getplayer[THISACTOR].pals 0 varname
-     redefinequote 332 .PALS 0: ^21%d
-     qsprintf 332 332 varname
-     setvar temp 332
-     state gtz // state dn
-     addvar digx 0 // 110
-     addvar digy 4 // 53
-     getplayer[THISACTOR].pals 1 varname
-     redefinequote 332 .PALS 1: ^21%d
-     qsprintf 332 332 varname
-     setvar temp 332
-     state gtz // state dn
-     addvar digx 0 // 110
-     addvar digy 4 // 53
-     getplayer[THISACTOR].pals 2 varname
-     redefinequote 332 .PALS 2: ^21%d
-     qsprintf 332 332 varname
-     setvar temp 332
-     state gtz // state dn
-     addvar digx 0 // 110
-     addvar digy 4 // 53
-     getplayer[THISACTOR].pals_time varname
-     redefinequote 332 .PALS_TIME: ^21%d
-     qsprintf 332 332 varname
+     getplayer[THISACTOR].pals 0 TEMPVAR5 //Red [0-63]
+     getplayer[THISACTOR].pals 1 TEMPVAR6 //Green [0-63]
+     getplayer[THISACTOR].pals 2 TEMPVAR7 //Blue [0-63]
+     getplayer[THISACTOR].pals_time TEMPVAR8 //Intensity [0-63]
+     redefinequote 332 .PALS ^210^0/^221^0/^162^0/^20TIME^0: ^21%d^0/^22%d^0/^16%d^0/^20%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6 TEMPVAR7 TEMPVAR8
      setvar temp 332
      state gtz // state dn
 
@@ -14340,6 +14442,731 @@ else
      state settile3087 
 
    } // ifvare debugtoggle 1 [line 12070]
+
+   ifvare debugtoggle 2
+   { // ifvare debugtoggle 2
+    state settile3087 
+    state orientation27
+    setvar digx 200
+
+    setvar tilenum 2822 // 3072 
+    setvar digz 32768 // 54613 // 57344
+    setvar textscale 32768 // 54613 // 57344
+
+    setvarvar CHARACTERARRAY CHARACTERSELECTED?
+    setvar digx 2
+    setvar digy 0
+    state pal20
+    setvarvar varname CHARACTERSELECTED?
+    redefinequote 332 CHARACTERSELECTED?: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERTEMPLEVEL TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR6
+    redefinequote 332 ~TEMPLEVEL / ~LEVEL: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREXPPTS TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTEREXPPTSTONEXT TEMPVAR6
+    redefinequote 332 ~EXPPTS: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR6
+    redefinequote 332 ~HP: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMPVAR6
+    redefinequote 332 ~AP: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
+    redefinequote 332 ~APABSORB: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERMAXEP TEMPVAR6
+    redefinequote 332 ~EP: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERBREATHTIME TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME TEMPVAR6
+    redefinequote 332 ~BREATHTIME: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERMANTLETIME TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERMAXMANTLETIME TEMPVAR6
+    redefinequote 332 ~MANTLETIME: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAIRJUMPS TEMPVAR6
+    getactorvar[CHARACTERARRAY].CHARACTERAIRJUMPS TEMPVAR5
+    setvarvar TEMPVAR7 TEMPVAR6
+    subvarvar TEMPVAR7 TEMPVAR5
+    redefinequote 332 ~AIRJUMPS: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR7 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERFA varname
+    redefinequote 332 ~FA: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERATTACK varname
+    redefinequote 332 ~ATTACK: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERDEFENSE varname
+    redefinequote 332 ~DEFENSE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR5
+    setvarvar TEMPVAR6 TEMPVAR5
+    subvar TEMPVAR6 46500
+    divvar TEMPVAR6 145
+    redefinequote 332 ~SPEED: ^21%d ^20[^21%d^20]
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERCRITHITCHANCE varname
+    redefinequote 332 ~CRITHITCHANCE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSTATUS? varname
+    redefinequote 332 ~STATUS?: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERWEAPBITFIELD varname
+    redefinequote 332 ~WEAPBITFIELD: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERCURRWEAPON varname
+    redefinequote 332 ~CURRWEAPON: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME varname
+    redefinequote 332 ~JETPACKTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE varname
+    redefinequote 332 ~JETPACKTOGGLE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME varname
+    redefinequote 332 ~GOGGLESTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE varname
+    redefinequote 332 ~GOGGLESTOGGLE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSTEROIDSTIME varname
+    redefinequote 332 ~STEROIDSTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERBOOTSTIME varname
+    redefinequote 332 ~BOOTSTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERHOLOTIME varname
+    redefinequote 332 ~HOLOTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSCUBATIME varname
+    redefinequote 332 ~SCUBATIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERQUADTIME varname
+    redefinequote 332 ~QUADTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERINVULNTIME varname
+    redefinequote 332 ~INVULNTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERREGENTIME varname
+    redefinequote 332 ~REGENTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAPREGENTIME varname
+    redefinequote 332 ~APREGENTIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERVAMPIRETIME varname
+    redefinequote 332 ~VAMPIRETIME: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO1 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO1 TEMPVAR5
+     redefinequote 332 ~AMMO1: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO2 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO2 TEMPVAR5
+     redefinequote 332 ~AMMO2: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO3 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO3 TEMPVAR5
+     redefinequote 332 ~AMMO3: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO4 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO4 TEMPVAR5
+     redefinequote 332 ~AMMO4: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO5 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO5 TEMPVAR5
+     redefinequote 332 ~AMMO5: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO6 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAMMO6 TEMPVAR5
+    redefinequote 332 ~AMMO6: ^21%d ^20/ ^21%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO7 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO7 TEMPVAR5
+     redefinequote 332 ~AMMO7: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO8 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO8 TEMPVAR5
+     redefinequote 332 ~AMMO8: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO9 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO9 TEMPVAR5
+     redefinequote 332 ~AMMO9: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO10 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO10 TEMPVAR5
+     redefinequote 332 ~AMMO10: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO11 TEMPVAR6
+    ifvarg TEMPVAR6 0
+    {
+     addvar digy 4 // 53
+     getactorvar[CHARACTERARRAY].CHARACTERAMMO11 TEMPVAR5
+     redefinequote 332 ~AMMO11: ^21%d ^20/ ^21%d
+     qsprintf 332 332 TEMPVAR5 TEMPVAR6
+     setvar temp 332
+     state gtz // state dn
+    }
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSHRINKINGRESIST varname
+    redefinequote 332 ~SHRINKINGRESIST: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED varname
+    redefinequote 332 ~ENEMIESKILLED: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERDEATHS varname
+    redefinequote 332 ~DEATHS: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAUTOHPREGENTIMER varname
+    redefinequote 332 ~AUTOHPREGENTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER varname
+    redefinequote 332 ~AUTOEPREGENTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH varname
+    redefinequote 332 ~LIFTSTRENGTH: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERJUMPSTRENGTH varname
+    redefinequote 332 ~JUMPSTRENGTH: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERFALLRESIST varname
+    redefinequote 332 ~FALLRESIST: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+
+
+    setvar digx 256 // 270
+    setvar digy 0
+    getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS TEMPVAR6
+    ifvarg TEMPVAR6 -1 ifvarl TEMPVAR6 10 redefinequote 332 ~ATMMONEY: ^21$%d.0%d
+    else redefinequote 332 ~ATMMONEY: ^21$%d.%d
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE varname
+    redefinequote 332 ~ATMINTERESTRATE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERHASTETIMER varname
+    redefinequote 332 ~HASTETIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER varname
+    redefinequote 332 ~SLOWTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER varname
+    redefinequote 332 ~POISONTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER varname
+    redefinequote 332 ~DIMNESSTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERREFRACTORTIMER varname
+    redefinequote 332 ~REFRACTORTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERRAGNAROKTIMER varname
+    redefinequote 332 ~RAGNAROKTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER varname
+    redefinequote 332 ~CONFUSIONTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAQUAPROTECTTIMER varname
+    redefinequote 332 ~AQUAPROTECTTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSHELLTIMER varname
+    redefinequote 332 ~SHELLTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERBLITZKRIEGTIMER varname
+    redefinequote 332 ~BLITZKRIEGTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERBLOODLUSTTIMER varname
+    redefinequote 332 ~BLOODLUSTTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER varname
+    redefinequote 332 ~PSISHIELDTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERHPINCREASECURVE varname
+    redefinequote 332 ~HPINCREASECURVE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAPINCREASECURVE varname
+    redefinequote 332 ~APINCREASECURVE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREPINCREASECURVE varname
+    redefinequote 332 ~EPINCREASECURVE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERATKINCREASECURVE varname
+    redefinequote 332 ~ATKINCREASECURVE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERDEFINCREASECURVE varname
+    redefinequote 332 ~DEFINCREASECURVE: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTSUSED varname
+    redefinequote 332 ~SUPPORTSUSED: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTDUKE: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTJACK: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTBUBSY: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTAMI: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTLOWANG: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTESSENCE: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTTED: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTLISA: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTCYBANIS: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTNETHRA: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTPAULA: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTLORI: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTMINAKO: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTMYSTERY1: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN varname
+    ifvarn varname -1
+    {
+     addvar digy 4 // 53
+     redefinequote 332 ~SUPPORTMAKEN: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+    }
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 varname
+    redefinequote 332 ~EQUIPSLOTITEM1: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 varname
+    redefinequote 332 ~EQUIPSLOTITEM2: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 varname
+    redefinequote 332 ~EQUIPSLOTITEM3: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 varname
+    redefinequote 332 ~EQUIPSLOTITEM4: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 varname
+    redefinequote 332 ~EQUIPSLOTITEM5: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 varname
+    redefinequote 332 ~EQUIPSLOTITEM6: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 varname
+    redefinequote 332 ~EQUIPSLOTITEM7: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 varname
+    redefinequote 332 ~EQUIPSLOTITEM8: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERSHRINKTIMER varname
+    redefinequote 332 ~SHRINKTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERFREEZETIMER varname
+    redefinequote 332 ~FREEZETIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERDROWNDMGFACTOR varname
+    redefinequote 332 ~DROWNDMGFACTOR: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERWINTERCLOTHES varname
+    redefinequote 332 ~WINTERCLOTHES: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERTRANSFORMTIMER varname
+    redefinequote 332 ~TRANSFORMTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
+    state orientation27
+    state settile3087 
+   } // ifvare debugtoggle 2
+
    // END OF VERY IMPORTANT TESTING VARIABLES
    // END OF DEBUGGING MENU
 
@@ -14376,9 +15203,9 @@ else
  //*********************************************
  //*********************************************
 
- ifvare oldskoolmode 1 ifvarg TIMERRAWFORMAT 0
+ ifvarg oldskoolmode 0 ifvarg TIMERRAWFORMAT 0
  { // ifvare oldskoolmode 1 [line 15423]
-  ifvare debugtoggle 1
+  ifvarg debugtoggle 0
   {
    state settile3087
    state pal21

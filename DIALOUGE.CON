@@ -1253,7 +1253,7 @@ state dialouge-pausedgame
   setvar MISCARRAYID 57 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0  // pause-init
  }
 
- ifvare debugtoggle 1 
+ ifvarg debugtoggle 0 
  {
   state digx160
   state settile2837

@@ -6815,7 +6815,7 @@ ifvarg ENEMYHP 0
   {
    ifvare RADARARROWSET? 0 // Sets the arrow immediately instead of waiting for the actor to see you
    {
-    ifvare debugtoggle 1
+    ifvarg debugtoggle 0
     {
      espawn POINTERARROW // POINTERARROW is for when the actor can be seen on the Mercury Computer's Radar
      setactorvar[THISACTOR].POINTERICONCHILD RETURN
@@ -16910,7 +16910,7 @@ ifvarvarg RNDMIZER RNDMIZERLIMIT
    else
    ifvare CHARACTERSELECTED? 14
    {
-    ifvare debugtoggle 1 
+    ifvarg debugtoggle 0 
     {
      randvar RANDOMIZER 17
      ifvare RANDOMIZER 0
@@ -28298,7 +28298,7 @@ state characterusescannerfail
           else
           {
            ifvare debugtoggle 0 redefinequote 334 ^10??????? CANNOT ACCESS THIS SCANNER!
-           ifvare debugtoggle 1 redefinequote 334 ^10HINOTORI CANNOT ACCESS THIS SCANNER!          
+           ifvarg debugtoggle 0 redefinequote 334 ^10HINOTORI CANNOT ACCESS THIS SCANNER!          
           }
          }
          ifvare CHARACTERSELECTED? 15 redefinequote 334 ^10MAKEN CANNOT ACCESS THIS SCANNER!

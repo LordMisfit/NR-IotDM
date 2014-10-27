@@ -2295,7 +2295,7 @@ state shop_display
   setvar tilenum 3087 // setvar tilenum 3010
   state orientation27
   setvarvar varname shopownerhealth
-  ifvare debugtoggle 1 state dn
+  ifvarg debugtoggle 0 state dn
 
   ifvare shoptype 1 
   { 
@@ -2304,7 +2304,7 @@ state shop_display
    setvar tilenum 3087 // setvar tilenum 3010
    state orientation27
    setvarvar varname shopowner
-   ifvare debugtoggle 1 state dn
+   ifvarg debugtoggle 0 state dn
   }
 
   setvar digx 274
@@ -2312,7 +2312,7 @@ state shop_display
   setvar tilenum 3087 // setvar tilenum 3010
   state orientation27
   setvarvar varname shop_id
-  ifvare debugtoggle 1 state dn
+  ifvarg debugtoggle 0 state dn
 
   ifvare shoptype 1 
   { 
@@ -4469,7 +4469,7 @@ ifvare shop_id 0
     setvar shade 0
     state pal20
     setvarvar varname CHARACTERSPEEDTRUE
-    ifvare debugtoggle 1
+    ifvarg debugtoggle 0
     {
      setvar digx 300 // 224
      subvar digy 2 // setvar digy 152 // 146
@@ -5208,7 +5208,7 @@ ifvare shop_id 0
     subvar digy 2
     state pal0
     setvarvar varname MAXAIRTIME
-    ifvare debugtoggle 1
+    ifvarg debugtoggle 0
     {
      setvar digx 300 // 224
      setvar tilenum 3087 // setvar tilenum 3010
@@ -5267,7 +5267,7 @@ ifvare shop_id 0
     subvar digy 2
     state pal14
     setvarvar varname MANTLINGTIMERMAX
-    ifvare debugtoggle 1
+    ifvarg debugtoggle 0
     {
      setvar digx 300 // 224
      setvar tilenum 3087 // setvar tilenum 3010

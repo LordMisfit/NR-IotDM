@@ -1522,12 +1522,12 @@ else
              ifvare PUBLICBETA? 0
              {
               ifvare debugtoggle 0 redefinequote 836 ^20HOLONAFERIA ^14[+%d ADDED TO INVENTORY!]
-              ifvare debugtoggle 1 redefinequote 836 ^20HOLOHINOTORI ^14[+%d ADDED TO INVENTORY!]
+              ifvarg debugtoggle 0 redefinequote 836 ^20HOLOHINOTORI ^14[+%d ADDED TO INVENTORY!]
              }
              else
              {
               ifvare debugtoggle 0 redefinequote 836 ^20HOLO???????? ^14[+%d ADDED TO INVENTORY!]
-              ifvare debugtoggle 1 redefinequote 836 ^20HOLOHINOTORI ^14[+%d ADDED TO INVENTORY!]
+              ifvarg debugtoggle 0 redefinequote 836 ^20HOLOHINOTORI ^14[+%d ADDED TO INVENTORY!]
              }
             }
             ifvare CHARACTERSELECTED? 15 redefinequote 836 ^20HOLOMAKEN ^14[+%d ADDED TO INVENTORY!]

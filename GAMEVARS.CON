@@ -1488,7 +1488,7 @@ gamevar miscdisplaytoggle 1 131073
  // 14 [2+4+8]		= Stat-Increase, Money-Get and Reward Displays 
  // 15 [1+2+4+8]	= All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
 gamevar characterstattoggle 1 131073 // Determines if the stats for the current character will display [Level, EXP, Speed, Attack, Etc]
-gamevar debugtoggle 0 131073 // Determines if the Debug Variables will show or not. 0 = No, 1 = Yes.
+gamevar debugtoggle 0 131073 // Determines if the Debug Variables will show or not. 0 = No, 1+ = Yes. 1 shows most techincal debug information, 2+ will show other kinds of debug info in later versions.
 gamevar lifebartogglemode 1 131072 // If you want to toggle lifebars on and off
 gamevar automedikittoggle 0 0 // for if you want to auto-use the Portable Medikit when you lose health
 gamevar automantletoggle 0 0
@@ -2234,7 +2234,7 @@ gamevar SHRINKINGRESISTPLAYER 50 131073
 gamevar CHARACTERSHRINKINGRESIST 0 132098
 gamevar CHARACTERCRITHITCHANCE 0 132098
 gamevar CHARACTERSPEED 0 132098
-gamevar CURRWEAPONCHARACTER 0 132098
+gamevar CHARACTERCURRWEAPON 0 132098
 gamevar CHARACTERWEAPBITFIELD 0 132098
 gamevar CHARACTERMANTLETIME 0 132098
 gamevar CHARACTERMAXMANTLETIME 0 132098

@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git81)
-definequote 1337 ^22VERSION:^0 5.22.git81.10262014
+setgamename Naferia's Reign (5.22.git82)
+definequote 1337 ^22VERSION:^0 5.22.git82.10272014
 
 action ANULLACTION 0
 
@@ -10431,7 +10431,7 @@ switch ACTORPICNUM
   getactor[THISACTOR].sectnum TEMP ifvare TEMP -1 setvar MUSICANDSFX_STATUS -1
 
   ifvare MUSICANDSFX_STATUS -1 killit
-  ifvare debugtoggle 1
+  ifvarg debugtoggle 0
   {
    setactor[THISACTOR].cstat 0
    ifvarn MUSICANDSFX_LINKID -1
@@ -11514,7 +11514,7 @@ switch ACTORPICNUM
  case RESPAWN
  case GPSPEED
  case SECTOREFFECTORFAKE
-  ifvare debugtoggle 1 setactor[THISACTOR].cstat 0 else setactor[THISACTOR].cstat 32767
+  ifvarg debugtoggle 0 setactor[THISACTOR].cstat 0 else setactor[THISACTOR].cstat 32767
  break
 
  case FOOTPRINTS
@@ -11612,7 +11612,7 @@ ifvare ACTORFLAGS 4 // Extra = "4"
 		}
 	}
 
-	ifvare debugtoggle 1 setactor[THISACTOR].cstat 0
+	ifvarg debugtoggle 0 setactor[THISACTOR].cstat 0
 	else setactor[THISACTOR].cstat 32767
 }
 */
@@ -11679,7 +11679,7 @@ ifvare ACTORFLAGS 1 // Extra = "1"
 		}
 	}
 
-	ifvare debugtoggle 1 setactor[THISACTOR].cstat 0
+	ifvarg debugtoggle 0 setactor[THISACTOR].cstat 0
 	else setactor[THISACTOR].cstat 32767
 }
 break
@@ -25283,6 +25283,14 @@ actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
 
 addvar TEMPCOUNT 1
 // ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 addlogvar TEMPCOUNT
+getplayer[THISACTOR].pals_time TEMPVAR5
+ifvare TEMPVAR5 0
+{
+ setplayer[THISACTOR].pals 0 0 //Red
+ setplayer[THISACTOR].pals 1 0 //Green
+ setplayer[THISACTOR].pals 2 0 //Blue
+}
+
 
 ifvarg INVULNREFLECTRATE 2000 setvar INVULNREFLECTRATE 2000
 ifvarg INVULNHEALTHDRAIN 2001 setvar INVULNHEALTHDRAIN 2001
