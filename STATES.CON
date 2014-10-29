@@ -1417,9 +1417,8 @@ state MAPBEACON
  setactor[THISACTOR].shade -127
  state shadepulse4
  setactor[THISACTOR].shade shade
- getuserdef[THISACTOR].overhead_on TEMP
  cstat 32800
- ifvare TEMP 2
+ ifvare AUTOMAPMODE 2
  {
   getplayer[THISACTOR].zoom TEMP2
   subvar TEMP2 2048
@@ -7932,6 +7931,122 @@ state removebloodlusting
 
   subvar PLAYERSTATUS? 8192
   setvar PLAYERBLOODLUSTTIMER 0
+  setvarvar fta fta_normal setvar ftq 335
+ }
+ends
+
+state addcorrosion
+ ifvarand CHEATBITFIELD? 4 nullop else
+ {
+  randvar TEMPVAR5 99 addvar TEMPVAR5 1
+  ifvarl TEMPVAR5 16
+  {
+
+   //****************
+   //*Support System*
+   //****************
+   setvar DAMAGEMODIFIER 1000
+   //**Ailment Support / Maken**
+   state support-ailmentresist
+   ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+   randvar TEMPMOD 1000
+   ifvarvarl TEMPMOD DAMAGEMODIFIER
+   { // ifvarvarl TEMPMOD DAMAGEMODIFIER
+    ifvarand CHEATBITFIELD? 32 nullop
+    else
+    {
+     ifvarg INVULNTIME 1 nullop
+     else
+     {
+      ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 nullop
+      else
+      {
+       setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+       ifvare MISCARRAYID_AMOUNTTEMP 0
+       {
+        ifvarand PLAYERSTATUS? 16384
+        { 
+         randvar TEMP 390
+         addvar TEMP 390
+         addvarvar PLAYERCORROSIONTIMER TEMP
+        } 
+        else 
+        { 
+         randvar TEMP 390
+         addvar TEMP 390
+         addvarvar PLAYERCORROSIONTIMER TEMP
+         addvar PLAYERSTATUS? 16384
+         redefinequote 335 ^10YOUR ARMOR IS CORRODING!
+         setvarvar fta fta_normal setvar ftq 335
+        }
+       }
+      }
+     }
+    }
+   }
+
+  }
+ }
+ends
+
+state addcorrosion_overridevehicle
+ ifvarand CHEATBITFIELD? 4 nullop else
+ {
+  randvar TEMPVAR5 99 addvar TEMPVAR5 1
+  ifvarl TEMPVAR5 16
+  {
+
+   //****************
+   //*Support System*
+   //****************
+   setvar DAMAGEMODIFIER 1000
+   //**Ailment Support / Maken**
+   state support-ailmentresist
+   ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+   randvar TEMPMOD 1000
+   ifvarvarl TEMPMOD DAMAGEMODIFIER
+   { // ifvarvarl TEMPMOD DAMAGEMODIFIER
+    ifvarand CHEATBITFIELD? 32 nullop
+    else
+    {
+     ifvarg INVULNTIME 1 nullop
+     else
+     {
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+      ifvare MISCARRAYID_AMOUNTTEMP 0
+      {
+       ifvarand PLAYERSTATUS? 16384
+       { 
+        randvar TEMP 390
+        addvar TEMP 390
+        addvarvar PLAYERCORROSIONTIMER TEMP
+       } 
+       else 
+       { 
+        randvar TEMP 390
+        addvar TEMP 390
+        addvarvar PLAYERCORROSIONTIMER TEMP
+        addvar PLAYERSTATUS? 16384
+        redefinequote 335 ^10YOUR ARMOR IS CORRODING!
+        setvarvar fta fta_normal setvar ftq 335
+       }
+      }
+     }
+    }
+   }
+
+  }
+ }
+ends
+
+state removecorrosion
+ ifvarand PLAYERSTATUS? 16384
+ {
+  ifvare PLAYERCORROSIONTIMER 0 redefinequote 335 ^22CORROSION HAS WORN OFF!
+  else redefinequote 335 ^22YOUR ARMOR IS NO LONGER CORRODING!
+
+  subvar PLAYERSTATUS? 16384
+  setvar PLAYERCORROSIONTIMER 0
   setvarvar fta fta_normal setvar ftq 335
  }
 ends
@@ -22945,15 +23060,38 @@ state playerregen5percentap
 ends
 
 state determineregenrates // affects how regeneration speed for HP and EP works.
+
        ifp ponsteroids mulvar TEMPMOD 4 // Steroids = 400% Speed
        ifvarand PLAYERSTATUS? 2 { mulvar TEMPMOD 1250 divvar TEMPMOD 1000 } // Haste = 125% Speed
        ifvarand PLAYERSTATUS? 4 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Slow = 75% Speed
-       ifvare DEFENSEMODE? 1 { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // Defend Mode = 133% Speed
+
+       ifvare DEFENSEMODE? 1
+       {
+        ifvare TEMPVAR8 0 // HP Regen
+        { 
+         ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Defend Mode = 75% Speed if Poisoned
+         else { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // Defend Mode = 133% Speed
+        }
+        ifvare TEMPVAR8 2 // AP Regen
+        { 
+         ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Defend Mode = 75% Speed if Mindblown
+         else { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // Defend Mode = 133% Speed
+        }
+       }
        ifvarn VEHICLEID -1 
        {
         ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 
         {
-         mulvar TEMPMOD 1400 divvar TEMPMOD 1000 // using a Riot Tank will put a character at rest, giving a 40% bonus to regen speeds
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 714 divvar TEMPMOD 1000 } // 71.4% speed if Poisoned
+          else { mulvar TEMPMOD 1400 divvar TEMPMOD 1000 } // using a Riot Tank will put a character at rest, giving a 40% bonus to regen speeds
+         }
+         ifvare TEMPVAR8 2 // AP Regen
+         { 
+          ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 714 divvar TEMPMOD 1000 } // 71.4% speed if Mindblown
+          else { mulvar TEMPMOD 1400 divvar TEMPMOD 1000 } // using a Riot Tank will put a character at rest, giving a 40% bonus to regen speeds
+         }
         }
        }
        else
@@ -22962,40 +23100,210 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
         { 
          ifp ponground
          {
-          mulvar TEMPMOD 400 divvar TEMPMOD 1000 
+          ifvare TEMPVAR8 0 // HP Regen
+          { 
+           ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+           else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+          }
+          ifvare TEMPVAR8 2 // EP Regen
+          { 
+           ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if MindBlown
+           else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+          }
          }
          else 
          {
           ifp pjetpack 
           {
-           mulvar TEMPMOD 600 divvar TEMPMOD 1000 
+           ifvare TEMPVAR8 0 // HP Regen
+           { 
+            ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 1500 divvar TEMPMOD 1000 } // 150% speed if Poisoned
+            else { mulvar TEMPMOD 600 divvar TEMPMOD 1000 }
+           }
+           ifvare TEMPVAR8 2 // EP Regen
+           { 
+            ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 1500 divvar TEMPMOD 1000 } // 150% speed if Mindblown
+            else { mulvar TEMPMOD 600 divvar TEMPMOD 1000 }
+           }
           }
           else
           {
-           mulvar TEMPMOD 400 divvar TEMPMOD 1000 
+           ifvare TEMPVAR8 0 // HP Regen
+           { 
+            ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+            else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+           }
+           ifvare TEMPVAR8 2 // EP Regen
+           { 
+            ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+            else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+           }
           }
          } 
         }
-        else ifvarg jumpcounter 0 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+        else ifvarg jumpcounter 0 
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
         else ifvarand bits 2 // Crouch
         {
          ifp ponground 
          {
-          mulvar TEMPMOD 1800 divvar TEMPMOD 1000 
+          ifvare TEMPVAR8 0 // HP Regen
+          { 
+           ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 555 divvar TEMPMOD 1000 } // 55.5% speed if Poisoned
+           else { mulvar TEMPMOD 1800 divvar TEMPMOD 1000 }
+          }
+          ifvare TEMPVAR8 2 // EP Regen
+          { 
+           ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 555 divvar TEMPMOD 1000 } // 55.5% speed if MindBlown
+           else { mulvar TEMPMOD 1800 divvar TEMPMOD 1000 }
+          }
          }
          else 
          {
-          ifp pjetpack { mulvar TEMPMOD 600 divvar TEMPMOD 1000 } else { mulvar TEMPMOD 750 divvar TEMPMOD 1000 }
+          ifp pjetpack 
+          {
+           ifvare TEMPVAR8 0 // HP Regen
+           { 
+            ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 1500 divvar TEMPMOD 1000 } // 150% speed if Poisoned
+            else { mulvar TEMPMOD 600 divvar TEMPMOD 1000 }
+           }
+           ifvare TEMPVAR8 2 // EP Regen
+           { 
+            ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 1500 divvar TEMPMOD 1000 } // 150% speed if MindBlown
+            else { mulvar TEMPMOD 600 divvar TEMPMOD 1000 }
+           }
+          }
+          else 
+          {
+           ifvare TEMPVAR8 0 // HP Regen
+           { 
+            ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // 133.3% Speed if Poisoned
+            else { mulvar TEMPMOD 750 divvar TEMPMOD 1000 }
+           }
+           ifvare TEMPVAR8 2 // EP Regen
+           { 
+            ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // 133.3% Speed if MindBlown
+            else { mulvar TEMPMOD 750 divvar TEMPMOD 1000 }
+           }
+          }
          } 
         }
-        ifvarand bits 4 { mulvar TEMPMOD 500 divvar TEMPMOD 1000 } // Fire
-        else ifvarand bits 4194304 { mulvar TEMPMOD 500 divvar TEMPMOD 1000 } // Alt-Fire/Quick Kick
-        ifvarand extbits 1 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Move Forward
-        else ifvarand extbits 2 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Move Backwards
-        else ifvarand extbits 4 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Strafe Left
-        else ifvarand extbits 8 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Strafe Right
-        else ifvarand extbits 16 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Turn Left
-        else ifvarand extbits 32 { mulvar TEMPMOD 400 divvar TEMPMOD 1000 } // Turn Right
+        ifvarand bits 4 // Fire
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2000 divvar TEMPMOD 1000 } // 200% Speed if Poisoned
+          else { mulvar TEMPMOD 500 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 2000 divvar TEMPMOD 1000 } // 200% Speed if Mindblown
+          else { mulvar TEMPMOD 500 divvar TEMPMOD 1000 }
+         }
+        }
+        else ifvarand bits 4194304 // Alt-Fire/Quick Kick
+        { 
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2000 divvar TEMPMOD 1000 } // 200% Speed if Poisoned
+          else { mulvar TEMPMOD 500 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 2000 divvar TEMPMOD 1000 } // 200% Speed if Mindblown
+          else { mulvar TEMPMOD 500 divvar TEMPMOD 1000 }
+         }
+        }
+
+        ifvarand extbits 1 // Move Forward
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
+        else ifvarand extbits 2 // Move Backwards
+        { 
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
+        else ifvarand extbits 4 // Strafe Left
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
+        else ifvarand extbits 8 // Strafe Right
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
+        else ifvarand extbits 16 // Turn Left
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
+        else ifvarand extbits 32 // Turn Right
+        {
+         ifvare TEMPVAR8 0 // HP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Poisoned
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         }
+        }
        }
 ends
 
@@ -23026,7 +23334,7 @@ state playerregenhealthnormal
       }
       ifvarn TEMPMOD 0
       { 
-       state determineregenrates
+       setvar TEMPVAR8 0 state determineregenrates
        addvarvar HITPOINTREGENTICS TEMPMOD 
       }
      }
@@ -23059,7 +23367,7 @@ state playerregenhealthnormal
 
          ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR 2 // Jack Inverts Poison Damage to 2x Healing         
          else ifvare CHARACTERSELECTED? 4 { ifvare SECTORLOTAG 1 { mulvar TEMPVAR -4 divvar TEMPVAR 5 } else ifvare SECTORLOTAG 2 { mulvar TEMPVAR -2 divvar TEMPVAR 5 } else { mulvar TEMPVAR -1 } } // Ami loses less HP in or under water when poisoned
-         else ifvare CHARACTERSELECTED? 12 divvar TEMPVAR 2 // Lori only suffers 1/2 damage from Poison
+         else ifvare CHARACTERSELECTED? 12 divvar TEMPVAR -2 // Lori only suffers 1/2 damage from Poison
          else mulvar TEMPVAR -1 // All others
 
          ifp ponsteroids { mulvar TEMPVAR 9 divvar TEMPVAR 2 }
@@ -23400,16 +23708,23 @@ state playerregenarmornormal
       setvar TEMPMOD 0
       ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTS 
       { 
-       setvar TEMPVAR8 0
-       ifvare PLAYEREQUIPSLOTITEM1 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM2 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM3 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM4 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM5 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM6 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM7 29 addvar TEMPVAR8 1
-       ifvare PLAYEREQUIPSLOTITEM8 29 addvar TEMPVAR8 1
-       ifvarg TEMPVAR8 0 { ifvare APREGENTIME 0 setvar TEMPMOD 10 }
+       ifvarand PLAYERSTATUS? 16384
+       { 
+        setvar TEMPMOD 10
+       }
+       else
+       {
+        setvar TEMPVAR8 0
+        ifvare PLAYEREQUIPSLOTITEM1 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM2 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM3 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM4 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM5 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM6 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM7 29 addvar TEMPVAR8 1
+        ifvare PLAYEREQUIPSLOTITEM8 29 addvar TEMPVAR8 1
+        ifvarg TEMPVAR8 0 { ifvare APREGENTIME 0 setvar TEMPMOD 10 }
+       }
       } 
       else
       {
@@ -23424,7 +23739,7 @@ state playerregenarmornormal
       }
       ifvarn TEMPMOD 0
       { 
-       //state determineregenrates
+       //setvar TEMPVAR8 1 state determineregenrates
        addvarvar ARMORPOINTREGENTICS TEMPMOD 
       }
      }
@@ -23450,6 +23765,49 @@ state playerregenarmornormal
 
         ifvarand PLAYERSTATUS? 16384 // If the player has 'Corrosion', turn the gain into a loss and flash the screen a sickly green
         {
+         setvarvar TEMPVAR MAXARMORPOINTS
+         randvar TEMPVAR2 10
+         setvar TEMPVAR3 20
+         ifrnd 128 addvarvar TEMPVAR3 TEMPVAR2 else subvarvar TEMPVAR3 TEMPVAR2
+         mulvarvar TEMPVAR TEMPVAR3
+         divvar TEMPVAR 1000
+
+         ifvare CHARACTERSELECTED? 11 divvar TEMPVAR 2 // Paula only suffers 1/2 damage from Corrosion
+         mulvar TEMPVAR -1
+
+         ifvarand CHEATBITFIELD? 16 { divvar TEMPVAR 1000 ifvarg TEMPVAR -1 setvar TEMPVAR -1 state cheatersound }
+         palfrom 32 0 32 
+
+         ifvarl TEMPVAR 0
+         {
+          setvarvar DAMAGEHUEFACTOR TEMPVAR
+          mulvar DAMAGEHUEFACTOR -1
+          state playerdamagehues-acidtype
+
+          setvarvar tempe TEMPVAR
+          mulvar tempe -1
+          setvar ATTACKINGACTORPICNUM 5299 // Needs a new graphic to represent corrosion
+          getactor[THISACTOR].pal TEMP
+          setvarvar ATTACKINGACTORPAL TEMP
+          setvar ACTORCRITICAL? 0
+          setvarvar PLAYERARMORDAMAGETEMP tempe
+
+          ifvarn SHOWDAMAGEPLAYER 0
+          {
+           ifvarg tempe 0
+           {
+            setvarvar SHOWDAMAGE tempe
+            setvar SHOWDAMAGETYPE 3
+            setvarvar SHOWDAMAGEACTORID THISACTOR
+            state showdamage
+           }
+          }
+
+          setactor[THISACTOR].htpicnum -1
+          setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+          setvar ATTACKERDISPLAYTIMER 0 setvar ARMORNULLDAMAGE 0
+          ifvarg tempe 0 setvar ARMORDAMAGETIMER 0
+         }
         }
         else
         {
@@ -23494,7 +23852,7 @@ state playerregenarmornormal
         else ifvarl TEMPVAR 0 setvar PLAYERAPDAMAGED? 1
         addvarvar CURRENTARMORPOINTS TEMPVAR
         ifvarvarg CURRENTARMORPOINTS STATLIMITATOMIC setvarvar CURRENTARMORPOINTS STATLIMITATOMIC
-        ifvarand PLAYERSTATUS? 8 nullop else { ifvarvarg CURRENTARMORPOINTS MAXHITPOINTS setvarvar CURRENTARMORPOINTS MAXARMORPOINTS } // Prevents Corrosion ailment from setting above 100% AP to 100% :P
+        ifvarand PLAYERSTATUS? 16384 nullop else { ifvarvarg CURRENTARMORPOINTS MAXHITPOINTS setvarvar CURRENTARMORPOINTS MAXARMORPOINTS } // Prevents Corrosion ailment from setting above 100% AP to 100% :P
 
         ifvarn SHOWDAMAGEPLAYER 0
         {
@@ -23582,7 +23940,7 @@ state playerregenenergynormal
        } 
        ifvarn TEMPMOD 0 
        {
-        state determineregenrates
+        setvar TEMPVAR8 2 state determineregenrates
         addvarvar ENERGYPOINTREGENTICS TEMPMOD
        }
       }
@@ -24470,6 +24828,7 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
                 ifvare MISCARRAYID_AMOUNTTEMP 1
                 {
                  ifrnd 1 state addpoison
+                 ifrnd 1 state addcorrosion
                 }
                }
                else
@@ -24483,36 +24842,43 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
                   else
                   {
                    ifrnd 4 state addpoison
+                   ifrnd 4 state addcorrosion
                   }
                  }
                  else
                  {
                   ifrnd 4 state addpoison
+                  ifrnd 4 state addcorrosion
                  }
                 }
                 else
                 {
                  ifrnd 4 state addpoison
+                 ifrnd 4 state addcorrosion
                 }
                }
                else
                ifvare CHARACTERSELECTED? 12
                {
                 ifrnd 1 { ifrnd 128 state addpoison }
+                ifrnd 1 { ifrnd 128 state addcorrosion }
                }
                else
                ifvare CHARACTERSELECTED? 14
                {
                 ifrnd 2 state addpoison
+                ifrnd 2 state addcorrosion
                }
                else
                ifvare CHARACTERSELECTED? 15
                {
                 ifrnd 2 state addpoison
+                ifrnd 2 state addcorrosion
                }
                else
                {
                 ifrnd 4 state addpoison
+                ifrnd 4 state addcorrosion
                }
 
               }
@@ -25344,6 +25710,7 @@ state player-newpurplelava_dmg
                 setvarvar TEMPVAR TEMP7
 
                 ifrnd 6 state addpoison
+                ifrnd 6 state addcorrosion
 
                 //********
                 //*Others*
@@ -25420,10 +25787,12 @@ state player-newpurplelava_dmg
                 {
                  ifrnd 64 setvar TEMPVAR 1 else setvar TEMPVAR 0
                  ifrnd 3 state addpoison
+                 ifrnd 3 state addcorrosion
                 }
                 else
                 {
                  ifrnd 12 state addpoison
+                 ifrnd 12 state addcorrosion
                 }
                }
                else ifvare CHARACTERSELECTED? 4
@@ -25441,6 +25810,7 @@ state player-newpurplelava_dmg
                  ifvarl TEMPVAR 1 { ifrnd 26 setvar TEMPVAR 1 else setvar TEMPVAR 0 }
                 }
                 ifrnd 12 state addpoison
+                ifrnd 12 state addcorrosion
                }
                else ifvare CHARACTERSELECTED? 8
                {
@@ -25452,31 +25822,36 @@ state player-newpurplelava_dmg
                   else
                   {
                    ifrnd 12 state addpoison
+                   ifrnd 12 state addcorrosion
                   }
                  }
                  else
                  {
                   ifrnd 12 state addpoison
+                  ifrnd 12 state addcorrosion
                  }
                 }
                 else
                 {
                  ifrnd 12 state addpoison
-
+                 ifrnd 12 state addcorrosion
                 }
                }
                else ifvare CHARACTERSELECTED? 12
                {
                 ifrnd 4 { ifrnd 128 state addpoison }
+                ifrnd 4 { ifrnd 128 state addcorrosion }
                }
                else ifvare CHARACTERSELECTED? 14 nullop
                else ifvare CHARACTERSELECTED? 15
                {
                 ifrnd 6 state addpoison
+                ifrnd 6 state addcorrosion
                }
                else
                {
                 ifrnd 12 state addpoison
+                ifrnd 12 state addcorrosion
                }
 
                //********

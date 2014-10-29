@@ -5498,7 +5498,7 @@ definesound DUKE_AIRJUMP2        c01-airjump2.wav       0    0   255   4   0
 definesound DUKE_GRABQUAD        c01-grabquad.wav       0    0   255   4   0
 definesound DUKE_GRABINVULN      c01-grabinvuln.wav     0    0   255   4   0
 definesound DUKE_GRABREGEN       c01-grabregen.wav      0    0   255   4   0
-definesound DUKE_GRABAPREGEN     c01-grabapregen.wav    0    0   255   4   0
+definesound DUKE_GRABAPREGEN     c01-grabapregen.ogg    0    0   255   4   0
 definesound DUKE_GRABVAMPIRE     c01-grabvampire.wav    0    0   255   4   0
 
 

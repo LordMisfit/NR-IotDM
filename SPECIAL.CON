@@ -22640,7 +22640,30 @@ state statusscreenlist
     setvar pal 0
     ifvarvare CHARACTERSELECTED? CHARACTERARRAY state shadepulse4 else setvar shade 0
    }
+   ifvarand TEMPVAR 16384 // Corrosion
+   {
+    setvar digx 165
+    setvar tilenum 8114
+    getactorvar[CHARACTERARRAY].CHARACTERCORROSIONTIMER TEMPVAR2
+    ifvarl TEMPVAR2 130 state shadepulse2
+    state rs
+
+    setvar tilenum 3087 // Blue Digital Text
+    setvar pal 21 // Ailments are Negative
+    addvar digx 1
+    subvar digy 5
+    setvar textscale 38619 // 45056
+    setvarvar varname TEMPVAR2
+    divvar varname 26
+    state dnz
+
+    subvar digx 1 // +25
+    addvar digy 5 // +25
+    setvar pal 0
     ifvarvare CHARACTERSELECTED? CHARACTERARRAY state shadepulse4 else setvar shade 0
+   }
+
+   ifvarvare CHARACTERSELECTED? CHARACTERARRAY state shadepulse4 else setvar shade 0
 // Steroids
     setvar digx 90 // 54
     setvar digy 46 // 44 (+26)
@@ -31234,8 +31257,7 @@ state vehicledisplays
  state pal0
  ifvarn VEHICLEID -1
  {
-  getuserdef[THISACTOR].overhead_on TEMPVAR
-  ifvarn TEMPVAR 2
+  ifvarn AUTOMAPMODE 2
   {
    getplayer[THISACTOR].over_shoulder_on TEMPVAR
    ifvare TEMPVAR 1 state showvehiclecommands
@@ -32313,8 +32335,7 @@ ifvare oldskoolmode 0
    divvar BREATHCAMERAHORIZ 240 // 108
   }
 
-  getuserdef[THISACTOR].overhead_on tempb
-  ifvarn tempb 2
+  ifvarn AUTOMAPMODE 2
   {
    getplayer[THISACTOR].over_shoulder_on tempb
    ifvare tempb 0

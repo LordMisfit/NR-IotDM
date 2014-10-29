@@ -903,8 +903,7 @@ else
    mulvar MAXENERGYPOINTSATOMIC 2
 
    // Damage Screens
-   getuserdef[THISACTOR].overhead_on tempb
-   ifvarn tempb 2
+   ifvarn AUTOMAPMODE 2
    {
     getplayer[THISACTOR].over_shoulder_on tempb
     ifvare tempb 0
@@ -954,8 +953,7 @@ else
    }
 
    // Display Player's Overhead Sprite
-   getuserdef[THISACTOR].overhead_on tempb
-   ifvarn tempb 0
+   ifvarn AUTOMAPMODE 0
    {
     state shade0
     setvar digx 160
@@ -1242,11 +1240,10 @@ else
    getuserdef[THISACTOR].pause_on TEMPVAR 
    ifvare TEMPVAR 0 state vehicledisplays
 
-   getuserdef[THISACTOR].overhead_on TEMPVAR4
-   ifvarn TEMPVAR4 2
+   ifvarn AUTOMAPMODE 2
    {
     getplayer[THISACTOR].over_shoulder_on TEMPVAR4
-    ifvare TEMPVAR4 0
+    ifvare AUTOMAPMODE 0
     {
      // PK Shield "Hit" Display[s]
      ifvarg PKSHIELDHIT_TIMER 0
@@ -2697,6 +2694,42 @@ else
       setvar pal 0
       setvar shade 0
      }
+     ifvarand PLAYERSTATUS? 16384 // Corrosion
+     {
+      setvar digx 32 // 128
+      ifvarand PLAYERSTATUS? 2 addvar digx 7
+      ifvarand PLAYERSTATUS? 4 addvar digx 7
+      ifvarand PLAYERSTATUS? 8 addvar digx 7
+      ifvarand PLAYERSTATUS? 16 addvar digx 7
+      ifvarand PLAYERSTATUS? 32 addvar digx 7
+      ifvarand PLAYERSTATUS? 64 addvar digx 7
+      ifvarand PLAYERSTATUS? 128 addvar digx 7
+      ifvarand PLAYERSTATUS? 256 addvar digx 7
+      ifvarand PLAYERSTATUS? 512 addvar digx 7
+      ifvarand PLAYERSTATUS? 1024 addvar digx 7
+      ifvarand PLAYERSTATUS? 2048 addvar digx 7
+      ifvarand PLAYERSTATUS? 4096 addvar digx 7
+      ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      setvar tilenum 8114
+      ifvarl PLAYERCORROSIONTIMER 130 { state shadepulse4 addvar shade 8 }
+      state orientation27
+      state rs
+ 
+      setvar tilenum 3087 // Blue Digital Text
+      setvar pal 21 // Ailments are Negative
+      addvar digx 3
+      subvar digy 4
+      setvar textscale 45056
+      setvarvar varname PLAYERCORROSIONTIMER
+      divvar varname 26
+      state orientation27
+      state dnz
+ 
+      subvar digx 3
+      addvar digy 4
+      setvar pal 0
+      setvar shade 0
+     }
 
      state digz12288
      // Show Quad Damage Icon
@@ -2716,6 +2749,7 @@ else
       ifvarand PLAYERSTATUS? 2048 addvar digx 7
       ifvarand PLAYERSTATUS? 4096 addvar digx 7
       ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      ifvarand PLAYERSTATUS? 16384 addvar digx 7
       setvar tilenum 8071 // 5272
       ifvarl QUADTIME 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2754,6 +2788,7 @@ else
       ifvarand PLAYERSTATUS? 2048 addvar digx 7
       ifvarand PLAYERSTATUS? 4096 addvar digx 7
       ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      ifvarand PLAYERSTATUS? 16384 addvar digx 7
       ifvarg QUADTIME 0 addvar digx 7
       setvar tilenum 8072 // 5272
       ifvarl INVULNTIME 130 { state shadepulse4 addvar shade 8 }
@@ -2792,6 +2827,7 @@ else
       ifvarand PLAYERSTATUS? 2048 addvar digx 7
       ifvarand PLAYERSTATUS? 4096 addvar digx 7
       ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      ifvarand PLAYERSTATUS? 16384 addvar digx 7
       ifvarg QUADTIME 0 addvar digx 7
       ifvarg INVULNTIME 0 addvar digx 7
       setvar tilenum 8073 // 5272
@@ -2831,6 +2867,7 @@ else
       ifvarand PLAYERSTATUS? 2048 addvar digx 7
       ifvarand PLAYERSTATUS? 4096 addvar digx 7
       ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      ifvarand PLAYERSTATUS? 16384 addvar digx 7
       ifvarg QUADTIME 0 addvar digx 7
       ifvarg INVULNTIME 0 addvar digx 7
       ifvarg REGENTIME 0 addvar digx 7
@@ -2871,6 +2908,7 @@ else
       ifvarand PLAYERSTATUS? 2048 addvar digx 7
       ifvarand PLAYERSTATUS? 4096 addvar digx 7
       ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      ifvarand PLAYERSTATUS? 16384 addvar digx 7
       ifvarg QUADTIME 0 addvar digx 7
       ifvarg INVULNTIME 0 addvar digx 7
       ifvarg REGENTIME 0 addvar digx 7
@@ -4481,6 +4519,11 @@ else
       setvar digz 16384
       addvar TEMPVAR5 1
      }
+     else ifvare ATTACKINGACTORPICNUM 5299 // CORROSIONSYMBOL
+     {
+      setvar digz 32768
+      addvar TEMPVAR5 1
+     }
      else ifvarg ATTACKINGACTORPICNUM 5119 ifvarl ATTACKINGACTORPICNUM 5126 setvar digz 16384 // Coin Money
      else ifvarg ATTACKINGACTORPICNUM 5125 ifvarl ATTACKINGACTORPICNUM 5146 setvar digz 12378 // Paper Money
      else ifvare ATTACKINGACTORPICNUM 5146 setvar digz 6189 // MONEYBAG
@@ -4701,6 +4744,7 @@ else
      else ifvare ATTACKINGACTORPICNUM 5175 nullop // NEWPLUG
      else ifvare ATTACKINGACTORPICNUM 5190 nullop // NEWBLOODPOOL
      else ifvare ATTACKINGACTORPICNUM 5216 nullop // POISONSYMBOL
+     else ifvare ATTACKINGACTORPICNUM 5299 nullop // CORROSIONSYMBOL
      else ifvare ATTACKINGACTORPICNUM 4890 nullop // NATURALLIGHTNING
      else ifvare ATTACKINGACTORPICNUM 1088 nullop // REACTOR
      else ifvare ATTACKINGACTORPICNUM 578 nullop // REACTOR2
@@ -15288,8 +15332,7 @@ else
     getplayer[THISACTOR].access_spritenum tempd
     ifvarn tempd -1 getactor[tempd].pal tempd
  
-    getuserdef[THISACTOR].overhead_on TEMPVAR4
-    ifvarn TEMPVAR4 2
+    ifvarn AUTOMAPMODE 2
     {
      getplayer[THISACTOR].over_shoulder_on TEMPVAR4
      ifvare TEMPVAR4 0
@@ -15333,8 +15376,7 @@ else
      getsector[temp].floorpal tempe
      getsector[temp].floorshade tempf
  
-     getuserdef[THISACTOR].overhead_on TEMPVAR4
-     ifvarn TEMPVAR4 2
+     ifvarn AUTOMAPMODE 2
      {
       getplayer[THISACTOR].over_shoulder_on TEMPVAR4
       ifvare TEMPVAR4 0
@@ -15388,8 +15430,7 @@ else
      divvar TEMP4 100
      ifvarl TEMP4 0 mulvar TEMP4 -1
  
-     getuserdef[THISACTOR].overhead_on TEMPVAR4
-     ifvarn TEMPVAR4 2
+     ifvarn AUTOMAPMODE 2
      {
       getplayer[THISACTOR].over_shoulder_on TEMPVAR4
       ifvare TEMPVAR4 0

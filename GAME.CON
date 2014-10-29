@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git83)
-definequote 1337 ^22VERSION:^0 5.22.git83.10282014
+setgamename Naferia's Reign (5.22.git84)
+definequote 1337 ^22VERSION:^0 5.22.git84.10292014
 
 action ANULLACTION 0
 
@@ -4642,11 +4642,13 @@ state player_defense
      {
       ifvarand PLAYERSTATUS? 256
       {
-       ifrnd 6 state addpoison 
+       ifrnd 6 state addpoison
+       ifrnd 6 state addcorrosion
       }
       else
       {
-       ifrnd 32 state addpoison 
+       ifrnd 32 state addpoison
+       ifrnd 32 state addcorrosion
       }
      }
      else 
@@ -4660,26 +4662,31 @@ state player_defense
         else
         {
          ifrnd 64 state addpoison 
+         ifrnd 64 state addcorrosion
         } 
        }
        else
        {
         ifrnd 64 state addpoison 
+        ifrnd 64 state addcorrosion
        } 
       }
       else
       {
        ifrnd 64 state addpoison 
+       ifrnd 64 state addcorrosion
       } 
      }
      else 
      ifvare CHARACTERSELECTED? 15
      {
       ifrnd 32 state addpoison 
+      ifrnd 32 state addcorrosion
      }
      else 
      {
       ifrnd 64 state addpoison 
+      ifrnd 64 state addcorrosion
      }
     }
  
@@ -26738,6 +26745,25 @@ ifvare mainmenu 0 // Main Menu is NOT open
    state removebloodlusting
   }
  }
+ ifvarand PLAYERSTATUS? 16384
+ {
+  setvar TEMPVAR5 1
+  ifvare PLAYEREQUIPSLOTITEM1 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM2 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM3 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM4 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM5 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM6 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM7 28 mulvar TEMPVAR5 5
+  ifvare PLAYEREQUIPSLOTITEM8 28 mulvar TEMPVAR5 5
+  subvarvar PLAYERCORROSIONTIMER TEMPVAR5
+
+  ifvarl PLAYERCORROSIONTIMER 1
+  {
+   setvar PLAYERCORROSIONTIMER 0
+   state removecorrosion
+  }
+ }
 
  // Portable Medikit Toggle Mode
  ifvare automedikittoggle 1
@@ -38130,21 +38156,25 @@ state lizcode
            { 
             ifvarand PLAYERSTATUS? 256
             {
-             ifrnd 5 state addpoison 
+             ifrnd 5 state addpoison
+             ifrnd 5 state addcorrosion
             }
             else
             {
-             ifrnd 24 state addpoison 
+             ifrnd 24 state addpoison
+             ifrnd 24 state addcorrosion
             }
            }
            else
            ifvare CHARACTERSELECTED? 15
            {
             ifrnd 12 state addpoison 
+            ifrnd 12 state addcorrosion
            }
            else
            {
             ifrnd 24 state addpoison 
+            ifrnd 24 state addcorrosion
            }
           }  
  
@@ -51475,14 +51505,12 @@ ends
 
 // The hitag of the Handscanner actor is the character-bitfield, and the lotag should match that of the activator or activator-locked. 
 eventloadactor ACCESSSWITCH
- // espawn ACCESSSWITCH3 state convertaccessswitches
  espawn DUKEKEYBEACON
  getactor[THISACTOR].pal TEMP
  setactor[RETURN].pal TEMP
 enda 
 
 eventloadactor ACCESSSWITCH2
- // espawn ACCESSSWITCH3 state convertaccessswitches
  espawn DUKEKEYBEACON
  getactor[THISACTOR].pal TEMP
  setactor[RETURN].pal TEMP
