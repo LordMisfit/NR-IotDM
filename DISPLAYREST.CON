@@ -1243,7 +1243,7 @@ else
    ifvarn AUTOMAPMODE 2
    {
     getplayer[THISACTOR].over_shoulder_on TEMPVAR4
-    ifvare AUTOMAPMODE 0
+    ifvare TEMPVAR4 0
     {
      // PK Shield "Hit" Display[s]
      ifvarg PKSHIELDHIT_TIMER 0
