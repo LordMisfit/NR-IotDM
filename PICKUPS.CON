@@ -16399,6 +16399,131 @@ else
 enda
 
 
+// Liquid Metal Amulet [Equipment Item #29]
+eventloadactor LIQUIDMETALAMULET state setpickupflags enda
+useractor notenemy LIQUIDMETALAMULET 0 
+
+ sizeat 32 32
+ state itemfullbright
+ setvar ACTORSHEIGHT 30 setvar ACTORSWIDTH 19
+ state checkoldskool_items
+ state checkitemflags
+ state checkitemflags2 // Checks Item Multiplications for Display Icon
+ ifvare mainmenu 0 state fallflags
+ifvarg ITEMDROPPEDTIME 0
+{
+ ifvare mainmenu 0 subvar ITEMDROPPEDTIME 1
+}
+else
+{
+
+ ifvarand ACTORFLAGS 8 nullop
+ else
+ {
+  ifmove RESPAWN_ACTOR_FLAG
+    state respawnit
+  else
+   ifvare mainmenu 0
+   {
+    ifp pshrunk nullop
+    else
+    {
+     ifvarg CURRENTHITPOINTS 0 // ifp palive
+     {
+      ifcanseetarget
+      {
+       ifpdistl RETRIEVEDISTANCE
+       {
+        ifcount 6
+        {
+         state checkexplodeflag
+ 
+         setvar ACTORPICKUPAMOUNT 1
+         state checkpickupamountflags state checkdoublepickupbonus
+         state checkliquidmetalamulets addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
+         ifvarg ACTORPICKUPAMOUNT 1
+         {
+          redefinequote 335 ^22FOUND A LIQUID METAL AMULET!
+          redefinequote 336 ^22FOUND %ld LIQUID METAL AMULETS!
+          qsprintf 335 336 ACTORPICKUPAMOUNT
+         }
+         else redefinequote 335 ^22FOUND A LIQUID METAL AMULET!
+
+         state grabequippable
+        }
+       }
+      }
+     }
+    }
+   }
+ }
+
+}
+enda
+
+// Mandala Bracelet [Equipment Item #30]
+eventloadactor MANDALABRACELET state setpickupflags enda
+useractor notenemy MANDALABRACELET 0 
+
+ sizeat 4 4
+ state itemfullbright
+ setvar ACTORSHEIGHT 158 setvar ACTORSWIDTH 218
+ state checkoldskool_items
+ state checkitemflags
+ state checkitemflags2 // Checks Item Multiplications for Display Icon
+ ifvare mainmenu 0 state fallflags
+ifvarg ITEMDROPPEDTIME 0
+{
+ ifvare mainmenu 0 subvar ITEMDROPPEDTIME 1
+}
+else
+{
+
+ ifvarand ACTORFLAGS 8 nullop
+ else
+ {
+  ifmove RESPAWN_ACTOR_FLAG
+    state respawnit
+  else
+   ifvare mainmenu 0
+   {
+    ifp pshrunk nullop
+    else
+    {
+     ifvarg CURRENTHITPOINTS 0 // ifp palive
+     {
+      ifcanseetarget
+      {
+       ifpdistl RETRIEVEDISTANCE
+       {
+        ifcount 6
+        {
+         state checkexplodeflag
+ 
+         setvar ACTORPICKUPAMOUNT 1
+         state checkpickupamountflags state checkdoublepickupbonus
+         state checkmandalabracelets addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
+         ifvarg ACTORPICKUPAMOUNT 1
+         {
+          redefinequote 335 ^22FOUND A MANDALA BRACELET!
+          redefinequote 336 ^22FOUND %ld MANDALA BRACELETS!
+          qsprintf 335 336 ACTORPICKUPAMOUNT
+         }
+         else redefinequote 335 ^22FOUND A MANDALA BRACELET!
+
+         state grabequippable
+        }
+       }
+      }
+     }
+    }
+   }
+ }
+
+}
+enda
+
+
 // Silk Carnation [Permenant Boost Item #1]
 eventloadactor SILKCARNATION spritepal 10 setvar ACTORNATURALPAL 10 state setpickupflags enda
 useractor notenemy SILKCARNATION 0 

@@ -823,6 +823,17 @@ state checkmysticsatchels
   getactorvar[ITEMARRAYID].ITEMARRAYID_AMOUNT ITEMARRAYID_AMOUNTTEMP
 ends
 
+state checkliquidmetalamulets
+  setvar ITEMARRAYID 105 // LIQUIDMETALAMULETS
+  getactorvar[ITEMARRAYID].ITEMARRAYID_AMOUNT ITEMARRAYID_AMOUNTTEMP
+ends
+
+state checkmandalabracelets
+  setvar ITEMARRAYID 106 // MANDALABRACELETS
+  getactorvar[ITEMARRAYID].ITEMARRAYID_AMOUNT ITEMARRAYID_AMOUNTTEMP
+ends
+
+
 //
 
 state checkpg1characters
@@ -895,6 +906,8 @@ state checkpg6items
    state checkenergyincurments ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
    state checkserpenthelmets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
    state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkliquidmetalamulets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmandalabracelets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
 ends
 
 state checkpg1equippables
@@ -934,6 +947,8 @@ state checkpg2equippables
    state checkenergyincurments ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
    state checkyinyangorbs ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
    state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkliquidmetalamulets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
+   state checkmandalabracelets ifvarg ITEMARRAYID_AMOUNTTEMP 0 addvar TEMPMOD 1
 ends
 
 //
@@ -6634,7 +6649,7 @@ ends
 
 state drop_randomized_item
    ifrnd 224 randvar RANDOMIZER 245
-   else randvar RANDOMIZER 320
+   else randvar RANDOMIZER 324
    addvar RANDOMIZER 1
 
    ifvarg RANDOMIZER 0 ifvarl RANDOMIZER 25 { espawn COLA state scatterdrops } // 1-24 [24]
@@ -6710,28 +6725,30 @@ state drop_randomized_item
    else ifvarg RANDOMIZER 295 ifvarl RANDOMIZER 298 { ifrnd 224 { espawn SERPENTHELMET state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 296-297 [2]
    else ifvarg RANDOMIZER 297 ifvarl RANDOMIZER 300 { ifrnd 224 { espawn ENERGYINCURMENT state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 298-299 [2]
    else ifvarg RANDOMIZER 299 ifvarl RANDOMIZER 302 { ifrnd 224 { espawn YINYANGORB state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 300-301 [2]
-   else ifvarg RANDOMIZER 301 ifvarl RANDOMIZER 304 { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } // 302-303 [2]
-   else ifvare RANDOMIZER 304 { ifrnd 240 { espawn AFAS_DROP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 304 [1]
-   else ifvare RANDOMIZER 305 { ifrnd 240 { espawn FAUXLEVELUP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 305 [1]
-   else ifvare RANDOMIZER 306 { ifrnd 128 { espawn ENERGYSHELL_UPGRADED state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 306 [1]
-   else ifvare RANDOMIZER 307 { ifrnd 192 { espawn SILKCARNATION setactorvar[RETURN].ACTORNATURALPAL 10 state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 307 [1] 
-   else ifvare RANDOMIZER 308 { ifrnd 192 { espawn RAREPIRATEDOUBLOON state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 308 [1] 
-   else ifvare RANDOMIZER 309 { ifrnd 192 { espawn FIXEDDICEPAIR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 309 [1] 
-   else ifvare RANDOMIZER 310 { ifrnd 192 { espawn MALAKIANGEM setactorvar[RETURN].ACTORNATURALPAL 17 state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 310 [1] 
-   else ifvare RANDOMIZER 311 { ifrnd 192 { espawn SAFELOCKBOX state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 311 [1] 
-   else ifvare RANDOMIZER 312 { ifrnd 192 { espawn SECRETRECIPE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 312 [1] 
-   else ifvare RANDOMIZER 313 { ifrnd 192 { espawn SLURPEEMACHINE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 313 [1] 
-   else ifvare RANDOMIZER 314 { ifrnd 192 { espawn STOCKOWNERSHIP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 314 [1] 
-   else ifvare RANDOMIZER 315 { ifrnd 192 { espawn TRANSDIMENSIONALSAFE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 315 [1] 
-   else ifvare RANDOMIZER 316 { ifrnd 192 { espawn BLOODPACTSHIELD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 316 [1] 
-   else ifvare RANDOMIZER 317 { ifrnd 128 { espawn MYSTICSATCHEL state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 317 [1]
-   else ifvare RANDOMIZER 318 { setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
+   else ifvarg RANDOMIZER 301 ifvarl RANDOMIZER 304 { ifrnd 224 { espawn LIQUIDMETALAMULET state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 300-301 [2]
+   else ifvarg RANDOMIZER 303 ifvarl RANDOMIZER 306 { ifrnd 224 { espawn MANDALABRACELET state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 300-301 [2]
+   else ifvarg RANDOMIZER 305 ifvarl RANDOMIZER 308 { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } // 302-303 [2]
+   else ifvare RANDOMIZER 308 { ifrnd 240 { espawn AFAS_DROP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 304 [1]
+   else ifvare RANDOMIZER 309 { ifrnd 240 { espawn FAUXLEVELUP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 305 [1]
+   else ifvare RANDOMIZER 310 { ifrnd 128 { espawn ENERGYSHELL_UPGRADED state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 306 [1]
+   else ifvare RANDOMIZER 311 { ifrnd 192 { espawn SILKCARNATION setactorvar[RETURN].ACTORNATURALPAL 10 state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 307 [1] 
+   else ifvare RANDOMIZER 312 { ifrnd 192 { espawn RAREPIRATEDOUBLOON state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 308 [1] 
+   else ifvare RANDOMIZER 313 { ifrnd 192 { espawn FIXEDDICEPAIR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 309 [1] 
+   else ifvare RANDOMIZER 314 { ifrnd 192 { espawn MALAKIANGEM setactorvar[RETURN].ACTORNATURALPAL 17 state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 310 [1] 
+   else ifvare RANDOMIZER 315 { ifrnd 192 { espawn SAFELOCKBOX state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 311 [1] 
+   else ifvare RANDOMIZER 316 { ifrnd 192 { espawn SECRETRECIPE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 312 [1] 
+   else ifvare RANDOMIZER 317 { ifrnd 192 { espawn SLURPEEMACHINE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 313 [1] 
+   else ifvare RANDOMIZER 318 { ifrnd 192 { espawn STOCKOWNERSHIP state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 314 [1] 
+   else ifvare RANDOMIZER 319 { ifrnd 192 { espawn TRANSDIMENSIONALSAFE state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 315 [1] 
+   else ifvare RANDOMIZER 320 { ifrnd 192 { espawn BLOODPACTSHIELD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 316 [1] 
+   else ifvare RANDOMIZER 321 { ifrnd 128 { espawn MYSTICSATCHEL state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 317 [1]
+   else ifvare RANDOMIZER 322 { setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
                                 ifvare MISCARRAYID_AMOUNTTEMP  0 { espawn MONEYRADAR state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 318 [1]
-   else ifvare RANDOMIZER 319 { setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
+   else ifvare RANDOMIZER 323 { setvar MISCARRAYID 67 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-PORTABLE-ATM?
                                 ifvare MISCARRAYID_AMOUNTTEMP 0 { espawn PORTABLEATM state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 319 [1]
-   else ifvare RANDOMIZER 320 { setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+   else ifvare RANDOMIZER 324 { setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
                                 ifvare MISCARRAYID_AMOUNTTEMP 0 { espawn MERCURYCOMPUTER state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 320 [1]
-   else ifvare RANDOMIZER 321 { setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
+   else ifvare RANDOMIZER 325 { setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
                                 ifvarl MISCARRAYID_AMOUNTTEMP 5 { ifrnd 16 { espawn MEMBERSHIPCARD state scatterdrops } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } else { state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops state gemring_drops } } // 321 [1]
 
 ends
@@ -28631,6 +28648,16 @@ state showequipmentnames
      {
       redefinequote 332 JEWEL OF FOUR SOULS
      }
+     else
+     ifvare TEMPVAR 29 // Liquid Metal Amulet
+     {
+      redefinequote 332 LIQUID METAL AMULET
+     }
+     else
+     ifvare TEMPVAR 30 // Mandala Bracelet
+     {
+      redefinequote 332 MANDALA BRACELET
+     }
      state gtz
 ends
 
@@ -28666,6 +28693,8 @@ state showequipmenticons
      else ifvare TEMPVAR 26 { mulvar digz 2 divvar digz 5 setvar tilenum 6050 } // Energy Incurment
      else ifvare TEMPVAR 27 { divvar digz 7 setvar tilenum 6051 } // Yin-Yang Orb
      else ifvare TEMPVAR 28 { divvar digz 5 setvar tilenum 6043 } // Jewel of Four Souls
+     else ifvare TEMPVAR 29 { mulvar digz 2 divvar digz 3 setvar tilenum 6053 } // Liquid Metal Amulet
+     else ifvare TEMPVAR 30 { divvar digz 10 setvar tilenum 6054 } // Mandala Bracelet
 
      ifvare TEMPVAR 28 // Makes Jewel of Four Souls flash colors
      {
@@ -29367,6 +29396,15 @@ state showshikonjeweldescript
       redefinequote 332 JEWEL OF FOUR SOULS: "COURAGE, FRIENDSHIP, WISDOM, LOVE..." [EQUIPPABLE]
 ends
 
+state showmetalamuletdescript
+      redefinequote 332 LIQUID METAL AMULET: ALLOWS NATURAL AP REGENERATION. [EQUIPPABLE]
+ends
+
+state showmandalabraceletdescript
+      redefinequote 332 MANDALA BRACELET: GET A SHORT BURST OF INVINCIBILITY WHEN DAMAGED. [EQUIPPABLE]
+ends
+
+
 include SHOPS.CON
 include ATMS.CON
 include DIALOUGE.CON
@@ -29522,6 +29560,8 @@ state showequipmentitemdescript
    ifvare EQUIPTEMP 26 state showenergyincurmentdescript
    ifvare EQUIPTEMP 27 state showyinyangorbdescript
    ifvare EQUIPTEMP 28 state showshikonjeweldescript
+   ifvare EQUIPTEMP 29 state showmetalamuletdescript
+   ifvare EQUIPTEMP 30 state showmandalabraceletdescript
 /*
    setvar digx 160
    qstrlen TEMPVAR 332
@@ -30539,6 +30579,7 @@ state gettruetimerdisplayvars
  qstrcat 600 601 // SecFrags
 ends
 
+//
 state show_secondaryquotemethod
      setuserdef[THISACTOR].fta_on 1
 
@@ -30554,7 +30595,7 @@ state show_secondaryquotemethod
 
      ifvarg fta 0
      {
-      setvar quotescale 49152
+      setvar quotescale 49152 // 49152
       ifvarg fta 95
       {
        setvar tempb 100
@@ -30574,14 +30615,13 @@ state show_secondaryquotemethod
        divvar quotescale 100
       }
 
-/*
       ifvarg debugtoggle 0
       {
        state shade0
        state pal16
        setvarvar digx 160
        setvarvar digy quotedigy
-       addvar digy 6
+       addvar digy 4
        setvarvar digz quotescale
        setvarvar varname ftq
        state settile2837
@@ -30591,14 +30631,14 @@ state show_secondaryquotemethod
        state pal0
        setvarvar digx 160
        setvarvar digy quotedigy
-       addvar digy 12
+       addvar digy 8
        setvarvar digz quotescale
        setvarvar varname fta
        state settile2837
        state orientation10
        state dnz
       }
-*/
+
       state shadepulse3
       setvarvar digx quotedigx
       setvarvar digy quotedigy
@@ -32519,6 +32559,8 @@ state givecheat_inventoryitems
  state checkserpenthelmets addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
  state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
  state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
+ state checkliquidmetalamulets addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
+ state checkmandalabracelets addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
  state checkusedbodyarmors addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
  state checkusedsuperarmors addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
  state checkbodyarmors addvar ITEMARRAYID_AMOUNTTEMP 25 state setitemidarrayamount
@@ -33116,38 +33158,6 @@ state medicbag_check1character
               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
               ifvarg INVENTORYSLOTMAX 7 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR7 else setvar TEMPVAR7 -1
               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-              /*
-              ifvare EQUIPCHEAT? 0
-              {
-               ifvarl SKILLLEVEL 10 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR7 else setvar TEMPVAR7 -1
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               ifvarl SKILLLEVEL 7 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR7 else setvar TEMPVAR7 -1
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               ifvarl SKILLLEVEL 4 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR7 else setvar TEMPVAR7 -1
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               ifvarl SKILLLEVEL 1 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR7 else setvar TEMPVAR7 -1
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-              }
-              else
-              {
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-               getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR7
-               ifvare TEMPVAR7 24 addvar DAMAGEMODIFIER 10
-              }
-              */
               ifvarg DAMAGEMODIFIER 100 setvar DAMAGEMODIFIER 100
               setvarvar TEMPVAR6 TEMP
               mulvarvar TEMPVAR6 DAMAGEMODIFIER
@@ -40123,6 +40133,8 @@ ends
         else ifvare EQUIPTEMP 26 { state menu_setequipslots state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount } // Energy Incurment Equipped
         else ifvare EQUIPTEMP 27 { state menu_setequipslots state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount } // Yin-Yang Orb Equipped
         else ifvare EQUIPTEMP 28 { state menu_setequipslots state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount } // Jewel of Four Souls Equipped
+        else ifvare EQUIPTEMP 29 { state menu_setequipslots state checkliquidmetalamulets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount } // Liquid Metal Amulet Equipped
+        else ifvare EQUIPTEMP 30 { state menu_setequipslots state checkmandalabracelets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount } // Mandala Bracelet Equipped
         state sound_addequip
   ends
 
@@ -40581,8 +40593,38 @@ state menu-equippinganitem
       else state sound_errorequip
      }
 
-     ifvare equipmenuselection 4 state menuerrorsound // ?
-     ifvare equipmenuselection 5 state menuerrorsound // ?
+     ifvare equipmenuselection 4 // Liquid Metal Amulet
+     {
+      state menu_checkequipslots
+      ifvarn EQUIPTEMP 29
+      {
+       state checkliquidmetalamulets
+       ifvarg ITEMARRAYID_AMOUNTTEMP 0
+       {
+        state changeequipmentcheck
+        state checkliquidmetalamulets subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
+       }
+       else state menuerrorsound
+      }
+      else state sound_errorequip
+     }
+
+     ifvare equipmenuselection 5 // Mandala Bracelet
+     {
+      state menu_checkequipslots
+      ifvarn EQUIPTEMP 30
+      {
+       state checkmandalabracelets
+       ifvarg ITEMARRAYID_AMOUNTTEMP 0
+       {
+        state changeequipmentcheck
+        state checkmandalabracelets subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
+       }
+       else state menuerrorsound
+      }
+      else state sound_errorequip
+     }
+
      ifvare equipmenuselection 6 state menuerrorsound // ?
      ifvare equipmenuselection 7 state menuerrorsound // ?
      ifvare equipmenuselection 8 state menuerrorsound // ?
@@ -46233,8 +46275,8 @@ state dropinventoryitem
           ifvare mainmenuselection 1 { state checkenergyincurments ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn ENERGYINCURMENT state checkenergyincurments subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
           ifvare mainmenuselection 2 { state checkyinyangorbs ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn YINYANGORB state checkyinyangorbs subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
           ifvare mainmenuselection 3 { state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn SHIKONJEWEL state checkshikonjewels subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
-          ifvare mainmenuselection 4 state menuerrorsound
-          ifvare mainmenuselection 5 state menuerrorsound
+          ifvare mainmenuselection 4 { state checkliquidmetalamulets ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn LIQUIDMETALAMULET state checkliquidmetalamulets subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
+          ifvare mainmenuselection 5 { state checkmandalabracelets ifvarg ITEMARRAYID_AMOUNTTEMP 0 { espawn MANDALABRACELET state checkmandalabracelets subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state checkdropinventoryflags } else state menuerrorsound }
           ifvare mainmenuselection 6 state menuerrorsound
           ifvare mainmenuselection 7 state menuerrorsound
           ifvare mainmenuselection 8 state menuerrorsound

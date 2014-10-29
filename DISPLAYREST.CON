@@ -7712,7 +7712,7 @@ else
            }
            else ifvare TARGETSPECIES MYSTICSATCHEL
            {
-            redefinequote 142 MYSTIC SATCHEL
+            redefinequote 142 MYSTIC SATCHEL 
             state checkactorpickupamounts
             state pal15
            }
@@ -7918,6 +7918,18 @@ else
             redefinequote 142 JEWEL OF FOUR SOULS 
             state checkactorpickupamounts
             state paletteflasher // state pal23
+           }
+           else ifvare TARGETSPECIES LIQUIDMETALAMULET
+           {
+            redefinequote 142 LIQUID METAL AMULET 
+            state checkactorpickupamounts
+            state pal14
+           }
+           else ifvare TARGETSPECIES MANDALABRACELET
+           {
+            redefinequote 142 MANDALABRACELET 
+            state checkactorpickupamounts
+            state pal14
            }
            else ifvare TARGETSPECIES MYSTERYBOX
            {
@@ -13243,6 +13255,13 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
+      state pal22
+      setvarvar varname ARMORPOINTREGENTICS
+      redefinequote 332 AP AUTO-REGEN TIMER: %d/%d TICS
+      qsprintf 332 332 varname ARMORPOINTREGENINTERVAL
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
       state pal0
       setvarvar varname ENERGYPOINTREGENTICS
       redefinequote 332 EP AUTO-REGEN TIMER: %d/%d TICS
@@ -13376,18 +13395,27 @@ else
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
-      addvar digy 4
-      getplayer[THISACTOR].autostep varname
-      redefinequote 332 AUTOSTEP: ^21%d
+      addvar digx 0 // 110
+      addvar digy 4 // 53
+      setvarvar varname randomseed
+      redefinequote 332 RANDOMSEED: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
-      state gtz // state dnz
-      addvar digy 4
-      getplayer[THISACTOR].autostep_sbw varname
-      redefinequote 332 AUTOSTEP_SBW: ^21%d
+      state gtz // state dn
+      addvar digx 0 // 110
+      addvar digy 4 // 53
+      setvarvar varname ftq
+      redefinequote 332 FTQ: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
-      state gtz // state dnz
+      state gtz // state dn
+      addvar digx 0 // 110
+      addvar digy 4 // 53
+      setvarvar varname fta
+      redefinequote 332 FTA: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dn
 
      }
     }
@@ -14409,27 +14437,18 @@ else
      qsprintf 332 332 varname
      setvar temp 332
      state gtz // state dn
-     addvar digx 0 // 110
-     addvar digy 4 // 53
-     setvarvar varname randomseed
-     redefinequote 332 RANDOMSEED: ^21%d
+     addvar digy 4
+     getplayer[THISACTOR].autostep varname
+     redefinequote 332 .AUTOSTEP: ^21%d
      qsprintf 332 332 varname
      setvar temp 332
-     state gtz // state dn
-     addvar digx 0 // 110
-     addvar digy 4 // 53
-     setvarvar varname ftq
-     redefinequote 332 FTQ: ^21%d
+     state gtz // state dnz
+     addvar digy 4
+     getplayer[THISACTOR].autostep_sbw varname
+     redefinequote 332 .AUTOSTEP_SBW: ^21%d
      qsprintf 332 332 varname
      setvar temp 332
-     state gtz // state dn
-     addvar digx 0 // 110
-     addvar digy 4 // 53
-     setvarvar varname fta
-     redefinequote 332 FTA: ^21%d
-     qsprintf 332 332 varname
-     setvar temp 332
-     state gtz // state dn
+     state gtz // state dnz
      addvar digx 0 // 110
      addvar digy 4 // 53     
      getactorvar[PLAYERID].FROZENTIMER varname
@@ -14581,27 +14600,17 @@ else
     state gtz // state dn
 
     addvar digy 4 // 53
-    getactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME varname
-    redefinequote 332 ~JETPACKTIME: ^21%d
-    qsprintf 332 332 varname
+    getactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE TEMPVAR6
+    redefinequote 332 ~JETPACKTIME [TOGGLE?]: ^21%d ^20[^21%d^20]
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
     setvar temp 332
     state gtz // state dn
     addvar digy 4 // 53
-    getactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE varname
-    redefinequote 332 ~JETPACKTOGGLE: ^21%d
-    qsprintf 332 332 varname
-    setvar temp 332
-    state gtz // state dn
-    addvar digy 4 // 53
-    getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME varname
-    redefinequote 332 ~GOGGLESTIME: ^21%d
-    qsprintf 332 332 varname
-    setvar temp 332
-    state gtz // state dn
-    addvar digy 4 // 53
-    getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE varname
-    redefinequote 332 ~GOGGLESTOGGLE: ^21%d
-    qsprintf 332 332 varname
+    getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR5
+    getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE TEMPVAR6
+    redefinequote 332 ~GOGGLESTIME [TOGGLE?]: ^21%d ^20[^21%d^20]
+    qsprintf 332 332 TEMPVAR5 TEMPVAR6
     setvar temp 332
     state gtz // state dn
     addvar digy 4 // 53
@@ -14794,6 +14803,12 @@ else
     setvar temp 332
     state gtz // state dn
     addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERAUTOAPREGENTIMER varname
+    redefinequote 332 ~AUTOAPREGENTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
     getactorvar[CHARACTERARRAY].CHARACTERAUTOEPREGENTIMER varname
     redefinequote 332 ~AUTOEPREGENTIMER: ^21%d
     qsprintf 332 332 varname
@@ -14902,13 +14917,25 @@ else
     qsprintf 332 332 varname
     setvar temp 332
     state gtz // state dn
-
     addvar digy 4 // 53
     getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER varname
     redefinequote 332 ~PSISHIELDTIMER: ^21%d
     qsprintf 332 332 varname
     setvar temp 332
     state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERBOOSTERTIMER varname
+    redefinequote 332 ~BOOSTERTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+    addvar digy 4 // 53
+    getactorvar[CHARACTERARRAY].CHARACTERCORROSIONTIMER varname
+    redefinequote 332 ~CORROSIONTIMER: ^21%d
+    qsprintf 332 332 varname
+    setvar temp 332
+    state gtz // state dn
+
     addvar digy 4 // 53
     getactorvar[CHARACTERARRAY].CHARACTERHPINCREASECURVE varname
     redefinequote 332 ~HPINCREASECURVE: ^21%d
@@ -17249,6 +17276,6 @@ else
  }
 } // [line 248]
 
-state show_secondaryquotemethod
+ state show_secondaryquotemethod
 
 endevent

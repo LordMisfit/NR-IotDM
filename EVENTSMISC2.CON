@@ -1965,7 +1965,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
      setvar CHARACTERARRAY 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-     addlogvar MISCARRAYID_AMOUNTTEMP
+     //addlogvar MISCARRAYID_AMOUNTTEMP
      ifvare MISCARRAYID_AMOUNTTEMP 0
      {
       ifvarg TEMPVAR6 0
@@ -2116,7 +2116,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
      setvar CHARACTERARRAY 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-     addlogvar MISCARRAYID_AMOUNTTEMP
+     //addlogvar MISCARRAYID_AMOUNTTEMP
      ifvare MISCARRAYID_AMOUNTTEMP 0
      {
       setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // AMI-FORM?
@@ -2382,6 +2382,8 @@ ifvare mainmenu 0
           else ifvare EQUIPTEMP 26 { state menu_clearequipslots state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Energy Incurment Equipped...
           else ifvare EQUIPTEMP 27 { state menu_clearequipslots state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Yin-Yang Orb Equipped...
           else ifvare EQUIPTEMP 28 { state menu_clearequipslots state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Jewel of Four Souls Equipped...
+          else ifvare EQUIPTEMP 29 { state menu_clearequipslots state checkliquidmetalamulets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Liquid Metal Amulet Equipped...
+          else ifvare EQUIPTEMP 30 { state menu_clearequipslots state checkmandalabracelets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount state sound_removeequip } // If Mandala Bracelet Equipped...
  
           setvar equipmenuinuse -1
          }
@@ -4076,6 +4078,32 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
    ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
    ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
   }
+ }
+
+ setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+ ifvarg MISCARRAYID_AMOUNTTEMP 0 // Prevents potentially-fatal knockback when a death-switch occurs
+ {
+  getplayer[THISACTOR].player_par TEMPVAR4
+  modvar TEMPVAR4 6
+  gettspr[THISACTOR].tsprcstat TEMPVAR3
+  ifvarand TEMPVAR3 2 subvar TEMPVAR3 2
+  ifvarand TEMPVAR3 512 subvar TEMPVAR3 512
+  ifvarand TEMPVAR3 32768 subvar TEMPVAR3 32768
+  ifvare TEMPVAR4 0 addvar TEMPVAR3 2
+  ifvare TEMPVAR4 1 addvar TEMPVAR3 2
+  ifvare TEMPVAR4 2 addvar TEMPVAR3 514
+  ifvare TEMPVAR4 3 addvar TEMPVAR3 514
+  ifvare TEMPVAR4 4 addvar TEMPVAR3 33282
+  ifvare TEMPVAR4 5 addvar TEMPVAR3 33282
+  settspr[THISACTOR].tsprcstat TEMPVAR3
+ }
+ else
+ {
+  gettspr[THISACTOR].tsprcstat TEMPVAR3
+  //ifvarand TEMPVAR3 2 subvar TEMPVAR3 2
+  ifvarand TEMPVAR3 512 subvar TEMPVAR3 512
+  ifvarand TEMPVAR3 32768 subvar TEMPVAR3 32768
+  settspr[THISACTOR].tsprcstat TEMPVAR3
  }
 
 } // APLAYER actor

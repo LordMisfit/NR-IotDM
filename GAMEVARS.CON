@@ -845,7 +845,8 @@ gamevar ACTORRAGNAROKTIMER 0 131073 // For having Triad Ragnarok Durations [64]
 gamevar ACTORCONFUSIONTIMER 0 131074 // For having Confusion Durations [128]
 gamevar ACTORSHELLTIMER 0 131074 // For having Shell Durations [512]
 gamevar ACTORPSISHIELDTIMER 0 131074 // For having Psychic Shield Duractions [1024]
-gamevar ACTORBLOODLUSTTIMER 0 131074 // For having Psychic Shield Duractions [1024]
+gamevar ACTORBLOODLUSTTIMER 0 131074 //
+gamevar ACTORCORROSIONTIMER 0 131074
 gamevar ENEMYBOOTSAMOUNT 0 131074
 gamevar ENEMYJETPACKAMOUNT 0 131074
 gamevar ENEMYAIRTANKAMOUNT 0 131074
@@ -1128,7 +1129,8 @@ gamevar PLAYERSHELLTIMER 0 131073 // For having Shell Durations [512]
 gamevar PLAYERPSISHIELDTIMER 0 131073 // For having Psychic Shield Duractions [1024]
 gamevar PLAYERBLITZKRIEGTIMER 0 131073 // For having Triad Blitzkrieg Duractions [2048]
 gamevar PLAYERBOOSTERTIMER 0 131073 // For having Triad Booster Duractions [4096]
-gamevar PLAYERBLOODLUSTTIMER 0 131073 // For having Triad Booster Duractions [8192]
+gamevar PLAYERBLOODLUSTTIMER 0 131073 // For having Bloodlust Duractions [8192]
+gamevar PLAYERCORROSIONTIMER 0 131073 // For having Corrosion Duractions [16384]
 
 gamevar SECTOREXTRA 0 1026
 gamevar SECTORISASECRET? 0 1026 // For an array
@@ -1406,6 +1408,8 @@ gamevar BOSSMETERTEMP 0 131073
 
 gamevar HITPOINTREGENTICS 0 2
 gamevar HITPOINTREGENINTERVAL 0 2
+gamevar ARMORPOINTREGENTICS 0 2
+gamevar ARMORPOINTREGENINTERVAL 0 2
 gamevar ENERGYPOINTREGENTICS 0 2
 gamevar ENERGYPOINTREGENINTERVAL 0 2
 
@@ -1852,6 +1856,8 @@ gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept 
  // (ITEMARRAYID = 102) # of Red Tank Capsules in Inventory		// gamevar REDTANKCAPSULES 0 131073 
  // (ITEMARRAYID = 103) # of Bloodpact Shields in Inventory		// gamevar BLOODPACTSHIELDS 0 131073 
  // (ITEMARRAYID = 104) # of Mystic Satchels in Inventory		// gamevar MYSTICSATCHELS 0 131073 
+ // (ITEMARRAYID = 105) # of Liquid Metal Amulets in Inventory		// gamevar LIQUIDMETALAMULETS 0 131073 
+ // (ITEMARRAYID = 106) # of Mystic Satchels in Inventory		// gamevar MANDALABRACELETS 0 131073 
 gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 
@@ -2128,14 +2134,16 @@ gamevar EQUIPTEMP 0 131072
 // ID #27 = Yin-Yang Orb (-20% EP Cost for all Skills and Attacks [each])
 // ID #28 = Jewel of Four Souls (SUPER item, one of a kind, gives multiple effects >.>)
 //---
- // ID #29 = [undefined] Mandala Offering (gives a few [9-13] tics of invincibility when most types of damage ar suffered (with a few exceptions), similar to death-switching [each])
- // ID #30 = [undefined] Winged Bracer (adds 25% to the Max Airjumps of the current character [or 1 Airjump if they have less than 4] [each])
- // ID #31 = [undefined] Divinity Snorkel (extends underwater-airtime by 10% and increases swimming speed by 5% [each])
- // ID #32 = [undefined] Obsidian Band (reduces damage from damagefloors [except HyperMagma] by 20% and HyperMagma by 8% [each])
- // ID #33 = [undefined] Liquid Metal Amulet (allows natural AP regeneration if wearing any kind of armor item [each]) 
+ // ID #29 = [in-progress] Liquid Metal Amulet (allows natural AP regeneration if wearing any kind of armor item [each]) 
+ // ID #30 = [in-progress] Mandala Bracelet (gives a few [9-13?] tics of invincibility when most types of damage ar suffered (with a few exceptions), similar to death-switching [each])
+
+ // ID #31 = [undefined] Winged Bracer (adds 25% to the Max Airjumps of the current character [or 1 Airjump if they have less than 4] [each])
+ // ID #32 = [undefined] Divinity Snorkel (extends underwater-airtime by 10% and increases swimming speed by 5% [each])
+ // ID #33 = [undefined] Obsidian Band (reduces damage from damagefloors [except HyperMagma] by 20% and HyperMagma by 8% [each])
  // ID #34 = [undefined] Flame of Soul (marginally slows down the loss of the 'WARM' meter in hypothermic environments [each]) 
  // ID #35 = [undefined] Bond of Trust Bracelet (reduces damage suffered by the point character by 10% and then splits the rest between all characters in the party, damage-reduction effects might be stronger between wearer and his/her support members [each])
- // ID #36 = [undefined] 
+ // ID #36 = [undefined] Franklin Badge (blocks and reflects any thunder-style attack at the originator [each, though only one is needed for the effect])
+ // ID #37 = [undefined] ? (If a fatal blow is received and you have at least 89% EP, will stop you from dying and restore you to 25% of your MaxHP at the cost of 89% of your EP [each additional one will reduce the EP cost/requirement by 11% [up to 88% total reduction]])
 
 // END OF CHARACTER MENU VARIABLES HERE
 
@@ -2308,6 +2316,7 @@ gamevar CHARACTERPSISHIELDTIMER 0 132098 // For having Psychic Shield Duractions
 gamevar CHARACTERBLITZKRIEGTIMER 0 132098 // For having Triad Blitzkreg [2048]
 gamevar CHARACTERBOOSTERTIMER 0 132098 // For having Triad Booster [4096]
 gamevar CHARACTERBLOODLUSTTIMER 0 132098 // For having Bloodlusting Duractions [8192]
+gamevar CHARACTERCORROSIONTIMER 0 132098 // For having Bloodlusting Duractions [16384]
 gamevar CHARACTERHPINCREASECURVE 0 132098 // HP-Increase Curve
 gamevar CHARACTERAPINCREASECURVE 0 132098 // AP-Increase Curve
 gamevar CHARACTEREPINCREASECURVE 0 132098 // EP-Increase Curve
@@ -2333,13 +2342,14 @@ gamevar CHARACTEREQUIPSLOTITEM1 0 132098 // Character's Equip Slot #1 Item ID#
 gamevar CHARACTEREQUIPSLOTITEM2 0 132098 // Character's Equip Slot #2 Item ID#
 gamevar CHARACTEREQUIPSLOTITEM3 0 132098 // Character's Equip Slot #3 Item ID#
 gamevar CHARACTEREQUIPSLOTITEM4 0 132098 // Character's Equip Slot #4 Item ID#
-gamevar CHARACTEREQUIPSLOTITEM5 0 132098 // Character's Equip Slot #5 Item ID# (Special Equip Cheat Only)
-gamevar CHARACTEREQUIPSLOTITEM6 0 132098 // Character's Equip Slot #6 Item ID# (Special Equip Cheat Only)
-gamevar CHARACTEREQUIPSLOTITEM7 0 132098 // Character's Equip Slot #7 Item ID# (Special Equip Cheat Only)
-gamevar CHARACTEREQUIPSLOTITEM8 0 132098 // Character's Equip Slot #8 Item ID# (Special Equip Cheat Only)
+gamevar CHARACTEREQUIPSLOTITEM5 0 132098 // Character's Equip Slot #5 Item ID#
+gamevar CHARACTEREQUIPSLOTITEM6 0 132098 // Character's Equip Slot #6 Item ID#
+gamevar CHARACTEREQUIPSLOTITEM7 0 132098 // Character's Equip Slot #7 Item ID#
+gamevar CHARACTEREQUIPSLOTITEM8 0 132098 // Character's Equip Slot #8 Item ID#
 gamevar CHARACTERENEMIESKILLED 0 132098 // Counts how many enemies a character has killed during the game [for showing in the final stats after the ending, etc]
 gamevar CHARACTERDEATHS 0 132098 // Counts how many times the character in question has died during the game.
 gamevar CHARACTERAUTOHPREGENTIMER 0 132098 // How far into a character's HP auto-regen process they are.
+gamevar CHARACTERAUTOAPREGENTIMER 0 132098 // How far into a character's AP auto-regen process they are.
 gamevar CHARACTERAUTOEPREGENTIMER 0 132098 // How far into a character's HP auto-regen process they are.
 gamevar CHARACTERSHRINKTIMER 0 132098 // How much "Shrunken" time a character has left
 gamevar CHARACTERJUMPSTRENGTH 0 132098 // Character's Jumping Strength [in tics, out of 65 max]

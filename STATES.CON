@@ -23011,7 +23011,7 @@ state playerregenhealthnormal
       setvar TEMPMOD 0
       ifvarvarl CURRENTHITPOINTS MAXHITPOINTS 
       { 
-       setvar TEMPMOD 10
+       ifvare REGENTIME 0 setvar TEMPMOD 10
       } 
       else
       {
@@ -23030,6 +23030,7 @@ state playerregenhealthnormal
        addvarvar HITPOINTREGENTICS TEMPMOD 
       }
      }
+      // The Actual regeneration process
       ifvarvarg HITPOINTREGENTICS HITPOINTREGENINTERVAL
       { 
        ifvarl REGENTIME 1 // Only Regenerate at the usual rate when NOT using Regen Powerup
@@ -23076,6 +23077,12 @@ state playerregenhealthnormal
           ifvare PLAYEREQUIPSLOTITEM6 5 addvar TEMPMOD 3 // Charm Ankh
           ifvare PLAYEREQUIPSLOTITEM7 5 addvar TEMPMOD 3 // Charm Ankh
           ifvare PLAYEREQUIPSLOTITEM8 5 addvar TEMPMOD 3 // Charm Ankh
+          ifvarl TEMPMOD 1 setvar TEMPMOD 1
+          ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+          mulvarvar TEMPVAR TEMPMOD
+          ifvarl TEMPVAR 1 setvar TEMPVAR 1
+
+          setvar TEMPMOD 0
           ifvare PLAYEREQUIPSLOTITEM1 28 addvar TEMPMOD 10 // Jewel of Four Souls
           ifvare PLAYEREQUIPSLOTITEM2 28 addvar TEMPMOD 10 // Jewel of Four Souls
           ifvare PLAYEREQUIPSLOTITEM3 28 addvar TEMPMOD 10 // Jewel of Four Souls
@@ -23086,6 +23093,7 @@ state playerregenhealthnormal
           ifvare PLAYEREQUIPSLOTITEM8 28 addvar TEMPMOD 10 // Jewel of Four Souls
           ifvarl TEMPMOD 1 setvar TEMPMOD 1
           mulvarvar TEMPVAR TEMPMOD
+          ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
          }
 
          // Check Slurpee Machine [Permenant Boost Item]
@@ -23189,6 +23197,12 @@ state playerregenhealthnormal
          ifvare PLAYEREQUIPSLOTITEM6 5 addvar TEMPMOD 3 // Charm Ankh
          ifvare PLAYEREQUIPSLOTITEM7 5 addvar TEMPMOD 3 // Charm Ankh
          ifvare PLAYEREQUIPSLOTITEM8 5 addvar TEMPMOD 3 // Charm Ankh
+         ifvarl TEMPMOD 1 setvar TEMPMOD 1
+         ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+         mulvarvar TEMPVAR TEMPMOD
+         ifvarl TEMPVAR 1 setvar TEMPVAR 1
+
+         setvar TEMPMOD 0
          ifvare PLAYEREQUIPSLOTITEM1 28 addvar TEMPMOD 10 // Jewel of Four Souls
          ifvare PLAYEREQUIPSLOTITEM2 28 addvar TEMPMOD 10 // Jewel of Four Souls
          ifvare PLAYEREQUIPSLOTITEM3 28 addvar TEMPMOD 10 // Jewel of Four Souls
@@ -23197,10 +23211,9 @@ state playerregenhealthnormal
          ifvare PLAYEREQUIPSLOTITEM6 28 addvar TEMPMOD 10 // Jewel of Four Souls
          ifvare PLAYEREQUIPSLOTITEM7 28 addvar TEMPMOD 10 // Jewel of Four Souls
          ifvare PLAYEREQUIPSLOTITEM8 28 addvar TEMPMOD 10 // Jewel of Four Souls
-
          ifvarl TEMPMOD 1 setvar TEMPMOD 1
-         ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
          mulvarvar TEMPVAR TEMPMOD
+         ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
 
          ifvarl TEMPVAR 1 setvar TEMPVAR 1
          // Check Slurpee Machine [Permenant Boost Item]
@@ -23237,8 +23250,8 @@ state playerregenhealthnormal
         //**************************
         //*Reset the interval timer*
         //**************************
-        setvarvar TEMPVAR4 PLAYERLEVEL divvar TEMPVAR4 20
 
+        // Character Check
         ifvare CHARACTERSELECTED? 1 // Duke Nukem
         { 
          ifvarand PLAYERSTATUS? 8 { setvar HITPOINTREGENTICS -2 randvar TEMPVAR5 2 subvarvar HITPOINTREGENTICS TEMPVAR5 } // - 2 to 4 tics of Poison Damage
@@ -23328,6 +23341,7 @@ state playerregenhealthnormal
         ifvarn HITPOINTREGENTICS 0 mulvar HITPOINTREGENTICS 10
 
         // Add Speed from Character Levels
+        setvarvar TEMPVAR4 PLAYERLEVEL divvar TEMPVAR4 20
         ifvarand PLAYERSTATUS? 8 subvarvar HITPOINTREGENTICS TEMPVAR4
         else addvarvar HITPOINTREGENTICS TEMPVAR4
 
@@ -23368,6 +23382,185 @@ state playerregenhealthnormal
         ifvarand PLAYERSTATUS? 8 subvarvar HITPOINTREGENTICS TEMPMOD
         else addvarvar HITPOINTREGENTICS TEMPMOD
         
+       }
+      }
+    }
+   }
+ends
+
+state playerregenarmornormal
+   ifvare PUBLICBETA? 0 { ifvarand PLAYERSTATUS? 16384 setvar ARMORPOINTREGENINTERVAL 390 else setvar ARMORPOINTREGENINTERVAL 780 } else { setvar ARMORPOINTREGENINTERVAL 260 }
+   ifvarand PLAYERSTATUS? 16384 { setvarvar TEMP STATLIMITATOMIC addvar TEMP 1 } else { setvarvar TEMP MAXARMORPOINTS } // If player is poisoned, their health will go down even if above 100%
+   ifvarvarl CURRENTARMORPOINTS TEMP // TEMP or MAXARMORPOINTS
+   {
+    ifvarg CURRENTARMORPOINTS 0 // if the player has SOME armor, the effect will kick in
+    {
+     ifvare mainmenu 0 
+     {
+      setvar TEMPMOD 0
+      ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTS 
+      { 
+       setvar TEMPVAR8 0
+       ifvare PLAYEREQUIPSLOTITEM1 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM2 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM3 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM4 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM5 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM6 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM7 29 addvar TEMPVAR8 1
+       ifvare PLAYEREQUIPSLOTITEM8 29 addvar TEMPVAR8 1
+       ifvarg TEMPVAR8 0 { ifvare APREGENTIME 0 setvar TEMPMOD 10 }
+      } 
+      else
+      {
+       ifvarand PLAYERSTATUS? 16384
+       { 
+        setvar TEMPMOD 10
+       }
+       else
+       {
+        setvar ARMORPOINTREGENTICS 0
+       }
+      }
+      ifvarn TEMPMOD 0
+      { 
+       //state determineregenrates
+       addvarvar ARMORPOINTREGENTICS TEMPMOD 
+      }
+     }
+
+      // The Actual regeneration process
+      ifvarvarg ARMORPOINTREGENTICS ARMORPOINTREGENINTERVAL
+      { 
+       ifvarl APREGENTIME 1 // Only Regenerate at the usual rate when NOT using APRegen Powerup
+       {
+        setvarvar TEMPVAR MAXARMORPOINTS
+        mulvarvar TEMPVAR PLAYERLEVEL
+        divvar TEMPVAR 10000
+        //ifp ponsteroids divvar TEMPVAR 6667 else divvar TEMPVAR 10000
+        ifvarl TEMPVAR 1 setvar TEMPVAR 1
+ 
+        randvar RANDOMIZER 120
+        addvar RANDOMIZER 1
+        ifvarg RANDOMIZER 0 ifvarl RANDOMIZER 2 mulvar TEMPVAR 5 // 1
+        ifvarg RANDOMIZER 1 ifvarl RANDOMIZER 5 mulvar TEMPVAR 4 // 2-4 +3
+        ifvarg RANDOMIZER 4 ifvarl RANDOMIZER 14 mulvar TEMPVAR 3 // 5-13 +9
+        ifvarg RANDOMIZER 13 ifvarl RANDOMIZER 41 mulvar TEMPVAR 2 // 14-40 +27
+        ifvarg RANDOMIZER 40 ifvarl RANDOMIZER 122 mulvar TEMPVAR 1 // 41-121 +81
+
+        ifvarand PLAYERSTATUS? 16384 // If the player has 'Corrosion', turn the gain into a loss and flash the screen a sickly green
+        {
+        }
+        else
+        {
+         ifvare CHARACTERSELECTED? 11 { mulvar TEMPVAR 3 divvar TEMPVAR 1 } // Paula always recovers 3x the normal AP
+         ifvare PUBLICBETA? 0 divvar TEMPVAR 9 else divvar TEMPVAR 3
+
+         ifvarl TEMPVAR 1 setvar TEMPVAR 1
+         ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+
+         setvar TEMPVAR8 0
+         ifvare PLAYEREQUIPSLOTITEM1 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM2 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM3 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM4 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM5 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM6 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM7 29 addvar TEMPVAR8 1
+         ifvare PLAYEREQUIPSLOTITEM8 29 addvar TEMPVAR8 1
+         ifvarl TEMPVAR8 1 setvar TEMPVAR8 1
+         ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+         mulvarvar TEMPVAR TEMPVAR8
+         ifvarl TEMPVAR 1 setvar TEMPVAR 1
+
+         setvar TEMPMOD 0
+         ifvare PLAYEREQUIPSLOTITEM1 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM2 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM3 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM4 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM5 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM6 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM7 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM8 28 addvar TEMPMOD 10 // Jewel of Four Souls
+         ifvarl TEMPMOD 1 setvar TEMPMOD 1
+         mulvarvar TEMPVAR TEMPMOD
+         ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+
+         ifvarl TEMPVAR 1 setvar TEMPVAR 1
+        }
+
+        // Show Damage Numbers
+        ifvarg TEMPVAR 0 setvar PLAYERAPDAMAGED? -1
+        else ifvarl TEMPVAR 0 setvar PLAYERAPDAMAGED? 1
+        addvarvar CURRENTARMORPOINTS TEMPVAR
+        ifvarvarg CURRENTARMORPOINTS STATLIMITATOMIC setvarvar CURRENTARMORPOINTS STATLIMITATOMIC
+        ifvarand PLAYERSTATUS? 8 nullop else { ifvarvarg CURRENTARMORPOINTS MAXHITPOINTS setvarvar CURRENTARMORPOINTS MAXARMORPOINTS } // Prevents Corrosion ailment from setting above 100% AP to 100% :P
+
+        ifvarn SHOWDAMAGEPLAYER 0
+        {
+         ifvarg TEMPVAR 0
+         {
+          setvarvar SHOWDAMAGE TEMPVAR
+          setvar SHOWDAMAGETYPE 4
+          setvarvar SHOWDAMAGEACTORID THISACTOR
+          state showdamage
+         }
+        }
+        setvar TEMPVAR 0
+
+        //**************************
+        //*Reset the interval timer*
+        //**************************
+        ifvare CHARACTERSELECTED? 11 // Paula Polestar
+        { 
+         ifvarand PLAYERSTATUS? 16384 setvar ARMORPOINTREGENTICS -8 // -8 tics of Corrosion Damage
+         else setvar ARMORPOINTREGENTICS 16 // +16 tics of Healing
+        }
+        else setvar ARMORPOINTREGENTICS 0
+        ifvarn ARMORPOINTREGENTICS 0 mulvar ARMORPOINTREGENTICS 10
+        // Add Speed from Character Levels
+        setvarvar TEMPVAR4 PLAYERLEVEL divvar TEMPVAR4 20
+        ifvarand PLAYERSTATUS? 16384 subvarvar ARMORPOINTREGENTICS TEMPVAR4
+        else addvarvar ARMORPOINTREGENTICS TEMPVAR4
+
+        // Add Speed from Equipped Liquid Metal Amulets
+        setvar TEMPMOD 0
+        ifvare PLAYEREQUIPSLOTITEM1 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM2 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM3 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM4 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM5 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM6 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM7 29 addvar TEMPMOD 10
+        ifvare PLAYEREQUIPSLOTITEM8 29 addvar TEMPMOD 10
+        divvar TEMPMOD 20
+        // Add Speed from Equipped Jewels of Four Souls
+        ifvare PUBLICBETA? 0
+        {
+         ifvare PLAYEREQUIPSLOTITEM1 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM2 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM3 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM4 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM5 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM6 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM7 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM8 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 355 } else { addvar TEMPMOD 710 } } // Jewel of Four Souls
+        }
+        else
+        {
+         ifvare PLAYEREQUIPSLOTITEM1 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM2 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM3 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM4 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM5 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM6 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM7 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+         ifvare PLAYEREQUIPSLOTITEM8 28 { ifvarand PLAYERSTATUS? 16384 { addvar TEMPMOD 240 } else { addvar TEMPMOD 240 } } // Jewel of Four Souls
+        }
+        ifvarand PLAYERSTATUS? 16384 subvarvar ARMORPOINTREGENTICS TEMPMOD
+        else addvarvar ARMORPOINTREGENTICS TEMPMOD
+        //addlogvar ARMORPOINTREGENTICS
+
        }
       }
     }

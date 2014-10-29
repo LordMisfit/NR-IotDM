@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git82)
-definequote 1337 ^22VERSION:^0 5.22.git82.10272014
+setgamename Naferia's Reign (5.22.git83)
+definequote 1337 ^22VERSION:^0 5.22.git83.10282014
 
 action ANULLACTION 0
 
@@ -224,13 +224,15 @@ define POWERWRIST 6042
 define SHIKONJEWEL 6043
 define HOCKEYMASK 6044
 define GEMSTONECROWN 6045
-define IRONRUNE 6052
 define TWILIGHTCAPE 6046
 define SNAKEARMBAND 6047
 define MEDICBAG 6048
 define SERPENTHELMET 6049
 define ENERGYINCURMENT 6050
 define YINYANGORB 6051
+define IRONRUNE 6052
+define LIQUIDMETALAMULET 6053
+define MANDALABRACELET 6054
 
 define MONEYRADAR 6089
 define SILKCARNATION 6090
@@ -745,6 +747,8 @@ spritenoshade MEDICBAG
 spritenoshade SERPENTHELMET
 spritenoshade ENERGYINCURMENT
 spritenoshade YINYANGORB
+spritenoshade LIQUIDMETALAMULET
+spritenoshade MANDALABRACELET
 spritenoshade GREENTANKCAPSULE
 spritenoshade BLUETANKCAPSULE
 spritenoshade REDTANKCAPSULE
@@ -3265,10 +3269,10 @@ state player_defense
    else
    {
     // General Damage Reduction or Increase for reflected damage [to sooth the screaming masses of people who hate overwhelming amounts of deflected damage :P]
-    addlogvar ENEMYDEFLECTEDDAMAGE
+    //addlogvar ENEMYDEFLECTEDDAMAGE
     mulvarvar ENEMYDEFLECTEDDAMAGE INVULNREFLECTRATE
     divvar ENEMYDEFLECTEDDAMAGE 1000
-    addlogvar ENEMYDEFLECTEDDAMAGE
+    //addlogvar ENEMYDEFLECTEDDAMAGE
 
     ifvare INVULNREFLECTRATE 0
     {
@@ -4888,6 +4892,20 @@ state player_defense
       setvarvar DAMAGEHUEFACTOR PLAYERDAMAGE
       ifvare tempvehicleid -1 state playerdamagehues
       else state playerdamagehues_vehicle
+
+      // Mandala Bracelet Check
+      setvar TEMPMOD 0 setvar DAMAGEMODIFIER 0 setvar TEMPVAR5 0
+      ifvare PLAYEREQUIPSLOTITEM1 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM2 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM3 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM4 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM5 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM6 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM7 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM8 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvarl TEMPVAR5 0 setvar TEMPVAR5 0
+      ifvarg TEMPVAR5 104 setvar TEMPVAR5 104
+      ifvarg TEMPMOD 0 { setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT TEMPVAR5 } // DEATHSWITCH-DELAY
      }
     }
     else setactor[THISACTOR].htextra 0
@@ -6856,10 +6874,10 @@ ifvarg tempb 0
   ifvare DEFLECTDAMAGESTATE 1 // If the player is in God Mode or under the effect of an Invuln item, they deflect all enemy damage
   {
    // General Damage Reduction or Increase for reflected damage [to sooth the screaming masses of people who hate overwhelming amounts of deflected damage :P]
-   addlogvar DEFLECTEDDAMAGE
+   //addlogvar DEFLECTEDDAMAGE
    mulvarvar DEFLECTEDDAMAGE INVULNREFLECTRATE
    divvar DEFLECTEDDAMAGE 1000
-   addlogvar DEFLECTEDDAMAGE
+   //addlogvar DEFLECTEDDAMAGE
 
    ifvare INVULNREFLECTRATE 0
    {
@@ -14572,7 +14590,7 @@ useractor notenemy DANCE1 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -14769,7 +14787,7 @@ useractor notenemy DANCE2 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -14975,7 +14993,7 @@ useractor notenemy DANCE3 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -15183,7 +15201,7 @@ useractor notenemy DANCE5 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -15382,7 +15400,7 @@ useractor notenemy DANCE6 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -15591,7 +15609,7 @@ useractor notenemy DANCE7 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -15799,7 +15817,7 @@ useractor notenemy DANCE9 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -15999,7 +16017,7 @@ useractor notenemy STAND1 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -16199,7 +16217,7 @@ useractor notenemy STAND3 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -16399,7 +16417,7 @@ useractor notenemy STAND4 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -16598,7 +16616,7 @@ useractor notenemy COP1 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -16799,7 +16817,7 @@ useractor notenemy COP2 TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -17001,7 +17019,7 @@ useractor notenemy PUNKDUDE TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -17202,7 +17220,7 @@ useractor notenemy SITTINGDUDE TOUGH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -17407,7 +17425,7 @@ useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -17612,7 +17630,7 @@ useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -17817,7 +17835,7 @@ useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -18023,7 +18041,7 @@ useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
 
     ifwasweapon SHRINKSPARK
     {
-     addlogvar SHRUNK?
+     //addlogvar SHRUNK?
      setvar SHRUNK? 1
      sound ACTOR_SHRINKING
      move 0
@@ -23559,21 +23577,26 @@ ends
 state playershrink
       ifvare oldskoolmode 0
       {
-       state stoppainsounds
-       ifrnd 128 state deflectshrinker 
-       else 
-       { 
-        ifvarn VEHICLEID -1 nullop
-        else
-        {
-         setvar SHRUNK? 1
-         palfrom 48 0 48
-         move PSHRINKING // used as a var only.
-         sound ACTOR_SHRINKING
-         cstat 0
-         break
+       randvar TEMPVAR5 999 addvar TEMPVAR5 1
+       ifvarvarg TEMPVAR5 SHRINKINGRESISTPLAYER
+       {
+        state stoppainsounds
+        ifrnd 128 state deflectshrinker 
+        else 
+        { 
+         ifvarn VEHICLEID -1 nullop
+         else
+         {
+          setvar SHRUNK? 1
+          palfrom 48 0 48
+          move PSHRINKING // used as a var only.
+          sound ACTOR_SHRINKING
+          cstat 0
+          break
+         }
         }
        }
+       else state deflectshrinker 
       }
       else
       {
@@ -23656,7 +23679,9 @@ state removeexcessinventory-checkids
   ifvare TEMPVAR3 26 { state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
   ifvare TEMPVAR3 27 { state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
   ifvare TEMPVAR3 28 { state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
-  addlogvar TEMPVAR3
+  ifvare TEMPVAR3 29 { state checkliquidmetalamulets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 30 { state checkmandalabracelets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  //addlogvar TEMPVAR3
   setvar TEMPVAR3 0
 ends
 
@@ -27560,6 +27585,7 @@ ifvarg MISCARRAYID_AMOUNTTEMP 0 // Prevents potentially-fatal knockback when a d
   setvar MISCARRAYID 26 // DEATHSWITCH-DELAY
   getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
   subvar MISCARRAYID_AMOUNTTEMP 1
+  //addlogvar MISCARRAYID_AMOUNTTEMP
   setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
 
   setplayer[THISACTOR].falling_counter 0
@@ -31523,16 +31549,17 @@ ifvare mainmenu -1
   }
  }
 
-// Code for Regenerating Player-Character's HP when below 100%
+// Code for Regenerating Player-Character's HP/AP/EP when below 100%
 ifvare oldskoolmode 0
 {
  ifvare mainmenu 0
  {
   state playerregenhealthnormal
+  state playerregenarmornormal
   state playerregenenergynormal
  }
 }
-// End Code for Regenerating HP
+// End Code for Regenerating HP/AP/EP
 
 ifvare oldskoolmode 1
 {
@@ -49622,6 +49649,7 @@ useractor notenemy PICKUPMULTIICON 0
   else ifvare TEMP MEDICBAG mulvar TESTXREPEAT1 10
   else ifvare TEMP SERPENTHELMET mulvar TESTXREPEAT1 8
   else ifvare TEMP YINYANGORB mulvar TESTXREPEAT1 4
+  else ifvare TEMP MANDALABRACELET mulvar TESTXREPEAT1 8
   else ifvare TEMP WINTERCLOTHES mulvar TESTXREPEAT1 8
   else ifvare TEMP GREENTANKCAPSULE mulvar TESTXREPEAT1 4
   else ifvare TEMP BLUETANKCAPSULE mulvar TESTXREPEAT1 4
@@ -49692,6 +49720,7 @@ useractor notenemy PICKUPMULTIICON 0
   else ifvare TEMP MEDICBAG mulvar TESTYREPEAT1 10
   else ifvare TEMP SERPENTHELMET mulvar TESTYREPEAT1 8
   else ifvare TEMP YINYANGORB mulvar TESTYREPEAT1 4
+  else ifvare TEMP MANDALABRACELET mulvar TESTYREPEAT1 8
   else ifvare TEMP WINTERCLOTHES mulvar TESTYREPEAT1 8
   else ifvare TEMP GREENTANKCAPSULE mulvar TESTYREPEAT1 4
   else ifvare TEMP BLUETANKCAPSULE mulvar TESTYREPEAT1 4
