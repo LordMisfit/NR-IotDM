@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git87)
-definequote 1337 ^22VERSION:^0 5.22.git87.10302014
+setgamename Naferia's Reign (5.22.git88)
+definequote 1337 ^22VERSION:^0 5.22.git88.10302014
 
 action ANULLACTION 0
 
@@ -24907,7 +24907,65 @@ state getskillusecosts
 
  setvar CHARACTERARRAY 13 // Minako
  getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR
- // Nothing For Minako [Yet :P]
+ ifvarg TEMPVAR -1 ifvarl TEMPVAR 34
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 10
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 24
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 42
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg TEMPVAR 33 ifvarl TEMPVAR 67
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 9
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 23
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 40
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg TEMPVAR 66 ifvarl TEMPVAR 100
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 8
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 22
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 39
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare TEMPVAR 100
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 20
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 36
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
 
 
  setvar CHARACTERARRAY 14 // Mystery Lady

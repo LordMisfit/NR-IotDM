@@ -23772,6 +23772,22 @@ state playerregenarmornormal
          mulvarvar TEMPVAR TEMPVAR3
          divvar TEMPVAR 1000
 
+         // Riot Shield Check
+         setvar DAMAGEMODIFIER 1000
+         ifvare PLAYEREQUIPSLOTITEM1 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM2 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM3 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM4 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM5 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM6 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM7 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvare PLAYEREQUIPSLOTITEM8 10 addvar DAMAGEMODIFIER -100 // Riot Shield (-10% Damage)
+         ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+         mulvarvar TEMPVAR DAMAGEMODIFIER
+         divvar TEMPVAR 1000
+         ifvarl TEMPVAR 1 setvar TEMPVAR 1
+
+         // Character Check
          ifvare CHARACTERSELECTED? 11 divvar TEMPVAR 2 // Paula only suffers 1/2 damage from Corrosion
          mulvar TEMPVAR -1
 
@@ -23808,8 +23824,31 @@ state playerregenarmornormal
           setvar ATTACKERDISPLAYTIMER 0 setvar ARMORNULLDAMAGE 0
           ifvarg tempe 0 setvar ARMORDAMAGETIMER 0
 
-          randvar TEMPVAR5 10 addvar TEMPVAR5 5
-          ifrnd 112 { subvarvar ARMORPERCENT TEMPVAR5 ifvarl ARMORPERCENT 100 setvar ARMORPERCENT 100 }
+          // Start of 'Damage AP-Absorb' Code
+          randvar TEMPVAR5 10 addvar TEMPVAR5 5 // [0.5% to 1.5% AP-Absorb loss per interval (base)]
+          ifvare CHARACTERSELECTED? 11 { mulvar TEMPVAR5 333 divvar TEMPVAR5 1000 } // Paula's AP-Absorb only suffers 1/3 the amount of the others'
+
+          // Riot Shield Check [AP-Absorb Damage]
+          setvar DAMAGEMODIFIER 1000
+          ifvare PLAYEREQUIPSLOTITEM1 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM2 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM3 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM4 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM5 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM6 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM7 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvare PLAYEREQUIPSLOTITEM8 10 addvar DAMAGEMODIFIER -50 // Riot Shield (-5% Damage)
+          ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+          mulvarvar TEMPVAR5 DAMAGEMODIFIER
+          divvar TEMPVAR5 1000
+
+          setvar TEMPVAR8 437 // 7/16 chance of AP-Absorb loss occuring at all [base]
+          mulvarvar TEMPVAR8 DAMAGEMODIFIER
+          divvar TEMPVAR8 1000
+          ifvare CHARACTERSELECTED? 11 { mulvar TEMPVAR8 667 divvar TEMPVAR8 1000 } // Paula's Armor only suffers AP-Absorb loss 2/3s as often as the others
+
+          randvar TEMPVAR7 999 addvar TEMPVAR7 1
+          ifvarvarg TEMPVAR7 TEMPVAR8 nullop else { subvarvar ARMORPERCENT TEMPVAR5 ifvarl ARMORPERCENT 100 setvar ARMORPERCENT 100 }
          }
         }
         else

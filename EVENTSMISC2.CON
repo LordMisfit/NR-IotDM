@@ -953,35 +953,42 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
        ifvare mainmenusubmenu 3 state menuerrorsound // Status
        ifvare mainmenusubmenu 4 // Skills
        {
-        ifvare mainmenupage 3
+        ifvare mainmenupage 3 // Ami
         {
          subvar mainmenuselection 1
          ifvarl mainmenuselection 0 addvar mainmenuselection 2
          sound MENU_CURSOR
         }
         else
-        ifvare mainmenupage 6
+        ifvare mainmenupage 6 // Ted
         {
          subvar mainmenuselection 1
          ifvarl mainmenuselection 0 addvar mainmenuselection 3
          sound MENU_CURSOR
         }
         else
-        ifvare mainmenupage 9
+        ifvare mainmenupage 9 // Christina
         {
          subvar mainmenuselection 1
          ifvarl mainmenuselection 0 addvar mainmenuselection 6
          sound MENU_CURSOR
         }
         else
-        ifvare mainmenupage 11
+        ifvare mainmenupage 11 // Lori
         {
          subvar mainmenuselection 1
          ifvarl mainmenuselection 0 addvar mainmenuselection 2
          sound MENU_CURSOR
         }
         else
-        ifvare mainmenupage 13
+        ifvare mainmenupage 12 // Minako
+        {
+         subvar mainmenuselection 1
+         ifvarl mainmenuselection 0 addvar mainmenuselection 3
+         sound MENU_CURSOR
+        }
+        else
+        ifvare mainmenupage 13 // Mystery1
         {
          ifvare PUBLICBETA? 0
          {
@@ -992,7 +999,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
          else state menuerrorsound
         }
         else
-        ifvare mainmenupage 14
+        ifvare mainmenupage 14 // Maken
         {
          subvar mainmenuselection 1
          ifvarl mainmenuselection 0 addvar mainmenuselection 2
@@ -1183,6 +1190,13 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
        {
         addvar mainmenuselection 1
         ifvarg mainmenuselection 1 subvar mainmenuselection 2
+        sound MENU_CURSOR
+       }
+       else
+       ifvare mainmenupage 12 // Minako
+       {
+        addvar mainmenuselection 1
+        ifvarg mainmenuselection 2 subvar mainmenuselection 3
         sound MENU_CURSOR
        }
        else

@@ -7590,6 +7590,20 @@ state characterplate
    state digz32768
 ends
 
+state apabsorbchecks-useskillitem
+   setvar TEMP7 0
+   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
+   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
+   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
+   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   else ifvarg skillidinuse 16 ifvarl skillidinuse 20 addvar TEMP7 1
+ends
+
+state bufftimerdisplay-useskillitem
+   setvar TEMP7 0
+   ifvarg skillidinuse 11 ifvarl skillidinuse 17 addvar TEMP7 1
+ends
+
 state menudukestats
   ifvarand CHARACTERSAVAILABLE 1 
   { 
@@ -7927,12 +7941,8 @@ state menudukestats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -7976,7 +7986,8 @@ state menudukestats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -8335,12 +8346,8 @@ state menujackstats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -8384,7 +8391,8 @@ state menujackstats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -8747,12 +8755,8 @@ state menububsystats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -8796,7 +8800,8 @@ state menububsystats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -9168,12 +9173,8 @@ state menuamistats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -9217,7 +9218,8 @@ state menuamistats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -9586,12 +9588,8 @@ state menulowangstats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -9635,7 +9633,8 @@ state menulowangstats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -10004,12 +10003,8 @@ state menuessencestats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -10053,7 +10048,8 @@ state menuessencestats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -10422,12 +10418,8 @@ state menutedstats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -10471,7 +10463,8 @@ state menutedstats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -10840,12 +10833,8 @@ state menulisastats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -10889,7 +10878,8 @@ state menulisastats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -11259,12 +11249,8 @@ state menucybanisstats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -11308,7 +11294,8 @@ state menucybanisstats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -11680,12 +11667,8 @@ state menunethrastats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -11729,7 +11712,8 @@ state menunethrastats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -12099,12 +12083,8 @@ state menupaulastats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -12148,7 +12128,8 @@ state menupaulastats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -12517,12 +12498,8 @@ state menuloristats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -12566,7 +12543,8 @@ state menuloristats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -12936,12 +12914,8 @@ state menuminakostats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -12985,7 +12959,8 @@ state menuminakostats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -13363,12 +13338,8 @@ state menumystery1stats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -13412,7 +13383,8 @@ state menumystery1stats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 332 // digx_test
@@ -13782,12 +13754,8 @@ state menumakenstats
     state dnz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[CHARACTERARRAY].CHARACTERAPABSORB varname
@@ -13831,7 +13799,8 @@ state menumakenstats
    }
 
    // Show "Buff" Timers
-   ifvarg skillidinuse 11 ifvarl skillidinuse 17
+   state bufftimerdisplay-useskillitem
+   ifvarg TEMP7 0
    {
     setvar tilenum 2822
     setvarvar digx 120 // digx_test
@@ -14073,12 +14042,8 @@ state menuvehiclestats
     state gtz
    }
 
-   // Show AB% Levels when using Ted's "Fortify" skills
-   setvar TEMP7 0
-   ifvarg itemidinuse 10 ifvarl itemidinuse 13 addvar TEMP7 1
-   else ifvarg itemidinuse 19 ifvarl itemidinuse 22 addvar TEMP7 1
-   else ifvarg itemidinuse 23 ifvarl itemidinuse 38 addvar TEMP7 1
-   else ifvarg skillidinuse 8 ifvarl skillidinuse 12 addvar TEMP7 1
+   // Show AB% Levels when using Ted's "Fortify" skills or Minako's "Venus Steel Mending"
+   state apabsorbchecks-useskillitem
    ifvarg TEMP7 0
    {
     getactorvar[VEHICLEID].ENEMYARMORPERCENT varname
@@ -32681,7 +32646,7 @@ state givecheat_inventoryitems
   setvar MISCARRAYID 68 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // GOT-MONEY-RADAR?
   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 68 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 }
 
-  ifvare HAVEASHIKONJEWEL? 0 { state checkshikonjewels setvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare HAVEASHIKONJEWEL? 0 { state checkshikonjewels setvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount setvar SHIKONHOLDERENEMYID -1 }
 
   setvar MISCARRAYID 76 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CARD-MEMBERSHIP?
   ifvare MISCARRAYID_AMOUNTTEMP 0 { setvar MISCARRAYID 76 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 }
@@ -37909,6 +37874,422 @@ state usefortifygreatervehicle
             }
 ends
 
+// START TODO
+state usevenusmendinglessermain
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 21 // Venus Steel Mending [Lesser]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             setvarvar TEMPVAR MAXARMORPOINTS
+             setvarvar TEMP2 TEMPVAR
+             mulvar TEMP2 200
+             divvar TEMP2 1000
+             addvarvar CURRENTARMORPOINTS TEMP2
+             setvarvar TEMP3 MAXARMORPOINTS
+             mulvar TEMP3 1200
+             divvar TEMP3 1000
+             ifvarvarg CURRENTARMORPOINTS TEMP3 setvarvar CURRENTARMORPOINTS TEMP3
+             setvar PLAYERAPDAMAGED? -1
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             setvarvar TEMPVAR2 ARMORPERCENT
+             divvar TEMPVAR2 250 // 0.4%
+             randvar TEMPVAR 6 addvar TEMPVAR 2
+             addvarvar ARMORPERCENT TEMPVAR 
+             addvarvar ARMORPERCENT TEMPVAR2 
+             ifvarg ARMORPERCENT 1000 setvar ARMORPERCENT 1000
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendinglessersecondary
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 21 // Venus Steel Mending [Lesser]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP
+             setvarvar TEMP2 TEMP
+             mulvar TEMP2 200
+             divvar TEMP2 1000
+             getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+             addvarvar TEMPVAR TEMP2
+             getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+             mulvar TEMP3 1200
+             divvar TEMP3 1000
+             ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+             setactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             getactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMPVAR2
+             divvar TEMPVAR2 250 // 0.4%
+             getactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMP
+             randvar TEMPVAR 6 addvar TEMPVAR 2
+             addvarvar TEMP TEMPVAR 
+             addvarvar TEMP TEMPVAR2
+             ifvarg TEMP 1000 setvar TEMP 1000
+             setactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMP
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendinglesservehicle
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 21 // Venus Steel Mending [Lesser]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             getactorvar[VEHICLEID].ENEMYMAXAP TEMP
+             setvarvar TEMP2 TEMP
+             mulvar TEMP2 200
+             divvar TEMP2 1000
+             getactorvar[VEHICLEID].ENEMYAP TEMPVAR
+             addvarvar TEMPVAR TEMP2
+             getactorvar[VEHICLEID].ENEMYMAXAP TEMP3
+             mulvar TEMP3 1200
+             divvar TEMP3 1000
+             ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+             setactorvar[VEHICLEID].ENEMYAP TEMPVAR
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMPVAR2
+             divvar TEMPVAR2 250 // 0.4%
+             getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMP
+             randvar TEMPVAR 6 addvar TEMPVAR 2
+             addvarvar TEMP TEMPVAR 
+             addvarvar TEMP TEMPVAR2
+             ifvarg TEMP 1000 setvar TEMP 1000
+             setactorvar[VEHICLEID].ENEMYARMORPERCENT TEMP
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendingmoderatemain
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 22 // Venus Steel Mending [Moderate]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             setvarvar TEMPVAR MAXARMORPOINTS
+             setvarvar TEMP2 TEMPVAR
+             mulvar TEMP2 450
+             divvar TEMP2 1000
+             addvarvar CURRENTARMORPOINTS TEMP2
+             setvarvar TEMP3 MAXARMORPOINTS
+             mulvar TEMP3 1450
+             divvar TEMP3 1000
+             ifvarvarg CURRENTARMORPOINTS TEMP3 setvarvar CURRENTARMORPOINTS TEMP3
+             setvar PLAYERAPDAMAGED? -1
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             setvarvar TEMPVAR2 ARMORPERCENT
+             divvar TEMPVAR2 200 // 0.5%
+             randvar TEMPVAR 12 addvar TEMPVAR 4
+             addvarvar ARMORPERCENT TEMPVAR 
+             addvarvar ARMORPERCENT TEMPVAR2
+             ifvarg ARMORPERCENT 1000 setvar ARMORPERCENT 1000
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendingmoderatesecondary
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 22 // Venus Steel Mending [Moderate]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP
+             setvarvar TEMP2 TEMP
+             mulvar TEMP2 450
+             divvar TEMP2 1000
+             getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+             addvarvar TEMPVAR TEMP2
+             getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+             mulvar TEMP3 1450
+             divvar TEMP3 1000
+             ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+             setactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             getactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMPVAR2
+             divvar TEMPVAR2 200 // 0.5%
+             getactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMP
+             randvar TEMPVAR 12 addvar TEMPVAR 4
+             addvarvar TEMP TEMPVAR 
+             addvarvar TEMP TEMPVAR2
+             ifvarg TEMP 1000 setvar TEMP 1000
+             setactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMP
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendingmoderatevehicle
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 22 // Venus Steel Mending [Moderate]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             getactorvar[VEHICLEID].ENEMYMAXAP TEMP
+             setvarvar TEMP2 TEMP
+             mulvar TEMP2 450
+             divvar TEMP2 1000
+             getactorvar[VEHICLEID].ENEMYAP TEMPVAR
+             addvarvar TEMPVAR TEMP2
+             getactorvar[VEHICLEID].ENEMYMAXAP TEMP3
+             mulvar TEMP3 1450
+             divvar TEMP3 1000
+             ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+             setactorvar[VEHICLEID].ENEMYAP TEMPVAR
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMPVAR2
+             divvar TEMPVAR2 200 // 0.5%
+             getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMP
+             randvar TEMPVAR 12 addvar TEMPVAR 4
+             addvarvar TEMP TEMPVAR 
+             addvarvar TEMP TEMPVAR2
+             ifvarg TEMP 1000 setvar TEMP 1000
+             setactorvar[VEHICLEID].ENEMYARMORPERCENT TEMP
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendinggreatermain
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 23 // Venus Steel Mending [Greater]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             setvarvar TEMPVAR MAXARMORPOINTS
+             setvarvar TEMP2 TEMPVAR
+             mulvar TEMP2 775
+             divvar TEMP2 1000
+             addvarvar CURRENTARMORPOINTS TEMP2
+             setvarvar TEMP3 MAXARMORPOINTS
+             mulvar TEMP3 1775
+             divvar TEMP3 1000
+             ifvarvarg CURRENTARMORPOINTS TEMP3 setvarvar CURRENTARMORPOINTS TEMP3
+             setvar PLAYERAPDAMAGED? -1
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             setvarvar TEMPVAR2 ARMORPERCENT
+             divvar TEMPVAR2 125 // 0.8%
+             randvar TEMPVAR 18 addvar TEMPVAR 6
+             addvarvar ARMORPERCENT TEMPVAR 
+             addvarvar ARMORPERCENT TEMPVAR2
+             ifvarg ARMORPERCENT 1000 setvar ARMORPERCENT 1000
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendinggreatersecondary
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 23 // Venus Steel Mending [Greater]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP
+             setvarvar TEMP2 TEMP
+             mulvar TEMP2 775
+             divvar TEMP2 1000
+             getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+             addvarvar TEMPVAR TEMP2
+             getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+             mulvar TEMP3 1775
+             divvar TEMP3 1000
+             ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+             setactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             getactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMPVAR2
+             divvar TEMPVAR2 125 // 0.8%
+             getactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMP
+             randvar TEMPVAR 18 addvar TEMPVAR 6
+             addvarvar TEMP TEMPVAR 
+             addvarvar TEMP TEMPVAR2
+             ifvarg TEMP 1000 setvar TEMP 1000
+             setactorvar[CHARACTERARRAY].CHARACTERAPABSORB TEMP
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+
+state usevenusmendinggreatervehicle
+            setvar SKILLUSERARRAY 13
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+
+            setvar USESKILLARRAY 23 // Venus Steel Mending [Greater]
+            getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+            state check-skillenergycost-mul
+            divvar SKILL-ENERGYCOST 100
+            getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+            state check-skillenergycost-add
+            setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+
+            ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar TEMPVAR5 CURRENTENERGYPOINTS
+            else getactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5            
+            ifvarvarl TEMPVAR5 SKILL-ENERGYCOST { state menuerrorsound setvar skillidinuse -1 }
+            else
+            {
+             getactorvar[VEHICLEID].ENEMYMAXAP TEMP
+             setvarvar TEMP2 TEMP
+             mulvar TEMP2 775
+             divvar TEMP2 1000
+             getactorvar[VEHICLEID].ENEMYAP TEMPVAR
+             addvarvar TEMPVAR TEMP2
+             getactorvar[VEHICLEID].ENEMYMAXAP TEMP3
+             mulvar TEMP3 1775
+             divvar TEMP3 1000
+             ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+             setactorvar[VEHICLEID].ENEMYAP TEMPVAR
+             stopsound VENUSSTEELMENDING_CLANG
+             globalsound VENUSSTEELMENDING_CLANG
+
+             getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMPVAR2
+             divvar TEMPVAR2 125 // 0.8%
+             getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMP
+             randvar TEMPVAR 18 addvar TEMPVAR 6
+             addvarvar TEMP TEMPVAR 
+             addvarvar TEMP TEMPVAR2
+             ifvarg TEMP 1000 setvar TEMP 1000
+             setactorvar[VEHICLEID].ENEMYARMORPERCENT TEMP
+
+             subvarvar TEMPVAR5 SKILL-ENERGYCOST
+             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar CURRENTENERGYPOINTS TEMPVAR5
+             else setactorvar[SKILLUSERARRAY].CHARACTEREP TEMPVAR5
+            }
+ends
+// END TODO
+
 state usemercuryquickeningmain
             setvar SKILLUSERARRAY 4
             ifvarvare CHARACTERSELECTED? SKILLUSERARRAY setvarvar SKILL-ENERGYCOST MAXENERGYPOINTS
@@ -41055,6 +41436,7 @@ state assesshealskilltype1
  ifvare skillidinuse 6 setvar tempvarname 1666
 ends
 
+// AP-Absorb [specfically]
 state assessarmorabskilltype2_p
  ifvare skillidinuse 9 state usefortifylessermain
  ifvare skillidinuse 10 state usefortifymoderatemain
@@ -41282,6 +41664,401 @@ state assessarmorabskilltype1
         }
 ends
 
+// AP-Mending [w/ a bit of AP-Absorb]
+state assessaprestoreskilltype2_p
+ ifvare skillidinuse 17 state usevenusmendinglessermain
+ ifvare skillidinuse 18 state usevenusmendingmoderatemain
+ ifvare skillidinuse 19 state usevenusmendinggreatermain
+ends
+
+state assessaprestoreskilltype2_c
+ ifvare skillidinuse 17 state usevenusmendinglessersecondary
+ ifvare skillidinuse 18 state usevenusmendingmoderatesecondary
+ ifvare skillidinuse 19 state usevenusmendinggreatersecondary
+ends
+
+state assessaprestoreskilltype2_v
+ ifvare skillidinuse 17 state usevenusmendinglesservehicle
+ ifvare skillidinuse 18 state usevenusmendingmoderatevehicle
+ ifvare skillidinuse 19 state usevenusmendinggreatervehicle
+ends
+
+state assessaprestoreskilltype1
+        ifvare skillmenupage 0
+        {
+         ifvare skillmenuselection 0 // Duke
+         { 
+          ifvarg DUKE? 0 
+          {
+           ifvare CHARACTERSELECTED? 1
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 1
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 1 // Jack
+         { 
+          ifvarg JACK? 0 
+          {
+           ifvare CHARACTERSELECTED? 2
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 2
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 2 // Bubsy
+         { 
+          ifvarg BUBSY? 0 
+          { 
+           ifvare CHARACTERSELECTED? 3
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 3
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 3 // Ami
+         { 
+          ifvarg AMI? 0 
+          { 
+           ifvare CHARACTERSELECTED? 4
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 4
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 4 // Lo Wang
+         { 
+          ifvarg LOWANG? 0 
+          { 
+           ifvare CHARACTERSELECTED? 5
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 5
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 5 // ESSence
+         { 
+          ifvarg ESSENCE? 0 
+          { 
+           ifvare CHARACTERSELECTED? 6
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 6
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 6 // Ted
+         { 
+          ifvarg TED? 0 
+          { 
+           ifvare CHARACTERSELECTED? 7
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 7
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 7 // Lisa
+         { 
+          ifvarg LISA? 0 
+          { 
+           ifvare CHARACTERSELECTED? 8
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 8
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+        }
+        else
+        ifvare skillmenupage 1
+        {
+         ifvare skillmenuselection 0 // Cybanis
+         { 
+          ifvarg CYBANIS? 0 
+          { 
+           ifvare CHARACTERSELECTED? 9
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 9
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 1 // Nethra/Christina
+         { 
+          ifvarg NETHRA? 0 
+          { 
+           ifvare CHARACTERSELECTED? 10
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 10
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 2 // Paula
+         { 
+          ifvarg PAULA? 0 
+          { 
+           ifvare CHARACTERSELECTED? 11
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 11
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 3 // Lori
+         { 
+          ifvarg LORI? 0 
+          { 
+           ifvare CHARACTERSELECTED? 12
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 12
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 4 // Minako
+         { 
+          ifvarg MINAKO? 0 
+          { 
+           ifvare CHARACTERSELECTED? 13
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 13
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 5 // Mystery Lady [?]
+         { 
+          ifvarg MYSTERY1? 0 
+          { 
+           ifvare CHARACTERSELECTED? 14
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 14
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 6 // Maken
+         { 
+          ifvarg MAKEN? 0 
+          { 
+           ifvare CHARACTERSELECTED? 15
+           {
+            setvarvar TEMP3 MAXARMORPOINTS
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            ifvarg CURRENTARMORPOINTS 0 { ifvarvarl CURRENTARMORPOINTS TEMP3 state assessaprestoreskilltype2_p else state menuerrorsound } else state menuerrorsound
+           }
+           else
+           {
+            setvar CHARACTERARRAY 15
+            getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMP3
+            mulvarvar TEMP3 tempvarname
+            divvar TEMP3 1000
+            getactorvar[CHARACTERARRAY].CHARACTERAP TEMPVAR
+            ifvarg TEMPVAR 0 ifvarvarl TEMPVAR TEMP3 state assessaprestoreskilltype2_c else state menuerrorsound 
+           } 
+          } 
+          else state menuerrorsound 
+         }
+         ifvare skillmenuselection 7 // Current Vehicle
+         { 
+          ifvarn VEHICLEID -1
+          {
+           getactorvar[VEHICLEID].ENEMYAP TEMPVAR4
+           getactorvar[VEHICLEID].ENEMYMAXAP TEMPVAR5
+           setvarvar TEMP3 TEMPVAR5
+           mulvarvar TEMP3 tempvarname
+           divvar TEMP3 1000
+           ifvarg TEMPVAR4 0 { ifvarvarl TEMPVAR4 TEMP3 state assessaprestoreskilltype2_v else state menuerrorsound } else state menuerrorsound
+          }
+          else state menuerrorsound 
+         }
+        }
+ends
+
+state assessaprestoreskilltype0
+ ifvare skillidinuse 17 setvar tempvarname 1200
+ ifvare skillidinuse 18 setvar tempvarname 1450
+ ifvare skillidinuse 19 setvar tempvarname 1775
+ends
+
+
+// Cure Ailment
 state assesscureskilltype2_p
  ifvare skillidinuse 5 state usecureailmentmoderatemain
  ifvare skillidinuse 8 state usecureailmentgreatestmain
@@ -41503,6 +42280,7 @@ state assesscureskilltype1
         }
 ends
 
+// Resurrection
 state assessreviveskilltype2
  ifvare skillidinuse 1 state useresurrectionprime
  ifvare skillidinuse 3 state uselesserresurrection
@@ -41673,6 +42451,7 @@ state assessreviveskilltype1
         }
 ends
 
+// General Skill usage
 state menu-usingaskill
 /*
        ifvare skillidinuse 0 // if the skill is "[UNKNOWN SKILL]"
@@ -42797,6 +43576,12 @@ state menu-usingaskill
         }
        }
 
+       ifvarg skillidinuse 16 ifvarl skillidinuse 20
+       {
+        state assessaprestoreskilltype0
+        state assessaprestoreskilltype1 // Venus Steel Mending [Lesser, Moderate and Greater]
+       }
+
 ends
 
 state enterequipscreen
@@ -42804,10 +43589,10 @@ state enterequipscreen
            ifvare mainmenuselection 1 setvar equipmenuinuse 2 // Equipment Slot #2 [Skill 0 to 6]
            ifvare mainmenuselection 2 setvar equipmenuinuse 3 // Equipment Slot #3 [Skill 0 to 3]
            ifvare mainmenuselection 3 setvar equipmenuinuse 4 // Equipment Slot #4 [Skill 0]
-           ifvare mainmenuselection 4 setvar equipmenuinuse 5 // Equipment Slot #5 [Special Equip Cheat Only]
-           ifvare mainmenuselection 5 setvar equipmenuinuse 6 // Equipment Slot #6 [Special Equip Cheat Only]
-           ifvare mainmenuselection 6 setvar equipmenuinuse 7 // Equipment Slot #7 [Special Equip Cheat Only]
-           ifvare mainmenuselection 7 setvar equipmenuinuse 8 // Equipment Slot #8 [Special Equip Cheat Only]
+           ifvare mainmenuselection 4 setvar equipmenuinuse 5 // Equipment Slot #5
+           ifvare mainmenuselection 5 setvar equipmenuinuse 6 // Equipment Slot #6
+           ifvare mainmenuselection 6 setvar equipmenuinuse 7 // Equipment Slot #7
+           ifvare mainmenuselection 7 setvar equipmenuinuse 8 // Equipment Slot #8
 ends
 
 state dropatelebeacon
@@ -44106,7 +44891,55 @@ state menu-mainmenu-state
             }
            }
           }
-          else ifvare mainmenupage 12 nullop  // Minako Aino
+          else
+          ifvare mainmenupage 12 // Minako Aino
+          {
+           setvar CHARACTERARRAY 13
+           getactorvar[CHARACTERARRAY].CHARACTERHP TEMP
+           ifvarl TEMP 1 state useskill_characterdead
+           else
+           {
+            ifvare mainmenuselection 0
+            {
+             getactorvar[CHARACTERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+             setvar USESKILLARRAY 21 // Venus Steel Mending [Lesser]
+             getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+             state check-skillenergycost-mul
+             divvar SKILL-ENERGYCOST 100
+             getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+             state check-skillenergycost-add
+             setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+             getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 17 state skillusecheckpartysize } // Venus Steel Mending [Lesser]
+            }
+            else ifvare mainmenuselection 1
+            {
+             getactorvar[CHARACTERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+             setvar USESKILLARRAY 22 // Venus Steel Mending [Moderate]
+             getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+             state check-skillenergycost-mul
+             divvar SKILL-ENERGYCOST 100
+             getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+             state check-skillenergycost-add
+             setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+             getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 18 state skillusecheckpartysize } // Venus Steel Mending [Moderate]
+            }
+            else ifvare mainmenuselection 2 
+            { 
+             getactorvar[CHARACTERARRAY].CHARACTERMAXEP SKILL-ENERGYCOST
+             setvar USESKILLARRAY 23 // Venus Steel Mending [Greater]
+             getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+             state check-skillenergycost-mul
+             divvar SKILL-ENERGYCOST 100
+             getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+             state check-skillenergycost-add
+             setvarvar ENERGYCOST_TEMP SKILL-ENERGYCOST state energycost_check setvarvar SKILL-ENERGYCOST ENERGYCOST_TEMP
+             getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+             ifvarvarl TEMPVAR5 SKILL-ENERGYCOST state menuerrorsound else { setvar skillidinuse 19 state skillusecheckpartysize } // Venus Steel Mending [Greater]
+            }
+           }
+          }
           else
           ifvare mainmenupage 13 // "Mystery Lady"
           {

@@ -16346,6 +16346,7 @@ else
          state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
          redefinequote 335 ^22OMG!!! YOU FOUND THE JEWEL OF FOUR SOULS!!!! :D :D :D :D
 
+         setvar SHIKONHOLDERENEMYID -1
          setvar SHIKONONMAP? 0
          globalsound GETONEOFAKIND
          state grabequippable

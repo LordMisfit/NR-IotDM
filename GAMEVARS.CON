@@ -126,6 +126,29 @@ gamevar SHOWDAMAGECRITICALTYPEID -1 2
 gamevar SHOWDAMAGEPARENTID -1 2
 
 gamevar USESKILLARRAY 0 1
+// ID #1 - Damage Shell
+// ID #2 - Mercury Aqua Protection
+// ID #3 - Mercury Quickening
+// ID #4 - Fortify [Lesser]
+// ID #5 - Fortify [Moderate]
+// ID #6 - Fortify [Greater]
+// ID #7 - Bloodlusting
+// ID #8 - Lesser Resurrection
+// ID #9 - Heal Life [Lesser]
+// ID #10 - Cure Ailment [Moderate]
+// ID #11 - Heal Life [Greater]
+// ID #12 - Greater Resurrection
+// ID #13 - Cure Ailment [Greatest]
+// ID #14 - PK Shield
+// ID #15 - Triad Refractor
+// ID #16 - Triad Ragnarok
+// ID #17 - Resurrection Prime
+// ID #18 - Resurrection Ultima
+// ID #19 - Triad Blitzkrieg
+// ID #20 - Triad Booster
+// ID #21 - Venus Steel Mending [Lesser]
+// ID #22 - Venus Steel Mending [Moderate]
+// ID #23 - Venus Steel Mending [Greater]
 gamevar USESKILLPERCENTCOST 0 132098 // Defines a %-based cost for a skill [can be combined with USESKILLEXACTCOST below for complexer skill costs]
 gamevar USESKILLEXACTCOST 0 132098 // Defines an exact # cost for a skill [can be combined with USESKILLPERCENTCOST above for complexer skill costs]
 
@@ -2096,6 +2119,9 @@ gamevar skillidinuse -1 131072 // Indexes what skill id is trying to be used in 
 // ID #14 = Triad Booster (6% EP)
 // ID #15 = Bloodlusting (6% EP)
 // ID #16 = PK Shield (6% EP)
+// ID #17 = Venus Steel Mending [Lesser] (10% EP)
+// ID #18 = Venus Steel Mending [Moderate] (24% EP)
+// ID #19 = Venus Steel Mending [Greater] (42% EP)
 gamevar skillmenupage 0 131072 // Determines the page of the characters menu when using a skill
 gamevar skillmenuselection 0 131072 // Determines what character is highlighted when using a skill
 

@@ -2253,6 +2253,8 @@ define DUKE_GRABREGEN            1292
 define DUKE_GRABAPREGEN          1293
 define DUKE_GRABVAMPIRE          1294
 
+define VENUSSTEELMENDING_CLANG   1295
+
 // MAXIMUM NUMBER OF SOUNDS: 4096 ( 0-4095 ) [from 2560 sounds]
 
 // DT other defs
@@ -5221,6 +5223,8 @@ definesound AQUAPRO_ACTIVATE       aquproac.wav      -128   128  2   0   0
 definesound TRIREFR_ACTIVATE       trefacti.wav      -128   128  2   0   0
 definesound TRIRAGN_ACTIVATE       tragacti.wav      -128   128  2   0   0
 definesound TRIBLIT_ACTIVATE       tbliacti.wav      -128   128  2   0   0
+
+definesound VENUSSTEELMENDING_CLANG venusmending.ogg      -128   128  2   0   0
 
 definesound ICE_EXPLODE            iceexpl.wav       -128   128  2   0   0
 

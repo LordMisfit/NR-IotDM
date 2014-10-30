@@ -6407,7 +6407,7 @@ ifvare mainmenusubmenu 4
     state setquote332
     redefinequote 332 TED MALDORAS
     state mt
-
+//
     // Has Fortify [Lesser]
     setvar digx 54 // 88 (-34)
     setvar digy 46 // 44 (+26)
@@ -6581,7 +6581,7 @@ ifvare mainmenusubmenu 4
     }
     redefinequote 332 RATE BY DOUBLE FROM THEIR PREVIOUS AMOUNT.
     state mt
-
+//
     state showepskillsmenu
     state shade0
     state digz32768
@@ -7338,11 +7338,184 @@ ifvare mainmenusubmenu 4
     state pal23
     state orientation2
     state setquote332
-    redefinequote 332 MINAKO AINO
-    
+    redefinequote 332 MINAKO AINO    
+    state mt
+//    state shownoskills
+//
+    // Has Venus Steel Mending [Lesser]
+    setvar digx 54 // 88 (-34)
+    setvar digy 46 // 44 (+26)
+    state setquote332
+    setvar CHARACTERARRAY 13
+    getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
+    setvar USESKILLARRAY 21 // Venus Steel Mending [Lesser]
+    getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+    state check-skillenergycost-mulmenu
+    divvar varname 100
+    getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+    state check-skillenergycost-addmenu
+    setvarvar SKILLUSERARRAY CHARACTERARRAY
+    setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
+    ifvare mainmenuselection 0
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     redefinequote 332 VENUS STEEL MENDING [LESSER]   ^21[%d EP]
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     redefinequote 332 VENUS STEEL MENDING [LESSER]   ^10[%d EP]
+    }
+    qsprintf 332 332 varname
     state mt
 
-    state shownoskills
+    setvar digx 70 // 88 (-34)
+    setvar digy 52 // 44 (+26)
+    ifvare mainmenuselection 0
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+    }
+    redefinequote 332 MINAKO REPLENISHES 20% OF A CHARACTER'S AP,
+    state mt
+    setvar digx 70 // 88 (-34)
+    setvar digy 58 // 44 (+26)
+    ifvare mainmenuselection 0
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+    }
+    redefinequote 332 UP TO 120%, WITH A TINY ABSORPTION BOOST.
+    state mt
+
+    // Has Venus Steel Mending [Moderate]
+    setvar digx 54 // 88 (-34)
+    setvar digy 64 // 44 (+26)
+    state setquote332
+    setvar CHARACTERARRAY 13
+    getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
+    setvar USESKILLARRAY 22 // Venus Steel Mending [Moderate]
+    getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+    state check-skillenergycost-mulmenu
+    divvar varname 100
+    getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+    state check-skillenergycost-addmenu
+    setvarvar SKILLUSERARRAY CHARACTERARRAY
+    setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
+    ifvare mainmenuselection 1
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     redefinequote 332 VENUS STEEL MENDING [MODERATE]   ^21[%d EP]
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     redefinequote 332 VENUS STEEL MENDING [MODERATE]   ^10[%d EP]
+    }
+    qsprintf 332 332 varname
+    state mt
+
+    setvar digx 70 // 88 (-34)
+    setvar digy 70 // 44 (+26)
+    ifvare mainmenuselection 1
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+    }
+    redefinequote 332 MINAKO REPLENISHES 45% OF A CHARACTER'S AP,
+    state mt
+    setvar digx 70 // 88 (-34)
+    setvar digy 76 // 44 (+26)
+    ifvare mainmenuselection 1
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+    }
+    redefinequote 332 UP TO 145%, WITH A SMALL ABSORPTION BOOST.
+    state mt
+
+    // Has Venus Steel Mending [Greater]
+    setvar digx 54 // 88 (-34)
+    setvar digy 82 // 44 (+26)
+    state setquote332
+    setvar CHARACTERARRAY 13
+    getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
+    setvar USESKILLARRAY 23 // Venus Steel Mending [Greater]
+    getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
+    state check-skillenergycost-mulmenu
+    divvar varname 100
+    getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
+    state check-skillenergycost-addmenu
+    setvarvar SKILLUSERARRAY CHARACTERARRAY
+    setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
+    ifvare mainmenuselection 2
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     redefinequote 332 VENUS STEEL MENDING [GREATER]   ^21[%d EP]
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     redefinequote 332 VENUS STEEL MENDING [GREATER]   ^10[%d EP]
+    }
+    qsprintf 332 332 varname
+    state mt
+
+    setvar digx 70 // 88 (-34)
+    setvar digy 88 // 44 (+26)
+    ifvare mainmenuselection 2
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+    }
+    redefinequote 332 MINAKO REPLENISHES 77.5% OF A CHARACTER'S AP,
+    state mt
+    setvar digx 70 // 88 (-34)
+    setvar digy 94 // 44 (+26)
+    ifvare mainmenuselection 2
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+    }
+    else
+    {
+     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
+     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+    }
+    redefinequote 332 UP TO 177.5%, WITH A MODERATE ABSORPTION BOOST.
+    state mt
+//
 
     state showepskillsmenu
     state shade0
@@ -12240,7 +12413,7 @@ ifvarg equipmenuinuse 0
   setvar digy 149
   ifvare skillmenupage 0 state menulisastats
   else ifvare skillmenupage 1 state menuvehiclestats // Insert Vehicle's Stats
-	
+
 // Shows the Selection Cursor Depending on What 'skillmenuselection' is set to [for Characters menu]
 
    ifvarg skillmenuselection -1 ifvarl skillmenuselection 2 setvar digy 53
