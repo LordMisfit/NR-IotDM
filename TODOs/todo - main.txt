@@ -1,5 +1,4 @@
 Soon TODOs:
-- Corrosion Ailment for 'Armor Poison' [based on DoomRPG]
 - Make an equippable item that splits damage taken by the wearer between all members of the group.
 - Other equippables as pointed out in GAMEVARS.CON
 

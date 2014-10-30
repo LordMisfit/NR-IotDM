@@ -19136,11 +19136,11 @@ ends
 move MOUSEVELS 32
 
 state scrap1
-	  debris SCRAP3 4
-	  debris SCRAP1 3
-	  debris SCRAP4 2
-	  debris SCRAP2 2
-	  debris SCRAP5 1
+      debris SCRAP3 4
+      debris SCRAP1 3
+      debris SCRAP4 2
+      debris SCRAP2 2
+      debris SCRAP5 1
 ends
 
 state piratebreak1
@@ -19211,14 +19211,14 @@ state breakobject
       else ifactor SKINNEDCHICKEN state jibfood
       else ifactor BARSTOOL sound VENT_BUST
       else
-	ifactor TABLE
-	{
-	 sound GLASS_HEAVYBREAK  
-	 debris SCRAP1 5
-	 debris SCRAP2 5
-	 debris SCRAP3 5
-	 ifrnd 128 cactor BARBROKE
-	}
+      ifactor TABLE
+      {
+       sound GLASS_HEAVYBREAK  
+       debris SCRAP1 5
+       debris SCRAP2 5
+       debris SCRAP3 5
+       ifrnd 128 cactor BARBROKE
+      }
       else
       ifactor SHOPPINGCART
       {
@@ -19294,84 +19294,84 @@ state breakobject
       }
       else 
        ifactor DONUTS
-	{
+      {
         debris SCRAP1 1
         spritepal 7
         guts JIBS6 2
         ifvarand ACTORFLAGS 4096 state pickupexplosion
         ifvarand ACTORFLAGS 8192 state pickupexplosion
         killit
-	}
+      }
       else 
        ifactor DONUTS2
-	{
+      {
         spritepal 7
         guts JIBS6 2
         ifvarand ACTORFLAGS 4096 state pickupexplosion
         ifvarand ACTORFLAGS 8192 state pickupexplosion
         killit
-	}
+      }
       else 
        ifactor VIDEO1
-	{
-  	  debris SCRAP3 3
-	  debris SCRAP4 2
-	  lotsofglass 30
-	}
+      {
+       debris SCRAP3 3
+       debris SCRAP4 2
+       lotsofglass 30
+      }
       else 
        ifactor VIDEO3
-	{
-	  debris SCRAP3 3
-	  debris SCRAP4 2
-	  lotsofglass 30
-	}
-	else
-       ifactor VIDEO2
-	{
-	  debris SCRAP3 3
-	  debris SCRAP4 2
-	  lotsofglass 30
-	}
+      {
+       debris SCRAP3 3
+       debris SCRAP4 2
+       lotsofglass 30
+      }
+      else
+        ifactor VIDEO2
+      {
+       debris SCRAP3 3
+       debris SCRAP4 2
+       lotsofglass 30
+      }
       else
        ifactor E-GLASS
-	{
-	  state scrap1
-	  sound GLASS_HEAVYBREAK
-	  lotsofglass 30
-	}
+      {
+       state scrap1
+       sound GLASS_HEAVYBREAK
+       lotsofglass 30
+      }
       else
        ifactor HERMIT
-	{
-	  state scrap1
-	  lotsofglass 10
-	}
+      {
+       state scrap1
+       lotsofglass 10
+      }
       else
        ifactor WOLFDUDE
       {
- 	  soundonce MALENPC_DEATH1
-        state drop_artifacts
-        state civiliankilled
+       soundonce MALENPC_DEATH1
+       state drop_artifacts
+       state civiliankilled
       }
       else
        ifactor COP1
       {
- 	  soundonce MALENPC_DEATH1
-        state drop_artifacts
-        state civiliankilled
+       soundonce MALENPC_DEATH1
+       state drop_artifacts
+       state civiliankilled
       }
       else
        ifactor COP2
       {
- 	  soundonce MALENPC_DEATH1
-        state drop_artifacts
-        state civiliankilled
+       soundonce MALENPC_DEATH1
+       state drop_artifacts
+       state civiliankilled
       }
       else
        ifactor PUNKDUDE
       {
- 	  soundonce MALENPC_DEATH1
-        state drop_artifacts
-        state civiliankilled
+       soundonce MALENPC_DEATH1
+       state drop_artifacts
+       state civiliankilled
       }
       else
        ifactor SITTINGDUDE
@@ -23807,6 +23807,9 @@ state playerregenarmornormal
           setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
           setvar ATTACKERDISPLAYTIMER 0 setvar ARMORNULLDAMAGE 0
           ifvarg tempe 0 setvar ARMORDAMAGETIMER 0
+
+          randvar TEMPVAR5 10 addvar TEMPVAR5 5
+          ifrnd 112 { subvarvar ARMORPERCENT TEMPVAR5 ifvarl ARMORPERCENT 100 setvar ARMORPERCENT 100 }
          }
         }
         else
