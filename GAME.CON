@@ -2,7 +2,7 @@
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
 setgamename Naferia's Reign (5.22.git88)
-definequote 1337 ^22VERSION:^0 5.22.git88.10302014
+definequote 1337 ^22VERSION:^0 5.22.git88.11012014
 
 action ANULLACTION 0
 
@@ -5355,8 +5355,8 @@ state snakearmband_check
      addvar TEMP 390
      addvarvar ACTORPOISONTIMER TEMP
     }   
-     redefinequote 335 ^22YOU HAVE SLOWED DOWN AND POISONED AN ENEMY!
-     setvarvar fta fta_normal setvar ftq 335
+    redefinequote 335 ^22YOU HAVE SLOWED DOWN AND POISONED AN ENEMY!
+    setvarvar fta fta_normal setvar ftq 335
    }
    else // Choose between Slow or Poison
    {
@@ -25364,7 +25364,7 @@ ends
 //************************************************************************************************************************
 //************************************************************************************************************************
 //************************************************************************************************************************
-//******************************************Here Comes the Huge APLAYER CODE O.O******************************************
+//******************************************Here Comes the Huge APLAYER code O.O******************************************
 //************************************************************************************************************************
 //************************************************************************************************************************
 //************************************************************************************************************************
@@ -25384,6 +25384,7 @@ ifvare TEMPVAR5 0
 
 ifvarg INVULNREFLECTRATE 2000 setvar INVULNREFLECTRATE 2000
 ifvarg INVULNHEALTHDRAIN 2001 setvar INVULNHEALTHDRAIN 2001
+ifvare CURRENTARMORPOINTS 0 state removecorrosion_armorgone // makes sure corrosion ailment is removed if it destroys your current armor.
 
 ifvarn mainmenusubmenu 7 
 {
@@ -28851,6 +28852,7 @@ else
   ifvarg APREGENTIME 0
   {
    ifvarand POWERUPBITFIELD 8 nullop else addvar POWERUPBITFIELD 8
+   state removecorrosion
    // Sets AB%
    // setvar ARMORPERCENT 1000 // nerf the old super Armor angle
    setvar TEMPMOD 125
@@ -28983,6 +28985,7 @@ else
     state removepoison
     state removedimness
     state removeconfusion
+    state removecorrosion
     setplayer[THISACTOR].hurt_delay 12
     ifvare INVULNTIME 104 soundonce INVULNITEM2
     ifvarg INVULNTIME 130 palfrom 16 64 64

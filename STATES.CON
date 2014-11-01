@@ -7936,7 +7936,7 @@ state removebloodlusting
 ends
 
 state addcorrosion
- ifvarand CHEATBITFIELD? 4 nullop else
+ ifvare CURRENTARMORPOINTS 0 nullop else
  {
   randvar TEMPVAR5 99 addvar TEMPVAR5 1
   ifvarl TEMPVAR5 16
@@ -7990,7 +7990,7 @@ state addcorrosion
 ends
 
 state addcorrosion_overridevehicle
- ifvarand CHEATBITFIELD? 4 nullop else
+ ifvare CURRENTARMORPOINTS 0 nullop else
  {
   randvar TEMPVAR5 99 addvar TEMPVAR5 1
   ifvarl TEMPVAR5 16
@@ -8042,9 +8042,21 @@ ends
 state removecorrosion
  ifvarand PLAYERSTATUS? 16384
  {
-  ifvare PLAYERCORROSIONTIMER 0 redefinequote 335 ^22CORROSION HAS WORN OFF!
-  else redefinequote 335 ^22YOUR ARMOR IS NO LONGER CORRODING!
+  ifvare PLAYERCORROSIONTIMER 0 redefinequote 335 ^22YOUR ARMOR IS NO LONGER CORRODING!
+  else redefinequote 335 ^22YOUR ARMOR HAS STOPPED CORRODING!
 
+  subvar PLAYERSTATUS? 16384
+  setvar PLAYERCORROSIONTIMER 0
+  setvarvar fta fta_normal setvar ftq 335
+ }
+ends
+
+state removecorrosion_armorgone
+ ifvarand PLAYERSTATUS? 16384
+ {
+  redefinequote 335 ^22YOUR ARMOR WAS DESTROYED BY CORROSION!
+
+  ifvarl CURRENTARMORPOINTS 0 setvar CURRENTARMORPOINTS 0
   subvar PLAYERSTATUS? 16384
   setvar PLAYERCORROSIONTIMER 0
   setvarvar fta fta_normal setvar ftq 335
@@ -8365,6 +8377,70 @@ state removedamageshell_actor
   ifvarand ACTORSTATUS? 512 { subvar ACTORSTATUS? 512 setvar ACTORSHELLTIMER 0 }
   setvarvar fta fta_normal setvar ftq 335
 ends
+
+state addcorrosion_actor
+ ifvarg ENEMYAP 0
+ {
+  ifvarand ACTORSTATUS? 16384
+  { 
+   ifvarand ACTORFLAGS 512
+   {   
+    randvar TEMP 156
+    addvar TEMP 156
+   }
+   else
+   {
+    randvar TEMP 390
+    addvar TEMP 390
+   }
+   addvarvar ACTORCORROSIONTIMER TEMP
+  } 
+  else 
+  { 
+   addvar ACTORSTATUS? 16384
+   ifvarand ACTORFLAGS 512
+   {   
+    randvar TEMP 156
+    addvar TEMP 156
+   }
+   else
+   {
+    randvar TEMP 390
+    addvar TEMP 390
+   }
+   addvarvar ACTORCORROSIONTIMER TEMP
+   state getitemseekerspeciesquote
+   ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 335 ^22AN ENEMY'S ARMOR HAS STARTED CORRODING!
+   ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 335 ^15A CIVILIAN'S ARMOR HAS STARTED CORRODING!
+   ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 335 ^15A VEHICLE'S ARMOR HAS STARTED CORRODING!
+ 
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+ends
+
+state removecorrosion_actor
+  // redefinequote 335 ^10AN ENEMY'S POISON HAS WORN OFF! :(
+  state getitemseekerspeciesquote
+  ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 335 ^10AN ENEMY'S ARMOR STOPPED CORRODING! :(
+  ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 335 ^15A CIVILIAN'S ARMOR STOPPED CORRODING! :O
+  ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 335 ^15A VEHICLE'S ARMOR STOPPED CORRODING! :O
+
+  ifvarand ACTORSTATUS? 16384 { subvar ACTORSTATUS? 16384 setvar ACTORCORROSIONTIMER 0 }
+  setvarvar fta fta_normal setvar ftq 335
+ends
+
+state removecorrosion_actor_noarmor
+  // redefinequote 335 ^10AN ENEMY'S POISON HAS WORN OFF! :(
+  state getitemseekerspeciesquote
+  ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 335 ^10AN ENEMY'S ARMOR WAS DESTROYED BY CORROSION! :D
+  ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 335 ^15A CIVILIAN'S ARMOR WAS DESTROYED BY CORROSION! :O
+  ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 335 ^15A VEHICLE'S ARMOR WAS DESTROYED BY CORROSION! :O
+
+  ifvarand ACTORSTATUS? 16384 { subvar ACTORSTATUS? 16384 setvar ACTORCORROSIONTIMER 0 }
+  setvarvar fta fta_normal setvar ftq 335
+ends
+
 
 //***************************************
 //*End Status Ailments [Monsters/Actors]*
@@ -10111,6 +10187,7 @@ state enemy-newfloorslime
          divvar tempe 2250
          state enemydmgflr_hpmaxcalcend
          ifrnd 4 state addpoison_actor
+         ifrnd 4 state addcorrosion_actor
         }
        }
       }
@@ -10140,6 +10217,7 @@ state enemy-newfloorslime
           divvar tempe 1000
           state enemydmgflr_hpmaxcalcend
           ifrnd 4 state addpoison_actor
+          ifrnd 4 state addcorrosion_actor
          }
         }
        }
@@ -10206,6 +10284,7 @@ state enemy-newfloorslime
          divvar tempe 1000
          state enemydmgflr_hpmaxcalcend
          ifrnd 4 state addpoison_actor
+         ifrnd 4 state addcorrosion_actor
         }
        }
       }
@@ -10766,6 +10845,7 @@ state enemy-newpurplelava
          divvar tempe 2250
          state enemydmgflr_hpmaxcalcend
          ifrnd 12 state addpoison_actor
+         ifrnd 12 state addcorrosion_actor
         }
        }
       }
@@ -10791,6 +10871,7 @@ state enemy-newpurplelava
          divvar tempe 1000
          state enemydmgflr_hpmaxcalcend
          ifrnd 12 state addpoison_actor
+         ifrnd 12 state addcorrosion_actor
         }
        }
        else sound INVULNITEM3
@@ -10840,6 +10921,7 @@ state enemy-newpurplelava
         divvar tempe 1000
         state enemydmgflr_hpmaxcalcend
         ifrnd 12 state addpoison_actor
+        ifrnd 12 state addcorrosion_actor
        }
       }
       else sound INVULNITEM3
@@ -11107,6 +11189,8 @@ state enemy-amoebaacid
          state enemyamoebaacid_hpmaxcalc
          divvar tempe 2250
          state enemydmgflr_hpmaxcalcend
+         ifrnd 40 state addpoison_actor
+         ifrnd 40 state addcorrosion_actor
         }
        }
       }
@@ -11136,6 +11220,8 @@ state enemy-amoebaacid
           state enemyamoebaacid_hpmaxcalc
           divvar tempe 1000
           state enemydmgflr_hpmaxcalcend
+          ifrnd 40 state addpoison_actor
+          ifrnd 40 state addcorrosion_actor
          }
         }
        }
@@ -11172,6 +11258,8 @@ state enemy-amoebaacid
          state enemyamoebaacid_hpmaxcalc
          divvar tempe 1000
          state enemydmgflr_hpmaxcalcend
+         ifrnd 40 state addpoison_actor
+         ifrnd 40 state addcorrosion_actor
         }
        }
       }
@@ -13248,7 +13336,7 @@ state enemyinvulnitem
     ifvarand ACTORSTATUS? 4 // Remove Slow
     {
      subvar ACTORSTATUS? 4
-     setvar ACTORPOISONTIMER 0
+     setvar ACTORSLOWTIMER 0
     }
     ifvarand ACTORSTATUS? 8 // Remove Poison
     {
@@ -13258,12 +13346,17 @@ state enemyinvulnitem
     ifvarand ACTORSTATUS? 16 // Remove Dimness
     {
      subvar ACTORSTATUS? 16
-     setvar ACTORPOISONTIMER 0
+     setvar ACTORDIMNESSTIMER 0
     }
     ifvarand ACTORSTATUS? 128 // Remove Confusion
     {
      subvar ACTORSTATUS? 128
-     setvar ACTORPOISONTIMER 0
+     setvar ACTORCONFUSIONTIMER 0
+    }
+    ifvarand ACTORSTATUS? 16384 // Remove Corrosion
+    {
+     subvar ACTORSTATUS? 16384
+     setvar ACTORCORROSIONTIMER 0
     }
     state itemfullbright
     state invulnicon-nonplayers
@@ -13427,8 +13520,68 @@ state enemyarmortype
     } 
    } 
   }
-
  }
+
+ // Enemy Natural Armor Regeneration / Corrosion Damage Degeneration
+ ifvare mainmenu 0 ifvarg ENEMYAP 0
+ {
+  ifvare CLOAKED? 1 nullop 
+  else ifvare FROZEN? 1 nullop
+  else ifvare SHRUNK? 1 nullop
+  else addvar ACTORAPREGENTIMER 1
+
+  ifvare PUBLICBETA? 0 { ifvarand ACTORSTATUS? 16384 setvar ACTORAPREGENINTERVAL 39 else setvar ACTORAPREGENINTERVAL 78 } else { setvar ACTORAPREGENINTERVAL 26 }
+  ifvarvarg ACTORAPREGENTIMER ACTORAPREGENINTERVAL
+  {
+   ifvarand ACTORSTATUS? 16384 // Has Corrosion
+   { 
+    setvarvar TEMPVAR ENEMYMAXAP
+    randvar TEMPVAR2 10
+    setvar TEMPVAR3 20
+    ifrnd 128 addvarvar TEMPVAR3 TEMPVAR2 else subvarvar TEMPVAR3 TEMPVAR2
+    mulvarvar TEMPVAR TEMPVAR3
+    divvar TEMPVAR 1000
+    mulvar TEMPVAR -1
+ 
+    ifvarn ENEMYHASSHIKON? 0 divvar TEMPVAR 10
+
+    ifvarl TEMPVAR 0
+    {
+     addvarvar ENEMYAP TEMPVAR
+     ifvarl ENEMYAP 0 setvar ENEMYAP 0
+     setactor[THISACTOR].htowner THISACTOR
+
+     setvarvar ITEMSEEKC TEMPVAR
+     mulvar ITEMSEEKC -1
+     ifvarg ITEMSEEKC 0
+     {
+      setvarvar SHOWDAMAGE ITEMSEEKC
+      setvar SHOWDAMAGETYPE 1
+      setvarvar SHOWDAMAGEACTORID THISACTOR
+      state showdamage
+     }
+ 
+     setvar ENEMYAPDAMAGED? 1
+    }
+
+    // Start of 'Damage AP-Absorb' Code
+    randvar TEMPVAR5 10 addvar TEMPVAR5 5 // [0.5% to 1.5% AP-Absorb loss per interval (base)]
+    setvar TEMPVAR8 437 // 7/16 chance of AP-Absorb loss occuring at all [base]
+    randvar TEMPVAR7 999 addvar TEMPVAR7 1
+    ifvarvarg TEMPVAR7 TEMPVAR8 nullop else { subvarvar ENEMYARMORPERCENT TEMPVAR5 ifvarl ENEMYARMORPERCENT 100 setvar ENEMYARMORPERCENT 100 }
+
+    ifvarn ENEMYHASSHIKON? 0
+    {
+     ifvare PUBLICBETA? 0 { setvar ACTORAPREGENTIMER -35 } else { setvar ACTORAPREGENTIMER -24 }
+    }
+    else setvar ACTORAPREGENTIMER 0
+   }
+   // else nullop // Currently, monsters have no way to get natural AP regen [though this will need to be implemented later for the 'Doppelganger' bosses >_>
+  }
+ }
+
+ // Corrosion
+ ifvare ENEMYAP 0 ifvarand ACTORSTATUS? 16384 state removecorrosion_actor_noarmor
 
  // Sets up how enemies use their Quad Damage
  ifvarg ENEMYQUADTIME 0
@@ -13787,6 +13940,39 @@ state enemyarmortype
    setvarvar fta fta_normal setvar ftq 335
   }
  }
+ ifvarand ACTORSTATUS? 16384 // Corrosion
+ {
+  ifvarg ACTORCORROSIONTIMER 0
+  {
+   ifvare CLOAKED? 1 nullop 
+   else ifvare FROZEN? 1 nullop
+   else ifvare SHRUNK? 1 nullop
+   else
+   {
+    setvar TEMPVAR5 0
+    ifvarn ENEMYHASSHIKON? 0 addvar TEMPVAR5 1
+    ifvarg TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 TIMERRAWFORMAT 
+     modvar TEMPVAR4 5
+     ifvare TEMPVAR4 4 subvar ACTORCORROSIONTIMER 1
+    }
+    else
+    {
+     subvar ACTORCORROSIONTIMER 1
+    }
+   }
+  }
+  else
+  {
+   redefinequote 335 ^22AN ENEMY'S ARMOR HAS STOPPED CORRODING! :(
+   subvar ACTORSTATUS? 16384
+   setvar ACTORCORROSIONTIMER 0
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+
+
 
  // Makes the enemy use their First Aid Kit if they have one everytime they lose health until it runs out
  setvarvar ENEMYCURRENTFIRSTAID ENEMYFIRSTAID
@@ -13997,6 +14183,11 @@ state enemyapregenitem
     ifvarvarl ENEMYARMORPERCENT TEMPMOD setvarvar ENEMYARMORPERCENT TEMPMOD
 
     ifvare mainmenu 0 ifvarn FROZEN? 1 addvar ENEMYAPREGENCOUNTER 1 
+    ifvarand ACTORSTATUS? 16384 // Remove Corrosion
+    {
+     subvar ACTORSTATUS? 16384
+     setvar ACTORCORROSIONTIMER 0
+    }
     ifvarg ENEMYAPREGENCOUNTER 25
     {
      setvarvar ENEMYAPREGENAMOUNT1 ENEMYMAXAP
@@ -23813,7 +24004,7 @@ state playerregenarmornormal
            ifvarg tempe 0
            {
             setvarvar SHOWDAMAGE tempe
-            setvar SHOWDAMAGETYPE 3
+            setvar SHOWDAMAGETYPE 1
             setvarvar SHOWDAMAGEACTORID THISACTOR
             state showdamage
            }
@@ -24862,36 +25053,19 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
 
               ifvarg TEMPVAR 0 
               {
-               ifvare CHARACTERSELECTED? 2 nullop
+               ifvare CHARACTERSELECTED? 2 // Jack
+               {
+                // Jack cannot incur poison, but he can still incur corrosion from nukage. :P
+                ifrnd 4 state addcorrosion
+               }
                else
-               ifvare CHARACTERSELECTED? 3
+               ifvare CHARACTERSELECTED? 3 // Bubsy
                {
                 setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
                 ifvare MISCARRAYID_AMOUNTTEMP 1
                 {
                  ifrnd 1 state addpoison
                  ifrnd 1 state addcorrosion
-                }
-               }
-               else
-               ifvare CHARACTERSELECTED? 8
-               {
-                ifvare HAVEENERGYSHIELD? 1
-                {
-                 ifvare ENERGYSHIELDMODE 1 
-                 {
-                  ifvarg DAMAGEINCELL 0 nullop
-                  else
-                  {
-                   ifrnd 4 state addpoison
-                   ifrnd 4 state addcorrosion
-                  }
-                 }
-                 else
-                 {
-                  ifrnd 4 state addpoison
-                  ifrnd 4 state addcorrosion
-                 }
                 }
                 else
                 {
@@ -24900,24 +25074,50 @@ state player-newfloorslime_dmg   // NEWFLOORSLIME [Atomic / Poison Elemental]
                 }
                }
                else
-               ifvare CHARACTERSELECTED? 12
+               ifvare CHARACTERSELECTED? 8 // Lisa
+               {
+                ifvare HAVEENERGYSHIELD? 1 // If she has the bio-shield...
+                {
+                 ifvare ENERGYSHIELDMODE 1 // ...and it's turned on...
+                 {
+                  ifvarg DAMAGEINCELL 0 nullop // ...and if it has power of any amount in it...
+                  else // ...else she can incur poison and corrosion...
+                  {
+                   ifrnd 4 state addpoison
+                   ifrnd 4 state addcorrosion
+                  }
+                 }
+                 else // ...else she can incur poison and corrosion...
+                 {
+                  ifrnd 4 state addpoison
+                  ifrnd 4 state addcorrosion
+                 }
+                }
+                else // ...else she can incur poison and corrosion...
+                {
+                 ifrnd 4 state addpoison
+                 ifrnd 4 state addcorrosion
+                }
+               }
+               else
+               ifvare CHARACTERSELECTED? 12 // Lori
                {
                 ifrnd 1 { ifrnd 128 state addpoison }
                 ifrnd 1 { ifrnd 128 state addcorrosion }
                }
                else
-               ifvare CHARACTERSELECTED? 14
+               ifvare CHARACTERSELECTED? 14 // Mystery1
                {
                 ifrnd 2 state addpoison
                 ifrnd 2 state addcorrosion
                }
                else
-               ifvare CHARACTERSELECTED? 15
+               ifvare CHARACTERSELECTED? 15 // Maken
                {
                 ifrnd 2 state addpoison
                 ifrnd 2 state addcorrosion
                }
-               else
+               else // Anyone else
                {
                 ifrnd 4 state addpoison
                 ifrnd 4 state addcorrosion
@@ -25821,7 +26021,10 @@ state player-newpurplelava_dmg
 
               ifvarg TEMPVAR 0 
               {
-               ifvare CHARACTERSELECTED? 2 nullop
+               ifvare CHARACTERSELECTED? 2
+               {
+                ifrnd 12 state addcorrosion
+               }
                else ifvare CHARACTERSELECTED? 3
                {
                 setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
@@ -25890,7 +26093,7 @@ state player-newpurplelava_dmg
                 ifrnd 6 state addpoison
                 ifrnd 6 state addcorrosion
                }
-               else
+               else // Anyone else
                {
                 ifrnd 12 state addpoison
                 ifrnd 12 state addcorrosion
@@ -26283,19 +26486,92 @@ state player-amoebaacid_dmg
               //*********************
               //*Character Modifiers*
               //*********************
+              addlogvar CHARACTERSELECTED?
+              ifvare CHARACTERSELECTED? 2
+              {
+               ifrnd 40 state addcorrosion
+              }
+              else
               ifvare CHARACTERSELECTED? 3
               {
                setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
-               ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPVAR 4
+               ifvare MISCARRAYID_AMOUNTTEMP 1
+               {
+                divvar TEMPVAR 4
+                ifrnd 10 state addpoison
+                ifrnd 10 state addcorrosion
+               }
+               else
+               {
+                ifrnd 40 state addpoison
+                ifrnd 40 state addcorrosion
+               }
               }
+              else
               ifvare CHARACTERSELECTED? 4
               {
+               ifvare SECTORLOTAG 2 ifvare WATER? 2 divvar TEMPVAR 6
+               ifvare SECTORLOTAG 1 ifvare WATER? 1 { mulvar TEMPVAR 2 divvar TEMPVAR 7 }
+
+               setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+               ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133% Damage
+               else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPVAR 2 // 50% Damage
+               else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPVAR 3 // 33% Damage
                ifvarand PLAYERSTATUS? 256
                {
                 ifp pducking divvar TEMPVAR 25 else divvar TEMPVAR 5
                }
+               ifrnd 40 state addpoison
+               ifrnd 40 state addcorrosion
               }
-              ifvare CHARACTERSELECTED? 14 divvar TEMPVAR 10
+              else ifvare CHARACTERSELECTED? 8
+              {
+               ifvare HAVEENERGYSHIELD? 1
+               {
+                ifvare ENERGYSHIELDMODE 1 
+                {
+                 ifvarg DAMAGEINCELL 0 nullop // CURRENTCELLS
+                 else
+                 {
+                  ifrnd 40 state addpoison
+                  ifrnd 40 state addcorrosion
+                 }
+                }
+                else
+                {
+                 ifrnd 40 state addpoison
+                 ifrnd 40 state addcorrosion
+                }
+               }
+               else
+               {
+                ifrnd 40 state addpoison
+                ifrnd 40 state addcorrosion
+               }
+              }
+              else ifvare CHARACTERSELECTED? 12
+              {
+               ifrnd 13 { ifrnd 128 state addpoison }
+               ifrnd 13 { ifrnd 128 state addcorrosion }
+              }
+              ifvare CHARACTERSELECTED? 14
+              {
+               divvar TEMPVAR 10
+               ifrnd 20 state addpoison
+               ifrnd 20 state addcorrosion
+              }
+              else ifvare CHARACTERSELECTED? 15
+              {
+               ifrnd 20 state addpoison
+               ifrnd 20 state addcorrosion
+              }
+              else
+              {
+               ifrnd 40 state addpoison
+               ifrnd 40 state addcorrosion
+              }
+
+
               ifvarl TEMPVAR 1 { ifrnd 128 setvar TEMPVAR 1 else setvar TEMPVAR 0 }
 
               //********
