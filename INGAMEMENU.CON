@@ -1271,8 +1271,7 @@ ifvare mainmenu 1
      ifvare AMI? 1
      {
       setvar CHARACTERARRAY 4
-      getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
-      ifvarg TEMPVAR 0
+      ifvarg actorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME 0
       {
        redefinequote 332 MERCURY VR GOGGLES: SCANS AND SHOWS ENEMY & NPC STATISTICS.
       }
@@ -5634,8 +5633,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 1 state shadepulse4
     setvar tilenum 7936 
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 138
@@ -5661,8 +5659,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 2 state shadepulse4
     setvar tilenum 7937 
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 136
@@ -5692,8 +5689,7 @@ ifvare mainmenusubmenu 3
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
 
     state rs 
@@ -5724,8 +5720,7 @@ ifvare mainmenusubmenu 3
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 138
@@ -5752,8 +5747,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 5 state shadepulse4
     setvar tilenum 7940
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 134
@@ -5779,8 +5773,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 6 state shadepulse4
     setvar tilenum 7941
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 128
@@ -5806,8 +5799,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 7 state shadepulse4
     setvar tilenum 7942
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 134
@@ -5833,8 +5825,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 8 state shadepulse4
     setvar tilenum 7943
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 138
@@ -5860,8 +5851,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 9 state shadepulse4
     setvar tilenum 7944
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 124
@@ -5890,8 +5880,7 @@ ifvare mainmenusubmenu 3
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
@@ -5922,8 +5911,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 11 state shadepulse4
     setvar tilenum 7946
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 130
@@ -5949,8 +5937,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 12 state shadepulse4
     setvar tilenum 7947
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 134
@@ -5979,8 +5966,7 @@ ifvare mainmenusubmenu 3
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 136
@@ -6007,8 +5993,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 14 state shadepulse4
     setvar tilenum 7957
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 128
@@ -6043,8 +6028,7 @@ ifvare mainmenusubmenu 3
     ifvare CHARACTERSELECTED? 15 state shadepulse4
     setvar tilenum 7971
     {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1 state pal2 else state pal0
+     ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     } 
     state rs 
     setvar digx 130
@@ -6122,14 +6106,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 DAMAGE SHELL   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 DAMAGE SHELL   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6139,13 +6121,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 JACK ERECTS A POWERFUL BARRIER THAT BLOCKS
     state mt
@@ -6153,13 +6133,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 AROUND 1/3 OF ALL DAMAGE FROM ENEMIES.
     state mt
@@ -6228,8 +6206,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 256 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
      redefinequote 332 MERCURY AQUA PROTECTION   ^21[%d EP]
     }
@@ -6237,8 +6214,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 256 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
      redefinequote 332 MERCURY AQUA PROTECTION   ^10[%d EP]
     }
@@ -6251,16 +6227,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 256 state pal0 else 
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 256 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 AMI TAKES 80% LESS DAMAGE, BUT DOES 80% LESS
@@ -6271,16 +6245,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 256 state pal0 else 
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 256 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 DAMAGE TO ENEMIES.
@@ -6302,14 +6274,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 MERCURY QUICKENING   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 MERCURY QUICKENING   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6319,13 +6289,11 @@ ifvare mainmenusubmenu 4
     setvar digy 70 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 AMI SPEEDS UP THE MOVEMENT AND ATTACK OF ONE
     state mt
@@ -6333,13 +6301,11 @@ ifvare mainmenusubmenu 4
     setvar digy 76 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 PERSON FOR 15 SECONDS OR ADDS 15 MORE SECONDS.
     state mt
@@ -6424,14 +6390,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 FORTIFY [LESSER]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 FORTIFY [LESSER]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6441,13 +6405,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 TED INCREASES ONE PERSON'S ARMOR ABSORBSION
     state mt
@@ -6455,13 +6417,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 RATE BY 1/5 FROM THEIR PREVIOUS AMOUNT.
     state mt
@@ -6482,14 +6442,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 FORTIFY [MODERATE]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 FORTIFY [MODERATE]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6499,13 +6457,11 @@ ifvare mainmenusubmenu 4
     setvar digy 70 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 TED INCREASES ONE PERSON'S ARMOR ABSORBSION
     state mt
@@ -6513,13 +6469,11 @@ ifvare mainmenusubmenu 4
     setvar digy 76 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 RATE BY 3/5S FROM THEIR PREVIOUS AMOUNT.
     state mt
@@ -6540,14 +6494,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 FORTIFY [GREATER]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 FORTIFY [GREATER]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6557,13 +6509,11 @@ ifvare mainmenusubmenu 4
     setvar digy 88 // 44 (+26)
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 TED INCREASES ONE PERSON'S ARMOR ABSORBSION
     state mt
@@ -6571,13 +6521,11 @@ ifvare mainmenusubmenu 4
     setvar digy 94 // 44 (+26)
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 RATE BY DOUBLE FROM THEIR PREVIOUS AMOUNT.
     state mt
@@ -6640,14 +6588,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 BLOODLUSTING   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 BLOODLUSTING   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6657,13 +6603,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 CYBANIS INCREASES ONE CHARACTER'S CRITICAL HIT
     state mt
@@ -6671,13 +6615,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 RATE BY 1/4 PLUS ANOTHER 20+% FOR 15 SECONDS.
     state mt
@@ -6723,14 +6665,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 LESSER RESURRECTION   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 LESSER RESURRECTION   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6740,13 +6680,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA RESURRECTS ONE CHARACTER WITH 40% OF
@@ -6756,13 +6694,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 THEIR HP INTACT UPON REVIVAL.
     state mt
@@ -6783,14 +6719,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 HEAL LIFE [LESSER]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 HEAL LIFE [LESSER]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6800,13 +6734,11 @@ ifvare mainmenusubmenu 4
     setvar digy 70 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL HEAL ONE PERSON'S HP BY 33%, UP
@@ -6816,13 +6748,11 @@ ifvare mainmenusubmenu 4
     setvar digy 76 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 TO 133% OF THEIR MAXIMUM HP.
     state mt
@@ -6843,14 +6773,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 CURE AILMENT [MODERATE]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 CURE AILMENT [MODERATE]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6860,13 +6788,11 @@ ifvare mainmenusubmenu 4
     setvar digy 88 // 44 (+26)
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL CURE "DIMNESS", "POISON" AND 
@@ -6876,24 +6802,22 @@ ifvare mainmenusubmenu 4
     setvar digy 94 // 44 (+26)
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 "CONFUSION" FROM ONE PERSON.
     state mt
 
-    // Has Heal Life [Lesser]
+    // Has Heal Life [Greater]
     setvar digx 54 // 88 (-34)
     setvar digy 100 // 44 (+26)
     state setquote332
     setvar CHARACTERARRAY 10
     getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
-    setvar USESKILLARRAY 11 // Heal Life [Lesser]
+    setvar USESKILLARRAY 11 // Heal Life [Greater]
     getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
     state check-skillenergycost-mulmenu
     divvar varname 100
@@ -6903,14 +6827,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 3
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 HEAL LIFE [GREATER]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 HEAL LIFE [GREATER]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6920,13 +6842,11 @@ ifvare mainmenusubmenu 4
     setvar digy 106 // 44 (+26)
     ifvare mainmenuselection 3
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL HEAL ONE PERSON'S HP BY 66%, UP
@@ -6936,13 +6856,11 @@ ifvare mainmenusubmenu 4
     setvar digy 112 // 44 (+26)
     ifvare mainmenuselection 3
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 TO 166% OF THEIR MAXIMUM HP.
     state mt
@@ -6964,14 +6882,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 4
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 GREATER RESURRECTION   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 GREATER RESURRECTION   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -6981,13 +6897,11 @@ ifvare mainmenusubmenu 4
     setvar digy 124 // 44 (+26)
     ifvare mainmenuselection 4
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA RESURRECTS ONE CHARACTER WITH 80% OF
@@ -6997,13 +6911,11 @@ ifvare mainmenusubmenu 4
     setvar digy 130 // 44 (+26)
     ifvare mainmenuselection 4
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 THEIR HP INTACT UPON REVIVAL.
     state mt
@@ -7024,14 +6936,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 5
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 CURE AILMENT [GREATEST]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 CURE AILMENT [GREATEST]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7041,13 +6951,11 @@ ifvare mainmenusubmenu 4
     setvar digy 142 // 44 (+26)
     ifvare mainmenuselection 5
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 redefinequote 332 NETHRA WILL CURE "DIMNESS", "POISON", 
@@ -7057,13 +6965,11 @@ ifvare mainmenusubmenu 4
     setvar digy 148 // 44 (+26)
     ifvare mainmenuselection 5
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 "CONFUSION" AND "SLOW" FROM ONE PERSON.
     state mt
@@ -7104,14 +7010,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 PSYCHOKENETIC SHIELD   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 PSYCHOKENETIC SHIELD   ^14[%d EP]
     }
     qsprintf 332 332 varname
@@ -7121,13 +7025,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 PAULA CREATES A SHIELD THAT BLOCKS OR REFLECTS
     state mt
@@ -7135,13 +7037,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 6 PSYCHIC/MAGIC/MYSTIC-TYPE ATTACKS PER USE.
     state mt
@@ -7185,8 +7085,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 32 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
      redefinequote 332 TRIAD REFRACTOR   ^21[%d EP]
     }
@@ -7194,8 +7093,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 32 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
      redefinequote 332 TRIAD REFRACTOR   ^10[%d EP]
     }
@@ -7208,16 +7106,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 32 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 32 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 DAMAGE TO LORI IS CUT BY 50% AND THE REST PLUS
@@ -7228,16 +7124,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 32 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 32 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 EXTRA IS DEFLECTED TO THE ATTACKING ENEMY.
@@ -7262,8 +7156,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 64 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
      redefinequote 332 TRIAD RAGNAROK   ^21[%d EP]
     }
@@ -7271,8 +7164,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 64 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
      redefinequote 332 TRIAD RAGNAROK   ^10[%d EP]
     }
@@ -7285,16 +7177,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 64 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 64 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 WHEN LORI TAKES MORE THAN 5% DAMAGE FROM
@@ -7305,16 +7195,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 64 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 64 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 ATTACKS, SHE WILL GET RANDOM STATISTICAL BOOSTS.
@@ -7358,14 +7246,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 VENUS STEEL MENDING [LESSER]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 VENUS STEEL MENDING [LESSER]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7375,13 +7261,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 MINAKO REPLENISHES 20% OF A CHARACTER'S AP,
     state mt
@@ -7389,13 +7273,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 UP TO 120%, WITH A TINY ABSORPTION BOOST.
     state mt
@@ -7416,14 +7298,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 VENUS STEEL MENDING [MODERATE]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 VENUS STEEL MENDING [MODERATE]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7433,13 +7313,11 @@ ifvare mainmenusubmenu 4
     setvar digy 70 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 MINAKO REPLENISHES 45% OF A CHARACTER'S AP,
     state mt
@@ -7447,13 +7325,11 @@ ifvare mainmenusubmenu 4
     setvar digy 76 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 UP TO 145%, WITH A SMALL ABSORPTION BOOST.
     state mt
@@ -7474,14 +7350,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 VENUS STEEL MENDING [GREATER]   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 VENUS STEEL MENDING [GREATER]   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7491,13 +7365,11 @@ ifvare mainmenusubmenu 4
     setvar digy 88 // 44 (+26)
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 MINAKO REPLENISHES 77.5% OF A CHARACTER'S AP,
     state mt
@@ -7505,13 +7377,11 @@ ifvare mainmenusubmenu 4
     setvar digy 94 // 44 (+26)
     ifvare mainmenuselection 2
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 UP TO 177.5%, WITH A MODERATE ABSORPTION BOOST.
     state mt
@@ -7567,14 +7437,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 RESURRECTION PRIME   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 RESURRECTION PRIME   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7584,13 +7452,11 @@ ifvare mainmenusubmenu 4
     setvar digy 52 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     ifvare debugtoggle 0
     {
@@ -7607,13 +7473,11 @@ ifvare mainmenusubmenu 4
     setvar digy 58 // 44 (+26)
     ifvare mainmenuselection 0
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 RESTORES THEIR HP TO 200% IN THE PROCESS.
     state mt
@@ -7634,14 +7498,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 RESURRECTION ULTIMA   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 RESURRECTION ULTIMA   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7651,13 +7513,11 @@ ifvare mainmenusubmenu 4
     setvar digy 70 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     ifvare debugtoggle 0
     {
@@ -7674,13 +7534,11 @@ ifvare mainmenusubmenu 4
     setvar digy 76 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 RESTORES THEIR HP TO 200% IN THE PROCESS.
     state mt
@@ -7726,8 +7584,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 2048 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
      redefinequote 332 TRIAD BLITZKRIEG   ^21[%d EP]
     }
@@ -7735,8 +7592,7 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 2048 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
      redefinequote 332 TRIAD BLITZKRIEG   ^10[%d EP]
     }
@@ -7749,16 +7605,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 2048 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 2048 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 ALL DAMAGE INFLICTED BY MAKEN IGNORES 75% OF
@@ -7769,16 +7623,14 @@ ifvare mainmenusubmenu 4
     {
      ifvarand TEMP 2048 state pal0 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      }
     }
     else
     {
      ifvarand TEMP 2048 state pal16 else
      {
-      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-      ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+      ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      }
     }
     redefinequote 332 HER VICTIMS' DEFENSE STAT, BUT NOT RESISTANCES.
@@ -7800,14 +7652,12 @@ ifvare mainmenusubmenu 4
     setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
      redefinequote 332 TRIAD BOOSTER   ^21[%d EP]
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
      redefinequote 332 TRIAD BOOSTER   ^10[%d EP]
     }
     qsprintf 332 332 varname
@@ -7817,13 +7667,11 @@ ifvare mainmenusubmenu 4
     setvar digy 70 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 MAKEN INCREASES THE ATTACK/DEFENSE OF ONE PERSON
     state mt
@@ -7831,13 +7679,11 @@ ifvare mainmenusubmenu 4
     setvar digy 76 // 44 (+26)
     ifvare mainmenuselection 1
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal22
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal22
     }
     else
     {
-     getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR5
-     ifvarvarl TEMPVAR5 varname state pal4 else state pal14
+     ifvarvarl actorvar[CHARACTERARRAY].CHARACTEREP varname state pal4 else state pal14
     }
     redefinequote 332 BY 25% EACH FOR 15 SECS OR ADDS 15 MORE SECS.
     state mt
@@ -7869,8 +7715,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 1
     ifvare CHARACTERSELECTED? 1 state shadepulse4
     setvar tilenum 7936 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 138
     setvar digy 38
@@ -7996,8 +7841,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 2
     ifvare CHARACTERSELECTED? 2 state shadepulse4
     setvar tilenum 7937
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 136
     setvar digy 38
@@ -8129,8 +7973,7 @@ ifvare mainmenusubmenu 5
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 136
     setvar digy 38
@@ -8257,8 +8100,8 @@ ifvare mainmenusubmenu 5
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 138
     setvar digy 38
@@ -8386,8 +8229,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 5
     ifvare CHARACTERSELECTED? 5 state shadepulse4
     setvar tilenum 7940
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 134
     setvar digy 38
@@ -8513,8 +8355,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 6
     ifvare CHARACTERSELECTED? 6 state shadepulse4
     setvar tilenum 7941
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 128
     setvar digy 38
@@ -8639,8 +8480,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 7
     ifvare CHARACTERSELECTED? 7 state shadepulse4
     setvar tilenum 7942
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 134
     setvar digy 38
@@ -8765,8 +8605,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 8
     ifvare CHARACTERSELECTED? 8 state shadepulse4
     setvar tilenum 7943 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 138
     setvar digy 38
@@ -8891,8 +8730,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 9
     ifvare CHARACTERSELECTED? 9 state shadepulse4
     setvar tilenum 7944
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 124
     setvar digy 38
@@ -9021,8 +8859,7 @@ ifvare mainmenusubmenu 5
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
 
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
@@ -9156,8 +8993,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 11
     ifvare CHARACTERSELECTED? 11 state shadepulse4
     setvar tilenum 7946
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 130
     setvar digy 38
@@ -9283,8 +9119,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 12
     ifvare CHARACTERSELECTED? 12 state shadepulse4
     setvar tilenum 7947
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 134
     setvar digy 38
@@ -9412,8 +9247,7 @@ ifvare mainmenusubmenu 5
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 136
     setvar digy 38
@@ -9538,8 +9372,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 14
     ifvare CHARACTERSELECTED? 14 state shadepulse4
     setvar tilenum 7957 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 128
     setvar digy 38
@@ -9673,8 +9506,7 @@ ifvare mainmenusubmenu 5
     setvar CHARACTERARRAY 15
     ifvare CHARACTERSELECTED? 15 state shadepulse4
     setvar tilenum 7971
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 130
     setvar digy 38
@@ -9810,8 +9642,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 1
     ifvare CHARACTERSELECTED? 1 state shadepulse4
     setvar tilenum 7936 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 138
     setvar digy 38
@@ -9834,8 +9665,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 2
     ifvare CHARACTERSELECTED? 2 state shadepulse4
     setvar tilenum 7937
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 136
     setvar digy 38
@@ -9861,18 +9691,7 @@ ifvare mainmenusubmenu 6
     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7938
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7962
-    {
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvarl TEMPVAR 1
-     {
-      state pal2
-     }
-     else
-     {
-      state pal0
-     }
-    } 
-
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 136
     setvar digy 38
@@ -9898,8 +9717,7 @@ ifvare mainmenusubmenu 6
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7939
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7963
     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7966
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 138
     setvar digy 38
@@ -9922,8 +9740,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 5
     ifvare CHARACTERSELECTED? 5 state shadepulse4
     setvar tilenum 7940
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 134
     setvar digy 38
@@ -9946,8 +9763,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 6
     ifvare CHARACTERSELECTED? 6 state shadepulse4
     setvar tilenum 7941
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 128
     setvar digy 38
@@ -9970,8 +9786,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 7
     ifvare CHARACTERSELECTED? 7 state shadepulse4
     setvar tilenum 7942
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 134
     setvar digy 38
@@ -9994,8 +9809,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 8
     ifvare CHARACTERSELECTED? 8 state shadepulse4
     setvar tilenum 7943 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 138
     setvar digy 38
@@ -10018,8 +9832,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 9
     ifvare CHARACTERSELECTED? 9 state shadepulse4
     setvar tilenum 7944
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 124
     setvar digy 38
@@ -10045,8 +9858,7 @@ ifvare mainmenusubmenu 6
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7945
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7964
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
 
     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
@@ -10075,8 +9887,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 11
     ifvare CHARACTERSELECTED? 11 state shadepulse4
     setvar tilenum 7946
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 130
     setvar digy 38
@@ -10099,8 +9910,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 12
     ifvare CHARACTERSELECTED? 12 state shadepulse4
     setvar tilenum 7947
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 134
     setvar digy 38
@@ -10126,8 +9936,7 @@ ifvare mainmenusubmenu 6
     ifvare MISCARRAYID_AMOUNTTEMP 0 setvar tilenum 7948
     else ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tilenum 7965
     else ifvare MISCARRAYID_AMOUNTTEMP 2 setvar tilenum 7968
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 136
     setvar digy 38
@@ -10151,8 +9960,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 14
     ifvare CHARACTERSELECTED? 14 state shadepulse4
     setvar tilenum 7957 
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 128
     setvar digy 38
@@ -10184,8 +9992,7 @@ ifvare mainmenusubmenu 6
     setvar CHARACTERARRAY 15
     ifvare CHARACTERSELECTED? 15 state shadepulse4
     setvar tilenum 7971
-    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-    ifvarl TEMPVAR 1 state pal2 else state pal0
+    ifvarl actorvar[CHARACTERARRAY].CHARACTERHP 1 state pal2 else state pal0
     state rs 
     setvar digx 130
     setvar digy 38

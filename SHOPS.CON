@@ -2013,11 +2013,9 @@ state shop_assessvehicleHP
      state pal21
      redefinequote 598 X%
      redefinequote 599 %ld%
-     getactorvar[VEHICLEID].ENEMYHP TEMPVAR3
-     setvarvar TEMP2 TEMPVAR3
+     setvarvar TEMP2 actorvar[VEHICLEID].ACTORHP
      mulvar TEMP2 100
-     getactorvar[VEHICLEID].ENEMYMAXHP TEMPVAR3
-     divvarvar TEMP2 TEMPVAR3
+     divvarvar TEMP2 actorvar[VEHICLEID].ACTORMAXHP
      qsprintf 598 599 TEMP2
      qstrlen TEMPVAR 598
      ifvarg TEMPVAR 0 
@@ -2102,11 +2100,9 @@ state shop_assessvehicleAP
     state pal17
     redefinequote 598 X%
     redefinequote 599 %ld%
-    getactorvar[VEHICLEID].ENEMYAP TEMPVAR3
-    setvarvar TEMP2 TEMPVAR3
+    setvarvar TEMP2 actorvar[VEHICLEID].ACTORAP
     mulvar TEMP2 100
-    getactorvar[VEHICLEID].ENEMYMAXAP TEMPVAR3
-    divvarvar TEMP2 TEMPVAR3
+    divvarvar TEMP2 actorvar[VEHICLEID].ACTORMAXAP
     qsprintf 598 599 TEMP2
     qstrlen TEMPVAR 598
     ifvarg TEMPVAR 0 
@@ -2126,7 +2122,7 @@ state shop_assessvehicleAB
     state pal17
     redefinequote 598 #.#%
     redefinequote 599 %d.%d%
-    getactorvar[VEHICLEID].ENEMYARMORPERCENT TEMPVAR3
+    getactorvar[VEHICLEID].ACTORARMORPERCENT TEMPVAR3
     setvarvar TEMP2 TEMPVAR3
     divvar TEMP2 10
     setvarvar TEMP3 TEMPVAR3
@@ -2172,11 +2168,9 @@ state shop_assessvehicleFA
     state pal20
      redefinequote 598 X%
      redefinequote 599 %ld%
-     getactorvar[VEHICLEID].ENEMYFIRSTAID TEMPVAR3
-     setvarvar TEMP2 TEMPVAR3
+     setvarvar TEMP2 actorvar[VEHICLEID].ACTORFIRSTAID
      mulvar TEMP2 100
-     getactorvar[VEHICLEID].ENEMYMAXHP TEMPVAR3
-     divvarvar TEMP2 TEMPVAR3
+     divvarvar TEMP2 actorvar[VEHICLEID].ACTORMAXHP
      qsprintf 598 599 TEMP2
      qstrlen TEMPVAR 598
      ifvarg TEMPVAR 0 
@@ -4155,7 +4149,7 @@ ifvare shop_id 0
      state pal20
      redefinequote 598 X%
      redefinequote 599 %ld%
-     getactorvar[VEHICLEID].ENEMYAIRTANKAMOUNT TEMP2 // setvarvar TEMP2 SCUBATIME
+     getactorvar[VEHICLEID].ACTORAIRTANKAMOUNT TEMP2 // setvarvar TEMP2 SCUBATIME
      divvar TEMP2 64
      qsprintf 598 599 TEMP2
      qstrlen TEMPVAR 598
@@ -4233,7 +4227,7 @@ ifvare shop_id 0
      state pal20
      redefinequote 598 X%
      redefinequote 599 %ld%
-     getactorvar[VEHICLEID].ENEMYBOOTSAMOUNT TEMP2 // setvarvar TEMP2 SCUBATIME
+     getactorvar[VEHICLEID].ACTORBOOTSAMOUNT TEMP2 // setvarvar TEMP2 SCUBATIME
      divvar TEMP2 2
      qsprintf 598 599 TEMP2
      qstrlen TEMPVAR 598
@@ -4289,7 +4283,7 @@ ifvare shop_id 0
 
      setvar digx 303 // 224
      subvar digy 2 // setvar digy 136 // 130
-     state shop_assesscharacterFA
+     state shop_assessvehicleFA
      state mt
     }
 
@@ -4418,13 +4412,13 @@ ifvare shop_id 0
 
      setvar shade -4
      state pal21
-     getactorvar[VEHICLEID].ENEMYMAXHP varname // setvarvar varname MAXHITPOINTS
+     getactorvar[VEHICLEID].ACTORMAXHP varname // setvarvar varname MAXHITPOINTS
      subvar digy 5 // 224
      setvar tilenum 3087 // setvar tilenum 3010
      state orientation27
      state dn
      state pal22
-     getactorvar[VEHICLEID].ENEMYMAXAP varname // setvarvar varname MAXARMORPOINTS
+     getactorvar[VEHICLEID].ACTORMAXAP varname // setvarvar varname MAXARMORPOINTS
      addvar digy 6 // 224
      setvar tilenum 3087 // setvar tilenum 3010
      state orientation27
@@ -11637,7 +11631,7 @@ state buyforvehicle_cola
 
         state showhealing_playerhp
         ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORHP TEMPVAR4
         setvar VEHICLEHPDAMAGED? -1
 
         state checksmallmedikits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
@@ -11818,7 +11812,7 @@ state buyforvehicle_swmedikit
 
         state showhealing_playerhp
         ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORHP TEMPVAR4
         setvar VEHICLEHPDAMAGED? -1
 
         state checkmediummedikits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
@@ -11999,7 +11993,7 @@ state buyforvehicle_sixpak
 
         state showhealing_playerhp
         ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORHP TEMPVAR4
         setvar VEHICLEHPDAMAGED? -1
 
         state checklargemedikits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
@@ -12170,7 +12164,7 @@ state buyforvehicle_swbigmedikit
 
         state showhealing_playerhp
         ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORHP TEMPVAR4
         setvar VEHICLEHPDAMAGED? -1
 
         state checkextralargemedikits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
@@ -12314,7 +12308,7 @@ state buyforvehicle_atom
         globalsound GETATOMICHEALTH
         addvar SHOPDOLLARSTEMP 1
         state selldisplays
-        getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR3        
+        getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR3        
 
         // TEMP4 = Maximum HP % to reach
         // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
@@ -12350,7 +12344,7 @@ state buyforvehicle_atom
         state showhealing_playerhp
         ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
         ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORHP TEMPVAR4
         setvar VEHICLEHPDAMAGED? -1
 
         state checkatomichealths addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
@@ -12485,40 +12479,40 @@ state buyforvehicle_superatom
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifrnd 64 { ifvarl TEMPVAR3 925 setvar TEMPVAR3 925 }
         else ifrnd 85 { ifvarl TEMPVAR3 950 setvar TEMPVAR3 950 }
         else ifrnd 128 { ifvarl TEMPVAR3 975 setvar TEMPVAR3 975 }
         else { ifvarl TEMPVAR3 1000 setvar TEMPVAR3 1000 }	
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
-        getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-        getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+        getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+        getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
         mulvar TEMPVAR5 2
         ifvarvarl TEMPVAR4 TEMPVAR5 setvar VEHICLEHPDAMAGED? -1
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar TEMPHEALTH TEMPVAR5
         state showhealing_playerhp
         ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-        setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORHP TEMPVAR4
 
-        getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-        getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+        getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+        getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
         mulvar TEMPVAR5 2
         ifvarvarl TEMPVAR4 TEMPVAR5 setactorvar[PLAYERID].VDISPLAYFAFLASHTIMER -28
         setvarvar TEMPVAR4 TEMPVAR5
         ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-        setactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
+        setactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
 
-        getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-        getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+        getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+        getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
         mulvar TEMPVAR5 2
         ifvarvarl TEMPVAR4 TEMPVAR5 setvar VEHICLEAPDAMAGED? -1
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
         ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
 
         subvar ACTORPICKUPAMOUNT 1
         addvar tempe 1
@@ -12646,17 +12640,17 @@ state buyforvehicle_shield
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifrnd 64 { ifvarl TEMPVAR3 333 setvar TEMPVAR3 333 }
         else ifrnd 85 { ifvarl TEMPVAR3 500 setvar TEMPVAR3 500 }
         else ifrnd 128 { ifvarl TEMPVAR3 750 setvar TEMPVAR3 750 }
         else { ifvarl TEMPVAR3 900 setvar TEMPVAR3 900 }
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -12785,17 +12779,17 @@ state buyforvehicle_supershield
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifrnd 64 { ifvarl TEMPVAR3 333 setvar TEMPVAR3 333 }
         else ifrnd 85 { ifvarl TEMPVAR3 500 setvar TEMPVAR3 500 }
         else ifrnd 128 { ifvarl TEMPVAR3 750 setvar TEMPVAR3 750 }
         else { ifvarl TEMPVAR3 900 setvar TEMPVAR3 900 }
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -12915,7 +12909,7 @@ state buyforvehicle_airtank
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        setactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT SCUBA_AMOUNT
+        setactorvar[tempvehicleid].ACTORAIRTANKAMOUNT SCUBA_AMOUNT
 
         subvar ACTORPICKUPAMOUNT 1
         addvar tempe 1
@@ -13034,7 +13028,7 @@ state buyforvehicle_boots
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        setactorvar[tempvehicleid].ENEMYBOOTSAMOUNT BOOT_AMOUNT
+        setactorvar[tempvehicleid].ACTORBOOTSAMOUNT BOOT_AMOUNT
 
         subvar ACTORPICKUPAMOUNT 1
         addvar tempe 1
@@ -13161,7 +13155,7 @@ state buyforvehicle_firstaid
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        setactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR5
+        setactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR5
         setactorvar[PLAYERID].VDISPLAYFAFLASHTIMER -28
 
         subvar ACTORPICKUPAMOUNT 1
@@ -13399,13 +13393,13 @@ state buyforvehicle_greenarmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifvarl TEMPVAR3 333 setvar TEMPVAR3 333
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -13531,13 +13525,13 @@ state buyforvehicle_bluearmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifvarl TEMPVAR3 500 setvar TEMPVAR3 500
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -13663,13 +13657,13 @@ state buyforvehicle_yellowarmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifvarl TEMPVAR3 750 setvar TEMPVAR3 750
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -13795,13 +13789,13 @@ state buyforvehicle_redarmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifvarl TEMPVAR3 900 setvar TEMPVAR3 900
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -13928,14 +13922,14 @@ state buyforvehicle_greyarmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         randvar TEMPVAR4 99 addvar TEMPVAR4 900
         ifvarvarl ARMORPERCENT TEMPVAR4 setvarvar ARMORPERCENT TEMPVAR4
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -14061,13 +14055,13 @@ state buyforvehicle_whitearmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         ifvarl TEMPVAR3 1000 setvar TEMPVAR3 1000
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -14195,15 +14189,15 @@ state buyforvehicle_randomarmor
         setvarvar ACTORPICKUPAMOUNT shopamount
         setvar tempe 0
 
-        getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         randvar TEMPVAR4 900 addvar TEMPVAR4 100
         ifvarl ARMORPERCENT 100 setvar ARMORPERCENT 100
         ifvarvarl ARMORPERCENT TEMPVAR4 setvarvar ARMORPERCENT TEMPVAR4
-        setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+        setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
         setvarvar TEMPVAR4 TEMPVAR5
         setvarvar RECEIVEDARMOR TEMPVAR5
         state showhealing_playerap
-        setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+        setactorvar[tempvehicleid].ACTORAP TEMPVAR4
         setvar VEHICLEAPDAMAGED? -1
 
         subvar ACTORPICKUPAMOUNT 1
@@ -14309,8 +14303,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_cola
          else
@@ -14321,8 +14315,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state buyforcharacter_cola
          else
          {
-          getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_cola
           else
@@ -14331,8 +14325,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_cola
          else
          {
@@ -14374,8 +14368,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_swmedikit
          else
@@ -14386,8 +14380,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state buyforcharacter_swmedikit
          else
          {
-          getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_swmedikit
           else
@@ -14396,8 +14390,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_swmedikit
          else
          {
@@ -14445,8 +14439,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_sixpak
          else
@@ -14457,8 +14451,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state buyforcharacter_sixpak
          else
          {
-          getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_sixpak
           else
@@ -14467,8 +14461,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_sixpak
          else
          {
@@ -14510,8 +14504,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_swbigmedikit
          else
@@ -14522,8 +14516,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state buyforcharacter_swbigmedikit
          else
          {
-          getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_swbigmedikit
           else
@@ -14532,8 +14526,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_swbigmedikit
          else
          {
@@ -14575,8 +14569,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          mulvar TEMPVAR5 2
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_atom
@@ -14588,8 +14582,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTHITPOINTS MAXHITPOINTSATOMIC state buyforcharacter_atom
          else
          {
-          getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           mulvar TEMPVAR5 2
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_atom
@@ -14599,8 +14593,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          mulvar TEMPVAR5 2
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_atom
          else
@@ -14716,8 +14710,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_shield
          else
@@ -14728,8 +14722,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTS state buyforcharacter_shield
          else
          {
-          getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_shield
           else
@@ -14738,8 +14732,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_shield
          else
          {
@@ -14781,8 +14775,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
          mulvar TEMPVAR5 2
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_supershield
@@ -14794,8 +14788,8 @@ ifvare com_pause 0
          ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTSATOMIC state buyforcharacter_supershield
          else
          {
-          getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
           mulvar TEMPVAR5 2
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_supershield
@@ -14805,8 +14799,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
          mulvar TEMPVAR5 2
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_supershield
          else
@@ -15250,7 +15244,7 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR4
+         getactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR4
          ifvarl TEMPVAR4 SCUBA_AMOUNT
           state buyforvehicle_airtank
          else
@@ -15261,7 +15255,7 @@ ifvare com_pause 0
          ifvarl SCUBATIME SCUBA_AMOUNT  state buyforcharacter_airtank
          else
          {
-          getactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR4
+          getactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR4
           ifvarl TEMPVAR4 SCUBA_AMOUNT
            state buyforvehicle_airtank
           else
@@ -15270,7 +15264,7 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR4
+         getactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR4
          ifvarl TEMPVAR4 SCUBA_AMOUNT state buyforvehicle_airtank
          else
          {
@@ -15312,7 +15306,7 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR4
+         getactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR4
          ifvarl TEMPVAR4 BOOT_AMOUNT
           state buyforvehicle_boots
          else
@@ -15323,7 +15317,7 @@ ifvare com_pause 0
          ifvarl BOOTSTIME BOOT_AMOUNT state buyforcharacter_boots
          else
          {
-          getactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR4
+          getactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR4
           ifvarl TEMPVAR4 BOOT_AMOUNT
            state buyforvehicle_boots
           else
@@ -15332,7 +15326,7 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR4
+         getactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR4
          ifvarl TEMPVAR4 BOOT_AMOUNT state buyforvehicle_boots
          else
          {
@@ -15374,8 +15368,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
           state buyforvehicle_firstaid
          else
@@ -15386,8 +15380,8 @@ ifvare com_pause 0
          ifvarvarl FIRSTAIDCURRENT MAXHITPOINTS state buyforcharacter_firstaid
          else
          {
-          getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
            state buyforvehicle_firstaid
           else
@@ -15396,8 +15390,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5 state buyforvehicle_firstaid
          else
          {
@@ -15589,12 +15583,12 @@ ifvare com_pause 0
         {
          setvarvar TEMPVAR STATLIMIT
          subvar TEMPVAR 1
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
          ifvarvarg TEMPVAR5 TEMPVAR
          {
           setvarvar TEMPVAR STATLIMIT
           subvar TEMPVAR 1
-          getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
           ifvarvarg TEMPVAR5 TEMPVAR
           {
            stopsound MONEYSOUND
@@ -15618,12 +15612,12 @@ ifvare com_pause 0
           {
            setvarvar TEMPVAR STATLIMIT
            subvar TEMPVAR 1
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
           ifvarvarg TEMPVAR5 TEMPVAR
            {
             setvarvar TEMPVAR STATLIMIT
             subvar TEMPVAR 1
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarvarg TEMPVAR5 TEMPVAR
             {
              stopsound MONEYSOUND
@@ -15643,12 +15637,12 @@ ifvare com_pause 0
         {
          setvarvar TEMPVAR STATLIMIT
          subvar TEMPVAR 1
-         getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
         ifvarvarg TEMPVAR5 TEMPVAR
         {
           setvarvar TEMPVAR STATLIMIT
           subvar TEMPVAR 1
-          getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
           ifvarvarg TEMPVAR5 TEMPVAR
           {
            setvarvar TEMPVAR STATLIMIT
@@ -16071,7 +16065,7 @@ ifvare com_pause 0
 
           setvarvar TEMP5 TEMPVAR7
           mulvarvar TEMP5 ESHIELDDMGFACTOR
-          ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+          ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
           {
            ifvarg TEMP5 0
            {
@@ -16145,7 +16139,7 @@ ifvare com_pause 0
 
            setvarvar TEMP5 TEMPVAR7
            mulvarvar TEMP5 ESHIELDDMGFACTOR
-           ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+           ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
            {
             ifvarg TEMP5 0
             {
@@ -16227,7 +16221,7 @@ ifvare com_pause 0
 
            setvarvar TEMP5 TEMPVAR7
            mulvarvar TEMP5 ESHIELDDMGFACTOR
-           ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+           ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
            {
             ifvarg TEMP5 0
             {
@@ -18349,8 +18343,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 1 // Vehicle Only
         {
-         getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
          {
           ifvare shopselection 13 state buyforvehicle_greenarmor
@@ -18386,8 +18380,8 @@ ifvare com_pause 0
          }
          else
          {
-          getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-          getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+          getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+          getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
           ifvarvarl TEMPVAR4 TEMPVAR5
           {
            ifvare shopselection 13 state buyforvehicle_greenarmor
@@ -18412,8 +18406,8 @@ ifvare com_pause 0
         }
         ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
         {
-         getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-         getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+         getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
          ifvarvarl TEMPVAR4 TEMPVAR5
          {
           ifvare shopselection 13 state buyforvehicle_greenarmor

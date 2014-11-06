@@ -5,22 +5,11 @@ state setjumpcounter
 ends
 
 state getjumpheights
+ ifvare PLAYERJUMPSTRENGTHTEMP 0 setplayer[THISACTOR].jumping_counter 0
 
-ifvare PLAYERJUMPSTRENGTHTEMP 0 setplayer[THISACTOR].jumping_counter 0
-
-/*
-ifvarg PLAYERJUMPSTRENGTHTEMP 0
-{
- ifvare jumpcounter 181
- {
-  ifonwater setvar JUMP_ONWATER? 1 else setvar JUMP_ONWATER? 0
- }
-}
-*/
-
-// ****************************
-// ** Revised Jumping System **
-// ****************************
+ // ****************************
+ // ** Revised Jumping System **
+ // ****************************
  // Controls Jump Timer to compare w/ a character's jump strength
  ifvare jumpcounter 0 setvar PLAYERJUMPTICS 0
  ifonwater { mulvar PLAYERJUMPSTRENGTHTEMP 7 divvar PLAYERJUMPSTRENGTHTEMP 12 }
@@ -64,7 +53,7 @@ ifvarg PLAYERJUMPSTRENGTHTEMP 0
   ifvarg PLAYERJUMPTICS 6 { setvar jumpcounter 1082 state setjumpcounter setplayer[THISACTOR].poszv -4096 }
  }
 
- // Cuts off a jump if the Jump timer exceeds the character's jump strength			   
+ // Cuts off a jump if the Jump timer exceeds the character's jump strength
  ifvarvarg PLAYERJUMPTICS PLAYERJUMPSTRENGTHTEMP2 { setvar jumpcounter 1441 state setjumpcounter setvar PLAYERJUMPTICS 0 }
  
 ends
@@ -124,42 +113,24 @@ state setcharacterarrays
         setactorvar[CHARACTERARRAY].CHARACTERAPREGENTIME APREGENTIME
         setactorvar[CHARACTERARRAY].CHARACTERVAMPIRETIME VAMPIRETIME
         setactorvar[CHARACTERARRAY].CHARACTERSTEROIDSTIME STEROIDSTIME
-        getplayer[THISACTOR].jetpack_amount TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME TEMPVAR
-        getplayer[THISACTOR].jetpack_on TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE TEMPVAR
-        getplayer[THISACTOR].heat_amount TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
-        getplayer[THISACTOR].heat_on TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE TEMPVAR
-        getplayer[THISACTOR].boot_amount TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERBOOTSTIME TEMPVAR
-        getplayer[THISACTOR].holoduke_amount TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERHOLOTIME TEMPVAR
-        getplayervar[THISACTOR].SCUBATIME TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERSCUBATIME TEMPVAR
-        getplayer[THISACTOR].ammo_amount 0 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO1 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 1 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO2 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 2 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO3 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 3 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO4 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 4 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO5 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 5 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO6 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 6 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO7 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 7 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO8 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 8 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO9 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 9 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO10 TEMPVAR
-        getplayer[THISACTOR].ammo_amount 11 TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERAMMO11 TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME player[THISACTOR].jetpack_amount
+        setactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE player[THISACTOR].jetpack_on
+        setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME player[THISACTOR].heat_amount 
+        setactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE player[THISACTOR].heat_on
+        setactorvar[CHARACTERARRAY].CHARACTERBOOTSTIME player[THISACTOR].boot_amount
+        setactorvar[CHARACTERARRAY].CHARACTERHOLOTIME player[THISACTOR].holoduke_amount
+        setactorvar[CHARACTERARRAY].CHARACTERSCUBATIME SCUBATIME
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO1 player[THISACTOR].ammo_amount 0
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO2 player[THISACTOR].ammo_amount 1
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO3 player[THISACTOR].ammo_amount 2
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO4 player[THISACTOR].ammo_amount 3
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO5 player[THISACTOR].ammo_amount 4
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO6 player[THISACTOR].ammo_amount 5
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO7 player[THISACTOR].ammo_amount 6
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO8 player[THISACTOR].ammo_amount 7
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO9 player[THISACTOR].ammo_amount 8
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO10 player[THISACTOR].ammo_amount 9
+        setactorvar[CHARACTERARRAY].CHARACTERAMMO11 player[THISACTOR].ammo_amount 11
         setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO1 MAXKICK
         setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO2 MAXPISTOL
         setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO3 MAXSHOTGUN
@@ -171,11 +142,9 @@ state setcharacterarrays
         setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO9 MAXTRIPBOMB
         setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO10 MAXFREEZER
         setactorvar[CHARACTERARRAY].CHARACTERMAXAMMO11 MAXEXPANDER
-        getplayer[THISACTOR].runspeed TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERSPEED player[THISACTOR].runspeed
         setactorvar[CHARACTERARRAY].CHARACTERCRITHITCHANCE CRITICALHITCHANCE
-        getplayer[THISACTOR].curr_weapon TEMPVAR
-        setactorvar[CHARACTERARRAY].CHARACTERCURRWEAPON TEMPVAR
+        setactorvar[CHARACTERARRAY].CHARACTERCURRWEAPON player[THISACTOR].curr_weapon
         state readweapontochar
         setactorvar[CHARACTERARRAY].CHARACTERWEAPBITFIELD PLAYERWEAPONBITFIELD
         setactorvar[CHARACTERARRAY].CHARACTERLEVEL PLAYERLEVEL
@@ -213,7 +182,6 @@ state setcharacterarrays
         setactorvar[CHARACTERARRAY].CHARACTERFREEZETIMER freezetimer
         setactorvar[CHARACTERARRAY].CHARACTERWINTERCLOTHES winterclothes
         setactorvar[CHARACTERARRAY].CHARACTERTRANSFORMTIMER TRANSFORMTIMER
-        // setactorvar[CHARACTERARRAY].CHARACTERWEAPONCOUNT weaponcount
 ends
 
 state getcharacterarrays
@@ -236,9 +204,8 @@ state getcharacterarrays
          getactorvar[CHARACTERARRAY].CHARACTERREGENTIME REGENTIME
          getactorvar[CHARACTERARRAY].CHARACTERAPREGENTIME APREGENTIME
          getactorvar[CHARACTERARRAY].CHARACTERVAMPIRETIME VAMPIRETIME
-         getactorvar[CHARACTERARRAY].CHARACTERJETPACKTIME TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERSTEROIDSTIME STEROIDSTIME
 
+         getactorvar[CHARACTERARRAY].CHARACTERSTEROIDSTIME STEROIDSTIME
          ifvare STEROIDSTIME 0 setplayer[THISACTOR].steroids_amount 0
          else ifvare STEROIDSTIME 600 setplayer[THISACTOR].steroids_amount 400 // 150
          else ifvare STEROIDSTIME 1200 setplayer[THISACTOR].steroids_amount 400 // 300
@@ -246,41 +213,25 @@ state getcharacterarrays
          else ifvare STEROIDSTIME 4800 setplayer[THISACTOR].steroids_amount 400 // 1200
          else setplayer[THISACTOR].steroids_amount 399
 
-         setplayer[THISACTOR].jetpack_amount TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE TEMPVAR
-         setplayer[THISACTOR].jetpack_on TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME TEMPVAR
-         setplayer[THISACTOR].heat_amount TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE TEMPVAR
-         setplayer[THISACTOR].heat_on TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERBOOTSTIME TEMPVAR
-         setplayer[THISACTOR].boot_amount TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERHOLOTIME TEMPVAR
-         setplayer[THISACTOR].holoduke_amount TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERSCUBATIME TEMPVAR
-         setplayervar[THISACTOR].SCUBATIME TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO1 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 0 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO2 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 1 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO3 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 2 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO4 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 3 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO5 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 4 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO6 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 5 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO7 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 6 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO8 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 7 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO9 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 8 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO10 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 9 TEMPVAR
-         getactorvar[CHARACTERARRAY].CHARACTERAMMO11 TEMPVAR
-         setplayer[THISACTOR].ammo_amount 11 TEMPVAR
+         setplayer[THISACTOR].jetpack_amount actorvar[CHARACTERARRAY].CHARACTERJETPACKTIME
+         setplayer[THISACTOR].jetpack_on actorvar[CHARACTERARRAY].CHARACTERJETPACKTOGGLE
+         setplayer[THISACTOR].heat_amount actorvar[CHARACTERARRAY].CHARACTERGOGGLESTIME
+         setplayer[THISACTOR].heat_on actorvar[CHARACTERARRAY].CHARACTERGOGGLESTOGGLE
+         setplayer[THISACTOR].boot_amount actorvar[CHARACTERARRAY].CHARACTERBOOTSTIME
+         setplayer[THISACTOR].holoduke_amount actorvar[CHARACTERARRAY].CHARACTERHOLOTIME
+         setplayervar[THISACTOR].SCUBATIME actorvar[CHARACTERARRAY].CHARACTERSCUBATIME
+
+         setplayer[THISACTOR].ammo_amount 0 actorvar[CHARACTERARRAY].CHARACTERAMMO1
+         setplayer[THISACTOR].ammo_amount 1 actorvar[CHARACTERARRAY].CHARACTERAMMO2
+         setplayer[THISACTOR].ammo_amount 2 actorvar[CHARACTERARRAY].CHARACTERAMMO3
+         setplayer[THISACTOR].ammo_amount 3 actorvar[CHARACTERARRAY].CHARACTERAMMO4
+         setplayer[THISACTOR].ammo_amount 4 actorvar[CHARACTERARRAY].CHARACTERAMMO5
+         setplayer[THISACTOR].ammo_amount 5 actorvar[CHARACTERARRAY].CHARACTERAMMO6
+         setplayer[THISACTOR].ammo_amount 6 actorvar[CHARACTERARRAY].CHARACTERAMMO7
+         setplayer[THISACTOR].ammo_amount 7 actorvar[CHARACTERARRAY].CHARACTERAMMO8
+         setplayer[THISACTOR].ammo_amount 8 actorvar[CHARACTERARRAY].CHARACTERAMMO9
+         setplayer[THISACTOR].ammo_amount 9 actorvar[CHARACTERARRAY].CHARACTERAMMO10
+         setplayer[THISACTOR].ammo_amount 11 actorvar[CHARACTERARRAY].CHARACTERAMMO11
          getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO1 MAXKICK
          getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO2 MAXPISTOL
          getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO3 MAXSHOTGUN
@@ -292,11 +243,10 @@ state getcharacterarrays
          getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO9 MAXTRIPBOMB
          getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO10 MAXFREEZER
          getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO11 MAXEXPANDER
-         getactorvar[CHARACTERARRAY].CHARACTERSPEED TEMPVAR
-         setplayer[THISACTOR].runspeed TEMPVAR
+
+         setplayer[THISACTOR].runspeed actorvar[CHARACTERARRAY].CHARACTERSPEED
          getactorvar[CHARACTERARRAY].CHARACTERCRITHITCHANCE CRITICALHITCHANCE
-         getactorvar[CHARACTERARRAY].CHARACTERCURRWEAPON TEMPVAR
-         setplayer[THISACTOR].curr_weapon TEMPVAR
+         setplayer[THISACTOR].curr_weapon actorvar[CHARACTERARRAY].CHARACTERCURRWEAPON
          getactorvar[CHARACTERARRAY].CHARACTERWEAPBITFIELD PLAYERWEAPONBITFIELD
          state readchartoweapon
          getactorvar[CHARACTERARRAY].CHARACTERLEVEL PLAYERLEVEL
@@ -335,7 +285,6 @@ state getcharacterarrays
          getactorvar[CHARACTERARRAY].CHARACTERFREEZETIMER freezetimer
          getactorvar[CHARACTERARRAY].CHARACTERWINTERCLOTHES winterclothes
          getactorvar[CHARACTERARRAY].CHARACTERTRANSFORMTIMER TRANSFORMTIMER
-         // getactorvar[CHARACTERARRAY].CHARACTERWEAPONCOUNT weaponcount
 ends
 
 state checkcharacter_status
@@ -495,7 +444,7 @@ getplayer[THISACTOR].runspeed CHARACTERSPEEDTRUE
         setvar PLAYERWEIGHT 224 // In lbs
         // setplayer[THISACTOR].autostep 5120
         // setplayer[THISACTOR].autostep_sbw 1024
-		
+
         state setcharacterarrays
       }
       else
@@ -1054,92 +1003,77 @@ state checkforcontinues
    ifvare DUKE? 1
    {
     setvar CHARACTERARRAY 1
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare JACK? 1
    {
     setvar CHARACTERARRAY 2
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare BUBSY? 1
    {
     setvar CHARACTERARRAY 3
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare AMI? 1
    {
     setvar CHARACTERARRAY 4
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare LOWANG? 1
    {
     setvar CHARACTERARRAY 5
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare ESSENCE? 1
    {
     setvar CHARACTERARRAY 6
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare TED? 1
    {
     setvar CHARACTERARRAY 7
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare LISA? 1
    {
     setvar CHARACTERARRAY 8
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare CYBANIS? 1
    {
     setvar CHARACTERARRAY 9
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare NETHRA? 1
    {
     setvar CHARACTERARRAY 10
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare PAULA? 1
    {
     setvar CHARACTERARRAY 11
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare LORI? 1
    {
     setvar CHARACTERARRAY 12
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare MINAKO? 1
    {
     setvar CHARACTERARRAY 13
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare MYSTERY1? 1
    {
     setvar CHARACTERARRAY 14
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    ifvare MAKEN? 1
    {
     setvar CHARACTERARRAY 15
-    getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-    setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+    setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
    }
    setactor[PLAYERID].extra 16384
 
@@ -1159,14 +1093,11 @@ ends
 
 state death-checkbubsylives
      setvar CHARACTERARRAY 3
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvare TEMPVAR 0  
+     ifvare actorvar[CHARACTERARRAY].CHARACTERHP 0  
      { 
       setactor[PLAYERID].extra 16384
-      getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-      setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-      getactorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME temp
-      setactorvar[CHARACTERARRAY].CHARACTERBREATHTIME temp
+      setactorvar[CHARACTERARRAY].CHARACTERHP actorvar[CHARACTERARRAY].CHARACTERMAXHP
+      setactorvar[CHARACTERARRAY].CHARACTERBREATHTIME actorvar[CHARACTERARRAY].CHARACTERMAXBREATHTIME
       state checkbubsylives subvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount
       setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 39 // DEATHSWITCH-DELAY
       redefinequote 321 ^2BUBSY LOSES ONE LIFE!!
@@ -1177,8 +1108,7 @@ ends
 
 state death-checkbubsylives2
      setvar CHARACTERARRAY 3
-     getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-     ifvare TEMPVAR 0  
+     ifvare actorvar[CHARACTERARRAY].CHARACTERHP 0  
      { 
       setactor[PLAYERID].extra 16384
       setvarvar CURRENTHITPOINTS MAXHITPOINTS
@@ -1233,8 +1163,7 @@ ends
 state switchcharactercheck
    setvar MISCARRAYID 83 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // CHARACTER-NEW
    setvarvar CHARACTERARRAY MISCARRAYID_AMOUNTTEMP
-   getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-   ifvarg TEMPVAR 0 state changechar else jump TEMPVAR3
+   ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 state changechar else jump TEMPVAR3
 ends
 
 state switchtorandomcharacter
@@ -1291,8 +1220,7 @@ state switchtolivingcharacter
  else
  {
   setvar CHARACTERARRAY 3
-  getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
-  ifvare TEMPVAR 0
+  ifvare actorvar[CHARACTERARRAY].CHARACTERHP 0
   {
    state checkbubsylives
    ifvarg ITEMARRAYID_AMOUNTTEMP 0 state death-checkbubsylives2 // If Bubsy has 'extra lives' left, revive him automatically to 100% HP and Airtime and don't switch him over, but decrement his 'lives' counter by 1
@@ -1495,41 +1423,40 @@ ends
 state checkpartysize
    setvar PARTYSIZE 0 
    setvar PARTYALIVE 0
-       ifvare DUKE? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 1 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+       ifvare DUKE? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 1 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 1 state switchtorandomcharacter }
-       ifvare JACK? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 2 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+       ifvare JACK? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 2 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 2 state switchtorandomcharacter }
-      ifvare BUBSY? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 3 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+      ifvare BUBSY? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 3 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 3 state switchtorandomcharacter }
-        ifvare AMI? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 4 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+        ifvare AMI? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 4 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 4 state switchtorandomcharacter }
-     ifvare LOWANG? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 5 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+     ifvare LOWANG? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 5 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 5 state switchtorandomcharacter }
-    ifvare ESSENCE? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 6 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+    ifvare ESSENCE? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 6 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 6 state switchtorandomcharacter }
-        ifvare TED? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 7 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+        ifvare TED? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 7 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 7 state switchtorandomcharacter }
-       ifvare LISA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 8 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+       ifvare LISA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 8 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 8 state switchtorandomcharacter }
-    ifvare CYBANIS? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 9 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+    ifvare CYBANIS? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 9 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 9 state switchtorandomcharacter }
-     ifvare NETHRA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 10 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+     ifvare NETHRA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 10 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 10 state switchtorandomcharacter }
-      ifvare PAULA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 11 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+      ifvare PAULA? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 11 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 11 state switchtorandomcharacter }
-       ifvare LORI? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 12 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+       ifvare LORI? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 12 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 12 state switchtorandomcharacter }
-     ifvare MINAKO? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 13 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+     ifvare MINAKO? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 13 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 13 state switchtorandomcharacter }
-   ifvare MYSTERY1? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 14 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+   ifvare MYSTERY1? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 14 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 14 state switchtorandomcharacter }
-      ifvare MAKEN? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 15 getactorvar[CHARACTERARRAY].CHARACTERHP temp ifvarg temp 0 addvar PARTYALIVE 1 }
+      ifvare MAKEN? 1 { addvar PARTYSIZE 1 setvar CHARACTERARRAY 15 ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar PARTYALIVE 1 }
                  else { ifvare CHARACTERSELECTED? 15 state switchtorandomcharacter }
 ends
 
 state checkcharalive
-      getactorvar[CHARACTERARRAY].CHARACTERHP temp
-      ifvarg temp 0 
+      ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 
       {
        state checkcharacter_status
        ifvarand TEMPVAR 1 

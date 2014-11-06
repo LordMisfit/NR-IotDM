@@ -103,16 +103,12 @@ gamevar winterclothes 0 1
 gamevar enemywinterclothes 0 131074
 
 // Sectnum Vars
-gamevar sectnum_x 0 2
-gamevar sectnum_y 0 2
-gamevar sectnum_z 0 2
 gamevar sectnum_sect 0 2
 
 gamevar SHOWDAMAGE 0 2 // For showing Damage in RPG/FF style [numbers appear over damaged actors' heads]
 gamevar SHOWDAMAGETEMP 0 2 //
 gamevar SHOWDAMAGETYPE 0 2 // 0 = Health [Damage], 1 = Armor [Damage], 2 = Bio-Shield [Damage] (Lisa-players only), 3 = Health [Healing], 4 = Armor [Healing], 5 = Bio-shield [Healing] (Lisa-players only)
 gamevar SHOWDAMAGEACTORID 0 2 //
-gamevar SHOWDAMAGEPLAYER 0 1 // for showing Player's own health/armor/bioshield damage if F7 mode is on.
 
 gamevar SHOWDAMAGEDIGIT1ID -1 2
 gamevar SHOWDAMAGEDIGIT10ID -1 2
@@ -447,7 +443,6 @@ gamevar ROTATEXALTER 0 2
 gamevar ROTATEYALTER 0 2
 gamevar ROTATEZALTER 0 2
 
-
 gamevar SWITCHSCRIPTID 0 2
 gamevar OBJECTWIDTH 0 2
 gamevar OBJECTHEIGHT 0 2
@@ -457,8 +452,6 @@ gamevar OBJECTYREPEAT 0 2
 gamevar OBJECTCENTERZ 0 2
 gamevar OBJECTDIFF 0 2
 gamevar OBJECTDIFF2 0 2
-
-gamevar GREENSLIMEID 0 131073
 
 gamevar BIOSHIELDABSORBSOLID 0 131073
 gamevar BIOSHIELDABSORBRANDOM 0 131073
@@ -488,7 +481,6 @@ gamevar VENDINGQUANITY 0 1026
 
 gamevar textscale 0 0
 
-gamevar ENEMYLASTDAMAGE 0 2
 gamevar ARMORDAMAGEFACTOR 0 0
 
 gamevar BOSS4HEALTIMER 0 2
@@ -500,16 +492,12 @@ gamevar PLAYERDMGFLRZ 0 131073
 
 gamevar LIGHTNINGACTORDMGID 0 2
 gamevar LIGHTNINGDISTANCE 0 2
-
 gamevar REACTORACTORDMGID 0 2
 gamevar REACTORDISTANCE 0 2
-
 gamevar STEAMACTORDMGID 0 2
 gamevar STEAMDISTANCE 0 2
-
 gamevar FIREACTORDMGID 0 2
 gamevar FIREDISTANCE 0 2
-
 gamevar FLOORFLAMEACTORDMGID 0 2
 gamevar FLOORFLAMEDISTANCE 0 2
 
@@ -535,8 +523,8 @@ gamevar TIMERWEEKS 0 0
 gamevar DEATHCHARACTERVAR 0 0
 gamevar TEMPHITCHARACTERVAR 0 0
 gamevar TEMPATKCHARACTERVAR 0 0
-gamevar TEMPHITENEMYVARHP 0 0
-gamevar TEMPHITENEMYVARAP 0 0
+gamevar TEMPHITACTORVARHP 0 0
+gamevar TEMPHITACTORVARAP 0 0
 
 gamevar TEMPFLRDMG 0 2
 
@@ -546,8 +534,6 @@ gamevar CELLDAMAGELEFT 0 0
 
 gamevar GREENSLIMETIMER 0 131073
 gamevar ACTORDEAD? 0 2
-
-gamevar HURTDELAY 0 131073
 
 gamevar MULTIPLIERITEMCANSEE? 0 131074
 
@@ -585,12 +571,8 @@ gamevar gameoverscreen 0 0
 gamevar gameoverblacknessfade 0 0
 
 gamevar oldskoolmode 0 0
-gamevar startlevelvolume 0 0
-gamevar startlevellevel 0 0
 
-gamevar LIFEBARHP 0 2
 gamevar MELEEATTACKERID -1 131073
-gamevar HITRADIUSATTACKERID -1 131073
 
 gamevar LEVELUPTIMER 0 1
 
@@ -600,7 +582,6 @@ gamevar FULLPOWER 0 0
 
 gamevar GENDER? 0 131073 // 0 = Male, 1 = Female
 gamevar DEFENDINGPAL 0 2
-gamevar ONLYHPMETER? 0 2
 
 gamevar TEMPVAR 0 0
 gamevar TEMPVAR2 0 0
@@ -621,23 +602,18 @@ gamevar EXPFACTOR1 0 0
 gamevar EXPFACTOR2 0 0
 gamevar RANKSTARLEVEL 0 2
 gamevar numruns 0 0
-gamevar TMP 0 131072
 gamevar SPAWNID 0 0 // For Constant ESpawns of the same item. >.>
 gamevar INITTYPE 0 0
 gamevar INITBENEFIT 0 0
-gamevar METERTEMP 0 0
 gamevar CLOAKED? 0 2
 gamevar SHRUNK? 0 2
 gamevar EXPANDING? 0 2
 gamevar FROZEN? 0 2
 gamevar FROZENTIMER 0 2
 gamevar REFRACTORSTATE 0 0
-gamevar REFRACTORLEVEL 0 0
 gamevar MIRRORSHIELDSTATE 0 0
-gamevar MIRRORSHIELDCHECKS 0 0
 gamevar ABSORBEDDAMAGE 0 1
 gamevar AVERAGELEVEL 0 0
-gamevar RANDOMIZER 0 0
 
 gamevar STEPINBLOODPOOL? 0 2
 
@@ -646,11 +622,9 @@ gamevar EMUFLOORDAMAGETYPE? 0 131073
 gamevar EMUCEILINGDAMAGETYPE? 0 131073
 gamevar CEILINGDAMAGETYPE? 0 131073
 gamevar FLOORDAMAGETYPE? 0 131073
-gamevar TILEEMULATION 0 131073
 
 gamevar LISAMONEYTURNS0 0 2
 gamevar LISAMONEYTURNS 0 2
-
 gamevar LISAMONEYTURNS2 0 0
 gamevar LISAMONEYMAXLEVEL 0 131073 // Sets to 1 if Lisa's Level is 100 [maxed]
 
@@ -690,7 +664,6 @@ gamevar PLAYERFALLRESISTTEMP 0 1 //
 
 gamevar SURVIVALCHECK 0 0 // Sets the chance of someone surviving a 'mortal' attack with 1 HP left.
 gamevar SURVIVALVALUE 0 0
-gamevar ARMORCHECK 0 0 // Makes Sure that Armor Absorbsion rates work properly without meessing up the character switch system.
 gamevar CHARFALLRESIST 0 0 // Determines how far a character can fall in tics before their fall counter will increment.
 
 gamevar ATTACKANGLE 0 2
@@ -705,7 +678,6 @@ gamevar FLAGSSET? 0 2
 gamevar POWERUPBENEFIT 0 2
 
 gamevar FLOORDAMAGETEMP 0 2
-gamevar ZEROHP 0 2
 gamevar ZEROHITS 0 2
 
 gamevar RADARARROWSET? 0 2
@@ -715,23 +687,10 @@ gamevar CRITICALHITCHANCE2 1001 131073
 gamevar CRITICALINCREASEMAIN 0 0
 gamevar CRITICALINCREASESECONDARY 0 0
 
-gamevar HPMETERCURRENT 0 2
-gamevar HPMETERMAX 0 2
-gamevar HPMETERPERCENT 0 2
-gamevar APMETERCURRENT 0 2
-gamevar APMETERMAX 0 2
-gamevar APMETERPERCENT 0 2
-
-gamevar ACTORSHRINKTIMER 0 131074
 gamevar ACTORSHEIGHT 0 2
 gamevar ACTORSWIDTH 0 2
 gamevar LIFEMETERZ 0 2
 gamevar EXTRAZ 0 2
-
-gamevar NIGHTVISION 0 131073
-
-gamevar ACTORX 0 2
-gamevar ACTORY 0 2
 
 gamevar TESTX 0 2
 gamevar TESTY 0 2
@@ -740,10 +699,6 @@ gamevar TESTXREPEAT1 0 2
 gamevar TESTXREPEAT2 0 2
 gamevar TESTYREPEAT1 0 2
 
-
-
-gamevar HPPERCENTAGE 0 131073
-gamevar APPERCENTAGE 0 131073
 gamevar AMMOPERCENTAGE 0 131073
 
 gamevar ARMORPERCENTTEMP 0 0
@@ -764,15 +719,7 @@ gamevar HEALSEEK 0 2
 gamevar HEALSEEKB 0 2
 gamevar HEALSEEKRATIO 0 2
 gamevar HEALTYPE -1 2
-gamevar HEALSEEKERX 0 2
-gamevar HEALSEEKERY 0 2
-gamevar HEALSEEKERZ 0 2
-gamevar HEALSEEKERANGLE 0 2
-gamevar HEALTARGETX 0 2
-gamevar HEALTARGETY 0 2
-gamevar HEALTARGETZ 0 2
 
-gamevar ATTACKERQUADTIME 0 2
 gamevar ATTACKERANGLE 0 0
 gamevar SYSDIFFANGLE 0 0
 gamevar SYSDIFFANGLEREFINED 0 0
@@ -790,51 +737,42 @@ gamevar ITEMSEEKD 0 2
 gamevar ITEMTARGET 0 2
 gamevar ITEMFATARGET 0 2
 gamevar ITEMCANSEE1? 0 2
-gamevar ITEMENEMYMAXHP 0 2
-gamevar ITEMENEMYMAXHPATOMIC 0 2
-gamevar ITEMENEMYCURRENTAP 0 2
-gamevar ITEMENEMYMAXAP 0 2
-gamevar ITEMENEMYMAXAPATOMIC 0 2
+gamevar ITEMACTORMAXHP 0 2
+gamevar ITEMACTORMAXHPATOMIC 0 2
+gamevar ITEMACTORCURRENTAP 0 2
+gamevar ITEMACTORMAXAP 0 2
+gamevar ITEMACTORMAXAPATOMIC 0 2
 
-gamevar CURRENTENEMYARMORPERCENT 0 0
+gamevar CURRENTACTORARMORPERCENT 0 0 // Remove?
 
-gamevar MAXDOLLARS 2147483647 131073
+gamevar MAXDOLLARS 2147483647 0
 
 gamevar TEMPDOLLARS 0 0
 gamevar TEMPCENTS 0 0
 
-gamevar htang 0 131073
-gamevar htextra 0 131073
-gamevar htowner 0 131073
-gamevar htpicnum 0 131073
-
-gamevar SKILLHEALTHCALC 0 2
 gamevar STATCALCPICNUM 0 0
 gamevar STATCALCPAL 0 0
-gamevar SKILLATTACKCALC 0 2
-gamevar SKILLDEFENSECALC 0 2
-gamevar SKILLARMORCALC 0 2
 
 // Primary Actor-Related Vars
 
-gamevar ENEMYTEMPLEVEL 0 131074
-gamevar ENEMYLEVEL 0 131074
-gamevar ENEMYHP 0 131074
-gamevar ENEMYMAXHP 0 131074
-gamevar ENEMYFIRSTAID 0 131074
-gamevar ENEMYFIRSTAIDMAX 0 131074
-gamevar ENEMYAP 0 131074
-gamevar ENEMYMAXAP 0 131074
-gamevar ENEMYARMORPERCENT 0 131074
+gamevar ACTORTEMPLEVEL 0 131074
+gamevar ACTORLEVEL 0 131074
+gamevar ACTORHP 0 131074
+gamevar ACTORMAXHP 0 131074
+gamevar ACTORFIRSTAID 0 131074
+gamevar ACTORFIRSTAIDMAX 0 131074
+gamevar ACTORAP 0 131074
+gamevar ACTORMAXAP 0 131074
+gamevar ACTORARMORPERCENT 0 131074
 gamevar ACTORATTACK 0 131074 // The Actor's Attack Value
 gamevar ACTORDEFENSE 0 131074 // The Actor's Defense Value
 gamevar ACTORSPEED 0 131074 // The Actor's Speed Value
 gamevar ACTORMAXFALLRESIST 0 131074 // The Actor's Falling Resistance
-gamevar ENEMYQUADTIME 0 131074
-gamevar ENEMYINVULNTIME 0 131074
-gamevar ENEMYREGENTIME 0 131074
-gamevar ENEMYAPREGENTIME 0 131074
-gamevar ENEMYVAMPIRETIME 0 131074
+gamevar ACTORQUADTIME 0 131074
+gamevar ACTORINVULNTIME 0 131074
+gamevar ACTORREGENTIME 0 131074
+gamevar ACTORAPREGENTIME 0 131074
+gamevar ACTORVAMPIRETIME 0 131074
 gamevar ACTORSTATUS? 0 131074
 gamevar ACTORCRITICALHITCHANCE 0 131074
 gamevar ACTORCRITICALHITCHANCE2 0 131074
@@ -864,71 +802,60 @@ gamevar ACTORHASTETIMER 0 131074 // For having Haste Durations [2]
 gamevar ACTORSLOWTIMER 0 131074 // For having Slow Durations [4]
 gamevar ACTORPOISONTIMER 0 131074 // For having Poison Durations [8]
 gamevar ACTORDIMNESSTIMER 0 131074 // For having Dimness Durations [16]
-gamevar ACTORRAGNAROKTIMER 0 131073 // For having Triad Ragnarok Durations [64]
+gamevar ACTORRAGNAROKTIMER 0 131074 // For having Triad Ragnarok Durations [64]
 gamevar ACTORCONFUSIONTIMER 0 131074 // For having Confusion Durations [128]
 gamevar ACTORSHELLTIMER 0 131074 // For having Shell Durations [512]
 gamevar ACTORPSISHIELDTIMER 0 131074 // For having Psychic Shield Duractions [1024]
 gamevar ACTORBLOODLUSTTIMER 0 131074 //
 gamevar ACTORCORROSIONTIMER 0 131074
-gamevar ENEMYBOOTSAMOUNT 0 131074
-gamevar ENEMYJETPACKAMOUNT 0 131074
-gamevar ENEMYAIRTANKAMOUNT 0 131074
+gamevar ACTORBOOTSAMOUNT 0 131074
+gamevar ACTORJETPACKAMOUNT 0 131074
+gamevar ACTORAIRTANKAMOUNT 0 131074
+gamevar ACTORLEVELMINIMUM 0 2
+gamevar ACTORLEVELMINSPAWN 0 2
+gamevar ACTORLEVELMAXSPAWN 0 2
+gamevar ACTORLEVELPRESET? 0 2
+gamevar ACTORLEVELRANDOM 0 2
+gamevar ACTORLEVELBENEFIT 0 2
+gamevar ACTORLEVELFACTOR 0 2
+gamevar ACTORLEVELFACTORRAND 0 2
+gamevar ACTORLEVELFACTORVARIENCE 0 2
+gamevar ACTORLEVELEXPCALC 0 2
 
-//
-
-gamevar ENEMYLEVELMINIMUM 0 2
-gamevar ENEMYLEVELMINSPAWN 0 2
-gamevar ENEMYLEVELMAXSPAWN 0 2
-gamevar ENEMYLEVELPRESET? 0 2
-gamevar ENEMYLEVELRANDOM 0 2
-gamevar ENEMYLEVELBENEFIT 0 2
-gamevar ENEMYLEVELFACTOR 0 2
-gamevar ENEMYLEVELFACTORRAND 0 2
-gamevar ENEMYLEVELFACTORVARIENCE 0 2
-gamevar ENEMYLEVELEXPCALC 0 2
-gamevar ENEMYLEVELDISPLAY 0 0 // For Ami's VR display
-
-gamevar ENEMYBOMBER? 0 2 // 1 = Enemy has armed a suicide Bomb :P
-gamevar ENEMYBOMBTIMER 0 2
-gamevar ENEMYMAXBOMBTIMER 0 2
-gamevar ENEMYSTAT 0 2
-gamevar ENEMYINVULNCOUNTER 0 2
-gamevar ENEMYINVULN? 0 1
-gamevar ENEMYTILEEMUL 0 2
-gamevar ENEMYCEILINGTILE 0 2
-gamevar ENEMYFLOORTILE 0 2
-gamevar ENEMYDAMAGEFLOORTIMER 0 2
-gamevar ENEMYSECTORLOTAG 0 2
-gamevar ENEMYTEMPAIR 0 2
-gamevar ENEMYAIRTIME 0 2
-gamevar ENEMYMAXAIRTIME 0 2
-gamevar ENEMYAIRTIMEEXTRA 0 2
-gamevar ENEMYDROWNTIME 0 2
-gamevar ENEMYBASEDROWNDMG 0 2
-gamevar ENEMYEXTRADROWNDMG 0 2
-gamevar ENEMYTOTALDROWNDMG 0 2
-gamevar ENEMYREGENCOUNTER 0 2
-gamevar ENEMYREGENAMOUNT1 0 2
-gamevar ENEMYREGENAMOUNT2 0 2
-gamevar ENEMYAPREGENCOUNTER 0 2
-gamevar ENEMYAPREGENAMOUNT1 0 2
-gamevar ENEMYAPREGENAMOUNT2 0 2
-gamevar ENEMYMAXHPATOMIC 0 2
-gamevar ENEMYMAXAPATOMIC 0 2
-gamevar ENEMYCURRENTFIRSTAID 0 2
-gamevar ENEMYARMORLIMIT 0 2
-gamevar ENEMYARMORDAMAGE 0 0
-gamevar ENEMYARMORDISPLAYTIMER 0 0
-gamevar ENEMYDISPLAYARMORDAMAGE 0 0
-gamevar ENEMYARMORDAMAGETEMP 0 0
-gamevar ENEMYNULLDAMAGE 0 0
-gamevar ENEMYARMORNULLDAMAGE 0 0
-gamevar ENEMYDAMAGEPERCENT 0 2
-gamevar ENEMYSHEALTH 0 2
-gamevar ENEMYDEADTIMER 0 2
-gamevar ENEMYSPEED 0 2
-gamevar ENEMYDEFLECTDAMAGESTATE 0 0
-gamevar ENEMYDEFLECTEDDAMAGE 0 0
+gamevar ACTORAIRTIME 0 2
+gamevar ACTORMAXAIRTIME 0 2
+gamevar ACTORAIRTIMEEXTRA 0 2
+gamevar ACTORDROWNTIME 0 2
+gamevar ACTORBASEDROWNDMG 0 2
+gamevar ACTOREXTRADROWNDMG 0 2
+gamevar ACTORTOTALDROWNDMG 0 2
+gamevar ACTORBOMBER? 0 2 // 1 = Enemy has armed a suicide Bomb :P
+gamevar ACTORBOMBTIMER 0 2
+gamevar ACTORSTAT 0 2
+gamevar ACTORINVULNCOUNTER 0 2
+gamevar ACTORINVULN? 0 1
+gamevar ACTORDAMAGEFLOORTIMER 0 2
+gamevar ACTORREGENCOUNTER 0 2
+gamevar ACTORREGENAMOUNT1 0 2
+gamevar ACTORREGENAMOUNT2 0 2
+gamevar ACTORAPREGENCOUNTER 0 2
+gamevar ACTORAPREGENAMOUNT1 0 2
+gamevar ACTORAPREGENAMOUNT2 0 2
+gamevar ACTORMAXHPATOMIC 0 2
+gamevar ACTORMAXAPATOMIC 0 2
+gamevar ACTORARMORLIMIT 0 2
+gamevar ACTORARMORDAMAGE 0 0
+gamevar ACTORARMORDISPLAYTIMER 0 0
+gamevar ACTORDISPLAYARMORDAMAGE 0 0
+gamevar ACTORARMORDAMAGETEMP 0 0
+gamevar ACTORNULLDAMAGE 0 0
+gamevar ACTORARMORNULLDAMAGE 0 0
+gamevar ACTORDAMAGEPERCENT 0 2
+gamevar ACTORDEADTIMER 0 2
+gamevar ACTORSPEED 0 2
+gamevar ACTORDEFLECTDAMAGESTATE 0 0
+gamevar ACTORDEFLECTEDDAMAGE 0 0
+gamevar ACTORLASTDAMAGE 0 2
 
 gamevar ACTORREGENTIMER 0 131074
 gamevar ACTORREGENINTERVAL 26 131074
@@ -941,24 +868,18 @@ gamevar PLAYERAPDAMAGED? 0 131073
 gamevar VEHICLEHPDAMAGED? 0 131073
 gamevar VEHICLEAPDAMAGED? 0 131073
 
-gamevar ENEMYHPDAMAGED? 0 2
-gamevar ENEMYAPDAMAGED? 0 2
+gamevar ACTORHPDAMAGED? 0 2
+gamevar ACTORAPDAMAGED? 0 2
 
 gamevar HPBARFLASHTIMER 0 2
 gamevar APBARFLASHTIMER 0 2
 
-gamevar TAUNT? 0 0
 gamevar DISPLAYCENTS 0 0
 gamevar DISPLAYDOLLARS 0 0
 gamevar DISPLAYMONEYTIMER 0 0
-gamevar MONEYGAIN 0 0
 
-gamevar MONEYPICKUPTOGGLE 0 0
 gamevar MELEEATTACK? 0 0
 
-gamevar TARGETMAXAP 0 131073
-
-gamevar CURRENTWEAPON 0 131073
 gamevar CURRENTAMMOA 0 131073
 gamevar MAXIMUMAMMO 0 131073
 
@@ -1114,7 +1035,6 @@ gamevar PLAYERID 0 131073 // The Sprite ID of the Player
 gamevar PLAYERHEALTH 0 131073
 gamevar PLAYERANGLE 0 131073 // Horizontal Viewing Angle
 gamevar PLAYERHORIZ 0 131073 // Vertical Viewing Angle
-gamevar PLAYERWEAPON? 0 131073
 gamevar PLAYERCEILINGTILE 0 131073
 gamevar PLAYERFLOORTILE 0 131073
 gamevar PLAYERONGROUND 0 131073
@@ -1180,12 +1100,9 @@ gamevar SECTORFLOORPICNUM 0 131073
 
 gamevar SKILLLEVEL 0 0
 gamevar TARGETTYPE 0 0
-gamevar TARGETHEALTH 0 0
-gamevar TARGETATTACK 0 0
 gamevar TARGETSPECIES 0 0
 gamevar TARGETDISPLAYDAMAGE 0 0
 gamevar TARGETPAL 0 0
-gamevar TARGETCLOAKED? 0 0
 gamevar SHOWTARGETNAME? 0 0
 gamevar SHOWTARGETHEALTH? 0 0
 gamevar SHOWTARGETDEFENSE? 0 0
@@ -1203,8 +1120,6 @@ gamevar TEMP7 0 2
 gamevar TEMP8 0 2
 gamevar TEMPHEALTH 0 131073
 gamevar TEMPARMOR 0 131073
-gamevar TEMPENERGY 0 131073
-gamevar temppartime 0 2
 gamevar temp 0 2         // used for temporary storage
 gamevar tempb 0 2
 gamevar tempc 0 2
@@ -1214,12 +1129,14 @@ gamevar tempf 0 2
 gamevar tempg 0 2
 gamevar temph 0 2
 gamevar tempi 0 2
-gamevar tempvehicleid 0 2
-gamevar tempvehicletype 0 2
 gamevar tempvarname 0 131073
 gamevar tempvarname2 0 131073
 gamevar tempvarname3 0 131073
 gamevar tempvarname4 0 131073
+
+gamevar temppartime 0 2 // Remove?
+gamevar tempvehicleid 0 2 // Remove?
+gamevar tempvehicletype 0 2 // Remove?
 
 gamevar DEFENDERDISPLAYTIMER 0 0
 gamevar spriteid 0 0
@@ -1281,7 +1198,6 @@ gamevar bpress 0 131073
 gamevar mtype 0 131074
 gamevar myspawner -1 131074
 gamevar target -1 131074
-gamevar holstertimer 0 131073
 gamevar countvar 0 131074
 gamevar countvarb 0 131074
 
@@ -1312,9 +1228,6 @@ gamevar SKILLLEVELFLAGS 0 2
 
 // Naferia Reign Specfic Vars
 
-gamevar RANKPOINTSLOWEST -262144000 0 //
-gamevar RANKPOINTSHIGHEST 262144000 0 //
-
 gamevar DOLLARS 200 131073
 gamevar CENTS 0 131073
 
@@ -1327,7 +1240,6 @@ gamevar EXPTONEXT 0 131073
 
 gamevar KNEEDAMAGE 0 131073
 gamevar GENERALDAMAGE 0 131073
-gamevar DAMAGERANDOMIZER 0 131073
 
 gamevar ACTORATTACKTEMP 0 2 // The Creature's Extra Attack (for special effects)
 gamevar ACTORDEFENSETEMP 0 2 // The Creature's Extra Defense (for special effects)
@@ -1378,9 +1290,6 @@ gamevar CURRENTENERGYPOINTS DUKEENERGYPOINTSSTART 131073
 gamevar MAXENERGYPOINTS DUKEENERGYPOINTSSTART 131073
 
 gamevar FIRSTAIDCURRENT 0 131073
-
-gamevar SECTORHITAG 0 131073
-gamevar SECTORLOTAG 0 131073
 
 gamevar AIRTIME DUKEAIRTIME 131073
 gamevar MAXAIRTIME DUKEAIRTIME 131073
@@ -1454,7 +1363,6 @@ gamevar WORLDTILEBITFIELD5 0 131072
 gamevar WORLDTILEBITFIELD6 0 131072
 gamevar WORLDTILEBITFIELD7 0 131072
 gamevar WORLDTILEBITFIELD8 0 131072
-gamevar WORLDTILEANG 0 2
 
 gamevar oposxv 0 1 // velocities from last tick
 gamevar oposyv 0 1
@@ -1476,9 +1384,7 @@ gamevar NPC_TYPE 0 0 // 0 = None, 1 = Enemy, 2 = Ally, 3 = Neutral, 4 = Importan
 gamevar CHOKING? 0 2 // For choking/begging LIZTROOPs
 
 gamevar ARRAYPOSITION 0 0
-gamevar ARRAYPOSITION2 0 0
 
-gamevar STOMPTIMER 0 1
 gamevar wall_array 0 1026
 gamevar sector_array 0 1026
 
@@ -1516,7 +1422,7 @@ gamevar miscdisplaytoggle 1 131073
  // 14 [2+4+8]		= Stat-Increase, Money-Get and Reward Displays 
  // 15 [1+2+4+8]	= All Turned on [Damage Displays, Stat-Increase Displays, Money-Get Displays, Reward Displays]
 gamevar characterstattoggle 1 131073 // Determines if the stats for the current character will display [Level, EXP, Speed, Attack, Etc]
-gamevar debugtoggle 0 131073 // Determines if the Debug Variables will show or not. 0 = No, 1+ = Yes. 1 shows most techincal debug information, 2+ will show other kinds of debug info in later versions.
+gamevar debugtoggle 0 131072 // Determines if the Debug Variables will show or not. 0 = No, 1+ = Yes. 1 shows most techincal debug information, 2+ will show other kinds of debug info in later versions.
 gamevar lifebartogglemode 1 131072 // If you want to toggle lifebars on and off
 gamevar automedikittoggle 0 0 // for if you want to auto-use the Portable Medikit when you lose health
 gamevar automantletoggle 0 0
@@ -1526,7 +1432,7 @@ gamevar SWITCHEDTILENUM 0 2
 gamevar GLIDING? 0 131073
 
 gamevar POWERUPBITFIELD 0 1
-gamevar ENEMYPOWERUPBITFIELD 0 2
+gamevar ACTORPOWERUPBITFIELD 0 2
 /* 
  // Powerup Bitfields [Player and Actors]
  0 = None
@@ -2050,7 +1956,9 @@ gamevar MISCARRAYID -1 131072
  // [226] = RANDOMSPAWN-ANGLE
  // [227] = RANDOMSPAWN-MOVEMENT
  // [228] = GLOBAL-PLAYER-INIT
- // [229+] are not defined yet
+ // [229] = RANK-POINTS-LOWEST
+ // [230] = RANK-POINTS-HIGHEST
+ // [231+] are not defined yet
 gamevar MISCARRAYID_AMOUNT 0 132098 // Used with MISCARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefront for if-checks and array changes
 gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes
@@ -2402,8 +2310,6 @@ gamevar APSUPPORTTEMP2 0 132098
 gamevar EXPCHEAT? -1 131072
 
 gamevar SKILLSET-TEMP 0 0
-gamevar ACTORPAL-TEMP 0 0
-gamevar ACTORSKILL-TEMP 0 0
 gamevar TALLYSET-TEMP 0 0
 
 // 0 DEFAULT

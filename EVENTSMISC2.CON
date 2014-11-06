@@ -72,33 +72,47 @@ onevent EVENT_EGS
    setactorvar[THISACTOR].ACTORATTACK PLAYERATTACK
   }
 
-  ifvare CHARACTERSELECTED? 1 { ifp ponsteroids setvar tempd 125 else setvar tempd 100 }
-  ifvare CHARACTERSELECTED? 2 { ifp ponsteroids setvar tempd 119 else setvar tempd 95 }
-  ifvare CHARACTERSELECTED? 3 { ifp ponsteroids setvar tempd 115 else setvar tempd 92 }
-  ifvare CHARACTERSELECTED? 4 { ifp ponsteroids setvar tempd 100 else setvar tempd 80 }
-  ifvare CHARACTERSELECTED? 5 { ifp ponsteroids setvar tempd 138 else setvar tempd 110 }
-  ifvare CHARACTERSELECTED? 6 { ifp ponsteroids setvar tempd 150 else setvar tempd 120 }
-  ifvare CHARACTERSELECTED? 7 { ifp ponsteroids setvar tempd 121 else setvar tempd 97 }
-  ifvare CHARACTERSELECTED? 8 { ifp ponsteroids setvar tempd 106 else setvar tempd 85 }
-  ifvare CHARACTERSELECTED? 9 { ifp ponsteroids setvar tempd 156 else setvar tempd 125 }
-  ifvare CHARACTERSELECTED? 10 { ifp ponsteroids setvar tempd 110 else setvar tempd 88 }
-  ifvare CHARACTERSELECTED? 11 { ifp ponsteroids setvar tempd 104 else setvar tempd 83 }
-  ifvare CHARACTERSELECTED? 12 { ifp ponsteroids setvar tempd 120 else setvar tempd 96 }
-  ifvare CHARACTERSELECTED? 13 { ifp ponsteroids setvar tempd 113 else setvar tempd 90 }
-  ifvare CHARACTERSELECTED? 14 { ifp ponsteroids setvar tempd 188 else setvar tempd 150 }
-  ifvare CHARACTERSELECTED? 15 { ifp ponsteroids setvar tempd 114 else setvar tempd 91 }
-  getactor[THISACTOR].xvel temp
-  getactor[THISACTOR].yvel tempb
-  getactor[THISACTOR].zvel tempc
-  mulvarvar temp tempd
-  mulvarvar tempb tempd
-  mulvarvar tempc tempd
-  divvar temp 100
-  divvar tempb 100
-  divvar tempc 100
-  setactor[THISACTOR].xvel temp
-  setactor[THISACTOR].yvel tempb
-  setactor[THISACTOR].zvel tempc
+  // PipeBomb Velocities [based on strength]
+  setvar tempd 1000 // 1000 = 100.0%
+  ifvare CHARACTERSELECTED? 1 setvar tempd 1000
+  ifvare CHARACTERSELECTED? 2 setvar tempd 950
+  ifvare CHARACTERSELECTED? 3 setvar tempd 920
+  ifvare CHARACTERSELECTED? 4 setvar tempd 800
+  ifvare CHARACTERSELECTED? 5 setvar tempd 1100
+  ifvare CHARACTERSELECTED? 6 setvar tempd 1200
+  ifvare CHARACTERSELECTED? 7 setvar tempd 970
+  ifvare CHARACTERSELECTED? 8 setvar tempd 850
+  ifvare CHARACTERSELECTED? 9 setvar tempd 1250
+  ifvare CHARACTERSELECTED? 10 setvar tempd 880
+  ifvare CHARACTERSELECTED? 11 setvar tempd 830
+  ifvare CHARACTERSELECTED? 12 setvar tempd 960
+  ifvare CHARACTERSELECTED? 13 setvar tempd 900
+  ifvare CHARACTERSELECTED? 14 setvar tempd 1500
+  ifvare CHARACTERSELECTED? 15 setvar tempd 910
+
+  // Check for Hyper Wrist Equippable items
+  //addlogvar tempd
+  setvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM1 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM2 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM3 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM4 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM5 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM6 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM7 18 addvar DAMAGEMODIFIER 25
+  ifvare PLAYEREQUIPSLOTITEM8 18 addvar DAMAGEMODIFIER 25
+  mulvarvar tempd DAMAGEMODIFIER
+  divvar tempd 100
+
+  // Check for Steroids Equippable items
+  ifp ponsteroids { mulvar tempd 1250 divvar tempd 1000 }
+  //addlogvar tempd
+
+  //addlogvar temp addlogvar tempb addlogvar tempc
+  getactor[THISACTOR].xvel temp mulvarvar temp tempd divvar temp 1000 setactor[THISACTOR].xvel temp
+  getactor[THISACTOR].yvel tempb mulvarvar tempb tempd divvar tempb 1000 setactor[THISACTOR].yvel tempb
+  getactor[THISACTOR].zvel tempc mulvarvar tempc tempd divvar tempc 1000 setactor[THISACTOR].zvel tempc
+  //addlogvar temp addlogvar tempb addlogvar tempc
  }
 
 // Monster Spawner
@@ -338,8 +352,8 @@ onevent EVENT_INVENTORYLEFT // Opens the Menu [also cancels selections/closes me
 ifvare oldskoolmode 0
 {
  state getpartime
-  addvar mpresstime 1
-   ifvarvare temppartime mpresstime nullop else
+     addvar mpresstime 1
+     ifvarvare temppartime mpresstime nullop else
      {
       ifvare shop_id -1
       {
@@ -417,20 +431,20 @@ ifvare oldskoolmode 0
        sound MENU_EXIT 
       }
      }
-  setvarvar mpresstime temppartime
- state setreturn-1
+     setvarvar mpresstime temppartime
+     state setreturn-1
 }
 endevent
 
 onevent EVENT_INVENTORYRIGHT
 ifvare oldskoolmode 0
 {
- state getpartime
-  addvar mpresstime 1
-   ifvarvare temppartime mpresstime nullop else
+    state getpartime
+    addvar mpresstime 1
+    ifvarvare temppartime mpresstime nullop else
     {
-     ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
-     {
+       ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
+       {
         ifvare itemidinuse -1
         {
          ifvare skillidinuse -1
@@ -693,7 +707,7 @@ ifvare oldskoolmode 0
            }
           }
         }
-     }
+       }
        else
        {
         ifvare shop_id -1
@@ -725,8 +739,8 @@ ifvare oldskoolmode 0
         }
        }
     }
-  setvarvar mpresstime temppartime
- state setreturn-1
+    setvarvar mpresstime temppartime
+    state setreturn-1
 }
 endevent
 
@@ -785,7 +799,7 @@ else // ifvare mainmenu 0
        // addlogvar TEMPVAR
        addvarvar DAMAGEINCELL TEMPVAR
 
-       ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+       ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
        {
         ifvarg TEMPVAR 0
         {
@@ -843,14 +857,14 @@ onevent EVENT_PROCESSINPUT
     getplayer[THISACTOR].player_par temp
     addvar jpresstime 1
     ifp pjetpack nullop else 
-    ifvare SECTORLOTAG 2 nullop else
+    ifvare sector[PLAYERSECTOR].lotag 2 nullop else
     {
      getplayer[THISACTOR].jetpack_amount tempc
      ifvarvare temp jpresstime ifvare multijumpflag 0 nullop else
      {
       ifp ponground nullop
       else
-      ifvare SECTORLOTAG 2 nullop	
+      ifvare sector[PLAYERSECTOR].lotag 2 nullop
       else
       ifvarvarl multijumpflag PLAYERMAXAIRJUMPS
       {
@@ -1455,7 +1469,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
           ifvarl itemmenuselection 0 addvar itemmenuselection 8
           sound MENU_CURSOR
          }
-	   state setreturn-1 
+         state setreturn-1 
     }
    }
    setvarvar lpresstime temppartime
@@ -1657,7 +1671,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
            ifvare equipmenuinuse -1
            {
             ifvare mainmenusubmenu 0
-	        {
+            {
              addvar mainmenuselection 1
              ifvarg mainmenuselection 7 subvar mainmenuselection 8
              sound MENU_CURSOR
@@ -2130,7 +2144,6 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
      setvar CHARACTERARRAY 4
      getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR6
      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-     //addlogvar MISCARRAYID_AMOUNTTEMP
      ifvare MISCARRAYID_AMOUNTTEMP 0
      {
       setvar MISCARRAYID 104 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // AMI-FORM?
@@ -2699,23 +2712,23 @@ onevent EVENT_JUMP
         ifrnd 128 sound WANG_JUMP1 else sound WANG_JUMP2 
        }
        ifvare CHARACTERSELECTED? 8 
-	   { 
-	    stopsound LISA_JUMP1 
-		stopsound LISA_JUMP2 
-		ifrnd 128 sound LISA_JUMP1 else sound LISA_JUMP2 
-	   }
+       { 
+        stopsound LISA_JUMP1 
+        stopsound LISA_JUMP2 
+        ifrnd 128 sound LISA_JUMP1 else sound LISA_JUMP2 
+       }
        ifvare CHARACTERSELECTED? 9 
-	   { 
-	    stopsound CYBANIS_JUMP1 
-		stopsound CYBANIS_JUMP2 
-		ifrnd 128 sound CYBANIS_JUMP1 else sound CYBANIS_JUMP2 
-	   }
+       { 
+        stopsound CYBANIS_JUMP1 
+        stopsound CYBANIS_JUMP2 
+        ifrnd 128 sound CYBANIS_JUMP1 else sound CYBANIS_JUMP2 
+       }
        ifvare CHARACTERSELECTED? 15 
-	   {
-	    stopsound MAKEN_JUMP1 
-		stopsound MAKEN_JUMP2 
-		ifrnd 128 sound MAKEN_JUMP1 else sound MAKEN_JUMP2 
-	   }
+       {
+        stopsound MAKEN_JUMP1 
+        stopsound MAKEN_JUMP2 
+        ifrnd 128 sound MAKEN_JUMP1 else sound MAKEN_JUMP2 
+       }
       }
       addvar EQUIP_MOVETIMER 1
       setvar INTHEAIR? 1
@@ -2789,8 +2802,7 @@ onevent EVENT_USEJETPACK
 
   ifvare shop_id -1 ifvare atm_id -1
   {
-   getplayer[THISACTOR].jetpack_amount varname
-   ifvarg varname 0 nullop
+   ifvarg player[THISACTOR].jetpack_amount 0 nullop
    else
    {
     state checkjetpacks
@@ -2810,8 +2822,7 @@ onevent EVENT_USESTEROIDS
 
   ifvare shop_id -1 ifvare atm_id -1
   {
-   setvarvar varname STEROIDSTIME
-   ifvarg varname 0 nullop
+   ifvarg STEROIDSTIME 0 nullop
    else
    {
     state checkvitaminxs
@@ -2838,15 +2849,14 @@ onevent EVENT_USENIGHTVISION
     setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
     ifvare MISCARRAYID_AMOUNTTEMP 1 nullop
     else
-	{
-	 getplayer[THISACTOR].heat_amount varname
-	 ifvarl varname 1
- 	 { 
+    {
+     ifvarl player[THISACTOR].heat_amount 1
+     { 
       state checkheatsensors
       ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_nightvisiongoggles_player
       state setreturn-1
-	 }	
-	}
+     }
+    }
    }
    else
    {
@@ -2856,7 +2866,7 @@ onevent EVENT_USENIGHTVISION
      state checkheatsensors
      ifvarg ITEMARRAYID_AMOUNTTEMP 0 state use_nightvisiongoggles_player
      state setreturn-1
-    }	 
+    } 
    }   
   }
   else
@@ -2876,8 +2886,7 @@ onevent EVENT_HOLODUKEON
 
   ifvare shop_id -1 ifvare atm_id -1
   {
-   getplayer[THISACTOR].holoduke_amount varname
-   ifvarg varname 0 nullop
+   ifvarg player[THISACTOR].holoduke_amount 0 nullop
    else
    {
     state checkholoforms
@@ -3150,15 +3159,15 @@ onevent EVENT_ENTERLEVEL
  readgamevar numruns
  addvar numruns 1 
  andvar numruns 65535 
- setvarvar TMP numruns 
- xorvar TMP 43690 
- whilevarn TMP 0 
+ setvarvar TEMPVAR8 numruns 
+ xorvar TEMPVAR8 43690 
+ whilevarn TEMPVAR8 0 
  { 
   ifrnd 1 { }
   ifrnd 4 { }
   ifrnd 16 { }
   ifrnd 64 { }
-  subvar TMP 1 
+  subvar TEMPVAR8 1 
  } 
  savegamevar numruns
 
@@ -3237,8 +3246,7 @@ onevent EVENT_GETMENUTILE
 endevent
 
 onevent EVENT_RETURNTOCENTER
-        getplayer[THISACTOR].hard_landing temp
-        ifvare temp 0
+        ifvare player[THISACTOR].hard_landing 0
         {
          state setreturn-1
          ifvare CHARACTERSELECTED? 9 state setreturn-1
@@ -3251,19 +3259,18 @@ onevent EVENT_DRAWWEAPON
 
  ifvare oldskoolmode 1
  {
-  getplayer[THISACTOR].curr_weapon TEMPVAR
-  ifvare TEMPVAR 0 { state setreturn-1 break } // Kick
-  ifvare TEMPVAR 1 { state setreturn-1 break } // Pistol
-  ifvare TEMPVAR 2 { state setreturn-1 break } // Shotgun
-  ifvare TEMPVAR 3 { state setreturn-1 break } // Chaingun Cannon
-  ifvare TEMPVAR 4 { state setreturn-1 break } // RPG
-  ifvare TEMPVAR 5 { state setreturn-1 break } // Pipebomb
-  ifvare TEMPVAR 6 { state setreturn-1 break } // Shrinker
-  ifvare TEMPVAR 7 { state setreturn-1 break } // Devastator
-  ifvare TEMPVAR 8 { state setreturn-1 break } // Tripbomb
-  ifvare TEMPVAR 9 { state setreturn-1 break } // Freezethrower
-  ifvare TEMPVAR 10 { state setreturn-1 break } // Hand Remote
-  ifvare TEMPVAR 11 { state setreturn-1 break } // Expander
+  ifvare player[THISACTOR].curr_weapon 0 { state setreturn-1 break } // Kick
+  ifvare player[THISACTOR].curr_weapon 1 { state setreturn-1 break } // Pistol
+  ifvare player[THISACTOR].curr_weapon 2 { state setreturn-1 break } // Shotgun
+  ifvare player[THISACTOR].curr_weapon 3 { state setreturn-1 break } // Chaingun Cannon
+  ifvare player[THISACTOR].curr_weapon 4 { state setreturn-1 break } // RPG
+  ifvare player[THISACTOR].curr_weapon 5 { state setreturn-1 break } // Pipebomb
+  ifvare player[THISACTOR].curr_weapon 6 { state setreturn-1 break } // Shrinker
+  ifvare player[THISACTOR].curr_weapon 7 { state setreturn-1 break } // Devastator
+  ifvare player[THISACTOR].curr_weapon 8 { state setreturn-1 break } // Tripbomb
+  ifvare player[THISACTOR].curr_weapon 9 { state setreturn-1 break } // Freezethrower
+  ifvare player[THISACTOR].curr_weapon 10 { state setreturn-1 break } // Hand Remote
+  ifvare player[THISACTOR].curr_weapon 11 { state setreturn-1 break } // Expander
  }
  getuserdef[THISACTOR].pause_on temp
  ifvarg temp 0 { state setreturn-1 break }
@@ -3291,8 +3298,7 @@ else
 endevent
 
 state invuln-paletteflash
- getactorvar[THISACTOR].ENEMYINVULNTIME TEMPVAR6
- ifvarg TEMPVAR6 0
+ ifvarg actorvar[THISACTOR].ACTORINVULNTIME 0
  {
   getplayer[THISACTOR].player_par TEMPVAR4
   modvar TEMPVAR4 12
@@ -4054,7 +4060,7 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
 
  ifvarn VEHICLEID -1
  {
-  getactorvar[VEHICLEID].ENEMYINVULNTIME TEMPVAR6
+  getactorvar[VEHICLEID].ACTORINVULNTIME TEMPVAR6
   ifvarg TEMPVAR6 0
   {
    getplayer[THISACTOR].player_par TEMPVAR4
@@ -4651,6 +4657,9 @@ onevent EVENT_NEWGAME
   setvar MISCARRAYID 100 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // VISOR-OFF-SOUND
 
   setvar MISCARRAYID 110 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // NETHRA-FORM?
+
+  setvar MISCARRAYID 229 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT -262144000 // RANK-POINTS-LOWEST
+  setvar MISCARRAYID 230 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 262144000 // RANK-POINTS-HIGHEST
 
   //getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP
   //addlogvar MISCARRAYID_AMOUNTTEMP

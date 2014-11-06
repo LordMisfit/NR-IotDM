@@ -271,8 +271,7 @@ onevent EVENT_WEAPKEY4
    {
     ifvare DEATHMISSILESUSABLE? 1
     {
-     getplayer[THISACTOR].curr_weapon TEMPVAR
-     ifvare TEMPVAR 3
+     ifvare player[THISACTOR].curr_weapon 3
      {
       state getpartime
       addvar mpresstime 1
@@ -342,8 +341,7 @@ onevent EVENT_WEAPKEY5
    {
     ifvare DEATHMISSILESUSABLE? 1
     {
-     getplayer[THISACTOR].curr_weapon TEMPVAR
-     ifvare TEMPVAR 4
+     ifvare player[THISACTOR].curr_weapon 4
      {
       state getpartime
       addvar mpresstime 1
@@ -988,8 +986,7 @@ ifsound DUKE_GETWEAPON6
 //
 
 setvar CHARACTERARRAY 1
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound JIBBED_ACTOR1 stopsound JIBBED_ACTOR1
   ifsound JIBBED_ACTOR2 stopsound JIBBED_ACTOR2
@@ -1104,8 +1101,7 @@ ifvarand TEMP 1 // Dead
 }
 
 setvar CHARACTERARRAY 2 // Jack
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound JACK_ONELINER01 stopsound JACK_ONELINER01
   ifsound JACK_ONELINER02 stopsound JACK_ONELINER02
@@ -1136,8 +1132,7 @@ ifvarand TEMP 1 // Dead
 }
 
 setvar CHARACTERARRAY 3 // Bubsy
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound BUBSY_ONELINER01 stopsound BUBSY_ONELINER01
   ifsound BUBSY_ONELINER02 stopsound BUBSY_ONELINER02
@@ -1165,14 +1160,12 @@ ifvarand TEMP 1 // Dead
 }
 /*
 setvar CHARACTERARRAY 4 // Ami
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
 }
 */
 setvar CHARACTERARRAY 5 // Lo Wang
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound WANG_ONELINER01 stopsound WANG_ONELINER01
   ifsound WANG_ONELINER02 stopsound WANG_ONELINER02
@@ -1207,8 +1200,7 @@ ifvarand TEMP 1 // Dead
 }
 
 setvar CHARACTERARRAY 6 // ESSence
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound ESSENCE_ONELINER01 stopsound ESSENCE_ONELINER01
   ifsound ESSENCE_ONELINER02 stopsound ESSENCE_ONELINER02
@@ -1238,8 +1230,7 @@ ifvarand TEMP 1 // Dead
   ifsound ESSENCE_FALLSCREAM stopsound ESSENCE_FALLSCREAM
 }
 setvar CHARACTERARRAY 7 // Ted
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound TED_ONELINER01 stopsound TED_ONELINER01
   ifsound TED_ONELINER02 stopsound TED_ONELINER02
@@ -1261,8 +1252,7 @@ ifvarand TEMP 1 // Dead
   ifsound TED_ONELINER18 stopsound TED_ONELINER18
 }
 setvar CHARACTERARRAY 8 // Lisa
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound LISA_ONELINER01 stopsound LISA_ONELINER01
   ifsound LISA_ONELINER02 stopsound LISA_ONELINER02
@@ -1355,8 +1345,7 @@ ifvarand TEMP 1 // Dead
 }
 
 setvar CHARACTERARRAY 9 // Cybanis
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound CYBANIS_ONELINER01 stopsound CYBANIS_ONELINER01
   ifsound CYBANIS_ONELINER02 stopsound CYBANIS_ONELINER02
@@ -1400,8 +1389,7 @@ ifvarand TEMP 1 // Dead
 }
 
 setvar CHARACTERARRAY 10 // Nethra/Christina
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound NETHRA_ONELINER01 stopsound NETHRA_ONELINER01
   ifsound NETHRA_ONELINER02 stopsound NETHRA_ONELINER02
@@ -1443,21 +1431,18 @@ ifvarand TEMP 1 // Dead
 }
 /*
 setvar CHARACTERARRAY 11 // Paula
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
 }
 
 setvar CHARACTERARRAY 12 // Lori
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
 }
 */
 
 setvar CHARACTERARRAY 13 // Minako
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound MINAKO_ONELINER01 stopsound MINAKO_ONELINER01
   ifsound MINAKO_ONELINER02 stopsound MINAKO_ONELINER02
@@ -1486,14 +1471,12 @@ ifvarand TEMP 1 // Dead
 
 /*
 setvar CHARACTERARRAY 14 // "Mystery Lady"
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
 }
 */
 setvar CHARACTERARRAY 15 // Maken
-getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMP
-ifvarand TEMP 1 // Dead
+ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
 {
   ifsound MAKEN_ONELINER01 stopsound MAKEN_ONELINER01
   ifsound MAKEN_ONELINER02 stopsound MAKEN_ONELINER02
@@ -2315,16 +2298,6 @@ onevent EVENT_DISPLAYWEAPON
 endevent
 
 onevent EVENT_DISPLAYMENUREST
-
- getplayer[THISACTOR].gm temp
-/*
- ifvarand temp 4
- {
-  nullop 
- }
- else
-*/
- {
   rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
   rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim
 
@@ -2358,5 +2331,4 @@ onevent EVENT_DISPLAYMENUREST
   state orientation0
   state gtz
   setvar shade 0
- }
 endevent

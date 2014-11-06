@@ -94,8 +94,7 @@ ifvarg temp 0
   state pal23
   setvar digy 146
   setvarvar CHARACTERARRAY CHARACTERSELECTED?
-  getactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED TEMPVAR
-  setvarvar TEMPVAR4 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED TEMPVAR4
   setvar MISCARRAYID 1 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // Enemies Killed [game]
   ifvarn MISCARRAYID_AMOUNTTEMP 0
   {
@@ -148,8 +147,7 @@ ifvarg temp 0
   state pal23
   setvar digy 146
   setvarvar CHARACTERARRAY CHARACTERSELECTED?
-  getactorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED TEMPVAR
-  setvarvar varname TEMPVAR
+  setvarvar varname actorvar[CHARACTERARRAY].CHARACTERENEMIESKILLED
   state dnz
 
   state pal16
@@ -905,15 +903,12 @@ else
    // Damage Screens
    ifvarn AUTOMAPMODE 2
    {
-    getplayer[THISACTOR].over_shoulder_on tempb
-    ifvare tempb 0
+    ifvare player[THISACTOR].over_shoulder_on 0
     {
-     getplayer[THISACTOR].newowner TEMP
-     ifvare TEMP -1
+     ifvare player[THISACTOR].newowner -1
      { 
       // Damage Screen #2 - Frozen Over
-      getactorvar[PLAYERID].FROZEN? varname
-      ifvare varname 1
+      ifvare actorvar[PLAYERID].FROZEN? 1
       {
        state shadepulse3
        divvar shade 3
@@ -941,7 +936,7 @@ else
        setvar digz 114688 // 65536
        subvarvar digz varname // 65536
 
-       // Left Edges [33% Trans]
+       // Tunnel Vision Effect Sprite[s]
        setvar digx 160
        setvar digy 100
        setvar tilenum 3519 // 3518
@@ -996,12 +991,10 @@ else
     ifvarg tempc 200 { setvar tempc 200 }
 
     // Based on Player Height from Ground Second
-    getsector[THISACTOR].floorz TEMPVAR2
-    setvarvar TEMPVAR4 TEMPVAR2
+    setvarvar TEMPVAR4 sector[THISACTOR].floorz
     addvar TEMPVAR4 -9850
-    getplayer[THISACTOR].posz TEMPVAR
     setvarvar TEMPVAR5 TEMPVAR4
-    subvarvar TEMPVAR5 TEMPVAR
+    subvarvar TEMPVAR5 player[THISACTOR].posz
     setvarvar tempf TEMPVAR5
     ifvarg TEMPVAR5 -1 divvar tempf 150 else divvar tempf 75
     ifvarl tempf -66 setvar tempf -66
@@ -1015,7 +1008,6 @@ else
     addvarvar tempc tempg
 
     getplayer[THISACTOR].zoom tempb
-
     // Small Zoom
     ifvarl tempb 305
     {
@@ -1189,11 +1181,9 @@ else
    }
 
    // Controlled Camera Displays
-   getplayer[THISACTOR].newowner TEMP
-   ifvarn TEMP -1
+   ifvarn player[THISACTOR].newowner -1
    { 
-    getactorvar[TEMP].extrasav TEMP2
-    ifvare TEMP2 1
+    ifvare actorvar[TEMP].extrasav 1
     {
      state shade0
      setvar digx 320
@@ -1242,8 +1232,7 @@ else
 
    ifvarn AUTOMAPMODE 2
    {
-    getplayer[THISACTOR].over_shoulder_on TEMPVAR4
-    ifvare TEMPVAR4 0
+    ifvare player[THISACTOR].over_shoulder_on 0
     {
      // PK Shield "Hit" Display[s]
      ifvarg PKSHIELDHIT_TIMER 0
@@ -1323,8 +1312,7 @@ else
    state shade0
    ifvarn pad_id -1
    {
-    getactorvar[pad_id].pnum TEMPVAR
-    ifvarn TEMPVAR -1
+    ifvarn actorvar[pad_id].pnum -1
     {
      // Show Black Digital Background Thing :P
      setvar digx 96
@@ -1339,7 +1327,7 @@ else
      state pal22
      setvar tilenum 3461
      state orientation27 // 1+2+8+16
-     setvarvar varname TEMPVAR
+     setvarvar varname actorvar[pad_id].pnum
      state dn
 
      // Show Large Keypad thingy :P
@@ -1607,8 +1595,7 @@ else
        ifvare NETHRA? 1
        {
         setvar CHARACTERARRAY 10
-        getactorvar[CHARACTERARRAY].CHARACTERHP TEMP
-        ifvarg TEMP 0 addvar TEMPVAR 1
+        ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar TEMPVAR 1
        }
 
        ifvare MYSTERY1? 1
@@ -1616,8 +1603,7 @@ else
         ifvare PUBLICBETA? 0
         {
          setvar CHARACTERARRAY 14
-         getactorvar[CHARACTERARRAY].CHARACTERHP TEMP
-         ifvarg TEMP 0 addvar TEMPVAR 1
+         ifvarg actorvar[CHARACTERARRAY].CHARACTERHP 0 addvar TEMPVAR 1
         }
        }
       }
@@ -1826,8 +1812,7 @@ else
      setvar temp 318
      state mt
      state shade0
-     getplayer[THISACTOR].holster_weapon temp
-     ifvare temp 1
+     ifvare player[THISACTOR].holster_weapon 1
      {
       addvar digx 1 // 182
       addvar digy -3 // 182
@@ -1849,34 +1834,45 @@ else
      // Weapon 1
      setvar digx 102
      redefinequote 325 1
-     ifvare PLAYERWEAPON? 0 state shadepulse3
-     state pal20
+     ifvare player[THISACTOR].curr_weapon 0 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 0 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 0
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 0
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 1 state mt
 
      state shade0
      // Weapon 2
      addvar digx 10
      redefinequote 325 2
-     ifvare PLAYERWEAPON? 1 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 1 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 1 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 1 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 1 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 1
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 1
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 2 state mt
 
      state shade0
      // Weapon 3
      addvar digx 10
      redefinequote 325 3
-     ifvare PLAYERWEAPON? 2 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 2 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 2 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 2 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 2 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 2
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 2
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 4 state mt
 
      state shade0
@@ -1900,13 +1896,15 @@ else
      {
       redefinequote 325 4
      }
-     ifvare PLAYERWEAPON? 3 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 3 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 3 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 3 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 3 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 3
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 3
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 8 state mt
       
      state shade0
@@ -1925,91 +1923,105 @@ else
      {
       redefinequote 325 5
      }
-     ifvare PLAYERWEAPON? 4 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 4 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 4 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 4 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 4 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 4
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 4
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 16 state mt
 
      state shade0
      // Weapon 6
      addvar digx 10
      redefinequote 325 6
-     ifvare PLAYERWEAPON? 5 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 5 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 5 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 5 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 5 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 5
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 5
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 32 state mt
 
      state shade0
      // Weapon 7
      addvar digx 10
      redefinequote 325 7
-     ifvare PLAYERWEAPON? 6 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 6 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 6 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 6 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 6 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 6
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 6
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 64 state mt
 
      state shade0
      // Weapon 8
      addvar digx 10
      redefinequote 325 8
-     ifvare PLAYERWEAPON? 7 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 7 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 7 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 7 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 7 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 7
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 7
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 128 state mt
 
      state shade0
      // Weapon 9
      addvar digx 10
      redefinequote 325 9
-     ifvare PLAYERWEAPON? 8 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 8 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 8 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 8 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 8 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 8
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 8
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 256 state mt
       
      state shade0
      // Weapon 10
      addvar digx 10
      redefinequote 325 10
-     ifvare PLAYERWEAPON? 9 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 9 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 9 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 9 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 9 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 9
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 9
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 512 state mt
 
      state shade0
      // Weapon 11
      addvar digx 10
      redefinequote 325 11
-     ifvare PLAYERWEAPON? 11 state shadepulse3
-     getplayer[THISACTOR].ammo_amount 11 TEMPVAR4
-     getplayer[THISACTOR].max_ammo_amount 11 TEMPVAR5
-     setvarvar AMMOPERCENTAGE TEMPVAR4
-     mulvar AMMOPERCENTAGE 1000
-     ifvarn TEMPVAR5 0 divvarvar AMMOPERCENTAGE TEMPVAR5
-     state ammocolors
+     ifvare player[THISACTOR].curr_weapon 11 state shadepulse3
+     ifvarn player[THISACTOR].max_ammo_amount 11 0
+     { 
+      setvarvar AMMOPERCENTAGE player[THISACTOR].ammo_amount 11
+      mulvar AMMOPERCENTAGE 1000
+      divvarvar AMMOPERCENTAGE player[THISACTOR].max_ammo_amount 11
+      state ammocolors
+     }
+     else state pal20
      ifvarand PLAYERWEAPONBITFIELD 1024 state mt
 
 
@@ -2094,13 +2106,11 @@ else
     state orientation27
     state shade0
  
-    ifvare CURRENTWEAPON 0 nullop
-    else ifvare CURRENTWEAPON 10 nullop
-    else
+    ifvarn MAXIMUMAMMO 0 
     {
      setvarvar AMMOPERCENTAGE CURRENTAMMOA
      mulvar AMMOPERCENTAGE 1000
-     ifvarn MAXIMUMAMMO 0 divvarvar AMMOPERCENTAGE MAXIMUMAMMO
+     divvarvar AMMOPERCENTAGE MAXIMUMAMMO
      qsprintf 290 291 AMMOPERCENTAGE
     }
 
@@ -2987,14 +2997,14 @@ else
      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 nullop else addvar digy 6
      setvar digx 52 // 288
      setvarvar varname EXPPTS
-     ifvarg varname -1 ifvarl varname 10 addvar digx 16
-     else ifvarg varname 9 ifvarl varname 100 addvar digx 18
-     else ifvarg varname 99 ifvarl varname 1000 addvar digx 20
-     else ifvarg varname 999 ifvarl varname 10000 addvar digx 22
-     else ifvarg varname 9999 ifvarl varname 100000 addvar digx 24
-     else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 26
-     else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 28
-     else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 30
+     ifvarg EXPPTS -1 ifvarl EXPPTS 10 addvar digx 16
+     else ifvarg EXPPTS 9 ifvarl EXPPTS 100 addvar digx 18
+     else ifvarg EXPPTS 99 ifvarl EXPPTS 1000 addvar digx 20
+     else ifvarg EXPPTS 999 ifvarl EXPPTS 10000 addvar digx 22
+     else ifvarg EXPPTS 9999 ifvarl EXPPTS 100000 addvar digx 24
+     else ifvarg EXPPTS 99999 ifvarl EXPPTS 1000000 addvar digx 26
+     else ifvarg EXPPTS 999999 ifvarl EXPPTS 10000000 addvar digx 28
+     else ifvarg EXPPTS 9999999 ifvarl EXPPTS 100000000 addvar digx 30
      state orientation27
      state dn
 
@@ -3035,15 +3045,14 @@ else
       else ifvarg EXPPTS 99999 ifvarl EXPPTS 1000000 addvar digx 48
       else ifvarg EXPPTS 999999 ifvarl EXPPTS 10000000 addvar digx 52
       else ifvarg EXPPTS 9999999 ifvarl EXPPTS 100000000 addvar digx 56
-      ifvarg varname -1 ifvarl varname 10 addvar digx 0
-      else ifvarg varname 9 ifvarl varname 100 addvar digx 2
-      else ifvarg varname 99 ifvarl varname 1000 addvar digx 4
-      else ifvarg varname 999 ifvarl varname 10000 addvar digx 6
-      else ifvarg varname 9999 ifvarl varname 100000 addvar digx 8
-      else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 10 
-      else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 12 
-      else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 14
-      // ifvarl PLAYERTEMPLEVEL 100 
+      ifvarg EXPTONEXT -1 ifvarl EXPTONEXT 10 addvar digx 0
+      else ifvarg EXPTONEXT 9 ifvarl EXPTONEXT 100 addvar digx 2
+      else ifvarg EXPTONEXT 99 ifvarl EXPTONEXT 1000 addvar digx 4
+      else ifvarg EXPTONEXT 999 ifvarl EXPTONEXT 10000 addvar digx 6
+      else ifvarg EXPTONEXT 9999 ifvarl EXPTONEXT 100000 addvar digx 8
+      else ifvarg EXPTONEXT 99999 ifvarl EXPTONEXT 1000000 addvar digx 10 
+      else ifvarg EXPTONEXT 999999 ifvarl EXPTONEXT 10000000 addvar digx 12 
+      else ifvarg EXPTONEXT 9999999 ifvarl EXPTONEXT 100000000 addvar digx 14
       state orientation27
       state dn
      }
@@ -3055,17 +3064,17 @@ else
      setvar digx 52 // 288
      state shade0
      setvarvar varname PLAYERTEMPLEVEL
-     ifvarl varname 11 state pal0
-     ifvarg varname 10 ifvarl varname 21 state pal16
-     ifvarg varname 20 ifvarl varname 31 state pal22
-     ifvarg varname 30 ifvarl varname 41 state pal14
-     ifvarg varname 40 ifvarl varname 51 state pal12
-     ifvarg varname 50 ifvarl varname 61 state pal13
-     ifvarg varname 60 ifvarl varname 71 state pal23
-     ifvarg varname 70 ifvarl varname 81 state pal7
-     ifvarg varname 80 ifvarl varname 91 state pal21
-     ifvarg varname 90 ifvarl varname 100 state pal10
-     ifvarg varname 99 state paletteflasher
+     ifvarl PLAYERTEMPLEVEL 11 state pal0
+     ifvarg PLAYERTEMPLEVEL 10 ifvarl PLAYERTEMPLEVEL 21 state pal16
+     ifvarg PLAYERTEMPLEVEL 20 ifvarl PLAYERTEMPLEVEL 31 state pal22
+     ifvarg PLAYERTEMPLEVEL 30 ifvarl PLAYERTEMPLEVEL 41 state pal14
+     ifvarg PLAYERTEMPLEVEL 40 ifvarl PLAYERTEMPLEVEL 51 state pal12
+     ifvarg PLAYERTEMPLEVEL 50 ifvarl PLAYERTEMPLEVEL 61 state pal13
+     ifvarg PLAYERTEMPLEVEL 60 ifvarl PLAYERTEMPLEVEL 71 state pal23
+     ifvarg PLAYERTEMPLEVEL 70 ifvarl PLAYERTEMPLEVEL 81 state pal7
+     ifvarg PLAYERTEMPLEVEL 80 ifvarl PLAYERTEMPLEVEL 91 state pal21
+     ifvarg PLAYERTEMPLEVEL 90 ifvarl PLAYERTEMPLEVEL 100 state pal10
+     ifvarg PLAYERTEMPLEVEL 99 state paletteflasher
      ifvarg EXPPTS -1 ifvarl EXPPTS 10 addvar digx 20
      else ifvarg EXPPTS 9 ifvarl EXPPTS 100 addvar digx 24
      else ifvarg EXPPTS 99 ifvarl EXPPTS 1000 addvar digx 28
@@ -3118,26 +3127,26 @@ else
      setvar digz 58982 // 65536
      setvar tilenum 7680 // 746
      setvarvar varname RANKPOINTS
-     ifvarl varname -262143999 { setvar TEMPVAR3 -262144000 setvar TEMPVAR4 -262144000 }
-     else ifvarg varname -262144000 ifvarl varname -65536000 { setvar TEMPVAR3 -262144000 setvar TEMPVAR4 -65536000 }
-     else ifvarg varname -65536001 ifvarl varname -16384000 { setvar TEMPVAR3 -65536000 setvar TEMPVAR4 -16384000 }
-     else ifvarg varname -16384001 ifvarl varname -4096000 { setvar TEMPVAR3 -16384000 setvar TEMPVAR4 -4096000 }
-     else ifvarg varname -4096001 ifvarl varname -1024000 { setvar TEMPVAR3 -4096000 setvar TEMPVAR4 -1024000 }
-     else ifvarg varname -1024001 ifvarl varname -256000 { setvar TEMPVAR3 -1024000 setvar TEMPVAR4 -256000 }
-     else ifvarg varname -256001 ifvarl varname -64000 { setvar TEMPVAR3 -256000 setvar TEMPVAR4 -64000 }
-     else ifvarg varname -64001 ifvarl varname -16000 { setvar TEMPVAR3 -64000 setvar TEMPVAR4 -16000 }
-     else ifvarg varname -16001 ifvarl varname -4000 { setvar TEMPVAR3 -16000 setvar TEMPVAR4 -4000 }
-     else ifvarg varname -4001 ifvarl varname 0 { setvar TEMPVAR3 -4000 setvar TEMPVAR4 0 }
-     else ifvarg varname -1 ifvarl varname 4001 { setvar TEMPVAR3 0 setvar TEMPVAR4 4000 }
-     else ifvarg varname 4000 ifvarl varname 16001 { setvar TEMPVAR3 4000 setvar TEMPVAR4 16000 }
-     else ifvarg varname 16000 ifvarl varname 64001 { setvar TEMPVAR3 16000 setvar TEMPVAR4 64000 }
-     else ifvarg varname 64000 ifvarl varname 256001 { setvar TEMPVAR3 64000 setvar TEMPVAR4 256000 }
-     else ifvarg varname 256000 ifvarl varname 1024001 { setvar TEMPVAR3 256000 setvar TEMPVAR4 1024000 }
-     else ifvarg varname 1024000 ifvarl varname 4096001 { setvar TEMPVAR3 1024000 setvar TEMPVAR4 4096000 }
-     else ifvarg varname 4096000 ifvarl varname 16384001 { setvar TEMPVAR3 4096000 setvar TEMPVAR4 16384000 }
-     else ifvarg varname 16384000 ifvarl varname 65536001 { setvar TEMPVAR3 16384000 setvar TEMPVAR4 65536000 }
-     else ifvarg varname 65536000 ifvarl varname 262144000 { setvar TEMPVAR3 65536000 setvar TEMPVAR4 262143999 }
-     else ifvarg varname 262143999 { setvar TEMPVAR3 262143999 setvar TEMPVAR4 262143999 }
+     ifvarl RANKPOINTS -262143999 { setvar TEMPVAR3 -262144000 setvar TEMPVAR4 -262144000 }
+     else ifvarg RANKPOINTS -262144000 ifvarl RANKPOINTS -65536000 { setvar TEMPVAR3 -262144000 setvar TEMPVAR4 -65536000 }
+     else ifvarg RANKPOINTS -65536001 ifvarl RANKPOINTS -16384000 { setvar TEMPVAR3 -65536000 setvar TEMPVAR4 -16384000 }
+     else ifvarg RANKPOINTS -16384001 ifvarl RANKPOINTS -4096000 { setvar TEMPVAR3 -16384000 setvar TEMPVAR4 -4096000 }
+     else ifvarg RANKPOINTS -4096001 ifvarl RANKPOINTS -1024000 { setvar TEMPVAR3 -4096000 setvar TEMPVAR4 -1024000 }
+     else ifvarg RANKPOINTS -1024001 ifvarl RANKPOINTS -256000 { setvar TEMPVAR3 -1024000 setvar TEMPVAR4 -256000 }
+     else ifvarg RANKPOINTS -256001 ifvarl RANKPOINTS -64000 { setvar TEMPVAR3 -256000 setvar TEMPVAR4 -64000 }
+     else ifvarg RANKPOINTS -64001 ifvarl RANKPOINTS -16000 { setvar TEMPVAR3 -64000 setvar TEMPVAR4 -16000 }
+     else ifvarg RANKPOINTS -16001 ifvarl RANKPOINTS -4000 { setvar TEMPVAR3 -16000 setvar TEMPVAR4 -4000 }
+     else ifvarg RANKPOINTS -4001 ifvarl RANKPOINTS 0 { setvar TEMPVAR3 -4000 setvar TEMPVAR4 0 }
+     else ifvarg RANKPOINTS -1 ifvarl RANKPOINTS 4001 { setvar TEMPVAR3 0 setvar TEMPVAR4 4000 }
+     else ifvarg RANKPOINTS 4000 ifvarl RANKPOINTS 16001 { setvar TEMPVAR3 4000 setvar TEMPVAR4 16000 }
+     else ifvarg RANKPOINTS 16000 ifvarl RANKPOINTS 64001 { setvar TEMPVAR3 16000 setvar TEMPVAR4 64000 }
+     else ifvarg RANKPOINTS 64000 ifvarl RANKPOINTS 256001 { setvar TEMPVAR3 64000 setvar TEMPVAR4 256000 }
+     else ifvarg RANKPOINTS 256000 ifvarl RANKPOINTS 1024001 { setvar TEMPVAR3 256000 setvar TEMPVAR4 1024000 }
+     else ifvarg RANKPOINTS 1024000 ifvarl RANKPOINTS 4096001 { setvar TEMPVAR3 1024000 setvar TEMPVAR4 4096000 }
+     else ifvarg RANKPOINTS 4096000 ifvarl RANKPOINTS 16384001 { setvar TEMPVAR3 4096000 setvar TEMPVAR4 16384000 }
+     else ifvarg RANKPOINTS 16384000 ifvarl RANKPOINTS 65536001 { setvar TEMPVAR3 16384000 setvar TEMPVAR4 65536000 }
+     else ifvarg RANKPOINTS 65536000 ifvarl RANKPOINTS 262144000 { setvar TEMPVAR3 65536000 setvar TEMPVAR4 262143999 }
+     else ifvarg RANKPOINTS 262143999 { setvar TEMPVAR3 262143999 setvar TEMPVAR4 262143999 }
      setvarvar TEMPVAR2 TEMPVAR4 // Rank Range - Set to max amount for rank level
      subvarvar TEMPVAR2 TEMPVAR3 // Rank Range - Subtract by minimum amount for rank level
 
@@ -3176,27 +3185,26 @@ else
      setvar digx 48 // 288
 
      setvarvar varname RANKPOINTS
-     // ifvarg varname -10000000000 
-     ifvarl varname -999999999 addvar digx 40
-     else ifvarg varname -1000000000 ifvarl varname -99999999 addvar digx 38
-     else ifvarg varname -100000000 ifvarl varname -9999999 addvar digx 36
-     else ifvarg varname -10000000 ifvarl varname -999999 addvar digx 34
-     else ifvarg varname -1000000 ifvarl varname -99999 addvar digx 32
-     else ifvarg varname -100000 ifvarl varname -9999 addvar digx 30
-     else ifvarg varname -10000 ifvarl varname -999 addvar digx 28
-     else ifvarg varname -1000 ifvarl varname -99 addvar digx 26
-     else ifvarg varname -100 ifvarl varname -9 addvar digx 24
-     else ifvarg varname -10 ifvarl varname 0 addvar digx 22
-     else ifvarg varname -1 ifvarl varname 10 addvar digx 20
-     else ifvarg varname 9 ifvarl varname 100 addvar digx 22
-     else ifvarg varname 99 ifvarl varname 1000 addvar digx 24
-     else ifvarg varname 999 ifvarl varname 10000 addvar digx 26
-     else ifvarg varname 9999 ifvarl varname 100000 addvar digx 28
-     else ifvarg varname 99999 ifvarl varname 1000000 addvar digx 30
-     else ifvarg varname 999999 ifvarl varname 10000000 addvar digx 32
-     else ifvarg varname 9999999 ifvarl varname 100000000 addvar digx 34
-     else ifvarg varname 99999999 ifvarl varname 1000000000 addvar digx 36
-     else ifvarg varname 999999999 addvar digx 38
+     ifvarl RANKPOINTS -999999999 addvar digx 40
+     else ifvarg RANKPOINTS -1000000000 ifvarl RANKPOINTS -99999999 addvar digx 38
+     else ifvarg RANKPOINTS -100000000 ifvarl RANKPOINTS -9999999 addvar digx 36
+     else ifvarg RANKPOINTS -10000000 ifvarl RANKPOINTS -999999 addvar digx 34
+     else ifvarg RANKPOINTS -1000000 ifvarl RANKPOINTS -99999 addvar digx 32
+     else ifvarg RANKPOINTS -100000 ifvarl RANKPOINTS -9999 addvar digx 30
+     else ifvarg RANKPOINTS -10000 ifvarl RANKPOINTS -999 addvar digx 28
+     else ifvarg RANKPOINTS -1000 ifvarl RANKPOINTS -99 addvar digx 26
+     else ifvarg RANKPOINTS -100 ifvarl RANKPOINTS -9 addvar digx 24
+     else ifvarg RANKPOINTS -10 ifvarl RANKPOINTS 0 addvar digx 22
+     else ifvarg RANKPOINTS -1 ifvarl RANKPOINTS 10 addvar digx 20
+     else ifvarg RANKPOINTS 9 ifvarl RANKPOINTS 100 addvar digx 22
+     else ifvarg RANKPOINTS 99 ifvarl RANKPOINTS 1000 addvar digx 24
+     else ifvarg RANKPOINTS 999 ifvarl RANKPOINTS 10000 addvar digx 26
+     else ifvarg RANKPOINTS 9999 ifvarl RANKPOINTS 100000 addvar digx 28
+     else ifvarg RANKPOINTS 99999 ifvarl RANKPOINTS 1000000 addvar digx 30
+     else ifvarg RANKPOINTS 999999 ifvarl RANKPOINTS 10000000 addvar digx 32
+     else ifvarg RANKPOINTS 9999999 ifvarl RANKPOINTS 100000000 addvar digx 34
+     else ifvarg RANKPOINTS 99999999 ifvarl RANKPOINTS 1000000000 addvar digx 36
+     else ifvarg RANKPOINTS 999999999 addvar digx 38
      state orientation27
      state dn
  
@@ -3228,88 +3236,88 @@ else
      else ifvarg RANKPOINTS 999999999 addvar digx 62
      state shade0   
      setvarvar varname RANKPOINTS
-     ifvarl varname -262143999
+     ifvarl RANKPOINTS -262143999
      {
       state pal15 redefinequote 332 [0]
      }
-     else ifvarg varname -262144000 ifvarl varname -65536000
+     else ifvarg RANKPOINTS -262144000 ifvarl RANKPOINTS -65536000
      {
       state pal15 redefinequote 332 [N]
      }
-     else ifvarg varname -65536001 ifvarl varname -16384000 
+     else ifvarg RANKPOINTS -65536001 ifvarl RANKPOINTS -16384000 
      {
       state pal15 redefinequote 332 [M]
      }
-     else ifvarg varname -16384001 ifvarl varname -4096000
+     else ifvarg RANKPOINTS -16384001 ifvarl RANKPOINTS -4096000
      {
       state pal15 redefinequote 332 [L]
      }
-     else ifvarg varname -4096001 ifvarl varname -1024000
+     else ifvarg RANKPOINTS -4096001 ifvarl RANKPOINTS -1024000
      {
       state pal15 redefinequote 332 [K]
      }
-     else ifvarg varname -1024001 ifvarl varname -256000 
+     else ifvarg RANKPOINTS -1024001 ifvarl RANKPOINTS -256000 
      {
       state pal21 redefinequote 332 [J]
      }
-     else ifvarg varname -256001 ifvarl varname -64000 
+     else ifvarg RANKPOINTS -256001 ifvarl RANKPOINTS -64000 
      {
       state pal21 redefinequote 332 [I]
      }
-     else ifvarg varname -64001 ifvarl varname -16000
+     else ifvarg RANKPOINTS -64001 ifvarl RANKPOINTS -16000
      {
       state pal21 redefinequote 332 [H]
      }
-     else ifvarg varname -16001 ifvarl varname -4000 
+     else ifvarg RANKPOINTS -16001 ifvarl RANKPOINTS -4000 
      {
       state pal21 redefinequote 332 [G]
      }
-     else ifvarg varname -4001 ifvarl varname 0
+     else ifvarg RANKPOINTS -4001 ifvarl RANKPOINTS 0
      {
       state pal21 redefinequote 332 [F]
      }
-     else ifvare varname 0
+     else ifvare RANKPOINTS 0
      {
       state pal20 redefinequote 332 [-]
      }
-     else ifvarg varname 0 ifvarl varname 4001
+     else ifvarg RANKPOINTS 0 ifvarl RANKPOINTS 4001
      {
       state pal0 redefinequote 332 [E]
      }
-     else ifvarg varname 4000 ifvarl varname 16001
+     else ifvarg RANKPOINTS 4000 ifvarl RANKPOINTS 16001
      {
       state pal0 redefinequote 332 [D]
      }
-     else ifvarg varname 16000 ifvarl varname 64001
+     else ifvarg RANKPOINTS 16000 ifvarl RANKPOINTS 64001
      {
       state pal0 redefinequote 332 [C]
      }
-     else ifvarg varname 64000 ifvarl varname 256001
+     else ifvarg RANKPOINTS 64000 ifvarl RANKPOINTS 256001
      {
       state pal0 redefinequote 332 [B]
      }
-     else ifvarg varname 256000 ifvarl varname 1024001
+     else ifvarg RANKPOINTS 256000 ifvarl RANKPOINTS 1024001
      {
       state pal0 redefinequote 332 [A]
      }
-     else ifvarg varname 1024000 ifvarl varname 4096001
+     else ifvarg RANKPOINTS 1024000 ifvarl RANKPOINTS 4096001
      {
       state pal22 redefinequote 332 [S]
      }
-     else ifvarg varname 4096000 ifvarl varname 16384001
+     else ifvarg RANKPOINTS 4096000 ifvarl RANKPOINTS 16384001
      {
       state pal22 redefinequote 332 [SS]
      }
-     else ifvarg varname 16384000 ifvarl varname 65536000
+     else ifvarg RANKPOINTS 16384000 ifvarl RANKPOINTS 65536000
      {
       state pal22 redefinequote 332 [Z]
      }
-     else ifvarg varname 65535999 ifvarl varname 262144000
+     else ifvarg RANKPOINTS 65535999 ifvarl RANKPOINTS 262144000
      {
       state shadepulse
       state pal22 redefinequote 332 [ZZ]
      }
-     else ifvarg varname 262143999
+     else ifvarg RANKPOINTS 262143999
      {
       state shadepulse state paletteflasher redefinequote 332 [NR]
      }
@@ -4093,8 +4101,8 @@ else
      //***************
      //*AMMO Displays*
      //***************
-     ifvare CURRENTWEAPON 0 nullop
-     else ifvare CURRENTWEAPON 10 nullop
+     ifvare player[THISACTOR].curr_weapon 0 nullop
+     else ifvare player[THISACTOR].curr_weapon 10 nullop
      else
      {
       state ammocolors
@@ -4121,8 +4129,8 @@ else
       // Shows "Current Ammo" 
       setvar digy 193 // 187
       setvar digx 240 // 136
-      ifvare CURRENTWEAPON 9 addvar digx 4
-      else ifvare CURRENTWEAPON 11 addvar digx 4
+      ifvare player[THISACTOR].curr_weapon 9 addvar digx 4
+      else ifvare player[THISACTOR].curr_weapon 11 addvar digx 4
       setvarvar varname CURRENTAMMOA
       ifvarg varname -1 ifvarl varname 10 addvar digx 24
       else ifvarg varname 9 ifvarl varname 100 addvar digx 26
@@ -4139,8 +4147,8 @@ else
       setvar digy 193 // 187
       setvar digx 240 // 136
       state showslash
-      ifvare CURRENTWEAPON 9 addvar digx 4
-      else ifvare CURRENTWEAPON 11 addvar digx 4
+      ifvare player[THISACTOR].curr_weapon 9 addvar digx 4
+      else ifvare player[THISACTOR].curr_weapon 11 addvar digx 4
       ifvarg CURRENTAMMOA -1 ifvarl CURRENTAMMOA 10 addvar digx 28
       else ifvarg CURRENTAMMOA 9 ifvarl CURRENTAMMOA 100 addvar digx 32
       else ifvarg CURRENTAMMOA 99 ifvarl CURRENTAMMOA 1000 addvar digx 36
@@ -4153,8 +4161,8 @@ else
       // Shows "Maximum Ammo" 
       setvar digy 193 // 187
       setvar digx 240 // 136
-      ifvare CURRENTWEAPON 9 addvar digx 4
-      else ifvare CURRENTWEAPON 11 addvar digx 4
+      ifvare player[THISACTOR].curr_weapon 9 addvar digx 4
+      else ifvare player[THISACTOR].curr_weapon 11 addvar digx 4
       setvarvar varname MAXIMUMAMMO
       ifvarg CURRENTAMMOA -1 ifvarl CURRENTAMMOA 10 addvar digx 28
       else ifvarg CURRENTAMMOA 9 ifvarl CURRENTAMMOA 100 addvar digx 32
@@ -4183,7 +4191,6 @@ else
      ifvarg CENTS -1 ifvarl CENTS 10 setvar temp 193 else setvar temp 194 
      state mt
      setvar orientation_change 0
-// statusdisplaytoggle
     } // ifvarn statusdisplaytoggle 0 ifvarg PARTYALIVE 0 [line 1991]
 
      setvar orientation_change 256
@@ -4229,7 +4236,7 @@ else
       state mt    
       state shade0
   
-      ifvarn CURRENTWEAPON 0
+      ifvarn player[THISACTOR].curr_weapon 0
       {
        ifvare DEFENSEMODE? 1 state shadepulse
        setvar digx 1
@@ -4304,7 +4311,7 @@ else
        state shade0
       }
  
-      ifvare PLAYERWEAPON? 3 // Chaingun Equipped
+      ifvare player[THISACTOR].curr_weapon 3 // Chaingun Equipped
       {
        ifvarand bits 262144 state shadepulse
        setvar digx 1
@@ -4320,7 +4327,7 @@ else
        state shade0
       }
  
-      ifvare PLAYERWEAPON? 4 // RPG Equipped
+      ifvare player[THISACTOR].curr_weapon 4 // RPG Equipped
       {
        ifvarand bits 262144 state shadepulse
        setvar digx 1
@@ -4351,10 +4358,21 @@ else
      }
      else
      {
-      state calchppercentage
-      qsprintf 277 278 HPPERCENTAGE
-      state calcappercentage
-      qsprintf 279 280 APPERCENTAGE
+      ifvarn MAXHITPOINTS 0 
+      {
+       setvarvar TEMPVAR8 CURRENTHITPOINTS
+       mulvar TEMPVAR8 100
+       divvarvar TEMPVAR8 MAXHITPOINTS
+      }
+      qsprintf 277 278 TEMPVAR8
+
+      ifvarn MAXARMORPOINTS 0 
+      {
+       setvarvar TEMPVAR8 CURRENTARMORPOINTS
+       mulvar TEMPVAR8 100
+       divvarvar TEMPVAR8 MAXARMORPOINTS
+      }
+      qsprintf 279 280 TEMPVAR8
      }
     } // ifvarn statusdisplaytoggle 2
 
@@ -4373,28 +4391,27 @@ else
       setvarvar tempc DISPLAYCENTS
       ifvarl tempc 0 mulvar tempc -1
  
-      setvar MONEYGAIN 0
+      setvar TEMPVAR8 0
       ifvare DISPLAYDOLLARS 0 //
       {
        ifvare DISPLAYCENTS 0 setvar DISPLAYMONEYTIMER 0
-       else ifvarg DISPLAYCENTS 0 { state pal22 setvar MONEYGAIN 1 } // Positive
-       else ifvarl DISPLAYCENTS 0 { state pal10 setvar MONEYGAIN -1 } // Negative
+       else ifvarg DISPLAYCENTS 0 { state pal22 setvar TEMPVAR8 1 } // Positive
+       else ifvarl DISPLAYCENTS 0 { state pal10 setvar TEMPVAR8 -1 } // Negative
       }
-      else ifvarg DISPLAYDOLLARS 0 { state pal22 setvar MONEYGAIN 1 } // Positive      
-      else ifvarl DISPLAYDOLLARS 0 { state pal10 setvar MONEYGAIN -1 } // Negative
+      else ifvarg DISPLAYDOLLARS 0 { state pal22 setvar TEMPVAR8 1 } // Positive      
+      else ifvarl DISPLAYDOLLARS 0 { state pal10 setvar TEMPVAR8 -1 } // Negative
  
       ifvarg tempc -1 ifvarl tempc 10
       {
-       ifvare MONEYGAIN 1 redefinequote 332 +$%d.0%d
-       ifvare MONEYGAIN -1 redefinequote 332 -$%d.0%d
-       qsprintf 332 332 tempb tempc
+       ifvare TEMPVAR8 1 redefinequote 332 +$%d.0%d
+       ifvare TEMPVAR8 -1 redefinequote 332 -$%d.0%d
       }
       else
       {
-       ifvare MONEYGAIN 1 redefinequote 332 +$%d.%d
-       ifvare MONEYGAIN -1 redefinequote 332 -$%d.%d
-       qsprintf 332 332 tempb tempc
+       ifvare TEMPVAR8 1 redefinequote 332 +$%d.%d
+       ifvare TEMPVAR8 -1 redefinequote 332 -$%d.%d
       }
+      qsprintf 332 332 tempb tempc
  
       ifvarg DISPLAYMONEYTIMER 0 ifvarl DISPLAYMONEYTIMER 20 state orientation26
       ifvarg DISPLAYMONEYTIMER 19 ifvarl DISPLAYMONEYTIMER 37 state orientation27
@@ -4405,7 +4422,7 @@ else
       setvar textscale 40960
       state gtz
  
-      ifvarg DISPLAYMONEYTIMER 53 { setvar DISPLAYDOLLARS 0 setvar DISPLAYCENTS 0 setvar DISPLAYMONEYTIMER 0 setvar MONEYGAIN 0 }
+      ifvarg DISPLAYMONEYTIMER 53 { setvar DISPLAYDOLLARS 0 setvar DISPLAYCENTS 0 setvar DISPLAYMONEYTIMER 0 setvar TEMPVAR8 0 }
      }
      setvar orientation_change 0
     }
@@ -4873,17 +4890,15 @@ else
       {
        ifvarg TEMPHITCHARACTERVAR -1 ifvarl TEMPHITCHARACTERVAR 16
        {
-        mulvar varname 1000    
         setvarvar CHARACTERARRAY TEMPHITCHARACTERVAR
-        getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR
-        ifvarn TEMPVAR 0 divvarvar varname TEMPVAR
+        mulvar varname 1000    
+        ifvarn actorvar[CHARACTERARRAY].CHARACTERMAXHP 0 divvarvar varname actorvar[CHARACTERARRAY].CHARACTERMAXHP
        }
       }
       else
       {
        mulvar varname 1000    
-       getactorvar[VEHICLEID].ENEMYMAXHP TEMPVAR
-       ifvarn TEMPVAR 0 divvarvar varname TEMPVAR
+       ifvarn actorvar[VEHICLEID].ACTORMAXHP 0 divvarvar varname actorvar[VEHICLEID].ACTORMAXHP
       }
  
       ifvarl varname 2001 
@@ -4996,17 +5011,15 @@ else
       {
        ifvarg TEMPHITCHARACTERVAR -1 ifvarl TEMPHITCHARACTERVAR 16
        {
-        mulvar varname 1000    
         setvarvar CHARACTERARRAY TEMPHITCHARACTERVAR
-        getactorvar[CHARACTERARRAY].CHARACTERMAXAP TEMPVAR
-        ifvarn TEMPVAR 0 divvarvar varname TEMPVAR
+        mulvar varname 1000    
+        ifvarn actorvar[CHARACTERARRAY].CHARACTERMAXAP 0 divvarvar varname actorvar[CHARACTERARRAY].CHARACTERMAXAP
        }
       }
       else
       {
        mulvar varname 1000
-       getactorvar[VEHICLEID].ENEMYMAXAP TEMPVAR
-       ifvarn TEMPVAR 0 divvarvar varname TEMPVAR
+       ifvarn actorvar[VEHICLEID].ACTORMAXAP 0 divvarvar varname actorvar[VEHICLEID].ACTORMAXAP
       }
  
       ifvarl varname 2001 
@@ -5235,7 +5248,7 @@ else
     //** MONSTER DAMAGE **
     //********************
     setvarvar TARGETDISPLAYDAMAGE DAMAGETEMP
-    setvarvar ENEMYDISPLAYARMORDAMAGE ENEMYARMORDAMAGETEMP
+    setvarvar ACTORDISPLAYARMORDAMAGE ACTORARMORDAMAGETEMP
 
     ifvarand miscdisplaytoggle 1
     { // line [5178]
@@ -5256,9 +5269,9 @@ else
      else ifvarg DEFENDERDISPLAYTIMER 26 ifvarl DEFENDERDISPLAYTIMER 54 state orientation35
  
      setvar TEMPVAR4 0
-     ifvarg ENEMYNULLDAMAGE 0 addvar TEMPVAR4 1
+     ifvarg ACTORNULLDAMAGE 0 addvar TEMPVAR4 1
      ifvarg TARGETDISPLAYDAMAGE 0 addvar TEMPVAR4 1
-     ifvarg ENEMYDISPLAYARMORDAMAGE 0 addvar TEMPVAR4 1
+     ifvarg ACTORDISPLAYARMORDAMAGE 0 addvar TEMPVAR4 1
  
      ifvarg TEMPVAR4 0
      {
@@ -5372,7 +5385,7 @@ else
       addvar digx -6
       setvarvar varname TARGETDISPLAYDAMAGE
       mulvar varname 1000    
-      ifvarn TEMPHITENEMYVARHP 0 divvarvar varname TEMPHITENEMYVARHP
+      ifvarn TEMPHITACTORVARHP 0 divvarvar varname TEMPHITACTORVARHP
       ifvarl varname 2001 
       {
        setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
@@ -5405,9 +5418,9 @@ else
      }
  
      // Show's "NO DAMAGE!" or "INVULNERABLE!" on health
-     ifvare ENEMYNULLDAMAGE 1
+     ifvare ACTORNULLDAMAGE 1
      {
-      ifvare ENEMYINVULN? 1 
+      ifvare ACTORINVULN? 1 
       { 
        redefinequote 333 INVULNERABLE!
        setvar temp 333 
@@ -5429,18 +5442,18 @@ else
       mulvar textscale 750
       divvar textscale 1000
       state gtz
-      ifvarg DEFENDERDISPLAYTIMER 52 { setvar ENEMYNULLDAMAGE 0 setvar MELEEATTACKER -1 setvar MELEEATTACKERPAL 0 setvar DEFENDERDISPLAYTIMER 0 state orientation0 }
+      ifvarg DEFENDERDISPLAYTIMER 52 { setvar ACTORNULLDAMAGE 0 setvar MELEEATTACKER -1 setvar MELEEATTACKERPAL 0 setvar DEFENDERDISPLAYTIMER 0 state orientation0 }
      }
  
      //*DISPLAYS ARMOR DAMAGE*
      setvar digy 39
      setvar TEMPVAR5 0
      ifvarg TARGETDISPLAYDAMAGE 0 addvar TEMPVAR5 1 
-     ifvare ENEMYNULLDAMAGE 1 addvar TEMPVAR5 1
+     ifvare ACTORNULLDAMAGE 1 addvar TEMPVAR5 1
      ifvarg TEMPVAR5 0 addvar digy 6
      ifvarg CRITICAL? 0 // if a critical is detected, check to see if the font for armor damage needs to change, else leave it at normal
      {
-      ifvarg ENEMYDISPLAYARMORDAMAGE 0 // If damage is detected to armor, change font to bold for critical, but continue to check for health damage
+      ifvarg ACTORDISPLAYARMORDAMAGE 0 // If damage is detected to armor, change font to bold for critical, but continue to check for health damage
       {
        ifvarg TARGETDISPLAYDAMAGE 0 addvar digy 6
        setvar tilenum 6385
@@ -5454,13 +5467,13 @@ else
      else state settile2837 
  
      state pal14
-     ifvarg ENEMYDISPLAYARMORDAMAGE 0
+     ifvarg ACTORDISPLAYARMORDAMAGE 0
      { 
-      setvar ENEMYARMORNULLDAMAGE 0
+      setvar ACTORARMORNULLDAMAGE 0
       state digx160
-      ifvarg ENEMYARMORDISPLAYTIMER -1 ifvarl ENEMYARMORDISPLAYTIMER 19 state orientation26
-      else ifvarg ENEMYARMORDISPLAYTIMER 18 ifvarl ENEMYARMORDISPLAYTIMER 36 state orientation27
-      else ifvarg ENEMYARMORDISPLAYTIMER 35 ifvarl ENEMYARMORDISPLAYTIMER 54 state orientation59
+      ifvarg ACTORARMORDISPLAYTIMER -1 ifvarl ACTORARMORDISPLAYTIMER 19 state orientation26
+      else ifvarg ACTORARMORDISPLAYTIMER 18 ifvarl ACTORARMORDISPLAYTIMER 36 state orientation27
+      else ifvarg ACTORARMORDISPLAYTIMER 35 ifvarl ACTORARMORDISPLAYTIMER 54 state orientation59
  
       setvar digz 65536
       mulvar digz 750
@@ -5468,21 +5481,21 @@ else
       setvar textscale 65536
       mulvar textscale 750
       divvar textscale 1000
-      setvarvar varname ENEMYDISPLAYARMORDAMAGE
+      setvarvar varname ACTORDISPLAYARMORDAMAGE
       state dnz
 
-      ifvarg ENEMYDISPLAYARMORDAMAGE -1 ifvarl ENEMYDISPLAYARMORDAMAGE 10 { ifvarg CRITICAL? 0 setvar digx 364 else setvar digx 348 }
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 9 ifvarl ENEMYDISPLAYARMORDAMAGE 100 { ifvarg CRITICAL? 0 setvar digx 373 else setvar digx 356 }
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 99 ifvarl ENEMYDISPLAYARMORDAMAGE 1000 { ifvarg CRITICAL? 0 setvar digx 382 else setvar digx 364 }
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 999 ifvarl ENEMYDISPLAYARMORDAMAGE 10000 { ifvarg CRITICAL? 0 setvar digx 392 else setvar digx 372 }
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 9999 ifvarl ENEMYDISPLAYARMORDAMAGE 100000 { ifvarg CRITICAL? 0 setvar digx 403 else setvar digx 380 }
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 99999 ifvarl ENEMYDISPLAYARMORDAMAGE 1000000 { ifvarg CRITICAL? 0 setvar digx 415 else setvar digx 388 }
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 999999 ifvarl ENEMYDISPLAYARMORDAMAGE 10000000 { ifvarg CRITICAL? 0 setvar digx 428 else setvar digx 396 }  	 
-      else ifvarg ENEMYDISPLAYARMORDAMAGE 9999999 ifvarl ENEMYDISPLAYARMORDAMAGE 100000000 { ifvarg CRITICAL? 0 setvar digx 442 else setvar digx 408 }  	 
+      ifvarg ACTORDISPLAYARMORDAMAGE -1 ifvarl ACTORDISPLAYARMORDAMAGE 10 { ifvarg CRITICAL? 0 setvar digx 364 else setvar digx 348 }
+      else ifvarg ACTORDISPLAYARMORDAMAGE 9 ifvarl ACTORDISPLAYARMORDAMAGE 100 { ifvarg CRITICAL? 0 setvar digx 373 else setvar digx 356 }
+      else ifvarg ACTORDISPLAYARMORDAMAGE 99 ifvarl ACTORDISPLAYARMORDAMAGE 1000 { ifvarg CRITICAL? 0 setvar digx 382 else setvar digx 364 }
+      else ifvarg ACTORDISPLAYARMORDAMAGE 999 ifvarl ACTORDISPLAYARMORDAMAGE 10000 { ifvarg CRITICAL? 0 setvar digx 392 else setvar digx 372 }
+      else ifvarg ACTORDISPLAYARMORDAMAGE 9999 ifvarl ACTORDISPLAYARMORDAMAGE 100000 { ifvarg CRITICAL? 0 setvar digx 403 else setvar digx 380 }
+      else ifvarg ACTORDISPLAYARMORDAMAGE 99999 ifvarl ACTORDISPLAYARMORDAMAGE 1000000 { ifvarg CRITICAL? 0 setvar digx 415 else setvar digx 388 }
+      else ifvarg ACTORDISPLAYARMORDAMAGE 999999 ifvarl ACTORDISPLAYARMORDAMAGE 10000000 { ifvarg CRITICAL? 0 setvar digx 428 else setvar digx 396 }  	 
+      else ifvarg ACTORDISPLAYARMORDAMAGE 9999999 ifvarl ACTORDISPLAYARMORDAMAGE 100000000 { ifvarg CRITICAL? 0 setvar digx 442 else setvar digx 408 }  	 
       addvar digx -6
-      setvarvar varname ENEMYDISPLAYARMORDAMAGE
+      setvarvar varname ACTORDISPLAYARMORDAMAGE
       mulvar varname 1000    
-      ifvarn TEMPHITENEMYVARAP 0 divvarvar varname TEMPHITENEMYVARAP
+      ifvarn TEMPHITACTORVARAP 0 divvarvar varname TEMPHITACTORVARAP
       ifvarl varname 2001 
       {
        setvar MISCARRAYID 92 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // PERCENT-UPPER
@@ -5511,14 +5524,14 @@ else
       divvar textscale 1000
       state gtz
  
-      ifvarg ENEMYARMORDISPLAYTIMER 52 { setvar ENEMYDISPLAYARMORDAMAGE 0 setvar ENEMYARMORDAMAGETEMP 0 setvar MELEEATTACKER -1 setvar MELEEATTACKERPAL 0 setvar ENEMYARMORDISPLAYTIMER 0 }
+      ifvarg ACTORARMORDISPLAYTIMER 52 { setvar ACTORDISPLAYARMORDAMAGE 0 setvar ACTORARMORDAMAGETEMP 0 setvar MELEEATTACKER -1 setvar MELEEATTACKERPAL 0 setvar ACTORARMORDISPLAYTIMER 0 }
      }
 
      // Show's "NO DAMAGE!" or "INVULNERABLE!" on armor
-     ifvare ENEMYARMORNULLDAMAGE 1
+     ifvare ACTORARMORNULLDAMAGE 1
      {
-      setvar ENEMYDISPLAYARMORDAMAGE 0
-      ifvare ENEMYINVULN? 1 
+      setvar ACTORDISPLAYARMORDAMAGE 0
+      ifvare ACTORINVULN? 1 
       { 
        redefinequote 333 INVULNERABLE!
        setvar temp 333 
@@ -5530,9 +5543,9 @@ else
        setvar digx 265 // 232
       }
       state settilealphanum
-      ifvarg ENEMYARMORDISPLAYTIMER -1 ifvarl ENEMYARMORDISPLAYTIMER 19 state orientation18
-      else ifvarg ENEMYARMORDISPLAYTIMER 18 ifvarl ENEMYARMORDISPLAYTIMER 36 state orientation19
-      else ifvarg ENEMYARMORDISPLAYTIMER 35 ifvarl ENEMYARMORDISPLAYTIMER 54 state orientation51
+      ifvarg ACTORARMORDISPLAYTIMER -1 ifvarl ACTORARMORDISPLAYTIMER 19 state orientation18
+      else ifvarg ACTORARMORDISPLAYTIMER 18 ifvarl ACTORARMORDISPLAYTIMER 36 state orientation19
+      else ifvarg ACTORARMORDISPLAYTIMER 35 ifvarl ACTORARMORDISPLAYTIMER 54 state orientation51
       setvar digz 65536
       mulvar digz 750
       divvar digz 1000
@@ -5540,7 +5553,7 @@ else
       mulvar textscale 750
       divvar textscale 1000
       state gtz
-      ifvarg ENEMYARMORDISPLAYTIMER 52 { setvar ENEMYARMORNULLDAMAGE 0 setvar MELEEATTACKER -1 setvar MELEEATTACKERPAL 0 setvar ENEMYARMORDISPLAYTIMER 0 state orientation0 }
+      ifvarg ACTORARMORDISPLAYTIMER 52 { setvar ACTORARMORNULLDAMAGE 0 setvar MELEEATTACKER -1 setvar MELEEATTACKERPAL 0 setvar ACTORARMORDISPLAYTIMER 0 state orientation0 }
      }
     } // line [4905]
  
@@ -5959,8 +5972,8 @@ else
     { // ifvare CHARACTERSELECTED? 4 ifvarl AUTOMAPMODE 2 [line 6886]
      ifvarg CURRENTHITPOINTS 0 // ifp palive
      { // ifvarg CURRENTHITPOINTS 0 // ifp palive
-      ifvare NIGHTVISION 1
-      { // ifvare NIGHTVISION 1
+      ifvare player[THISACTOR].heat_on 1
+      { // ifvare player[THISACTOR].heat_on 1
        // VR Visor' Crosshair
        state digx160
        setvar digy 100
@@ -6077,9 +6090,9 @@ else
           setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
           ifvare MISCARRAYID_AMOUNTTEMP 1
           { // ifvare HAVEMERCURY-COMPUTER? 1
+
            // Normal-Ceiling Scan
-           getsector[hitsector].lotag TEMP
-           ifvare TEMP 2 // Ceiling Picnum
+           ifvare sector[hitsector].lotag 2 // Ceiling Picnum
            {
             getsector[hitsector].ceilingpicnum TEMPVAR
             ifvarn TEMPVAR -1 // Ceiling Picnum
@@ -6134,8 +6147,7 @@ else
            }
 
            // Normal-Floor Scan
-           getsector[hitsector].lotag TEMP
-           ifvare TEMP 2
+           ifvare sector[hitsector].lotag 2
            {
             getsector[hitsector].ceilingpicnum TEMPVAR
             ifvarn TEMPVAR -1 // Ceiling Picnum
@@ -6192,11 +6204,10 @@ else
            }
  
            // Tileemu-Ceiling Scan
-           getsector[hitsector].lotag TEMP
-           ifvare TEMP 2 // Ceiling Picnum
+           ifvare sector[hitsector].lotag 2 // Sector Lotag
            {
             getsector[hitsector].hitag TEMPVAR
-            ifvarn TEMPVAR -1 // Ceiling Picnum
+            ifvarn TEMPVAR -1 // Emulated Ceiling Picnum
             {
              getceilzofslope hitsector hitx hity TEMPVAR4
              setvarvar TEMPVAR2 TEMPVAR4
@@ -6249,11 +6260,10 @@ else
            }
  
            // Emulated-Floor Scan
-           getsector[hitsector].lotag TEMP
-           ifvare TEMP 2
+           ifvare sector[hitsector].lotag 2
            {
             getsector[hitsector].hitag TEMPVAR
-            ifvarn TEMPVAR -1 // Ceiling Picnum
+            ifvarn TEMPVAR -1 // Emulated Floor Picnum
             {
              getflorzofslope hitsector hitx hity TEMPVAR4
              setvarvar TEMPVAR2 TEMPVAR4
@@ -6285,7 +6295,7 @@ else
            else
            {
             getsector[hitsector].hitag TEMPVAR
-            ifvarn TEMPVAR -1 // Floor Picnum
+            ifvarn TEMPVAR -1 // Emulated Floor Picnum
             {
              getflorzofslope hitsector hitx hity TEMPVAR4
              setvarvar TEMPVAR2 TEMPVAR4
@@ -6320,16 +6330,13 @@ else
         getactor[hitsprite].statnum TARGETTYPE
         getactor[hitsprite].picnum TARGETSPECIES
         getactor[hitsprite].pal TARGETPAL
-        getactorvar[hitsprite].ENEMYLEVEL ENEMYLEVELDISPLAY
-        getactorvar[hitsprite].CLOAKED? TARGETCLOAKED?
-        getactorvar[hitsprite].ENEMYMAXAP TARGETMAXAP
  
-        ifvare TARGETCLOAKED? 0
+        ifvare actorvar[hitsprite].CLOAKED? 0
         {
          ifvare TARGETTYPE 1
          {
           setvar digy 81
-          ifvare SHOWTARGETHEALTH? 1 ifvarg ENEMYLEVELDISPLAY 0 ifvarg TARGETHEALTH 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORLEVEL 0 ifvarg actorvar[hitsprite].ACTORHP 0
           {
            // Shows "LEVEL:" text
            setvar digx 135
@@ -6346,11 +6353,10 @@ else
            state pal16
            state orientation27
            setvar textscale 49152
-           setvarvar varname ENEMYLEVELDISPLAY
+           setvarvar varname actorvar[hitsprite].ACTORLEVEL
            state dnz
  
-           getactorvar[hitsprite].ACTORFLAGS TEMP
-           ifvarand TEMP 512
+           ifvarand actorvar[hitsprite].ACTORFLAGS 512
            {
             // Shows "[ELITE]" text
             setvar digx 360
@@ -6365,15 +6371,14 @@ else
           }
  
           state vrvisorflashhp
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0
           {
            addvar digy 8
-           getactorvar[hitsprite].ENEMYHP TEMPVAR
            setvar digx 127
            state settile2837
            setvar textscale 49152
            state orientation27
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORHP
            state dnz
  
            // Shows "HP:" text
@@ -6389,25 +6394,23 @@ else
            state showslash
            setvar textscale 49152
            state settilealphanum
-           state orientation27	
+           state orientation27
            state gtz 
  
-           getactorvar[hitsprite].ENEMYMAXHP TEMPVAR
            // Maximum HITPOINTS
            setvar digx 193
            state settile2837
            state orientation27
            setvar textscale 49152
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORMAXHP
            state dnz
           }
  
           state vrvisorflashfa
-          getactorvar[hitsprite].ENEMYFIRSTAID TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORFIRSTAID 0
           {
            // DISPLAYS ENEMY'S FIRSTAID AMOUNT
-           qsprintf 179 180 TEMPVAR
+           qsprintf 179 180 actorvar[hitsprite].ACTORFIRSTAID
            setvar digx 455
            setvar temp 179
            setvar textscale 49152
@@ -6417,17 +6420,15 @@ else
           }
  
           state vrvisorflashap
-          getactorvar[hitsprite].ENEMYMAXAP TARGETMAXAP
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TARGETMAXAP 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORMAXAP 0
           {
            addvar digy 8
-           getactorvar[hitsprite].ENEMYAP TEMPVAR
            // Current ARMORPOINTS
            setvar digx 127
            state settile2837
            setvar textscale 49152
            state orientation27
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORAP
            state dnz
  
            // Shows "AP:" text
@@ -6451,31 +6452,27 @@ else
            state settile2837
            state orientation27
            setvar textscale 49152
-           setvarvar varname TARGETMAXAP
+           setvarvar varname actorvar[hitsprite].ACTORMAXAP
            state dnz
  
-           getactorvar[hitsprite].ENEMYARMORPERCENT TEMPVAR5 // divvar TEMPVAR5 10
-           ifvarg TEMPVAR5 0
+           ifvarg actorvar[hitsprite].ACTORARMORPERCENT 0
            {
-            getactorvar[hitsprite].ENEMYARMORPERCENT TEMPVAR3
-            divvar TEMPVAR3 10
-            getactorvar[hitsprite].ENEMYARMORPERCENT TEMPVAR4
-            modvar TEMPVAR4 10
+            getactorvar[hitsprite].ACTORARMORPERCENT TEMPVAR3 divvar TEMPVAR3 10
+            getactorvar[hitsprite].ACTORARMORPERCENT TEMPVAR4 modvar TEMPVAR4 10
             // Armor ABSORBSION
             qsprintf 183 184 TEMPVAR3 TEMPVAR4
             setvar digx 455
             setvar temp 183
             setvar textscale 49152
             state settilealphanum
-            state orientation27	
+            state orientation27
             state gtz
            }
           }
  
-          ifvare SHOWTARGETDEFENSE? 1 ifvarg TARGETHEALTH 0
+          ifvare SHOWTARGETDEFENSE? 1
           {
-           getactorvar[hitsprite].ACTORATTACK TARGETATTACK
-           ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TARGETATTACK 0
+           ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORATTACK 0
            {
             addvar digy 8
             // Shows "ATK:" text
@@ -6493,12 +6490,11 @@ else
             state pal21
             setvar textscale 49152
             state orientation27
-            setvarvar varname TARGETATTACK
+            setvarvar varname actorvar[hitsprite].ACTORATTACK
             state dnz
            }
  
-           getactorvar[hitsprite].ACTORDEFENSE TEMPVAR
-           ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+           ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORDEFENSE 0
            {
             addvar digy 8
             // Shows "DEF:" text
@@ -6516,14 +6512,13 @@ else
             state pal23
             setvar textscale 49152
             state orientation27
-            setvarvar varname TEMPVAR
+            setvarvar varname actorvar[hitsprite].ACTORDEFENSE
             state dnz
            }
           }
  
           // DISPLAY ENEMY QUAD TIME
-          getactorvar[hitsprite].ENEMYQUADTIME TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORQUADTIME 0
           {
            addvar digy 8
            // Shows "QUAD:" text
@@ -6540,14 +6535,13 @@ else
            state pal16
            setvar textscale 49152
            state orientation27
-           divvar TEMPVAR 26
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORQUADTIME
+           divvar varname 26
            state dnz
           }
  
           // DISPLAY ENEMY INVULN TIME
-          getactorvar[hitsprite].ENEMYINVULNTIME TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORINVULNTIME 0
           {
            addvar digy 8
            // Shows "INVULN:" text
@@ -6564,14 +6558,13 @@ else
            state pal23
            setvar textscale 49152
            state orientation27
-           divvar TEMPVAR 26
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORINVULNTIME
+           divvar varname 26
            state dnz
           }
  
           // DISPLAY ENEMY REGEN TIME
-          getactorvar[hitsprite].ENEMYREGENTIME TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORREGENTIME 0
           {
            addvar digy 8
            // Shows "REGEN:" text
@@ -6588,14 +6581,13 @@ else
            state pal21
            setvar textscale 49152
            state orientation27
-           divvar TEMPVAR 26
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORREGENTIME
+           divvar varname 26
            state dnz
           }
  
           // DISPLAY ENEMY AP-REGEN TIME
-          getactorvar[hitsprite].ENEMYAPREGENTIME TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORAPREGENTIME 0
           {
            addvar digy 8
            // Shows "APREGEN:" text
@@ -6612,14 +6604,13 @@ else
            state pal11
            setvar textscale 49152
            state orientation27
-           divvar TEMPVAR 26
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORAPREGENTIME
+           divvar varname 26
            state dnz
           }
  
           // DISPLAY ENEMY VAMPIRE TIME
-          getactorvar[hitsprite].ENEMYVAMPIRETIME TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarg TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarg actorvar[hitsprite].ACTORVAMPIRETIME 0
           {
            addvar digy 8
            // Shows "VAMPIRE:" text
@@ -6636,14 +6627,14 @@ else
            state pal10
            setvar textscale 49152
            state orientation27
-           divvar TEMPVAR 26
-           setvarvar varname TEMPVAR
+           setvarvar varname actorvar[hitsprite].ACTORVAMPIRETIME
+           divvar varname 26
            state dnz
           }
  
           // DISPLAY ENEMY ELEMENTAL ATTRIBUTES        
           getactorvar[hitsprite].ACTORABSORBFLAGS TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarn TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarn TEMPVAR 0
           {
            addvar digy 8
            // Shows "ABSORBS:" text
@@ -6661,7 +6652,7 @@ else
            state displayresisticons
           }
           getactorvar[hitsprite].ACTORIMMUNEFLAGS TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarn TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarn TEMPVAR 0
           {
            addvar digy 8
            // Shows "IMMUNE:" text
@@ -6679,7 +6670,7 @@ else
            state displayresisticons
           }
           getactorvar[hitsprite].ACTORSTRONGFLAGS TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarn TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarn TEMPVAR 0
           {
            addvar digy 8
            // Shows "RESISTS:" text
@@ -6697,7 +6688,7 @@ else
            state displayresisticons
           }
           getactorvar[hitsprite].ACTORWEAKNESSFLAGS TEMPVAR
-          ifvare SHOWTARGETHEALTH? 1 ifvarg TARGETHEALTH 0 ifvarn TEMPVAR 0
+          ifvare SHOWTARGETHEALTH? 1 ifvarg actorvar[hitsprite].ACTORHP 0 ifvarn TEMPVAR 0
           {
            addvar digy 8
            // Shows "WEAK TO:" text
@@ -7231,29 +7222,26 @@ else
             state digx320
             setvar NPC_TYPE 0
            } 
-          } // ifvare TARGETTYPE 1 [line 6368]
+          } // ifvare TARGETTYPE 1 [line 6294]
  
-          ifvare SHOWTARGETNAME? 1
+          ifvare SHOWTARGETNAME? 1 ifvarg actorvar[hitsprite].ACTORHP 0
           {
-           ifvarg TARGETHEALTH 0
-           {
-            ifvarg ENEMYLEVELDISPLAY 0 setvar digy 71 else setvar digy 79 // 67
+            ifvarg actorvar[hitsprite].ACTORLEVEL 0 setvar digy 71 else setvar digy 79 // 67
             setvar tilenum 2822
             setvarvar pal TARGETPAL
             setvar temp 142
             setvar textscale 57344
             state orientation27
             state gtz
-           }
-          } // ifvare SHOWTARGETNAME? 1
+          } // ifvare SHOWTARGETNAME? 1 ifvarg actorvar[hitsprite].ACTORHP 0
          } // ifvare TARGETTYPE 1
 
-        } // ifvare TARGETCLOAKED? 0
+        } // ifvare actorvar[hitsprite].CLOAKED? 0
        } // ifvarn hitsprite -1 [line 5963]
        //************************
        //**End Scanner Displays**
        //************************
-      } // ifvare NIGHTVISION 1
+      } // ifvare player[THISACTOR].heat_on 1
      } // ifvarg CURRENTHITPOINTS 0 // ifp palive
     } // ifvare CHARACTERSELECTED? 4 ifvarl AUTOMAPMODE 2 [line 5588]
 
@@ -7268,7 +7256,7 @@ else
      setvar MISCARRAYID 77 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-HACKERVISION?
      ifvare CHARACTERSELECTED? 8 ifvare MISCARRAYID_AMOUNTTEMP 1 ifvarl AUTOMAPMODE 2 // Makes Lisa Able to use "Hacker Vision" :P
      {
-      ifvarg CURRENTHITPOINTS 0 { ifvare NIGHTVISION 1 state hackervision }
+      ifvarg CURRENTHITPOINTS 0 { ifvare player[THISACTOR].heat_on 1 state hackervision }
      }
      ifvare CHARACTERSELECTED? 15 ifvarl AUTOMAPMODE 2 // Maken has natural "Hacker Vision" :P
      {
@@ -7289,11 +7277,9 @@ else
        getactor[hitsprite].statnum TARGETTYPE
        getactor[hitsprite].picnum TARGETSPECIES
        getactor[hitsprite].pal TARGETPAL
-       getactorvar[hitsprite].ENEMYLEVEL ENEMYLEVELDISPLAY
-       getactorvar[hitsprite].CLOAKED? TARGETCLOAKED? 
   
        setvar TEMPVAR5 0
-       ifvare TARGETCLOAKED? 0 // Monster is visible
+       ifvare actorvar[hitsprite].CLOAKED? 0 // Monster is visible
        {
         ifvare TARGETTYPE 1 // Awake [Monsters]
         {
@@ -7307,48 +7293,41 @@ else
            getactorvar[hitsprite].ACTORFLAGS CALCVAR2
            ifvare TARGETSPECIES CRATE1
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 30 redefinequote 142 WOODEN CRATE
+            ifvare TARGETPAL 30 redefinequote 142 WOODEN CRATE
             else redefinequote 142 METALLIC CRATE
  
-            getactorvar[hitsprite].ACTORPHYSICSFLAGS TEMPVAR3
-            ifvare TEMPVAR3 0 redefinequote 143 ^20 [^10WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 1 redefinequote 143 ^20 [^14WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 3 redefinequote 143 ^20 [^22WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 7 redefinequote 143 ^20 [^16WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 15 redefinequote 143 ^20 [^0WEIGHT: %d LBS^20]
+            ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 0 redefinequote 143 ^20 [^10WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 1 redefinequote 143 ^20 [^14WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 3 redefinequote 143 ^20 [^22WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 7 redefinequote 143 ^20 [^16WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 15 redefinequote 143 ^20 [^0WEIGHT: %d LBS^20]
  
-            getactorvar[hitsprite].ACTORWEIGHT TEMPVAR3
-            qsprintf 143 143 TEMPVAR3
+            qsprintf 143 143 actorvar[hitsprite].ACTORWEIGHT
             qstrcat 142 143
             state pal20
            }
            else
            ifvare TARGETSPECIES CRATE2
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 30 redefinequote 142 METALLIC CRATE
+            ifvare TARGETPAL 30 redefinequote 142 METALLIC CRATE
             else redefinequote 142 WOODEN CRATE
  
-            getactorvar[hitsprite].ACTORPHYSICSFLAGS TEMPVAR3
-            ifvare TEMPVAR3 0 redefinequote 143 ^20 [^10WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 1 redefinequote 143 ^20 [^14WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 3 redefinequote 143 ^20 [^22WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 7 redefinequote 143 ^20 [^16WEIGHT: %d LBS^20]
-            else ifvare TEMPVAR3 15 redefinequote 143 ^20 [^0WEIGHT: %d LBS^20]
+            ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 0 redefinequote 143 ^20 [^10WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 1 redefinequote 143 ^20 [^14WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 3 redefinequote 143 ^20 [^22WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 7 redefinequote 143 ^20 [^16WEIGHT: %d LBS^20]
+            else ifvare actorvar[hitsprite].ACTORPHYSICSFLAGS 15 redefinequote 143 ^20 [^0WEIGHT: %d LBS^20]
  
-            getactorvar[hitsprite].ACTORWEIGHT TEMPVAR3
-            qsprintf 143 143 TEMPVAR3
+            qsprintf 143 143 actorvar[hitsprite].ACTORWEIGHT
             qstrcat 142 143
             state pal20
            }
            else
            ifvare TARGETSPECIES TELEBEACON
            {
-            getactorvar[hitsprite].telebeaconid TEMPVAR3
-            ifvare TEMPVAR3 -1 redefinequote 142 TELEPORTER BEACON [INACTIVE]
+            ifvare actorvar[hitsprite].telebeaconid -1 redefinequote 142 TELEPORTER BEACON [INACTIVE]
             else redefinequote 142 TELEPORTER BEACON [ACTIVE (# %d)]
-            qsprintf 142 142 TEMPVAR3          
+            qsprintf 142 142 actorvar[hitsprite].telebeaconid          
             state pal14
            }
            else
@@ -7433,53 +7412,51 @@ else
            }
            else ifvare TARGETSPECIES SHIELD
            {
-            getactorvar[hitsprite].ARMORISUSED? TEMPVAR3
-            ifvare TEMPVAR3 1 redefinequote 142 BODY ARMOR [USED] 
+            ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 BODY ARMOR [USED] 
             else redefinequote 142 BODY ARMOR 
             state checkactorpickupamounts
             ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTS state pal20 else state pal14
            }
            else ifvare TARGETSPECIES COLORSHIELD
            {
-            getactorvar[hitsprite].ARMORISUSED? TEMPVAR3
             ifvare TARGETPAL 10
             {
-             ifvare TEMPVAR3 1 redefinequote 142 RED-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 RED-CLASS ARMOR [USED] 
              else redefinequote 142 RED-CLASS ARMOR 
             }
             else
             ifvare TARGETPAL 13
             {
-             ifvare TEMPVAR3 1 redefinequote 142 GRAY-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 GRAY-CLASS ARMOR [USED] 
              else redefinequote 142 GRAY-CLASS ARMOR 
             }
             else
             ifvare TARGETPAL 14
             {
-             ifvare TEMPVAR3 1 redefinequote 142 GREEN-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 GREEN-CLASS ARMOR [USED] 
              else redefinequote 142 GREEN-CLASS ARMOR 
             }
             else
             ifvare TARGETPAL 16
             {
-             ifvare TEMPVAR3 1 redefinequote 142 BLUE-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 BLUE-CLASS ARMOR [USED] 
              else redefinequote 142 BLUE-CLASS ARMOR 
             }
             else
             ifvare TARGETPAL 20
             {
-             ifvare TEMPVAR3 1 redefinequote 142 WHITE-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 WHITE-CLASS ARMOR [USED] 
              else redefinequote 142 WHITE-CLASS ARMOR 
             }
             else
             ifvare TARGETPAL 23
             {
-             ifvare TEMPVAR3 1 redefinequote 142 YELLOW-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 YELLOW-CLASS ARMOR [USED] 
              else redefinequote 142 YELLOW-CLASS ARMOR 
             }
             else
             {
-             ifvare TEMPVAR3 1 redefinequote 142 RANDOM-CLASS ARMOR [USED] 
+             ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 RANDOM-CLASS ARMOR [USED] 
              else redefinequote 142 RANDOM-CLASS ARMOR 
             }
             state checkactorpickupamounts
@@ -7487,8 +7464,7 @@ else
            }
            else ifvare TARGETSPECIES SUPERSHIELD
            {
-            getactorvar[hitsprite].ARMORISUSED? TEMPVAR3
-            ifvare TEMPVAR3 1 redefinequote 142 SUPER BODY ARMOR [USED] 
+            ifvare actorvar[hitsprite].ARMORISUSED? 1 redefinequote 142 SUPER BODY ARMOR [USED] 
             else redefinequote 142 SUPER BODY ARMOR 
             state checkactorpickupamounts
             ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTSATOMIC state pal20 else state pal14
@@ -8120,117 +8096,104 @@ else
            }
            else ifvare TARGETSPECIES MAXHPUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 MAXIMUM HP BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 MAXIMUM HP BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 MAXIMUM HP BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 MAXIMUM HP BONUS [LARGE] 
             else redefinequote 142 MAXIMUM HP BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES MAXAPUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 MAXIMUM AP BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 MAXIMUM AP BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 MAXIMUM AP BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 MAXIMUM AP BONUS [LARGE] 
             else redefinequote 142 MAXIMUM HP BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES MAXHPAPUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 MAXIMUM HP/AP BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 MAXIMUM HP/AP BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 MAXIMUM HP/AP BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 MAXIMUM HP/AP BONUS [LARGE] 
             else redefinequote 142 MAXIMUM HP/AP BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES MAXEPUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 MAXIMUM EP BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 MAXIMUM EP BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 MAXIMUM EP BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 MAXIMUM EP BONUS [LARGE] 
             else redefinequote 142 MAXIMUM EP BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES ATKUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 ATTACK BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 ATTACK BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 ATTACK BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 ATTACK BONUS [LARGE] 
             else redefinequote 142 ATTACK BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES DEFUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 DEFENSE BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 DEFENSE BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 DEFENSE BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 DEFENSE BONUS [LARGE] 
             else redefinequote 142 DEFENSE BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES ATKDEFUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 ATTACK/DEFENSE BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 ATTACK/DEFENSE BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 ATTACK/DEFENSE BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 ATTACK/DEFENSE BONUS [LARGE] 
             else redefinequote 142 ATTACK/DEFENSE BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES SPDUP
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 SPEED BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 SPEED BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 SPEED BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 SPEED BONUS [LARGE] 
             else redefinequote 142 SPEED BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES AIRTIMEBONUS
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 UNDERWATER AIR TIME BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 UNDERWATER AIR TIME BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 UNDERWATER AIR TIME BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 UNDERWATER AIR TIME BONUS [LARGE] 
             else redefinequote 142 UNDERWATER AIR TIME BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES MANTLEBONUS
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 MANTLING STRENGTH BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 MANTLING STRENGTH BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 MANTLING STRENGTH BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 MANTLING STRENGTH BONUS [LARGE] 
             else redefinequote 142 MANTLING STRENGTH BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES AIRJUMPBONUS
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 AIR-JUMP BONUS [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 AIR-JUMP BONUS [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 AIR-JUMP BONUS [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 AIR-JUMP BONUS [LARGE] 
             else redefinequote 142 AIR-JUMP BONUS 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES SATCHEL_SMALL
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 SMALL AMMO SATCHEL [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 SMALL AMMO SATCHEL [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 SMALL AMMO SATCHEL [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 SMALL AMMO SATCHEL [LARGE] 
             else redefinequote 142 SMALL AMMO SATCHEL 
             state checkactorpickupamounts
             state pal23
            }
            else ifvare TARGETSPECIES SATCHEL_LARGE
            {
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 9 redefinequote 142 LARGE AMMO SATCHEL [VERY LARGE] 
-            else ifvare TEMPVAR3 3 redefinequote 142 LARGE AMMO SATCHEL [LARGE] 
+            ifvare TARGETPAL 9 redefinequote 142 LARGE AMMO SATCHEL [VERY LARGE] 
+            else ifvare TARGETPAL 3 redefinequote 142 LARGE AMMO SATCHEL [LARGE] 
             else redefinequote 142 LARGE AMMO SATCHEL 
             state checkactorpickupamounts
             state pal23
@@ -8429,39 +8392,35 @@ else
            }
            else ifvare TARGETSPECIES GEMRINGSILVER
            {          
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 11 redefinequote 142 ZIRCON RING [SILVER] 
-            else ifvare TEMPVAR3 16 redefinequote 142 AQUAMARINE RING [SILVER] 
-            else ifvare TEMPVAR3 0 redefinequote 142 TURQUIOSE RING [SILVER] 
-            else ifvare TEMPVAR3 14 redefinequote 142 EMERALD RING [SILVER] 
-            else ifvare TEMPVAR3 21 redefinequote 142 GARNET RING [SILVER] 
-            else ifvare TEMPVAR3 10 redefinequote 142 RUBY RING [SILVER] 
-            else ifvare TEMPVAR3 23 redefinequote 142 CITRINE RING [SILVER] 
-            else ifvare TEMPVAR3 12 redefinequote 142 DIAMOND RING [SILVER] 
+            ifvare TARGETPAL 11 redefinequote 142 ZIRCON RING [SILVER] 
+            else ifvare TARGETPAL 16 redefinequote 142 AQUAMARINE RING [SILVER] 
+            else ifvare TARGETPAL 0 redefinequote 142 TURQUIOSE RING [SILVER] 
+            else ifvare TARGETPAL 14 redefinequote 142 EMERALD RING [SILVER] 
+            else ifvare TARGETPAL 21 redefinequote 142 GARNET RING [SILVER] 
+            else ifvare TARGETPAL 10 redefinequote 142 RUBY RING [SILVER] 
+            else ifvare TARGETPAL 23 redefinequote 142 CITRINE RING [SILVER] 
+            else ifvare TARGETPAL 12 redefinequote 142 DIAMOND RING [SILVER] 
             state checkactorpickupamounts
             state pal22
            }
            else ifvare TARGETSPECIES GEMRINGGOLD
            {          
-            getactor[hitsprite].pal TEMPVAR3
-            ifvare TEMPVAR3 11 redefinequote 142 ZIRCON RING [GOLD] 
-            else ifvare TEMPVAR3 16 redefinequote 142 AQUAMARINE RING [GOLD] 
-            else ifvare TEMPVAR3 0 redefinequote 142 TURQUIOSE RING [GOLD] 
-            else ifvare TEMPVAR3 14 redefinequote 142 EMERALD RING [GOLD] 
-            else ifvare TEMPVAR3 21 redefinequote 142 GARNET RING [GOLD] 
-            else ifvare TEMPVAR3 10 redefinequote 142 RUBY RING [GOLD] 
-            else ifvare TEMPVAR3 23 redefinequote 142 CITRINE RING [GOLD] 
-            else ifvare TEMPVAR3 12 redefinequote 142 DIAMOND RING [GOLD] 
+            ifvare TARGETPAL 11 redefinequote 142 ZIRCON RING [GOLD] 
+            else ifvare TARGETPAL 16 redefinequote 142 AQUAMARINE RING [GOLD] 
+            else ifvare TARGETPAL 0 redefinequote 142 TURQUIOSE RING [GOLD] 
+            else ifvare TARGETPAL 14 redefinequote 142 EMERALD RING [GOLD] 
+            else ifvare TARGETPAL 21 redefinequote 142 GARNET RING [GOLD] 
+            else ifvare TARGETPAL 10 redefinequote 142 RUBY RING [GOLD] 
+            else ifvare TARGETPAL 23 redefinequote 142 CITRINE RING [GOLD] 
+            else ifvare TARGETPAL 12 redefinequote 142 DIAMOND RING [GOLD] 
             state checkactorpickupamounts
             state pal22
            }
            else ifvare TARGETSPECIES MONEYBAG
            {
-            getactorvar[hitsprite].MONEYBAGDOLLARS TEMPVAR2
-            getactorvar[hitsprite].MONEYBAGCENTS TEMPVAR3
-            ifvarg TEMPVAR3 -1 ifvarl TEMPVAR3 10 redefinequote 142 MONEY BAG [WITH ^14$%d.0%d^22 INSIDE] 
+            ifvarg actorvar[hitsprite].MONEYBAGCENTS -1 ifvarl actorvar[hitsprite].MONEYBAGCENTS 10 redefinequote 142 MONEY BAG [WITH ^14$%d.0%d^22 INSIDE] 
             else redefinequote 142 MONEY BAG [WITH ^14$%d.%d^22 INSIDE] 
-            qsprintf 142 142 TEMPVAR2 TEMPVAR3
+            qsprintf 142 142 actorvar[hitsprite].MONEYBAGDOLLARS actorvar[hitsprite].MONEYBAGCENTS
             state pal22
            }
            else ifvarg TARGETSPECIES 8191 ifvarl TARGETSPECIES 8448 // Worldtiles
@@ -9343,8 +9302,7 @@ else
            }
            else
            {
-            getactorvar[hitsprite].ISMEMORBILIA? TEMP
-            ifvare TEMP 1
+            ifvare actorvar[hitsprite].ISMEMORBILIA? 1
             {
              state checktip_memorbilia
              redefinequote 142 [MEMORBILIA ITEM]
@@ -9475,13 +9433,12 @@ else
           state settilealphanum
           state orientation27
           state gtz
-          getactorvar[hitwall].VENDINGQUANITY varname
           setvar temp 332
           setvarvar digx 320
           setvarvar digy 106
           state pal20
           redefinequote 332 SNACKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 varname
+          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
           setvar textscale 40960
           state settilealphanum
           state orientation27
@@ -9556,13 +9513,12 @@ else
           state settilealphanum
           state orientation27
           state gtz
-          getactorvar[hitwall].VENDINGQUANITY varname
           setvar temp 332
           setvarvar digx 320
           setvarvar digy 106
           state pal20
           redefinequote 332 DRINKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 varname
+          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
           setvar textscale 40960
           state settilealphanum
           state orientation27
@@ -9637,13 +9593,12 @@ else
           state settilealphanum
           state orientation27
           state gtz
-          getactorvar[hitwall].VENDINGQUANITY varname
           setvar temp 332
           setvarvar digx 320
           setvarvar digy 106
           state pal20
           redefinequote 332 DRINKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 varname
+          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
           setvar textscale 40960
           state settilealphanum
           state orientation27
@@ -9674,13 +9629,12 @@ else
           state settilealphanum
           state orientation27
           state gtz
-          getactorvar[hitwall].VENDINGQUANITY varname
           setvar temp 332
           setvarvar digx 320
           setvarvar digy 106
           state pal20
           redefinequote 332 SNACKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 varname
+          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
           setvar textscale 40960
           state settilealphanum
           state orientation27
@@ -9711,13 +9665,12 @@ else
           state settilealphanum
           state orientation27
           state gtz
-          getactorvar[hitwall].VENDINGQUANITY varname
           setvar temp 332
           setvarvar digx 320
           setvarvar digy 106
           state pal20
           redefinequote 332 DRINKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 varname
+          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
           setvar textscale 40960
           state settilealphanum
           state orientation27
@@ -9737,7 +9690,7 @@ else
 // If the player has submerged, show air bar
    ifvarn statusdisplaytoggle 0
    { // ifvarn statusdisplaytoggle 0 [line 12063]
-    ifvare SECTORLOTAG 2
+    ifvare sector[PLAYERSECTOR].lotag 2
     {
      state displayair
 
@@ -9782,7 +9735,6 @@ else
      // Debug
      ifvarg debugtoggle 0
      {
-      // varname DEBUGAIRTIME
       getplayervar[THISACTOR].AIRTIME varname
       setvar digx 146 // 164
       setvar digy 18 // 18
@@ -9827,7 +9779,7 @@ else
     }
 
     // If the player has resurfaced and does not have maximum air, make the airbar transperant until air fills back up
-    ifvarn SECTORLOTAG 2
+    ifvarn sector[PLAYERSECTOR].lotag 2
     {
      ifvarvarl AIRTIME MAXAIRTIME
      {
@@ -10201,8 +10153,8 @@ else
     // First Boss
     ifvarn BOSSMETERID1 -1
     {
-      getactorvar[BOSSMETERID1].ENEMYHP TEMPVAR4
-      getactorvar[BOSSMETERID1].ENEMYMAXHP TEMPVAR5
+      getactorvar[BOSSMETERID1].ACTORHP TEMPVAR4
+      getactorvar[BOSSMETERID1].ACTORMAXHP TEMPVAR5
       mulvar TEMPVAR4 1000
       ifvarn TEMPVAR5 0 divvarvar TEMPVAR4 TEMPVAR5
       setvarvar BOSSMETERFACTOR TEMPVAR4
@@ -10252,19 +10204,14 @@ else
      setvar temp 332
      state gtz
 
-     getactorvar[BOSSMETERID1].ENEMYHP TEMPVAR3
-     ifvarl TEMPVAR3 1 
-     {
-      getactorvar[BOSSMETERID1].FROZEN? TEMPVAR3
-      ifvare TEMPVAR3 0 setvar BOSSMETERID1 -1
-     }
+     ifvare actorvar[BOSSMETERID1].FROZEN? 0 ifvarl actorvar[BOSSMETERID1].ACTORHP 1 setvar BOSSMETERID1 -1
     }
 
     // Second Boss
     ifvarn BOSSMETERID2 -1
     {
-      getactorvar[BOSSMETERID2].ENEMYHP TEMPVAR4
-      getactorvar[BOSSMETERID2].ENEMYMAXHP TEMPVAR5
+      getactorvar[BOSSMETERID2].ACTORHP TEMPVAR4
+      getactorvar[BOSSMETERID2].ACTORMAXHP TEMPVAR5
       mulvar TEMPVAR4 1000
       ifvarn TEMPVAR5 0 divvarvar TEMPVAR4 TEMPVAR5
       setvarvar BOSSMETERFACTOR TEMPVAR4
@@ -10313,19 +10260,14 @@ else
      setvar temp 332
      state gtz
 
-     getactorvar[BOSSMETERID2].ENEMYHP TEMPVAR3
-     ifvarl TEMPVAR3 1 
-     {
-      getactorvar[BOSSMETERID2].FROZEN? TEMPVAR3
-      ifvare TEMPVAR3 0 setvar BOSSMETERID2 -1
-     }
+     ifvare actorvar[BOSSMETERID2].FROZEN? 0 ifvarl actorvar[BOSSMETERID2].ACTORHP 1 setvar BOSSMETERID2 -1
     }
 
     // Third Boss
     ifvarn BOSSMETERID3 -1
     {
-      getactorvar[BOSSMETERID3].ENEMYHP TEMPVAR4
-      getactorvar[BOSSMETERID3].ENEMYMAXHP TEMPVAR5
+      getactorvar[BOSSMETERID3].ACTORHP TEMPVAR4
+      getactorvar[BOSSMETERID3].ACTORMAXHP TEMPVAR5
       mulvar TEMPVAR4 1000
       ifvarn TEMPVAR5 0 divvarvar TEMPVAR4 TEMPVAR5
       setvarvar BOSSMETERFACTOR TEMPVAR4
@@ -10374,12 +10316,7 @@ else
      setvar temp 332
      state gtz
 
-     getactorvar[BOSSMETERID3].ENEMYHP TEMPVAR3
-     ifvarl TEMPVAR3 1 
-     {
-      getactorvar[BOSSMETERID3].FROZEN? TEMPVAR3
-      ifvare TEMPVAR3 0 setvar BOSSMETERID3 -1
-     }
+     ifvare actorvar[BOSSMETERID3].FROZEN? 0 ifvarl actorvar[BOSSMETERID3].ACTORHP 1 setvar BOSSMETERID2 -1
     }
     // End of BOSS Lifemeters Display Code
 
@@ -10495,8 +10432,7 @@ else
       setvarvar varname STEROIDSTIME
       ifvarg varname 0
       {
-       getplayer[THISACTOR].steroids_amount TEMPVAR
-       ifvarl TEMPVAR 400 { ifvarg TEMPVAR 0 state shadepulse }
+       ifvarl player[THISACTOR].steroids_amount 400 { ifvarg player[THISACTOR].steroids_amount 0 state shadepulse }
        // Show Icon
        setvar digx 311
        setvar digy 50
@@ -10587,11 +10523,10 @@ else
 
       setvar orientation_change 512
       // display goggles - coded originally by DeeperThought -.-
-      getplayer[THISACTOR].heat_on TEMPVAR
       getplayer[THISACTOR].heat_amount varname
       ifvarg varname 0
       {              
-       ifvare TEMPVAR 1 state shadepulse
+       ifvare player[THISACTOR].heat_on 1 state shadepulse
 
        // Item Picture
        setvar digx 311 // 8
@@ -10782,11 +10717,10 @@ else
 
       setvar orientation_change 512
       // display jetpack - coded originally by DeeperThought o.o
-      getplayer[THISACTOR].jetpack_on TEMPVAR
       getplayer[THISACTOR].jetpack_amount varname
       ifvarg varname 0
       {
-       ifvarg TEMPVAR 2 state shadepulse
+       ifvarg player[THISACTOR].jetpack_on 2 state shadepulse
 
        // Item Picture
        setvar digx 311
@@ -10883,11 +10817,10 @@ else
 
       setvar orientation_change 512
       // display holoform - coded originally by DeeperThought o.O
-      getplayer[THISACTOR].holoduke_on TEMPVAR
       getplayer[THISACTOR].holoduke_amount varname
       ifvarg varname 0
       {
-       ifvarn TEMPVAR -1 state shadepulse
+       ifvarn player[THISACTOR].holoduke_on -1 state shadepulse
 
        // Item Picture
        setvar digx 311
@@ -10987,12 +10920,12 @@ else
 
       setvar orientation_change 512
       // display scuba - coded originally by DeeperThought O.o
-      setvarvar varname SCUBATIME // getplayer[THISACTOR].scuba_amount varname
+      setvarvar varname SCUBATIME
       ifvarg varname 0
       {
        ifvarl INVULNTIME 1
        {
-        ifvare SECTORLOTAG 2
+        ifvare sector[PLAYERSECTOR].lotag 2
         {
          ifvarn VEHICLEID -1
          {
@@ -11240,7 +11173,7 @@ else
       setvar orientation_change 0
 
       setvar orientation_change 512
-      // display mercury computer
+      // Display Mercury Computer
       setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
       ifvare CHARACTERSELECTED? 4 ifvare MISCARRAYID_AMOUNTTEMP 1
       {
@@ -13076,17 +13009,16 @@ else
     {
      ifvarn hitsector -1
      {
-      getsector[hitsector].floorpicnum temp
-      ifvare temp NEWFLOORPLASMA setvar tempb 1
-      else ifvare temp NEWFLOORPLASMAFROZE setvar tempb 1
-      else ifvare temp HOTLAVA setvar tempb 1
-      else ifvare temp HOTLAVAFROZE setvar tempb 1
-      else ifvare temp MEGALAVA setvar tempb 1
-      else ifvare temp MEGALAVAFROZE setvar tempb 1
-      else ifvare temp ULTRALAVA setvar tempb 1
-      else ifvare temp ULTRALAVAFROZE setvar tempb 1
-      else ifvare temp HYPERMAGMA setvar tempb 1
-      else ifvare temp HYPERMAGMAFROZE setvar tempb 1
+      ifvare sector[hitsector].floorpicnum NEWFLOORPLASMA setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum NEWFLOORPLASMAFROZE setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum HOTLAVA setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum HOTLAVAFROZE setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum MEGALAVA setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum MEGALAVAFROZE setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum ULTRALAVA setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum ULTRALAVAFROZE setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum HYPERMAGMA setvar tempb 1
+      else ifvare sector[hitsector].floorpicnum HYPERMAGMAFROZE setvar tempb 1
       else setvar tempb 0
      }
      else setvar tempb 0
@@ -13501,31 +13433,31 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYLEVEL varname
+      getactorvar[hitsprite].ACTORLEVEL varname
       redefinequote 332 LEVEL: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYHP varname
+      getactorvar[hitsprite].ACTORHP varname
       redefinequote 332 HP: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYMAXHP varname
+      getactorvar[hitsprite].ACTORMAXHP varname
       redefinequote 332 MAX HP: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYAP varname
+      getactorvar[hitsprite].ACTORAP varname
       redefinequote 332 AP: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYMAXAP varname
+      getactorvar[hitsprite].ACTORMAXAP varname
       redefinequote 332 MAX AP: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
@@ -13543,13 +13475,13 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYAIRTIME varname
+      getactorvar[hitsprite].ACTORAIRTIME varname
       redefinequote 332 AIRTIME: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYMAXAIRTIME varname
+      getactorvar[hitsprite].ACTORMAXAIRTIME varname
       redefinequote 332 MAX AIRTIME: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
@@ -13567,13 +13499,13 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYFIRSTAID varname
+      getactorvar[hitsprite].ACTORFIRSTAID varname
       redefinequote 332 FIRSTAID: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYARMORPERCENT varname
+      getactorvar[hitsprite].ACTORARMORPERCENT varname
       setvarvar TEMPVAR2 varname
       divvar TEMPVAR2 10
       setvarvar TEMPVAR3 varname
@@ -13583,43 +13515,43 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYQUADTIME varname
+      getactorvar[hitsprite].ACTORQUADTIME varname
       redefinequote 332 QUAD: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYINVULNTIME varname
+      getactorvar[hitsprite].ACTORINVULNTIME varname
       redefinequote 332 INVULN: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYREGENTIME varname
+      getactorvar[hitsprite].ACTORREGENTIME varname
       redefinequote 332 REGEN: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYAPREGENTIME varname
+      getactorvar[hitsprite].ACTORAPREGENTIME varname
       redefinequote 332 APREGEN: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYVAMPIRETIME varname
+      getactorvar[hitsprite].ACTORVAMPIRETIME varname
       redefinequote 332 VAMPIRE: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYBOOTSAMOUNT varname
+      getactorvar[hitsprite].ACTORBOOTSAMOUNT varname
       redefinequote 332 AIRTANK: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYAIRTANKAMOUNT varname
+      getactorvar[hitsprite].ACTORAIRTANKAMOUNT varname
       redefinequote 332 BOOTS: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
@@ -13751,7 +13683,7 @@ else
       setvar temp 332
       state gtz // state dnz
       addvar digy 4
-      getactorvar[hitsprite].ENEMYSPEED varname
+      getactorvar[hitsprite].ACTORSPEED varname
       redefinequote 332 MOVE SPEED: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
@@ -15321,21 +15253,17 @@ else
   ifvare CURRENTHITPOINTS 0 ifvare FROZEN? 0 nullop
   else
   { // [line 14928]
-   getplayer[THISACTOR].access_incs varname
-   ifvarg varname 0 // Using a Keycard on a Keyscanner
+   ifvarg player[THISACTOR].access_incs 0 // Using a Keycard on a Keyscanner
    { // Using a Keycard on a Keyscanner
  
     getactor[PLAYERID].sectnum temp
     getsector[temp].floorpal tempe
     getsector[temp].floorshade tempf
- 
-    getplayer[THISACTOR].access_spritenum tempd
-    ifvarn tempd -1 getactor[tempd].pal tempd
- 
+    ifvarn player[THISACTOR].access_spritenum -1 getactor[tempd].pal tempd 
+
     ifvarn AUTOMAPMODE 2
     {
-     getplayer[THISACTOR].over_shoulder_on TEMPVAR4
-     ifvare TEMPVAR4 0
+     ifvare player[THISACTOR].over_shoulder_on 0
      {
       // 1-10 - Holding Key (2568) [Flipped]
       // 11-15 - Withdrawing Hand 1 (2564)
@@ -15343,22 +15271,22 @@ else
       setvarvar pal tempd
  
       // Frames
-      ifvarg varname 0 ifvarl varname 11 { state orientation20 setvar diga 1024 setvar tilenum 2568 }
-      ifvarg varname 10 ifvarl varname 16 { state orientation16 setvar diga 0 setvar tilenum 2564 }
-      ifvarg varname 15 ifvarl varname 21 { state orientation16 setvar diga 0 setvar tilenum 2565 }
+      ifvarg player[THISACTOR].access_incs 0 ifvarl player[THISACTOR].access_incs 11 { state orientation20 setvar diga 1024 setvar tilenum 2568 }
+      ifvarg player[THISACTOR].access_incs 10 ifvarl player[THISACTOR].access_incs 16 { state orientation16 setvar diga 0 setvar tilenum 2564 }
+      ifvarg player[THISACTOR].access_incs 15 ifvarl player[THISACTOR].access_incs 21 { state orientation16 setvar diga 0 setvar tilenum 2565 }
  
-      ifvare varname 1 { setvarvar digx 247 setvarvar digy 196 }
-      ifvare varname 2 { setvarvar digx 249 setvarvar digy 189 }
-      ifvare varname 3 { setvarvar digx 245 setvarvar digy 173 }
-      ifvare varname 4 { setvarvar digx 237 setvarvar digy 141 }
-      ifvare varname 5 { setvarvar digx 232 setvarvar digy 121 }
-      ifvarg varname 5 ifvarl varname 11 { setvarvar digx 226 setvarvar digy 97 }
-      ifvarg varname 10 ifvarl varname 16 { setvarvar digx -13 setvarvar digy 88 }
-      ifvare varname 16 { setvarvar digx -5 setvarvar digy 107 }
-      ifvare varname 17 { setvarvar digx 1 setvarvar digy 131 }
-      ifvare varname 18 { setvarvar digx 3 setvarvar digy 139 }
-      ifvare varname 19 { setvarvar digx 11 setvarvar digy 171 }
-      ifvare varname 20 { setvarvar digx 15 setvarvar digy 187 }
+      ifvare player[THISACTOR].access_incs 1 { setvarvar digx 247 setvarvar digy 196 }
+      ifvare player[THISACTOR].access_incs 2 { setvarvar digx 249 setvarvar digy 189 }
+      ifvare player[THISACTOR].access_incs 3 { setvarvar digx 245 setvarvar digy 173 }
+      ifvare player[THISACTOR].access_incs 4 { setvarvar digx 237 setvarvar digy 141 }
+      ifvare player[THISACTOR].access_incs 5 { setvarvar digx 232 setvarvar digy 121 }
+      ifvarg player[THISACTOR].access_incs 5 ifvarl player[THISACTOR].access_incs 11 { setvarvar digx 226 setvarvar digy 97 }
+      ifvarg player[THISACTOR].access_incs 10 ifvarl player[THISACTOR].access_incs 16 { setvarvar digx -13 setvarvar digy 88 }
+      ifvare player[THISACTOR].access_incs 16 { setvarvar digx -5 setvarvar digy 107 }
+      ifvare player[THISACTOR].access_incs 17 { setvarvar digx 1 setvarvar digy 131 }
+      ifvare player[THISACTOR].access_incs 18 { setvarvar digx 3 setvarvar digy 139 }
+      ifvare player[THISACTOR].access_incs 19 { setvarvar digx 11 setvarvar digy 171 }
+      ifvare player[THISACTOR].access_incs 20 { setvarvar digx 15 setvarvar digy 187 }
       subvar digy 18 // repositions the display above the status bar
       state oldskoolturningpositions
       state digz65536
@@ -15369,8 +15297,7 @@ else
    } // Using a Keycard on a Keyscanner
    else // Not Using a Keycard on a Keyscanner
    { // Not Using a Keycard on a Keyscanner
-    getplayer[THISACTOR].knuckle_incs varname
-    ifvarg varname 0 // Cracking Knuckles
+    ifvarg player[THISACTOR].knuckle_incs 0 // Cracking Knuckles
     { // Cracking Knuckles
      getactor[PLAYERID].sectnum temp
      getsector[temp].floorpal tempe
@@ -15378,8 +15305,7 @@ else
  
      ifvarn AUTOMAPMODE 2
      {
-      getplayer[THISACTOR].over_shoulder_on TEMPVAR4
-      ifvare TEMPVAR4 0
+      ifvare player[THISACTOR].over_shoulder_on 0
       {
        // 1 - Frame 1 (2324) [Flipped]
        // 2-3 - Frame 2 (2325) [Flipped]
@@ -15390,13 +15316,13 @@ else
        // 20-21 - Frame 1 (2324) [Flipped]
        setvarvar pal tempd
  
-       ifvare varname 1 { setvar digx 309 setvar digy 129 state orientation20 setvar diga 1024 setvar tilenum 2324 }
-       ifvarg varname 1 ifvarl varname 4 { setvar digx 318 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2325 }
-       ifvarg varname 3 ifvarl varname 8 { setvar digx 307 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2326 }
-       ifvarg varname 7 ifvarl varname 14 { setvar digx 309 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2327 }
-       ifvarg varname 13 ifvarl varname 18 { setvar digx 307 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2326 }
-       ifvarg varname 17 ifvarl varname 20 { setvar digx 318 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2325 }
-       ifvarg varname 19 ifvarl varname 22 { setvar digx 309 setvar digy 129 state orientation20 setvar diga 1024 setvar tilenum 2324 }
+       ifvare player[THISACTOR].knuckle_incs 1 { setvar digx 309 setvar digy 129 state orientation20 setvar diga 1024 setvar tilenum 2324 }
+       ifvarg player[THISACTOR].knuckle_incs 1 ifvarl player[THISACTOR].knuckle_incs 4 { setvar digx 318 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2325 }
+       ifvarg player[THISACTOR].knuckle_incs 3 ifvarl player[THISACTOR].knuckle_incs 8 { setvar digx 307 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2326 }
+       ifvarg player[THISACTOR].knuckle_incs 7 ifvarl player[THISACTOR].knuckle_incs 14 { setvar digx 309 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2327 }
+       ifvarg player[THISACTOR].knuckle_incs 13 ifvarl player[THISACTOR].knuckle_incs 18 { setvar digx 307 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2326 }
+       ifvarg player[THISACTOR].knuckle_incs 17 ifvarl player[THISACTOR].knuckle_incs 20 { setvar digx 318 setvar digy 125 state orientation20 setvar diga 1024 setvar tilenum 2325 }
+       ifvarg player[THISACTOR].knuckle_incs 19 ifvarl player[THISACTOR].knuckle_incs 22 { setvar digx 309 setvar digy 129 state orientation20 setvar diga 1024 setvar tilenum 2324 }
        subvar digy 18 // repositions the display above the status bar
        state oldskoolturningpositions
        state digz65536
@@ -15410,12 +15336,10 @@ else
      getsector[temp].floorpal tempe
      getsector[temp].floorshade tempf
   
-     getplayer[THISACTOR].weapon_pos TEMPVAR3 // [negatives are "going down" [last_weapon], positives are "coming up" [curr_weapon]]
-     ifvarg TEMPVAR3 -11 ifvarl TEMPVAR3 0 getplayer[THISACTOR].last_weapon TEMPVAR
-     else ifvarg TEMPVAR3 -1 ifvarl TEMPVAR3 11 getplayer[THISACTOR].curr_weapon TEMPVAR
+     ifvarg player[THISACTOR].weapon_pos -11 ifvarl player[THISACTOR].weapon_pos 0 getplayer[THISACTOR].last_weapon TEMPVAR
+     else ifvarg player[THISACTOR].weapon_pos -1 ifvarl player[THISACTOR].weapon_pos 11 getplayer[THISACTOR].curr_weapon TEMPVAR
 
-     getplayer[THISACTOR].look_ang TEMPVAR5
-     setvarvar TEMP2 TEMPVAR5
+     setvarvar TEMP2 player[THISACTOR].look_ang
      mulvar TEMP2 100
      divvar TEMP2 608
 
@@ -15432,8 +15356,7 @@ else
  
      ifvarn AUTOMAPMODE 2
      {
-      getplayer[THISACTOR].over_shoulder_on TEMPVAR4
-      ifvare TEMPVAR4 0
+      ifvare player[THISACTOR].over_shoulder_on 0
       {
        // Kick
        ifvare TEMPVAR 0
@@ -15441,21 +15364,20 @@ else
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
    
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
         setvar tilenum 5372
-        ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 5 // Frames 2-5
+        ifvarg player[THISACTOR].kickback_pic 0 ifvarl player[THISACTOR].kickback_pic 5 // Frames 2-5
         {
          setvarvar digx 155 // 155 is normal x position for kick in non-oldskool mode
          setvarvar digy 152 // 152 is normal y position for kick in non-oldskool mode
          setvar tilenum 2521
         }
-        ifvarg TEMPVAR2 4 ifvarl TEMPVAR2 10
+        ifvarg player[THISACTOR].kickback_pic 4 ifvarl player[THISACTOR].kickback_pic 10
         {
          setvarvar digx 128 // 128 is normal x position for kick in non-oldskool mode
          setvarvar digy 81 // 81 is normal y position for kick in non-oldskool mode
          setvar tilenum 2522
         }
-        ifvarg TEMPVAR2 9 ifvarl TEMPVAR2 14
+        ifvarg player[THISACTOR].kickback_pic 9 ifvarl player[THISACTOR].kickback_pic 14
         {
          setvarvar digx 155 // 155 is normal x position for kick in non-oldskool mode
          setvarvar digy 152 // 152 is normal y position for kick in non-oldskool mode
@@ -15475,35 +15397,34 @@ else
        {
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
    
         // Ammo Clip & Hand
         setvar tilenum 5372
-        ifvare TEMPVAR2 10 // Frame 11 [Empty Clip]
+        ifvare player[THISACTOR].kickback_pic 10 // Frame 11 [Empty Clip]
         {
          setvarvar digx 142 // 142 is normal x position for pistol in non-oldskool mode
          setvarvar digy 196 // 196 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2530
         }
-        ifvare TEMPVAR2 18 // Frame 19 [Hand w/ Clip]
+        ifvare player[THISACTOR].kickback_pic 18 // Frame 19 [Hand w/ Clip]
         {
          setvarvar digx 113 // 113 is normal x position for pistol in non-oldskool mode
          setvarvar digy 190 // 190 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2531
         }
-        ifvare TEMPVAR2 19 // Frame 20 [Hand w/ Clip]
+        ifvare player[THISACTOR].kickback_pic 19 // Frame 20 [Hand w/ Clip]
         {
          setvarvar digx 113 // 113 is normal x position for pistol in non-oldskool mode
          setvarvar digy 185 // 185 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2531
         }
-        ifvarg TEMPVAR2 19 ifvarl TEMPVAR2 23 // Frame 21-23 [Hand w/o Clip]
+        ifvarg player[THISACTOR].kickback_pic 19 ifvarl player[THISACTOR].kickback_pic 23 // Frame 21-23 [Hand w/o Clip]
         {
          setvarvar digx 167 // 167 is normal x position for pistol in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2532
         }
-        ifvarg TEMPVAR2 22 ifvarl TEMPVAR2 25 // Frame 24-25 [Hand w/o Clip]
+        ifvarg player[THISACTOR].kickback_pic 22 ifvarl player[THISACTOR].kickback_pic 25 // Frame 24-25 [Hand w/o Clip]
         {
          setvarvar digx 147 // 147 is normal x position for pistol in non-oldskool mode
          setvarvar digy 141 // 141 is normal y position for pistol in non-oldskool mode
@@ -15511,62 +15432,62 @@ else
         }
         subvar digy 18 // repositions the display above the status bar
         state oldskoolweaponposchange
-        ifvarl TEMPVAR2 6 state oldskoolweaponbob
+        ifvarl player[THISACTOR].kickback_pic 6 state oldskoolweaponbob
         state oldskoolturningpositions
         state digz65536
         state orientation16
         state rs
    
         // Main Gun
-        ifvare TEMPVAR2 0 // Frame 1
+        ifvare player[THISACTOR].kickback_pic 0 // Frame 1
         {
          setvar digx 171 // 171 is normal x position for pistol in non-oldskool mode
          setvar digy 142 // 142 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2524
         }
-        ifvare TEMPVAR2 1 // Frame 2
+        ifvare player[THISACTOR].kickback_pic 1 // Frame 2
         {
          setvar digx 161 // 166 is normal x position for pistol in non-oldskool mode
          setvar digy 123 // 123 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2525
         }
-        ifvare TEMPVAR2 2 // Frame 3
+        ifvare player[THISACTOR].kickback_pic 2 // Frame 3
         {
          setvar digx 173 // 173 is normal x position for pistol in non-oldskool mode
          setvar digy 128 // 128 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2526
         }
-        ifvarg TEMPVAR2 2 ifvarl TEMPVAR2 7 // Frames 4-7
+        ifvarg player[THISACTOR].kickback_pic 2 ifvarl player[THISACTOR].kickback_pic 7 // Frames 4-7
         {
          setvar digx 171 // 171 is normal x position for pistol in non-oldskool mode
          setvar digy 142 // 142 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2524
         }
-        ifvarg TEMPVAR2 6 ifvarl TEMPVAR2 10 // Frames 8-11
+        ifvarg player[THISACTOR].kickback_pic 6 ifvarl player[THISACTOR].kickback_pic 10 // Frames 8-11
         {
          setvar digx 139 // 139 is normal x position for pistol in non-oldskool mode
          setvar digy 102 // 102 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2528
         }
-        ifvarg TEMPVAR2 9 ifvarl TEMPVAR2 20 // Frames 12-20
+        ifvarg player[THISACTOR].kickback_pic 9 ifvarl player[THISACTOR].kickback_pic 20 // Frames 12-20
         {
          setvar digx 183 // 183 is normal x position for pistol in non-oldskool mode
          setvar digy 74 // 74 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2529
         }
-        ifvarg TEMPVAR2 19 ifvarl TEMPVAR2 23 // Frames 21-23
+        ifvarg player[THISACTOR].kickback_pic 19 ifvarl player[THISACTOR].kickback_pic 23 // Frames 21-23
         {
          setvar digx 183 // 183 is normal x position for pistol in non-oldskool mode
          setvar digy 64 // 64 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2529
         }
-        ifvarg TEMPVAR2 22 ifvarl TEMPVAR2 25 // Frames 24-25
+        ifvarg player[THISACTOR].kickback_pic 22 ifvarl player[THISACTOR].kickback_pic 25 // Frames 24-25
         {
          setvar digx 183 // 183 is normal x position for pistol in non-oldskool mode
          setvar digy 74 // 74 is normal y position for pistol in non-oldskool mode
          setvar tilenum 2529
         }
-        ifvarg TEMPVAR2 24 ifvarl TEMPVAR2 27 // Frames 26-27
+        ifvarg player[THISACTOR].kickback_pic 24 ifvarl player[THISACTOR].kickback_pic 27 // Frames 26-27
         {
          setvar digx 153 // 153 is normal x position for pistol in non-oldskool mode
          setvar digy 89 // 89 is normal y position for pistol in non-oldskool mode
@@ -15574,7 +15495,7 @@ else
         }
         subvar digy 18 // repositions the display above the status bar
         state oldskoolweaponposchange
-        ifvarl TEMPVAR2 6 state oldskoolweaponbob
+        ifvarl player[THISACTOR].kickback_pic 6 state oldskoolweaponbob
         state oldskoolturningpositions
         state digz65536
         state orientation16
@@ -15595,54 +15516,53 @@ else
   
         // 1-2 - Muzzle Flash 2 [2615]
         // 3-4 - Muzzle Flash 2 [2615]
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
   
         setvar tilenum 5372
-        ifvarg TEMPVAR2 -1 ifvarl TEMPVAR2 3
+        ifvarg player[THISACTOR].kickback_pic -1 ifvarl player[THISACTOR].kickback_pic 3
         {
          setvarvar digx 155 // 155 is normal x position for gun in non-oldskool mode
          setvarvar digy 141 // 141 is normal y position for gun in non-oldskool mode
          setvar tilenum 2613
         }
-        ifvarg TEMPVAR2 2 ifvarl TEMPVAR2 5
+        ifvarg player[THISACTOR].kickback_pic 2 ifvarl player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 173 // 173 is normal x position for gun in non-oldskool mode
          setvarvar digy 171 // 171 is normal y position for gun in non-oldskool mode
          setvar tilenum 2616
         }
-        ifvare TEMPVAR2 5
+        ifvare player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 153 // 153 is normal x position for gun in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for gun in non-oldskool mode
          setvar tilenum 2616
         }
-        ifvarg TEMPVAR2 5 ifvarl TEMPVAR2 9
+        ifvarg player[THISACTOR].kickback_pic 5 ifvarl player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 155 // 155 is normal x position for gun in non-oldskool mode
          setvarvar digy 141 // 141 is normal y position for gun in non-oldskool mode
          setvar tilenum 2613
         }
-        ifvarg TEMPVAR2 8 ifvarl TEMPVAR2 13
+        ifvarg player[THISACTOR].kickback_pic 8 ifvarl player[THISACTOR].kickback_pic 13
         {
          setvarvar digx 153 // 153 is normal x position for gun in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for gun in non-oldskool mode
          setvar tilenum 2616
         }
-        ifvarg TEMPVAR2 12 ifvarl TEMPVAR2 16
+        ifvarg player[THISACTOR].kickback_pic 12 ifvarl player[THISACTOR].kickback_pic 16
         {
          setvarvar digx 143 // 143 is normal x position for gun in non-oldskool mode
          setvarvar digy 94 // 94 is normal y position for gun in non-oldskool mode
          setvar tilenum 2617
         }
-        ifvarg TEMPVAR2 15 ifvarl TEMPVAR2 20
+        ifvarg player[THISACTOR].kickback_pic 15 ifvarl player[THISACTOR].kickback_pic 20
         {
          setvarvar digx 158 // 158 is normal x position for gun in non-oldskool mode
          setvarvar digy 45 // 45 is normal y position for gun in non-oldskool mode
          setvar tilenum 2618
         }
-        ifvare TEMPVAR2 20
+        ifvare player[THISACTOR].kickback_pic 20
         {
          setvarvar digx 177 // 177 is normal x position for gun in non-oldskool mode
          setvarvar digy 46 // 46 is normal y position for gun in non-oldskool mode
@@ -15659,13 +15579,13 @@ else
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
         setvar tilenum 5372
-        ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 3
+        ifvarg player[THISACTOR].kickback_pic 0 ifvarl player[THISACTOR].kickback_pic 3
         {
          setvarvar digx 160 // 160 is normal x position for gun in non-oldskool mode
          setvarvar digy 125 // 125 is normal y position for gun in non-oldskool mode
          setvar tilenum 2615
         }
-        ifvarg TEMPVAR2 2 ifvarl TEMPVAR2 5
+        ifvarg player[THISACTOR].kickback_pic 2 ifvarl player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 190 // 190 is normal x position for gun in non-oldskool mode
          setvarvar digy 158 // 158 is normal y position for gun in non-oldskool mode
@@ -15695,7 +15615,6 @@ else
  
         // 5-8 - Left/Right Firing 1 [2541] (x2)
         // 9 - Left/Right Firing 2 [2542] (x2)
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
   
@@ -15703,13 +15622,13 @@ else
  
         // Middle Firing Barrel
         setvar tilenum 5372
-        ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 6
+        ifvarg player[THISACTOR].kickback_pic 0 ifvarl player[THISACTOR].kickback_pic 6
         {
          setvarvar digx 161 // 161 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 130 // 130 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2541
         }
-        ifvare TEMPVAR2 6
+        ifvare player[THISACTOR].kickback_pic 6
         {
          setvarvar digx 158 // 158 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 127 // 127 is normal y position for bottom part in non-oldskool mode
@@ -15727,13 +15646,13 @@ else
    
         // Left Firing Barrel
         setvar tilenum 5372
-        ifvarg TEMPVAR2 4 ifvarl TEMPVAR2 9
+        ifvarg player[THISACTOR].kickback_pic 4 ifvarl player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 141 // 141 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 130 // 130 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2541
         }
-        ifvare TEMPVAR2 9
+        ifvare player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 138 // 138 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 127 // 127 is normal y position for bottom part in non-oldskool mode
@@ -15751,13 +15670,13 @@ else
 
         // Right Firing Barrel
         setvar tilenum 5372
-        ifvarg TEMPVAR2 4 ifvarl TEMPVAR2 9
+        ifvarg player[THISACTOR].kickback_pic 4 ifvarl player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 181 // 161 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 130 // 130 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2541
         }
-        ifvare TEMPVAR2 9
+        ifvare player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 178 // 158 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 127 // 127 is normal y position for bottom part in non-oldskool mode
@@ -15775,7 +15694,7 @@ else
 
         // Bottom Part
         setvar tilenum 5372
-        ifvarg TEMPVAR2 -1 ifvarl TEMPVAR2 10
+        ifvarg player[THISACTOR].kickback_pic -1 ifvarl player[THISACTOR].kickback_pic 10
         {
          setvarvar digx 75 // 75 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 168 // 168 is normal y position for bottom part in non-oldskool mode
@@ -15793,31 +15712,31 @@ else
  
         // Top Part
         setvar tilenum 5372
-        ifvarg TEMPVAR2 -1 ifvarl TEMPVAR2 2
+        ifvarg player[THISACTOR].kickback_pic -1 ifvarl player[THISACTOR].kickback_pic 2
         {
          setvarvar digx 147 // 147 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 145 // 145 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2537
         }
-        ifvarg TEMPVAR2 1 ifvarl TEMPVAR2 4
+        ifvarg player[THISACTOR].kickback_pic 1 ifvarl player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 147 // 147 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 145 // 145 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2538
         }
-        ifvarg TEMPVAR2 3 ifvarl TEMPVAR2 6
+        ifvarg player[THISACTOR].kickback_pic 3 ifvarl player[THISACTOR].kickback_pic 6
         {
          setvarvar digx 147 // 147 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 145 // 145 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2539
         }
-        ifvarg TEMPVAR2 5 ifvarl TEMPVAR2 8
+        ifvarg player[THISACTOR].kickback_pic 5 ifvarl player[THISACTOR].kickback_pic 8
         {
          setvarvar digx 147 // 147 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 145 // 145 is normal y position for bottom part in non-oldskool mode
          setvar tilenum 2540
         }
-        ifvarg TEMPVAR2 7 ifvarl TEMPVAR2 10
+        ifvarg player[THISACTOR].kickback_pic 7 ifvarl player[THISACTOR].kickback_pic 10
         {
          setvarvar digx 147 // 147 is normal x position for bottom part in non-oldskool mode
          setvarvar digy 145 // 145 is normal y position for bottom part in non-oldskool mode
@@ -15843,125 +15762,124 @@ else
  
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
   
         // Main Gun
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 106 // 106 is normal x position for gun in non-oldskool mode
          setvarvar digy 126 // 126 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 1
+        ifvare player[THISACTOR].kickback_pic 1
         {
          setvarvar digx 106 // 106 is normal x position for gun in non-oldskool mode
          setvarvar digy 126 // 126 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 2
+        ifvare player[THISACTOR].kickback_pic 2
         {
          setvarvar digx 111 // 111 is normal x position for gun in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 3
+        ifvare player[THISACTOR].kickback_pic 3
         {
          setvarvar digx 115 // 115 is normal x position for gun in non-oldskool mode
          setvarvar digy 135 // 135 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 4
+        ifvare player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 117 // 117 is normal x position for gun in non-oldskool mode
          setvarvar digy 137 // 137 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 5
+        ifvare player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 119 // 119 is normal x position for gun in non-oldskool mode
          setvarvar digy 139 // 139 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 6
+        ifvare player[THISACTOR].kickback_pic 6
         {
          setvarvar digx 119 // 119 is normal x position for gun in non-oldskool mode
          setvarvar digy 139 // 139 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 7
+        ifvare player[THISACTOR].kickback_pic 7
         {
          setvarvar digx 119 // 119 is normal x position for gun in non-oldskool mode
          setvarvar digy 139 // 139 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 8
+        ifvare player[THISACTOR].kickback_pic 8
         {
          setvarvar digx 117 // 117 is normal x position for gun in non-oldskool mode
          setvarvar digy 137 // 137 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 9
+        ifvare player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 115 // 115 is normal x position for gun in non-oldskool mode
          setvarvar digy 135 // 135 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 10
+        ifvare player[THISACTOR].kickback_pic 10
         {
          setvarvar digx 111 // 111 is normal x position for gun in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 11
+        ifvare player[THISACTOR].kickback_pic 11
         {
          setvarvar digx 108 // 108 is normal x position for gun in non-oldskool mode
          setvarvar digy 128 // 128 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 12
+        ifvare player[THISACTOR].kickback_pic 12
         {
          setvarvar digx 106 // 106 is normal x position for gun in non-oldskool mode
          setvarvar digy 126 // 126 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 13
+        ifvare player[THISACTOR].kickback_pic 13
         {
          setvarvar digx 104 // 104 is normal x position for gun in non-oldskool mode
          setvarvar digy 124 // 124 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 14
+        ifvare player[THISACTOR].kickback_pic 14
         {
          setvarvar digx 102 // 102 is normal x position for gun in non-oldskool mode
          setvarvar digy 122 // 122 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 15
+        ifvare player[THISACTOR].kickback_pic 15
         {
          setvarvar digx 104 // 104 is normal x position for gun in non-oldskool mode
          setvarvar digy 124 // 124 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 16
+        ifvare player[THISACTOR].kickback_pic 16
         {
          setvarvar digx 106 // 106 is normal x position for gun in non-oldskool mode
          setvarvar digy 126 // 126 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 17
+        ifvare player[THISACTOR].kickback_pic 17
         {
          setvarvar digx 108 // 108 is normal x position for gun in non-oldskool mode
          setvarvar digy 128 // 128 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 18
+        ifvare player[THISACTOR].kickback_pic 18
         {
          setvarvar digx 111 // 111 is normal x position for gun in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for gun in non-oldskool mode
          setvar tilenum 2544
         }
-        ifvare TEMPVAR2 19
+        ifvare player[THISACTOR].kickback_pic 19
         {
          setvarvar digx 115 // 115 is normal x position for gun in non-oldskool mode
          setvarvar digy 135 // 135 is normal y position for gun in non-oldskool mode
@@ -15979,25 +15897,25 @@ else
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
         setvar tilenum 5372
-        ifvare TEMPVAR2 2
+        ifvare player[THISACTOR].kickback_pic 2
         {
          setvarvar digx 199 // 199 is normal x position for gun in non-oldskool mode
          setvarvar digy 121 // 121 is normal y position for gun in non-oldskool mode
          setvar tilenum 2545
         }
-        ifvare TEMPVAR2 3
+        ifvare player[THISACTOR].kickback_pic 3
         {
          setvarvar digx 203 // 203 is normal x position for gun in non-oldskool mode
          setvarvar digy 125 // 125 is normal y position for gun in non-oldskool mode
          setvar tilenum 2545
         }
-        ifvare TEMPVAR2 4
+        ifvare player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 189 // 189 is normal x position for gun in non-oldskool mode
          setvarvar digy 113 // 113 is normal y position for gun in non-oldskool mode
          setvar tilenum 2546
         }
-        ifvare TEMPVAR2 5
+        ifvare player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 191 // 191 is normal x position for gun in non-oldskool mode
          setvarvar digy 115 // 115 is normal y position for gun in non-oldskool mode
@@ -16020,40 +15938,39 @@ else
         // 12-19 - Empty Hand
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
  
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 180 // 180 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 118 // 118 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2573
         }
-        ifvare TEMPVAR2 1
+        ifvare player[THISACTOR].kickback_pic 1
         {
          setvarvar digx 180 // 180 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 118 // 118 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2573
         }
-        ifvare TEMPVAR2 2
+        ifvare player[THISACTOR].kickback_pic 2
         {
          setvarvar digx 180 // 180 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 128 // 128 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2573
         }
-        ifvare TEMPVAR2 3
+        ifvare player[THISACTOR].kickback_pic 3
         {
          setvarvar digx 180 // 180 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 138 // 138 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2573
         }
-        ifvare TEMPVAR2 4
+        ifvare player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 180 // 180 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 148 // 148 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2573
         }
-        ifvare TEMPVAR2 5
+        ifvare player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 112 // 112 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 189 // 189 is normal y position for pipebomb in non-oldskool mode
@@ -16061,73 +15978,73 @@ else
         }
         // 6 = Empty
         // 7 = Empty
-        ifvare TEMPVAR2 8
+        ifvare player[THISACTOR].kickback_pic 8
         {
          setvarvar digx 109 // 109 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 168 // 168 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2574
         }
-        ifvare TEMPVAR2 9
+        ifvare player[THISACTOR].kickback_pic 9
         {
          setvarvar digx 112 // 112 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 159 // 159 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2574
         }
-        ifvare TEMPVAR2 10
+        ifvare player[THISACTOR].kickback_pic 10
         {
          setvarvar digx 112 // 112 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 139 // 139 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2574
         }
-        ifvare TEMPVAR2 11
+        ifvare player[THISACTOR].kickback_pic 11
         {
          setvarvar digx 112 // 112 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 119 // 119 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2574
         }
-        ifvare TEMPVAR2 12
+        ifvare player[THISACTOR].kickback_pic 12
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 134 // 134 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 13
+        ifvare player[THISACTOR].kickback_pic 13
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 143 // 143 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 14
+        ifvare player[THISACTOR].kickback_pic 14
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 152 // 152 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 15
+        ifvare player[THISACTOR].kickback_pic 15
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 161 // 161 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 16
+        ifvare player[THISACTOR].kickback_pic 16
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 170 // 170 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 17
+        ifvare player[THISACTOR].kickback_pic 17
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 179 // 179 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 18
+        ifvare player[THISACTOR].kickback_pic 18
         {
          setvarvar digx 153 // 153 is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 188 // 188 is normal y position for pipebomb in non-oldskool mode
          setvar tilenum 2575
         }
-        ifvare TEMPVAR2 19
+        ifvare player[THISACTOR].kickback_pic 19
         {
          setvarvar digx 153 // ? is normal x position for pipebomb in non-oldskool mode
          setvarvar digy 197 // ? is normal y position for pipebomb in non-oldskool mode
@@ -16152,64 +16069,63 @@ else
         // 6-9 - Idle
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
-        getplayer[THISACTOR].kickback_pic TEMPVAR2  
   
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx -22 // -22 is normal x position for remote in non-oldskool mode
          setvarvar digy 137 // 137 is normal y position for remote in non-oldskool mode
          setvar tilenum 2570
         }
-        ifvare TEMPVAR2 1
+        ifvare player[THISACTOR].kickback_pic 1
         {
          setvarvar digx 6 // 6 is normal x position for remote in non-oldskool mode
          setvarvar digy 142 // 142 is normal y position for remote in non-oldskool mode
          setvar tilenum 2571
         }
-        ifvare TEMPVAR2 2
+        ifvare player[THISACTOR].kickback_pic 2
         {
          setvarvar digx 6 // 6 is normal x position for remote in non-oldskool mode
          setvarvar digy 142 // 142 is normal y position for remote in non-oldskool mode
          setvar tilenum 2571
         }
-        ifvare TEMPVAR2 3
+        ifvare player[THISACTOR].kickback_pic 3
         {
          setvarvar digx -23 // -23 is normal x position for remote in non-oldskool mode
          setvarvar digy 139 // 139 is normal y position for remote in non-oldskool mode
          setvar tilenum 2572
         }
-        ifvare TEMPVAR2 4
+        ifvare player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 6 // ? is normal x position for remote in non-oldskool mode
          setvarvar digy 142 // ? is normal y position for remote in non-oldskool mode
          setvar tilenum 2571
         }
-        ifvare TEMPVAR2 5
+        ifvare player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 6 // ? is normal x position for remote in non-oldskool mode
          setvarvar digy 142 // ? is normal y position for remote in non-oldskool mode
          setvar tilenum 2571
         }
-        ifvare TEMPVAR2 6
+        ifvare player[THISACTOR].kickback_pic 6
         {
          setvarvar digx -22 // ? is normal x position for remote in non-oldskool mode
          setvarvar digy 137 // ? is normal y position for remote in non-oldskool mode
          setvar tilenum 2570
         }
-        ifvare TEMPVAR2 7
+        ifvare player[THISACTOR].kickback_pic 7
         {
          setvarvar digx -22 // ? is normal x position for remote in non-oldskool mode
          setvarvar digy 137 // ? is normal y position for remote in non-oldskool mode
          setvar tilenum 2570
         }
-        ifvare TEMPVAR2 8
+        ifvare player[THISACTOR].kickback_pic 8
         {
          setvarvar digx -22 // ? is normal x position for remote in non-oldskool mode
          setvarvar digy 137 // ? is normal y position for remote in non-oldskool mode
          setvar tilenum 2570
         }
-        ifvare TEMPVAR2 9
+        ifvare player[THISACTOR].kickback_pic 9
         {
          setvarvar digx -22 // ? is normal x position for remote in non-oldskool mode
          setvarvar digy 137 // ? is normal y position for remote in non-oldskool mode
@@ -16239,7 +16155,6 @@ else
         // 9 - 2560 [Crystal]
         // 10 - 2561 [Crystal]
         // 11 - ? [Crystal] (2560/2562)
-        getplayer[THISACTOR].kickback_pic TEMPVAR2
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
   
@@ -16247,84 +16162,84 @@ else
    
         // Crystal Part
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          state shadepulse3
          setvarvar digx 183 // 183 is normal x position for crystal in non-oldskool mode
          setvarvar digy 160 // 160 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2558
         }
-        ifvare TEMPVAR2 1
+        ifvare player[THISACTOR].kickback_pic 1
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 2
+        ifvare player[THISACTOR].kickback_pic 2
         {
          setvar shade -31
          setvarvar digx 183 // 183 is normal x position for crystal in non-oldskool mode
          setvarvar digy 155 // 155 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2561
         }
-        ifvare TEMPVAR2 3
+        ifvare player[THISACTOR].kickback_pic 3
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 4
+        ifvare player[THISACTOR].kickback_pic 4
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 153 // 153 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2559
         }
-        ifvare TEMPVAR2 5
+        ifvare player[THISACTOR].kickback_pic 5
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 6
+        ifvare player[THISACTOR].kickback_pic 6
         {
          setvar shade -31
          setvarvar digx 183 // 183 is normal x position for crystal in non-oldskool mode
          setvarvar digy 155 // 155 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2561
         }
-        ifvare TEMPVAR2 7
+        ifvare player[THISACTOR].kickback_pic 7
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 8
+        ifvare player[THISACTOR].kickback_pic 8
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 153 // 153 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2559
         }
-        ifvare TEMPVAR2 9
+        ifvare player[THISACTOR].kickback_pic 9
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 10
+        ifvare player[THISACTOR].kickback_pic 10
         {
          setvar shade -31
          setvarvar digx 183 // 183 is normal x position for crystal in non-oldskool mode
          setvarvar digy 155 // 155 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2561
         }
-        ifvare TEMPVAR2 11
+        ifvare player[THISACTOR].kickback_pic 11
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
@@ -16344,13 +16259,13 @@ else
 
         // Gun Part
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 151 // 151 is normal x position for gun in non-oldskool mode
          setvarvar digy 151 // 151 is normal y position for gun in non-oldskool mode
          setvar tilenum 2556
         }
-        ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 12
+        ifvarg player[THISACTOR].kickback_pic 0 ifvarl player[THISACTOR].kickback_pic 12
         {
          setvarvar digx 151 // 151 is normal x position for gun in non-oldskool mode
          setvarvar digy 151 // 151 is normal y position for gun in non-oldskool mode
@@ -16375,42 +16290,41 @@ else
         // 2 - 2561 [Crystal] (Pal 2)
         // 3 - ? [Crystal] (2560/2562) (Pal 2)
         // 4 - 2559 [Crystal] (Pal 2)
-        getplayer[THISACTOR].kickback_pic TEMPVAR2
         ifvarn tempe 0 setvarvar pal tempe else setvar pal 2 
  
         state oldskoolgetshake
   
         // Crystal Part
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          state shadepulse3
          setvarvar digx 183 // 183 is normal x position for crystal in non-oldskool mode
          setvarvar digy 160 // 160 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2558
         }
-        ifvare TEMPVAR2 1
+        ifvare player[THISACTOR].kickback_pic 1
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 2
+        ifvare player[THISACTOR].kickback_pic 2
         {
          setvar shade -31
          setvarvar digx 183 // 183 is normal x position for crystal in non-oldskool mode
          setvarvar digy 155 // 155 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2561
         }
-        ifvare TEMPVAR2 3
+        ifvare player[THISACTOR].kickback_pic 3
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
          setvarvar digy 157 // 157 is normal y position for crystal in non-oldskool mode
          setvar tilenum 2560
         }
-        ifvare TEMPVAR2 4
+        ifvare player[THISACTOR].kickback_pic 4
         {
          setvar shade -31
          setvarvar digx 181 // 181 is normal x position for crystal in non-oldskool mode
@@ -16432,13 +16346,13 @@ else
   
         // Gun Part
         setvar tilenum 5372
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 154 // 154 is normal x position for gun in non-oldskool mode
          setvarvar digy 146 // 146 is normal y position for remote in non-oldskool mode
          setvar tilenum 2554
         }
-        ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 5
+        ifvarg player[THISACTOR].kickback_pic 0 ifvarl player[THISACTOR].kickback_pic 5
         {
          setvarvar digx 154 // 154 is normal x position for gun in non-oldskool mode
          setvarvar digy 146 // 146 is normal y position for gun in non-oldskool mode
@@ -16458,7 +16372,6 @@ else
        // Devastator
        ifvare TEMPVAR 7
        {
-        getplayer[THISACTOR].kickback_pic TEMPVAR2
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
   
@@ -16467,7 +16380,7 @@ else
         // [Starts off firing Right, then alternates to Left on next counter, then back]
    
         // Left Barrel
-        ifvare TEMPVAR2 0 
+        ifvare player[THISACTOR].kickback_pic 0 
         {
          setvarvar digx 127 // 127 is normal x position for left barrel in non-oldskool mode
          setvarvar digy 132 // 132 is normal y position for left barrel in non-oldskool mode
@@ -16477,7 +16390,7 @@ else
         }
         ifvare DEVASTATORBARRELDISPLAY 0
         {
-         ifvare TEMPVAR2 1
+         ifvare player[THISACTOR].kickback_pic 1
          {
           setvarvar digx 125 // 125 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 136 // 136 is normal y position for left barrel in non-oldskool mode
@@ -16485,7 +16398,7 @@ else
           setvar diga 1024
           setvar tilenum 2510
          }
-         ifvare TEMPVAR2 2
+         ifvare player[THISACTOR].kickback_pic 2
          {
           setvarvar digx 121 // 121 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 144 // 144 is normal y position for left barrel in non-oldskool mode
@@ -16493,7 +16406,7 @@ else
           setvar diga 1024
           setvar tilenum 2510
          }
-         ifvare TEMPVAR2 3
+         ifvare player[THISACTOR].kickback_pic 3
          {
           setvarvar digx 115 // 115 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 156 // 156 is normal y position for left barrel in non-oldskool mode
@@ -16501,7 +16414,7 @@ else
           setvar diga 1024
           setvar tilenum 2510
          }
-         ifvare TEMPVAR2 4
+         ifvare player[THISACTOR].kickback_pic 4
          {
           setvarvar digx 119 // 119 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 147 // 147 is normal y position for left barrel in non-oldskool mode
@@ -16526,7 +16439,7 @@ else
         state rs
    
         // Right Barrel
-         ifvare TEMPVAR2 0
+         ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 195 // 195 is normal x position for left barrel in non-oldskool mode
          setvarvar digy 130 // 130 is normal y position for left barrel in non-oldskool mode
@@ -16536,7 +16449,7 @@ else
         }
         ifvare DEVASTATORBARRELDISPLAY 1
         {
-         ifvare TEMPVAR2 1
+         ifvare player[THISACTOR].kickback_pic 1
          {
           setvarvar digx 197 // 197 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 134 // 134 is normal y position for left barrel in non-oldskool mode
@@ -16544,7 +16457,7 @@ else
           setvar diga 0
           setvar tilenum 2510
          }
-         ifvare TEMPVAR2 2
+         ifvare player[THISACTOR].kickback_pic 2
          {
           setvarvar digx 201 // 201 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 142 // 142 is normal y position for left barrel in non-oldskool mode
@@ -16552,7 +16465,7 @@ else
           setvar diga 0
           setvar tilenum 2510
          }
-         ifvare TEMPVAR2 3
+         ifvare player[THISACTOR].kickback_pic 3
          {
           setvarvar digx 207 // 207 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 154 // 154 is normal y position for left barrel in non-oldskool mode
@@ -16560,7 +16473,7 @@ else
           setvar diga 0
           setvar tilenum 2510
          }
-         ifvare TEMPVAR2 4
+         ifvare player[THISACTOR].kickback_pic 4
          {
           setvarvar digx 203 // 203 is normal x position for left barrel in non-oldskool mode
           setvarvar digy 145 // 145 is normal y position for left barrel in non-oldskool mode
@@ -16589,7 +16502,6 @@ else
        // Tripbombs
        ifvare TEMPVAR 8
        {
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
   
@@ -16599,7 +16511,7 @@ else
         // 7-8 - Lowered Open Hands
         // 9-39 - Empty
         setvar tilenum 5372
-        ifvarg TEMPVAR2 -1 ifvarl TEMPVAR2 4
+        ifvarg player[THISACTOR].kickback_pic -1 ifvarl player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 90 // 90 is normal x position for tripbomb in non-oldskool mode
          setvarvar digy 156 // 156 is normal y position for tripbomb in non-oldskool mode
@@ -16618,7 +16530,7 @@ else
         setvar tilenum 5372
         setvar diga 0
         state orientation16
-        ifvarg TEMPVAR2 -1 ifvarl TEMPVAR2 4
+        ifvarg player[THISACTOR].kickback_pic -1 ifvarl player[THISACTOR].kickback_pic 4
         {
          setvarvar digx -10 // -10 is normal x position for left hand in non-oldskool mode
          setvarvar digy 138 // 138 is normal y position for left hand in non-oldskool mode
@@ -16626,7 +16538,7 @@ else
          state orientation16
          setvar tilenum 2563
         }
-        ifvarg TEMPVAR2 3 ifvarl TEMPVAR2 7
+        ifvarg player[THISACTOR].kickback_pic 3 ifvarl player[THISACTOR].kickback_pic 7
         {
          setvarvar digx -6 // -6 is normal x position for left hand in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for left hand in non-oldskool mode
@@ -16634,7 +16546,7 @@ else
          state orientation16
          setvar tilenum 2564
         }
-        ifvare TEMPVAR2 7
+        ifvare player[THISACTOR].kickback_pic 7
         {
          setvarvar digx -6 // 3 is normal x position for left hand in non-oldskool mode
          setvarvar digy 187 // 187 is normal y position for left hand in non-oldskool mode
@@ -16653,7 +16565,7 @@ else
         setvar tilenum 5372
         setvar diga 1024
         state orientation20
-        ifvarg TEMPVAR2 -1 ifvarl TEMPVAR2 4
+        ifvarg player[THISACTOR].kickback_pic -1 ifvarl player[THISACTOR].kickback_pic 4
         {
          setvarvar digx 332 // 153 is normal x position for right hand in non-oldskool mode
          setvarvar digy 138 // 138 is normal y position for right hand in non-oldskool mode
@@ -16661,7 +16573,7 @@ else
          state orientation20
          setvar tilenum 2563
         }
-        ifvarg TEMPVAR2 3 ifvarl TEMPVAR2 7
+        ifvarg player[THISACTOR].kickback_pic 3 ifvarl player[THISACTOR].kickback_pic 7
         {
          setvarvar digx 328 // 328 is normal x position for right hand in non-oldskool mode
          setvarvar digy 131 // 131 is normal y position for right hand in non-oldskool mode
@@ -16669,7 +16581,7 @@ else
          state orientation20
          setvar tilenum 2564
         }
-        ifvare TEMPVAR2 7
+        ifvare player[THISACTOR].kickback_pic 7
         {
          setvarvar digx 328 // 328 is normal x position for right hand in non-oldskool mode
          setvarvar digy 187 // 187 is normal y position for right hand in non-oldskool mode
@@ -16688,7 +16600,6 @@ else
        // Freezethrower
        ifvare TEMPVAR 9
        {
-        getplayer[THISACTOR].kickback_pic TEMPVAR2 
         ifvarn tempe 0 setvarvar pal tempe else { ifvare FROZEN? 1 setvar pal 1 else setvar pal 0 }
         ifvarn tempf 0 setvarvar shade tempf else setvar shade 0
    
@@ -16702,7 +16613,7 @@ else
   
         // Bottom Part [1-7]
         setvar tilenum 5372
-        ifvarg TEMPVAR2 0
+        ifvarg player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 58 // ~58 is normal x position for freezethrower [bottom] in non-oldskool mode
          setvarvar digy 155 // ~155 is normal y position for freezethrower [bottom] in non-oldskool mode
@@ -16719,28 +16630,28 @@ else
         }
    
         // Top Parts [1-7]
-        ifvarg TEMPVAR2 0
+        ifvarg player[THISACTOR].kickback_pic 0
         {
          setvar tilenum 5372
-         ifvare TEMPVAR2 1
+         ifvare player[THISACTOR].kickback_pic 1
          {
           setvarvar digx 127 // ~127 is normal x position for freezethrower [top] in non-oldskool mode
           setvarvar digy 137 // ~137 is normal y position for freezethrower [top] in non-oldskool mode
           setvar tilenum 2551
          }
-         ifvarg TEMPVAR2 1 ifvarl TEMPVAR2 4
+         ifvarg player[THISACTOR].kickback_pic 1 ifvarl player[THISACTOR].kickback_pic 4
          {
           setvarvar digx 127 // ~127 is normal x position for freezethrower [top] in non-oldskool mode
           setvarvar digy 144 // ~144 is normal y position for freezethrower [top] in non-oldskool mode
           setvar tilenum 2552
          }
-         ifvarg TEMPVAR2 3 ifvarl TEMPVAR2 6
+         ifvarg player[THISACTOR].kickback_pic 3 ifvarl player[THISACTOR].kickback_pic 6
          {
           setvarvar digx 127 // ~127 is normal x position for freezethrower [top] in non-oldskool mode
           setvarvar digy 140 // ~140 is normal y position for freezethrower [top] in non-oldskool mode
           setvar tilenum 2553
          }
-         ifvarg TEMPVAR2 5 ifvarl TEMPVAR2 8
+         ifvarg player[THISACTOR].kickback_pic 5 ifvarl player[THISACTOR].kickback_pic 8
          {
           setvarvar digx 127 // ~127 is normal x position for freezethrower [top] in non-oldskool mode
           setvarvar digy 137 // ~144 is normal y position for freezethrower [top] in non-oldskool mode
@@ -16758,7 +16669,7 @@ else
         }
   
         // Idle Frame [0]
-        ifvare TEMPVAR2 0
+        ifvare player[THISACTOR].kickback_pic 0
         {
          setvarvar digx 151 // 151 is normal x position for freezethrower [full] in non-oldskool mode
          setvarvar digy 143 // 143 is normal y position for freezethrower [full] in non-oldskool mode
@@ -16790,19 +16701,29 @@ else
   state rs
 
   // Health Display [in % format akin to classic Duke3D]
-  state calchppercentage
+  ifvarn MAXHITPOINTS 0 
+  {
+   setvarvar TEMPVAR8 CURRENTHITPOINTS
+   mulvar TEMPVAR8 100
+   divvarvar TEMPVAR8 MAXHITPOINTS
+  }
   setvar digx 32
   setvar digy 183
   setvar tilenum 2472
-  setvarvar varname HPPERCENTAGE
+  setvarvar varname TEMPVAR8
   state dn
 
   // Armor Display [in % format akin to classic Duke3D]
-  state calcappercentage
+  ifvarn MAXARMORPOINTS 0 
+  {
+   setvarvar TEMPVAR8 CURRENTARMORPOINTS
+   mulvar TEMPVAR8 100
+   divvarvar TEMPVAR8 MAXARMORPOINTS
+  }
   setvar digx 64
   setvar digy 183
   setvar tilenum 2472
-  setvarvar varname APPERCENTAGE
+  setvarvar varname TEMPVAR8
   state dn
 
   // Weapons/Ammo Display
@@ -16810,41 +16731,41 @@ else
   state setquote332
   setvar digx 89
   setvar digy 178
-  ifvare CURRENTWEAPON 1 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 1 state shade-31 else state shade0
   redefinequote 332 2
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 2 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 2 state shade-31 else state shade0
   redefinequote 332 3
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 3 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 3 state shade-31 else state shade0
   redefinequote 332 4
   state mt
   setvar digx 128
   setvar digy 178
-  ifvare CURRENTWEAPON 4 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 4 state shade-31 else state shade0
   redefinequote 332 5
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 5 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 5 state shade-31 else state shade0
   redefinequote 332 6
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 6 state shade-31 else { ifvare CURRENTWEAPON 11 state shade-31 else state shade0 }
+  ifvare player[THISACTOR].curr_weapon 6 state shade-31 else { ifvare player[THISACTOR].curr_weapon 11 state shade-31 else state shade0 }
   redefinequote 332 7
   state mt
   setvar digx 159
   setvar digy 178
-  ifvare CURRENTWEAPON 7 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 7 state shade-31 else state shade0
   redefinequote 332 8
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 8 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 8 state shade-31 else state shade0
   redefinequote 332 9
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 9 state shade-31 else state shade0
+  ifvare player[THISACTOR].curr_weapon 9 state shade-31 else state shade0
   redefinequote 332 0
   state mt
   state pal6
@@ -16852,64 +16773,64 @@ else
   redefinequote 332 :
   setvar digx 93
   setvar digy 178
-  ifvare CURRENTWEAPON 1 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 1 state shade-31 else state shade15
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 2 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 2 state shade-31 else state shade15
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 3 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 3 state shade-31 else state shade15
   state mt
   setvar digx 132
   setvar digy 178
-  ifvare CURRENTWEAPON 4 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 4 state shade-31 else state shade15
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 5 state shade-31 else { ifvare CURRENTWEAPON 10 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 5 state shade-31 else { ifvare player[THISACTOR].curr_weapon 10 state shade-31 else state shade15 }
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 6 state shade-31 else { ifvare CURRENTWEAPON 11 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 6 state shade-31 else { ifvare player[THISACTOR].curr_weapon 11 state shade-31 else state shade15 }
   state mt
   setvar digx 163
   setvar digy 178
-  ifvare CURRENTWEAPON 7 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 7 state shade-31 else state shade15
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 8 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 8 state shade-31 else state shade15
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 9 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 9 state shade-31 else state shade15
   state mt
   redefinequote 332 /
   setvar digx 108
   setvar digy 178
-  ifvare CURRENTWEAPON 1 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 1 state shade-31 else state shade15
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 2 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 2 state shade-31 else state shade15
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 3 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 3 state shade-31 else state shade15
   state mt
   setvar digx 143
   setvar digy 178
-  ifvare CURRENTWEAPON 4 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 4 state shade-31 else state shade15
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 5 state shade-31 else { ifvare CURRENTWEAPON 10 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 5 state shade-31 else { ifvare player[THISACTOR].curr_weapon 10 state shade-31 else state shade15 }
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 6 state shade-31 else { ifvare CURRENTWEAPON 11 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 6 state shade-31 else { ifvare player[THISACTOR].curr_weapon 11 state shade-31 else state shade15 }
   state mt
   setvar digx 174
   setvar digy 178
-  ifvare CURRENTWEAPON 7 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 7 state shade-31 else state shade15
   state mt
   setvar digy 184
-  ifvare CURRENTWEAPON 8 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 8 state shade-31 else state shade15
   state mt
   setvar digy 190
-  ifvare CURRENTWEAPON 9 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 9 state shade-31 else state shade15
   state mt
 
   setvar tilenum 3087
@@ -16919,7 +16840,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO2 TEMPVAR
   ifvarg TEMPVAR 999 setvar TEMPVAR 999 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 99 setvar digx 102 else ifvarg TEMPVAR 9 ifvarl TEMPVAR 100 setvar digx 104 else setvar digx 106
-  ifvare CURRENTWEAPON 1 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 1 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -16928,7 +16849,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO3 TEMPVAR
   ifvarg TEMPVAR 999 setvar TEMPVAR 999 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 99 setvar digx 102 else ifvarg TEMPVAR 9 ifvarl TEMPVAR 100 setvar digx 104 else setvar digx 106
-  ifvare CURRENTWEAPON 2 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 2 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -16937,7 +16858,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO4 TEMPVAR
   ifvarg TEMPVAR 999 setvar TEMPVAR 999 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 99 setvar digx 102 else ifvarg TEMPVAR 9 ifvarl TEMPVAR 100 setvar digx 104 else setvar digx 106
-  ifvare CURRENTWEAPON 3 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 3 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -16946,7 +16867,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO5 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 139 else setvar digx 141
-  ifvare CURRENTWEAPON 4 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 4 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -16955,7 +16876,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO6 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 139 else setvar digx 141
-  ifvare CURRENTWEAPON 5 state shade-31 else { ifvare CURRENTWEAPON 10 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 5 state shade-31 else { ifvare player[THISACTOR].curr_weapon 10 state shade-31 else state shade15 }
   setvarvar varname TEMPVAR
   state dn
 
@@ -16964,7 +16885,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO7 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 139 else setvar digx 141
-  ifvare CURRENTWEAPON 6 state shade-31 else { ifvare CURRENTWEAPON 11 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 6 state shade-31 else { ifvare player[THISACTOR].curr_weapon 11 state shade-31 else state shade15 }
   setvarvar varname TEMPVAR
   state dn
 
@@ -16973,7 +16894,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO8 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 170 else setvar digx 172
-  ifvare CURRENTWEAPON 7 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 7 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -16982,7 +16903,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO9 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 170 else setvar digx 172
-  ifvare CURRENTWEAPON 8 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 8 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -16991,7 +16912,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERAMMO10 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 170 else setvar digx 172
-  ifvare CURRENTWEAPON 9 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 9 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17000,7 +16921,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO2 TEMPVAR
   ifvarg TEMPVAR 999 setvar TEMPVAR 999 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 99 setvar digx 118 else ifvarg TEMPVAR 9 ifvarl TEMPVAR 100 setvar digx 116 else setvar digx 114
-  ifvare CURRENTWEAPON 1 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 1 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17009,7 +16930,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO3 TEMPVAR
   ifvarg TEMPVAR 999 setvar TEMPVAR 999 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 99 setvar digx 118 else ifvarg TEMPVAR 9 ifvarl TEMPVAR 100 setvar digx 116 else setvar digx 114
-  ifvare CURRENTWEAPON 2 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 2 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17018,7 +16939,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO4 TEMPVAR
   ifvarg TEMPVAR 999 setvar TEMPVAR 999 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 99 setvar digx 118 else ifvarg TEMPVAR 9 ifvarl TEMPVAR 100 setvar digx 116 else setvar digx 114
-  ifvare CURRENTWEAPON 3 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 3 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17027,7 +16948,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO5 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 151 else setvar digx 149
-  ifvare CURRENTWEAPON 4 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 4 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17036,7 +16957,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO6 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 151 else setvar digx 149
-  ifvare CURRENTWEAPON 5 state shade-31 else { ifvare CURRENTWEAPON 10 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 5 state shade-31 else { ifvare player[THISACTOR].curr_weapon 10 state shade-31 else state shade15 }
   setvarvar varname TEMPVAR
   state dn
 
@@ -17045,7 +16966,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO7 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 151 else setvar digx 149
-  ifvare CURRENTWEAPON 6 state shade-31 else { ifvare CURRENTWEAPON 11 state shade-31 else state shade15 }
+  ifvare player[THISACTOR].curr_weapon 6 state shade-31 else { ifvare player[THISACTOR].curr_weapon 11 state shade-31 else state shade15 }
   setvarvar varname TEMPVAR
   state dn
 
@@ -17054,7 +16975,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO8 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 182 else setvar digx 180
-  ifvare CURRENTWEAPON 7 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 7 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17063,7 +16984,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO9 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 182 else setvar digx 180
-  ifvare CURRENTWEAPON 8 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 8 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
 
@@ -17072,7 +16993,7 @@ else
   getactorvar[CHARACTERARRAY].CHARACTERMAXAMMO10 TEMPVAR
   ifvarg TEMPVAR 99 setvar TEMPVAR 99 else setvarvar TEMPVAR TEMPVAR
   ifvarg TEMPVAR 9 setvar digx 182 else setvar digx 180
-  ifvare CURRENTWEAPON 9 state shade-31 else state shade15
+  ifvare player[THISACTOR].curr_weapon 9 state shade-31 else state shade15
   setvarvar varname TEMPVAR
   state dn
   
@@ -17085,9 +17006,8 @@ else
   setvarvar varname CURRENTAMMOA
   state dn
 
-  getplayer[THISACTOR].inven_icon TEMPVAR2
   // Inventory Display
-  ifvare TEMPVAR2 0 // N/A
+  ifvare player[THISACTOR].inven_icon 0 // N/A
   {
    setvar TEMPVAR3 2 // none
    setvar digx 0
@@ -17095,7 +17015,7 @@ else
    setvar tilenum 2459
    state rs
   }
-  ifvare TEMPVAR2 1 // Medkit
+  ifvare player[THISACTOR].inven_icon 1 // Medkit
   {
    setvar TEMPVAR3 2 // none
    setvar digx 231
@@ -17107,7 +17027,7 @@ else
    mulvar varname 100
    ifvarn MAXHITPOINTS 0 divvarvar varname MAXHITPOINTS
   }
-  ifvare TEMPVAR2 2 // Steroids
+  ifvare player[THISACTOR].inven_icon 2 // Steroids
   {
    setvar TEMPVAR3 2 // none
    setvar digx 232
@@ -17118,7 +17038,7 @@ else
    setvarvar varname STEROIDSTIME
    divvar varname 4
   }
-  ifvare TEMPVAR2 3 // Holoform
+  ifvare player[THISACTOR].inven_icon 3 // Holoform
   {
    setvar TEMPVAR3 0 // On/Off
    setvar digx 232
@@ -17129,7 +17049,7 @@ else
    getplayer[THISACTOR].holoduke_amount varname
    divvar varname 24
   }
-  ifvare TEMPVAR2 4 // Jetpack
+  ifvare player[THISACTOR].inven_icon 4 // Jetpack
   {
    setvar TEMPVAR3 0 // On/Off
    setvar digx 231
@@ -17140,7 +17060,7 @@ else
    getplayer[THISACTOR].jetpack_amount varname
    divvar varname 16
   }
-  ifvare TEMPVAR2 5 // NV Goggles
+  ifvare player[THISACTOR].inven_icon 5 // NV Goggles
   {
    setvar TEMPVAR3 0 // On/Off
    setvar digx 232
@@ -17151,7 +17071,7 @@ else
    getplayer[THISACTOR].heat_amount varname
    divvar varname 12
   }
-  ifvare TEMPVAR2 6 // Scuba Gear
+  ifvare player[THISACTOR].inven_icon 6 // Scuba Gear
   {
    setvar TEMPVAR3 1 // Auto
    setvar digx 232
@@ -17162,7 +17082,7 @@ else
    setvarvar varname SCUBATIME // getplayer[THISACTOR].scuba_amount varname
    divvar varname 64
   }
-  ifvare TEMPVAR2 7 // Boots
+  ifvare player[THISACTOR].inven_icon 7 // Boots
   {
    setvar TEMPVAR3 1 // Auto
    setvar digx 232
@@ -17180,7 +17100,7 @@ else
    // Percentage
    setvar shade -15
    ifvarg varname 99 setvar digx 257 else ifvarg varname 9 ifvarl varname 100 setvar digx 259 else setvar digx 261 
-   ifvare TEMPVAR2 0
+   ifvare player[THISACTOR].inven_icon 0
    {
     setvar digx 640
     setvar digy 400
@@ -17194,7 +17114,7 @@ else
    state orientation16
    state shade-31
    redefinequote 332 %
-   ifvare TEMPVAR2 0
+   ifvare player[THISACTOR].inven_icon 0
    {
     setvar digx 640
     setvar digy 400

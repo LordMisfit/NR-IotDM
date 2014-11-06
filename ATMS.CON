@@ -3516,7 +3516,7 @@ ifvarn atm_id -1
    state digx320
    setvar digy 66
    ifvare PUBLICBETA? 0 redefinequote 332 "Welcome Miss Maboroshi!  The
-  redefinequote 332 "Welcome Miss Genkai!  The
+   redefinequote 332 "Welcome Miss Genkai!  The
    state pal22
    state gtz
 
@@ -12099,4 +12099,3 @@ ends
 //******************
 //***END ATM CODE***
 //******************
-

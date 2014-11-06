@@ -267,7 +267,7 @@ state pickupvehicle_boots
           addvarvar TEMPVAR5 POWERUPBENEFIT
           setvar TEMPVAR BOOT_AMOUNT
           ifvarvarg TEMPVAR5 TEMPVAR setvarvar TEMPVAR5 TEMPVAR
-          setactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR5
+          setactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR5
 
           setvar ACTORPICKUPAMOUNT 1
           state checkpickupamountflags state checkdoublepickupbonus
@@ -389,7 +389,7 @@ else
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
            setvar TEMPVAR 1 // BOOT_AMOUNT
-           getactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR5
+           getactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR5
            ifvarvarl TEMPVAR5 TEMPVAR state pickupvehicle_boots else state pickupinventory_boots
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -399,14 +399,14 @@ else
            else
            {
             setvar TEMPVAR 1 // BOOT_AMOUNT
-            getactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR5
+            getactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR5
             ifvarvarl TEMPVAR5 TEMPVAR state pickupvehicle_boots else state pickupinventory_boots
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
            setvar TEMPVAR 1 // BOOT_AMOUNT
-           getactorvar[tempvehicleid].ENEMYBOOTSAMOUNT TEMPVAR5
+           getactorvar[tempvehicleid].ACTORBOOTSAMOUNT TEMPVAR5
            ifvarvarl TEMPVAR5 TEMPVAR state pickupvehicle_boots
            else
            {
@@ -429,9 +429,8 @@ else
   {
    ifvarn ITEMSEEK -1
    {
-    getactorvar[ITEMSEEK].ENEMYBOOTSAMOUNT ITEMSEEKB
-    getactorvar[ITEMSEEK].ENEMYHP ENEMYSHEALTH
-    ifvarg ENEMYSHEALTH 0 // -1
+    getactorvar[ITEMSEEK].ACTORBOOTSAMOUNT ITEMSEEKB
+    ifvarg actorvar[ITEMSEEK].ACTORHP 0 // -1
     {
      ifvarl ITEMSEEKB BOOT_AMOUNT
      {
@@ -440,7 +439,7 @@ else
       addvarvar ITEMSEEKC POWERUPBENEFIT
       setvar TEMPVAR BOOT_AMOUNT
       ifvarvarg ITEMSEEKC TEMPVAR setvarvar ITEMSEEKC TEMPVAR
-      setactorvar[ITEMSEEK].ENEMYBOOTSAMOUNT ITEMSEEKC
+      setactorvar[ITEMSEEK].ACTORBOOTSAMOUNT ITEMSEEKC
 
       state resetitemtarget
       state getitemseekerspecies
@@ -724,7 +723,7 @@ state pickupcharacter_shield
 ends
 
 state pickupvehicle_shield
-          getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+          getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
           state checkexplodeflag
 	    ifvare ARMORISUSED? 1
 	    {
@@ -750,20 +749,20 @@ state pickupvehicle_shield
             }
             state checkusedbodyarmors addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
 
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             mulvarvar RECEIVEDARMOR TEMPVAR5
             divvar RECEIVEDARMOR 1000
             addvarvar TEMPVAR4 RECEIVEDARMOR
             ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-            setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            setactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            setactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
             ifrnd 128 ifvarl TEMPVAR3 333 setvar TEMPVAR3 333
             else ifvarl TEMPVAR3 667 setvar TEMPVAR3 667
             ifvarg TEMPVAR3 999 setvar TEMPVAR3 1000
-            setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
             ifvarand ACTORFLAGS 2 nullop
             else
@@ -795,7 +794,7 @@ state pickupvehicle_shield
             else ifrnd 128 ifvarl TEMPVAR3 750 setvar TEMPVAR3 750
             else ifvarl TEMPVAR3 900 setvar TEMPVAR3 900
             ifvarg TEMPVAR3 999 setvar TEMPVAR3 1000
-            setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
             setvar ACTORPICKUPAMOUNT 1
             state checkpickupamountflags state checkdoublepickupbonus
@@ -804,8 +803,8 @@ state pickupvehicle_shield
 
             setvarvar RECEIVEDARMOR TEMPVAR5
             setvarvar TEMPVAR4 RECEIVEDARMOR
-            setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            setactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            setactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
             ifvarand ACTORFLAGS 2 nullop
@@ -963,8 +962,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_shield else state pickupinventory_shield
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -972,15 +971,15 @@ else
            ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTS state pickupcharacter_shield // If Armor is less than max, grab and immediately wear
            else
            {
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_shield else state pickupinventory_shield
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Vehicle]
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_shield // If Armor is less than max, grab and immediately wear
            else // If Armor is more than max, try to grab and store
            {
@@ -1003,10 +1002,10 @@ else
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
-    getactorvar[ITEMSEEK].ENEMYMAXAP ITEMENEMYMAXAP
+    getactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
+    getactorvar[ITEMSEEK].ACTORMAXAP ITEMACTORMAXAP
 
-    ifvarg ITEMSEEKB 0 ifvarvarl ITEMENEMYCURRENTAP ITEMENEMYMAXAP
+    ifvarg ITEMSEEKB 0 ifvarvarl ITEMACTORCURRENTAP ITEMACTORMAXAP
     {
      state checkexplodeflag
 
@@ -1016,9 +1015,9 @@ else
       // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
       setvar tempb 1000
       setvar TEMP4 1000
-      setvarvar TEMPARMOR ITEMENEMYCURRENTAP
+      setvarvar TEMPARMOR ITEMACTORCURRENTAP
       mulvar TEMPARMOR 1000
-      divvarvar TEMPARMOR ITEMENEMYMAXAP
+      divvarvar TEMPARMOR ITEMACTORMAXAP
       subvarvar tempb TEMPARMOR
 
       setvar ITEMSEEKC 0
@@ -1054,17 +1053,17 @@ else
        subvar ACTORPICKUPAMOUNT 1
       }
 
-      mulvarvar ITEMSEEKC ITEMENEMYMAXAP
+      mulvarvar ITEMSEEKC ITEMACTORMAXAP
       divvar ITEMSEEKC 1000
-      addvarvar ITEMENEMYCURRENTAP ITEMSEEKC
-      ifvarvarg ITEMENEMYCURRENTAP ITEMENEMYMAXAP setvarvar ITEMENEMYCURRENTAP ITEMENEMYMAXAP
-      setactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
+      addvarvar ITEMACTORCURRENTAP ITEMSEEKC
+      ifvarvarg ITEMACTORCURRENTAP ITEMACTORMAXAP setvarvar ITEMACTORCURRENTAP ITEMACTORMAXAP
+      setactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
       ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
-      getactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
-      ifrnd 128 ifvarl CURRENTENEMYARMORPERCENT 333 setvar CURRENTENEMYARMORPERCENT 333
-      else ifvarl CURRENTENEMYARMORPERCENT 667 setvar CURRENTENEMYARMORPERCENT 667
-      setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+      getactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
+      ifrnd 128 ifvarl CURRENTACTORARMORPERCENT 333 setvar CURRENTACTORARMORPERCENT 333
+      else ifvarl CURRENTACTORARMORPERCENT 667 setvar CURRENTACTORARMORPERCENT 667
+      setactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
 
       ifvarand ACTORFLAGS 4 nullop
       else
@@ -1074,18 +1073,18 @@ else
        ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT USED ARMOR!
        sound KICK_HIT
        ifrnd 128 globalsound USE_ARMORITEM1 else globalsound USE_ARMORITEM2
-       setactorvar[ITEMSEEK].ENEMYAPDAMAGED? -1          
+       setactorvar[ITEMSEEK].ACTORAPDAMAGED? -1          
       }
      }
      else
      {
-      ifrnd 64 ifvarl CURRENTENEMYARMORPERCENT 333 setvar CURRENTENEMYARMORPERCENT 333
-      else ifrnd 85 ifvarl CURRENTENEMYARMORPERCENT 500 setvar CURRENTENEMYARMORPERCENT 500
-      else ifrnd 128 ifvarl CURRENTENEMYARMORPERCENT 750 setvar CURRENTENEMYARMORPERCENT 750
-      else ifvarl CURRENTENEMYARMORPERCENT 900 setvar CURRENTENEMYARMORPERCENT 900
-      ifvarg CURRENTENEMYARMORPERCENT 999 setvar CURRENTENEMYARMORPERCENT 1000
+      ifrnd 64 ifvarl CURRENTACTORARMORPERCENT 333 setvar CURRENTACTORARMORPERCENT 333
+      else ifrnd 85 ifvarl CURRENTACTORARMORPERCENT 500 setvar CURRENTACTORARMORPERCENT 500
+      else ifrnd 128 ifvarl CURRENTACTORARMORPERCENT 750 setvar CURRENTACTORARMORPERCENT 750
+      else ifvarl CURRENTACTORARMORPERCENT 900 setvar CURRENTACTORARMORPERCENT 900
+      ifvarg CURRENTACTORARMORPERCENT 999 setvar CURRENTACTORARMORPERCENT 1000
 
-      setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+      setactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
 
       setvar ACTORPICKUPAMOUNT 1
       state checkpickupamountflags
@@ -1111,10 +1110,10 @@ else
        subvar ACTORPICKUPAMOUNT 1
       }
 
-      setvarvar ITEMSEEKC ITEMENEMYMAXAP
-      addvarvar ITEMENEMYCURRENTAP ITEMSEEKC
-      ifvarvarg ITEMSEEKC ITEMENEMYMAXAP setvarvar ITEMSEEKC ITEMENEMYMAXAP
-      setactorvar[ITEMSEEK].ENEMYAP ITEMSEEKC
+      setvarvar ITEMSEEKC ITEMACTORMAXAP
+      addvarvar ITEMACTORCURRENTAP ITEMSEEKC
+      ifvarvarg ITEMSEEKC ITEMACTORMAXAP setvarvar ITEMSEEKC ITEMACTORMAXAP
+      setactorvar[ITEMSEEK].ACTORAP ITEMSEEKC
       ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
       ifvarand ACTORFLAGS 4 nullop
@@ -1125,7 +1124,7 @@ else
        ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT ARMOR!
        globalsound DUKE_GET
        ifrnd 128 globalsound USE_ARMORITEM1 else globalsound USE_ARMORITEM2
-       setactorvar[ITEMSEEK].ENEMYAPDAMAGED? -1
+       setactorvar[ITEMSEEK].ACTORAPDAMAGED? -1
       }
      }
 
@@ -1199,7 +1198,7 @@ state pickupvehicle_airtank
           addvarvar TEMPVAR4 POWERUPBENEFIT
           setvar TEMPVAR SCUBA_AMOUNT
           ifvarvarg TEMPVAR4 TEMPVAR setvarvar TEMPVAR4 TEMPVAR
-          setactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR4
+          setactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR4
 
           setvar ACTORPICKUPAMOUNT 1
           state checkpickupamountflags state checkdoublepickupbonus
@@ -1320,7 +1319,7 @@ else
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
            setvar TEMPVAR 1 // SCUBA_AMOUNT
-           getactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR5
            ifvarvarl TEMPVAR5 TEMPVAR state pickupvehicle_airtank else state pickupinventory_airtank
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -1331,14 +1330,14 @@ else
            {
             setvar TEMPVAR 1 // SCUBA_AMOUNT
             state assesspickuprequirements
-            getactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR5
             ifvarvarl TEMPVAR5 TEMPVAR state pickupvehicle_airtank else state pickupinventory_airtank
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Vehicle]
           {
            setvar TEMPVAR 1 // SCUBA_AMOUNT
-           getactorvar[tempvehicleid].ENEMYAIRTANKAMOUNT TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAIRTANKAMOUNT TEMPVAR5
            ifvarvarl TEMPVAR5 TEMPVAR state pickupvehicle_airtank
            else
            {
@@ -1361,9 +1360,8 @@ else
   {
    ifvarn ITEMSEEK -1
    {
-    getactorvar[ITEMSEEK].ENEMYAIRTANKAMOUNT ITEMSEEKB
-    getactorvar[ITEMSEEK].ENEMYHP ENEMYSHEALTH
-    ifvarg ENEMYSHEALTH 0 // -1
+    getactorvar[ITEMSEEK].ACTORAIRTANKAMOUNT ITEMSEEKB
+    ifvarg actorvar[ITEMSEEK].ACTORHP 0 // -1
     {
      setvar TEMPVAR SCUBA_AMOUNT
      ifvarvarl ITEMSEEKB TEMPVAR
@@ -1373,7 +1371,7 @@ else
       addvarvar ITEMSEEKC POWERUPBENEFIT
       setvar TEMPVAR SCUBA_AMOUNT
       ifvarvarg ITEMSEEKC TEMPVAR setvarvar ITEMSEEKC TEMPVAR
-      setactorvar[ITEMSEEK].ENEMYAIRTANKAMOUNT ITEMSEEKC
+      setactorvar[ITEMSEEK].ACTORAIRTANKAMOUNT ITEMSEEKC
 
       state resetitemtarget
       state getitemseekerspecies
@@ -1709,18 +1707,17 @@ else
   {
    ifvarn ITEMSEEK -1
    {
-    getactorvar[ITEMSEEK].ENEMYHP ENEMYSHEALTH
-    ifvarg ENEMYSHEALTH 0 // -1
+    ifvarg actorvar[ITEMSEEK].ACTORHP 0 // -1
     {
-     getactorvar[ITEMSEEK].ENEMYJETPACKAMOUNT ITEMSEEKB
-	 setvar TEMPVAR JETPACK_AMOUNT
+     getactorvar[ITEMSEEK].ACTORJETPACKAMOUNT ITEMSEEKB
+     setvar TEMPVAR JETPACK_AMOUNT
      ifvarvarl ITEMSEEKB TEMPVAR
      {
       state checkexplodeflag
 
       addvarvar ITEMSEEKC POWERUPBENEFIT
       ifvarvarg ITEMSEEKC JETPACK_AMOUNT setvarvar ITEMSEEKC JETPACK_AMOUNT
-      setactorvar[ITEMSEEK].ENEMYJETPACKAMOUNT ITEMSEEKC
+      setactorvar[ITEMSEEK].ACTORJETPACKAMOUNT ITEMSEEKC
 
       state resetitemtarget
       state getitemseekerspecies
@@ -3347,8 +3344,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_cola else state pickupinventory_cola
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -3359,15 +3356,15 @@ else
            }
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_cola else state pickupinventory_cola
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5
            {
             state pickupvehicle_cola
@@ -3564,8 +3561,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_sixpak else state pickupinventory_sixpak
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -3576,15 +3573,15 @@ else
            }
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_sixpak else state pickupinventory_sixpak
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5
            {
             state pickupvehicle_sixpak
@@ -3771,7 +3768,7 @@ state pickupvehicle_atom
             state checkexplodeflag
             state gotmedsyoureallyneeded
 
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR3
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR3
             // TEMP4 = Maximum HP % to reach
             // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
             setvar tempb 2000
@@ -3799,7 +3796,7 @@ state pickupvehicle_atom
 
             addvarvar TEMPVAR4 TEMPHEALTH
             ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-            setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORHP TEMPVAR4
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerhp
 
             ifvarand ACTORFLAGS 2 nullop
@@ -3984,8 +3981,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            mulvar TEMPVAR5 2
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_atom else state pickupinventory_atom
           }
@@ -3994,16 +3991,16 @@ else
            ifvarvarl CURRENTHITPOINTS MAXHITPOINTSATOMIC state pickupcharacter_atom
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             mulvar TEMPVAR5 2
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_atom else state pickupinventory_atom
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            mulvar TEMPVAR5 2
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_atom
            else
@@ -4026,22 +4023,22 @@ else
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYMAXHP ITEMENEMYMAXHP
-    setvarvar ITEMENEMYMAXHPATOMIC ITEMENEMYMAXHP
-    mulvar ITEMENEMYMAXHPATOMIC 2
+    getactorvar[ITEMSEEK].ACTORMAXHP ITEMACTORMAXHP
+    setvarvar ITEMACTORMAXHPATOMIC ITEMACTORMAXHP
+    mulvar ITEMACTORMAXHPATOMIC 2
 
-    ifvarg ITEMSEEKB 0 ifvarvarl ITEMSEEKB ITEMENEMYMAXHPATOMIC
+    ifvarg ITEMSEEKB 0 ifvarvarl ITEMSEEKB ITEMACTORMAXHPATOMIC
     {
      state checkexplodeflag
 
-     getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR3
+     getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR3
      // TEMP4 = Maximum HP % to reach
      // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
      setvar tempb 2000
      setvar TEMP4 2000
      setvarvar TEMPARMOR ITEMSEEKB
      mulvar TEMPARMOR 1000
-     divvarvar TEMPARMOR ITEMENEMYMAXHP
+     divvarvar TEMPARMOR ITEMACTORMAXHP
      subvarvar tempb TEMPARMOR
 
      setvar ITEMSEEKC 0
@@ -4061,12 +4058,12 @@ else
       subvar TEMPVAR5 1
      }
 
-     mulvarvar ITEMSEEKC ITEMENEMYMAXHP
+     mulvarvar ITEMSEEKC ITEMACTORMAXHP
      divvar ITEMSEEKC 1000
 
      addvarvar ITEMSEEKB ITEMSEEKC
-     ifvarvarg ITEMSEEKB ITEMENEMYMAXHPATOMIC setvarvar ITEMSEEKB ITEMENEMYMAXHPATOMIC
-     setactorvar[ITEMSEEK].ENEMYHP ITEMSEEKB
+     ifvarvarg ITEMSEEKB ITEMACTORMAXHPATOMIC setvarvar ITEMSEEKB ITEMACTORMAXHPATOMIC
+     setactorvar[ITEMSEEK].ACTORHP ITEMSEEKB
      ifvarand ACTORFLAGS 4 nullop else state showhealing_actorhp
 
      state resetitemtarget
@@ -4100,7 +4097,7 @@ else
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT AN ATOMIC HEALTH!
 
       globalsound GETATOMICHEALTH
-      setactorvar[ITEMSEEK].ENEMYHPDAMAGED? -1
+      setactorvar[ITEMSEEK].ACTORHPDAMAGED? -1
      }
      state enemygrabitemflash
     }
@@ -4215,8 +4212,7 @@ state vehiclegrab_firstaid
              state checkpickupamountflags state checkdoublepickupbonus
 
              setvarvar TEMPVAR4 TEMPVAR5
-             setactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-             // setactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+             setactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
 
              subvar ACTORPICKUPAMOUNT 1
              state checkportablemedikits addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
@@ -4344,8 +4340,8 @@ actor FIRSTAID
           {
            ifcanseetarget
            {
-            getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-			getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+			getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             setvarvar TEMPVAR 1 // TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR state vehiclegrab_firstaid
             else state pickupinventory_firstaid
@@ -4361,8 +4357,8 @@ actor FIRSTAID
              ifvarvarl FIRSTAIDCURRENT TEMPVAR state minakograb_firstaid
              else
              {
-              getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-	  	  	  getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+	  	  	  getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
               setvarvar TEMPVAR 1 // TEMPVAR5
               ifvarvarl TEMPVAR4 TEMPVAR state vehiclegrab_firstaid
               else state pickupinventory_firstaid
@@ -4374,8 +4370,8 @@ actor FIRSTAID
              ifvarvarl FIRSTAIDCURRENT TEMPVAR state othersgrab_firstaid
              else
              {
-              getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-	  	  	  getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+	  	  	  getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
               setvarvar TEMPVAR 1 // TEMPVAR5
               ifvarvarl TEMPVAR4 TEMPVAR state vehiclegrab_firstaid
               else state pickupinventory_firstaid
@@ -4387,8 +4383,8 @@ actor FIRSTAID
           {
            ifcanseetarget
            {
-            getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-	  	  	getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+	  	  	getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             setvarvar TEMPVAR 1 // TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR state vehiclegrab_firstaid
             else
@@ -4420,20 +4416,19 @@ actor FIRSTAID
   state itemseekingactor
   ifvare mainmenu 0
   {
-   ifvarn ITEMSEEK -1
-	   {
+         ifvarn ITEMSEEK -1
+         {
           state checkenemypickuphealth
-          getactorvar[ITEMSEEK].ENEMYMAXHP ENEMYFIRSTAIDMAX
-          getactorvar[ITEMSEEK].ENEMYFIRSTAID ENEMYCURRENTFIRSTAID          
+          getactorvar[ITEMSEEK].ACTORMAXHP ACTORFIRSTAIDMAX
 
-           ifvarg ITEMSEEKB 0 ifvarvarl ENEMYCURRENTFIRSTAID ENEMYFIRSTAIDMAX
+           ifvarg ITEMSEEKB 0 ifvarvarl actorvar[ITEMSEEK].ACTORFIRSTAID ACTORFIRSTAIDMAX
            {
             state checkexplodeflag
 
             setvar ACTORPICKUPAMOUNT 1
             state checkpickupamountflags
 
-            setactorvar[ITEMSEEK].ENEMYFIRSTAID ENEMYFIRSTAIDMAX
+            setactorvar[ITEMSEEK].ACTORFIRSTAID ACTORFIRSTAIDMAX
 
             state resetitemtarget
             state getitemseekerspecies
@@ -6417,8 +6412,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_swmedikit else state pickupinventory_swmedikit
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -6426,15 +6421,15 @@ else
            ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state pickupcharacter_swmedikit
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_swmedikit else state pickupinventory_swmedikit
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_swmedikit
            else
            {
@@ -6627,8 +6622,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_swbigmedikit else state pickupinventory_swbigmedikit
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -6636,15 +6631,15 @@ else
            ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state pickupcharacter_swbigmedikit
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_swbigmedikit else state pickupinventory_swbigmedikit
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_swbigmedikit
            else
            {
@@ -6858,8 +6853,8 @@ useractor notenemy MEDPACK 0
            }
            ifvare vehiclepickuptoggle 1 // Vehicle Only
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_medpack else state pickupinventory_medpack
            }
            ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -6872,8 +6867,8 @@ useractor notenemy MEDPACK 0
              ifvarvarl CURRENTHITPOINTS TEMP state pickupcharacter_medpack
              else
              {
-              getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-              getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+              getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
               ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_medpack else state pickupinventory_medpack
              }
             }
@@ -6882,16 +6877,16 @@ useractor notenemy MEDPACK 0
              ifvarvarl CURRENTHITPOINTS MAXHITPOINTS state pickupcharacter_medpack
              else
              {
-              getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-              getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+              getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
               ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_medpack else state pickupinventory_medpack
              }
             }
            }
            ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_medpack
             else
             {
@@ -7116,8 +7111,8 @@ useractor notenemy SURGERYKIT 0
            }
            ifvare vehiclepickuptoggle 1 // Vehicle Only
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_surgerykit else state pickupinventory_surgerykit
            }
            ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -7133,8 +7128,8 @@ useractor notenemy SURGERYKIT 0
              }
              else
              {
-              getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-              getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+              getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
               ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_surgerykit else state pickupinventory_surgerykit
              }
             }
@@ -7146,16 +7141,16 @@ useractor notenemy SURGERYKIT 0
              }
              else
              {
-              getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-              getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+              getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
               ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_surgerykit else state pickupinventory_surgerykit
              }
             }
            }
            ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5
             {
              state pickupvehicle_surgerykit
@@ -7283,8 +7278,8 @@ useractor notenemy MAXHPUP 0
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 STATLIMITATOMIC state pickupvehicle_maxhpup
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -7292,15 +7287,15 @@ useractor notenemy MAXHPUP 0
            ifvarvarl CURRENTHITPOINTS STATLIMITATOMIC state pickupcharacter_maxhpup
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             ifvarvarl TEMPVAR4 STATLIMITATOMIC state pickupvehicle_maxhpup
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarl TEMPVAR4 STATLIMITATOMIC state pickupvehicle_maxhpup
            else
            {
@@ -7323,8 +7318,8 @@ useractor notenemy MAXHPUP 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYHP ITEMSEEKB
-    getactorvar[ITEMSEEK].ENEMYMAXHP temp
+    getactorvar[ITEMSEEK].ACTORHP ITEMSEEKB
+    getactorvar[ITEMSEEK].ACTORMAXHP temp
 
     ifvarg ITEMSEEKB 0 ifvarvarl ITEMSEEKB STATLIMITATOMIC
     {
@@ -7332,11 +7327,11 @@ useractor notenemy MAXHPUP 0
      state bonusitemvarience
      addvarvar ITEMSEEKB ITEMSEEKC
      ifvarvarg ITEMSEEKB STATLIMITATOMIC setvarvar ITEMSEEKB STATLIMITATOMIC
-     setactorvar[ITEMSEEK].ENEMYHP ITEMSEEKB
+     setactorvar[ITEMSEEK].ACTORHP ITEMSEEKB
      ifvarand ACTORFLAGS 4 nullop else state showhealing_actorhp
 
      ifvarvarg temp STATLIMIT setvarvar temp STATLIMIT
-     setactorvar[ITEMSEEK].ENEMYMAXHP temp
+     setactorvar[ITEMSEEK].ACTORMAXHP temp
      state resetitemtarget
      state bonusgrabactor
      state getitemseekerspecies
@@ -7437,8 +7432,8 @@ useractor notenemy MAXAPUP 0
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            ifvarvarl TEMPVAR4 STATLIMITATOMIC state pickupvehicle_maxapup
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -7446,15 +7441,15 @@ useractor notenemy MAXAPUP 0
            ifvarvarl CURRENTARMORPOINTS STATLIMITATOMIC state pickupcharacter_maxapup
            else
            {
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarvarl TEMPVAR4 STATLIMITATOMIC state pickupvehicle_maxapup
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            ifvarvarl TEMPVAR4 STATLIMITATOMIC state pickupvehicle_maxapup
            else
            {
@@ -7477,8 +7472,8 @@ useractor notenemy MAXAPUP 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYAP TEMPVAR3
-    getactorvar[ITEMSEEK].ENEMYMAXAP temp
+    getactorvar[ITEMSEEK].ACTORAP TEMPVAR3
+    getactorvar[ITEMSEEK].ACTORMAXAP temp
 
     ifvarg ITEMSEEKB 0 ifvarvarl TEMPVAR3 STATLIMITATOMIC
     {
@@ -7486,9 +7481,9 @@ useractor notenemy MAXAPUP 0
      state bonusitemvarience
      ifvarg TEMPVAR3 0 addvarvar TEMPVAR3 ITEMSEEKC
      ifvarvarg ITEMSEEKB STATLIMITATOMIC setvarvar ITEMSEEKB STATLIMITATOMIC
-     setactorvar[ITEMSEEK].ENEMYAP TEMPVAR3
+     setactorvar[ITEMSEEK].ACTORAP TEMPVAR3
      ifvarvarg temp STATLIMIT setvarvar temp STATLIMIT
-     setactorvar[ITEMSEEK].ENEMYMAXAP temp
+     setactorvar[ITEMSEEK].ACTORMAXAP temp
      ifvarand ACTORFLAGS 4 nullop else { ifvarg TEMPVAR3 0 state showhealing_actorap }
 
      state resetitemtarget
@@ -7633,14 +7628,14 @@ useractor notenemy MAXHPAPUP 0
           {
            setvarvar TEMPVAR STATLIMITATOMIC
            subvar TEMPVAR 1
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarg TEMPVAR4 TEMPVAR5
  	     {
             setvarvar TEMPVAR STATLIMITATOMIC
             subvar TEMPVAR 1
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarvarg TEMPVAR4 TEMPVAR5 nullop
             else
             {
@@ -7676,14 +7671,14 @@ useractor notenemy MAXHPAPUP 0
             {
              setvarvar TEMPVAR STATLIMITATOMIC
              subvar TEMPVAR 1
-             getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-             getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+             getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+             getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
              ifvarvarg TEMPVAR4 TEMPVAR5
              {
               setvarvar TEMPVAR STATLIMITATOMIC
               subvar TEMPVAR 1
-              getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-              getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+              getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+              getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
               ifvarvarg TEMPVAR4 TEMPVAR5 nullop
               else
               {
@@ -7743,14 +7738,14 @@ useractor notenemy MAXHPAPUP 0
           {
            setvarvar TEMPVAR STATLIMITATOMIC
            subvar TEMPVAR 1
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            ifvarvarg TEMPVAR4 TEMPVAR5
  	     {
             setvarvar TEMPVAR STATLIMITATOMIC
             subvar TEMPVAR 1
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarvarg TEMPVAR4 TEMPVAR5
             {
              setvarvar TEMPVAR STATLIMITATOMIC
@@ -7831,8 +7826,8 @@ useractor notenemy MAXHPAPUP 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYHP tempb
-    getactorvar[ITEMSEEK].ENEMYAP tempc
+    getactorvar[ITEMSEEK].ACTORHP tempb
+    getactorvar[ITEMSEEK].ACTORAP tempc
 
     setvarvar TEMPVAR STATLIMITATOMIC
     subvar TEMPVAR 1
@@ -8642,13 +8637,13 @@ useractor notenemy AIRTIMEBONUS 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYHP ITEMSEEKB
+    getactorvar[ITEMSEEK].ACTORHP ITEMSEEKB
 
     ifvarg ITEMSEEKB 0
     {
      state checkexplodeflag
-     getactorvar[ITEMSEEK].ENEMYMAXAIRTIME tempd
-     getactorvar[ITEMSEEK].ENEMYAIRTIME tempc
+     getactorvar[ITEMSEEK].ACTORMAXAIRTIME tempd
+     getactorvar[ITEMSEEK].ACTORAIRTIME tempc
      randvar temp 1
      ifspritepal 3 mulvar temp 4
      ifspritepal 9 mulvar temp 9
@@ -8663,7 +8658,7 @@ useractor notenemy AIRTIMEBONUS 0
      ifspritepal 3 mulvar tempe 4
      ifspritepal 9 mulvar tempe 9
      addvarvar tempb tempe
-     getactorvar[ITEMSEEK].ENEMYLEVEL TEMP
+     getactorvar[ITEMSEEK].ACTORLEVEL TEMP
      ifvarg TEMP 25 ifvarl TEMP 51 { mulvar tempb 3 divvar tempb 2 } 
      ifvarg TEMP 50 ifvarl TEMP 76 { mulvar tempb 4 divvar tempb 2 } 
      ifvarg TEMP 75 ifvarl TEMP 101 { mulvar tempb 5 divvar tempb 2 } 
@@ -8672,8 +8667,8 @@ useractor notenemy AIRTIMEBONUS 0
 
      addvarvar tempd tempb
      addvarvar tempc tempb
-     setactorvar[ITEMSEEK].ENEMYMAXAIRTIME tempd
-     setactorvar[ITEMSEEK].ENEMYAIRTIME tempc
+     setactorvar[ITEMSEEK].ACTORMAXAIRTIME tempd
+     setactorvar[ITEMSEEK].ACTORAIRTIME tempc
 
      state resetitemtarget
      state bonusgrabactor
@@ -9016,51 +9011,51 @@ ends
 state pickupvehicle_superatom
             state checkexplodeflag
 
-            getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
             ifrnd 64 { ifvarl TEMPVAR3 925 setvar TEMPVAR3 925 }
             else ifrnd 85 { ifvarl TEMPVAR3 950 setvar TEMPVAR3 950 }
             else ifrnd 128 { ifvarl TEMPVAR3 975 setvar TEMPVAR3 975 }
             else { ifvarl TEMPVAR3 1000 setvar TEMPVAR3 1000 }
-            setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 	
             ifvarand ACTORFLAGS 2 nullop
             else
             {
-             getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-             getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+             getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+             getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
              mulvar TEMPVAR5 2
              ifvarvarl TEMPVAR4 TEMPVAR5 setvar VEHICLEHPDAMAGED? -1
-             getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-             getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+             getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+             getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
              mulvar TEMPVAR5 2
              ifvarvarl TEMPVAR4 TEMPVAR5 setactorvar[PLAYERID].VDISPLAYFAFLASHTIMER -28
-             getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-             getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+             getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+             getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
              mulvar TEMPVAR5 2
              ifvarvarl TEMPVAR4 TEMPVAR5 setvar VEHICLEAPDAMAGED? -1
             }
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             mulvar TEMPVAR5 2
             ifvarvarl TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
             ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-            setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORHP TEMPVAR4
             setvarvar TEMPHEALTH TEMPVAR5
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerhp
 
-            getactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             mulvar TEMPVAR5 2
             ifvarvarl TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
             ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-            setactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR4
+            setactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR4
 
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             mulvar TEMPVAR5 2
             ifvarvarl TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
             ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC
-            setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORAP TEMPVAR4
             setvarvar RECEIVEDARMOR TEMPVAR5
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
@@ -9249,21 +9244,21 @@ else
            getactorvar[PLAYERID].VEHICLEID tempvehicleid
            ifvarn tempvehicleid -1
            {
-            getactorvar[tempvehicleid].ENEMYHP temp
+            getactorvar[tempvehicleid].ACTORHP temp
             ifvarg temp 0
             {
-             setactorvar[tempvehicleid].ENEMYARMORPERCENT 1000
-             getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR
+             setactorvar[tempvehicleid].ACTORARMORPERCENT 1000
+             getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR
              mulvar TEMPVAR 2
              ifvarvarg TEMPVAR STATLIMITATOMIC setvarvar TEMPVAR STATLIMITATOMIC
-             setactorvar[tempvehicleid].ENEMYHP TEMPVAR
-             getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR
+             setactorvar[tempvehicleid].ACTORHP TEMPVAR
+             getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR
              mulvar TEMPVAR 2
              ifvarvarg TEMPVAR STATLIMITATOMIC setvarvar TEMPVAR STATLIMITATOMIC
-             setactorvar[tempvehicleid].ENEMYAP TEMPVAR
+             setactorvar[tempvehicleid].ACTORAP TEMPVAR
              mulvar TEMPVAR 2
              ifvarvarg TEMPVAR STATLIMITATOMIC setvarvar TEMPVAR STATLIMITATOMIC
-             setactorvar[tempvehicleid].ENEMYFIRSTAID TEMPVAR
+             setactorvar[tempvehicleid].ACTORFIRSTAID TEMPVAR
             }
            }
            ifvarand ACTORFLAGS 2 nullop
@@ -9352,30 +9347,29 @@ else
    ifvarn ITEMSEEK -1
    {
           state checkenemypickuphealth
-          getactorvar[ITEMSEEK].ENEMYMAXHP ITEMENEMYMAXHP
-          getactorvar[ITEMSEEK].ENEMYMAXAP ITEMENEMYMAXAP
-          getactorvar[ITEMSEEK].ENEMYMAXHP ENEMYFIRSTAIDMAX
-          getactorvar[ITEMSEEK].ENEMYFIRSTAID ENEMYCURRENTFIRSTAID          
+          getactorvar[ITEMSEEK].ACTORMAXHP ITEMACTORMAXHP
+          getactorvar[ITEMSEEK].ACTORMAXAP ITEMACTORMAXAP
+          getactorvar[ITEMSEEK].ACTORMAXHP ACTORFIRSTAIDMAX
 
-          ifspritepal 12
+          ifspritepal 12 // Hyper-Atom
           {
            setvar TEMP5 1
           }
-          else
+          else // Super-Atom Checks
           {
            setvar TEMP5 0
-           getactorvar[ITEMSEEK].ENEMYHP TEMP3
-           getactorvar[ITEMSEEK].ENEMYMAXHP TEMP4
+           getactorvar[ITEMSEEK].ACTORHP TEMP3
+           getactorvar[ITEMSEEK].ACTORMAXHP TEMP4
            mulvar TEMP4 2
            ifvarvarl TEMP3 TEMP4 addvar TEMP5 1
 
-           getactorvar[ITEMSEEK].ENEMYAP TEMP3
-           getactorvar[ITEMSEEK].ENEMYMAXAP TEMP4
+           getactorvar[ITEMSEEK].ACTORAP TEMP3
+           getactorvar[ITEMSEEK].ACTORMAXAP TEMP4
            mulvar TEMP4 2
            ifvarvarl TEMP3 TEMP4 addvar TEMP5 1
 
-           getactorvar[ITEMSEEK].ENEMYFIRSTAID TEMP3
-           getactorvar[ITEMSEEK].ENEMYMAXHP TEMP4
+           getactorvar[ITEMSEEK].ACTORFIRSTAID TEMP3
+           getactorvar[ITEMSEEK].ACTORMAXHP TEMP4
            mulvar TEMP4 2
            ifvarvarl TEMP3 TEMP4 addvar TEMP5 1
           }
@@ -9386,45 +9380,44 @@ else
            {
             state checkexplodeflag
 
-            setvarvar ITEMENEMYMAXHPATOMIC ITEMENEMYMAXHP
-            mulvar ITEMENEMYMAXHPATOMIC 2
-            getactorvar[ITEMSEEK].ENEMYHP TEMP3
-            ifvarvarl TEMP3 ITEMENEMYMAXHPATOMIC { ifvarand ACTORFLAGS 4 nullop else setactorvar[ITEMSEEK].ENEMYHPDAMAGED? -1 }
-            ifvarvarg ITEMENEMYMAXHPATOMIC STATLIMITATOMIC setvarvar ITEMENEMYMAXHPATOMIC STATLIMITATOMIC
-            setvarvar ITEMSEEKC ITEMENEMYMAXHPATOMIC
+            setvarvar ITEMACTORMAXHPATOMIC ITEMACTORMAXHP
+            mulvar ITEMACTORMAXHPATOMIC 2
+            getactorvar[ITEMSEEK].ACTORHP TEMP3
+            ifvarvarl TEMP3 ITEMACTORMAXHPATOMIC { ifvarand ACTORFLAGS 4 nullop else setactorvar[ITEMSEEK].ACTORHPDAMAGED? -1 }
+            ifvarvarg ITEMACTORMAXHPATOMIC STATLIMITATOMIC setvarvar ITEMACTORMAXHPATOMIC STATLIMITATOMIC
+            setvarvar ITEMSEEKC ITEMACTORMAXHPATOMIC
             ifvarand ACTORFLAGS 4 nullop else state showhealing_actorhp
 
-            setvarvar ITEMENEMYMAXAPATOMIC ITEMENEMYMAXAP
-            mulvar ITEMENEMYMAXAPATOMIC 2
-            getactorvar[ITEMSEEK].ENEMYAP TEMP3
-            ifvarvarl TEMP3 ITEMENEMYMAXAPATOMIC { ifvarand ACTORFLAGS 4 nullop else setactorvar[ITEMSEEK].ENEMYAPDAMAGED? -1 }
-            ifvarvarg ITEMENEMYMAXAPATOMIC STATLIMITATOMIC setvarvar ITEMENEMYMAXAPATOMIC STATLIMITATOMIC
-            setvarvar ITEMSEEKC ITEMENEMYMAXAPATOMIC
+            setvarvar ITEMACTORMAXAPATOMIC ITEMACTORMAXAP
+            mulvar ITEMACTORMAXAPATOMIC 2
+            getactorvar[ITEMSEEK].ACTORAP TEMP3
+            ifvarvarl TEMP3 ITEMACTORMAXAPATOMIC { ifvarand ACTORFLAGS 4 nullop else setactorvar[ITEMSEEK].ACTORAPDAMAGED? -1 }
+            ifvarvarg ITEMACTORMAXAPATOMIC STATLIMITATOMIC setvarvar ITEMACTORMAXAPATOMIC STATLIMITATOMIC
+            setvarvar ITEMSEEKC ITEMACTORMAXAPATOMIC
             ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
-            setvarvar TEMP6 ENEMYFIRSTAIDMAX
+            setvarvar TEMP6 ACTORFIRSTAIDMAX
             mulvar TEMP6 2
-            getactorvar[ITEMSEEK].ENEMYFIRSTAID TEMP3
+            getactorvar[ITEMSEEK].ACTORFIRSTAID TEMP3
             ifvarvarl TEMP3 TEMP6 { ifvarand ACTORFLAGS 4 nullop else setactorvar[ITEMSEEK].EDISPLAYFAFLASHTIMER -28 }
             ifvarvarg TEMP6 STATLIMITATOMIC setvarvar TEMP6 STATLIMITATOMIC 
 
             ifspritepal 12
             {
-             setvar CURRENTENEMYARMORPERCENT 1000
+             setvar CURRENTACTORARMORPERCENT 1000
             }
             else
             {
-             ifrnd 64 { ifvarl CURRENTENEMYARMORPERCENT 925 setvar CURRENTENEMYARMORPERCENT 925 }
-             else ifrnd 85 { ifvarl CURRENTENEMYARMORPERCENT 950 setvar CURRENTENEMYARMORPERCENT 950 }
-             else ifrnd 128 { ifvarl CURRENTENEMYARMORPERCENT 975 setvar CURRENTENEMYARMORPERCENT 975 }
-             else { ifvarl CURRENTENEMYARMORPERCENT 1000 setvar CURRENTENEMYARMORPERCENT 1000 }
+             ifrnd 64 { ifvarl CURRENTACTORARMORPERCENT 925 setvar CURRENTACTORARMORPERCENT 925 }
+             else ifrnd 85 { ifvarl CURRENTACTORARMORPERCENT 950 setvar CURRENTACTORARMORPERCENT 950 }
+             else ifrnd 128 { ifvarl CURRENTACTORARMORPERCENT 975 setvar CURRENTACTORARMORPERCENT 975 }
+             else { ifvarl CURRENTACTORARMORPERCENT 1000 setvar CURRENTACTORARMORPERCENT 1000 }
             }
  
-            setactorvar[ITEMSEEK].ENEMYHP ITEMENEMYMAXHPATOMIC
-            setactorvar[ITEMSEEK].ENEMYAP ITEMENEMYMAXAPATOMIC
-            setactorvar[ITEMSEEK].ENEMYFIRSTAID ITEMENEMYMAXHPATOMIC
-            setactorvar[ITEMSEEK].ENEMYCURRENTFIRSTAID ENEMYFIRSTAID
-            setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+            setactorvar[ITEMSEEK].ACTORHP ITEMACTORMAXHPATOMIC
+            setactorvar[ITEMSEEK].ACTORAP ITEMACTORMAXAPATOMIC
+            setactorvar[ITEMSEEK].ACTORFIRSTAID ITEMACTORMAXHPATOMIC
+            setactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
             state resetitemtarget
             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
             state getworldtile
@@ -9515,7 +9508,7 @@ state givearmor2a_vehicle
          divvar RECEIVEDARMOR 1000
          addvarvar TEMPVAR4 RECEIVEDARMOR
          ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-         setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+         setactorvar[tempvehicleid].ACTORAP TEMPVAR4
          ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
          ifvarand ACTORFLAGS 2 nullop
@@ -9683,7 +9676,7 @@ state givearmor2_vehicle
 
          setvarvar RECEIVEDARMOR TEMPVAR5
          setvarvar TEMPVAR4 TEMPVAR5
-         setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+         setactorvar[tempvehicleid].ACTORAP TEMPVAR4
          ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
          ifvarand ACTORFLAGS 2 nullop
@@ -9973,7 +9966,7 @@ ends
 state pickupvehicle_colorshield
           state checkexplodeflag
 //
-          getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+          getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
           ifspritepal 14 // Green-Class Armor
           {
            setvar TEMPVAR 333
@@ -10112,7 +10105,7 @@ state pickupvehicle_colorshield
             state givearmor2_vehicle
            }
           }
-          setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+          setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
           ifvarand ACTORFLAGS 2 nullop
           else
@@ -10292,8 +10285,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_colorshield else state pickupinventory_colorshield
           }
           ifvare vehiclepickuptoggle 2 // Character & Vehicle [Character before Vehicle]
@@ -10301,15 +10294,15 @@ else
            ifvarvarl CURRENTARMORPOINTS MAXARMORPOINTS state pickupcharacter_colorshield
            else
            {
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_colorshield else state pickupinventory_colorshield
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_colorshield
            else
            {
@@ -10332,10 +10325,10 @@ else
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
-    getactorvar[ITEMSEEK].ENEMYMAXAP ITEMENEMYMAXAP
+    getactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
+    getactorvar[ITEMSEEK].ACTORMAXAP ITEMACTORMAXAP
 
-    ifvarg ITEMSEEKB 0 ifvarvarl ITEMENEMYCURRENTAP ITEMENEMYMAXAP
+    ifvarg ITEMSEEKB 0 ifvarvarl ITEMACTORCURRENTAP ITEMACTORMAXAP
     {
      state checkexplodeflag
 
@@ -10343,9 +10336,9 @@ else
      // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
      setvar tempb 1000
      setvar TEMP4 1000
-     setvarvar TEMPARMOR ITEMENEMYCURRENTAP
+     setvarvar TEMPARMOR ITEMACTORCURRENTAP
      mulvar TEMPARMOR 1000
-     divvarvar TEMPARMOR ITEMENEMYMAXAP
+     divvarvar TEMPARMOR ITEMACTORMAXAP
      subvarvar tempb TEMPARMOR
 
      setvar ITEMSEEKC 0
@@ -10377,7 +10370,7 @@ else
       }
      }
 
-     mulvarvar ITEMSEEKC ITEMENEMYMAXAP
+     mulvarvar ITEMSEEKC ITEMACTORMAXAP
      divvar ITEMSEEKC 1000
 
      ifvarg ACTORPICKUPAMOUNT 7
@@ -10444,13 +10437,13 @@ else
       subvar ACTORPICKUPAMOUNT 1
      }
 
-             getactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+             getactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
              ifspritepal 14
              { 
               setvarvar TEMPVAR 333
               state assesspickuprequirements
               ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
-	        ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
+	        ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10469,7 +10462,7 @@ else
               setvarvar TEMPVAR 500
               state assesspickuprequirements
               ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
-	        ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
+	        ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10488,7 +10481,7 @@ else
               setvarvar TEMPVAR 750
               state assesspickuprequirements
               ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
-	        ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
+	        ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10507,7 +10500,7 @@ else
               setvarvar TEMPVAR 900
               state assesspickuprequirements
               ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
-	        ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
+	        ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10527,7 +10520,7 @@ else
               addvarvar TEMPVAR 900
               state assesspickuprequirements
               ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
-	        ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
+	        ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10543,7 +10536,7 @@ else
              else
              ifspritepal 20
              { 
-              ifvarl CURRENTENEMYARMORPERCENT 1000 setvar CURRENTENEMYARMORPERCENT 1000
+              ifvarl CURRENTACTORARMORPERCENT 1000 setvar CURRENTACTORARMORPERCENT 1000
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10561,7 +10554,7 @@ else
               randvarvar TEMPVAR 1000
               state assesspickuprequirements
               ifvarg TEMPVAR 1000 setvar TEMPVAR 1000
-	        ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
+	        ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
               state getitemseekerspecies
               ifvare ARMORISUSED? 1
               { 
@@ -10574,7 +10567,7 @@ else
                ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT RANDOM-CLASS ARMOR!
               }
              }
-             setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+             setactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
 
       setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
       state getworldtile
@@ -10582,14 +10575,14 @@ else
       ifvarand ACTORFLAGS 4 nullop
       else
       {
-       setactorvar[ITEMSEEK].ENEMYAPDAMAGED? -1
+       setactorvar[ITEMSEEK].ACTORAPDAMAGED? -1
        ifrnd 128 globalsound USE_ARMORITEM1 else globalsound USE_ARMORITEM2
        ifvare ARMORISUSED? 1 globalsound KICK_HIT else globalsound DUKE_GET
       }
 
-     addvarvar ITEMENEMYCURRENTAP ITEMSEEKC
-     ifvarvarg ITEMENEMYCURRENTAP ITEMENEMYMAXAP setvarvar ITEMENEMYCURRENTAP ITEMENEMYMAXAP 
-     setactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
+     addvarvar ITEMACTORCURRENTAP ITEMSEEKC
+     ifvarvarg ITEMACTORCURRENTAP ITEMACTORMAXAP setvarvar ITEMACTORCURRENTAP ITEMACTORMAXAP 
+     setactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
      ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
      state resetitemtarget
@@ -10777,7 +10770,7 @@ state pickupvehicle_supershield
             setvar TEMP4 2000
             setvarvar TEMPARMOR TEMPVAR4
             mulvar TEMPARMOR 1000
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR3
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR3
             divvarvar TEMPARMOR TEMPVAR3
             subvarvar tempb TEMPARMOR
 
@@ -10794,21 +10787,21 @@ state pickupvehicle_supershield
             }
             state checkusedsuperarmors addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
 
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR3
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR3
             mulvarvar RECEIVEDARMOR TEMPVAR3
             divvar RECEIVEDARMOR 1000
 
             addvarvar TEMPVAR4 RECEIVEDARMOR
             ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-            setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORAP TEMPVAR4
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
-            getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
             ifrnd 64 ifvarl TEMPVAR3 333 setvar TEMPVAR3 333
             else ifrnd 85 ifvarl TEMPVAR3 500 setvar TEMPVAR3 500
             else ifrnd 128 ifvarl TEMPVAR3 750 setvar TEMPVAR3 750
             else ifvarl TEMPVAR3 900 setvar TEMPVAR3 900
-            setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
             ifvarand ACTORFLAGS 2 nullop
             else
@@ -10853,17 +10846,17 @@ state pickupvehicle_supershield
 	     }
 	     else
 	     {
-            getactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 	      ifrnd 64 ifvarl TEMPVAR3 333 setvar TEMPVAR3 333
 	      else ifrnd 85 ifvarl TEMPVAR3 500 setvar TEMPVAR3 500
 	      else ifrnd 128 ifvarl TEMPVAR3 750 setvar TEMPVAR3 750
 	      else ifvarl TEMPVAR3 900 setvar TEMPVAR3 900
             ifvarg TEMPVAR3 999 setvar TEMPVAR3 1000
-            setactorvar[tempvehicleid].ENEMYARMORPERCENT TEMPVAR3
+            setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR3
 
 	      setvarvar RECEIVEDARMOR TEMPVAR5
 	      setvarvar TEMPVAR4 RECEIVEDARMOR
-            setactorvar[tempvehicleid].ENEMYAP TEMPVAR4
+            setactorvar[tempvehicleid].ACTORAP TEMPVAR4
             ifvarand ACTORFLAGS 2 nullop else state showhealing_playerap
 
             setvar ACTORPICKUPAMOUNT 1
@@ -11057,8 +11050,8 @@ else
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            mulvar TEMPVAR5 2
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_supershield else state pickupinventory_supershield
           }
@@ -11070,16 +11063,16 @@ else
            }
            else
            {
-            getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
             mulvar TEMPVAR5 2
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_supershield else state pickupinventory_supershield
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYAP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXAP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXAP TEMPVAR5
            mulvar TEMPVAR5 2
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_supershield
            else
@@ -11102,26 +11095,26 @@ else
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
-    getactorvar[ITEMSEEK].ENEMYMAXAP ITEMENEMYMAXAP
-    setvarvar ITEMENEMYMAXAPATOMIC ITEMENEMYMAXAP
-    mulvar ITEMENEMYMAXAPATOMIC 2
+    getactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
+    getactorvar[ITEMSEEK].ACTORMAXAP ITEMACTORMAXAP
+    setvarvar ITEMACTORMAXAPATOMIC ITEMACTORMAXAP
+    mulvar ITEMACTORMAXAPATOMIC 2
 
     ifvarg ITEMSEEKB 0
     {
-     ifvarvarl ITEMENEMYCURRENTAP ITEMENEMYMAXAPATOMIC
+     ifvarvarl ITEMACTORCURRENTAP ITEMACTORMAXAPATOMIC
      {
       state checkexplodeflag
-      setvarvar ITEMSEEKC ITEMENEMYMAXAPATOMIC
+      setvarvar ITEMSEEKC ITEMACTORMAXAPATOMIC
       ifvare ARMORISUSED? 1
       {
        // TEMP4 = Maximum AP % to reach
        // tempb = becomes the % of health needed to heal to reach TEMP4 [tempb - TEMPARMOR = tempb]
        setvar tempb 2000
        setvar TEMP4 2000
-       setvarvar TEMPARMOR ITEMENEMYCURRENTAP
+       setvarvar TEMPARMOR ITEMACTORCURRENTAP
        mulvar TEMPARMOR 1000
-       divvarvar TEMPARMOR ITEMENEMYMAXAP
+       divvarvar TEMPARMOR ITEMACTORMAXAP
        subvarvar tempb TEMPARMOR
 
        setvar ITEMSEEKC 0
@@ -11136,20 +11129,20 @@ else
         subvar TEMPVAR2 1
        }
 
-       mulvarvar ITEMSEEKC ITEMENEMYMAXAP
+       mulvarvar ITEMSEEKC ITEMACTORMAXAP
        divvar ITEMSEEKC 1000
-       addvarvar ITEMENEMYCURRENTAP ITEMSEEKC
-       ifvarvarg ITEMENEMYCURRENTAP ITEMENEMYMAXAP setvarvar ITEMENEMYCURRENTAP ITEMENEMYMAXAP
-       setactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
+       addvarvar ITEMACTORCURRENTAP ITEMSEEKC
+       ifvarvarg ITEMACTORCURRENTAP ITEMACTORMAXAP setvarvar ITEMACTORCURRENTAP ITEMACTORMAXAP
+       setactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
        ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
-       getactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+       getactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
 
-       ifrnd 64 ifvarl CURRENTENEMYARMORPERCENT 333 setvar CURRENTENEMYARMORPERCENT 333
-       else ifrnd 85 ifvarl CURRENTENEMYARMORPERCENT 500 setvar CURRENTENEMYARMORPERCENT 500
-       else ifrnd 128 ifvarl CURRENTENEMYARMORPERCENT 750 setvar CURRENTENEMYARMORPERCENT 750
-       else ifvarl CURRENTENEMYARMORPERCENT 900 setvar CURRENTENEMYARMORPERCENT 900
-       setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+       ifrnd 64 ifvarl CURRENTACTORARMORPERCENT 333 setvar CURRENTACTORARMORPERCENT 333
+       else ifrnd 85 ifvarl CURRENTACTORARMORPERCENT 500 setvar CURRENTACTORARMORPERCENT 500
+       else ifrnd 128 ifvarl CURRENTACTORARMORPERCENT 750 setvar CURRENTACTORARMORPERCENT 750
+       else ifvarl CURRENTACTORARMORPERCENT 900 setvar CURRENTACTORARMORPERCENT 900
+       setactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
 
        setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
        state getworldtile
@@ -11192,13 +11185,13 @@ else
        else ifrnd 128 ifvarl TEMPVAR 750 setvar TEMPVAR 750
        else ifvarl TEMPVAR 900 setvar TEMPVAR 900
        ifvarg TEMPVAR 999 setvar TEMPVAR 1000
-       ifvarvarl CURRENTENEMYARMORPERCENT TEMPVAR setvarvar CURRENTENEMYARMORPERCENT TEMPVAR
-       setactorvar[ITEMSEEK].ENEMYARMORPERCENT CURRENTENEMYARMORPERCENT
+       ifvarvarl CURRENTACTORARMORPERCENT TEMPVAR setvarvar CURRENTACTORARMORPERCENT TEMPVAR
+       setactorvar[ITEMSEEK].ACTORARMORPERCENT CURRENTACTORARMORPERCENT
 
-       setvarvar ITEMSEEKC ITEMENEMYMAXAPATOMIC
-       addvarvar ITEMENEMYCURRENTAP ITEMSEEKC
-       ifvarvarg ITEMENEMYCURRENTAP ITEMENEMYMAXAPATOMIC setvarvar ITEMENEMYCURRENTAP ITEMENEMYMAXAPATOMIC
-       setactorvar[ITEMSEEK].ENEMYAP ITEMENEMYCURRENTAP
+       setvarvar ITEMSEEKC ITEMACTORMAXAPATOMIC
+       addvarvar ITEMACTORCURRENTAP ITEMSEEKC
+       ifvarvarg ITEMACTORCURRENTAP ITEMACTORMAXAPATOMIC setvarvar ITEMACTORCURRENTAP ITEMACTORMAXAPATOMIC
+       setactorvar[ITEMSEEK].ACTORAP ITEMACTORCURRENTAP
        ifvarand ACTORFLAGS 4 nullop else state showhealing_actorap
 
        setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
@@ -11232,7 +11225,7 @@ else
        ifvarand ACTORFLAGS 4 nullop
        else
        {
-        setactorvar[ITEMSEEK].ENEMYAPDAMAGED? -1
+        setactorvar[ITEMSEEK].ACTORAPDAMAGED? -1
         globalsound DUKE_GET
         ifrnd 128 globalsound USE_ARMORITEM1 else globalsound USE_ARMORITEM2
         ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 185 ^10AN ENEMY GOT SUPER ARMOR!
@@ -11500,9 +11493,9 @@ state pickupvehicle_invuln
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-             getactorvar[tempvehicleid].ENEMYINVULNTIME TEMPVAR5
+             getactorvar[tempvehicleid].ACTORINVULNTIME TEMPVAR5
              addvarvar TEMPVAR5 POWERUPBENEFIT
-             setactorvar[tempvehicleid].ENEMYINVULNTIME TEMPVAR5
+             setactorvar[tempvehicleid].ACTORINVULNTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -11570,13 +11563,13 @@ useractor notenemy ICONOFTHEDEFENDER 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYINVULNTIME ITEMSEEKC
+    getactorvar[ITEMSEEK].ACTORINVULNTIME ITEMSEEKC
 
     ifvarg ITEMSEEKB 0
     {
      state checkexplodeflag
      addvarvar ITEMSEEKC POWERUPBENEFIT
-     setactorvar[ITEMSEEK].ENEMYINVULNTIME ITEMSEEKC
+     setactorvar[ITEMSEEK].ACTORINVULNTIME ITEMSEEKC
      state resetitemtarget
      setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
@@ -11584,7 +11577,7 @@ useractor notenemy ICONOFTHEDEFENDER 0
      ifvarand ACTORFLAGS 4 nullop
      else
      {
-      ifvarg ENEMYINVULNTIME 104 stopsound INVULNITEM2
+      ifvarg ACTORINVULNTIME 104 stopsound INVULNITEM2
       sound INVULNITEM1
       globalsound DUKE_GET
       ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 185 ^10AN ENEMY GOT AN INVULN ITEM! O_O
@@ -11679,9 +11672,9 @@ state pickupvehicle_quad
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-             getactorvar[tempvehicleid].ENEMYQUADTIME TEMPVAR5
+             getactorvar[tempvehicleid].ACTORQUADTIME TEMPVAR5
              addvarvar TEMPVAR5 POWERUPBENEFIT
-             setactorvar[tempvehicleid].ENEMYQUADTIME TEMPVAR5
+             setactorvar[tempvehicleid].ACTORQUADTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -11748,13 +11741,13 @@ useractor notenemy QUADDAMAGE 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYQUADTIME ITEMSEEKC
+    getactorvar[ITEMSEEK].ACTORQUADTIME ITEMSEEKC
 
     ifvarg ITEMSEEKB 0
     {
      state checkexplodeflag
      addvarvar ITEMSEEKC POWERUPBENEFIT
-     setactorvar[ITEMSEEK].ENEMYQUADTIME ITEMSEEKC
+     setactorvar[ITEMSEEK].ACTORQUADTIME ITEMSEEKC
      state resetitemtarget
      setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
@@ -11762,7 +11755,7 @@ useractor notenemy QUADDAMAGE 0
      ifvarand ACTORFLAGS 4 nullop
      else
      {
-      ifvarg ENEMYQUADTIME 104 stopsound QUADDAMAGE2
+      ifvarg ACTORQUADTIME 104 stopsound QUADDAMAGE2
       sound QUADDAMAGE1
       globalsound DUKE_GET
       ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 185 ^10AN ENEMY GOT A QUAD DAMAGE! D:
@@ -11858,9 +11851,9 @@ state pickupvehicle_regen
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-             getactorvar[tempvehicleid].ENEMYREGENTIME TEMPVAR5
+             getactorvar[tempvehicleid].ACTORREGENTIME TEMPVAR5
              addvarvar TEMPVAR5 POWERUPBENEFIT
-             setactorvar[tempvehicleid].ENEMYREGENTIME TEMPVAR5
+             setactorvar[tempvehicleid].ACTORREGENTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -11871,7 +11864,7 @@ state pickupvehicle_regen
               state artipickupsounds
               state playerstealjustbeforemonster
              }
-             setactorvar[tempvehicleid].ENEMYREGENCOUNTER 25
+             setactorvar[tempvehicleid].ACTORREGENCOUNTER 25
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
@@ -11921,15 +11914,15 @@ useractor notenemy REGENITEM 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYREGENTIME ITEMSEEKC
+    getactorvar[ITEMSEEK].ACTORREGENTIME ITEMSEEKC
 
     ifvarg ITEMSEEKB 0
     {
      state checkexplodeflag
      addvarvar ITEMSEEKC POWERUPBENEFIT
-     setactorvar[ITEMSEEK].ENEMYREGENTIME ITEMSEEKC
+     setactorvar[ITEMSEEK].ACTORREGENTIME ITEMSEEKC
      state resetitemtarget
-     setvar ENEMYREGENCOUNTER 25
+     setvar ACTORREGENCOUNTER 25
      state getitemseekerspecies
      setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
@@ -12029,9 +12022,9 @@ state pickupvehicle_apregen
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-             getactorvar[tempvehicleid].ENEMYAPREGENTIME TEMPVAR5
+             getactorvar[tempvehicleid].ACTORAPREGENTIME TEMPVAR5
              addvarvar TEMPVAR5 POWERUPBENEFIT
-             setactorvar[tempvehicleid].ENEMYAPREGENTIME TEMPVAR5
+             setactorvar[tempvehicleid].ACTORAPREGENTIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -12042,7 +12035,7 @@ state pickupvehicle_apregen
               state artipickupsounds
               state playerstealjustbeforemonster
              }
-             setactorvar[tempvehicleid].ENEMYAPREGENCOUNTER 25
+             setactorvar[tempvehicleid].ACTORAPREGENCOUNTER 25
              setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
              state getworldtile
              state activationflag killit
@@ -12098,17 +12091,17 @@ useractor notenemy APREGENITEM 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYAPREGENTIME ITEMSEEKC
+    getactorvar[ITEMSEEK].ACTORAPREGENTIME ITEMSEEKC
 
     ifvarg ITEMSEEKB 0
     {
      state checkexplodeflag
      addvarvar ITEMSEEKC POWERUPBENEFIT
-     setactorvar[ITEMSEEK].ENEMYAPREGENTIME ITEMSEEKC
+     setactorvar[ITEMSEEK].ACTORAPREGENTIME ITEMSEEKC
      state resetitemtarget
      setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
-     setvar ENEMYAPREGENCOUNTER 25
+     setvar ACTORAPREGENCOUNTER 25
      state getitemseekerspecies
      ifvarand ACTORFLAGS 4 nullop
      else
@@ -12206,9 +12199,9 @@ state pickupvehicle_vampire
              state checkdoublepickupbonus
              setvarvar POWERUPBENEFIT ACTORPICKUPAMOUNT
 
-             getactorvar[tempvehicleid].ENEMYVAMPIRETIME TEMPVAR5
+             getactorvar[tempvehicleid].ACTORVAMPIRETIME TEMPVAR5
              addvarvar TEMPVAR5 POWERUPBENEFIT
-             setactorvar[tempvehicleid].ENEMYVAMPIRETIME TEMPVAR5
+             setactorvar[tempvehicleid].ACTORVAMPIRETIME TEMPVAR5
              ifvarand ACTORFLAGS 2 nullop
              else
              {
@@ -12269,13 +12262,13 @@ useractor notenemy VAMPIREITEM 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYVAMPIRETIME ITEMSEEKC
+    getactorvar[ITEMSEEK].ACTORVAMPIRETIME ITEMSEEKC
 
     ifvarg ITEMSEEKB 0
     {
      state checkexplodeflag
      addvarvar ITEMSEEKC POWERUPBENEFIT
-     setactorvar[ITEMSEEK].ENEMYVAMPIRETIME ITEMSEEKC
+     setactorvar[ITEMSEEK].ACTORVAMPIRETIME ITEMSEEKC
      state resetitemtarget
      setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
      state getworldtile
@@ -12725,7 +12718,7 @@ state pickupvehicle_fortune
              state checkexplodeflag
 	       setvarvar tempb TEMPVAR5
 
-             getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR3
+             getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR3
              setvarvar TEMPHEALTH TEMPVAR3
              setvar ACTORPICKUPAMOUNT 50
              setvarvar TEMP7 ACTORPICKUPAMOUNT state secretrecipecheck addvarvar ACTORPICKUPAMOUNT TEMP7
@@ -12735,7 +12728,7 @@ state pickupvehicle_fortune
 	       addvarvar TEMPVAR4 TEMPHEALTH      // Adds the actual heal value to the current player health
 	       ifvarvarg TEMPVAR4 STATLIMITATOMIC setvarvar TEMPVAR4 STATLIMITATOMIC // Prevents the player from going too far over their health value
 	       ifvarvarg TEMPVAR4 TEMPVAR5 setvarvar TEMPVAR4 TEMPVAR5
-             setactorvar[tempvehicleid].ENEMYHP TEMPVAR4
+             setactorvar[tempvehicleid].ACTORHP TEMPVAR4
              ifvarand ACTORFLAGS 2 nullop else state showhealing_playerhp
 
 	       qsprintf 273 274 TEMPHEALTH 
@@ -12806,8 +12799,8 @@ useractor notenemy FORTUNECOOKIE 0
           }
           ifvare vehiclepickuptoggle 1 // Vehicle Only
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            mulvar TEMPVAR5 2
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_fortune
           }
@@ -12816,16 +12809,16 @@ useractor notenemy FORTUNECOOKIE 0
            ifvarvarl CURRENTHITPOINTS MAXHITPOINTSATOMIC state pickupcharacter_fortune
            else
            {
-            getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-            getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+            getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+            getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
             mulvar TEMPVAR5 2
             ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_fortune
            }
           }
           ifvare vehiclepickuptoggle 3 // Vehicle & Character [Vehicle before Character]
           {
-           getactorvar[tempvehicleid].ENEMYHP TEMPVAR4
-           getactorvar[tempvehicleid].ENEMYMAXHP TEMPVAR5
+           getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           getactorvar[tempvehicleid].ACTORMAXHP TEMPVAR5
            mulvar TEMPVAR5 2
            ifvarvarl TEMPVAR4 TEMPVAR5 state pickupvehicle_fortune
            else
@@ -12848,21 +12841,21 @@ useractor notenemy FORTUNECOOKIE 0
    ifvarn ITEMSEEK -1
    {
     state checkenemypickuphealth
-    getactorvar[ITEMSEEK].ENEMYMAXHP ITEMENEMYMAXHP
-    setvarvar ITEMENEMYMAXHPATOMIC ITEMENEMYMAXHP
-    mulvar ITEMENEMYMAXHPATOMIC 2
+    getactorvar[ITEMSEEK].ACTORMAXHP ITEMACTORMAXHP
+    setvarvar ITEMACTORMAXHPATOMIC ITEMACTORMAXHP
+    mulvar ITEMACTORMAXHPATOMIC 2
 
-    ifvarg ITEMSEEKB 0 ifvarvarl ITEMSEEKB ITEMENEMYMAXHPATOMIC
+    ifvarg ITEMSEEKB 0 ifvarvarl ITEMSEEKB ITEMACTORMAXHPATOMIC
     {
      state checkexplodeflag
      setvar ACTORPICKUPAMOUNT 50
      state checkpickupamountflags
-     setvarvar ITEMSEEKC ITEMENEMYMAXHP
+     setvarvar ITEMSEEKC ITEMACTORMAXHP
      mulvarvar ITEMSEEKC ACTORPICKUPAMOUNT
      divvar ITEMSEEKC 100
      addvarvar ITEMSEEKB ITEMSEEKC
-     ifvarvarg ITEMSEEKB ITEMENEMYMAXHPATOMIC setvarvar ITEMSEEKB ITEMENEMYMAXHPATOMIC
-     setactorvar[ITEMSEEK].ENEMYHP ITEMSEEKB
+     ifvarvarg ITEMSEEKB ITEMACTORMAXHPATOMIC setvarvar ITEMSEEKB ITEMACTORMAXHPATOMIC
+     setactorvar[ITEMSEEK].ACTORHP ITEMSEEKB
      ifvarand ACTORFLAGS 4 nullop else state showhealing_actorhp
 
      state resetitemtarget
@@ -12870,7 +12863,7 @@ useractor notenemy FORTUNECOOKIE 0
      ifvarand ACTORFLAGS 4 nullop
      else
      {
-      setactorvar[ITEMSEEK].ENEMYHPDAMAGED? -1
+      setactorvar[ITEMSEEK].ACTORHPDAMAGED? -1
       globalsound FORTUNECOOKIE1
       ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 185 ^10AN ENEMY GOT A FORTUNE COOKIE!
       ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 185 ^15A CIVILIAN GOT A FORTUNE COOKIE!
@@ -13949,7 +13942,7 @@ useractor notenemy ENERGYCELL_SMALL 0
 
             setvarvar TEMP5 tempc
             mulvarvar TEMP5 ESHIELDDMGFACTOR
-            ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+            ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
             {
              ifvarg TEMP5 0
              {
@@ -14031,7 +14024,7 @@ useractor notenemy ENERGYCELL_MEDIUM 0
 
             setvarvar TEMP5 tempc
             mulvarvar TEMP5 ESHIELDDMGFACTOR
-            ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+            ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
             {
              ifvarg TEMP5 0
              {
@@ -14112,7 +14105,7 @@ useractor notenemy ENERGYCELL_LARGE 0
 
             setvarvar TEMP5 tempc
             mulvarvar TEMP5 ESHIELDDMGFACTOR
-            ifvarn SHOWDAMAGEPLAYER 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
+            ifvarn player[THISACTOR].over_shoulder_on 0 ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1
             {
              ifvarg TEMP5 0
              {
@@ -16370,8 +16363,7 @@ else
 
    ifvarn ITEMSEEK -1
    {
-    getactorvar[ITEMSEEK].ENEMYHP ENEMYSHEALTH
-    ifvarg ENEMYSHEALTH 0 // -1
+    ifvarg actorvar[ITEMSEEK].ACTORHP 0 // -1
     {
      getactorvar[ITEMSEEK].ENEMYHASSHIKON? ITEMSEEKB
      ifvare ITEMSEEKB 0
