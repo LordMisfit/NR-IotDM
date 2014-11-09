@@ -13075,7 +13075,7 @@ ends
 
 state enemyquaddamage
     ifvare mainmenu 0 ifvarn FROZEN? 1 subvar ACTORQUADTIME 1
-    state itemfullbright
+    //state itemfullbright
     ifvare ACTORQUADTIME 104 sound QUADDAMAGE2
     ifvare ACTORQUADTIME 1
     {
@@ -13089,7 +13089,7 @@ ends
 
 state enemyvampireitem
     ifvare mainmenu 0 ifvarn FROZEN? 1 subvar ACTORVAMPIRETIME 1
-    state itemfullbright
+    //state itemfullbright
     ifvare ACTORVAMPIRETIME 1
     {
       state getitemseekerspeciesquote
@@ -13134,7 +13134,7 @@ state enemyinvulnitem
      subvar ACTORSTATUS? 16384
      setvar ACTORCORROSIONTIMER 0
     }
-    state itemfullbright
+    //state itemfullbright
     state invulnicon-nonplayers
     ifvarg ACTORINVULNCOUNTER 38 { sound INVULN_PULSE setvar ACTORINVULNCOUNTER 0 }
     ifvare ACTORINVULNTIME 104 sound INVULNITEM2
@@ -13863,7 +13863,7 @@ state enemyregenitem
   ifvarg ACTORREGENTIME 0
   {
    ifvarand ACTORPOWERUPBITFIELD 4 nullop else addvar ACTORPOWERUPBITFIELD 4
-   state itemfullbright
+   //state itemfullbright
    ifvare mainmenu 0 ifvarn FROZEN? 1 addvar ACTORREGENCOUNTER 1
    ifvarand ACTORSTATUS? 8 // Remove Poison
    {
@@ -13941,7 +13941,7 @@ state enemyapregenitem
    ifvarg ACTORAPREGENTIME 0
    {
     ifvarand ACTORPOWERUPBITFIELD 8 nullop else addvar ACTORPOWERUPBITFIELD 8
-    state itemfullbright
+    //state itemfullbright
 
     // setvar ACTORARMORPERCENT 1000
     setvar TEMPMOD 125

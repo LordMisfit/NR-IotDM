@@ -47466,32 +47466,31 @@ action BOLTACTIONFRAMES 0 3 5 1 1
 action BALLACTIONFRAMES 0 1 1 1 1
 
 useractor notenemy RPG_NOAIM 140 RPGACTIONFRAMES 
-
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy OCTANINE_RPG 105 RPGACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy GENERAL_RPG 56 RPGACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy COMMANDER_RPG 140 RPGACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy LEADER_RPG 350 RPGACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy BAALO_RPG 1750 RPGACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy ZAPPER1 512 BOLTACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy ZAPPER2 256 BALLACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 useractor notenemy ZAPPER3 1024 BALLACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 
 define BIOMETRICEXPLOSION1 6075
@@ -47779,7 +47778,7 @@ define GATEMISSILE_SPLIT 5896
 action GATEACTIONFRAMES2 -3 1 5 1 1
 
 useractor notenemy GATEMISSILE_SPLIT 105 GATEACTIONFRAMES2
-state itemfullbright
+  state itemfullbright
 enda
 
 defineprojectile GATEMISSILE_SPLIT PROJ_WORKSLIKE 167938 // 36866 RPG WITH NO AUTOAIM
@@ -47806,7 +47805,7 @@ define GATEMISSILE_MAIN 5894
 action GATEACTIONFRAMES -1 1 5 1 1
 
 useractor notenemy GATEMISSILE_MAIN 700 GATEACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 
 defineprojectile GATEMISSILE_MAIN PROJ_WORKSLIKE 167938 // 36866 RPG WITH NO AUTOAIM
@@ -47833,7 +47832,7 @@ define STROKEMISSILE_SPLIT 5897
 action STROKEACTIONFRAMES2 -4 1 5 1 1
 
 useractor notenemy STROKEMISSILE_SPLIT 140 STROKEACTIONFRAMES2
-state itemfullbright
+  state itemfullbright
 enda
 
 defineprojectile STROKEMISSILE_SPLIT PROJ_WORKSLIKE 167938 // 36866 RPG WITH NO AUTOAIM
@@ -47861,7 +47860,7 @@ define STROKEMISSILE_MAIN 5895
 action STROKEACTIONFRAMES -2 1 5 1 1
 
 useractor notenemy STROKEMISSILE_MAIN 2800 STROKEACTIONFRAMES 
-state itemfullbright
+  state itemfullbright
 enda
 
 defineprojectile STROKEMISSILE_MAIN PROJ_WORKSLIKE 167938 // 36866 RPG WITH NO AUTOAIM

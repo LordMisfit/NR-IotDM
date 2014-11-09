@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git91)
-definequote 1337 ^22VERSION:^0 5.22.git91.11092014
+setgamename Naferia's Reign (5.22.git92)
+definequote 1337 ^22VERSION:^0 5.22.git92.11092014
 
 action ANULLACTION 0
 
@@ -5992,8 +5992,7 @@ state add_playermeleedamage
       }
       else
       {
-       getactorvar[tempvehicleid].ACTORQUADTIME TEMPVAR4
-       ifvarg TEMPVAR4 0 mulvar KNEEDAMAGE 4
+       ifvarg actorvar[tempvehicleid].ACTORQUADTIME 0 mulvar KNEEDAMAGE 4
       }
       ifvarl KNEEDAMAGE 1 setvar KNEEDAMAGE 1
       ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
@@ -9580,8 +9579,7 @@ ifvarg tempb 0
      }
      else
      {
-      getactorvar[tempvehicleid].ACTORQUADTIME TEMPVAR4
-      ifvarg TEMPVAR4 0 mulvar GENERALDAMAGE 4
+      ifvarg actorvar[tempvehicleid].ACTORQUADTIME 0 mulvar GENERALDAMAGE 4
      }
      state checkdamagecaps-general
  
@@ -12580,6 +12578,25 @@ endswitch
      ifvare sector[THISACTOR].lotag 2 state jetpackbubbles else state jetpacksmoke
      setvar JETPACKSMOKEVAR 0
     }
+    ifvare RANDOMIZERSET? 0
+    {
+     //readgamevar ENEMYRANDOMIZERCHANCE // CRITICAL for Randomizations on a new game or loading an unique usermap
+     displayrandvar TEMPVAR8 999 addvar TEMPVAR8 1
+     addlogvar TEMPVAR8
+     addlogvar ENEMYRANDOMIZERCHANCE
+     ifvarvarg TEMPVAR8 ENEMYRANDOMIZERCHANCE nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 151 { setactor[THISACTOR].pal 14 spritepal 14 sizeat 40 40 } // Sargeant-Driven [15%]
+      else ifvarg TEMPVAR7 150 ifvarl TEMPVAR7 401 { setactor[THISACTOR].pal 21 spritepal 21 sizeat 40 40 } // Captain-Driven [25%]
+      else ifvarg TEMPVAR7 400 ifvarl TEMPVAR7 1001 { setactor[THISACTOR].pal 0 spritepal 0 sizeat 40 40 } // Normal-Driven [60%]
+      addlogvar TEMPVAR7
+      getactor[THISACTOR].pal TEMPVAR8 addlogvar TEMPVAR8
+     }
+     addvar RANDOMIZERSET? 1
+     addlogvar RANDOMIZERSET?
+    }
     ifvare SKILLSET? 0 
     {
      setvar ACTORHP RECONSTRENGTH
@@ -12589,7 +12606,11 @@ endswitch
      setvarvar ARRAYPOSITION THISACTOR
      state addtomaxkills
      state getenemyid setvar SKILLSET? -1
+     getactor[THISACTOR].pal TEMPVAR7 addlogvar TEMPVAR7
     }
+//    else
+//    {
+//    }
     getactor[THISACTOR].extra ACTORHP // TODO: Leave alone [RECON]
     ifvarl ACTORHP 1 // Since there is no 'ifdead' condition...
     {
@@ -28045,10 +28066,8 @@ else
 
        sound RPG_SHOOT
       }
-      getactorvar[VEHICLEID].ACTORQUADTIME temp
-      ifvarg temp 0 sound QUADDAMAGE3
-      getactorvar[VEHICLEID].ACTORVAMPIRETIME temp
-      ifvarg temp 0 sound SHOOT_VAMPIREITEM
+      ifvarg actorvar[VEHICLEID].ACTORQUADTIME 0 sound QUADDAMAGE3
+      ifvarg actorvar[VEHICLEID].ACTORVAMPIRETIME 0 sound SHOOT_VAMPIREITEM
      }
      ifvarvarg VEHICLEATTACKTIMER TEMPVAR2 setvar VEHICLEATTACKTIMER 0
     }
@@ -28104,10 +28123,8 @@ else
 
         sound RPG_SHOOT
        }
-       getactorvar[VEHICLEID].ACTORQUADTIME temp
-       ifvarg temp 0 sound QUADDAMAGE3
-       getactorvar[VEHICLEID].ACTORVAMPIRETIME temp
-       ifvarg temp 0 sound SHOOT_VAMPIREITEM
+       ifvarg actorvar[VEHICLEID].ACTORQUADTIME 0 sound QUADDAMAGE3
+       ifvarg actorvar[VEHICLEID].ACTORVAMPIRETIME 0 sound SHOOT_VAMPIREITEM
       }
       ifvarvarg VEHICLEATTACKTIMER TEMPVAR2 setvar VEHICLEATTACKTIMER 0
      }
@@ -28747,7 +28764,7 @@ else
     ifvarg CURRENTHITPOINTS 0
     {
      ifvarand POWERUPCHEATFLAGS? 1 nullop else subvar QUADTIME 1
-     state itemfullbright
+     //state itemfullbright
     }
    }
  }
@@ -28831,7 +28848,7 @@ else
     ifvarg CURRENTHITPOINTS 0
     {
      ifvarand POWERUPCHEATFLAGS? 4 nullop else subvar REGENTIME 1
-     state itemfullbright
+     //state itemfullbright
     }
    }
  }
@@ -28933,7 +28950,7 @@ else
     ifvarg CURRENTHITPOINTS 0
     {
      ifvarand POWERUPCHEATFLAGS? 8 nullop else subvar APREGENTIME 1
-     state itemfullbright
+     //state itemfullbright
     }
    }
   } 
@@ -28959,7 +28976,7 @@ else
     ifvarg CURRENTHITPOINTS 0 
     {
      ifvarand POWERUPCHEATFLAGS? 16 nullop else subvar VAMPIRETIME 1
-     state itemfullbright
+     //state itemfullbright
     }
    }
   }
@@ -28996,7 +29013,7 @@ else
     ifvarg CURRENTHITPOINTS 0
     {
      ifvarand POWERUPCHEATFLAGS? 2 nullop else subvar INVULNTIME 1
-     state itemfullbright
+     //state itemfullbright
     }
    }
  }

@@ -115,6 +115,18 @@ onevent EVENT_EGS
   //addlogvar temp addlogvar tempb addlogvar tempc
  }
 
+ ifactor PIGCOP
+ {
+  ifspawnedby RECON
+  {
+   getactor[THISACTOR].owner TEMPVAR6
+   getactor[TEMPVAR6].pal TEMPVAR7
+   setactor[THISACTOR].pal TEMPVAR7
+   addlogvar TEMPVAR6
+   addlogvar TEMPVAR7
+  }
+ }
+
  // Monster Spawner
  ifactor EGG state respawnspritefix
  ifactor SHARK state respawnspritefix
@@ -3321,6 +3333,21 @@ else
 endevent
 
 state invuln-paletteflash
+ ifvare CHARACTERSELECTED? 4
+ {
+  ifvare player[THISACTOR].heat_on 1
+  {
+   getplayer[THISACTOR].player_par TEMPVAR4
+   modvar TEMPVAR4 12
+   ifvarg TEMPVAR4 -1 ifvarl TEMPVAR4 6
+   {
+    getactor[THISACTOR].pal TEMPVAR5
+    settspr[THISACTOR].tsprpal TEMPVAR5
+    settspr[THISACTOR].tsprshade -127
+   }
+  }
+ }
+
  ifvarg actorvar[THISACTOR].ACTORINVULNTIME 0
  {
   getplayer[THISACTOR].player_par TEMPVAR4
@@ -3337,6 +3364,48 @@ state invuln-paletteflash
   ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 7
   ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
   ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
+  settspr[THISACTOR].tsprshade -127
+ }
+ else
+ {
+  getplayer[THISACTOR].player_par TEMPVAR4
+  modvar TEMPVAR4 48
+  ifvarg actorvar[THISACTOR].ACTORQUADTIME 0
+  {
+   ifvare TEMPVAR4 0 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 1 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 2 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 3 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 4 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 5 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+  }
+  ifvarg actorvar[THISACTOR].ACTORREGENTIME 0
+  {
+   ifvare TEMPVAR4 12 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 13 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 14 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 15 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 16 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 17 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+  }
+  ifvarg actorvar[THISACTOR].ACTORAPREGENTIME 0
+  {
+   ifvare TEMPVAR4 24 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 25 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 26 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 27 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 28 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 29 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+  }
+  ifvarg actorvar[THISACTOR].ACTORVAMPIRETIME 0
+  {
+   ifvare TEMPVAR4 36 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 37 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 38 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 39 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 40 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+   ifvare TEMPVAR4 41 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+  }
  }
 ends
 
@@ -4081,6 +4150,21 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
   settspr[THISACTOR].tsprshade shade
  }
 
+ ifvare CHARACTERSELECTED? 4
+ {
+  ifvare player[THISACTOR].heat_on 1
+  {
+   getplayer[THISACTOR].player_par TEMPVAR4
+   modvar TEMPVAR4 12
+   ifvarg TEMPVAR4 -1 ifvarl TEMPVAR4 6
+   {
+    getactor[THISACTOR].pal TEMPVAR5
+    settspr[THISACTOR].tsprpal TEMPVAR5
+    settspr[THISACTOR].tsprshade -127
+   }
+  }
+ }
+
  ifvarn VEHICLEID -1
  {
   getactorvar[VEHICLEID].ACTORINVULNTIME TEMPVAR6
@@ -4120,6 +4204,80 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
    ifvare TEMPVAR4 9 settspr[THISACTOR].tsprpal 7
    ifvare TEMPVAR4 10 settspr[THISACTOR].tsprpal 8
    ifvare TEMPVAR4 11 settspr[THISACTOR].tsprpal 8
+   settspr[THISACTOR].tsprshade -127
+  }
+  else
+  {
+   getplayer[THISACTOR].player_par TEMPVAR4
+   modvar TEMPVAR4 48
+   ifvarg QUADTIME 0
+   {
+    ifvare TEMPVAR4 0 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 1 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 2 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 3 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 4 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 5 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+/*
+    ifvare TEMPVAR4 6 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 7 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 8 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 9 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 10 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 11 { settspr[THISACTOR].tsprpal 1 settspr[THISACTOR].tsprshade -127 }
+*/
+   }
+   ifvarg REGENTIME 0
+   {
+    ifvare TEMPVAR4 12 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 13 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 14 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 15 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 16 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 17 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+/*
+    ifvare TEMPVAR4 18 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 19 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 20 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 21 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 22 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 23 { settspr[THISACTOR].tsprpal 2 settspr[THISACTOR].tsprshade -127 }
+*/
+   }
+   ifvarg APREGENTIME 0
+   {
+    ifvare TEMPVAR4 24 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 25 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 26 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 27 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 28 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 29 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+/*
+    ifvare TEMPVAR4 30 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 31 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 32 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 33 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 34 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 35 { settspr[THISACTOR].tsprpal 8 settspr[THISACTOR].tsprshade -127 }
+*/
+   }
+   ifvarg VAMPIRETIME 0
+   {
+    ifvare TEMPVAR4 36 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 37 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 38 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 39 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 40 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 41 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+/*
+    ifvare TEMPVAR4 42 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 43 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 44 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 45 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 46 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+    ifvare TEMPVAR4 47 { settspr[THISACTOR].tsprpal 4 settspr[THISACTOR].tsprshade -127 }
+*/
+   }
   }
  }
 
