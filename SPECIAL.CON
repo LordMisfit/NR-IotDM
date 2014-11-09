@@ -18299,8 +18299,295 @@ state calcleveluphp
  addvar ACTORTEMPLEVEL 1
 ends
 
+state enemytyperandomizer
+ ifvare RANDOMIZERSET? 0
+ {
+  displayrandvar TEMPVAR8 999 addvar TEMPVAR8 1
+  ifvarvarg TEMPVAR8 ENEMYRANDOMIZERCHANCE
+  {
+   getactor[THISACTOR].picnum ACTORPICNUM
+   getactor[THISACTOR].pal ACTORPAL
+   getactor[THISACTOR].owner TEMP4 ifvarn TEMP4 -1 getactor[TEMP4].picnum TEMP4
+   switch ACTORPICNUM
+    case LIZTROOP
+    case LIZTROOPSTAYPUT
+    case LIZTROOPSHOOT
+    case LIZTROOPJETPACK
+    case LIZTROOPONTOILET
+    case LIZTROOPJUSTSIT
+    case LIZTROOPDUCKING
+    case LIZTROOPRUNNING
+     ifvare ACTORPAL 17 // Checks for Commander Zerman's palette
+     {
+      sizeat 55 55
+      ifvarand ACTORFLAGS 2048 nullop // if not flagged to include 2048, it will randomize him into a different LIZTROOP species
+      else
+      {
+       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1 addlogvar TEMPVAR7
+       ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 168 spritepal 14 // Shrink [16.7%]
+       else ifvarg TEMPVAR7 167 ifvarl TEMPVAR7 333 spritepal 19 // Ravager [16.7%]
+       else ifvarg TEMPVAR7 334 ifvarl TEMPVAR7 557 spritepal 21 // Captain [22.2%]
+       else ifvarg TEMPVAR7 556 ifvarl TEMPVAR7 1001 spritepal 22 // Trooper [44.4%]
+      }
+     }
+    break
+    case LIZMAN
+    case LIZMANSTAYPUT
+    case LIZMANSPITTING
+    case LIZMANJUMP
+    case LIZMANSHOOTING
+     ifvare ACTORPAL 17 // Checks for Commander Fertang's palette
+     {
+      sizeat 55 55
+      ifvarand ACTORFLAGS 2048 nullop // if not flagged to include 2048, it will randomize him into a different LIZMAN species
+      else
+      {
+       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+       ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 101 spritepal 6 // Bio-Warrior [10%]
+       else ifvarg TEMPVAR7 100 ifvarl TEMPVAR7 301 spritepal 19 // Laser [20%]
+       else ifvarg TEMPVAR7 300 ifvarl TEMPVAR7 1001 spritepal 0 // Normal [70%]
+      }
+     }
+    break
+    case PIGCOP
+    case PIGCOPSTAYPUT
+    case PIGCOPDIVE
+     ifvare ACTORPAL 24 // Checks for Colonel Ramone's palette
+     {
+      sizeat 55 55
+      ifvarand ACTORFLAGS 2048 nullop // if not flagged to include 2048, it will randomize him into a different PIGCOP species
+      else
+      {
+       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+       ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 151 { spritepal 14 sizeat 40 40 } // Sargeant [15%]
+       else ifvarg TEMPVAR7 150 ifvarl TEMPVAR7 401 { spritepal 21 sizeat 40 40 } // Captain [25%]
+       else ifvarg TEMPVAR7 400 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [60%]
+      }
+     }
+    break
+    case COMMANDER
+    case COMMANDERSTAYPUT
+     ifvare ACTORPAL 24 // Checks for Baalo the Collosus's palette
+     {
+      sizeat 80 80
+      ifvarand ACTORFLAGS 2048 nullop // if not flagged to include 2048, it will randomize him into a different COMMANDER species
+      else
+      {
+       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+       ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 251 { spritepal 25 sizeat 60 60 } // Leader [25%]
+       else ifvarg TEMPVAR7 250 ifvarl TEMPVAR7 751 { spritepal 0 sizeat 40 40 } // Commander [50%]
+       else ifvarg TEMPVAR7 750 ifvarl TEMPVAR7 1001 { spritepal 14 sizeat 30 30 } // General [25%]
+      }
+     }
+    break
+   endswitch
+  }
+  else
+  {
+   getactor[THISACTOR].picnum ACTORPICNUM
+   getactor[THISACTOR].pal ACTORPAL
+   getactor[THISACTOR].owner TEMP4 ifvarn TEMP4 -1 getactor[TEMP4].picnum TEMP4
+   switch ACTORPICNUM
+    case ROTATEGUN
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 301 { spritepal 19 sizeat 40 40 } // Rocket [30%]
+      else ifvarg TEMPVAR7 300 ifvarl TEMPVAR7 601 { spritepal 17 sizeat 40 40 } // Shotgun [30%]
+      else ifvarg TEMPVAR7 600 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [40%]
+     }
+    break
+    case SHARK
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 63 { spritepal 24 sizeat 160 160 } // Bloodtooth [6.2%]
+      else ifvarg TEMPVAR7 62 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [93.8%]
+     }
+    break
+    case LIZTROOP
+    case LIZTROOPSTAYPUT
+    case LIZTROOPSHOOT
+    case LIZTROOPJETPACK
+    case LIZTROOPONTOILET
+    case LIZTROOPJUSTSIT
+    case LIZTROOPDUCKING
+    case LIZTROOPRUNNING
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 168 spritepal 14 // Shrink [16.7%]
+      else ifvarg TEMPVAR7 167 ifvarl TEMPVAR7 333 spritepal 19 // Ravager [16.7%]
+      else ifvarg TEMPVAR7 334 ifvarl TEMPVAR7 557 spritepal 21 // Captain [22.2%]
+      else ifvarg TEMPVAR7 556 ifvarl TEMPVAR7 1001 spritepal 22 // Trooper [44.4%]
+     }
+    break
+    case LIZMAN
+    case LIZMANSTAYPUT
+    case LIZMANSPITTING
+    case LIZMANJUMP
+    case LIZMANSHOOTING
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 101 spritepal 6 // Bio-Warrior [10%]
+      else ifvarg TEMPVAR7 100 ifvarl TEMPVAR7 301 spritepal 19 // Laser [20%]
+      else ifvarg TEMPVAR7 300 ifvarl TEMPVAR7 1001 spritepal 0 // Normal [70%]
+     }
+    break
+    case DRONE
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 26 spritepal 25 // Super [2.5%]
+      else ifvarg TEMPVAR7 25 ifvarl TEMPVAR7 1001 spritepal 0 // Normal [97.5%]
+     }
+    break
+    case OCTABRAIN
+    case OCTABRAINSTAYPUT
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 11 { spritepal 14 sizeat 48 48 } // Octanine [1%]
+      else ifvarg TEMPVAR7 10 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [99%]
+     }
+    break
+    case PIGCOP
+    case PIGCOPSTAYPUT
+    case PIGCOPDIVE
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      ifvarn TEMP4 TANK ifvarn TEMP4 RECON ifvarn TEMP4 SCORPIONTANK // Randomize will not mess with the palettes of Pigcops spawned by RPVs, Riot Tanks or Scorpion Tanks
+      {
+       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+       ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 151 { spritepal 14 sizeat 40 40 } // Sargeant [15%]
+       else ifvarg TEMPVAR7 150 ifvarl TEMPVAR7 401 { spritepal 21 sizeat 40 40 } // Captain [25%]
+       else ifvarg TEMPVAR7 400 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [60%]
+      }
+     }
+    break
+    case BOSS1
+    case BOSS1STAYPUT
+    case BOSS1LOB
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 51 spritepal 24 // ESS [5%]
+      else ifvarg TEMPVAR7 50 ifvarl TEMPVAR7 251 { spritepal 3 ifvarand ACTORFLAGS 2 subvar ACTORFLAGS 2 } // Non-Ending Boss-size [20%]
+      else ifvarg TEMPVAR7 250 ifvarl TEMPVAR7 1001 spritepal 21 // Mini [75%]
+     }
+    break
+    case BOSS2
+    case BOSS2STAYPUT
+    case BOSS2SHOOT
+    case BOSS2BREATH
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 51 spritepal 24 // Megaton [5%]
+      else ifvarg TEMPVAR7 50 ifvarl TEMPVAR7 251 { spritepal 3 ifvarand ACTORFLAGS 2 subvar ACTORFLAGS 2 } // Non-Ending Boss-size [20%]
+      else ifvarg TEMPVAR7 250 ifvarl TEMPVAR7 1001 spritepal 21 // Mini [75%]
+     }
+    break
+    case BOSS3
+    case BOSS3STAYPUT
+    case BOSS3LOB
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 51 spritepal 24 // Void-Annhilator [5%]
+      else ifvarg TEMPVAR7 50 ifvarl TEMPVAR7 251 { spritepal 3 ifvarand ACTORFLAGS 2 subvar ACTORFLAGS 2 } // Non-Ending Boss-size [20%]
+      else ifvarg TEMPVAR7 250 ifvarl TEMPVAR7 1001 spritepal 21 // Mini [75%]
+     }
+    break
+    case COMMANDER
+    case COMMANDERSTAYPUT
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 251 { spritepal 25 sizeat 60 60 } // Leader [25%]
+      else ifvarg TEMPVAR7 250 ifvarl TEMPVAR7 751 { spritepal 0 sizeat 40 40 } // Commander [50%]
+      else ifvarg TEMPVAR7 750 ifvarl TEMPVAR7 1001 { spritepal 14 sizeat 30 30 } // General [25%]
+     }
+    break
+    case TANK
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 301 { spritepal 19 sizeat 40 40 } // Rocket [30%]
+      else ifvarg TEMPVAR7 300 ifvarl TEMPVAR7 601 { spritepal 17 sizeat 40 40 } // Shotgun [30%]
+      else ifvarg TEMPVAR7 600 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [40%]
+     }
+    break
+    case NEWBEAST
+    case NEWBEASTSTAYPUT
+    case NEWBEASTHANG
+    case NEWBEASTJUMP
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 126 { spritepal 20 sizeat 60 60 } // Greater Naf. [12.5%]
+      else ifvarg TEMPVAR7 125 ifvarl TEMPVAR7 351 { spritepal 17 sizeat 50 50 } // Lesser Naf. [22.5%]
+      else ifvarg TEMPVAR7 350 ifvarl TEMPVAR7 1001 { spritepal 0 sizeat 40 40 } // Normal [65%]
+     }
+    break
+    case BOSS4
+    case BOSS4STAYPUT
+     ifvarand ACTORFLAGS 2048 nullop
+     else
+     {
+      displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+      ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 126 { spritepal 3 sizeat 80 80 ifvarand ACTORFLAGS 2 subvar ACTORFLAGS 2 } // Non-Ending Boss-size [12.5%]
+      else ifvarg TEMPVAR7 125 ifvarl TEMPVAR7 1001 // Princess (Randomly Colored) [87.5%]
+      {
+       displayrandvar TEMPVAR7 993 addvar TEMPVAR7 1
+       ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 143 spritepal 10 // Princess [Dark Red] (1 out of 7)
+       else ifvarg TEMPVAR7 142 ifvarl TEMPVAR7 285 spritepal 11 // Princess [Light Green] (1 out of 7)
+       else ifvarg TEMPVAR7 284 ifvarl TEMPVAR7 427 spritepal 12 // Princess [White] (1 out of 7)
+       else ifvarg TEMPVAR7 426 ifvarl TEMPVAR7 569 spritepal 15 // Princess [Brown] (1 out of 7)
+       else ifvarg TEMPVAR7 568 ifvarl TEMPVAR7 711 spritepal 16 // Princess [Dark Blue] (1 out of 7)
+       else ifvarg TEMPVAR7 710 ifvarl TEMPVAR7 853 spritepal 21 // Princess [Red] (1 out of 7)
+       else ifvarg TEMPVAR7 852 ifvarl TEMPVAR7 995 spritepal 25 // Princess [Light Blue] (1 out of 7)
+       sizeat 40 40
+      }
+     }
+    break
+   endswitch
+   getactor[THISACTOR].pal ACTORPAL addlogvar ACTORPAL
+   //addlogvar TEMPVAR7
+
+   ifvarand ACTORFLAGS 2048 nullop
+   else
+   {
+    displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
+    ifvarl TEMPVAR7 26
+    {
+     ifvarand ACTORFLAGS 512 subvar ACTORFLAGS 512 else addvar ACTORFLAGS 512
+    }
+   }
+   //addlogvar TEMPVAR7
+   addlogvar ACTORFLAGS
+  }
+
+  addvar RANDOMIZERSET? 1
+  //addlogvar RANDOMIZERSET?
+ }
+ends
+
 state getenemylevel
- 
  setvar ACTORLEVEL 0
  setvar ACTORLEVELMINIMUM 1
  setvarvar TEMPVAR SKILLLEVEL
@@ -19586,6 +19873,7 @@ ifvarn SKILLSET-TEMP -1
   }
 
   addvar SKILLSET-TEMP 1
+  //addlogvar SKILLSET-TEMP
   setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
  }
 ends
@@ -19597,7 +19885,7 @@ state load_rotategun
 getactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 ifvarn SKILLSET-TEMP -1
 {
- getactor[ARRAYPOSITION].pal TEMP
+  getactor[ARRAYPOSITION].pal TEMP
   ifvare TEMP 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
   {
    state checkskillloadenemy
@@ -19666,6 +19954,7 @@ ifvarn SKILLSET-TEMP -1
   }
 
   addvar SKILLSET-TEMP 1
+  //addlogvar SKILLSET-TEMP
   setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -19808,6 +20097,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -19883,6 +20173,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -19961,6 +20252,7 @@ ifvarn SKILLSET-TEMP -1
   }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -20070,6 +20362,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -20181,6 +20474,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 } 
 ends
@@ -20388,6 +20682,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -20599,6 +20894,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -20806,6 +21102,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -20948,6 +21245,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -21020,6 +21318,7 @@ ifvarn SKILLSET-TEMP -1
   }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -21196,6 +21495,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -21334,6 +21634,7 @@ ifvarn SKILLSET-TEMP -1
  }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -21407,6 +21708,7 @@ ifvarn SKILLSET-TEMP -1
   }
 
  addvar SKILLSET-TEMP 1
+ //addlogvar SKILLSET-TEMP
  setactorvar[ARRAYPOSITION].SKILLSET? SKILLSET-TEMP
 }
 ends
@@ -47128,7 +47430,7 @@ state dropinventoryitem
 ends
 
 state menuvehicledisable
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 

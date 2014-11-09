@@ -91,6 +91,30 @@ onevent EVENT_SELECTWEAPON
       endswitch
      }
      else
+     ifvare mainmenuselection 16
+     {
+      getinput[THISACTOR].bits temp
+      shiftvarr temp 8
+      andvar temp 0xF
+ 
+      switch temp
+       case 11
+        subvar ENEMYRANDOMIZERCHANCE 100
+        ifvarl ENEMYRANDOMIZERCHANCE 0 setvar ENEMYRANDOMIZERCHANCE 0
+        savegamevar ENEMYRANDOMIZERCHANCE
+        sound PISTOL_BODYHIT
+        state setreturn-1
+       break
+       case 12
+        addvar ENEMYRANDOMIZERCHANCE 100
+        ifvarg ENEMYRANDOMIZERCHANCE 1000 setvar ENEMYRANDOMIZERCHANCE 1000
+        savegamevar ENEMYRANDOMIZERCHANCE
+        sound PISTOL_BODYHIT
+        state setreturn-1
+       break
+      endswitch
+     }
+     else
      {
       state setreturn-1
       state menuerrorsound
@@ -423,7 +447,7 @@ onevent EVENT_WEAPKEY9
  else state setreturn-1
 endevent // this makes reseting the code entry easier. 
 
-onevent EVENT_DISPLAYSBAR
+onevent EVENT_DISPLAYSBAR // WARNING: Unsynchronized Event
 
 // Sound based alterations
 
@@ -1583,7 +1607,7 @@ ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
  state setreturn-1
 endevent
 
-onevent EVENT_SOUND
+onevent EVENT_SOUND // WARNING: Unsynchronized Event
 // addlogvar RETURN
 ifvare RETURN 42 { setvar RETURN -1 }
 ifvare RETURN 200 { setvar RETURN -1 } // fix by Hendricks266: prevents DUKE_LAND_HURT [#200] from playing and might help fix a sound issue with fall-damage sounds
@@ -2294,10 +2318,10 @@ ifvare nill 1 state showcam
 
 endevent
 
-onevent EVENT_DISPLAYWEAPON
+onevent EVENT_DISPLAYWEAPON // WARNING: Unsynchronized Event
 endevent
 
-onevent EVENT_DISPLAYMENUREST
+onevent EVENT_DISPLAYMENUREST // WARNING: Unsynchronized Event
   rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
   rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim
 

@@ -10213,30 +10213,67 @@ state projectiles_menufreeze
   ifvare TEMP 0
   {
    setthisprojectile[THISACTOR].vel PROJECTILESPEED
-   setthisprojectile[THISACTOR].trail TEMP2
-   setactor[THISACTOR].xvel xvel
-   setactor[THISACTOR].yvel yvel
-   setactor[THISACTOR].zvel zvel
+   setthisprojectile[THISACTOR].trail PROJECTILETRAIL
+   setactor[THISACTOR].xvel ACTORXVEL
+   setactor[THISACTOR].yvel ACTORYVEL
+   setactor[THISACTOR].zvel ACTORZVEL
+   setactor[THISACTOR].x x
+   setactor[THISACTOR].y y
+   setactor[THISACTOR].z z
+/*
+   addlogvar THISACTOR
+   addlogvar PROJECTILESPEED
+   addlogvar PROJECTILETRAIL
+   addlogvar ACTORXVEL
+   addlogvar ACTORYVEL
+   addlogvar ACTORZVEL
+   addlogvar x
+   addlogvar y
+   addlogvar z
+*/
   }
   getthisprojectile[THISACTOR].vel PROJECTILESPEED
-  getthisprojectile[THISACTOR].trail TEMP2
+  getthisprojectile[THISACTOR].trail PROJECTILETRAIL
+  getactor[THISACTOR].xvel ACTORXVEL
+  getactor[THISACTOR].yvel ACTORYVEL
+  getactor[THISACTOR].zvel ACTORZVEL
   getactor[THISACTOR].x x
   getactor[THISACTOR].y y
   getactor[THISACTOR].z z
-  getactor[THISACTOR].xvel xvel
-  getactor[THISACTOR].yvel yvel
-  getactor[THISACTOR].zvel zvel
  }
  else
  {
+  getactor[THISACTOR].xvel TEMP
+  ifvarn TEMP 0
+  {
+   getthisprojectile[THISACTOR].vel PROJECTILESPEED
+   getthisprojectile[THISACTOR].trail PROJECTILETRAIL
+   getactor[THISACTOR].xvel ACTORXVEL
+   getactor[THISACTOR].yvel ACTORYVEL
+   getactor[THISACTOR].zvel ACTORZVEL
+   getactor[THISACTOR].x x
+   getactor[THISACTOR].y y
+   getactor[THISACTOR].z z
+/*
+   addlogvar THISACTOR
+   addlogvar PROJECTILESPEED
+   addlogvar PROJECTILETRAIL
+   addlogvar ACTORXVEL
+   addlogvar ACTORYVEL
+   addlogvar ACTORZVEL
+   addlogvar x
+   addlogvar y
+   addlogvar z
+*/
+  }
   setthisprojectile[THISACTOR].vel 0
   setthisprojectile[THISACTOR].trail -1
-  setactor[THISACTOR].x x
-  setactor[THISACTOR].y y
-  setactor[THISACTOR].z z
   setactor[THISACTOR].xvel 0
   setactor[THISACTOR].yvel 0
   setactor[THISACTOR].zvel 0
+  setactor[THISACTOR].x x
+  setactor[THISACTOR].y y
+  setactor[THISACTOR].z z
  }
 ends
 
@@ -10265,7 +10302,6 @@ state usewaterfountain
 ends
 
 onevent EVENT_GAME
-
 // HUBS
 
    ifvarn hubpdestination -1 ifactor APLAYER
@@ -10406,7 +10442,7 @@ ifactor JIBS6
  {
   ifvare gameover? 0
   {
-   ifvarn mainmenu 0 { sleeptime 1 changespritestat THISACTOR 0 } else { sleeptime 0 changespritestat THISACTOR 1 }
+   ifvare mainmenu 1 { sleeptime 1 changespritestat THISACTOR 0 } else { sleeptime 0 changespritestat THISACTOR 1 }
   }
   else
   {
@@ -11727,30 +11763,67 @@ case FREEZEBLAST
   ifvare TEMP 1
   {
    setthisprojectile[THISACTOR].vel PROJECTILESPEED
-   setthisprojectile[THISACTOR].trail TEMP2
-   setactor[THISACTOR].xvel xvel
-   setactor[THISACTOR].yvel yvel
-   setactor[THISACTOR].zvel zvel
+   setthisprojectile[THISACTOR].trail PROJECTILETRAIL
+   setactor[THISACTOR].xvel ACTORXVEL
+   setactor[THISACTOR].yvel ACTORYVEL
+   setactor[THISACTOR].zvel ACTORZVEL
+   setactor[THISACTOR].x x
+   setactor[THISACTOR].y y
+   setactor[THISACTOR].z z
+/*
+   addlogvar THISACTOR
+   addlogvar PROJECTILESPEED
+   addlogvar PROJECTILETRAIL
+   addlogvar ACTORXVEL
+   addlogvar ACTORYVEL
+   addlogvar ACTORZVEL
+   addlogvar x
+   addlogvar y
+   addlogvar z
+*/
   }
   getthisprojectile[THISACTOR].vel PROJECTILESPEED
-  getthisprojectile[THISACTOR].trail TEMP2
+  getthisprojectile[THISACTOR].trail PROJECTILETRAIL
+  getactor[THISACTOR].xvel ACTORXVEL
+  getactor[THISACTOR].yvel ACTORYVEL
+  getactor[THISACTOR].zvel ACTORZVEL
   getactor[THISACTOR].x x
   getactor[THISACTOR].y y
   getactor[THISACTOR].z z
-  getactor[THISACTOR].xvel xvel
-  getactor[THISACTOR].yvel yvel
-  getactor[THISACTOR].zvel zvel
  }
  else
  {
+  getactor[THISACTOR].xvel TEMP
+  ifvarn TEMP 1
+  {
+   getthisprojectile[THISACTOR].vel PROJECTILESPEED
+   getthisprojectile[THISACTOR].trail PROJECTILETRAIL
+   getactor[THISACTOR].xvel ACTORXVEL
+   getactor[THISACTOR].yvel ACTORYVEL
+   getactor[THISACTOR].zvel ACTORZVEL
+   getactor[THISACTOR].x x
+   getactor[THISACTOR].y y
+   getactor[THISACTOR].z z
+/*
+   addlogvar THISACTOR
+   addlogvar PROJECTILESPEED
+   addlogvar PROJECTILETRAIL
+   addlogvar ACTORXVEL
+   addlogvar ACTORYVEL
+   addlogvar ACTORZVEL
+   addlogvar x
+   addlogvar y
+   addlogvar z
+*/
+  }
   setthisprojectile[THISACTOR].vel 1
   setthisprojectile[THISACTOR].trail -1
-  setactor[THISACTOR].x x
-  setactor[THISACTOR].y y
-  setactor[THISACTOR].z z
   setactor[THISACTOR].xvel 1
   setactor[THISACTOR].yvel 1
   setactor[THISACTOR].zvel 1
+  setactor[THISACTOR].x x
+  setactor[THISACTOR].y y
+  setactor[THISACTOR].z z
  }
 break
 
@@ -11934,8 +12007,6 @@ break
 case GATEMISSILE_MAIN
  state itemfullbright
  state projectiles_menufreeze
- // addvar TEMP3 1
- // ifvarg TEMP3 13
  ifvarg DEATHMISSILEACTIVATED 0
  {
   getactor[THISACTOR].htg_t 9 TEMP3
@@ -12043,8 +12114,6 @@ break
 case STROKEMISSILE_MAIN
  state itemfullbright
  state projectiles_menufreeze
-// addvar TEMP3 1
-// ifvarg TEMP3 13
 ifvarg DEATHMISSILEACTIVATED 0
 {
  getactor[THISACTOR].htg_t 9 TEMP3
@@ -12428,10 +12497,10 @@ endswitch
   else ifspawnedby SCORPIONTANK state setrpgsize
  }
 
- getactor[THISACTOR].picnum GAMEFLAG 
- getactor[GAMEFLAG].pal ACTORPAL
+ getactor[THISACTOR].picnum ACTORPICNUM
+ getactor[THISACTOR].pal ACTORPAL
 
- switch GAMEFLAG 
+ switch ACTORPICNUM 
 
   case MONEY:
       state deleteoldmoney
@@ -12485,7 +12554,7 @@ endswitch
   case BOSS4STAYPUT
    ifvare gameover? 0
    {
-    ifvarn mainmenu 0 { sleeptime 1 ifvarl SKILLSET? 0 { changespritestat THISACTOR 0 } } else { ifvarl SKILLSET? 0 { sleeptime 0 changespritestat THISACTOR 1 } }
+    ifvare mainmenu 1 { sleeptime 1 ifvarl SKILLSET? 0 { changespritestat THISACTOR 0 } } else { ifvarl SKILLSET? 0 { sleeptime 0 changespritestat THISACTOR 1 } }
    }
    else
    {
@@ -12496,7 +12565,7 @@ endswitch
   case RECON:
    ifvare gameover? 0
    {
-    ifvarn mainmenu 0 { sleeptime 1 ifvarl SKILLSET? 0 { changespritestat THISACTOR 0 } } else { ifvarl SKILLSET? 0 { sleeptime 0 changespritestat THISACTOR 1 } }
+    ifvare mainmenu 1 { sleeptime 1 ifvarl SKILLSET? 0 { changespritestat THISACTOR 0 } } else { ifvarl SKILLSET? 0 { sleeptime 0 changespritestat THISACTOR 1 } }
    }
    else
    {
@@ -12611,9 +12680,8 @@ ifactor CAMERA1
  }
 }
 
- getactor[THISACTOR].picnum GAMEFLAGEGS 
-
- switch GAMEFLAGEGS
+ getactor[THISACTOR].picnum ACTORPICNUM 
+ switch ACTORPICNUM
   case MONEY:
       cstat 32768
       ifrnd 4 { espawn RANDOMMONEY state setdroppedmoneyowner }
@@ -12861,13 +12929,17 @@ ifai 0
  ifvarn SKILLSET? 0
   ifvarn SKILLSET? -1
  {
+  //addlogvar SKILLSET?
   state rankstarbeta
   state checkbosslifemeters 
   state getenemyid setvar SKILLSET? -1
+  //addlogvar SKILLSET?
  }
 
  ifvare SKILLSET? 0 // Palette 9 is 'Old School' (No abnormal stat calculations)
  {
+  //addlogvar SKILLSET?
+  state enemytyperandomizer
   state cstat2048toeliteflag
   state rankstarbeta
   ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -12915,6 +12987,7 @@ ifai 0
   state addtomaxkills
   state checkbosslifemeters 
   state getenemyid setvar SKILLSET? -1
+  //addlogvar SKILLSET?
  }
  state enemyunderwater
 }
@@ -20479,13 +20552,17 @@ ifai 0
  ifvarn SKILLSET? 0
   ifvarn SKILLSET? -1
  {
+  //addlogvar SKILLSET?
   state rankstarbeta
   state checkbosslifemeters
   state getenemyid setvar SKILLSET? -1
+  //addlogvar SKILLSET?
  }
 
  ifvare SKILLSET? 0
  {
+  //addlogvar SKILLSET?
+  state enemytyperandomizer
   state rankstarbeta
   ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
   {
@@ -20548,6 +20625,7 @@ ifai 0
   state addtomaxkills
   state checkbosslifemeters
   state getenemyid setvar SKILLSET? -1
+  //addlogvar SKILLSET?
  }
 } 
 
@@ -25337,7 +25415,6 @@ ifvarvarl RANKPOINTS MISCARRAYID_AMOUNTTEMP setvarvar RANKPOINTS MISCARRAYID_AMO
 setvar MISCARRAYID 230 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // RANK-POINTS-HIGHEST
 ifvarvarg RANKPOINTS MISCARRAYID_AMOUNTTEMP setvarvar RANKPOINTS MISCARRAYID_AMOUNTTEMP
 
-addvar TEMPCOUNT 1
 ifvare player[THISACTOR].pals_time 0
 {
  setplayer[THISACTOR].pals 0 0 //Red
@@ -28087,7 +28164,7 @@ else
   }
   else
   {
-   ifvarg mainmenutransitiontimer 6 setvar TEMPVAR4 16384
+   ifvare DEBUG_NOMENUOVERLAY 0 { ifvarg mainmenutransitiontimer 6 setvar TEMPVAR4 16384 } else setvar TEMPVAR4 0
   }
  } 
  else
@@ -28123,7 +28200,7 @@ else
   }
   else
   {
-   ifvarg mainmenutransitiontimer 6 setvar TEMPVAR4 16384
+   ifvare DEBUG_NOMENUOVERLAY 0 { ifvarg mainmenutransitiontimer 6 setvar TEMPVAR4 16384 } else setvar TEMPVAR4 0
   }
  }
  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
@@ -34906,6 +34983,7 @@ ifai 0
 
  ifvare SKILLSET? 0
  {
+  state enemytyperandomizer
   state cstat2048toeliteflag
   state rankstarbeta
   setvar ACTORJETPACKAMOUNT JETPACK_AMOUNT
@@ -36929,82 +37007,83 @@ ifai 0
 
  ifvare SKILLSET? 0
  { 
+  state enemytyperandomizer
   state cstat2048toeliteflag
   state rankstarbeta
- ifspritepal 9 // Palette 9 is 'Old School' Trooper (No abnormal stat calculations)
- {
-  setvar ACTORHP LIZSTRENGTH
-  setvar ACTORMAXAIRTIME LIZAIRTIME
-  setvar ACTORAIRTIME LIZAIRTIME
-  setvar ACTORMAXHP LIZSTRENGTH
- }
- else
- ifspritepal 6
- {
-  setvar ACTORHP BIOLIZSTRENGTH
-  setvar ACTORMAXAIRTIME BIOLIZAIRTIME
-  setvar ACTORAIRTIME BIOLIZAIRTIME
-  setvar ACTORATTACK BIOLIZBASEATTACK
-  setvar ACTORDEFENSE BIOLIZBASEDEFENSE
-  setvar ACTORMAXAP BIOLIZSTRENGTH
-  setvar ACTORMAXFALLRESIST BIOLIZFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE BIOLIZCRITCHANCE
-  setvar ACTORSURVIVALVALUE BIOLIZSURVIVALCHANCE
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 416 // Metal, Poison, Ion/Energy (256)
-  setvar ACTORWEAKNESSFLAGS 2 // Ice
- }
- else
- ifspritepal 17
- {
-  sizeat 55 55
-  setvar ACTORHP FERTANGSTRENGTH
-  setvar ACTORMAXAIRTIME FERTANGAIRTIME
-  setvar ACTORAIRTIME FERTANGAIRTIME
-  setvar ACTORATTACK FERTANGBASEATTACK
-  setvar ACTORDEFENSE FERTANGBASEDEFENSE
-  setvar ACTORMAXAP FERTANGSTRENGTH
-  setvar ACTORMAXFALLRESIST FERTANGFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE FERTANGCRITCHANCE
-  setvar ACTORSURVIVALVALUE FERTANGSURVIVALCHANCE
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 416 // Metal, Poison, Ion/Energy (256)
-  setvar ACTORWEAKNESSFLAGS 2 // Ice
- }
- else
- ifspritepal 19
- {
-  setvar ACTORHP LASERLIZSTRENGTH
-  setvar ACTORMAXAIRTIME LASERLIZAIRTIME
-  setvar ACTORAIRTIME LASERLIZAIRTIME
-  setvar ACTORATTACK FERTANGBASEATTACK
-  setvar ACTORDEFENSE LASERLIZBASEDEFENSE
-  setvar ACTORMAXAP LASERLIZSTRENGTH
-  setvar ACTORMAXFALLRESIST LASERLIZFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE LASERLIZCRITCHANCE
-  setvar ACTORSURVIVALVALUE LASERLIZSURVIVALCHANCE
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 416 // Metal, Poison, Ion/Energy (256)
-  setvar ACTORWEAKNESSFLAGS 2 // Ice
- }
- else
- {
-  setvar ACTORHP LIZSTRENGTH
-  setvar ACTORMAXAIRTIME LIZAIRTIME
-  setvar ACTORAIRTIME LIZAIRTIME
-  setvar ACTORATTACK LIZBASEATTACK
-  setvar ACTORDEFENSE LIZBASEDEFENSE
-  setvar ACTORMAXAP LIZSTRENGTH
-  setvar ACTORMAXFALLRESIST LIZFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE LIZCRITCHANCE
-  setvar ACTORSURVIVALVALUE LIZSURVIVALCHANCE
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 386 // Ice, Poison, Ion/Energy (256)
- }
+  ifspritepal 9 // Palette 9 is 'Old School' Enforcer (No abnormal stat calculations)
+  {
+   setvar ACTORHP LIZSTRENGTH
+   setvar ACTORMAXAIRTIME LIZAIRTIME
+   setvar ACTORAIRTIME LIZAIRTIME
+   setvar ACTORMAXHP LIZSTRENGTH
+  }
+  else
+  ifspritepal 6 // Bio-Warrior Enforcer
+  {
+   setvar ACTORHP BIOLIZSTRENGTH
+   setvar ACTORMAXAIRTIME BIOLIZAIRTIME
+   setvar ACTORAIRTIME BIOLIZAIRTIME
+   setvar ACTORATTACK BIOLIZBASEATTACK
+   setvar ACTORDEFENSE BIOLIZBASEDEFENSE
+   setvar ACTORMAXAP BIOLIZSTRENGTH
+   setvar ACTORMAXFALLRESIST BIOLIZFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE BIOLIZCRITCHANCE
+   setvar ACTORSURVIVALVALUE BIOLIZSURVIVALCHANCE
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 416 // Metal, Poison, Ion/Energy (256)
+   setvar ACTORWEAKNESSFLAGS 2 // Ice
+  }
+  else
+  ifspritepal 17 // Commander Fertang [boss]
+  {
+   sizeat 55 55
+   setvar ACTORHP FERTANGSTRENGTH
+   setvar ACTORMAXAIRTIME FERTANGAIRTIME
+   setvar ACTORAIRTIME FERTANGAIRTIME
+   setvar ACTORATTACK FERTANGBASEATTACK
+   setvar ACTORDEFENSE FERTANGBASEDEFENSE
+   setvar ACTORMAXAP FERTANGSTRENGTH
+   setvar ACTORMAXFALLRESIST FERTANGFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE FERTANGCRITCHANCE
+   setvar ACTORSURVIVALVALUE FERTANGSURVIVALCHANCE
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 416 // Metal, Poison, Ion/Energy (256)
+   setvar ACTORWEAKNESSFLAGS 2 // Ice
+  }
+  else
+  ifspritepal 19 // Laser Enforcer
+  {
+   setvar ACTORHP LASERLIZSTRENGTH
+   setvar ACTORMAXAIRTIME LASERLIZAIRTIME
+   setvar ACTORAIRTIME LASERLIZAIRTIME
+   setvar ACTORATTACK FERTANGBASEATTACK
+   setvar ACTORDEFENSE LASERLIZBASEDEFENSE
+   setvar ACTORMAXAP LASERLIZSTRENGTH
+   setvar ACTORMAXFALLRESIST LASERLIZFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE LASERLIZCRITCHANCE
+   setvar ACTORSURVIVALVALUE LASERLIZSURVIVALCHANCE
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 416 // Metal, Poison, Ion/Energy (256)
+   setvar ACTORWEAKNESSFLAGS 2 // Ice
+  }
+  else // Normal
+  {
+   setvar ACTORHP LIZSTRENGTH
+   setvar ACTORMAXAIRTIME LIZAIRTIME
+   setvar ACTORAIRTIME LIZAIRTIME
+   setvar ACTORATTACK LIZBASEATTACK
+   setvar ACTORDEFENSE LIZBASEDEFENSE
+   setvar ACTORMAXAP LIZSTRENGTH
+   setvar ACTORMAXFALLRESIST LIZFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE LIZCRITCHANCE
+   setvar ACTORSURVIVALVALUE LIZSURVIVALCHANCE
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 386 // Ice, Poison, Ion/Energy (256)
+  }
   setvarvar ARRAYPOSITION THISACTOR
   state addtomaxkills
   state checkbosslifemeters
@@ -38441,6 +38520,7 @@ ifvarn SKILLSET? 0
 
 ifvare SKILLSET? 0
 { 
+ state enemytyperandomizer
  state cstat2048toeliteflag
  state rankstarbeta
  ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -39347,6 +39427,7 @@ ifai 0
 
  ifvare SKILLSET? 0
  {
+  state enemytyperandomizer
   state cstat2048toeliteflag
   state rankstarbeta
   ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -40131,91 +40212,92 @@ ifai 0
 
  ifvare SKILLSET? 0
  {
- state cstat2048toeliteflag
- state rankstarbeta
- ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
- {
-  setvar ACTORHP PIGCOPSTRENGTH
-  setvar ACTORMAXAIRTIME PIGCOPAIRTIME
-  setvar ACTORAIRTIME PIGCOPAIRTIME
-  setvar ACTORMAXHP PIGCOPSTRENGTH
- }
- else
- ifspritepal 21
- {
-  setvar ACTORHP PIGCAPTAINSTRENGTH
-  setvar ACTORMAXAIRTIME PIGCAPTAINAIRTIME
-  setvar ACTORAIRTIME PIGCAPTAINAIRTIME
-  setvar ACTORATTACK PIGCAPTAINBASEATTACK
-  setvar ACTORDEFENSE PIGCAPTAINBASEDEFENSE
-  setvar ACTORMAXAP PIGCAPTAINSTRENGTH
-  setvar ACTORMAXFALLRESIST PIGCAPTAINFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE PIGCAPTAINCRITCHANCE
-  setvar ACTORSURVIVALVALUE PIGCAPTAINSURVIVALCHANCE
-  state enemyarmortype
-  state freezecode_actor
-  state healingsector_actor
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
- }
- else
- ifspritepal 14
- {
-  setvar ACTORHP PIGSARGEANTSTRENGTH
-  setvar ACTORMAXAIRTIME PIGSARGEANTAIRTIME
-  setvar ACTORAIRTIME PIGSARGEANTAIRTIME
-  setvar ACTORATTACK PIGSARGEANTBASEATTACK
-  setvar ACTORDEFENSE PIGSARGEANTBASEDEFENSE
-  setvar ACTORMAXAP PIGSARGEANTSTRENGTH
-  setvar ACTORMAXFALLRESIST PIGSARGEANTFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE PIGSARGEANTCRITCHANCE
-  setvar ACTORSURVIVALVALUE PIGSARGEANTSURVIVALCHANCE
-  state enemyarmortype
-  state freezecode_actor
-  state healingsector_actor
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
- }
- else
- ifspritepal 24
- {
-  sizeat 55 55
-  setvar ACTORHP RAMONESTRENGTH
-  setvar ACTORMAXAIRTIME RAMONEAIRTIME
-  setvar ACTORAIRTIME RAMONEAIRTIME
-  setvar ACTORATTACK RAMONEBASEATTACK
-  setvar ACTORDEFENSE RAMONEBASEDEFENSE
-  setvar ACTORMAXAP RAMONESTRENGTH
-  setvar ACTORMAXFALLRESIST RAMONEFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE RAMONECRITCHANCE
-  setvar ACTORSURVIVALVALUE RAMONESURVIVALCHANCE
-  state enemyarmortype
-  state freezecode_actor
-  state healingsector_actor
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
- }
- else
- {
-  setvar ACTORHP PIGCOPSTRENGTH
-  setvar ACTORMAXAIRTIME PIGCOPAIRTIME
-  setvar ACTORAIRTIME PIGCOPAIRTIME
-  setvar ACTORATTACK PIGCOPBASEATTACK
-  setvar ACTORDEFENSE PIGCOPBASEDEFENSE
-  setvar ACTORMAXAP PIGCOPSTRENGTH
-  setvar ACTORMAXFALLRESIST PIGCOPFALLRESIST
-  setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-  setvar ACTORCRITICALHITCHANCE PIGCOPCRITCHANCE
-  setvar ACTORSURVIVALVALUE PIGCOPSURVIVALCHANCE
-  state enemyarmortype
-  state freezecode_actor
-  state healingsector_actor
-  state newenemystatcalc
-  setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
- }
+  state enemytyperandomizer
+  state cstat2048toeliteflag
+  state rankstarbeta
+  ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
+  {
+   setvar ACTORHP PIGCOPSTRENGTH
+   setvar ACTORMAXAIRTIME PIGCOPAIRTIME
+   setvar ACTORAIRTIME PIGCOPAIRTIME
+   setvar ACTORMAXHP PIGCOPSTRENGTH
+  }
+  else
+  ifspritepal 21
+  {
+   setvar ACTORHP PIGCAPTAINSTRENGTH
+   setvar ACTORMAXAIRTIME PIGCAPTAINAIRTIME
+   setvar ACTORAIRTIME PIGCAPTAINAIRTIME
+   setvar ACTORATTACK PIGCAPTAINBASEATTACK
+   setvar ACTORDEFENSE PIGCAPTAINBASEDEFENSE
+   setvar ACTORMAXAP PIGCAPTAINSTRENGTH
+   setvar ACTORMAXFALLRESIST PIGCAPTAINFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE PIGCAPTAINCRITCHANCE
+   setvar ACTORSURVIVALVALUE PIGCAPTAINSURVIVALCHANCE
+   state enemyarmortype
+   state freezecode_actor
+   state healingsector_actor
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
+  }
+  else
+  ifspritepal 14
+  {
+   setvar ACTORHP PIGSARGEANTSTRENGTH
+   setvar ACTORMAXAIRTIME PIGSARGEANTAIRTIME
+   setvar ACTORAIRTIME PIGSARGEANTAIRTIME
+   setvar ACTORATTACK PIGSARGEANTBASEATTACK
+   setvar ACTORDEFENSE PIGSARGEANTBASEDEFENSE
+   setvar ACTORMAXAP PIGSARGEANTSTRENGTH
+   setvar ACTORMAXFALLRESIST PIGSARGEANTFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE PIGSARGEANTCRITCHANCE
+   setvar ACTORSURVIVALVALUE PIGSARGEANTSURVIVALCHANCE
+   state enemyarmortype
+   state freezecode_actor
+   state healingsector_actor
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
+  }
+  else
+  ifspritepal 24
+  {
+   sizeat 55 55
+   setvar ACTORHP RAMONESTRENGTH
+   setvar ACTORMAXAIRTIME RAMONEAIRTIME
+   setvar ACTORAIRTIME RAMONEAIRTIME
+   setvar ACTORATTACK RAMONEBASEATTACK
+   setvar ACTORDEFENSE RAMONEBASEDEFENSE
+   setvar ACTORMAXAP RAMONESTRENGTH
+   setvar ACTORMAXFALLRESIST RAMONEFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE RAMONECRITCHANCE
+   setvar ACTORSURVIVALVALUE RAMONESURVIVALCHANCE
+   state enemyarmortype
+   state freezecode_actor
+   state healingsector_actor
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
+  }
+  else
+  {
+   setvar ACTORHP PIGCOPSTRENGTH
+   setvar ACTORMAXAIRTIME PIGCOPAIRTIME
+   setvar ACTORAIRTIME PIGCOPAIRTIME
+   setvar ACTORATTACK PIGCOPBASEATTACK
+   setvar ACTORDEFENSE PIGCOPBASEDEFENSE
+   setvar ACTORMAXAP PIGCOPSTRENGTH
+   setvar ACTORMAXFALLRESIST PIGCOPFALLRESIST
+   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+   setvar ACTORCRITICALHITCHANCE PIGCOPCRITCHANCE
+   setvar ACTORSURVIVALVALUE PIGCOPSURVIVALCHANCE
+   state enemyarmortype
+   state freezecode_actor
+   state healingsector_actor
+   state newenemystatcalc
+   setvar ACTORSTRONGFLAGS 48 // Explosive, Metal
+  }
   setvarvar ARRAYPOSITION THISACTOR
   state addtomaxkills
   state checkbosslifemeters state getenemyid setvar SKILLSET? -1
@@ -41413,6 +41495,7 @@ state bossendgamestuff
     ifvare gameover? 0 ifvare mainmenu 0 addvar ACTORDEADTIMER 1
     ifvare ACTORDEADTIMER 56
     {
+     addlogvar ACTORFLAGS
      ifvarand ACTORFLAGS 2
      {
       setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
@@ -41478,6 +41561,7 @@ ifvarn SKILLSET? 0
 
 ifvare SKILLSET? 0
 {
+ state enemytyperandomizer
  state cstat2048toeliteflag
  state rankstarbeta
  ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -42504,6 +42588,7 @@ ifvarn SKILLSET? 0
 
 ifvare SKILLSET? 0
 {
+ state enemytyperandomizer
  state cstat2048toeliteflag
  state rankstarbeta
  ifspritepal 10 // Palette 10 will be 'Old School' (No abnormal stat calculations)
@@ -43623,6 +43708,7 @@ ifvarn SKILLSET? 0
 
 ifvare SKILLSET? 0
 {
+ state enemytyperandomizer
  state cstat2048toeliteflag
  state rankstarbeta
  ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -44596,81 +44682,82 @@ ifai 0
 
  ifvare SKILLSET? 0
  {
- state cstat2048toeliteflag
- state rankstarbeta
- ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
- {
-  setvar ACTORHP COMMANDERSTRENGTH
-  setvar ACTORMAXHP COMMANDERSTRENGTH
-  setvar ACTORMAXAIRTIME COMMANDERAIRTIME
-  setvar ACTORAIRTIME COMMANDERAIRTIME
- }
- else
- ifspritepal 14
- {
-   sizeat 30 30
-   setvar ACTORHP GENERALSTRENGTH
-   setvar ACTORMAXAIRTIME GENERALAIRTIME
-   setvar ACTORAIRTIME GENERALAIRTIME
-   setvar ACTORATTACK GENERALBASEATTACK
-   setvar ACTORDEFENSE GENERALBASEDEFENSE
-   setvar ACTORMAXAP GENERALSTRENGTH
-   setvar ACTORMAXFALLRESIST 65536
-   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-   setvar ACTORCRITICALHITCHANCE GENERALCRITCHANCE
-   setvar ACTORSURVIVALVALUE GENERALSURVIVALCHANCE
-   state newenemystatcalc
-   setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
- }
- else
- ifspritepal 25
- {
-   sizeat 60 60
-   setvar ACTORHP LEADERSTRENGTH
-   setvar ACTORMAXAIRTIME LEADERAIRTIME
-   setvar ACTORAIRTIME LEADERAIRTIME
-   setvar ACTORATTACK LEADERBASEATTACK
-   setvar ACTORDEFENSE LEADERBASEDEFENSE
-   setvar ACTORMAXAP LEADERSTRENGTH
-   setvar ACTORMAXFALLRESIST 65536
-   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-   setvar ACTORCRITICALHITCHANCE LEADERCRITCHANCE
-   setvar ACTORSURVIVALVALUE LEADERSURVIVALCHANCE
-   state newenemystatcalc
-   setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
- }
- else
- ifspritepal 24
- {
-   sizeat 80 80
-   setvar ACTORHP BAALOSTRENGTH
-   setvar ACTORMAXAIRTIME BAALOAIRTIME
-   setvar ACTORAIRTIME BAALOAIRTIME
-   setvar ACTORATTACK BAALOBASEATTACK
-   setvar ACTORDEFENSE BAALOBASEDEFENSE
-   setvar ACTORMAXAP BAALOSTRENGTH
-   setvar ACTORMAXFALLRESIST 65536
-   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-   setvar ACTORCRITICALHITCHANCE BAALOCRITCHANCE
-   setvar ACTORSURVIVALVALUE BAALOSURVIVALCHANCE
-   state newenemystatcalc
-   setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
- }
- else
- {
+  state enemytyperandomizer
+  state cstat2048toeliteflag
+  state rankstarbeta
+  ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
+  {
    setvar ACTORHP COMMANDERSTRENGTH
+   setvar ACTORMAXHP COMMANDERSTRENGTH
    setvar ACTORMAXAIRTIME COMMANDERAIRTIME
    setvar ACTORAIRTIME COMMANDERAIRTIME
-   setvar ACTORATTACK COMMANDERBASEATTACK
-   setvar ACTORDEFENSE COMMANDERBASEDEFENSE
-   setvar ACTORMAXAP COMMANDERSTRENGTH
-   setvar ACTORMAXFALLRESIST 65536
-   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-   setvar ACTORCRITICALHITCHANCE COMMANDERCRITCHANCE
-   setvar ACTORSURVIVALVALUE COMMANDERSURVIVALCHANCE
-   state newenemystatcalc
-   setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
- }
+  }
+  else
+  ifspritepal 14
+  {
+    sizeat 30 30
+    setvar ACTORHP GENERALSTRENGTH
+    setvar ACTORMAXAIRTIME GENERALAIRTIME
+    setvar ACTORAIRTIME GENERALAIRTIME
+    setvar ACTORATTACK GENERALBASEATTACK
+    setvar ACTORDEFENSE GENERALBASEDEFENSE
+    setvar ACTORMAXAP GENERALSTRENGTH
+    setvar ACTORMAXFALLRESIST 65536
+    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+    setvar ACTORCRITICALHITCHANCE GENERALCRITCHANCE
+    setvar ACTORSURVIVALVALUE GENERALSURVIVALCHANCE
+    state newenemystatcalc
+    setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
+  }
+  else
+  ifspritepal 25
+  {
+    sizeat 60 60
+    setvar ACTORHP LEADERSTRENGTH
+    setvar ACTORMAXAIRTIME LEADERAIRTIME
+    setvar ACTORAIRTIME LEADERAIRTIME
+    setvar ACTORATTACK LEADERBASEATTACK
+    setvar ACTORDEFENSE LEADERBASEDEFENSE
+    setvar ACTORMAXAP LEADERSTRENGTH
+    setvar ACTORMAXFALLRESIST 65536
+    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+    setvar ACTORCRITICALHITCHANCE LEADERCRITCHANCE
+    setvar ACTORSURVIVALVALUE LEADERSURVIVALCHANCE
+    state newenemystatcalc
+    setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
+  }
+  else
+  ifspritepal 24
+  {
+    sizeat 80 80
+    setvar ACTORHP BAALOSTRENGTH
+    setvar ACTORMAXAIRTIME BAALOAIRTIME
+    setvar ACTORAIRTIME BAALOAIRTIME
+    setvar ACTORATTACK BAALOBASEATTACK
+    setvar ACTORDEFENSE BAALOBASEDEFENSE
+    setvar ACTORMAXAP BAALOSTRENGTH
+    setvar ACTORMAXFALLRESIST 65536
+    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+    setvar ACTORCRITICALHITCHANCE BAALOCRITCHANCE
+    setvar ACTORSURVIVALVALUE BAALOSURVIVALCHANCE
+    state newenemystatcalc
+    setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
+  }
+  else
+  {
+    setvar ACTORHP COMMANDERSTRENGTH
+    setvar ACTORMAXAIRTIME COMMANDERAIRTIME
+    setvar ACTORAIRTIME COMMANDERAIRTIME
+    setvar ACTORATTACK COMMANDERBASEATTACK
+    setvar ACTORDEFENSE COMMANDERBASEDEFENSE
+    setvar ACTORMAXAP COMMANDERSTRENGTH
+    setvar ACTORMAXFALLRESIST 65536
+    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+    setvar ACTORCRITICALHITCHANCE COMMANDERCRITCHANCE
+    setvar ACTORSURVIVALVALUE COMMANDERSURVIVALCHANCE
+    state newenemystatcalc
+    setvar ACTORSTRONGFLAGS 17 // Fire (1), Explosions
+  }
   setvarvar ARRAYPOSITION THISACTOR
   state addtomaxkills
   state checkbosslifemeters state getenemyid setvar SKILLSET? -1
@@ -45755,6 +45842,7 @@ state settankhealth
 
  ifvare SKILLSET? 0
  {
+  state enemytyperandomizer
   state cstat2048toeliteflag
   state rankstarbeta
   ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -46225,6 +46313,7 @@ ifvarn SKILLSET? 0
 
 ifvare SKILLSET? 0
 {
+  state enemytyperandomizer
  state cstat2048toeliteflag
  state rankstarbeta
  ifspritepal 9 // Palette 10 will be 'Old School' (No abnormal stat calculations)
@@ -47149,6 +47238,7 @@ ifvarn SKILLSET? 0
 
 ifvare SKILLSET? 0
 {
+  state enemytyperandomizer
  state cstat2048toeliteflag
  state rankstarbeta
  ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
@@ -48928,7 +49018,8 @@ state setscorpiontankhealth
 
  ifvare SKILLSET? 0
  {
- state cstat2048toeliteflag
+  state enemytyperandomizer
+  state cstat2048toeliteflag
   state rankstarbeta
   ifspritepal 9 // Palette 9 is 'Old School' (No abnormal stat calculations)
   {
@@ -51035,122 +51126,144 @@ eventloadactor EGG
  setactor[THISACTOR].htowner -1
 enda
 eventloadactor ROTATEGUN
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor SHARK 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOP
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPSTAYPUT
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPSHOOT
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPJETPACK
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPONTOILET
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPJUSTSIT
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPDUCKING
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZTROOPRUNNING
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZMAN
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZMANSTAYPUT
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZMANSPITTING
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZMANJUMP
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor LIZMANSHOOTING
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor DRONE 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor OCTABRAIN
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor OCTABRAINSTAYPUT 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor PIGCOP
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor PIGCOPSTAYPUT 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor PIGCOPDIVE 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS1 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS1STAYPUT 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS1LOB 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS2 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS2STAYPUT 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS2SHOOT 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS2BREATH 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS3 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor BOSS3LOB 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor COMMANDER 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor COMMANDERSTAYPUT 
- state getenemylevel2 
+ state getenemylevel2
 enda
 eventloadactor TANK 
  sizeat 40 40
  state getenemylevel2
 enda
 eventloadactor BOSS4 
- state eventload3
+ ifspritepal 0 sizeat 80 80 
+ else ifspritepal 3 sizeat 80 80 
+ else ifspritepal 9 sizeat 80 80 
+ else ifspritepal 24 sizeat 48 48
+ else sizeat 40 40
+ state getenemylevel2
 enda
 eventloadactor BOSS4STAYPUT 
- state eventload3
+ ifspritepal 0 sizeat 80 80 
+ else ifspritepal 3 sizeat 80 80 
+ else ifspritepal 9 sizeat 80 80 
+ else ifspritepal 24 sizeat 48 48
+ else sizeat 40 40
+ state getenemylevel2
 enda
 eventloadactor NEWBEAST
- state eventload6
+ ifspritepal 17 sizeat 50 50 
+ else ifspritepal 20 sizeat 60 60 
+ else sizeat 40 40
+ state getenemylevel2
 enda
 eventloadactor NEWBEASTSTAYPUT 
- state eventload6
+ ifspritepal 17 sizeat 50 50 
+ else ifspritepal 20 sizeat 60 60 
+ else sizeat 40 40
+ state getenemylevel2
 enda
 eventloadactor NEWBEASTHANG 
- state eventload6
+ ifspritepal 17 sizeat 50 50 
+ else ifspritepal 20 sizeat 60 60 
+ else sizeat 40 40
+ state getenemylevel2
 enda
 eventloadactor NEWBEASTJUMP 
- state eventload6
+ ifspritepal 17 sizeat 50 50 
+ else ifspritepal 20 sizeat 60 60 
+ else sizeat 40 40
+ state getenemylevel2
 enda
 eventloadactor SCORPIONTANK
  sizeat 40 40

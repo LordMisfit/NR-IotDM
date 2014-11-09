@@ -1,4 +1,4 @@
-onevent EVENT_DISPLAYREST
+onevent EVENT_DISPLAYREST // WARNING: Unsynchronized Event
 
 setuserdef[THISACTOR].screen_size 3
 getuserdef[THISACTOR].pause_on temp
@@ -15195,7 +15195,22 @@ else
    // ******************************************************************************
    // ******************************************************************************
 
-   state ingamemenus
+   ifvare DEBUG_NOMENUOVERLAY 0 state ingamemenus
+   else
+   {
+    ifvarg mainmenutransitiontimer 0
+    {
+     state shade0
+     state pal10
+     setvar digy 10
+     state orientation2
+     state setquote332
+     setvar tilenum 2822
+     state digx320
+     redefinequote 332 [!!!MENUS ARE CURRENTLY SET TO NOT SHOW!!!]
+     state gt
+    }
+   }
 
   } // ifvare oldskoolmode 0 [line 1436]
  } // ifvarl gameover? 1 ifvarg TIMERRAWFORMAT 0 [line 235]

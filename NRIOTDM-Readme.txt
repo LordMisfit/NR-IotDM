@@ -338,8 +338,11 @@ NOTE: You can also spawn ELITE monsters via the console by including "2048" in t
   i. 256 = (undefined at the current time)
   j. 512 = Flags the monster an an "ELITE" monster. Read "ELITE Monsters" section above to learn more about their properties.
   k. 1024 = When the enemy awakens, they will have a BOSS lifemeter appear on the screen showing their HP ratio[but only HP]. This will disappear when the enemy dies or 3 other enemies with the flag awaken. "Boss" tagged monsters also give more EXP and RANK on death.
-  l. 2048 = (undefined at the current time)
-  m. 4096 = Special Flag #1. Works only on LIZTROOPs at the moment. Setting this will cause them to wake up as suicide bombers immediately instead of waiting for their health to decline.
+  l. 2048 = Special Monster-Unique Flag #1.
+            1. Marks LIZTROOP Pal 17, PIGCOP Pal 24, LIZMAN Pal 17, COMMANDER Pal 24, as their proper boss forms. If not given, they will be randomized as a different non-boss varient of their species at map load. Meant to prevent certain custom maps from accidentially spamming near-undefeatable boss versions of these guys. 
+            2. For non-boss Palette monsters [and also BOSS1/2/3/4 Pal 3] from the get go, it will stop them from being affected by the enemy-randomization stuff regardless of the current settings.
+  m. 4096 = Special Monster-Unique Flag #2.
+            1. Works only on LIZTROOPs at the moment. Setting this will cause them to wake up as suicide bombers immediately instead of waiting for their health to decline.
   n. 8192 = Player/Ally NPC Ally [not yet coded]
   o. 16384 = NaMa-Alligence Monster [not yet coded]
   p. 32768 = ElMa-Alligence Monster [not yet coded]

@@ -447,6 +447,7 @@ ifvare mainmenu 1
    {
     ifvare mainmenuselection 14 nullop
     else ifvare mainmenuselection 15 nullop
+    else ifvare mainmenuselection 16 nullop
     else
     {
      getkeyname 502 6 0
@@ -1856,19 +1857,6 @@ ifvare mainmenu 1
       redefinequote 332 ^12%s^23/^12%s^23/^12%s^23/^12%s^23/^12%s^23/^12%s^0=^22CHANGE -.1%^23/^22+.1%^23/^22-1%^23/^22+1%^23/^22-10%^23/^22+10%
       qsprintf 332 332 502 503 504 505 506 507
      }
-/*
-     ifvare INVULNREFLECTRATE 0 redefinequote 332 INVULN-AURA CAN'T DEFLECT ANY DAMAGE BACK TO ATTACKERS.
-     else
-     {
-      setvarvar MISCARRAYID_AMOUNTTEMP INVULNREFLECTRATE
-      divvar MISCARRAYID_AMOUNTTEMP 10
-      setvarvar MISCARRAYID_AMOUNTTEMP2 INVULNREFLECTRATE
-      modvar MISCARRAYID_AMOUNTTEMP2 10
-
-      redefinequote 332 INVULN-AURA REFLECTS %ld.%ld% DAMAGE BACK TO ATTACKERS.
-      qsprintf 332 332 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
-     }
-*/
     }
     ifvare mainmenuselection 15
     {
@@ -1900,23 +1888,37 @@ ifvare mainmenu 1
       redefinequote 332 ^12%s^23/^12%s^23/^12%s^23/^12%s^23/^12%s^23/^12%s^0=^22CHANGE -.1%^23/^22+.1%^23/^22-1%^23/^22+1%^23/^22-10%^23/^22+10%
       qsprintf 332 332 502 503 504 505 506 507
      }
-/*
-     ifvare INVULNHEALTHDRAIN 0 redefinequote 332 INVULN-AURA WON'T DAMAGE OR INSTANTLY KILL ENEMIES.
+    }
+    ifvare mainmenuselection 16
+    {
+     ifvare ENEMYRANDOMIZERCHANCE 1000
+     {
+      getkeyname 502 2 0
+      getkeyname 504 15 0
+      getkeyname 506 51 0
+      redefinequote 332 ^12%s^23/^12%s^23/^12%s^0=^22CHANGE -.1%^23/^22-1%^23/^22-10%
+      qsprintf 332 332 502 504 506
+     }
+     else
+     ifvare ENEMYRANDOMIZERCHANCE 0
+     {
+      getkeyname 503 3 0
+      getkeyname 505 16 0
+      getkeyname 507 50 0
+      redefinequote 332 ^12%s^23/^12%s^23/^12%s^0=^22CHANGE +.1%^23/^22+1%^23/^22+10%
+      qsprintf 332 332 503 505 507
+     }
      else
      {
-      ifvarg INVULNHEALTHDRAIN 2000 redefinequote 332 INVULN-AURA INSTANTLY KILLS NEARBY ENEMIES.
-      else ifvarg INVULNHEALTHDRAIN 0
-      {
-       setvarvar MISCARRAYID_AMOUNTTEMP INVULNHEALTHDRAIN
-       divvar MISCARRAYID_AMOUNTTEMP 10
-       setvarvar MISCARRAYID_AMOUNTTEMP2 INVULNHEALTHDRAIN
-       modvar MISCARRAYID_AMOUNTTEMP2 10
- 
-       redefinequote 332 INVULN-AURA DEALS %ld.%ld% DAMAGE / TIC TO ENEMIES NEARBY.
-       qsprintf 332 332 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
-      }
+      getkeyname 502 2 0
+      getkeyname 503 3 0
+      getkeyname 504 15 0
+      getkeyname 505 16 0
+      getkeyname 506 51 0
+      getkeyname 507 50 0
+      redefinequote 332 ^12%s^23/^12%s^23/^12%s^23/^12%s^23/^12%s^23/^12%s^0=^22CHANGE -.1%^23/^22+.1%^23/^22-1%^23/^22+1%^23/^22-10%^23/^22+10%
+      qsprintf 332 332 502 503 504 505 506 507
      }
-*/
     }
    }
    setvar temp 332
@@ -5362,84 +5364,89 @@ ifvare mainmenusubmenu 2
   setvar digx 56
   state pal21
   state setquote332
-  setvar digy 38
+  setvar digy 43
   redefinequote 332 MISCELLANEOUS DISPLAYS
   ifvare mainmenuselection 0 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 PLAYER'S STAT DISPLAYS
   ifvare mainmenuselection 1 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 DEBUG VARIABLES
   ifvare mainmenuselection 2 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 LIFEBAR & RANKSTAR DISPLAYS
   ifvare mainmenuselection 3 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 AUTO-USE MEDIKIT WHEN DAMAGED
   ifvare mainmenuselection 4 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 AUTO-MANTLE NEAR CLIFF LEDGES
   ifvare mainmenuselection 5 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 ACTOR FOOTSTEP & LADDER SOUNDS
   ifvare mainmenuselection 6 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 DEFAULT HITSCANNING OF OBJECTS
   ifvare mainmenuselection 7 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 VEHICLES & GRABBING/BUYING ITEMS
   ifvare mainmenuselection 8 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 CHARACTERS' PAIN SOUND TOGGLE
   ifvare mainmenuselection 9 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 SHOW RPG-STYLE DAMAGE/HEALING
   ifvare mainmenuselection 10 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 GAME AUTOSAVES ON INTERVALS
   ifvare mainmenuselection 11 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 WEAPON/CHARACTER CYCLE?
   ifvare mainmenuselection 12 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 UPPERLEFT-HAND KEY LEGEND
   ifvare mainmenuselection 13 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 INVULNERABLITY REFLECT-RATE
   ifvare mainmenuselection 14 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
-  addvar digy 8
+  addvar digy 7
   redefinequote 332 INVULNERABLITY BIO-AURA DMG
   ifvare mainmenuselection 15 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
+  state mt
+
+  addvar digy 7
+  redefinequote 332 ENEMY RANDOMIZATION RATE
+  ifvare mainmenuselection 16 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt
 
 
@@ -5452,7 +5459,7 @@ ifvare mainmenusubmenu 2
   state shade0
 
   // Misc Displays [Right Side]
-  setvar digy 38
+  setvar digy 43
   ifvare miscdisplaytoggle 0 redefinequote 332 ALL OFF
   ifvare miscdisplaytoggle 1 redefinequote 332 DAMAGE ONLY
   ifvare miscdisplaytoggle 2 redefinequote 332 STATS ONLY
@@ -5473,14 +5480,14 @@ ifvare mainmenusubmenu 2
   state mt_free
 
   // Status Displays [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare statusdisplaytoggle 0 redefinequote 332 OFF
   ifvare statusdisplaytoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 1 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Debug Displays [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare debugtoggle 0 redefinequote 332 OFF
   ifvare debugtoggle 1 redefinequote 332 ON [1]
   ifvare debugtoggle 2 redefinequote 332 ON [2]
@@ -5488,42 +5495,42 @@ ifvare mainmenusubmenu 2
   state mt_free
 
   // Lifebar Displays [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare lifebartogglemode 0 redefinequote 332 OFF
   ifvare lifebartogglemode 1 redefinequote 332 ON
   ifvare mainmenuselection 3 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Auto Medikit [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare automedikittoggle 0 redefinequote 332 OFF
   ifvare automedikittoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 4 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Auto Mantle [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare automantletoggle 0 redefinequote 332 OFF
   ifvare automantletoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 5 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Footsteps [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare footstepsndtoggle 0 redefinequote 332 OFF
   ifvare footstepsndtoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 6 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Bioshock-style Hitscanning [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare normalhitscantoggle 0 redefinequote 332 OFF
   ifvare normalhitscantoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 7 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Vehicle Pickup Detection [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare vehiclepickuptoggle 0 redefinequote 332 CHARACTERS
   ifvare vehiclepickuptoggle 1 redefinequote 332 VEHICLES
   ifvare vehiclepickuptoggle 2 redefinequote 332 CHAR/VEHI
@@ -5532,21 +5539,21 @@ ifvare mainmenusubmenu 2
   state mt_free
  
   // Pain Sound Determination [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare PAINSOUNDSTYPE 0 redefinequote 332 CURRENT HP
   ifvare PAINSOUNDSTYPE 1 redefinequote 332 PERCENT DMG
   ifvare mainmenuselection 9 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // RPG-Style Damage# Indicators [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare rpgdmgdisplaytoggle 0 redefinequote 332 OFF
   ifvare rpgdmgdisplaytoggle 1 redefinequote 332 ON
   ifvare mainmenuselection 10 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Auto-Saving [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare autosavetoggle 0 redefinequote 332 OFF
   ifvare autosavetoggle 1
   {
@@ -5561,14 +5568,14 @@ ifvare mainmenusubmenu 2
   state mt_free
 
   // Character/Weapon Toggle with Change-Weapon Keys [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare weapontoggleselect 0 redefinequote 332 CHARACTERS
   ifvare weapontoggleselect 1 redefinequote 332 WEAPONS
   ifvare mainmenuselection 12 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
   // Upperleft-Hand Key Legend [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare upperlefthandlegend 0 redefinequote 332 MENU KEY
   ifvare upperlefthandlegend 1 redefinequote 332 ALL ON
   ifvare upperlefthandlegend 2 redefinequote 332 OFF
@@ -5576,7 +5583,7 @@ ifvare mainmenusubmenu 2
   state mt_free
 
   // Invuln Reflect Rate [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare INVULNREFLECTRATE 0 redefinequote 332 NO DEFLECTION
   else
   {
@@ -5593,7 +5600,7 @@ ifvare mainmenusubmenu 2
   state mt_free
 
   // Invuln Drain Rate [Right Side]
-  addvar digy 8
+  addvar digy 7
   ifvare INVULNHEALTHDRAIN 0 redefinequote 332 NO DAMAGE/DEATH
   {
    ifvarg INVULNHEALTHDRAIN 2000 redefinequote 332 DEATH ON TOUCH
@@ -5610,6 +5617,25 @@ ifvare mainmenusubmenu 2
    }
   }
   ifvare mainmenuselection 15 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
+  state mt_free
+
+  // Enemy Randomization Rate [Right Side]
+  addvar digy 7
+  ifvare ENEMYRANDOMIZERCHANCE 0 redefinequote 332 NO RANDOMIZATION
+  {
+   ifvarg ENEMYRANDOMIZERCHANCE 0
+   {
+    setvarvar MISCARRAYID_AMOUNTTEMP ENEMYRANDOMIZERCHANCE
+    divvar MISCARRAYID_AMOUNTTEMP 10
+
+    setvarvar MISCARRAYID_AMOUNTTEMP2 ENEMYRANDOMIZERCHANCE
+    modvar MISCARRAYID_AMOUNTTEMP2 10
+
+    redefinequote 332 %ld.%ld%
+    qsprintf 332 332 MISCARRAYID_AMOUNTTEMP MISCARRAYID_AMOUNTTEMP2
+   }
+  }
+  ifvare mainmenuselection 16 { state pal21 state shade0 } else { state pal21 setvar shade 8 }
   state mt_free
 
 

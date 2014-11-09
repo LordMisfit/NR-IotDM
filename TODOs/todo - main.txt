@@ -1,17 +1,17 @@
 Soon TODOs:
+- Make a randomizer mode for monsters [monsters of a specfic 'species' can randomly upgrade into stronger [non-boss] counterparts, similar to DV-DS. Also can randomly flag non-boss enemies as elites.
 - Make an equippable item that splits damage taken by the wearer between all members of the group.
 - Other equippables as pointed out in GAMEVARS.CON
 
 Distant TODOs [maybe?]:
-- MAKE THE DAMN SLOT MACHINE MINIGAME :P
-- Add alternate storyline route mode if all worldtiles are detected as found at least once.
-- Make Tanks able to push crates within it's weight limit.
-- Make a randomizer mode for monsters [monsters of a specfic 'species' can randomly upgrade into stronger [non-boss] counterparts, similar to DV-DS. Also can randomly flag non-boss enemies as elites.
 - Randomizer for where some non-captured NPCs might be able to turn into a shop/dealer.
+- MAKE THE DAMN SLOT MACHINE MINIGAME :P
+- Make Tanks able to push crates within it's weight limit.
 
 "Eventually" TODOs:
 - Add a mouse-cursor to the menu systems that WORKS... somehow... good luck me <_<;
 - As to the request of one Sir Cordell, make a 'prototype weapons system' for adding/implementing the non-Duke characters' future weapons... Provided he or some others can direct me to some workable placeholder sprites for specfic kinds of weapon tiers. >.> I don't sadly have time to go through possibly hundreds of pages right now of mostly Doom-style ones [specfically I need 3/4 perspective weapons like DN3D/SW and not Doom's straight forward-angle design] to weed out more Duke-style ones right now. Life has been making NR development slow and it won't help when I need to go weeding out placeholder sprites [especially out of concerns that people will bitch at me for using their specfic sprites for such a reason, another reason I tend to not like using placeholder sprites since I can't make my own to fill that gap in. :\]
+- Add alternate storyline route mode if all worldtiles are detected as found at least once.
 
 Maybe TODOs:
 - 'maybe' make a custom shrink projectile to get around the 'no shrinking things with < 24 x/y-repeat' issue.

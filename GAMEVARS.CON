@@ -26,7 +26,10 @@ gamevar INVENTORYSLOTMAX 1 132098 //
 gamevar INVULNREFLECTRATE 1000 0 // % of base damage deflected by invulnerabilities [1000 = 100.0%, 0 = No Reflection at all]
 gamevar INVULNHEALTHDRAIN 2001 0 // % of health drained per tick [1000 = 100.0% [AP/Defense-ignoring] HP damage/tic, >2000 = Instant Death [HP and AP set to 0], 0 = No Damage/Death when close]
 gamevar TEMPCOUNT 0 0
-gamevar TEMPCOUNT2 0 0
+
+gamevar DEBUG_NOMENUOVERLAY 0 0 // Turn to 1 to make the on-screen menus not show and to stop the level from dimming when on [to track frozen projectiles or other things meant to be frozen when using the menus]
+
+gamevar ENEMYRANDOMIZERCHANCE 0 0 // 0 = NEVER. 1-1000 equals chance in x.x% format [125 = 12.5%, 1000 = 1000% (ALWAYS)] that enemies NOT given Actorflags that include 2048 will randomize based on their species and have a rare chance of also being flagged elite.
 
 //*******************************************************************************************************************************************************************************
 //*******************************************************************************************************************************************************************************
@@ -183,6 +186,7 @@ gamevar MONEYBAGCENTS 0 131074
 
 gamevar PROJECTILESPEED 0 2
 gamevar PROJECTILESPEEDMULTI 0 2
+gamevar PROJECTILETRAIL 0 2
 
 gamevar HEALPANEL_CHARGEHEALS 0 2 // XVEL of FIRSTAIDPANEL_ON actor [positives are % based (based on 1000 = 100.0% HP), negatives are exact (-1000 = +1000 HP)]
 gamevar HEALPANEL_CHARGES 0 2
@@ -852,7 +856,6 @@ gamevar ACTORNULLDAMAGE 0 0
 gamevar ACTORARMORNULLDAMAGE 0 0
 gamevar ACTORDAMAGEPERCENT 0 2
 gamevar ACTORDEADTIMER 0 2
-gamevar ACTORSPEED 0 2
 gamevar ACTORDEFLECTDAMAGESTATE 0 0
 gamevar ACTORDEFLECTEDDAMAGE 0 0
 gamevar ACTORLASTDAMAGE 0 2
@@ -940,6 +943,7 @@ gamevar ARMORDAMAGETIMER 0 131072
 gamevar CELLDAMAGETIMER 0 131072
 
 gamevar SKILLSET? 0 131074
+gamevar RANDOMIZERSET? 0 131074
 gamevar TALLYSET? 0 131074
 
 gamevar DISPLAYRANKPOINTS 0 131072
@@ -1095,6 +1099,8 @@ gamevar VEHICLEATTACKTIMER 0 131073 // Attack-Timer of Vehicle
 gamevar GAMEFLAG 0 2
 gamevar GAMEFLAGEGS 0 2
 gamevar ACTORPAL 0 2
+gamevar ACTORPICNUM 0 2
+gamevar ACTORFLAGS 0 2
 gamevar RANDOMVARIABLE 0 2
 gamevar SECTORFLOORPICNUM 0 131073
 
@@ -1207,9 +1213,6 @@ gamevar tsprowner 0 2
 
 gamevar FALLCOUNTER 0 131073
 gamevar HITACTORTYPE? 0 0 // 0 = Enemy, 1 = Civilian, 2 = Allies
-
-gamevar ACTORPICNUM 0 2
-gamevar ACTORFLAGS 0 2
 
 gamevar SKILLLEVELFLAGS 0 2
 /*

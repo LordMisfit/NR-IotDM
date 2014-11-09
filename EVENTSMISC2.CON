@@ -1,5 +1,5 @@
 onevent EVENT_USEMEDKIT
- ifvarn mainmenu 0 state setreturn-1
+ ifvare mainmenu 1 state setreturn-1
  else 
  {
   ifvarl FIRSTAIDCURRENT 1
@@ -115,7 +115,7 @@ onevent EVENT_EGS
   //addlogvar temp addlogvar tempb addlogvar tempc
  }
 
-// Monster Spawner
+ // Monster Spawner
  ifactor EGG state respawnspritefix
  ifactor SHARK state respawnspritefix
  ifactor ROTATEGUN state respawnspritefix
@@ -295,9 +295,8 @@ onevent EVENT_EGS
   else ifspawnedby SCORPIONTANK state properRPG
  }
 
- getactor[THISACTOR].picnum GAMEFLAGEGS 
-
- switch GAMEFLAGEGS
+ getactor[THISACTOR].picnum ACTORPICNUM 
+ switch ACTORPICNUM
 
   case ZAPPER1
     iffloordistl 16 nullop else 
@@ -961,7 +960,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
        ifvare mainmenusubmenu 2 // Toggles
        {
         subvar mainmenuselection 1
-        ifvarl mainmenuselection 0 addvar mainmenuselection 16
+        ifvarl mainmenuselection 0 addvar mainmenuselection 17
         sound KICK_HIT // EXITMENUSOUND
        }
        ifvare mainmenusubmenu 3 state menuerrorsound // Status
@@ -1173,7 +1172,7 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
       ifvare mainmenusubmenu 2 // Toggle
       {
        addvar mainmenuselection 1
-       ifvarg mainmenuselection 15 subvar mainmenuselection 16
+       ifvarg mainmenuselection 16 subvar mainmenuselection 17
        sound KICK_HIT // EXITMENUSOUND
       }
       ifvare mainmenusubmenu 3 state menuerrorsound // Status
@@ -1414,6 +1413,12 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
                savegamevar INVULNHEALTHDRAIN
               }
              }
+             ifvare mainmenuselection 16
+             {
+              subvar ENEMYRANDOMIZERCHANCE 1
+              ifvarl ENEMYRANDOMIZERCHANCE 0 setvar ENEMYRANDOMIZERCHANCE 0
+              savegamevar ENEMYRANDOMIZERCHANCE
+             }
              sound PISTOL_BODYHIT
             }
             ifvare mainmenusubmenu 3 // Status
@@ -1561,6 +1566,12 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
                ifvarl INVULNHEALTHDRAIN 0 setvar INVULNHEALTHDRAIN 0
                savegamevar INVULNHEALTHDRAIN
               }
+             }
+             ifvare mainmenuselection 16
+             {
+              subvar ENEMYRANDOMIZERCHANCE 10
+              ifvarl ENEMYRANDOMIZERCHANCE 0 setvar ENEMYRANDOMIZERCHANCE 0
+              savegamevar ENEMYRANDOMIZERCHANCE
              }
              sound PISTOL_BODYHIT
             }
@@ -1711,6 +1722,12 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
               }
               savegamevar INVULNHEALTHDRAIN
              }
+             ifvare mainmenuselection 16
+             {
+              addvar ENEMYRANDOMIZERCHANCE 1
+              ifvarg ENEMYRANDOMIZERCHANCE 1000 setvar ENEMYRANDOMIZERCHANCE 1000
+              savegamevar ENEMYRANDOMIZERCHANCE
+             }
              sound PISTOL_BODYHIT
             }
             ifvare mainmenusubmenu 3 // Status
@@ -1859,6 +1876,12 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
                ifvarg INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2000
               }
               savegamevar INVULNHEALTHDRAIN
+             }
+             ifvare mainmenuselection 16
+             {
+              addvar ENEMYRANDOMIZERCHANCE 10
+              ifvarg ENEMYRANDOMIZERCHANCE 1000 setvar ENEMYRANDOMIZERCHANCE 1000
+              savegamevar ENEMYRANDOMIZERCHANCE
              }
              sound PISTOL_BODYHIT
             }
@@ -2471,7 +2494,7 @@ onevent EVENT_LOOKDOWN
 endevent
 
 onevent EVENT_FIRE // Cancel Button
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else 
  { 
   ifvarn shop_id -1 state setreturn-1 
@@ -2635,7 +2658,7 @@ onevent EVENT_FIRE // Cancel Button
 endevent
 
 onevent EVENT_QUICKKICK // Alt-fire mode for now
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else 
  { 
   ifvarn shop_id -1 state setreturn-1 
@@ -2681,7 +2704,7 @@ onevent EVENT_QUICKKICK // Alt-fire mode for now
 endevent
 
 onevent EVENT_JUMP
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -2740,7 +2763,7 @@ onevent EVENT_JUMP
 endevent
 
 onevent EVENT_CROUCH
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -2772,7 +2795,7 @@ onevent EVENT_SOARDOWN
 endevent
 
 onevent EVENT_USEJETPACK
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -2814,7 +2837,7 @@ onevent EVENT_USEJETPACK
 endevent
 
 onevent EVENT_USESTEROIDS
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -2834,7 +2857,7 @@ onevent EVENT_USESTEROIDS
 endevent
 
 onevent EVENT_USENIGHTVISION
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvare shop_id -1 ifvare atm_id -1
@@ -2878,7 +2901,7 @@ onevent EVENT_USENIGHTVISION
 endevent
 
 onevent EVENT_HOLODUKEON
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -2898,7 +2921,7 @@ onevent EVENT_HOLODUKEON
 endevent
 
 onevent EVENT_HOLODUKEOFF
- ifvarn mainmenu 0 state setreturn-1 
+ ifvare mainmenu 1 state setreturn-1 
  else
  {
   ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -2911,7 +2934,7 @@ onevent EVENT_INCURDAMAGE
 endevent
 
 
-onevent EVENT_GETLOADTILE 
+onevent EVENT_GETLOADTILE // WARNING: Unsynchronized Event
  ifvarn VEHICLEID -1 setuserdef[THISACTOR].auto_run 1
  ifvarn BOSSMETERID1 -1 setvar BOSSMETERID1 -1
  ifvarn BOSSMETERID2 -1 setvar BOSSMETERID2 -1
@@ -3138,7 +3161,7 @@ else // ifvare mainmenu 0
 }
 endevent
 
-onevent EVENT_ENTERLEVEL 
+onevent EVENT_ENTERLEVEL // WARNING: Unsynchronized Event; WARNING: No Players Set during this event
  setvar MISCARRAYID 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Enemies Killed for the Current Level
  setvar MISCARRAYID 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // Reset Max Enemies Killed for the Current Level
  setvar TIMERRAWFORMAT_LEVEL 0 // Reset In-Game Timer for the Current Level
@@ -3173,14 +3196,14 @@ onevent EVENT_ENTERLEVEL
 
  ifvare TIMERRAWFORMAT 0
  {
-  randvar SHIKONHOLDERENEMYID 4095
+  displayrandvar SHIKONHOLDERENEMYID 4095
   addvar SHIKONHOLDERENEMYID 1 
  }
  setvarvar NEXTAUTOSAVEINTERVAL TIMERRAWFORMAT
  addvar NEXTAUTOSAVEINTERVAL 13
 endevent
 
-onevent EVENT_CHEATGETSHIELD
+onevent EVENT_CHEATGETSHIELD // WARNING: Unsynchronized Event
  setvar RETURN 0
  setvarvar CURRENTARMORPOINTS MAXARMORPOINTSATOMIC
  setvar ARMORPERCENT 1000
@@ -3207,41 +3230,41 @@ onevent EVENT_CHEATGETSHIELD
  state cheatersound
 endevent
 
-onevent EVENT_CHEATGETFIRSTAID
+onevent EVENT_CHEATGETFIRSTAID // WARNING: Unsynchronized Event
  setvar RETURN 0
  setvarvar CURRENTHITPOINTS MAXHITPOINTSATOMIC
  setvarvar FIRSTAIDCURRENT MAXHITPOINTSATOMIC
  setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTSATOMIC
 endevent
 
-onevent EVENT_CHEATGETBOOT
+onevent EVENT_CHEATGETBOOT // WARNING: Unsynchronized Event
  setvar RETURN 600
 endevent
 
-onevent EVENT_CHEATGETHEAT
+onevent EVENT_CHEATGETHEAT // WARNING: Unsynchronized Event
  ifvarn CHARACTERSELECTED? 4 setvar RETURN 3600
  ifvare CHARACTERSELECTED? 8 { setvar MISCARRAYID 77 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 } // HAVE-HACKERVISION? 
 endevent
 
-onevent EVENT_CHEATGETHOLODUKE
+onevent EVENT_CHEATGETHOLODUKE // WARNING: Unsynchronized Event
  setvar RETURN 7200
 endevent
 
-onevent EVENT_CHEATGETJETPACK
+onevent EVENT_CHEATGETJETPACK // WARNING: Unsynchronized Event
  setvar RETURN 4800
 endevent
 
-onevent EVENT_CHEATGETSCUBA
+onevent EVENT_CHEATGETSCUBA // WARNING: Unsynchronized Event
  setvar SCUBATIME 19200
  setvar RETURN 19200
 endevent
 
-onevent EVENT_CHEATGETSTEROIDS
+onevent EVENT_CHEATGETSTEROIDS // WARNING: Unsynchronized Event
  setvar STEROIDSTIME 1200
  setvar RETURN 400
 endevent
 
-onevent EVENT_GETMENUTILE
+onevent EVENT_GETMENUTILE // WARNING: Unsynchronized Event
  setvar RETURN 3577
 endevent
 
@@ -3253,7 +3276,7 @@ onevent EVENT_RETURNTOCENTER
         }
 endevent
 
-onevent EVENT_DRAWWEAPON
+onevent EVENT_DRAWWEAPON // WARNING: Unsynchronized Event
  ifvarn SPRITEID-HOLDING -1 ifvare SPRITEID-TELEKENESIS_P -1 { state setreturn-1 break }
  ifvarn VEHICLEID -1 { state setreturn-1 break }
 
@@ -3276,7 +3299,7 @@ onevent EVENT_DRAWWEAPON
  ifvarg temp 0 { state setreturn-1 break }
  endevent
 
-onevent EVENT_DISPLAYCROSSHAIR
+onevent EVENT_DISPLAYCROSSHAIR // WARNING: Unsynchronized Event
 ifvarn gameover? 0 state setreturn-1
 else
 {
@@ -3284,7 +3307,7 @@ else
  ifvarg temp 0 state setreturn-1
  else
  {
-  ifvarn mainmenu 0 state setreturn-1 
+  ifvare mainmenu 1 state setreturn-1 
   else
   {
    ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
@@ -3317,7 +3340,7 @@ state invuln-paletteflash
  }
 ends
 
-onevent EVENT_ANIMATESPRITES
+onevent EVENT_ANIMATESPRITES // WARNING: Unsynchronized Event
 
 gettspr[THISACTOR].tsprcstat tsprcstat
 gettspr[THISACTOR].tsprpicnum tsprpicnum
@@ -4617,7 +4640,29 @@ onevent EVENT_KILLIT
 
 endevent
 
-onevent EVENT_NEWGAME
+onevent EVENT_NEWGAME // WARNING: Unsynchronized Event
+  ifmultiplayer break
+  // De-Pseudo
+  readgamevar numruns
+  addvar numruns 1 
+  andvar numruns 65535 
+  setvarvar TEMPVAR8 numruns 
+  xorvar TEMPVAR8 43690 
+  whilevarn TEMPVAR8 0 
+  { 
+   ifrnd 1 { }
+   ifrnd 4 { }
+   ifrnd 16 { }
+   ifrnd 64 { }
+   subvar TEMPVAR8 1 
+  } 
+  savegamevar numruns
+  addlogvar numruns
+  addlogvar randomseed
+
+  readgamevar ENEMYRANDOMIZERCHANCE // CRITICAL for Randomizations on a new game or loading an unique usermap
+  addlogvar ENEMYRANDOMIZERCHANCE
+
   setvar MISCARRAYID 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // ENEMIES-KILLED-LEVEL
   setvar MISCARRAYID 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // ENEMIES-KILLED-GAME
   setvar MISCARRAYID 2 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // MAX-ENEMIES-KILLED-LEVEL
@@ -4666,7 +4711,7 @@ onevent EVENT_NEWGAME
 endevent
 
 /*
-onevent EVENT_DISPLAYBONUSSCREEN
+onevent EVENT_DISPLAYBONUSSCREEN // WARNING: Unsynchronized Event
  setvar RETURN -1
  rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
  rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim

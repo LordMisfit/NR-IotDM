@@ -285,17 +285,17 @@ state slipperycode_actor
  else ifvare sector[THISACTOR].lotag 51 nullop
  else break
 
- getactor[THISACTOR].xvel xvel
+ getactor[THISACTOR].xvel ACTORXVEL
  setvar x 0
- ifvarg xvel 0 ifvarvarl xvel oposxv setvar x -1 // slowing down x vel
- ifvarl xvel 0 ifvarvarg xvel oposxv setvar x -1
+ ifvarg ACTORXVEL 0 ifvarvarl ACTORXVEL oposxv setvar x -1 // slowing down x vel
+ ifvarl ACTORXVEL 0 ifvarvarg ACTORXVEL oposxv setvar x -1
 
- getactor[THISACTOR].yvel yvel
+ getactor[THISACTOR].yvel ACTORYVEL
  setvar y 0
- ifvarg yvel 0 ifvarvarl yvel oposyv setvar y -1 // slowing down y vel
- ifvarl yvel 0 ifvarvarg yvel oposyv setvar y -1
+ ifvarg ACTORYVEL 0 ifvarvarl ACTORYVEL oposyv setvar y -1 // slowing down y vel
+ ifvarl ACTORYVEL 0 ifvarvarg ACTORYVEL oposyv setvar y -1
 	
- subvarvar actor_oposxv xvel
+ subvarvar actor_oposxv ACTORXVEL
  ifactor LIZTROOP
  {
   ifvare sector[THISACTOR].lotag 50
@@ -479,10 +479,10 @@ state slipperycode_actor
 
  mulvarvar actor_oposxv TEMPVAR3
  divvar actor_oposxv 1000
- addvarvar xvel actor_oposxv
- setactor[THISACTOR].xvel xvel
+ addvarvar ACTORXVEL actor_oposxv
+ setactor[THISACTOR].xvel ACTORXVEL
 
- subvarvar actor_oposyv yvel
+ subvarvar actor_oposyv ACTORYVEL
  ifactor LIZTROOP
  {
   ifspritepal 0 setvar TEMPVAR3 866
@@ -571,8 +571,8 @@ state slipperycode_actor
 
  mulvarvar actor_oposyv TEMPVAR3
  divvar actor_oposyv 1000
- addvarvar yvel actor_oposyv
- setactor[THISACTOR].yvel yvel
+ addvarvar ACTORYVEL actor_oposyv
+ setactor[THISACTOR].yvel ACTORYVEL
 
  ifvare x -1 state STOPSTEPSOUNDS_ACTOR else ifvare y -1 state STOPSTEPSOUNDS_ACTOR
 ends
@@ -3493,18 +3493,16 @@ state invulndrainplayer
            }
            else setvar TEMPVAR8 0
 
-           addvar TEMPCOUNT2 1
-           ifvarg TEMPCOUNT2 35
+           addvar TEMPCOUNT 1
+           ifvarg TEMPCOUNT 35
            {
-            //addlogvar TEMPCOUNT2
-            setvar TEMPCOUNT2 0
+            setvar TEMPCOUNT 0
             ifvare TEMPVAR8 1
             {
              setvarvar TEMPVAR7 MAXHITPOINTS
              mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
              divvar TEMPVAR7 1000
              ifvarl TEMPVAR7 1 setvar TEMPVAR7 1
-             //addlogvar TEMPVAR7
 
              setvarvar CELLDAMAGE TEMPVAR7
              setvarvar CELLDAMAGETEMP CELLDAMAGE setvar CELLDAMAGETIMER 0 // For the displays
@@ -3753,11 +3751,10 @@ ifvare mainmenu 0
 
         ifvarg INVULNHEALTHDRAIN 0 // if between 1 & 2000, set a % drain for damage per tic
         {
-         addvar TEMPCOUNT2 1
-         ifvarg TEMPCOUNT2 7
+         addvar TEMPCOUNT 1
+         ifvarg TEMPCOUNT 7
          {
-          //addlogvar TEMPCOUNT2
-          setvar TEMPCOUNT2 0
+          setvar TEMPCOUNT 0
           ifvarg INVULNHEALTHDRAIN 2000 // Instant Kill Effect
           {
            setactor[INVULNAURATARGET].htowner THISACTOR
@@ -3859,11 +3856,10 @@ ifvare mainmenu 0
       {
        ifvarg INVULNHEALTHDRAIN 0 ifvarl INVULNHEALTHDRAIN 2001 // if between 1 & 2000, set a % drain for damage per tic
        {
-        addvar TEMPCOUNT2 1
-        ifvarg TEMPCOUNT2 35
+        addvar TEMPCOUNT 1
+        ifvarg TEMPCOUNT 35
         {
-         //addlogvar TEMPCOUNT2
-         setvar TEMPCOUNT2 0
+         setvar TEMPCOUNT 0
  
          setvarvar TEMPVAR7 actorvar[tempvehicleid].ACTORMAXHP
          mulvarvar TEMPVAR7 INVULNHEALTHDRAIN
@@ -5246,7 +5242,7 @@ state sfx_firecrackle-sector
    setvar TEMPVAR4 0
    whilevarvarn TEMPVAR4 TEMPVAR5
    {
-//    addlogvar TEMPVAR4
+    //addlogvar TEMPVAR4
     ifvare TEMPVAR4 0
     {
      setvarvar TEMPVAR2 0
@@ -5254,31 +5250,31 @@ state sfx_firecrackle-sector
      getsector[ARRAYPOSITION].wallptr TEMPVAR6
      getwall[TEMPVAR6].x TEMPVAR7
      getwall[TEMPVAR6].y TEMPVAR8
-//     addlogvar TEMPVAR7
-//     addlogvar TEMPVAR8
+     //addlogvar TEMPVAR7
+     //addlogvar TEMPVAR8
      addvarvar TEMPVAR2 TEMPVAR7
      addvarvar TEMPVAR3 TEMPVAR8
-//     addlogvar TEMPVAR2
-//     addlogvar TEMPVAR3
+     //addlogvar TEMPVAR2
+     //addlogvar TEMPVAR3
     }
     else
     {
      getwall[TEMPVAR6].point2 TEMPVAR6
      getwall[TEMPVAR6].x TEMPVAR7
      getwall[TEMPVAR6].y TEMPVAR8
-//     addlogvar TEMPVAR7
-//     addlogvar TEMPVAR8
+     //addlogvar TEMPVAR7
+     //addlogvar TEMPVAR8
      addvarvar TEMPVAR2 TEMPVAR7
      addvarvar TEMPVAR3 TEMPVAR8
-//     addlogvar TEMPVAR2
-//     addlogvar TEMPVAR3
+     //addlogvar TEMPVAR2
+     //addlogvar TEMPVAR3
     }
     addvar TEMPVAR4 1
    }
    divvarvar TEMPVAR2 TEMPVAR5
    divvarvar TEMPVAR3 TEMPVAR5
-//   addlogvar TEMPVAR2
-//   addlogvar TEMPVAR3
+   //addlogvar TEMPVAR2
+   //addlogvar TEMPVAR3
    espawn MUSICANDSFX
    setactor[RETURN].xrepeat 32
    setactor[RETURN].yrepeat 32
@@ -5385,6 +5381,7 @@ state initializer
  readgamevar AUTOSAVEFREQUENCY
  readgamevar INVULNREFLECTRATE
  readgamevar INVULNHEALTHDRAIN
+ readgamevar ENEMYRANDOMIZERCHANCE
  readgamevar WORLDTILEBITFIELD1
  readgamevar WORLDTILEBITFIELD2
  readgamevar WORLDTILEBITFIELD3
@@ -14421,7 +14418,7 @@ state assessskillflags
 ends
 
 state getenemylevel2
-// OFF-LIMITS
+ // OFF-LIMITS
  getactor[THISACTOR].extra ACTORLEVEL
  setactor[THISACTOR].extra -1
  getactor[THISACTOR].xvel ACTORLEVELMINSPAWN
@@ -14432,10 +14429,11 @@ state getenemylevel2
  setactor[THISACTOR].zvel 0
  setactor[THISACTOR].htowner -1
  setactorvar[THISACTOR].ACTORMAXHP 1 // Prevents instanteous monster death on activation
-// END OFF LIMITS
+ // END OFF LIMITS
 
-// state assessskillflags
+ state enemytyperandomizer
 
+ // Rest of the Code
  setvar MISCARRAYID 74 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ATTACHED-OBJECTS?
  ifvarn MISCARRAYID_AMOUNTTEMP 0
  {
@@ -28401,22 +28399,6 @@ else
 }
 ends
 
-state eventload3
- ifspritepal 0 sizeat 80 80 
- else ifspritepal 3 sizeat 80 80 
- else ifspritepal 9 sizeat 80 80 
- else ifspritepal 24 sizeat 48 48
- else sizeat 40 40
- state getenemylevel2 
-ends
-
-state eventload6
- ifspritepal 17 sizeat 50 50 
- else ifspritepal 20 sizeat 60 60 
- else sizeat 40 40
- state getenemylevel2 
-ends
-
 state keypadhandscannerdamage
  ifvarand CHEATBITFIELD? 32 nullop else
  {
@@ -33155,33 +33137,6 @@ ifvare mainmenu 0 ifvarg ACTORHP 0
      setvar ACTORAPDAMAGED? -1
     }
    }
-/*
-   ifvarand TEMPVAR7 4 // EP Healing
-   {
-    getactorvar[temph].healsectormaxheal TEMPVAR4
-    ifvarg TEMPVAR4 0
-    {
-     mulvarvar TEMPVAR4 ENEMYMAXEP
-     divvar TEMPVAR4 1000
-    }
-    else { mulvar TEMPVAR4 -1 }
-    
-    ifvarvarl ENEMYEP TEMPVAR4
-    {
-     getactorvar[temph].healsectoramount TEMPVAR5
-     ifvarg TEMPVAR5 0
-     {
-      mulvarvar TEMPVAR5 ENEMYMAXEP
-      divvar TEMPVAR5 1000
-     }
-     else { mulvar TEMPVAR5 -1 }
-
-     addvarvar ENEMYEP TEMPVAR5
-     ifvarvarg ENEMYEP TEMPVAR4 setvarvar ENEMYEP TEMPVAR4
-     sound MYSTERIOUS_ENERGY
-    }
-   }
-*/
    setvar healsectordelaycur 0
   }
  }
