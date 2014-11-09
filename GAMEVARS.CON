@@ -1790,7 +1790,8 @@ gamevar ITEMARRAYID -1 0 // New Array-based Item system. All items are now kept 
  // (ITEMARRAYID = 103) # of Bloodpact Shields in Inventory		// gamevar BLOODPACTSHIELDS 0 131073 
  // (ITEMARRAYID = 104) # of Mystic Satchels in Inventory		// gamevar MYSTICSATCHELS 0 131073 
  // (ITEMARRAYID = 105) # of Liquid Metal Amulets in Inventory		// gamevar LIQUIDMETALAMULETS 0 131073 
- // (ITEMARRAYID = 106) # of Mystic Satchels in Inventory		// gamevar MANDALABRACELETS 0 131073 
+ // (ITEMARRAYID = 106) # of Mandala Bracelets in Inventory		// gamevar MANDALABRACELETS 0 131073 
+ // (ITEMARRAYID = 107) # of Aqualungs in Inventory		// gamevar AQUALUNGS 0 131073 
 gamevar ITEMARRAYID_AMOUNT 0 132098 // Used with ITEMARRAYID to keep tabs on how many of each item you have [replaces the old var-by-var-per-item system]
 gamevar ITEMARRAYID_AMOUNTTEMP 0 0 // Keeps a temporary var at the forefront for if-checks and array changes on item amounts
 
@@ -2071,14 +2072,13 @@ gamevar EQUIPTEMP 0 131072
 // ID #26 = Energy Incurment (Recovers [1/4]% EP from HP damage [each])
 // ID #27 = Yin-Yang Orb (-20% EP Cost for all Skills and Attacks [each])
 // ID #28 = Jewel of Four Souls (SUPER item, one of a kind, gives multiple effects >.>)
-//---
- // ID #29 = [in-progress] Liquid Metal Amulet (allows natural AP regeneration if wearing any kind of armor item [each]) 
- // ID #30 = [in-progress] Mandala Bracelet (gives a few [9-13?] tics of invincibility when most types of damage ar suffered (with a few exceptions), similar to death-switching [each])
+// ID #29 = Liquid Metal Amulet (allows natural AP regeneration if wearing any kind of armor item [each]) 
+// ID #30 = Mandala Bracelet (gives a few [9-13?] tics of invincibility when most types of damage ar suffered (with a few exceptions), similar to death-switching [each])
+ // ID #31 = [in progress] Aqualung (reduces oxygen consumption by 10%, and reduces drowning-damage by 5% [each])
 
- // ID #31 = [undefined] Winged Bracer (adds 25% to the Max Airjumps of the current character [or 1 Airjump if they have less than 4] [each])
- // ID #32 = [undefined] Divinity Snorkel (extends underwater-airtime by 10% and increases swimming speed by 5% [each])
- // ID #33 = [undefined] Obsidian Band (reduces damage from damagefloors [except HyperMagma] by 20% and HyperMagma by 8% [each])
- // ID #34 = [undefined] Flame of Soul (marginally slows down the loss of the 'WARM' meter in hypothermic environments [each]) 
+ // ID #32 = [undefined] Obsidian Band (reduces damage from damagefloors [except HyperMagma] by 20% and HyperMagma by 8% [each])
+ // ID #33 = [undefined] Flame of Soul (marginally slows down the loss of the 'WARM' meter in hypothermic environments [each]) 
+ // ID #34 = [undefined] Winged Bracer (adds 25% to the Max Airjumps of the current character [or 1 Airjump if they have less than 4] [each])
  // ID #35 = [undefined] Bond of Trust Bracelet (reduces damage suffered by the point character by 10% and then splits the rest between all characters in the party, damage-reduction effects might be stronger between wearer and his/her support members [each])
  // ID #36 = [undefined] Franklin Badge (blocks and reflects any thunder-style attack at the originator [each, though only one is needed for the effect])
  // ID #37 = [undefined] ? (If a fatal blow is received and you have at least 89% EP, will stop you from dying and restore you to 25% of your MaxHP at the cost of 89% of your EP [each additional one will reduce the EP cost/requirement by 11% [up to 88% total reduction]])

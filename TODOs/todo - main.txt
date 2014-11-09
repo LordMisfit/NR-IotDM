@@ -1,5 +1,4 @@
 Soon TODOs:
-- Make a randomizer mode for monsters [monsters of a specfic 'species' can randomly upgrade into stronger [non-boss] counterparts, similar to DV-DS. Also can randomly flag non-boss enemies as elites.
 - Make an equippable item that splits damage taken by the wearer between all members of the group.
 - Other equippables as pointed out in GAMEVARS.CON
 

@@ -7947,7 +7947,13 @@ else
            }
            else ifvare TARGETSPECIES MANDALABRACELET
            {
-            redefinequote 142 MANDALABRACELET 
+            redefinequote 142 MANDALA BRACELET 
+            state checkactorpickupamounts
+            state pal14
+           }
+           else ifvare TARGETSPECIES AQUALUNG
+           {
+            redefinequote 142 AQUA-LUNG 
             state checkactorpickupamounts
             state pal14
            }

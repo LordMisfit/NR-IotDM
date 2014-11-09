@@ -16516,6 +16516,68 @@ else
 }
 enda
 
+// AquaLung [Equipment Item #31]
+eventloadactor AQUALUNG state setpickupflags enda
+useractor notenemy AQUALUNG 0 
+
+ sizeat 10 10
+ state itemfullbright
+ setvar ACTORSHEIGHT 113 setvar ACTORSWIDTH 141
+ state checkoldskool_items
+ state checkitemflags
+ state checkitemflags2 // Checks Item Multiplications for Display Icon
+ ifvare mainmenu 0 state fallflags
+ifvarg ITEMDROPPEDTIME 0
+{
+ ifvare mainmenu 0 subvar ITEMDROPPEDTIME 1
+}
+else
+{
+
+ ifvarand ACTORFLAGS 8 nullop
+ else
+ {
+  ifmove RESPAWN_ACTOR_FLAG
+    state respawnit
+  else
+   ifvare mainmenu 0
+   {
+    ifp pshrunk nullop
+    else
+    {
+     ifvarg CURRENTHITPOINTS 0 // ifp palive
+     {
+      ifcanseetarget
+      {
+       ifpdistl RETRIEVEDISTANCE
+       {
+        ifcount 6
+        {
+         state checkexplodeflag
+ 
+         setvar ACTORPICKUPAMOUNT 1
+         state checkpickupamountflags state checkdoublepickupbonus
+         state checkaqualungs addvarvar ITEMARRAYID_AMOUNTTEMP ACTORPICKUPAMOUNT state setitemidarrayamount
+         ifvarg ACTORPICKUPAMOUNT 1
+         {
+          redefinequote 335 ^22FOUND AN AQUA-LUNG!
+          redefinequote 336 ^22FOUND %ld AQUA-LUNGS!
+          qsprintf 335 336 ACTORPICKUPAMOUNT
+         }
+         else redefinequote 335 ^22FOUND AN AQUA-LUNG!
+
+         state grabequippable
+        }
+       }
+      }
+     }
+    }
+   }
+ }
+
+}
+enda
+
 
 // Silk Carnation [Permenant Boost Item #1]
 eventloadactor SILKCARNATION spritepal 10 setvar ACTORNATURALPAL 10 state setpickupflags enda

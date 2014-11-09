@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git92)
-definequote 1337 ^22VERSION:^0 5.22.git92.11092014
+setgamename Naferia's Reign (5.22.git93)
+definequote 1337 ^22VERSION:^0 5.22.git93.11092014
 
 action ANULLACTION 0
 
@@ -233,6 +233,7 @@ define YINYANGORB 6051
 define IRONRUNE 6052
 define LIQUIDMETALAMULET 6053
 define MANDALABRACELET 6054
+define AQUALUNG 6055
 
 define MONEYRADAR 6089
 define SILKCARNATION 6090
@@ -749,6 +750,7 @@ spritenoshade ENERGYINCURMENT
 spritenoshade YINYANGORB
 spritenoshade LIQUIDMETALAMULET
 spritenoshade MANDALABRACELET
+spritenoshade AQUALUNG
 spritenoshade GREENTANKCAPSULE
 spritenoshade BLUETANKCAPSULE
 spritenoshade REDTANKCAPSULE
@@ -23760,6 +23762,7 @@ state removeexcessinventory-checkids
   ifvare TEMPVAR3 28 { state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
   ifvare TEMPVAR3 29 { state checkliquidmetalamulets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
   ifvare TEMPVAR3 30 { state checkmandalabracelets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 31 { state checkaqualungs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
   //addlogvar TEMPVAR3
   setvar TEMPVAR3 0
 ends
@@ -25413,6 +25416,50 @@ state checkpkshieldamounts
   setactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR7
   setactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER TEMPVAR8
  }
+ends
+
+state drowndamage-checkequips
+     setvar TEMPVAR5 1000
+     ifvare PLAYEREQUIPSLOTITEM1 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM2 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM3 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM4 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM5 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM6 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM7 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM8 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvarl TEMPVAR5 1 setvar TEMPVAR5 1
+     addlogvar TEMPVAR5
+     mulvarvar TEMPVAR2 TEMPVAR5
+     divvar TEMPVAR2 1000
+     addlogvar TEMPVAR2
+ends
+
+state airtimedrain-checkequips
+               ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvarl TEMPVAR4 1 setvar TEMPVAR4 1               
+
+               setvar TEMPVAR5 1000
+               ifvare PLAYEREQUIPSLOTITEM1 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM2 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM3 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM4 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM5 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM6 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM7 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM8 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvarl TEMPVAR5 1 setvar TEMPVAR5 1
+               addlogvar TEMPVAR5
+               mulvarvar TEMPVAR4 TEMPVAR5
+               divvar TEMPVAR4 1000
+               addlogvar TEMPVAR4
 ends
 
 //************************************************************************************************************************
@@ -30626,15 +30673,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
               ifvarvarg CURRENTBIOSHIELDPOWER TEMPVAR5
               {
                setvar TEMPVAR4 334
-               ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvarl TEMPVAR4 1 setvar TEMPVAR4 1               
+               state airtimedrain-checkequips
+
                subvarvar AIRTIMEEXTRA TEMPVAR4
                ifvarl AIRTIMEEXTRA 1
                {
@@ -30645,15 +30685,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
               else
               {
                setvar TEMPVAR4 1000
-               ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+               state airtimedrain-checkequips
+
                subvarvar AIRTIMEEXTRA TEMPVAR4
                ifvarl AIRTIMEEXTRA 1
                {
@@ -30665,15 +30698,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
              else
              {
               setvar TEMPVAR4 1000
-              ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+              state airtimedrain-checkequips
+
               subvarvar AIRTIMEEXTRA TEMPVAR4
               ifvarl AIRTIMEEXTRA 1
               {
@@ -30685,15 +30711,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
             else
             {
              setvar TEMPVAR4 1000
-             ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+             state airtimedrain-checkequips
+
              subvarvar AIRTIMEEXTRA TEMPVAR4
              ifvarl AIRTIMEEXTRA 1
              {
@@ -30705,15 +30724,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
            else subvar AIRTIME 1 
            {
             setvar TEMPVAR4 1000
-            ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+            state airtimedrain-checkequips
+
             subvarvar AIRTIMEEXTRA TEMPVAR4
             ifvarl AIRTIMEEXTRA 1
             {
@@ -30725,15 +30737,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
           else
           {
            setvar TEMPVAR4 1000
-           ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+           state airtimedrain-checkequips
+
            subvarvar AIRTIMEEXTRA TEMPVAR4
            ifvarl AIRTIMEEXTRA 1
            {
@@ -30759,15 +30764,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
               ifvarvarg CURRENTBIOSHIELDPOWER TEMPVAR5
               {
                setvar TEMPVAR4 334
-               ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+               state airtimedrain-checkequips
+
                subvarvar AIRTIMEEXTRA TEMPVAR4
                ifvarl AIRTIMEEXTRA 1
                {
@@ -30778,15 +30776,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
               else
               {
                setvar TEMPVAR4 1000
-               ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-               ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+               state airtimedrain-checkequips
+
                subvarvar AIRTIMEEXTRA TEMPVAR4
                ifvarl AIRTIMEEXTRA 1
                {
@@ -30798,15 +30789,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
              else
              {
               setvar TEMPVAR4 1000
-              ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-              ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+              state airtimedrain-checkequips
+
               subvarvar AIRTIMEEXTRA TEMPVAR4
               ifvarl AIRTIMEEXTRA 1
               {
@@ -30818,15 +30802,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
             else
             {
              setvar TEMPVAR4 1000
-             ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-             ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+             state airtimedrain-checkequips
+
              subvarvar AIRTIMEEXTRA TEMPVAR4
              ifvarl AIRTIMEEXTRA 1
              {
@@ -30838,15 +30815,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
            else
            {
             setvar TEMPVAR4 1000
-            ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-            ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+            state airtimedrain-checkequips
+
             subvarvar AIRTIMEEXTRA TEMPVAR4
             ifvarl AIRTIMEEXTRA 1
             {
@@ -30858,15 +30828,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
           else
           {
            setvar TEMPVAR4 1000
-           ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
-           ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+           state airtimedrain-checkequips
+
            subvarvar AIRTIMEEXTRA TEMPVAR4
            ifvarl AIRTIMEEXTRA 1
            {
@@ -31128,6 +31091,8 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
      setvarvar TEMP7 TEMPVAR2
      state malakiangemcheck 
      setvarvar TEMPVAR2 TEMP7
+
+     state drowndamage-checkequips
 
      ifvarand CHEATBITFIELD? 16 { divvar TEMPVAR2 1000 ifvarl TEMPVAR2 1 setvar TEMPVAR2 1 state cheatersound }
      subvarvar CURRENTHITPOINTS TEMPVAR2
@@ -49756,6 +49721,7 @@ useractor notenemy PICKUPMULTIICON 0
   else ifvare TEMP SERPENTHELMET mulvar TESTXREPEAT1 8
   else ifvare TEMP YINYANGORB mulvar TESTXREPEAT1 4
   else ifvare TEMP MANDALABRACELET mulvar TESTXREPEAT1 8
+  else ifvare TEMP AQUALUNG mulvar TESTXREPEAT1 4
   else ifvare TEMP WINTERCLOTHES mulvar TESTXREPEAT1 8
   else ifvare TEMP GREENTANKCAPSULE mulvar TESTXREPEAT1 4
   else ifvare TEMP BLUETANKCAPSULE mulvar TESTXREPEAT1 4
@@ -49827,6 +49793,7 @@ useractor notenemy PICKUPMULTIICON 0
   else ifvare TEMP SERPENTHELMET mulvar TESTYREPEAT1 8
   else ifvare TEMP YINYANGORB mulvar TESTYREPEAT1 4
   else ifvare TEMP MANDALABRACELET mulvar TESTYREPEAT1 8
+  else ifvare TEMP AQUALUNG mulvar TESTYREPEAT1 4
   else ifvare TEMP WINTERCLOTHES mulvar TESTYREPEAT1 8
   else ifvare TEMP GREENTANKCAPSULE mulvar TESTYREPEAT1 4
   else ifvare TEMP BLUETANKCAPSULE mulvar TESTYREPEAT1 4

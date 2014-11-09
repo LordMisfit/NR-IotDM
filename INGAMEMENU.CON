@@ -1720,6 +1720,11 @@ ifvare mainmenu 1
      state checkmandalabracelets
      ifvarg ITEMARRAYID_AMOUNTTEMP 0 state showmandalabraceletdescript
     }
+    ifvare mainmenuselection 6
+    {
+     state checkaqualungs
+     ifvarg ITEMARRAYID_AMOUNTTEMP 0 state showaqualungdescript
+    }
    }
 
    setvar temp 332
@@ -5307,6 +5312,30 @@ ifvare mainmenusubmenu 1
    addvar digx 2 // setvar digx 238
    setvar digy 64
    state checkmandalabracelets
+   setvarvar varname ITEMARRAYID_AMOUNTTEMP
+   state pal23
+   state settile3087
+   state dn
+  }
+
+  // Row #2
+  state checkaqualungs
+  ifvarg ITEMARRAYID_AMOUNTTEMP 0
+  {
+   setvar digx 78
+   setvar digy 84
+   state itemplate
+
+   setvar digx 78
+   setvar digy 84
+   setvar digz 8144 //5120
+   setvar tilenum 6055
+   state pal0
+   state rs 
+
+   addvar digx 2 // setvar digx 238
+   setvar digy 96
+   state checkaqualungs
    setvarvar varname ITEMARRAYID_AMOUNTTEMP
    state pal23
    state settile3087
@@ -11626,7 +11655,6 @@ ifvarg equipmenuinuse 0
 
 
 // Row #4
-// Row #4
   state checkhockeymasks
   ifvarg ITEMARRAYID_AMOUNTTEMP 0
   {
@@ -11916,6 +11944,30 @@ ifvarg equipmenuinuse 0
    state dn
   }
 
+  // Row #2
+  state checkaqualungs
+  ifvarg ITEMARRAYID_AMOUNTTEMP 0
+  {
+   setvar digx 78
+   setvar digy 84
+   state itemplate
+
+   setvar digx 78 // 78
+   setvar digy 84 
+   setvar digz 8144 //5120
+   setvar tilenum 6055 
+   state pal0
+   state rs 
+
+   setvar digx 80 // 78
+   setvar digy 96
+   state checkaqualungs
+   setvarvar varname ITEMARRAYID_AMOUNTTEMP
+   state pal23
+   state settile3087
+   state dn
+  }
+
  }
 
 // Row 1
@@ -12082,6 +12134,11 @@ ifvarg equipmenuinuse 0
     {
      state checkmandalabracelets
      ifvarg ITEMARRAYID_AMOUNTTEMP 0 state showmandalabraceletdescript
+    }
+    ifvare equipmenuselection 6
+    {
+     state checkaqualungs
+     ifvarg ITEMARRAYID_AMOUNTTEMP 0 state showaqualungdescript
     }
   }
 /*
