@@ -4791,8 +4791,10 @@ state bloodpooldamagemonster
           }
           else
           {
-           getactorvar[PYTHAGORASTARGET].ACTORHP TEMP
+           getactorvar[PYTHAGORASTARGET].ACTORHP TEMPVAR8
+           addlogvar TEMPVAR8
            getactor[PYTHAGORASTARGET].picnum tempc
+           addlogvar tempc
            ifvare tempc TANK
            {
             randvar tempe 2
@@ -4850,7 +4852,8 @@ state bloodpooldamagemonster
 
            ifvarn ENEMYHASSHIKON? 0 divvar tempe 10
 
-           subvarvar TEMP tempe
+           subvarvar TEMPVAR8 tempe
+           addlogvar TEMPVAR8
            ifvarg tempe 0
            {
             setvarvar SHOWDAMAGE tempe
@@ -4858,13 +4861,14 @@ state bloodpooldamagemonster
             setvarvar SHOWDAMAGEACTORID PYTHAGORASTARGET
             state showdamage
            }
-           ifvarl TEMP 1
+           ifvarl TEMPVAR8 1
            {
-            setvar TEMP 0
+            setvar TEMPVAR8 0
             setactor[PYTHAGORASTARGET].htowner THISACTOR
             setactor[PYTHAGORASTARGET].htpicnum NEWBLOODPOOL
            }
-           setactorvar[PYTHAGORASTARGET].ACTORHP TEMP
+           addlogvar TEMPVAR8
+           setactorvar[PYTHAGORASTARGET].ACTORHP TEMPVAR8
            ifvarg tempe 0 
            {
             setactorvar[PYTHAGORASTARGET].ACTORHPDAMAGED? 1
@@ -29630,6 +29634,18 @@ ends
   setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST setvar ACTORFALLCOUNTER 0
  ends
 
+state enemyfall-flyingcheck
+     addlogvar ACTORFALLING?
+     addlogvar ACTORFALLCOUNTER
+     addlogvar ACTORFALLRESIST
+     ifvarn ACTORFALLING? 0 setvar ACTORFALLING? 0 
+     ifvarn ACTORFALLCOUNTER 0 setvar ACTORFALLCOUNTER 0
+     ifvarvarn ACTORFALLRESIST ACTORMAXFALLRESIST setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
+     addlogvar ACTORFALLING?
+     addlogvar ACTORFALLRESIST
+     addlogvar ACTORFALLCOUNTER
+ends
+
 state checkfallcounter_nonplayer
  getsector[THISACTOR].lotag temp
  ifvare temp 2 // Under Water
@@ -29648,17 +29664,24 @@ state checkfallcounter_nonplayer
    {
     ifvare ACTORFALLING? 1 
     {
-     ifvarg ACTORFALLRESIST 0
+     ifvare mainmenu 0 
      {
-      ifvare mainmenu 0 { ifvarl ACTORINVULNTIME 1 subvar ACTORFALLRESIST 1 else state resetfallresist_nonplayer }
-     }
-     else
-     {
-      ifvare mainmenu 0 { ifvarl ACTORINVULNTIME 1 addvar ACTORFALLCOUNTER 1 else state resetfallresist_nonplayer }
+      ifvarg ACTORFALLRESIST 0
+      {
+       ifvarl ACTORINVULNTIME 1 subvar ACTORFALLRESIST 1 else state resetfallresist_nonplayer
+       //addlogvar ACTORFALLRESIST
+      }
+      ifvare ACTORFALLRESIST 0
+      {
+       ifvarl ACTORINVULNTIME 1 addvar ACTORFALLCOUNTER 1 else state resetfallresist_nonplayer
+       //addlogvar ACTORFALLCOUNTER
+      }
       ifvarl ACTORFALLRESIST 0
       {
-       ifvare mainmenu 0 { ifvarl ACTORINVULNTIME 1 addvar ACTORFALLRESIST 1 else state resetfallresist_nonplayer }
-       ifvare mainmenu 0 { ifvarl ACTORINVULNTIME 1 addvar ACTORFALLCOUNTER 1 else state resetfallresist_nonplayer }
+       ifvarl ACTORINVULNTIME 1 addvar ACTORFALLRESIST 1 else state resetfallresist_nonplayer
+       ifvarl ACTORINVULNTIME 1 addvar ACTORFALLCOUNTER 1 else state resetfallresist_nonplayer
+       //addlogvar ACTORFALLRESIST
+       //addlogvar ACTORFALLCOUNTER
       }
      }
     }
@@ -29672,9 +29695,8 @@ state checkfallcounter_nonplayer
     {
      iffloordistl 8 // On the ground...
      {
-      getsector[THISACTOR].lotag temp
-      ifvare temp 2 nullop  // Lands in underwater sector: Since The NPC/Enemy lands in water, no fall damage is received
-      else ifvare temp 1 nullop  // Lands in sinkable water/sector: Since The NPC/Enemy lands in water, no fall damage is received
+      ifvare sector[THISACTOR].lotag 2 nullop  // Lands in underwater sector: Since The NPC/Enemy lands in water, no fall damage is received
+      else ifvare sector[THISACTOR].lotag 1 nullop  // Lands in sinkable water/sector: Since The NPC/Enemy lands in water, no fall damage is received
       else // Lands on hard surface
       {
        ifvare mainmenu 0

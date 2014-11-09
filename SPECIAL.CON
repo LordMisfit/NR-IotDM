@@ -18573,12 +18573,13 @@ state enemytyperandomizer
    else
    {
     displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1
-    ifvarl TEMPVAR7 26
+    ifvarl TEMPVAR7 17 // 1.6%
     {
-     ifvarand ACTORFLAGS 512 subvar ACTORFLAGS 512 else addvar ACTORFLAGS 512
+     ifvarand ACTORFLAGS 512 subvar ACTORFLAGS 512 
+     else addvar ACTORFLAGS 512
     }
    }
-   //addlogvar TEMPVAR7
+   addlogvar TEMPVAR7
    addlogvar ACTORFLAGS
   }
 

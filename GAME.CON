@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git89)
-definequote 1337 ^22VERSION:^0 5.22.git89.11062014
+setgamename Naferia's Reign (5.22.git91)
+definequote 1337 ^22VERSION:^0 5.22.git91.11092014
 
 action ANULLACTION 0
 
@@ -36205,6 +36205,7 @@ state checktroophit
 ends
 
 state troopbombjetpackstate
+  state enemyfall-flyingcheck
   ifvarl ACTORINVULNTIME 1
   {
    ifpdistl 1780
@@ -36296,6 +36297,7 @@ state troopbombjetpackstate
 ends
 
 state troopjetpackstate
+  state enemyfall-flyingcheck
   ifinwater nullop else soundonce DUKE_JETPACK_IDLE
   addvar JETPACKSMOKEVAR 1
   ifvarg JETPACKSMOKEVAR 7
