@@ -1,4 +1,5 @@
 Soon TODOs:
+- Breath effects in hypothermic sectors.
 - Change Turrets to not always be stunned by any kind of damage [make it at least 1-2% Max HP].
 - Make an equippable item that splits damage taken by the wearer between all members of the group.
 - Other equippables as pointed out in GAMEVARS.CON
