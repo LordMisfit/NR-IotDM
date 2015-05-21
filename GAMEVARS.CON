@@ -2074,7 +2074,7 @@ gamevar EQUIPTEMP 0 131072
 // ID #28 = Jewel of Four Souls (SUPER item, one of a kind, gives multiple effects >.>)
 // ID #29 = Liquid Metal Amulet (allows natural AP regeneration if wearing any kind of armor item [each]) 
 // ID #30 = Mandala Bracelet (gives a few [9-13?] tics of invincibility when most types of damage ar suffered (with a few exceptions), similar to death-switching [each])
- // ID #31 = [in progress] Aqualung (reduces oxygen consumption by 10%, and reduces drowning-damage by 5% [each])
+// ID #31 = Aqualung (reduces oxygen consumption by 10%, and reduces drowning-damage by 5% [each])
 
  // ID #32 = [undefined] Obsidian Band (reduces damage from damagefloors [except HyperMagma] by 20% and HyperMagma by 8% [each])
  // ID #33 = [undefined] Flame of Soul (marginally slows down the loss of the 'WARM' meter in hypothermic environments [each]) 

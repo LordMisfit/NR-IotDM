@@ -5016,10 +5016,13 @@ state setupmilkfridge
    setactor[RETURN].x TEMP
    setactor[RETURN].y TEMP2
    getwall[ARRAYPOSITION].nextwall TEMP4
-   getwall[TEMP4].nextsector TEMP4
-   getsector[TEMP4].floorz TEMP5
+   ifvarg TEMP4 -1
+   {
+    getwall[TEMP4].nextsector TEMP4
+    getsector[TEMP4].floorz TEMP5
+   }
    setactor[RETURN].z TEMP5
-   changespritesect RETURN TEMP4
+   ifvarg TEMP4 -1 changespritesect RETURN TEMP4
 
    setactorvar[RETURN].MUSICANDSFX_LINKTYPE 1
    setactorvar[RETURN].MUSICANDSFX_LINKID ARRAYPOSITION
@@ -5403,7 +5406,7 @@ setvar ARRAYPOSITION 0
 whilevarn ARRAYPOSITION 16383
 {
  // Wall IDs <.<
- ifvarl ARRAYPOSITION 16384
+ ifvarg ARRAYPOSITION -1 ifvarvarl ARRAYPOSITION NUMWALLS // 16384
  {
   ifvarn wall[ARRAYPOSITION].picnum -1
   {
@@ -5443,7 +5446,7 @@ whilevarn ARRAYPOSITION 16383
  }
 
  // Sector IDs >.>
- ifvarl ARRAYPOSITION 4096 // Only 4096 sectors can be on a map [ID#s 0-4095]
+ ifvarg ARRAYPOSITION -1 ifvarvarl ARRAYPOSITION NUMSECTORS // 4096 // Only 4096 sectors can be on a map [ID#s 0-4095]
  {
    // Check the floor tile
    setactorvar[ARRAYPOSITION].SPACESECTOR? 0
@@ -5975,6 +5978,8 @@ whilevarn ARRAYPOSITION 16383
  addvar ARRAYPOSITION 1
  ifvarg ARRAYPOSITION 16383 break
 }
+// addlogvar NUMWALLS
+// addlogvar NUMSECTORS
 ends
 
 

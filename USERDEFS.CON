@@ -4458,14 +4458,14 @@ definelevelname 6 13 NYR_E1L3.map 03:32 01:49 NEW YORK RUMBLE PART 3
 definelevelname 6 14 NYR_E1L4.map 23:15 06:46 NEW YORK RUMBLE PART 4
 definelevelname 6 15 NYR_E1L6.map 03:26 00:44 NEW YORK RUMBLE PART 5
 definelevelname 6 16 NYR_E1L5.map 03:51 01:47 NEW YORK RUMBLE PART 6
-definelevelname 6 17 DUKEDC7.map 03:00 01:21 BROWN WATER
-definelevelname 6 18 DUKEDC8.map 06:15 03:09 DREAD OCTOBER
-definelevelname 6 19 DUKEDC9.map 02:38 01:17 NUKE PROOF
-definelevelname 6 20 DUKEDCSL.map 16:45 05:10 TOP SECRET
-definelevelname 6 21 QRED.map 10:00 03:20 HIGHWAY HORROR
-definelevelname 6 22 RED2.map 03:55 00:59 ABANDONED MINE TOWN
-definelevelname 6 23 RED3.map 03:32 01:49 HAUNTED TOWN
-definelevelname 6 24 RED4.map 23:15 06:46 WAIT FOR THE SHIP
+definelevelname 6 17 WGS1X.map 03:00 01:21 WG-SPACE 1X
+definelevelname 6 18 WGS2X.map 06:15 03:09 WG-SPACE 2X - ALIEN HIVE
+definelevelname 6 19 WGS3X.map 02:38 01:17 WG-SPACE 3X
+definelevelname 6 20 WGS4X.map 16:45 05:10 WG-SPACE 4X
+definelevelname 6 21 WGS5X.map 10:00 03:20 WG-SPACE 5X
+definelevelname 6 22 WGS6X.map 03:55 00:59 WG-SPACE 6X
+definelevelname 6 23 WGS1SX.map 03:32 01:49 WG-SPACE SECRET 1X
+definelevelname 6 24 WGS2SX.map 23:15 06:46 WG-SPACE SECRET 2X
 definelevelname 6 25 RED5.map 03:26 00:44 LONELY MOUNTAIN COMPLEX
 definelevelname 6 26 HOTELFAN.map 03:51 01:47 HOTEL FANSERVICE
 definelevelname 6 27 WORKHELL.map 07:23 05:32 WORK IS HELL!

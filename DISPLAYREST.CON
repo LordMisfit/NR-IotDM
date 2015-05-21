@@ -13407,8 +13407,9 @@ else
      setvar digx 192 // 270
      setvar digy 2
      setvarvar varname hitsprite
-     redefinequote 332 SPRITE ID: ^21%d
-     qsprintf 332 332 varname
+     ifvarvarl varname Numsprites redefinequote 332 SPRITE ID: ^21%d^22 /^0 %d
+     else redefinequote 332 ^21SPRITE ID: ^10%d^21 /^0 %d
+     qsprintf 332 332 varname Numsprites
      setvar temp 332
      state gtz // state dnz
      ifvarn hitsprite -1
@@ -13999,8 +14000,9 @@ else
      setvar digy 2
      state pal20
      setvarvar varname hitwall
-     redefinequote 332 WALL ID: ^21%d
-     qsprintf 332 332 varname
+     ifvarvarl varname NUMWALLS redefinequote 332 WALL ID: ^21%d^20 /^0 %d
+     else redefinequote 332 ^21WALL ID: ^10%d^21 /^0 %d
+     qsprintf 332 332 varname NUMWALLS
      setvar temp 332
      state gtz // state dn
      ifvarn hitwall -1
@@ -14062,8 +14064,9 @@ else
      setvar digx 2 // 110
      addvar digy 6 // 53
      setvarvar varname hitsector
-     redefinequote 332 SECTOR ID: ^21%d
-     qsprintf 332 332 varname
+     ifvarvarl varname NUMSECTORS redefinequote 332 SECTOR ID: ^21%d^22 /^0 %d
+     else redefinequote 332 ^21SECTOR ID: ^10%d^21 /^0 %d
+     qsprintf 332 332 varname NUMSECTORS
      setvar temp 332
      state gtz // state dn
      ifvarn hitsector -1
@@ -14351,7 +14354,7 @@ else
      getplayer[THISACTOR].pals 1 TEMPVAR6 //Green [0-63]
      getplayer[THISACTOR].pals 2 TEMPVAR7 //Blue [0-63]
      getplayer[THISACTOR].pals_time TEMPVAR8 //Intensity [0-63]
-     redefinequote 332 .PALS ^210^0/^221^0/^162^0/^20TIME^0: ^21%d^0/^22%d^0/^16%d^0/^20%d
+     redefinequote 332 .PALS ^210^0/^221^0/^162^0/^20T^0: ^21%d^0/^22%d^0/^16%d^0/^20%d
      qsprintf 332 332 TEMPVAR5 TEMPVAR6 TEMPVAR7 TEMPVAR8
      setvar temp 332
      state gtz // state dn
