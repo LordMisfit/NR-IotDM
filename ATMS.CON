@@ -126,6 +126,8 @@ Anthony Goldstein [NPC]:	202015 & 5112 (ID: 348) [Cameo-Good]		[added]
 Marcus Sparacio [NPC]:		521326 & 4444 (ID: 349) [Cameo-Good]		[added]
 Todd Ferguson [NPC]:		092012 & 2012 (ID: 350) [Cameo-Good]		[added]
 
+Mathias Andren [NPC]:		960503 & 2013 (ID: 351) [Cameo-Good]		[to be added]
+
 */
 
 state displayaccountvalue
@@ -853,6 +855,11 @@ state checkinterestrates
    setvar CHARACTERARRAY 350
    getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
   }   
+  ifvare atm_acctnum 960503 // Mathias Andren (NPC)
+  {
+   setvar CHARACTERARRAY 351
+   getactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE TEMP7
+  }   
 //
 ends
 
@@ -1412,6 +1419,11 @@ state checkdollarcents
    setvar CHARACTERARRAY 350
    state getatmdollarcents
   }   
+  ifvare atm_acctnum 960503 // Mathias Andren (NPC)
+  {
+   setvar CHARACTERARRAY 351
+   state getatmdollarcents
+  }   
 ends
 
 state displayaccountinfo
@@ -1689,6 +1701,7 @@ state atm_showwiretonames
   ifvare atm_wacctnum 202015 redefinequote 332 Anthony Goldstein
   ifvare atm_wacctnum 521326 redefinequote 332 Marcus Sparacio
   ifvare atm_wacctnum 92012 redefinequote 332 Todd Ferguson
+  ifvare atm_wacctnum 960503 redefinequote 332 Mathias Andren
 
   addlogvar atm_wacctnum
 // Fill in more beyond here
@@ -2871,6 +2884,7 @@ ifvarn atm_id -1
   ifvare atm_acctnum 202015 redefinequote 332 Welcome Mr. Goldstein. Please
   ifvare atm_acctnum 521326 redefinequote 332 Welcome Mr. Sparacio. Please
   ifvare atm_acctnum 92012 redefinequote 332 Welcome Mr. Ferguson. Please
+  ifvare atm_acctnum 960503 redefinequote 332 Welcome Mr. Andren. Please
 // Fill in more
   state pal22
   state gtz
@@ -2990,6 +3004,7 @@ ifvarn atm_id -1
   case 202015
   case 521326
   case 92012
+  case 960503
 // Fill in Here
    setvar TEMPVAR4 1
   break
@@ -6120,6 +6135,33 @@ ifvarn atm_id -1
    state pal22
    state gtz
   }   
+
+  ifvare atm_acctnum 960503 // Mathias Andren (NPC)
+  {
+   state digx320
+   setvar digy 66
+   redefinequote 332 "Welcome Mr. Andren!"
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 72
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 78
+   redefinequote 332  
+   state pal22
+   state gtz
+
+   state digx320
+   setvar digy 84
+   redefinequote 332  
+   state pal22
+   state gtz
+  }   
 // Fill in more
 
   // Screen Text
@@ -8311,6 +8353,11 @@ state cmd_depositmoney2
            setvar CHARACTERARRAY 350
            state cmd_depositmoney
           }   
+          ifvare atm_acctnum 960503 // Mathias Andren (NPC)
+          {
+           setvar CHARACTERARRAY 351
+           state cmd_depositmoney
+          }   
 // Fill in Here
           else // No one
           {
@@ -8987,6 +9034,11 @@ state cmd_withdrawmoney2
           ifvare atm_acctnum 92012 // Todd Ferguson (NPC)
           {
            setvar CHARACTERARRAY 350
+           state cmd_withdrawmoney
+          }   
+          ifvare atm_acctnum 960503 // Mathias Andren (NPC)
+          {
+           setvar CHARACTERARRAY 351
            state cmd_withdrawmoney
           }   
 // Fill in Here
@@ -9686,6 +9738,12 @@ state cmd_wiremoney_sender
         setvar atm_wirereceivearray 350
         state cmd_wiremoney_receiver
        }   
+       else
+       ifvare atm_wacctnum 960503 // Mathias Andren (NPC)
+       {
+        setvar atm_wirereceivearray 351
+        state cmd_wiremoney_receiver
+       }   
 // Fill in Here
        else
        {
@@ -9836,6 +9894,7 @@ state atm-upperleftbutton
       else ifvare atm_acctnum 202015 { setvar atm_mode 2 state randomatmbeeps } // Anthony Goldstein's ID (NPC)
       else ifvare atm_acctnum 521326 { setvar atm_mode 2 state randomatmbeeps } // Marcus Sparacio's ID (NPC)
       else ifvare atm_acctnum 92012 { setvar atm_mode 2 state randomatmbeeps } // Todd Ferguson's ID (NPC)
+      else ifvare atm_acctnum 960503 { setvar atm_mode 2 state randomatmbeeps } // Mathias Andren's ID (NPC)
 // Fill in Here
       else // Incorrect ACCT#
       {
@@ -9968,6 +10027,7 @@ state atm-upperleftbutton
       else ifvare atm_acctnum 202015 ifvare atm_pinnum 5112 { setvar atm_mode 3 state randomatmbeeps } // Anthony Goldstein's PIN (NPC)
       else ifvare atm_acctnum 521326 ifvare atm_pinnum 4444 { setvar atm_mode 3 state randomatmbeeps } // Marcus Sparacio's PIN (NPC)
       else ifvare atm_acctnum 92012 ifvare atm_pinnum 2012 { setvar atm_mode 3 state randomatmbeeps } // Todd Ferguson's PIN (NPC)
+      else ifvare atm_acctnum 960503 ifvare atm_pinnum 2013 { setvar atm_mode 3 state randomatmbeeps } // Mathias Andren's PIN (NPC)
 // Fill in Here
       else 
       {
@@ -10956,6 +11016,11 @@ state atm-upperleftbutton
        ifvare atm_acctnum 92012 // Marcus Sparacio (NPC)
        {
         setvar atm_wiresendarray 350
+        state cmd_wiremoney_sender
+       }   
+       ifvare atm_acctnum 960503 // Mathias Andren (NPC)
+       {
+        setvar atm_wiresendarray 351
         state cmd_wiremoney_sender
        }   
 // Fill in Here

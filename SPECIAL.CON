@@ -5051,6 +5051,11 @@ setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS 71786
 setactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS 11
 setactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE 98 // 9.8%
 
+setvar CHARACTERARRAY 351 // Mathias Anrden [Cameo]
+setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS 499
+setactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS 09
+setactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE 103 // 10.3%
+
 /*
 setvar CHARACTERARRAY ? // ?
 setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS 0 // [not yet determined]
@@ -5371,6 +5376,50 @@ state calcbank_interests
    setvar CHARACTERARRAY 354 state calcbank_interests2
    setvar CHARACTERARRAY 355 state calcbank_interests2
    setvar CHARACTERARRAY 356 state calcbank_interests2
+   setvar CHARACTERARRAY 357 state calcbank_interests2
+   setvar CHARACTERARRAY 358 state calcbank_interests2
+   setvar CHARACTERARRAY 359 state calcbank_interests2
+   setvar CHARACTERARRAY 360 state calcbank_interests2
+   setvar CHARACTERARRAY 361 state calcbank_interests2
+   setvar CHARACTERARRAY 362 state calcbank_interests2
+   setvar CHARACTERARRAY 363 state calcbank_interests2
+   setvar CHARACTERARRAY 364 state calcbank_interests2
+   setvar CHARACTERARRAY 365 state calcbank_interests2
+   setvar CHARACTERARRAY 366 state calcbank_interests2
+   setvar CHARACTERARRAY 367 state calcbank_interests2
+   setvar CHARACTERARRAY 368 state calcbank_interests2
+   setvar CHARACTERARRAY 369 state calcbank_interests2
+   setvar CHARACTERARRAY 370 state calcbank_interests2
+   setvar CHARACTERARRAY 371 state calcbank_interests2
+   setvar CHARACTERARRAY 372 state calcbank_interests2
+   setvar CHARACTERARRAY 373 state calcbank_interests2
+   setvar CHARACTERARRAY 374 state calcbank_interests2
+   setvar CHARACTERARRAY 375 state calcbank_interests2
+   setvar CHARACTERARRAY 376 state calcbank_interests2
+   setvar CHARACTERARRAY 377 state calcbank_interests2
+   setvar CHARACTERARRAY 378 state calcbank_interests2
+   setvar CHARACTERARRAY 379 state calcbank_interests2
+   setvar CHARACTERARRAY 380 state calcbank_interests2
+   setvar CHARACTERARRAY 381 state calcbank_interests2
+   setvar CHARACTERARRAY 382 state calcbank_interests2
+   setvar CHARACTERARRAY 383 state calcbank_interests2
+   setvar CHARACTERARRAY 384 state calcbank_interests2
+   setvar CHARACTERARRAY 385 state calcbank_interests2
+   setvar CHARACTERARRAY 386 state calcbank_interests2
+   setvar CHARACTERARRAY 387 state calcbank_interests2
+   setvar CHARACTERARRAY 388 state calcbank_interests2
+   setvar CHARACTERARRAY 389 state calcbank_interests2
+   setvar CHARACTERARRAY 390 state calcbank_interests2
+   setvar CHARACTERARRAY 391 state calcbank_interests2
+   setvar CHARACTERARRAY 392 state calcbank_interests2
+   setvar CHARACTERARRAY 393 state calcbank_interests2
+   setvar CHARACTERARRAY 394 state calcbank_interests2
+   setvar CHARACTERARRAY 395 state calcbank_interests2
+   setvar CHARACTERARRAY 396 state calcbank_interests2
+   setvar CHARACTERARRAY 397 state calcbank_interests2
+   setvar CHARACTERARRAY 398 state calcbank_interests2
+   setvar CHARACTERARRAY 399 state calcbank_interests2
+   setvar CHARACTERARRAY 400 state calcbank_interests2
    // Fill in Here
   }
 

@@ -22990,7 +22990,8 @@ ends
 
 state determineregenrates // affects how regeneration speed for HP and EP works.
 
-       ifp ponsteroids mulvar TEMPMOD 4 // Steroids = 400% Speed
+       ifvarn TEMPVAR8 1 ifp ponsteroids mulvar TEMPMOD 4 // Steroids = 400% Speed
+
        ifvarand PLAYERSTATUS? 2 { mulvar TEMPMOD 1250 divvar TEMPMOD 1000 } // Haste = 125% Speed
        ifvarand PLAYERSTATUS? 4 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Slow = 75% Speed
 
@@ -23666,7 +23667,7 @@ state playerregenarmornormal
       }
       ifvarn TEMPMOD 0
       { 
-       //setvar TEMPVAR8 1 state determineregenrates
+       setvar TEMPVAR8 1 state determineregenrates
        addvarvar ARMORPOINTREGENTICS TEMPMOD 
       }
      }
