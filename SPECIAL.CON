@@ -5051,7 +5051,7 @@ setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS 71786
 setactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS 11
 setactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE 98 // 9.8%
 
-setvar CHARACTERARRAY 351 // Mathias Anrden [Cameo]
+setvar CHARACTERARRAY 351 // Mathias Andren [Cameo]
 setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS 499
 setactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS 09
 setactorvar[CHARACTERARRAY].CHARACTERATMINTERESTRATE 103 // 10.3%
@@ -30939,7 +30939,6 @@ state show_secondaryquotemethod
       setplayer[THISACTOR].ftq -1
      }
 
-
      ifvarg fta 0
      {
       setvar quotescale 49152 // 49152
@@ -30974,6 +30973,7 @@ state show_secondaryquotemethod
        state settile2837
        state orientation10
        state dnz
+
        state shade0
        state pal0
        setvarvar digx 160
@@ -30981,6 +30981,17 @@ state show_secondaryquotemethod
        addvar digy 8
        setvarvar digz quotescale
        setvarvar varname fta
+       state settile2837
+       state orientation10
+       state dnz
+
+       state shade0
+       state pal21
+       setvarvar digx 160
+       setvarvar digy quotedigy
+       addvar digy 12
+       setvarvar digz quotescale
+       setvarvar varname quotescale
        state settile2837
        state orientation10
        state dnz
@@ -30995,6 +31006,7 @@ state show_secondaryquotemethod
       state orientation10
       state gtz
       state shade0
+
      }
      state shade0
      setvar quotescale 49152
@@ -33333,6 +33345,7 @@ state usefoghorn
              state checkfoghorns subvar ITEMARRAYID_AMOUNT 1 state setitemidarrayamount
              stopsound HEAL_AILMENT
              globalsound HEAL_AILMENT
+             globalsound USE_FOGHORN
 ends
 
 state usefoghorn2
@@ -33341,6 +33354,7 @@ state usefoghorn2
              state checkfoghorns subvar ITEMARRAYID_AMOUNT 1 state setitemidarrayamount
              stopsound HEAL_AILMENT
              globalsound HEAL_AILMENT
+             globalsound USE_FOGHORN
 ends
 
 state useantidote

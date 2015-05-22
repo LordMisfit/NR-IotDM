@@ -4240,7 +4240,7 @@ else
       {
        ifvare DEFENSEMODE? 1 state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       addvar digy 6
        getkeyname 401 42 0 
        redefinequote 332 ^12%s ^21= ^22DEFEND
        qsprintf 332 332 401
@@ -4254,7 +4254,7 @@ else
       {
        state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       addvar digy 6
        getkeyname 401 5 0 
        redefinequote 332 ^12%s ^21= ^22THROW
        qsprintf 332 332 401
@@ -4270,7 +4270,7 @@ else
        {
         ifvare GLIDING? 1 state shadepulse
         setvar digx 1
-        addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+        addvar digy 6
         getkeyname 401 11 0 
         redefinequote 332 ^12%s ^21= ^22GLIDE
         qsprintf 332 332 401
@@ -4285,7 +4285,7 @@ else
       {
        ifvarand bits 262144 state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       addvar digy 6
        state setquote332
        getkeyname 401 6 0
        getkeyname 402 15 0
@@ -4301,7 +4301,7 @@ else
       {
        ifvarand bits 262144 state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       addvar digy 6
        getkeyname 401 41 0
        redefinequote 332 ^12%s ^21= ^22TELEKENESIS
        qsprintf 332 332 401
@@ -4315,7 +4315,7 @@ else
       {
        ifvarand bits 262144 state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       addvar digy 6
        getkeyname 401 22 0
        ifvare CHAINGUNMODE 0 redefinequote 332 ^12%s ^21= ^22ROCKETS [CHAINGUN]
        else ifvare CHAINGUNMODE 1 redefinequote 332 ^12%s ^21= ^22BULLETS [CHAINGUN]
@@ -4331,7 +4331,7 @@ else
       {
        ifvarand bits 262144 state shadepulse
        setvar digx 1
-       addvar digy 6 // ifvarn ftq 777 setvar digy 15 else { ifvare fta 0 setvar digy 15 else setvar digy 9 }
+       addvar digy 6
        getkeyname 401 23 0
        ifvare DEATHMISSILEMODE 0 redefinequote 332 ^12%s ^21= ^22DEATHSTROKES [RPG]
        else redefinequote 332 ^12%s ^21= ^22DEATHGATES [RPG]

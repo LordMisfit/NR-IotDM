@@ -2255,6 +2255,8 @@ define DUKE_GRABVAMPIRE          1294
 
 define VENUSSTEELMENDING_CLANG   1295
 
+define USE_FOGHORN               1296
+
 // MAXIMUM NUMBER OF SOUNDS: 4096 ( 0-4095 ) [from 2560 sounds]
 
 // DT other defs
@@ -3781,9 +3783,7 @@ definequote 70        ^16BLUE^0 ACCESS CARD REQUIRED
 definequote 71        ^21RED^0 ACCESS CARD REQUIRED
 definequote 72        ^23YELLOW^0 ACCESS CARD REQUIRED
 definequote 73        ^22WEAPON LOWERED / DEFENSE MODE ON
-// definequote 73        ^22WEAPON LOWERED
 definequote 74        ^22WEAPON RAISED / DEFENSE MODE OFF
-// definequote 74        ^22WEAPON RAISED
 definequote 75        ^19PROTECTIVE BOOTS ON
 definequote 76        ^19SCUBA GEAR ON
 definequote 77        ^19SPACE SUIT ON
@@ -5102,6 +5102,8 @@ definesound VEHICLE_HEAL           medshot2.wav      -50    50   255   0   0
 definesound USE_ARMORITEM1         grabarmor1.wav    -50    50   255   0   0
 definesound USE_ARMORITEM2         grabarmor2.wav    -50    50   255   0   0
 definesound USE_ARMORITEM3         grabarmor3.wav    -50    50   255   0   0
+
+definesound USE_FOGHORN            usefoghorn.ogg     -250   250   255   0   0
 
 definesound MYSTERIOUS_HEALING     mysteryheal.wav      -50    50   255   0   0
 definesound MYSTERIOUS_ARMOR       mysteryarmor.wav     -50    50   255   0   0

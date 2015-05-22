@@ -3214,10 +3214,10 @@ state pickupcharacter_cola
            }
            state playerstealjustbeforemonster
           }
-      	    ifspawnedby COLA
-	     state getcode
+          ifspawnedby COLA
+            state getcode
           else
-           state quikget
+            state quikget
 ends
 
 state pickupvehicle_cola
@@ -3259,10 +3259,10 @@ state pickupvehicle_cola
            }
            state playerstealjustbeforemonster
           }
-      	    ifspawnedby COLA
-	     state getcode
+          ifspawnedby COLA
+            state getcode
           else
-           state quikget
+            state quikget
 ends
 
 state pickupinventory_cola
@@ -3291,9 +3291,9 @@ state pickupinventory_cola
            }
            globalsound FOUND_INVENTORY
            ifspawnedby COLA
- 	      state getcode
+             state getcode
            else
-            state quikget
+             state quikget
           }
 ends
 
