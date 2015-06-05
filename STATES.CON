@@ -3438,8 +3438,8 @@ state checkkillerofciv
          }
          else
          {
-          ifactor FEM10 redefinequote 130 ^10YOU JUST KILLED 2 CIVILIANS, RETARD!
-          else redefinequote 130 ^10YOU JUST KILLED A CIVILIAN, RETARD!
+          ifactor FEM10 redefinequote 130 ^10YOU JUST KILLED 2 CIVILIANS, STUPID!
+          else redefinequote 130 ^10YOU JUST KILLED A CIVILIAN, STUPID!
           setvarvar fta fta_normal setvar ftq 130
          }
         }
