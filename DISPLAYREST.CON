@@ -1275,12 +1275,7 @@ else
    // Display Fortune Cookie Fortunes
 
    setvar TEMPVAR5 0
-   ifvarg PLAYERSTATUS? 0 addvar TEMPVAR5 1
-   ifvarg QUADTIME 0 addvar TEMPVAR5 1
-   ifvarg INVULNTIME 0 addvar TEMPVAR5 1
-   ifvarg REGENTIME 0 addvar TEMPVAR5 1
-   ifvarg APREGENTIME 0 addvar TEMPVAR5 1
-   ifvarg VAMPIRETIME 0 addvar TEMPVAR5 1
+   state statustempvar5_check
 
    state digx160 // 2
    setvar digy 110
@@ -2305,13 +2300,10 @@ else
      redefinequote 332 STATUS
      state setquote332
      state pal20
+
+     // Check to print "STATUS" text
      setvar TEMPVAR5 0
-     ifvarg PLAYERSTATUS? 0 addvar TEMPVAR5 1
-     ifvarg QUADTIME 0 addvar TEMPVAR5 1
-     ifvarg INVULNTIME 0 addvar TEMPVAR5 1
-     ifvarg REGENTIME 0 addvar TEMPVAR5 1
-     ifvarg APREGENTIME 0 addvar TEMPVAR5 1
-     ifvarg VAMPIRETIME 0 addvar TEMPVAR5 1
+     state statustempvar5_check
      ifvarg TEMPVAR5 0 state mt
  
      state pal0
@@ -2321,17 +2313,109 @@ else
      ifvarg PARTYSIZE 1 nullop else addvar digy 6
      ifvarg CURRENTARMORPOINTS 0 nullop else addvar digy 6
      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 nullop else addvar digy 6
-     setvar digz 3609
+
+     setvar digx 25
+     ifvare CHARACTERSELECTED? 1 // Using Duke
+     {
+      ifvare FLOORDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8081
+       state orientation27
+       state rs
+      }
+      ifvare FLOORDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8082
+       state orientation27
+       state rs
+      }
+      ifvare CEILINGDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8081
+       state orientation27
+       state rs
+      }
+      ifvare CEILINGDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8082
+       state orientation27
+       state rs
+      }
+     }
+     ifvare CHARACTERSELECTED? 4 // Using Ami
+     {
+      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Adaptivity Mk 1 [3.5x Damage/Defense]
+      {
+       addvar digx 7
+       setvar tilenum 8083
+       state orientation27
+       state rs
+      }
+      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 // Water Adaptivity Mk 2 [6x Damage/Defense]
+      { 
+       addvar digx 7
+       setvar tilenum 8084
+       state orientation27
+       state rs
+      }
+     }
+     ifvare CHARACTERSELECTED? 8 // Using Lisa
+     {
+      ifvare LISAMONEYMAXLEVEL 1 // Lady Luck Lv. 4 [Lvl 100]
+      {
+       addvar digx 7
+       setvar tilenum 8088
+       state orientation27
+       state rs
+      }
+      else
+      {
+       ifvare LISAMONEYTURNS2 1 // Lady Luck Lv. 1 [Lvl 11-30]
+       {
+        addvar digx 7
+        setvar tilenum 8085
+        state orientation27
+        state rs
+       }
+       else
+       ifvare LISAMONEYTURNS2 2 // Lady Luck Lv. 2 [Lvl 31-60]
+       {
+        addvar digx 7
+        setvar tilenum 8086
+        state orientation27
+        state rs
+       }
+       else
+       ifvare LISAMONEYTURNS2 3 // Lady Luck Lv. 3 [Lvl 61-100]
+       {
+        addvar digx 7
+        setvar tilenum 8087
+        state orientation27
+        state rs
+       }
+      }
+     }
+     ifvare CHARACTERSELECTED? 10
+     {
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
+      {
+      }
+     }
      ifvarand PLAYERSTATUS? 1 // Dead
      {
-      setvar digx 32
+      addvar digx 7
       setvar tilenum 8100
       state orientation27
       state rs
      }
      ifvarand PLAYERSTATUS? 2 // Hasted
      {
-      setvar digx 32
+      addvar digx 7
       setvar tilenum 8106
       ifvarl PLAYERHASTETIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2354,8 +2438,7 @@ else
      }
      ifvarand PLAYERSTATUS? 4 // Slowed
      {
-      setvar digx 32 // 40
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
+      addvar digx 7
       setvar tilenum 8107
       ifvarl PLAYERSLOWTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2378,9 +2461,7 @@ else
      }
      ifvarand PLAYERSTATUS? 8 // Poisoned
      {
-      setvar digx 32 // 48
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
+      addvar digx 7
       setvar tilenum 8101
       ifvarl PLAYERPOISONTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2403,10 +2484,7 @@ else
      }
      ifvarand PLAYERSTATUS? 16 // Dimness
      {
-      setvar digx 32 // 56
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
+      addvar digx 7
       setvar tilenum 8102
       ifvarl PLAYERDIMNESSTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2429,11 +2507,7 @@ else
      }
      ifvarand PLAYERSTATUS? 32 // Triad Refractor
      {
-      setvar digx 32 // 64
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
+      addvar digx 7
       setvar tilenum 8104
       ifvarl PLAYERREFRACTORTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2456,12 +2530,7 @@ else
      }
      ifvarand PLAYERSTATUS? 64 // Triad Ragnarok
      {
-      setvar digx 32 // 72
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
+      addvar digx 7
       setvar tilenum 8105
       ifvarl PLAYERRAGNAROKTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2484,13 +2553,7 @@ else
      }
      ifvarand PLAYERSTATUS? 128 // Confusion
      {
-      setvar digx 32 // 80
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
+      addvar digx 7
       setvar tilenum 8103
       ifvarl PLAYERCONFUSIONTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2513,14 +2576,7 @@ else
      }
      ifvarand PLAYERSTATUS? 256 // Mercury Aqua Protection
      {
-      setvar digx 32 // 88
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
+      addvar digx 7
       setvar tilenum 8109
       ifvarl PLAYERAQUAPROTECTTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2543,15 +2599,7 @@ else
      }
      ifvarand PLAYERSTATUS? 512 // Damage Shell
      {
-      setvar digx 32 // 96
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
+      addvar digx 7
       setvar tilenum 8108
       ifvarl PLAYERSHELLTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2574,16 +2622,7 @@ else
      }
      ifvarand PLAYERSTATUS? 1024 // Psychic Shield
      {
-      setvar digx 32 // 104
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
+      addvar digx 7
       setvar tilenum 8110
       ifvarl PLAYERPSISHIELDTIMER 2 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2605,17 +2644,7 @@ else
      }
      ifvarand PLAYERSTATUS? 2048 // Triad Blitzkrieg
      {
-      setvar digx 32 // 112
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
+      addvar digx 7
       setvar tilenum 8111
       ifvarl PLAYERBLITZKRIEGTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2638,18 +2667,7 @@ else
      }
      ifvarand PLAYERSTATUS? 4096 // Triad Booster
      {
-      setvar digx 32 // 120
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
+      addvar digx 7
       setvar tilenum 8112
       ifvarl PLAYERBOOSTERTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2672,19 +2690,7 @@ else
      }
      ifvarand PLAYERSTATUS? 8192 // Bloodlusting
      {
-      setvar digx 32 // 128
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
+      addvar digx 7
       setvar tilenum 8113
       ifvarl PLAYERBLOODLUSTTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2707,20 +2713,7 @@ else
      }
      ifvarand PLAYERSTATUS? 16384 // Corrosion
      {
-      setvar digx 32 // 128
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
-      ifvarand PLAYERSTATUS? 8192 addvar digx 7
+      addvar digx 7
       setvar tilenum 8114
       ifvarl PLAYERCORROSIONTIMER 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2746,21 +2739,7 @@ else
      // Show Quad Damage Icon
      ifvarg QUADTIME 0
      {
-      setvar digx 32 // 136
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
-      ifvarand PLAYERSTATUS? 8192 addvar digx 7
-      ifvarand PLAYERSTATUS? 16384 addvar digx 7
+      addvar digx 7
       setvar tilenum 8071 // 5272
       ifvarl QUADTIME 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2785,22 +2764,7 @@ else
      // Show Icon of The Defender Icon
      ifvarg INVULNTIME 0
      {
-      setvar digx 32 // 136
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
-      ifvarand PLAYERSTATUS? 8192 addvar digx 7
-      ifvarand PLAYERSTATUS? 16384 addvar digx 7
-      ifvarg QUADTIME 0 addvar digx 7
+      addvar digx 7
       setvar tilenum 8072 // 5272
       ifvarl INVULNTIME 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2824,23 +2788,7 @@ else
      // Show Regeneration Ankh Icon
      ifvarg REGENTIME 0
      {
-      setvar digx 32 // 136
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
-      ifvarand PLAYERSTATUS? 8192 addvar digx 7
-      ifvarand PLAYERSTATUS? 16384 addvar digx 7
-      ifvarg QUADTIME 0 addvar digx 7
-      ifvarg INVULNTIME 0 addvar digx 7
+      addvar digx 7
       setvar tilenum 8073 // 5272
       ifvarl REGENTIME 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2864,24 +2812,7 @@ else
      // Show Shield Emblem Icon
      ifvarg APREGENTIME 0
      {
-      setvar digx 32 // 136
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
-      ifvarand PLAYERSTATUS? 8192 addvar digx 7
-      ifvarand PLAYERSTATUS? 16384 addvar digx 7
-      ifvarg QUADTIME 0 addvar digx 7
-      ifvarg INVULNTIME 0 addvar digx 7
-      ifvarg REGENTIME 0 addvar digx 7
+      addvar digx 7
       setvar tilenum 8074 // 5272
       ifvarl APREGENTIME 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -2905,25 +2836,7 @@ else
      // Show Vampire Mask Icon
      ifvarg VAMPIRETIME 0
      {
-      setvar digx 32 // 136
-      ifvarand PLAYERSTATUS? 2 addvar digx 7
-      ifvarand PLAYERSTATUS? 4 addvar digx 7
-      ifvarand PLAYERSTATUS? 8 addvar digx 7
-      ifvarand PLAYERSTATUS? 16 addvar digx 7
-      ifvarand PLAYERSTATUS? 32 addvar digx 7
-      ifvarand PLAYERSTATUS? 64 addvar digx 7
-      ifvarand PLAYERSTATUS? 128 addvar digx 7
-      ifvarand PLAYERSTATUS? 256 addvar digx 7
-      ifvarand PLAYERSTATUS? 512 addvar digx 7
-      ifvarand PLAYERSTATUS? 1024 addvar digx 7
-      ifvarand PLAYERSTATUS? 2048 addvar digx 7
-      ifvarand PLAYERSTATUS? 4096 addvar digx 7
-      ifvarand PLAYERSTATUS? 8192 addvar digx 7
-      ifvarand PLAYERSTATUS? 16384 addvar digx 7
-      ifvarg QUADTIME 0 addvar digx 7
-      ifvarg INVULNTIME 0 addvar digx 7
-      ifvarg REGENTIME 0 addvar digx 7
-      ifvarg APREGENTIME 0 addvar digx 7
+      addvar digx 7
       setvar tilenum 8075 // 5272
       ifvarl VAMPIRETIME 130 { state shadepulse4 addvar shade 8 }
       state orientation27
@@ -9918,12 +9831,7 @@ else
      ifvarg winterclothes 0
      {
       setvar TEMPVAR5 0
-      ifvarg PLAYERSTATUS? 0 addvar TEMPVAR5 1
-      ifvarg QUADTIME 0 addvar TEMPVAR5 1
-      ifvarg INVULNTIME 0 addvar TEMPVAR5 1
-      ifvarg REGENTIME 0 addvar TEMPVAR5 1
-      ifvarg APREGENTIME 0 addvar TEMPVAR5 1
-      ifvarg VAMPIRETIME 0 addvar TEMPVAR5 1
+      state statustempvar5_check
 
       // Shows the Mantling Meter itself
       setvarvar digx 67 // 166
@@ -10024,12 +9932,7 @@ else
      ifvarg freezetimer 0
      {
       setvar TEMPVAR5 0
-      ifvarg PLAYERSTATUS? 0 addvar TEMPVAR5 1
-      ifvarg QUADTIME 0 addvar TEMPVAR5 1
-      ifvarg INVULNTIME 0 addvar TEMPVAR5 1
-      ifvarg REGENTIME 0 addvar TEMPVAR5 1
-      ifvarg APREGENTIME 0 addvar TEMPVAR5 1
-      ifvarg VAMPIRETIME 0 addvar TEMPVAR5 1
+      state statustempvar5_check
 
       // Shows the Mantling Meter itself
       setvarvar digx 67 // 166

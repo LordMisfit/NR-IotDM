@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git103)
-definequote 1337 ^22VERSION:^0 5.22.git103.0705015N
+setgamename Naferia's Reign (5.22.git105)
+definequote 1337 ^22VERSION:^0 5.22.git105.0706015
 
 action ANULLACTION 0
 
@@ -3721,6 +3721,8 @@ state player_defense
   
       ifvare FLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
       ifvare FLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+      ifvare CEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare CEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
      }
 
      // Jack
@@ -5614,6 +5616,8 @@ state add_playermeleedamage
        // ***************************************************
        ifvare FLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
        ifvare FLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+       ifvare CEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare CEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
       }
 
       ifvare CHARACTERSELECTED? 3
@@ -9136,6 +9140,8 @@ ifvarg tempb 0
          // ***************************************************
          ifvare FLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
          ifvare FLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+         ifvare CEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare CEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
         }
 
         ifvare CHARACTERSELECTED? 2 // Jack Walker
@@ -28601,7 +28607,7 @@ ifvarg fta 0 { getuserdef[THISACTOR].pause_on temp ifvare temp 0 subvar fta 1 }
 getplayer[THISACTOR].posz posz
 getplayer[THISACTOR].poszv poszv
 
-// Sets up Lisa's ability to make money drop more often
+// Sets up Lisa's "Lady Luck" ability [to make money drop more often]
  setvar CHARACTERARRAY 8
  getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
  ifvarg templevel1 0 ifvarl templevel1 11 setvar LISAMONEYTURNS2 0
