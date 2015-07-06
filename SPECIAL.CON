@@ -7716,13 +7716,13 @@ state menudukestats
    setvarvar varname templeveltemp1 // DUKELEVEL
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
     state pal0
     setvar digy 46
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -7732,7 +7732,6 @@ state menudukestats
    {
     setvar digy 46
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -7743,7 +7742,6 @@ state menudukestats
    {
     setvar digy 46
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -7754,7 +7752,6 @@ state menudukestats
    {
     setvar digy 46
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -7765,7 +7762,6 @@ state menudukestats
    {
     setvar digy 46
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8121,13 +8117,13 @@ state menujackstats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
     state pal0
     setvar digy 46
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -8137,7 +8133,6 @@ state menujackstats
    {
     setvar digy 46
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8148,7 +8143,6 @@ state menujackstats
    {
     setvar digy 46
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8159,7 +8153,6 @@ state menujackstats
    {
     setvar digy 46
     setvar digx 240
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8170,7 +8163,6 @@ state menujackstats
    {
     setvar digy 46
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8530,13 +8522,13 @@ state menububsystats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
     state pal0
     setvar digy 78
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -8546,7 +8538,6 @@ state menububsystats
    {
     setvar digy 78
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8557,7 +8548,6 @@ state menububsystats
    {
     setvar digy 78
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8568,7 +8558,6 @@ state menububsystats
    {
     setvar digy 78
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8579,7 +8568,6 @@ state menububsystats
    {
     setvar digy 78
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8938,23 +8926,13 @@ state menuamistats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 76
-    setvar digx 241
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 78
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -8964,7 +8942,6 @@ state menuamistats
    {
     setvar digy 78
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8975,7 +8952,6 @@ state menuamistats
    {
     setvar digy 78
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8986,7 +8962,6 @@ state menuamistats
    {
     setvar digy 78
     setvar digx 240
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -8997,7 +8972,6 @@ state menuamistats
    {
     setvar digy 78
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9353,23 +9327,13 @@ state menulowangstats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 108
-    setvar digx 135
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 110
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -9379,7 +9343,6 @@ state menulowangstats
    {
     setvar digy 110
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9390,7 +9353,6 @@ state menulowangstats
    {
     setvar digy 110
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9401,7 +9363,6 @@ state menulowangstats
    {
     setvar digy 110
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9412,7 +9373,6 @@ state menulowangstats
    {
     setvar digy 110
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9768,23 +9728,13 @@ state menuessencestats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 108
-    setvar digx 241
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 110
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -9794,7 +9744,6 @@ state menuessencestats
    {
     setvar digy 110
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9805,7 +9754,6 @@ state menuessencestats
    {
     setvar digy 110
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9816,7 +9764,6 @@ state menuessencestats
    {
     setvar digy 110
     setvar digx 240
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -9827,7 +9774,6 @@ state menuessencestats
    {
     setvar digy 110
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10183,23 +10129,13 @@ state menutedstats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 140
-    setvar digx 135
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 142
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -10209,7 +10145,6 @@ state menutedstats
    {
     setvar digy 142
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10220,7 +10155,6 @@ state menutedstats
    {
     setvar digy 142
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10231,7 +10165,6 @@ state menutedstats
    {
     setvar digy 142
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10242,7 +10175,6 @@ state menutedstats
    {
     setvar digy 142
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10598,23 +10530,13 @@ state menulisastats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 140
-    setvar digx 241
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 142
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -10624,7 +10546,6 @@ state menulisastats
    {
     setvar digy 142
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10635,7 +10556,6 @@ state menulisastats
    {
     setvar digy 142
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -10647,7 +10567,6 @@ state menulisastats
     setvar digy 142
     setvar digx 240
     setvar digz 12288
-    setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
     state rs
@@ -10657,7 +10576,6 @@ state menulisastats
    {
     setvar digy 142
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11013,23 +10931,13 @@ state menucybanisstats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 44
-    setvar digx 135
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 46
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -11039,7 +10947,6 @@ state menucybanisstats
    {
     setvar digy 46
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11050,7 +10957,6 @@ state menucybanisstats
    {
     setvar digy 46
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11061,7 +10967,6 @@ state menucybanisstats
    {
     setvar digy 46
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11072,7 +10977,6 @@ state menucybanisstats
    {
     setvar digy 46
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11432,23 +11336,13 @@ state menunethrastats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 44
-    setvar digx 241
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 46
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -11458,7 +11352,6 @@ state menunethrastats
    {
     setvar digy 46
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11469,7 +11362,6 @@ state menunethrastats
    {
     setvar digy 46
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11480,7 +11372,6 @@ state menunethrastats
    {
     setvar digy 46
     setvar digx 240
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11491,7 +11382,6 @@ state menunethrastats
    {
     setvar digy 46
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11848,23 +11738,13 @@ state menupaulastats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 76
-    setvar digx 135
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 78
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -11874,7 +11754,6 @@ state menupaulastats
    {
     setvar digy 78
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11885,7 +11764,6 @@ state menupaulastats
    {
     setvar digy 78
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11896,7 +11774,6 @@ state menupaulastats
    {
     setvar digy 78
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -11907,7 +11784,6 @@ state menupaulastats
    {
     setvar digy 78
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12263,23 +12139,13 @@ state menuloristats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 76
-    setvar digx 241
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 78
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -12289,7 +12155,6 @@ state menuloristats
    {
     setvar digy 78
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12300,7 +12165,6 @@ state menuloristats
    {
     setvar digy 78
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12311,7 +12175,6 @@ state menuloristats
    {
     setvar digy 78
     setvar digx 240
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12322,7 +12185,6 @@ state menuloristats
    {
     setvar digy 78
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12679,23 +12541,13 @@ state menuminakostats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 108
-    setvar digx 135
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 110
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -12705,7 +12557,6 @@ state menuminakostats
    {
     setvar digy 110
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12716,7 +12567,6 @@ state menuminakostats
    {
     setvar digy 110
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12727,7 +12577,6 @@ state menuminakostats
    {
     setvar digy 110
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -12738,7 +12587,6 @@ state menuminakostats
    {
     setvar digy 110
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13103,23 +12951,13 @@ state menumystery1stats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 108
-    setvar digx 241
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 110
     setvar digx 225
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -13129,7 +12967,6 @@ state menumystery1stats
    {
     setvar digy 110
     setvar digx 230
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13140,7 +12977,6 @@ state menumystery1stats
    {
     setvar digy 110
     setvar digx 235
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13151,7 +12987,6 @@ state menumystery1stats
    {
     setvar digy 110
     setvar digx 240
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13162,7 +12997,6 @@ state menumystery1stats
    {
     setvar digy 110
     setvar digx 245
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13519,23 +13353,13 @@ state menumakenstats
    setvarvar varname templeveltemp1
    state dn
 // Insert Ailment Icons
+   setvar digz 3072 // 12288
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-/*
-    state pal21
-    setvar digy 140
-    setvar digx 135
-    state settile3087
-    redefinequote 332 DEAD
-    state setquote332
-    state mt
-    state pal20
-*/
     state pal0
     setvar digy 142
     setvar digx 119
-    setvar digz 12288
     setvar tilenum 8100
     state rs
    }
@@ -13545,7 +13369,6 @@ state menumakenstats
    {
     setvar digy 142
     setvar digx 124
-    setvar digz 12288
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13556,7 +13379,6 @@ state menumakenstats
    {
     setvar digy 142
     setvar digx 129
-    setvar digz 12288
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13567,7 +13389,6 @@ state menumakenstats
    {
     setvar digy 142
     setvar digx 134
-    setvar digz 12288
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -13578,7 +13399,6 @@ state menumakenstats
    {
     setvar digy 142
     setvar digx 139
-    setvar digz 12288
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22666,18 +22486,20 @@ state statusscreenlist
    state pal0
    setvar digy 72 // 46
    state digz20480 // 24576
-   setvar digz 12288
+
+   setvar digz 3072 // 12288
+   setvar digx 100 // 124
    getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
    ifvarl TEMPVAR 1
    {
-    setvar digx 100 // 124
     setvar tilenum 8100
     state rs
    }
+
    getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
    ifvarand TEMPVAR 2 // Haste
    {
-    setvar digx 105 // 124
+    addvar digx 6
     setvar tilenum 8106
     getactorvar[CHARACTERARRAY].CHARACTERHASTETIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22699,7 +22521,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 4 // Slow
    {
-    setvar digx 105
+    addvar digx 6
     setvar tilenum 8107
     getactorvar[CHARACTERARRAY].CHARACTERSLOWTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22721,7 +22543,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 8 // Poison
    {
-    setvar digx 110
+    addvar digx 6
     setvar tilenum 8101
     getactorvar[CHARACTERARRAY].CHARACTERPOISONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22743,7 +22565,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 16 // Dimness
    {
-    setvar digx 115
+    addvar digx 6
     setvar tilenum 8102
     getactorvar[CHARACTERARRAY].CHARACTERDIMNESSTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22765,7 +22587,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 32 // Triad Refractor
    {
-    setvar digx 120
+    addvar digx 6
     setvar tilenum 8104
     getactorvar[CHARACTERARRAY].CHARACTERREFRACTORTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22787,7 +22609,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 64 // Triad Ragnarok
    {
-    setvar digx 125
+    addvar digx 6
     setvar tilenum 8105
     getactorvar[CHARACTERARRAY].CHARACTERRAGNAROKTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22809,7 +22631,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 128 // Confusion
    {
-    setvar digx 130
+    addvar digx 6
     setvar tilenum 8103
     getactorvar[CHARACTERARRAY].CHARACTERCONFUSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22831,7 +22653,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 256 // Aqua Protection
    {
-    setvar digx 135
+    addvar digx 6
     setvar tilenum 8109
     getactorvar[CHARACTERARRAY].CHARACTERAQUAPROTECTTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22853,7 +22675,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 512 // Damage Shell
    {
-    setvar digx 140
+    addvar digx 6
     setvar tilenum 8108
     getactorvar[CHARACTERARRAY].CHARACTERSHELLTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22875,7 +22697,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 1024 // Psychic Shield
    {
-    setvar digx 145
+    addvar digx 6
     setvar tilenum 8110
     getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER TEMPVAR2
     ifvarl TEMPVAR2 2 state shadepulse2
@@ -22896,7 +22718,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 2048 // Triad Blitzkrieg
    {
-    setvar digx 150
+    addvar digx 6
     setvar tilenum 8111
     getactorvar[CHARACTERARRAY].CHARACTERBLITZKRIEGTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22918,7 +22740,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 4096 // Triad Booster
    {
-    setvar digx 155
+    addvar digx 6
     setvar tilenum 8112
     getactorvar[CHARACTERARRAY].CHARACTERBOOSTERTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22940,7 +22762,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 8192 // Bloodlusting
    {
-    setvar digx 160
+    addvar digx 6
     setvar tilenum 8113
     getactorvar[CHARACTERARRAY].CHARACTERBLOODLUSTTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2
@@ -22962,7 +22784,7 @@ state statusscreenlist
    }
    ifvarand TEMPVAR 16384 // Corrosion
    {
-    setvar digx 165
+    addvar digx 6
     setvar tilenum 8114
     getactorvar[CHARACTERARRAY].CHARACTERCORROSIONTIMER TEMPVAR2
     ifvarl TEMPVAR2 130 state shadepulse2

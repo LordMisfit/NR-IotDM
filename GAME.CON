@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git101)
-definequote 1337 ^22VERSION:^0 5.22.git101.05222015
+setgamename Naferia's Reign (5.22.git103)
+definequote 1337 ^22VERSION:^0 5.22.git103.0705015N
 
 action ANULLACTION 0
 
@@ -5404,6 +5404,29 @@ state snakearmband_check
   }
 ends
 
+state checkdamage-crisisbooster
+        // "Christina's Crisis Booster": Inflict More damage on the enemy when injured
+        setvarvar TEMP CURRENTHITPOINTS
+        mulvar TEMP -1000
+        ifvarn MAXHITPOINTS 0 divvarvar TEMP MAXHITPOINTS
+        ifvarl TEMP -1000 setvar TEMP -1000
+        addvar TEMP 2000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+ends
+
 state checkdamagecaps-knee
   ifvarvarg KNEEDAMAGE STATLIMITATOMIC setvarvar KNEEDAMAGE STATLIMITATOMIC
   ifvarvarg ACTORARMORDAMAGE STATLIMITATOMIC setvarvar ACTORARMORDAMAGE STATLIMITATOMIC
@@ -5647,19 +5670,9 @@ state add_playermeleedamage
        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
        ifvare MISCARRAYID_AMOUNTTEMP 1
        {
-        // "Christina's Crisis Booster": Inflict More damage on the enemy when injured
-        setvarvar TEMP CURRENTHITPOINTS
-        mulvar TEMP -1000
-        divvarvar TEMP MAXHITPOINTS
-        ifvarl TEMP -1000 setvar TEMP -1000
-        addvar TEMP 2000
-
-        mulvarvar KNEEDAMAGE TEMP
-        divvar KNEEDAMAGE 1000
-        mulvarvar KNEEDAMAGE TEMP
-        divvar KNEEDAMAGE 1000
-        mulvarvar KNEEDAMAGE TEMP
-        divvar KNEEDAMAGE 1000
+        setvarvar TEMPVAR2 KNEEDAMAGE
+        state checkdamage-crisisbooster
+        setvarvar KNEEDAMAGE TEMPVAR2
        }
       }
 
@@ -9253,19 +9266,9 @@ ifvarg tempb 0
          {
           ifvare tempc FREEZEBLAST mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Freezethrower damage she inflicts in human form
 
-          // Christina's "Crisis Booster": Inflict More damage on the enemy when injured
-          setvarvar TEMP CURRENTHITPOINTS
-          mulvar TEMP -1000
-          ifvarn MAXHITPOINTS 0 divvarvar TEMP MAXHITPOINTS
-          ifvarl TEMP -1000 setvar TEMP -1000
-          addvar TEMP 2000
-
-          mulvarvar GENERALDAMAGE TEMP
-          divvar GENERALDAMAGE 1000
-          mulvarvar GENERALDAMAGE TEMP
-          divvar GENERALDAMAGE 1000
-          mulvarvar GENERALDAMAGE TEMP
-          divvar GENERALDAMAGE 1000
+          setvarvar TEMPVAR2 GENERALDAMAGE
+          state checkdamage-crisisbooster
+          setvarvar GENERALDAMAGE TEMPVAR2
          }
         }
 

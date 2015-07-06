@@ -2316,11 +2316,12 @@ else
  
      state pal0
      state digz24576
-     setvar digz 14336
+     setvar digz 3609 // 14336
      setvar digy 138
      ifvarg PARTYSIZE 1 nullop else addvar digy 6
      ifvarg CURRENTARMORPOINTS 0 nullop else addvar digy 6
      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 nullop else addvar digy 6
+     setvar digz 3609
      ifvarand PLAYERSTATUS? 1 // Dead
      {
       setvar digx 32
