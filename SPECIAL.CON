@@ -51,6 +51,29 @@ define ZAPPER1 6656
 define ZAPPER2 6672
 define ZAPPER3 6678
 
+state checkdamage-crisisbooster
+        // "Christina's Crisis Booster": Inflict More damage on the enemy when injured
+        setvarvar TEMP CURRENTHITPOINTS
+        mulvar TEMP -1000
+        ifvarn MAXHITPOINTS 0 divvarvar TEMP MAXHITPOINTS
+        ifvarl TEMP -1000 setvar TEMP -1000
+        addvar TEMP 2000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+ends
+
 state statustempvar5_check
      ifvare CHARACTERSELECTED? 1 // Duke
      {
@@ -86,6 +109,14 @@ state statustempvar5_check
       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
       ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
       {
+       setvar TEMPVAR2 1000
+       state checkdamage-crisisbooster
+       divvar TEMPVAR2 1000
+       setvarvar varname TEMPVAR2
+       ifvarg TEMPVAR2 1
+       {
+        addvar TEMPVAR5 1
+       }
       }
      }
      ifvarg PLAYERSTATUS? 0 addvar TEMPVAR5 1

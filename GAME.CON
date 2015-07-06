@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git108)
-definequote 1337 ^22VERSION:^0 5.22.git108.0706015
+setgamename Naferia's Reign (5.22.git109)
+definequote 1337 ^22VERSION:^0 5.22.git109.0706015
 
 action ANULLACTION 0
 
@@ -5446,29 +5446,6 @@ state snakearmband_check
     }
    }
   }
-ends
-
-state checkdamage-crisisbooster
-        // "Christina's Crisis Booster": Inflict More damage on the enemy when injured
-        setvarvar TEMP CURRENTHITPOINTS
-        mulvar TEMP -1000
-        ifvarn MAXHITPOINTS 0 divvarvar TEMP MAXHITPOINTS
-        ifvarl TEMP -1000 setvar TEMP -1000
-        addvar TEMP 2000
-
-        //addlogvar TEMPVAR2
-        mulvarvar TEMPVAR2 TEMP
-        divvar TEMPVAR2 1000
-
-        //addlogvar TEMPVAR2
-        mulvarvar TEMPVAR2 TEMP
-        divvar TEMPVAR2 1000
-
-        //addlogvar TEMPVAR2
-        mulvarvar TEMPVAR2 TEMP
-        divvar TEMPVAR2 1000
-
-        //addlogvar TEMPVAR2
 ends
 
 state checkdamagecaps-knee
@@ -25533,13 +25510,13 @@ ends
 //************************************************************************************************************************
 
 actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
-
+/*
 ifvare player[THISACTOR].player_par 2
 {
  ifvarvarn CURRENTHITPOINTS MAXHITPOINTS setvarvar CURRENTHITPOINTS MAXHITPOINTS
  ifvarvarn CURRENTENERGYPOINTS MAXENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
 }
-
+*/
 setvar MISCARRAYID 229 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // RANK-POINTS-LOWEST
 ifvarvarl RANKPOINTS MISCARRAYID_AMOUNTTEMP setvarvar RANKPOINTS MISCARRAYID_AMOUNTTEMP
 setvar MISCARRAYID 230 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // RANK-POINTS-HIGHEST

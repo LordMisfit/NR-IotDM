@@ -2488,6 +2488,50 @@ else
       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
       ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
       {
+       setvar TEMPVAR2 1000
+       state checkdamage-crisisbooster
+       divvar TEMPVAR2 1000
+       setvarvar varname TEMPVAR2
+       ifvarg TEMPVAR2 1
+       {
+        addvar digx 7
+        ifvare TEMPVAR2 1 setvar pal 15 // Brown
+        ifvare TEMPVAR2 2 setvar pal 0 // Light Blue
+        ifvare TEMPVAR2 3 setvar pal 11 // Light Green
+        ifvare TEMPVAR2 4 setvar pal 23 // Yellow
+        ifvare TEMPVAR2 5 setvar pal 21 // Light Red
+        ifvare TEMPVAR2 6 setvar pal 20 // White [12 or 20]
+        ifvarg TEMPVAR2 6 state paletteflasher
+        //setvar pal 24 // Dynamo
+
+        setvar tilenum 8092 // Base Image
+        state orientation27
+        state rs
+
+        setvar tilenum 8080 // Frame
+        setvar pal 23
+        state orientation27
+        state rs
+
+        setvar tilenum 3087 // Blue Digital Text
+        setvar pal 22
+        addvar digx 3
+        subvar digy 4
+        setvar textscale 45056
+
+        setvar TEMPVAR2 1000
+        state checkdamage-crisisbooster
+        divvar TEMPVAR2 1000
+        setvarvar varname TEMPVAR2
+        state orientation27
+        state dnz
+ 
+        subvar digx 3 // +25
+        addvar digy 4 // +25
+        setvar pal 0
+        setvar shade 0
+
+       }
       }
      }
      ifvarand PLAYERSTATUS? 1 // Dead
@@ -15179,6 +15223,22 @@ else
     qsprintf 332 332 varname
     setvar temp 332
     state gtz // state dn
+
+    ifvare CHARACTERSELECTED? 10
+    {
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
+     {
+      addvar digy 4 // 53
+      setvar TEMPVAR2 1000
+      state checkdamage-crisisbooster
+      setvarvar varname TEMPVAR2
+      redefinequote 332 ~CRISISFACTOR: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dn
+     }
+    }
 
     state orientation27
     state settile3087 
