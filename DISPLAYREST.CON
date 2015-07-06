@@ -2346,6 +2346,34 @@ else
        state rs
       }
      }
+     ifvare CHARACTERSELECTED? 3 // Using Bubsy
+     {
+      setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+      ifvare MISCARRAYID_AMOUNTTEMP 1
+      {
+       addvar digx 7
+       setvar tilenum 8089
+       state orientation27
+       state rs
+      }
+      else
+      {
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Weakness Lv. 1
+       {
+        addvar digx 7
+        setvar tilenum 8090
+        state orientation27
+        state rs
+       }
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 // Water Weakness Lv. 2
+       { 
+        addvar digx 7
+        setvar tilenum 8091
+        state orientation27
+        state rs
+       }
+      }
+     }
      ifvare CHARACTERSELECTED? 4 // Using Ami
      {
       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Adaptivity Mk 1 [3.5x Damage/Defense]
@@ -14340,6 +14368,7 @@ else
      qsprintf 332 332 varname
      setvar temp 332
      state gtz // state dn
+
      addvar digx 0 // 110
      addvar digy 4 // 53
      getactor[PLAYERID].sectnum varname
@@ -14347,6 +14376,22 @@ else
      qsprintf 332 332 varname
      setvar temp 332
      state gtz // state dn
+
+     addvar digx 0 // 110
+     addvar digy 4 // 53
+     getsector[PLAYERSECTOR].lotag varname
+     redefinequote 332 .SECTORLOTAG: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+     addvar digx 0 // 110
+     addvar digy 4 // 53
+     setvarvar varname WATER?
+     redefinequote 332 .WATER?: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+
      addvar digx 0 // 110
      addvar digy 4 // 53
      getplayer[THISACTOR].transporter_hold varname

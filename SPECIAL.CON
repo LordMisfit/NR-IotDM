@@ -52,26 +52,36 @@ define ZAPPER2 6672
 define ZAPPER3 6678
 
 state statustempvar5_check
-     ifvare CHARACTERSELECTED? 1
+     ifvare CHARACTERSELECTED? 1 // Duke
      {
       ifvare FLOORDAMAGETYPE? 1 addvar TEMPVAR5 1
       ifvare FLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
       ifvare CEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
       ifvare CEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
      }
-     ifvare CHARACTERSELECTED? 4
+     ifvare CHARACTERSELECTED? 3 // Bubsy
+     {
+      setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 addvar TEMPVAR5 1 // If Bubsy is wearing the diving suit.
+      else
+      {
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 addvar TEMPVAR5 1
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 addvar TEMPVAR5 1
+      }
+     }
+     ifvare CHARACTERSELECTED? 4 // Ami
      {
       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 addvar TEMPVAR5 1
       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 addvar TEMPVAR5 1
      }
-     ifvare CHARACTERSELECTED? 8
+     ifvare CHARACTERSELECTED? 8 // Lisa
      {
       ifvare LISAMONEYMAXLEVEL 1 addvar TEMPVAR5 1
       ifvare LISAMONEYTURNS2 1 addvar TEMPVAR5 1
       ifvare LISAMONEYTURNS2 2 addvar TEMPVAR5 1
       ifvare LISAMONEYTURNS2 3 addvar TEMPVAR5 1
      }
-     ifvare CHARACTERSELECTED? 10
+     ifvare CHARACTERSELECTED? 10 // Christina/Nethra
      {
       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
       ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"

@@ -14335,7 +14335,9 @@ state enemymaxhpcountdown
  ifvarl EDISPLAYAPFLASHTIMER 0 { addvar EDISPLAYAPFLASHTIMER 1 } else ifvarg EDISPLAYAPFLASHTIMER 0 { subvar EDISPLAYAPFLASHTIMER 1 }
 
  // Check water or not
- ifonwater { setvar WATER? 1 } else ifinwater { setvar WATER? 2 } else { setvar WATER? 0 }
+ ifinwater setvar WATER? 2 
+ else ifonwater setvar WATER? 1 
+ else setvar WATER? 0
 
  // Checks Survival Rate
  state level_calcsurvivalrateactor

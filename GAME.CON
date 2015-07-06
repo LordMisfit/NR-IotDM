@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git106)
-definequote 1337 ^22VERSION:^0 5.22.git106.0706015
+setgamename Naferia's Reign (5.22.git107)
+definequote 1337 ^22VERSION:^0 5.22.git107.0706015
 
 action ANULLACTION 0
 
@@ -3766,8 +3766,10 @@ state player_defense
       // ********************************************
       // *Setting Up Bubsy's weakness in/under water*
       // ********************************************
-      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2
-      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
+      setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 2 // Halves damage to Bubsy if he's wearing his diving suit.
+      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2 // 200% if underwater
+      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 } // 133% if knee-high in water
   
       // ********************************************************
       // *Setting Up Bubsy's 25% Block Chance when in "Mask Form*
@@ -24099,6 +24101,8 @@ state getaccelerationlimits
     {
      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
      ifvare MISCARRAYID_AMOUNTTEMP 1 addvar ACCELFACTOR 1 
+     setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar ACCELFACTOR 75 divvar ACCELFACTOR 100 }
     }
     ifvare CHARACTERSELECTED? 4
     {
@@ -24108,7 +24112,7 @@ state getaccelerationlimits
     ifvare CHARACTERSELECTED? 6
     {
      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
-     ifvare MISCARRAYID_AMOUNTTEMP 0 subvar ACCELFACTOR 5 
+     ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACCELFACTOR 875 divvar ACCELFACTOR 1000 }
     }
     ifvare CHARACTERSELECTED? 10 
     {
@@ -28036,7 +28040,9 @@ ifvare SKILLSET? 1
 
 ifvarl CHARACTERSPEEDTRUE 46500 setvarvar CHARACTERSPEEDTRUE 46500 // Prevents people from having 'Negative' speed
 
-ifonwater setvar WATER? 1 else ifinwater setvar WATER? 2 else setvar WATER? 0
+ifinwater setvar WATER? 2 else 
+ifonwater setvar WATER? 1 else 
+setvar WATER? 0
 
 getplayer[THISACTOR].boot_amount BOOTSTIME
 ifvarg SCUBATIME 0 setplayer[THISACTOR].scuba_amount 96 else setplayer[THISACTOR].scuba_amount 0
@@ -30910,62 +30916,78 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
     {
      ifvare CHARACTERSELECTED? 1 // Duke
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv 352
+      setplayer[THISACTOR].poszv 352
      }
      else
      ifvare CHARACTERSELECTED? 2 // Jack
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -288
+      setplayer[THISACTOR].poszv -288
      }
      else
      ifvare CHARACTERSELECTED? 3 // Bubsy
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -320
+      setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 // Makes Bubsy heavy as hell in the water when wearing the Diving Suit.
+      {
+       setplayer[THISACTOR].poszv 480
+      }
+      else
+      {
+       setplayer[THISACTOR].poszv -320
+      }
      }
      else
      ifvare CHARACTERSELECTED? 5 // Lo Wang
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv 288
+      setplayer[THISACTOR].poszv 288
      }
      else
      ifvare CHARACTERSELECTED? 6 // ESSence
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv 448
+      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 // Makes ESSence heavy with his armor equipped
+      {
+       setplayer[THISACTOR].poszv 896
+      }
+      else ifvare MISCARRAYID_AMOUNTTEMP 1 // Makes him less heavy without the armor equipped
+      {
+       setplayer[THISACTOR].poszv 448
+      }
      }
      else
      ifvare CHARACTERSELECTED? 7 // Ted
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -288
+      setplayer[THISACTOR].poszv -288
      }
      else
      ifvare CHARACTERSELECTED? 8 // Lisa
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -352
+      setplayer[THISACTOR].poszv -352
      }
      else
      ifvare CHARACTERSELECTED? 9 // Cybanis
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv 416
+      setplayer[THISACTOR].poszv 416
      }
      else
      ifvare CHARACTERSELECTED? 11 // Paula
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -384
+      setplayer[THISACTOR].poszv -384
      }
      else
      ifvare CHARACTERSELECTED? 12 // Lori
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -352
+      setplayer[THISACTOR].poszv -352
      }
      else
      ifvare CHARACTERSELECTED? 13 // Minako
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -320
+      setplayer[THISACTOR].poszv -320
      }
      else
      ifvare CHARACTERSELECTED? 15 // Maken
      {
-      ifvare posxv 0 ifvare posyv 0 setplayer[THISACTOR].poszv -384
+      setplayer[THISACTOR].poszv -384
      }
  //  Ami has equal buyoncy in the water
  //  Nethra has equal buyoncy in the water
