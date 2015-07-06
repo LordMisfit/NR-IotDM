@@ -2371,6 +2371,20 @@ else
        setvar tilenum 8088
        state orientation27
        state rs
+
+       setvar tilenum 3087 // Blue Digital Text
+       setvar pal 22
+       addvar digx 3
+       subvar digy 4
+       setvar textscale 45056
+       setvar varname 4
+       state orientation27
+       state dnz
+ 
+       subvar digx 3 // +25
+       addvar digy 4 // +25
+       setvar pal 0
+       setvar shade 0
       }
       else
       {
@@ -2380,6 +2394,20 @@ else
         setvar tilenum 8085
         state orientation27
         state rs
+
+        setvar tilenum 3087 // Blue Digital Text
+        setvar pal 22
+        addvar digx 3
+        subvar digy 4
+        setvar textscale 45056
+        setvarvar varname LISAMONEYTURNS2
+        state orientation27
+        state dnz
+ 
+        subvar digx 3 // +25
+        addvar digy 4 // +25
+        setvar pal 0
+        setvar shade 0
        }
        else
        ifvare LISAMONEYTURNS2 2 // Lady Luck Lv. 2 [Lvl 31-60]
@@ -2388,6 +2416,20 @@ else
         setvar tilenum 8086
         state orientation27
         state rs
+
+        setvar tilenum 3087 // Blue Digital Text
+        setvar pal 22
+        addvar digx 3
+        subvar digy 4
+        setvar textscale 45056
+        setvarvar varname LISAMONEYTURNS2
+        state orientation27
+        state dnz
+ 
+        subvar digx 3 // +25
+        addvar digy 4 // +25
+        setvar pal 0
+        setvar shade 0
        }
        else
        ifvare LISAMONEYTURNS2 3 // Lady Luck Lv. 3 [Lvl 61-100]
@@ -2396,6 +2438,20 @@ else
         setvar tilenum 8087
         state orientation27
         state rs
+
+        setvar tilenum 3087 // Blue Digital Text
+        setvar pal 22
+        addvar digx 3
+        subvar digy 4
+        setvar textscale 45056
+        setvarvar varname LISAMONEYTURNS2
+        state orientation27
+        state dnz
+ 
+        subvar digx 3 // +25
+        addvar digy 4 // +25
+        setvar pal 0
+        setvar shade 0
        }
       }
      }
