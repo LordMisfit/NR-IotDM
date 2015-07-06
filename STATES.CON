@@ -861,6 +861,9 @@ state char_icedamage_misc
             setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
             ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 2 } // 150% Damage
             ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 5 divvar TEMPDAMAGEVAR 4 } // 125% Damage
+
+            setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // -50% Ice damage w/ Diving Suit on
            }
            ifvare CHARACTERSELECTED? 4 // Ami
            {
@@ -911,6 +914,9 @@ state char_elecdamage_misc
            {
             setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
             ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage
+
+            setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 5 // -80% Electric damage w/ Diving Suit on
            }
            ifvare CHARACTERSELECTED? 4 // Ami
            {
@@ -17924,7 +17930,12 @@ state freezeblast_frozen-player
       {
        // Reduceable Freeze Range
        setvar tempc 45
-       ifvare CHARACTERSELECTED? 3 { setvar tempc 59 ifrnd 128 addvar tempc 1 }
+       ifvare CHARACTERSELECTED? 3
+       {
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar tempc 29 ifrnd 64 addvar tempc 1 } // -50% Ice damage w/ Diving Suit on
+        else { setvar tempc 59 ifrnd 128 addvar tempc 1 }
+       }
        ifvare CHARACTERSELECTED? 4 setvar tempc 4
        ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
        ifvare CHARACTERSELECTED? 9 setvar tempc 90
@@ -17941,6 +17952,11 @@ state freezeblast_frozen-player
        // Base Freeze Range
        setvar tempb 50
        ifvare CHARACTERSELECTED? 3 setvar tempb 66
+       {
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar tempc 33 } // -50% Ice damage w/ Diving Suit on
+        else { setvar tempc 66 }
+       }
        ifvare CHARACTERSELECTED? 4 setvar tempb 5
        ifvare CHARACTERSELECTED? 6 setvar tempb 75
        ifvare CHARACTERSELECTED? 9 setvar tempb 100
@@ -22617,7 +22633,15 @@ ifvarg EDGEGRAPPLING 0
           {
            ifp ponsteroids // Triple your Mantling time if using steroids
            {
-            setvar TEMPVAR5 334
+            setvar TEMPVAR5 334 // Base Drain rate [1000 = 1 tic]
+
+            // Character Specfic conditions [sans Cybanis]
+            ifvare CHARACTERSELECTED? 3
+            {
+             setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+             ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvarvar TEMPVAR5 5 divvar TEMPVAR5 4 } // +25% Drain w/ Diving Suit on
+            }
+
             // Check for Power Wrist [equippable item]
             setvar DAMAGEMODIFIER 1000
             ifvare PLAYEREQUIPSLOTITEM1 18 subvar DAMAGEMODIFIER 125
@@ -22648,11 +22672,24 @@ ifvarg EDGEGRAPPLING 0
              subvar MANTLINGTIMER 1 
              addvar MANTLINGTIMEREXTRA 1000
             }
+            ifvarl MANTLINGTIMEREXTRA 1
+            {
+             subvar MANTLINGTIMER 1 
+             addvar MANTLINGTIMEREXTRA 1000
+            }
             ifvarl MANTLINGTIMER 0 setvar MANTLINGTIMER 0
            }
            else
            {
-            setvar TEMPVAR5 1000
+            setvar TEMPVAR5 1000 // Base Drain rate [1000 = 1 tic]
+
+            // Character Specfic conditions [sans Cybanis]
+            ifvare CHARACTERSELECTED? 3
+            {
+             setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+             ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvarvar TEMPVAR5 5 divvar TEMPVAR5 4 } // +25% Drain w/ Diving Suit on
+            }
+
             // Check for Power Wrist [equippable item]
             setvar DAMAGEMODIFIER 1000
             ifvare PLAYEREQUIPSLOTITEM1 18 subvar DAMAGEMODIFIER 125
@@ -22678,6 +22715,11 @@ ifvarg EDGEGRAPPLING 0
             ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR5 10
 
             subvarvar MANTLINGTIMEREXTRA TEMPVAR5
+            ifvarl MANTLINGTIMEREXTRA 1
+            {
+             subvar MANTLINGTIMER 1 
+             addvar MANTLINGTIMEREXTRA 1000
+            }
             ifvarl MANTLINGTIMEREXTRA 1
             {
              subvar MANTLINGTIMER 1 
@@ -32885,6 +32927,13 @@ state freezecode_player
 
        mulvarvar tempe tempb
        divvar tempe 100
+      }
+
+      // Character conditionals
+      ifvare CHARACTERSELECTED? 3
+      {
+       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar tempe 50 divvar tempe 100 } // -50% Ice damage w/ Diving Suit on
       }
     
       ifvare PLAYEREQUIPSLOTITEM1 28 divvar tempe 10

@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git107)
-definequote 1337 ^22VERSION:^0 5.22.git107.0706015
+setgamename Naferia's Reign (5.22.git108)
+definequote 1337 ^22VERSION:^0 5.22.git108.0706015
 
 action ANULLACTION 0
 
@@ -128,6 +128,7 @@ define CONTINUEITEM 5277
 define FAUXLEVELUP 5284
 define HACKERVISION 5289
 
+define BUBSYDIVINGSUIT 5308
 define SKYBOX_TILE 5318 			// Assign this to surfaces you wish to show skybox
 define NULL_TILE 5319 				// MUST BE AN EMPTY TILE
 
@@ -1940,6 +1941,18 @@ state player_electricalattackdmg
       //***************************
       //*Character-Based Modifiers*
       //***************************
+      ifvare CHARACTERSELECTED? 3
+      {
+       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+       ifvare MISCARRAYID_AMOUNTTEMP 1 // The diving suit makes Bubsy take -80 damage from electric attacks.
+       {
+        setvar DAMAGEMODIFIER 1000
+        addvar DAMAGEMODIFIER -800
+        state dmgmodcalc-player
+        // * 20.0% Damage
+       }
+      }
+      else
       ifvare CHARACTERSELECTED? 4
       {
        setvar DAMAGEMODIFIER 1000
@@ -2259,7 +2272,18 @@ state freezeblast-chilleffect_player
       {
        // Reduceable Freeze Range
        setvar tempc 45
-       ifvare CHARACTERSELECTED? 3 { setvar tempc 59 ifrnd 128 addvar tempc 1 }
+       ifvare CHARACTERSELECTED? 3 
+       { 
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 // Cuts damage to Bubsy to 50% if he's wearing his diving suit.
+        {
+         setvar tempc 29 ifrnd 64 addvar tempc 1 
+        }
+        else
+        {
+         setvar tempc 59 ifrnd 128 addvar tempc 1 
+        }
+       }
        ifvare CHARACTERSELECTED? 4 setvar tempc 4
        ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
        ifvare CHARACTERSELECTED? 9 setvar tempc 90
@@ -2274,7 +2298,11 @@ state freezeblast-chilleffect_player
 
        // Base Freeze Range [%]
        setvar tempb 50
-       ifvare CHARACTERSELECTED? 3 setvar tempb 66
+       ifvare CHARACTERSELECTED? 3
+       {
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 33 else setvar tempb 66
+       }
        ifvare CHARACTERSELECTED? 4 setvar tempb 5
        ifvare CHARACTERSELECTED? 6 setvar tempb 75
        ifvare CHARACTERSELECTED? 9 setvar tempb 100
@@ -3119,11 +3147,20 @@ state player_defense
     //***************************
     ifvare CHARACTERSELECTED? 3 // Bubsy
     {
-     setvar DAMAGEMODIFIER 1000
-     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
-     ifvare MISCARRAYID_AMOUNTTEMP 0 addvar DAMAGEMODIFIER 500 else ifvare MISCARRAYID_AMOUNTTEMP 1 addvar DAMAGEMODIFIER 250
+     setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 // Cuts damage to Bubsy to 50% if he's wearing his diving suit.
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -500
+     }
+     else
+     {
+      setvar DAMAGEMODIFIER 1000
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 addvar DAMAGEMODIFIER 500 else ifvare MISCARRAYID_AMOUNTTEMP 1 addvar DAMAGEMODIFIER 250
+     }
      state dmgmodcalc-player
-     // * 150.0% Damage [normal], 125.0% Damage [mask form]
+     // * 150.0% Damage [normal], 125.0% Damage [mask form] (50.0% Damage if in Diving Suit)
     }
     ifvare CHARACTERSELECTED? 4 // Ami
     {
@@ -3767,9 +3804,12 @@ state player_defense
       // *Setting Up Bubsy's weakness in/under water*
       // ********************************************
       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
-      ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 2 // Halves damage to Bubsy if he's wearing his diving suit.
-      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2 // 200% if underwater
-      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 } // 133% if knee-high in water
+      ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 3 // Cuts damage to Bubsy by 67% if he's wearing his diving suit.
+      else
+      {
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2 // 200% if underwater
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 } // 133% if knee-high in water
+      }
   
       // ********************************************************
       // *Setting Up Bubsy's 25% Block Chance when in "Mask Form*
@@ -25475,6 +25515,15 @@ state airtimedrain-checkequips
                addlogvar TEMPVAR4
 ends
 
+state airtimedrain-checkextratics
+               subvarvar AIRTIMEEXTRA TEMPVAR4
+               ifvarl AIRTIMEEXTRA 1
+               {
+                subvar AIRTIME 1
+                addvar AIRTIMEEXTRA 1000
+               }
+ends
+
 //************************************************************************************************************************
 //************************************************************************************************************************
 //************************************************************************************************************************
@@ -26013,6 +26062,9 @@ ifvare mainmenu 0
  { 
   setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
   ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 2 }
+
+  setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+  ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERLIFTSTRENGTHTEMP 3 divvar PLAYERLIFTSTRENGTHTEMP 5 } // Cuts Bubsy's lifting strength by 40%
  }
  ifvare CHARACTERSELECTED? 4
  {
@@ -27217,7 +27269,11 @@ ifp pjetpack
       subvarvar TEMPVAR4 player[THISACTOR].posz
       ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR4 0
       ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR4 534
-      ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR4 635
+      ifvare CHARACTERSELECTED? 3
+      {
+       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar TEMPVAR4 541 else mulvar TEMPVAR4 635
+      }
       ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 821
       ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 198
       ifvare CHARACTERSELECTED? 6
@@ -27237,7 +27293,12 @@ ifp pjetpack
       divvar TEMPVAR4 1000
       ifvare CHARACTERSELECTED? 1 { ifvarg TEMPVAR4 0 setvar TEMPVAR4 0 }
       ifvare CHARACTERSELECTED? 2 { ifvarg TEMPVAR4 1094 setvar TEMPVAR4 1094 }
-      ifvare CHARACTERSELECTED? 3 { ifvarg TEMPVAR4 1301 setvar TEMPVAR4 1301 }
+      ifvare CHARACTERSELECTED? 3
+      {
+       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { ifvarg TEMPVAR4 1102 setvar TEMPVAR4 1102 }
+         else { ifvarg TEMPVAR4 1301 setvar TEMPVAR4 1301 }
+      }
       ifvare CHARACTERSELECTED? 4 { ifvarg TEMPVAR4 1682 setvar TEMPVAR4 1682 }
       ifvare CHARACTERSELECTED? 5 { ifvarg TEMPVAR4 405 setvar TEMPVAR4 405 }
       ifvare CHARACTERSELECTED? 6 
@@ -27267,7 +27328,11 @@ ifp pjetpack
       subvarvar TEMPVAR4 player[THISACTOR].posz
       ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR4 0
       ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR4 348
-      ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR4 388
+      ifvare CHARACTERSELECTED? 3
+      {
+       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar TEMPVAR4 355 else mulvar TEMPVAR4 388
+      }
       ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 451
       ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 165
       ifvare CHARACTERSELECTED? 6
@@ -29280,6 +29345,9 @@ ifvarn multijumpflag 0
  {
   setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
   ifvare MISCARRAYID_AMOUNTTEMP 1 addvar PLAYERJUMPSTRENGTHTEMP 2
+
+  setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+  ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERJUMPSTRENGTHTEMP 2
  }
  ifvare CHARACTERSELECTED? 4
  {
@@ -29545,6 +29613,19 @@ ifvarn multijumpflag 0
     ifvarg PLAYERFALLRESISTTEMP 0
     {
      mulvar PLAYERFALLRESISTTEMP 5 divvar PLAYERFALLRESISTTEMP 4 // 125% [+25%]
+    }
+   }
+   setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+   ifvare MISCARRAYID_AMOUNTTEMP 1
+   {
+    ifvarl PLAYERFALLRESISTTEMP 0
+    {
+     mulvar PLAYERFALLRESISTTEMP 7 divvar PLAYERFALLRESISTTEMP 4 // 175% [+75%]
+    }
+    else
+    ifvarg PLAYERFALLRESISTTEMP 0
+    {
+     mulvar PLAYERFALLRESISTTEMP 1 divvar PLAYERFALLRESISTTEMP 3 // 33% [-67%]
     }
    }
   }
@@ -30690,24 +30771,14 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
                setvar TEMPVAR4 334
                state airtimedrain-checkequips
 
-               subvarvar AIRTIMEEXTRA TEMPVAR4
-               ifvarl AIRTIMEEXTRA 1
-               {
-                subvar AIRTIME 1
-                addvar AIRTIMEEXTRA 1000
-               }
+               state airtimedrain-checkextratics
               }
               else
               {
                setvar TEMPVAR4 1000
                state airtimedrain-checkequips
 
-               subvarvar AIRTIMEEXTRA TEMPVAR4
-               ifvarl AIRTIMEEXTRA 1
-               {
-                subvar AIRTIME 1
-                addvar AIRTIMEEXTRA 1000
-               }
+               state airtimedrain-checkextratics
               }
              }
              else
@@ -30715,12 +30786,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
               setvar TEMPVAR4 1000
               state airtimedrain-checkequips
 
-              subvarvar AIRTIMEEXTRA TEMPVAR4
-              ifvarl AIRTIMEEXTRA 1
-              {
-               subvar AIRTIME 1
-               addvar AIRTIMEEXTRA 1000
-              }
+              state airtimedrain-checkextratics
              }
             }
             else
@@ -30728,12 +30794,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
              setvar TEMPVAR4 1000
              state airtimedrain-checkequips
 
-             subvarvar AIRTIMEEXTRA TEMPVAR4
-             ifvarl AIRTIMEEXTRA 1
-             {
-              subvar AIRTIME 1
-              addvar AIRTIMEEXTRA 1000
-             }
+             state airtimedrain-checkextratics
             }
            }
            else subvar AIRTIME 1 
@@ -30741,25 +30802,32 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
             setvar TEMPVAR4 1000
             state airtimedrain-checkequips
 
-            subvarvar AIRTIMEEXTRA TEMPVAR4
-            ifvarl AIRTIMEEXTRA 1
-            {
-             subvar AIRTIME 1
-             addvar AIRTIMEEXTRA 1000
-            }
+            state airtimedrain-checkextratics
            }
           }
           else
           {
-           setvar TEMPVAR4 1000
-           state airtimedrain-checkequips
-
-           subvarvar AIRTIMEEXTRA TEMPVAR4
-           ifvarl AIRTIMEEXTRA 1
+           // CHARACTER SPECFIC CHECKS :P
+           ifvare CHARACTERSELECTED? 3 // Bubsy
            {
-            subvar AIRTIME 1
-            addvar AIRTIMEEXTRA 1000
+            setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { setplayer[THISACTOR].scuba_on 0 } // Do NOT drain Bubsy's air if he has the Diving Suit on, even if he has no Scuba Tank
+            else
+            {
+             setvar TEMPVAR4 1000
+             state airtimedrain-checkequips
+
+             state airtimedrain-checkextratics
+            }
            }
+           else
+           {
+            setvar TEMPVAR4 1000
+            state airtimedrain-checkequips
+ 
+            state airtimedrain-checkextratics
+           }
+
           }
          }
         }
@@ -30781,24 +30849,14 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
                setvar TEMPVAR4 334
                state airtimedrain-checkequips
 
-               subvarvar AIRTIMEEXTRA TEMPVAR4
-               ifvarl AIRTIMEEXTRA 1
-               {
-                subvar AIRTIME 1
-                addvar AIRTIMEEXTRA 1000
-               }
+               state airtimedrain-checkextratics
               }
               else
               {
                setvar TEMPVAR4 1000
                state airtimedrain-checkequips
 
-               subvarvar AIRTIMEEXTRA TEMPVAR4
-               ifvarl AIRTIMEEXTRA 1
-               {
-                subvar AIRTIME 1
-                addvar AIRTIMEEXTRA 1000
-               }
+               state airtimedrain-checkextratics
               }
              }
              else
@@ -30806,12 +30864,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
               setvar TEMPVAR4 1000
               state airtimedrain-checkequips
 
-              subvarvar AIRTIMEEXTRA TEMPVAR4
-              ifvarl AIRTIMEEXTRA 1
-              {
-               subvar AIRTIME 1
-               addvar AIRTIMEEXTRA 1000
-              }
+              state airtimedrain-checkextratics
              }
             }
             else
@@ -30819,12 +30872,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
              setvar TEMPVAR4 1000
              state airtimedrain-checkequips
 
-             subvarvar AIRTIMEEXTRA TEMPVAR4
-             ifvarl AIRTIMEEXTRA 1
-             {
-              subvar AIRTIME 1
-              addvar AIRTIMEEXTRA 1000
-             }
+             state airtimedrain-checkextratics
             }
            }
            else
@@ -30832,24 +30880,30 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
             setvar TEMPVAR4 1000
             state airtimedrain-checkequips
 
-            subvarvar AIRTIMEEXTRA TEMPVAR4
-            ifvarl AIRTIMEEXTRA 1
-            {
-             subvar AIRTIME 1
-             addvar AIRTIMEEXTRA 1000
-            }
+            state airtimedrain-checkextratics
            }
           }
           else
           {
-           setvar TEMPVAR4 1000
-           state airtimedrain-checkequips
-
-           subvarvar AIRTIMEEXTRA TEMPVAR4
-           ifvarl AIRTIMEEXTRA 1
+           // CHARACTER SPECFIC CHECKS :P
+           ifvare CHARACTERSELECTED? 3 // Bubsy
            {
-            subvar AIRTIME 1
-            addvar AIRTIMEEXTRA 1000
+            setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+            ifvare MISCARRAYID_AMOUNTTEMP 1 { setplayer[THISACTOR].scuba_on 0 } // Do NOT drain Bubsy's air if he has the Diving Suit on, even if he has no Scuba Tank
+            else
+            {
+             setvar TEMPVAR4 1000
+             state airtimedrain-checkequips
+
+             state airtimedrain-checkextratics
+            }
+           }
+           else
+           {
+            setvar TEMPVAR4 1000
+            state airtimedrain-checkequips
+ 
+            state airtimedrain-checkextratics
            }
           }
         }
@@ -30872,8 +30926,23 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
        setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
        ifvare MISCARRAYID_AMOUNTTEMP 0
        {
-        subvar SCUBATIME 1
-        ifvarl SCUBATIME 0 setvar SCUBATIME 0
+        // CHARACTER SPECFIC CHECKS :P
+        ifvare CHARACTERSELECTED? 3 // Bubsy
+        {
+         setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+         ifvare MISCARRAYID_AMOUNTTEMP 1 { setplayer[THISACTOR].scuba_on 0 } // Do NOT drain Bubsy's air if he has the Diving Suit on, even if he has no Scuba Tank
+         else
+         {
+          subvar SCUBATIME 1
+          ifvarl SCUBATIME 0 setvar SCUBATIME 0
+         }
+        }
+        else
+        {
+         subvar SCUBATIME 1
+         ifvarl SCUBATIME 0 setvar SCUBATIME 0
+        }
+
        }
       }
      }
@@ -30998,6 +31067,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
 
 // AIR TIME EFFECTS
 
+  // JETPACK Bubble effect
   ifp pjetpack
   {
     ifvarand bits 1
@@ -31034,6 +31104,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
   }
  }
 
+  // MAIN EFFECT for Underwater Airtime stuff >.>
   ifvare mainmenu 0
   {
    ifvarg SCUBATIME 0
@@ -31102,6 +31173,7 @@ ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
    }
   }
 
+  // DROWNING, DUDE.
   ifvare AIRTIME 0
   {
    ifvare mainmenu 0 addvar AIRTICCOUNTER2 1
