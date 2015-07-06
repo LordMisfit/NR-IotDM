@@ -1536,11 +1536,14 @@ ifvare mainmenu 1
      state checkredtankcapsules
      ifvarg ITEMARRAYID_AMOUNTTEMP 0 state showtank3capsuledescript
     }
-/*
     ifvare mainmenuselection 21
     {
+     setvar MISCARRAYID 232 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVEDIVINGSUIT?
+     ifvarn MISCARRAYID_AMOUNTTEMP 0
+     {
+      redefinequote 332 DIVING SUIT: USED BY BUBSY TO PROTECT FROM WATER. [PERMENANT ITEM]
+     }
     }
-*/
     ifvare mainmenuselection 22
     {
      state checkmysticsatchels
@@ -4554,6 +4557,41 @@ ifvare mainmenusubmenu 1
    state pal23
    state settile3087
    state dn
+  }
+
+  setvar MISCARRAYID 232 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVEDIVINGSUIT?
+  ifvarn MISCARRAYID_AMOUNTTEMP 0
+  {
+   setvar digx 174 // 238
+   setvar digy 148 // 52
+   state itemplate
+
+   setvar digx 174 // 238
+   setvar digy 148 // 52 
+   setvar digz 32768 // 5734
+   setvar tilenum 5308 
+   state pal0
+   state rs 
+
+   setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+   ifvare MISCARRAYID_AMOUNTTEMP 0
+   {
+    setvar digx 169 // 233
+    setvar digy 158 // 62
+    redefinequote 332 OFF
+    state setquote332
+    state pal23
+    state mt
+   }
+   else
+   {
+    setvar digx 170 // 234
+    setvar digy 158 // 62
+    redefinequote 332 ON
+    state setquote332
+    state pal23
+    state mt
+   }
   }
 
   state checkmysticsatchels

@@ -7766,6 +7766,12 @@ else
             state checkactorpickupamounts
             state pal15
            }
+           else ifvare TARGETSPECIES BUBSYDIVINGSUIT
+           {
+            redefinequote 142 BUBSY'S DIVING SUIT 
+            state checkactorpickupamounts
+            state pal15
+           }
            else ifvare TARGETSPECIES PORTABLEATM
            {
             redefinequote 142 MOBILE ATM MACHINE 

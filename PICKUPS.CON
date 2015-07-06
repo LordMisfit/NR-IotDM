@@ -14133,6 +14133,61 @@ useractor notenemy ENERGYCELL_LARGE 0
  }
 enda
 
+eventloadactor BUBSYDIVINGSUIT state setpickupflags enda
+useractor notenemy BUBSYDIVINGSUIT 0 
+
+ cstat 0
+ setvar ACTORSHEIGHT 32 setvar ACTORSWIDTH 30
+ state checkoldskool_items
+ state checkitemflags
+ state checkitemflags2 // Checks Item Multiplications for Display Icon
+
+ setvar MISCARRAYID 232 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVEDIVINGSUIT?
+ ifvare MISCARRAYID_AMOUNTTEMP 1 killit
+ sizeat 48 48
+ state itemfullbright
+ ifvare mainmenu 0 state fallflags
+ ifvarand ACTORFLAGS 8 nullop
+ else
+ {
+  ifmove RESPAWN_ACTOR_FLAG
+    state respawnit
+  else
+   ifvare mainmenu 0
+   {
+    ifp pshrunk nullop
+    else
+      ifvarg CURRENTHITPOINTS 0 // ifp palive
+       ifcanseetarget
+       {
+        ifpdistl RETRIEVEDISTANCE
+          ifcount 6
+          {
+            setvar MISCARRAYID 232 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVEDIVINGSUIT?
+            ifvarn MISCARRAYID_AMOUNTTEMP 1
+            {
+             state checkexplodeflag
+             setvar MISCARRAYID 232 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 1 // HAVEDIVINGSUIT?
+             ifvarand ACTORFLAGS 2 nullop
+             else
+             {
+              globalsound YEAH
+              globalsound YEAH
+              globalsound YEAH
+              redefinequote 334 ^23YOU FOUND BUBSY'S DIVING SUIT!!
+              setvarvar fta fta_normal setvar ftq 334
+              palfrom 32 0 32
+             }
+             setvar MISCARRAYID 24 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // WORLDTILE-SHUFFLES
+             state getworldtile
+             state activationflag killit
+            }
+          }
+       }
+   }
+ }
+enda
+
 eventloadactor MONEYRADAR state setpickupflags enda
 useractor notenemy MONEYRADAR 0 
 
