@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git115)
-definequote 1337 ^22VERSION:^0 5.22.git115.07062015
+setgamename Naferia's Reign (5.22.git116)
+definequote 1337 ^22VERSION:^0 5.22.git116.07062015
 
 action ANULLACTION 0
 
