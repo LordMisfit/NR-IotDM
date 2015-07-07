@@ -851,6 +851,7 @@
 #define ATKUP 5291
 #define ATKDEFUP 5300
 
+#define BUBSYDIVINGSUIT 5308
 #define DEFUP 5309
 
 #define SKYBOX_TILE 5318 // Assign this to surfaces you wish to show skybox

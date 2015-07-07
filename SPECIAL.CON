@@ -31489,6 +31489,7 @@ state showvehiclecommands
 ends
 
 state vehicledisplays
+
  state shade0
  state pal0
  ifvarn VEHICLEID -1
@@ -31546,6 +31547,40 @@ state vehicledisplays
    }
   }
  }
+// else
+// {
+  ifvarn AUTOMAPMODE 2
+  {
+   getplayer[THISACTOR].over_shoulder_on TEMPVAR
+   ifvare TEMPVAR 0
+   {
+
+    ifvare CHARACTERSELECTED? 3 // Using Bubsy
+    {
+     setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+     ifvare MISCARRAYID_AMOUNTTEMP 1
+     {
+      setvar digx 160
+      setvar digy 100
+      state digz65536
+      setvar tilenum 5568 // Suit Glass
+      setvar pal 0
+      state orientation43
+      state rs
+
+      setvar digx 160
+      setvar digy 100
+      state digz65536
+      setvar tilenum 5567 // Suit Frame
+      setvar pal 0
+      state orientation10
+      state rs
+     }
+    }
+
+   }
+  }
+// }
 ends
 
 state oldskoolturningpositions
