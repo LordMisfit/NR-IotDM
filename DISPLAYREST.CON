@@ -2345,6 +2345,35 @@ else
        state orientation27
        state rs
       }
+
+      ifvare EMUFLOORDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8081
+       state orientation27
+       state rs
+      }
+      ifvare EMUFLOORDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8082
+       state orientation27
+       state rs
+      }
+      ifvare EMUCEILINGDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8081
+       state orientation27
+       state rs
+      }
+      ifvare EMUCEILINGDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+      {
+       addvar digx 7
+       setvar tilenum 8082
+       state orientation27
+       state rs
+      }
      }
      ifvare CHARACTERSELECTED? 3 // Using Bubsy
      {

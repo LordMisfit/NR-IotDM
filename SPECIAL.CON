@@ -81,6 +81,10 @@ state statustempvar5_check
       ifvare FLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
       ifvare CEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
       ifvare CEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
+      ifvare EMUFLOORDAMAGETYPE? 1 addvar TEMPVAR5 1
+      ifvare EMUFLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
+      ifvare EMUCEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
+      ifvare EMUCEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
      }
      ifvare CHARACTERSELECTED? 3 // Bubsy
      {

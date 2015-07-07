@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git114)
-definequote 1337 ^22VERSION:^0 5.22.git114.0706015
+setgamename Naferia's Reign (5.22.git115)
+definequote 1337 ^22VERSION:^0 5.22.git115.07062015
 
 action ANULLACTION 0
 
@@ -3761,6 +3761,11 @@ state player_defense
       ifvare FLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
       ifvare CEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
       ifvare CEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+
+      ifvare EMUFLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare EMUFLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+      ifvare EMUCEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare EMUCEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
      }
 
      // Jack
@@ -5638,6 +5643,11 @@ state add_playermeleedamage
        ifvare FLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
        ifvare CEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
        ifvare CEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+
+       ifvare EMUFLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare EMUFLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+       ifvare EMUCEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare EMUCEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
       }
 
       ifvare CHARACTERSELECTED? 3
@@ -9162,6 +9172,11 @@ ifvarg tempb 0
          ifvare FLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
          ifvare CEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
          ifvare CEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+
+         ifvare EMUFLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare EMUFLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+         ifvare EMUCEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare EMUCEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
         }
 
         ifvare CHARACTERSELECTED? 2 // Jack Walker
@@ -33276,14 +33291,14 @@ else // If it is not an underwater sector, treat it like a normal damagefloor-ty
      ifvare CANDMGFLOOR2? 1
      {
       setvar EMUFLOORDAMAGETYPE? 1
-      state player_do_floorplasma_checks1_ef
+      state player_do_floorslime_checks1_ef
      }
     }
     else
     {
      ifvare CANDMGFLOOR2? 1
      {
-      state player_do_floorplasma_checks2
+      state player_do_floorslime_checks2
      }
     }
    }
