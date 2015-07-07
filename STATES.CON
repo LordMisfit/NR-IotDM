@@ -14341,9 +14341,21 @@ state enemymaxhpcountdown
  ifvarl EDISPLAYAPFLASHTIMER 0 { addvar EDISPLAYAPFLASHTIMER 1 } else ifvarg EDISPLAYAPFLASHTIMER 0 { subvar EDISPLAYAPFLASHTIMER 1 }
 
  // Check water or not
- ifinwater setvar WATER? 2 
- else ifonwater setvar WATER? 1 
- else setvar WATER? 0
+ ifinwater
+ {
+  setvar WATER? 2 
+ }
+ else 
+ setvar WATER? 0
+
+ getplayer[THISACTOR].posz TEMPVAR2
+ getsector[THISACTOR].floorz TEMPVAR3
+ getsector[THISACTOR].floorz TEMPVAR4
+ addvar TEMPVAR4 -8960 //-17920
+ ifvarvarg TEMPVAR2 TEMPVAR4 ifvarvarl TEMPVAR2 TEMPVAR3 ifvare sector[THISACTOR].lotag 1
+ {
+  setvar WATER? 1
+ }
 
  // Checks Survival Rate
  state level_calcsurvivalrateactor

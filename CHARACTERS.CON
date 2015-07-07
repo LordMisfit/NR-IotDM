@@ -12,7 +12,7 @@ state getjumpheights
  // ****************************
  // Controls Jump Timer to compare w/ a character's jump strength
  ifvare jumpcounter 0 setvar PLAYERJUMPTICS 0
- ifonwater { mulvar PLAYERJUMPSTRENGTHTEMP 7 divvar PLAYERJUMPSTRENGTHTEMP 12 }
+ ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERJUMPSTRENGTHTEMP 7 divvar PLAYERJUMPSTRENGTHTEMP 12 }
 
  // Intended to prevent large crouch jumps by reducing jump strength to 30% of it's normal amount
  getinput[THISACTOR].bits TEMP3
@@ -26,8 +26,12 @@ state getjumpheights
   } 
  }
  ifp ponground setvarvar PLAYERJUMPSTRENGTHTEMP2 PLAYERJUMPSTRENGTHTEMP
- else ifonwater setvarvar PLAYERJUMPSTRENGTHTEMP2 PLAYERJUMPSTRENGTHTEMP
- ifonwater setvar JUMP_ONWATER? 1 else setvar JUMP_ONWATER? 0
+ else
+ {
+  ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 setvarvar PLAYERJUMPSTRENGTHTEMP2 PLAYERJUMPSTRENGTHTEMP
+ }
+
+ ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 setvar JUMP_ONWATER? 1 else setvar JUMP_ONWATER? 0
  
  ifvare JUMP_ONWATER? 1 { ifvarg jumpcounter 0 ifvarl jumpcounter 1441 { addvar PLAYERJUMPTICS 1 } } // If Jumping from Water
                    else { ifvarg jumpcounter 0 ifvarl jumpcounter 1441 { addvar PLAYERJUMPTICS 1 } } // If Jumping from Solid Ground

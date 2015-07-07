@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git110)
-definequote 1337 ^22VERSION:^0 5.22.git110.0706015
+setgamename Naferia's Reign (5.22.git111)
+definequote 1337 ^22VERSION:^0 5.22.git111.0706015
 
 action ANULLACTION 0
 
@@ -28083,9 +28083,22 @@ ifvare SKILLSET? 1
 
 ifvarl CHARACTERSPEEDTRUE 46500 setvarvar CHARACTERSPEEDTRUE 46500 // Prevents people from having 'Negative' speed
 
-ifinwater setvar WATER? 2 else 
-ifonwater setvar WATER? 1 else 
+
+ifinwater
+{
+ setvar WATER? 2
+}
+else 
 setvar WATER? 0
+
+getplayer[THISACTOR].posz TEMPVAR2
+getsector[THISACTOR].floorz TEMPVAR3
+getsector[THISACTOR].floorz TEMPVAR4
+addvar TEMPVAR4 -8960 //-17920
+ifvarvarg TEMPVAR2 TEMPVAR4 ifvarvarl TEMPVAR2 TEMPVAR3 ifvare sector[PLAYERSECTOR].lotag 1
+{
+ setvar WATER? 1
+}
 
 getplayer[THISACTOR].boot_amount BOOTSTIME
 ifvarg SCUBATIME 0 setplayer[THISACTOR].scuba_amount 96 else setplayer[THISACTOR].scuba_amount 0

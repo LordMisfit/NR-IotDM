@@ -49063,7 +49063,7 @@ ifvare oldskoolmode 0
  getsector[THISACTOR].floorpicnum FLOORTEX
 
  ifinwater state STOPSTEPSOUNDS_PLAYER
- ifonwater state STOPSTEPSOUNDS_PLAYER
+ ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 state STOPSTEPSOUNDS_PLAYER
  ifp pfalling state STOPSTEPSOUNDS_PLAYER
  
  ifp pjetpack { setvar FOOTSTEPCOUNT 0 break }

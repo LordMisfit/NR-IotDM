@@ -13102,6 +13102,13 @@ else
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
+      setvar shade 3
+      addvar digy 4
+      setvarvar varname JUMP_ONWATER?
+      redefinequote 332 JUMP_ONWATER?: %d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
       setvar shade 0
 
       state pal12
@@ -13742,6 +13749,12 @@ else
       addvar digy 4
       getactorvar[hitsprite].ACTORAIACTIONFLAG varname
       redefinequote 332 AI ACTION FLAG: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dnz
+      addvar digy 4
+      getactorvar[hitsprite].WATER? varname
+      redefinequote 332 WATER?: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dnz
