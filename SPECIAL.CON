@@ -31571,7 +31571,7 @@ state vehicledisplays
       setvar digx 160
       setvar digy 100
       state digz65536
-      setvar tilenum 5567 // Suit Frame
+      setvar tilenum 5569 // Suit Frame
       setvar pal 0
       state orientation10
       state rs
