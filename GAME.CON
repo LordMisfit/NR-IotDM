@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git118)
-definequote 1337 ^22VERSION:^0 5.22.git118.07092015
+setgamename Naferia's Reign (5.22.git119)
+definequote 1337 ^22VERSION:^0 5.22.git119.11112015
 
 action ANULLACTION 0
 
@@ -4966,7 +4966,12 @@ state player_defense
       ifvare PLAYEREQUIPSLOTITEM8 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
       ifvarl TEMPVAR5 0 setvar TEMPVAR5 0
       ifvarg TEMPVAR5 104 setvar TEMPVAR5 104
-      ifvarg TEMPMOD 0 { setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT TEMPVAR5 } // DEATHSWITCH-DELAY
+      ifvarg TEMPMOD 0 
+      {
+       setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT TEMPVAR5 // DEATHSWITCH-DELAY
+       addlogvar TEMPMOD
+       addlogvar TEMPVAR5
+      }
      }
     }
     else setactor[THISACTOR].htextra 0
@@ -55117,6 +55122,7 @@ useractor notenemy WORLDTILE79 0 // World Tile #79: ""
       {
        addvar WORLDTILEBITFIELD3 16384
        redefinequote 410 ^20WORLD TILE #79 OF 256 OBTAINED!!
+       state grab_worldtile
       }
      }
     }

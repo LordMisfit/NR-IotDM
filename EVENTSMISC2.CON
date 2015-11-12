@@ -4298,6 +4298,7 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
   ifvare TEMPVAR4 4 addvar TEMPVAR3 33282
   ifvare TEMPVAR4 5 addvar TEMPVAR3 33282
   settspr[THISACTOR].tsprcstat TEMPVAR3
+  addlogvar TEMPVAR3
  }
  else
  {

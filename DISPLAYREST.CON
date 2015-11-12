@@ -4187,6 +4187,7 @@ else
       divvar TEMPVAR5 31
       addvarvar tilenum TEMPVAR5
       addvar shade 13
+      state orientation27
       state rs
       state settile3087 
       subvar shade 13
@@ -13469,6 +13470,13 @@ else
       addvar digy 4 // 53
       setvarvar varname fta
       redefinequote 332 FTA: ^21%d
+      qsprintf 332 332 varname
+      setvar temp 332
+      state gtz // state dn
+      addvar digx 0 // 110
+      addvar digy 4 // 53
+      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT varname // DEATHSWITCH-DELAY
+      redefinequote 332 DEATHSWITCH-DELAY: ^21%d
       qsprintf 332 332 varname
       setvar temp 332
       state gtz // state dn
