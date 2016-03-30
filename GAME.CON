@@ -6640,7 +6640,7 @@ state add_generaldamage
    setvar DEFENDERDISPLAYTIMER 0
    setvar CRITICALHITMULTI 0
  
-   setactor ACTORHP 0
+   setvar ACTORHP 0
    setactor[THISACTOR].extra 0
    state checkactorsurvivalvalue
    // setactor[THISACTOR].htowner PLAYERID
