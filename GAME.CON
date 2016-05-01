@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git119)
-definequote 1337 ^22VERSION:^0 5.22.git119.11112015
+setgamename Naferia's Reign (5.22.git124)
+definequote 1337 ^22VERSION:^0 5.22.git124.05012016
 
 action ANULLACTION 0
 
@@ -1580,10 +1580,6 @@ state dmgmodcalc-player
  ifvarvarg PLAYERDAMAGE STATLIMITMAXIMUM setvarvar PLAYERDAMAGE STATLIMITMAXIMUM
 ends
 
-state checkdamagefactorb
- ifvarl DAMAGEFACTORB 1 setvar DAMAGEFACTORB 1
-ends
-
 state setupenergydamages
  setvar DAMAGEMODIFIER 1000
  ifvare CHARACTERSELECTED? 8 addvar DAMAGEMODIFIER -667
@@ -1689,95 +1685,100 @@ state triadragnarok
     getactorvar[CHARACTERARRAY].CHARACTERMAXHP tempb
     ifvarn tempb 0 divvarvar DAMAGEFACTOR tempb
     setvar DAMAGEFACTORB 0
+    //addlogvar DAMAGEFACTOR
+	
+    ifvarg DAMAGEFACTOR 4 
+    {
+     setvar CHARACTERARRAY 12
+     getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
+     randvarvar DAMAGEFACTORB templevel1
+     ifvarg DAMAGEFACTOR 4 ifvarl DAMAGEFACTOR 26 { mulvar DAMAGEFACTORB 5 divvar DAMAGEFACTORB 7 } // 125%
+     else ifvarg DAMAGEFACTOR 25 ifvarl DAMAGEFACTOR 51 { mulvar DAMAGEFACTORB 3 divvar DAMAGEFACTORB 2 } // 150%
+     else ifvarg DAMAGEFACTOR 50 ifvarl DAMAGEFACTOR 76 { mulvar DAMAGEFACTORB 7 divvar DAMAGEFACTORB 4 } // 175%
+     else ifvarg DAMAGEFACTOR 75 ifvarl DAMAGEFACTOR 101 { mulvar DAMAGEFACTORB 2 } // 200%
+     else ifvarg DAMAGEFACTOR 100 ifvarl DAMAGEFACTOR 126 { mulvar DAMAGEFACTORB 7 divvar DAMAGEFACTORB 2 } // 350%
+     else ifvarg DAMAGEFACTOR 125 ifvarl DAMAGEFACTOR 151 { mulvar DAMAGEFACTORB 6 } // 600%
+     else ifvarg DAMAGEFACTOR 150 ifvarl DAMAGEFACTOR 176 { mulvar DAMAGEFACTORB 10 } // 1000%
+     else ifvarg DAMAGEFACTOR 175 ifvarl DAMAGEFACTOR 201 { mulvar DAMAGEFACTORB 17 } // 1700%
+     else ifvarg DAMAGEFACTOR 200 ifvarl DAMAGEFACTOR 251 { mulvar DAMAGEFACTORB 42 } // 4200%
+     else ifvarg DAMAGEFACTOR 250 ifvarl DAMAGEFACTOR 301 { mulvar DAMAGEFACTORB 67 } // 6700%
+     else ifvarg DAMAGEFACTOR 301 ifvarl DAMAGEFACTOR 400 { mulvar DAMAGEFACTORB 110 } // 11000%
+     else ifvarg DAMAGEFACTOR 400 { mulvar DAMAGEFACTORB 224 } // 22400%
+     ifvarl DAMAGEFACTORB 1 setvar DAMAGEFACTORB 1
+     //addlogvar DAMAGEFACTORB
 
-    setvar CHARACTERARRAY 12
-    getactorvar[CHARACTERARRAY].CHARACTERLEVEL templevel1
-    randvarvar DAMAGEFACTORB templevel1
-    ifvarg DAMAGEFACTOR 5 ifvarl DAMAGEFACTOR 26 { mulvar DAMAGEFACTORB 5 divvar DAMAGEFACTORB 7 } // 125%
-    else ifvarg DAMAGEFACTOR 25 ifvarl DAMAGEFACTOR 51 { mulvar DAMAGEFACTORB 3 divvar DAMAGEFACTORB 2 } // 150%
-    else ifvarg DAMAGEFACTOR 50 ifvarl DAMAGEFACTOR 76 { mulvar DAMAGEFACTORB 7 divvar DAMAGEFACTORB 4 } // 175%
-    else ifvarg DAMAGEFACTOR 75 ifvarl DAMAGEFACTOR 101 { mulvar DAMAGEFACTORB 2 } // 200%
-    else ifvarg DAMAGEFACTOR 100 ifvarl DAMAGEFACTOR 126 { mulvar DAMAGEFACTORB 7 divvar DAMAGEFACTORB 2 } // 350%
-    else ifvarg DAMAGEFACTOR 125 ifvarl DAMAGEFACTOR 151 { mulvar DAMAGEFACTORB 6 } // 600%
-    else ifvarg DAMAGEFACTOR 150 ifvarl DAMAGEFACTOR 176 { mulvar DAMAGEFACTORB 10 } // 1000%
-    else ifvarg DAMAGEFACTOR 175 ifvarl DAMAGEFACTOR 201 { mulvar DAMAGEFACTORB 17 } // 1700%
-    else ifvarg DAMAGEFACTOR 200 ifvarl DAMAGEFACTOR 251 { mulvar DAMAGEFACTORB 42 } // 4200%
-    else ifvarg DAMAGEFACTOR 250 ifvarl DAMAGEFACTOR 301 { mulvar DAMAGEFACTORB 67 } // 6700%
-    else ifvarg DAMAGEFACTOR 301 ifvarl DAMAGEFACTOR 400 { mulvar DAMAGEFACTORB 110 } // 11000%
-    else ifvarg DAMAGEFACTOR 400 { mulvar DAMAGEFACTORB 224 } // 22400%
-    state checkdamagefactorb
-
-    ifvarg DAMAGEFACTORB 0
-    {     
-     ifrnd 53
-     { 
-      mulvar DAMAGEFACTORB 3 divvar DAMAGEFACTORB 5
-      ifvarl DAMAGEFACTORB 1 setvar DAMAGEFACTORB 1
-      addvarvar MAXENERGYPOINTS DAMAGEFACTORB
-      addvarvar CURRENTENERGYPOINTS DAMAGEFACTORB
-      addvarvar EPINCREASED DAMAGEFACTORB
+     ifvarg DAMAGEFACTORB 0
+     {     
+      ifrnd 53
+      { 
+       mulvar DAMAGEFACTORB 3 divvar DAMAGEFACTORB 5
+       ifvarl DAMAGEFACTORB 1 setvar DAMAGEFACTORB 1
+       addvarvar MAXENERGYPOINTS DAMAGEFACTORB
+       addvarvar CURRENTENERGYPOINTS DAMAGEFACTORB
+       addvarvar EPINCREASED DAMAGEFACTORB
+      }
+      else 
+      ifrnd 64 
+      { 
+       addvarvar PLAYERATTACK DAMAGEFACTORB
+       addvarvar ATKINCREASED DAMAGEFACTORB
+      }
+      else 
+      ifrnd 85
+      {
+       addvarvar PLAYERDEFENSE DAMAGEFACTORB
+       addvarvar DEFINCREASED DAMAGEFACTORB
+      }
+      else 
+      ifrnd 128 
+      { 
+       addvarvar MAXHITPOINTS DAMAGEFACTORB
+       addvarvar CURRENTHITPOINTS DAMAGEFACTORB
+       addvarvar HPINCREASED DAMAGEFACTORB
+      }
+      else 
+      { 
+       addvarvar MAXARMORPOINTS DAMAGEFACTORB
+       addvarvar CURRENTARMORPOINTS DAMAGEFACTORB
+       addvarvar APINCREASED DAMAGEFACTORB
+      }
+      ifvarg HPINCREASED 0 
+      { 
+       qsprintf 204 209 HPINCREASED 
+       setvar HPLUPDISPLAY 0 
+       qsprintf 160 261 HPINCREASED
+       setvarvar fta fta_normal setvar ftq 160
+      } 
+      ifvarg APINCREASED 0 
+      { 
+       qsprintf 205 210 APINCREASED 
+       setvar APLUPDISPLAY 0 
+       qsprintf 161 262 APINCREASED
+       setvarvar fta fta_normal setvar ftq 161
+      } 
+      ifvarg EPINCREASED 0 
+      { 
+       qsprintf 238 239 EPINCREASED 
+       setvar EPLUPDISPLAY 0 
+       qsprintf 240 241 EPINCREASED
+       setvarvar fta fta_normal setvar ftq 240
+      } 
+      ifvarg ATKINCREASED 0 
+      { 
+       qsprintf 206 211 ATKINCREASED 
+       setvar ATKLUPDISPLAY 0 
+       qsprintf 326 329 ATKINCREASED 
+       setvarvar fta fta_normal setvar ftq 326
+      } 
+      ifvarg DEFINCREASED 0 
+      { 
+       qsprintf 207 212 DEFINCREASED 
+       setvar DEFLUPDISPLAY 0 
+       qsprintf 327 330 DEFINCREASED 
+       setvarvar fta fta_normal setvar ftq 327
+      } 
      }
-     else 
-     ifrnd 64 
-     { 
-      addvarvar PLAYERATTACK DAMAGEFACTORB
-      addvarvar ATKINCREASED DAMAGEFACTORB
-     }
-     else 
-     ifrnd 85
-     {
-      addvarvar PLAYERDEFENSE DAMAGEFACTORB
-      addvarvar DEFINCREASED DAMAGEFACTORB
-     }
-     else 
-     ifrnd 128 
-     { 
-      addvarvar MAXHITPOINTS DAMAGEFACTORB
-      addvarvar CURRENTHITPOINTS DAMAGEFACTORB
-      addvarvar HPINCREASED DAMAGEFACTORB
-     }
-     else 
-     { 
-      addvarvar MAXARMORPOINTS DAMAGEFACTORB
-      addvarvar CURRENTARMORPOINTS DAMAGEFACTORB
-      addvarvar APINCREASED DAMAGEFACTORB
-     }
-     ifvarg HPINCREASED 0 
-     { 
-      qsprintf 204 209 HPINCREASED 
-      setvar HPLUPDISPLAY 0 
-      qsprintf 160 261 HPINCREASED
-      setvarvar fta fta_normal setvar ftq 160
-     } 
-     ifvarg APINCREASED 0 
-     { 
-      qsprintf 205 210 APINCREASED 
-      setvar APLUPDISPLAY 0 
-      qsprintf 161 262 APINCREASED
-      setvarvar fta fta_normal setvar ftq 161
-     } 
-     ifvarg EPINCREASED 0 
-     { 
-      qsprintf 238 239 EPINCREASED 
-      setvar EPLUPDISPLAY 0 
-      qsprintf 240 241 EPINCREASED
-      setvarvar fta fta_normal setvar ftq 240
-     } 
-     ifvarg ATKINCREASED 0 
-     { 
-      qsprintf 206 211 ATKINCREASED 
-      setvar ATKLUPDISPLAY 0 
-      qsprintf 326 329 ATKINCREASED 
-      setvarvar fta fta_normal setvar ftq 326
-     } 
-     ifvarg DEFINCREASED 0 
-     { 
-      qsprintf 207 212 DEFINCREASED 
-      setvar DEFLUPDISPLAY 0 
-      qsprintf 327 330 DEFINCREASED 
-      setvarvar fta fta_normal setvar ftq 327
-     } 
-    }
+	}
 ends
 
 state playerarmorbitsshrapnel
@@ -1826,7 +1827,17 @@ state player_mirrorshield
  
        ifvare MELEEATTACK? 0 
        { 
-        ifvarn ATTACKINGACTORPICNUM APLAYER 
+        ifvarn ATTACKINGACTORPICNUM APLAYER addvar TEMPVAR7 1
+        ifvare ATTACKINGACTORPICNUM FIRE setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM FIRE2 setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM FIREBARREL setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM FIREVASE setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM BURNING setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM BURNING2 setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM STEAM setvar TEMPVAR7 0
+        ifvare ATTACKINGACTORPICNUM CEILINGSTEAM setvar TEMPVAR7 0
+
+        ifvare TEMPVAR7 1
         { 
          setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
          setactor[ATTACKINGACTOR].htextra 1 // TODO: Leave This
@@ -1837,7 +1848,17 @@ state player_mirrorshield
        else
        ifvare MELEEATTACK? 1 
        { 
-        ifvarn MELEEATTACKER APLAYER 
+        ifvarn MELEEATTACKER APLAYER addvar TEMPVAR7 1
+        ifvare MELEEATTACKER FIRE setvar TEMPVAR7 0
+        ifvare MELEEATTACKER FIRE2 setvar TEMPVAR7 0
+        ifvare MELEEATTACKER FIREBARREL setvar TEMPVAR7 0
+        ifvare MELEEATTACKER FIREVASE setvar TEMPVAR7 0
+        ifvare MELEEATTACKER BURNING setvar TEMPVAR7 0
+        ifvare MELEEATTACKER BURNING2 setvar TEMPVAR7 0
+        ifvare MELEEATTACKER STEAM setvar TEMPVAR7 0
+        ifvare MELEEATTACKER CEILINGSTEAM setvar TEMPVAR7 0
+
+        ifvare TEMPVAR7 1
         { 
          setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
          setactor[MELEEATTACKERID].htextra 1 // TODO: Leave This
@@ -4188,7 +4209,17 @@ state player_defense
  
          ifvare MELEEATTACK? 0 
          { 
-          ifvarn ATTACKINGACTORPICNUM APLAYER 
+          ifvarn ATTACKINGACTORPICNUM APLAYER addvar TEMPVAR7 1
+          ifvare ATTACKINGACTORPICNUM FIRE setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM FIRE2 setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM FIREBARREL setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM FIREVASE setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM BURNING setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM BURNING2 setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM STEAM setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM CEILINGSTEAM setvar TEMPVAR7 0
+
+          ifvare TEMPVAR7 1
           { 
            setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
            setactor[ATTACKINGACTOR].htextra 1 // TODO: Leave This
@@ -4199,7 +4230,17 @@ state player_defense
          else
          ifvare MELEEATTACK? 1 
          { 
-          ifvarn MELEEATTACKER APLAYER 
+          ifvarn MELEEATTACKER APLAYER addvar TEMPVAR7 1
+          ifvare MELEEATTACKER FIRE setvar TEMPVAR7 0
+          ifvare MELEEATTACKER FIRE2 setvar TEMPVAR7 0
+          ifvare MELEEATTACKER FIREBARREL setvar TEMPVAR7 0
+          ifvare MELEEATTACKER FIREVASE setvar TEMPVAR7 0
+          ifvare MELEEATTACKER BURNING setvar TEMPVAR7 0
+          ifvare MELEEATTACKER BURNING2 setvar TEMPVAR7 0
+          ifvare MELEEATTACKER STEAM setvar TEMPVAR7 0
+          ifvare MELEEATTACKER CEILINGSTEAM setvar TEMPVAR7 0
+
+          ifvare TEMPVAR7 1
           { 
            setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
            setactor[MELEEATTACKERID].htextra 1 // TODO: Leave This
@@ -10145,74 +10186,80 @@ enda
 actor SATELLITE TOUGH
 enda
 
-state checkfiretags
+state checkfiresteamtags
  getactor[THISACTOR].extra extrasav 
- setactor[THISACTOR].extra 0 
+ setactor[THISACTOR].extra 1000
+ ifvarg extrasav 0 setactorvar[THISACTOR].ACTORATTACK extrasav
+ends
+
+state checknonfiretags
+ getactor[THISACTOR].extra extrasav 
+ setactor[THISACTOR].extra 0
  ifvarg extrasav 0 setactorvar[THISACTOR].ACTORATTACK extrasav
 ends
 
 eventloadactor PIPE1
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor PIPE2
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor PIPE3
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor PIPE4
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor PIPE5
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor PIPE6
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor STEAM
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor CEILINGSTEAM
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor FIRE
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor FIRE2
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor FIREBARREL
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor FIREVASE
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor BURNING
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor BURNING2
- state checkfiretags
+ state checkfiresteamtags
 enda
 
 eventloadactor SEENINE
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor OOZFILTER
- state checkfiretags
+ state checknonfiretags
 enda
 
 eventloadactor CAMERA1 
