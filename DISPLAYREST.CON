@@ -2524,13 +2524,13 @@ else
        ifvarg TEMPVAR2 1
        {
         addvar digx 7
-        ifvare TEMPVAR2 1 setvar pal 15 // Brown
-        ifvare TEMPVAR2 2 setvar pal 0 // Light Blue
-        ifvare TEMPVAR2 3 setvar pal 11 // Light Green
-        ifvare TEMPVAR2 4 setvar pal 23 // Yellow
-        ifvare TEMPVAR2 5 setvar pal 21 // Light Red
-        ifvare TEMPVAR2 6 setvar pal 20 // White [12 or 20]
-        ifvarg TEMPVAR2 6 state paletteflasher
+        ifvarg TEMPVAR2 0 ifvarl TEMPVAR2 5 setvar pal 15 // Brown
+        ifvarg TEMPVAR2 4 ifvarl TEMPVAR2 9 setvar pal 0 // Light Blue
+        ifvarg TEMPVAR2 8 ifvarl TEMPVAR2 13 setvar pal 11 // Light Green
+        ifvarg TEMPVAR2 12 ifvarl TEMPVAR2 17 setvar pal 23 // Yellow
+        ifvarg TEMPVAR2 16 ifvarl TEMPVAR2 21 setvar pal 21 // Light Red
+        ifvarg TEMPVAR2 20 ifvarl TEMPVAR2 25 setvar pal 20 // White [12 or 20]
+        ifvarg TEMPVAR2 24 state paletteflasher
         //setvar pal 24 // Dynamo
 
         setvar tilenum 8092 // Base Image

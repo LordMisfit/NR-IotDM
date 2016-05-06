@@ -72,6 +72,14 @@ state checkdamage-crisisbooster
         divvar TEMPVAR2 1000
 
         //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
+        mulvarvar TEMPVAR2 TEMP
+        divvar TEMPVAR2 1000
+
+        //addlogvar TEMPVAR2
 ends
 
 state statustempvar5_check
