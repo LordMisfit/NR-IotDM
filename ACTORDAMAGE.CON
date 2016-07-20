@@ -1,3 +1,1514 @@
+state calccriticalhits
+ ifvare oldskoolmode 0
+ {
+    setvar CRITICALHITMULTI 1
+
+    randvar TEMPVAR8 9999
+    addvar TEMPVAR8 1
+    ifvarvarl TEMPVAR8 CRITICALHITCHANCE2
+    { 
+     randvar TEMPVAR8 39999
+     addvar TEMPVAR8 1
+     ifvarvarl TEMPVAR8 CRITICALHITCHANCE2
+     {
+      randvar TEMPVAR8 159999
+      addvar TEMPVAR8 1
+      ifvarvarl TEMPVAR8 CRITICALHITCHANCE2
+      {
+       randvar TEMPVAR8 639999
+       addvar TEMPVAR8 1
+       ifvarvarl TEMPVAR8 CRITICALHITCHANCE2
+       {
+        setvar CRITICAL? 4
+        setvar CRITICALHITMULTI 16
+        redefinequote 195 ^6GIGA CRITICAL HIT!!!!!!
+        globalsound SMAAASH 
+        globalsound SMAAASH 
+        globalsound SMAAASH 
+        globalsound SMAAASH 
+       }
+       else
+       {
+        setvar CRITICAL? 3
+        setvar CRITICALHITMULTI 8
+        redefinequote 195 ^10MEGA CRITICAL HIT!!!!
+        globalsound SMAAASH 
+        globalsound SMAAASH 
+        globalsound SMAAASH 
+       }
+      }
+      else
+      {
+       setvar CRITICAL? 2
+       setvar CRITICALHITMULTI 4
+       redefinequote 195 ^21SUPER CRITICAL HIT!!!
+       globalsound SMAAASH 
+       globalsound SMAAASH 
+      }
+     }
+     else
+     {
+      setvar CRITICAL? 1
+      setvar CRITICALHITMULTI 2
+      redefinequote 195 ^23CRITICAL HIT!!
+      globalsound SMAAASH 
+     }
+     ifp ponsteroids
+     {
+      mulvar CRITICALHITMULTI 5
+      divvar CRITICALHITMULTI 4
+     }
+    }    
+    else setvar CRITICAL? 0
+ }
+ends
+
+state null_damage
+     setactor[THISACTOR].htextra 0 // TODO: Leave This
+     setactor[THISACTOR].htpicnum SHOTSPARK1
+     break
+ends
+
+state prevent_redundantdamage // Prevents damage from being inflicted on "Cloaked Troopers" and also prevents constant damage to already dead monsters (resulting in constant Critical Hits & Sounds)
+   ifvare CLOAKED? 1
+   {
+    ifvarg tempb -1 state null_damage
+   }
+   ifvare SHRUNK? 1
+   {
+    ifvarg tempb -1 state null_damage
+   }
+   ifvarl TEMP -1 state null_damage
+ends
+
+// State for EnemyArmor Damage [via reflected damage]
+state calcenemyarmor
+   setvarvar CURRENTACTORARMORPERCENT ACTORAP
+   setvarvar ACTORARMORLIMIT tempd
+   mulvarvar ACTORARMORLIMIT ACTORARMORPERCENT // 50
+   divvar ACTORARMORLIMIT 1000
+   subvar ACTORARMORLIMIT 1
+
+   ifvarg tempd 0
+   {
+    ifvarvarg CURRENTACTORARMORPERCENT ACTORARMORLIMIT
+    {
+     setvarvar ACTORARMORDAMAGE tempd
+     mulvarvar ACTORARMORDAMAGE ACTORARMORPERCENT // 50
+     divvar ACTORARMORDAMAGE 1000
+
+     setvar ACTORDAMAGEPERCENT 1000
+     subvarvar ACTORDAMAGEPERCENT ACTORARMORPERCENT
+
+     mulvarvar tempd ACTORDAMAGEPERCENT // 50
+     divvar tempd 1000
+     subvarvar CURRENTACTORARMORPERCENT ACTORARMORDAMAGE
+     setactor[THISACTOR].htextra tempd
+     setvarvar ACTORAP CURRENTACTORARMORPERCENT
+    }
+    else
+    {
+     subvarvar tempd CURRENTACTORARMORPERCENT
+     setvarvar ACTORARMORDAMAGE CURRENTACTORARMORPERCENT
+     setvar CURRENTACTORARMORPERCENT 0
+     setactor[THISACTOR].htextra tempd
+     setvarvar ACTORAP CURRENTACTORARMORPERCENT
+    }
+   }
+   else
+   {
+    setactor[THISACTOR].htextra tempd
+    setvar ACTORARMORDAMAGE 0
+   }
+   ifvarg ACTORARMORDAMAGE 0 state enemyarmorbitsshrapnel
+ends
+
+// State for EnemyArmor Damage
+state enemyarmordamage
+       // tempd = damage value taken from calling code
+       setvarvar CURRENTACTORARMORPERCENT ACTORAP
+       setvarvar ACTORARMORLIMIT tempd
+       mulvarvar ACTORARMORLIMIT ACTORARMORPERCENT // 50
+       divvar ACTORARMORLIMIT 1000
+       subvar ACTORARMORLIMIT 1
+
+       ifvarg tempd 0
+       {
+	    ifvare tempd 1 // if scratch damage is suffered [1 dmg]
+		{
+         ifvarg ACTORAP 0 // will deal scratch damage to enemy armor 87.5% of the time
+		 {
+		   ifrnd 224
+		   {
+		    subvar ACTORAP 1
+		    setvar ACTORARMORDAMAGE 1
+		    setvar tempd 0
+           }
+		   else
+		   {
+		    setvar ACTORARMORDAMAGE 0
+		    setvar tempd 0
+           }
+		 }
+		 else
+		 {
+		  setvar ACTORARMORDAMAGE 0
+		 }
+		}
+        else
+		{
+         ifvarvarg CURRENTACTORARMORPERCENT ACTORARMORLIMIT
+         {
+          setvarvar ACTORARMORDAMAGE tempd
+          mulvarvar ACTORARMORDAMAGE ACTORARMORPERCENT // 50
+          divvar ACTORARMORDAMAGE 1000
+ 
+          setvar ACTORDAMAGEPERCENT 1000
+          subvarvar ACTORDAMAGEPERCENT ACTORARMORPERCENT
+ 
+          mulvarvar tempd ACTORDAMAGEPERCENT // 50
+          divvar tempd 1000
+          subvarvar CURRENTACTORARMORPERCENT ACTORARMORDAMAGE
+          setvarvar ACTORAP CURRENTACTORARMORPERCENT
+         }
+         else
+         {
+          subvarvar tempd CURRENTACTORARMORPERCENT
+          setvarvar ACTORARMORDAMAGE CURRENTACTORARMORPERCENT
+          setvar CURRENTACTORARMORPERCENT 0
+          setvarvar ACTORAP CURRENTACTORARMORPERCENT
+         }
+		}
+       }
+       else
+	   {
+ 		setvar ACTORARMORDAMAGE 0
+	   }
+	   // addlogvar ACTORARMORDAMAGE
+
+       ifvarg ACTORARMORDAMAGE 0 state enemyarmorbitsshrapnel setvar ACTORAPDAMAGED? 1
+ends
+
+state assessactortype
+ ifvare temp SHARK setvar HITACTORTYPE? 0
+ ifvare temp ROTATEGUN setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOP setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPSTAYPUT setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPSHOOT setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPJETPACK setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPRUNNING setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPDUCKING setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPONTOILET setvar HITACTORTYPE? 0
+ ifvare temp LIZTROOPJUSTSIT setvar HITACTORTYPE? 0
+ ifvare temp LIZMAN setvar HITACTORTYPE? 0
+ ifvare temp LIZMANSTAYPUT setvar HITACTORTYPE? 0
+ ifvare temp LIZMANSPITTING setvar HITACTORTYPE? 0
+ ifvare temp LIZMANJUMP setvar HITACTORTYPE? 0
+ ifvare temp DRONE setvar HITACTORTYPE? 0
+ ifvare temp OCTABRAIN setvar HITACTORTYPE? 0
+ ifvare temp OCTABRAINSTAYPUT setvar HITACTORTYPE? 0
+ ifvare temp PIGCOP setvar HITACTORTYPE? 0
+ ifvare temp PIGCOPSTAYPUT setvar HITACTORTYPE? 0
+ ifvare temp PIGCOPDIVE setvar HITACTORTYPE? 0
+ ifvare temp BOSS1 setvar HITACTORTYPE? 0
+ ifvare temp BOSS1STAYPUT setvar HITACTORTYPE? 0
+ ifvare temp BOSS1SHOOT setvar HITACTORTYPE? 0
+ ifvare temp BOSS1LOB setvar HITACTORTYPE? 0
+ ifvare temp BOSS2 setvar HITACTORTYPE? 0
+ ifvare temp BOSS2STAYPUT setvar HITACTORTYPE? 0
+ ifvare temp BOSS2SHOOT setvar HITACTORTYPE? 0
+ ifvare temp BOSS2BREATH setvar HITACTORTYPE? 0
+ ifvare temp BOSS3 setvar HITACTORTYPE? 0
+ ifvare temp BOSS3STAYPUT setvar HITACTORTYPE? 0
+ ifvare temp BOSS3LOB setvar HITACTORTYPE? 0
+ ifvare temp COMMANDER setvar HITACTORTYPE? 0
+ ifvare temp COMMANDERSTAYPUT setvar HITACTORTYPE? 0
+ ifvare temp TANK setvar HITACTORTYPE? 0
+ ifvare temp BOSS4 setvar HITACTORTYPE? 0
+ ifvare temp BOSS4STAYPUT setvar HITACTORTYPE? 0
+ ifvare temp NEWBEAST setvar HITACTORTYPE? 0
+ ifvare temp NEWBEASTSTAYPUT setvar HITACTORTYPE? 0
+ ifvare temp NEWBEASTJUMP setvar HITACTORTYPE? 0
+ ifvare temp NEWBEASTHANG setvar HITACTORTYPE? 0
+ ifvare temp SCORPIONTANK setvar HITACTORTYPE? 0
+//
+ ifvare temp DEALER setvar HITACTORTYPE? 1
+ ifvare temp STAND1 setvar HITACTORTYPE? 1
+ ifvare temp STAND3 setvar HITACTORTYPE? 1
+ ifvare temp STAND4 setvar HITACTORTYPE? 1
+ ifvare temp DANCE1 setvar HITACTORTYPE? 1
+ ifvare temp DANCE2 setvar HITACTORTYPE? 1
+ ifvare temp DANCE3 setvar HITACTORTYPE? 1
+ ifvare temp DANCE5 setvar HITACTORTYPE? 1
+ ifvare temp DANCE6 setvar HITACTORTYPE? 1
+ ifvare temp DANCE7 setvar HITACTORTYPE? 1
+ ifvare temp DANCE9 setvar HITACTORTYPE? 1
+ ifvare temp ROBOTDOG setvar HITACTORTYPE? 1
+ ifvare temp ROBOTDOG2 setvar HITACTORTYPE? 1
+ ifvare temp PRESIDENTCLINTON setvar HITACTORTYPE? 1
+ ifvare temp COP1 setvar HITACTORTYPE? 1
+ ifvare temp PUNKDUDE setvar HITACTORTYPE? 1
+ ifvare temp COP2 setvar HITACTORTYPE? 1
+ ifvare temp SITTINGDUDE setvar HITACTORTYPE? 1
+ ifvare temp FEM1 setvar HITACTORTYPE? 1
+ ifvare temp FEM2 setvar HITACTORTYPE? 1
+ ifvare temp FEM3 setvar HITACTORTYPE? 1
+ ifvare temp FEM4 setvar HITACTORTYPE? 1
+ ifvare temp FEM5 setvar HITACTORTYPE? 1
+ ifvare temp FEM6 setvar HITACTORTYPE? 1
+ ifvare temp FEM7 setvar HITACTORTYPE? 1
+ ifvare temp FEM9 setvar HITACTORTYPE? 1
+ ifvare temp FEM10 setvar HITACTORTYPE? 1
+ ifvare temp TOUGHGAL setvar HITACTORTYPE? 1
+ ifvare temp WOMAN setvar HITACTORTYPE? 1
+ ifvare temp NAKED1 setvar HITACTORTYPE? 1
+ ifvare temp PODFEM1 setvar HITACTORTYPE? 1
+ ifvare temp ANIMEGIRL1 setvar HITACTORTYPE? 1
+ ifvare temp ANIMEGIRL2 setvar HITACTORTYPE? 1
+ ifvare temp ANIMEGIRL3 setvar HITACTORTYPE? 1
+ ifvare temp ANIMEGIRL4 setvar HITACTORTYPE? 1
+//
+
+ends
+
+  state serpenthelmet_check2
+      setvar DAMAGEMODIFIER 100
+      setvar TEMPVAR3 50
+      ifvarand ACTORFLAGS 512 { mulvar TEMPVAR3 2 divvar TEMPVAR3 3 }
+      ifvarand ACTORFLAGS 1024 { divvar TEMPVAR3 2 }
+      subvarvar DAMAGEMODIFIER TEMPVAR3
+      mulvarvar ACTORDEFENSETEMP DAMAGEMODIFIER
+      divvar ACTORDEFENSETEMP 100
+  ends
+
+state serpenthelmet_check
+     // Check for Serpent Helmets
+     ifvare PLAYEREQUIPSLOTITEM1 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM2 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM3 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM4 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM5 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM6 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM7 25 state serpenthelmet_check2
+     ifvare PLAYEREQUIPSLOTITEM8 25 state serpenthelmet_check2
+ends
+
+state snakearmband_check
+  // Check for Snake Armband [Equippable Item]
+  setvar DAMAGEMODIFIER 0
+  ifvare PLAYEREQUIPSLOTITEM1 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM2 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM3 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM4 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM5 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM6 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM7 23 addvar DAMAGEMODIFIER 100
+  ifvare PLAYEREQUIPSLOTITEM8 23 addvar DAMAGEMODIFIER 100
+  ifvarg DAMAGEMODIFIER 1000 setvar DAMAGEMODIFIER 1000
+  randvar TEMP3 999 addvar TEMP3 1
+
+  ifvarvarg TEMP3 DAMAGEMODIFIER nullop
+  else
+  {
+   randvar TEMP2 1000
+
+   ifvarg TEMP2 800 // Slow AND Poison an Enemy
+   {
+    ifvarand ACTORSTATUS? 4 // Slow
+    { 
+     randvar TEMP 390
+     addvar TEMP 390
+     addvarvar ACTORSLOWTIMER TEMP
+    } 
+    else 
+    { 
+     addvar ACTORSTATUS? 4
+     randvar TEMP 390
+     addvar TEMP 390
+     addvarvar ACTORSLOWTIMER TEMP
+    }   
+
+    ifvarand ACTORSTATUS? 8 // Poison
+    { 
+     randvar TEMP 390
+     addvar TEMP 390
+     addvarvar ACTORPOISONTIMER TEMP
+    } 
+    else 
+    { 
+     addvar ACTORSTATUS? 8
+     randvar TEMP 390
+     addvar TEMP 390
+     addvarvar ACTORPOISONTIMER TEMP
+    }   
+    redefinequote 335 ^22YOU HAVE SLOWED DOWN AND POISONED AN ENEMY!
+    setvarvar fta fta_normal setvar ftq 335
+   }
+   else // Choose between Slow or Poison
+   {
+    ifrnd 128
+    {
+     ifvarand ACTORSTATUS? 4 // Slow
+     {
+      randvar TEMP 390
+      addvar TEMP 390
+      addvarvar ACTORSLOWTIMER TEMP
+     }
+     else 
+     {
+      addvar ACTORSTATUS? 4
+      randvar TEMP 390
+      addvar TEMP 390
+      addvarvar ACTORSLOWTIMER TEMP
+     }
+     redefinequote 335 ^22YOU HAVE SLOWED DOWN AN ENEMY!
+     setvarvar fta fta_normal setvar ftq 335
+    }
+    else
+    {
+     ifvarand ACTORSTATUS? 8 // Poison
+     { 
+      randvar TEMP 390
+      addvar TEMP 390
+      addvarvar ACTORPOISONTIMER TEMP
+     } 
+     else 
+     { 
+      addvar ACTORSTATUS? 8
+      randvar TEMP 390
+      addvar TEMP 390
+      addvarvar ACTORPOISONTIMER TEMP
+     }   
+     redefinequote 335 ^22YOU HAVE POISONED AN ENEMY!
+     setvarvar fta fta_normal setvar ftq 335
+    }
+   }
+  }
+ends
+
+state watchovermeskill-attack
+   ifvare CHARACTERSELECTED? 11 // Paula
+   {
+    setvar MISCARRAYID 62 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NUMBER-OF-PARTY-DEAD
+    ifvarg MISCARRAYID_AMOUNTTEMP 0
+    {
+     //addlogvar PLAYERATTACKTEMP
+     ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar PLAYERATTACKTEMP 140 // +40% [40]
+     ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERATTACKTEMP 200 // +100% [60]
+     ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar PLAYERATTACKTEMP 280 // +180% [80]
+     ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar PLAYERATTACKTEMP 380 // +280% [100]
+     ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar PLAYERATTACKTEMP 500 // +400% [120]
+     ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar PLAYERATTACKTEMP 640 // +540% [140]
+     ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar PLAYERATTACKTEMP 800 // +700% [160]
+     ifvare MISCARRAYID_AMOUNTTEMP 8 mulvar PLAYERATTACKTEMP 980 // +880% [180]
+     ifvare MISCARRAYID_AMOUNTTEMP 9 mulvar PLAYERATTACKTEMP 1180 // +1280% [200]
+     ifvare MISCARRAYID_AMOUNTTEMP 10 mulvar PLAYERATTACKTEMP 1400 // +1300% [220]
+     ifvare MISCARRAYID_AMOUNTTEMP 11 mulvar PLAYERATTACKTEMP 1640 // +1540% [240]
+     ifvare MISCARRAYID_AMOUNTTEMP 12 mulvar PLAYERATTACKTEMP 1900 // +1800% [260]
+     ifvare MISCARRAYID_AMOUNTTEMP 13 mulvar PLAYERATTACKTEMP 2180 // +2080% [280]
+     ifvare MISCARRAYID_AMOUNTTEMP 14 mulvar PLAYERATTACKTEMP 2480 // +2380% [300]
+     ifvarg MISCARRAYID_AMOUNTTEMP 14 mulvar PLAYERATTACKTEMP 2800 // +2700% [320]
+     divvar PLAYERATTACKTEMP 100
+     ifvarvarg PLAYERATTACKTEMP STATLIMIT setvarvar PLAYERATTACKTEMP STATLIMIT
+     //addlogvar PLAYERATTACKTEMP
+    }
+   }
+ends
+
+state checkdamagecaps-knee
+  ifvarvarg KNEEDAMAGE STATLIMITATOMIC setvarvar KNEEDAMAGE STATLIMITATOMIC
+  ifvarvarg ACTORARMORDAMAGE STATLIMITATOMIC setvarvar ACTORARMORDAMAGE STATLIMITATOMIC
+  // addlogvar KNEEDAMAGE
+  // addlogvar ACTORARMORDAMAGE
+ends
+
+//********************************************************
+//*State for Calculating Kick/Melee Damage to non-players*
+//********************************************************
+state add_playermeleedamage
+  setvar ACTORLASTDAMAGE 0
+  getactor[THISACTOR].htextra tempb
+  setvarvar TEMP ACTORHP
+  getactor[THISACTOR].htowner OWNERTEMP 
+  getactor[OWNERTEMP].picnum PICNUMTEMP
+  ifvare PICNUMTEMP APLAYER getactorvar[PLAYERID].VEHICLEID tempvehicleid
+
+  ifvarg ACTORDEATHSWITCHDELAY 0
+  {
+   setactor[THISACTOR].htextra -1
+   break
+  }
+
+  ifvarg oldskoolmode 0
+  {
+   getactor[THISACTOR].picnum temp
+   ifvare temp BOSS1
+   {
+    getactor[THISACTOR].pal tempc
+    ifvare tempc 9 mulvar tempb 4
+   }
+   ifvare temp BOSS3
+   {
+    getactor[THISACTOR].pal tempc
+    ifvare tempc 9 mulvar tempb 4
+   }
+   ifvare temp BOSS2
+   {
+    getactor[THISACTOR].pal tempc
+    ifvare tempc 9 mulvar tempb 4
+   }
+   ifvare temp BOSS4
+   {
+    getactor[THISACTOR].pal tempc
+    ifvare tempc 9 mulvar tempb 4
+   }
+   setvarvar ACTORLASTDAMAGE tempb
+   subvarvar ACTORHP tempb
+   break
+  }
+
+  state prevent_redundantdamage
+
+  ifvarg tempb 0 // If any actual damage is detected...
+  { // ifvarg tempb 0
+
+    ifvare mainmenu 1 // if in the menus, receive no damage and cancel event
+    {
+     setactor[THISACTOR].htextra -1 // 0
+     break
+    }
+
+    setvar ACTORARMORDAMAGE 0
+    getactor[THISACTOR].htextra KNEEDAMAGE // TODO: Leave this
+    setactor[THISACTOR].htextra 1
+ 
+    // Stage 1 of Damage Formula
+    ifvarg KNEEDAMAGE 0 
+    { // ifvarg KNEEDAMAGE 0 
+ 
+     getactor[THISACTOR].htowner OWNERTEMP 
+     getactor[OWNERTEMP].picnum PICNUMTEMP
+     state monster_defense_calc
+
+     ifvare PICNUMTEMP APLAYER // If the attacking actor is the Player themself...
+     { // ifvare PICNUMTEMP APLAYER
+      setvarvar DEFENDINGACTORDEBUG DEFENDINGACTOR
+
+      setvarvar PLAYERATTACKTEMP PLAYERATTACK
+      state watchovermeskill-attack
+
+      // Set to [Attack * 2]
+      setvarvar KNEEDAMAGE PLAYERATTACKTEMP
+      mulvar KNEEDAMAGE 2
+      ifp ponsteroids mulvar KNEEDAMAGE 10 // Steroids make damage 10x stronger
+
+      // Add or Remove [Attack / 2]
+      randvarvar TEMPVAR6 PLAYERATTACKTEMP
+      divvar TEMPVAR6 2 
+      ifp ponsteroids mulvar TEMPVAR6 10 // Steroids make damage 5x stronger
+
+      ifrnd 128 addvarvar KNEEDAMAGE TEMPVAR6 else subvarvar KNEEDAMAGE TEMPVAR6 // Gives a Damage Error of 50% of the Physical Attack stat [+- 50% attack]
+
+      // Add Base Damage Depending on Character and their Melee Attack Type
+      ifvare CHARACTERSELECTED? 1 addvar KNEEDAMAGE 10
+      ifvare CHARACTERSELECTED? 2 { ifrnd 128 addvar KNEEDAMAGE 4 else addvar KNEEDAMAGE 6 }
+      ifvare CHARACTERSELECTED? 3 { ifrnd 128 addvar KNEEDAMAGE 12 else addvar KNEEDAMAGE 13 }
+      ifvare CHARACTERSELECTED? 4 addvar KNEEDAMAGE 4
+      ifvare CHARACTERSELECTED? 5 { addvar KNEEDAMAGE 10 randvar TEMPVAR 30 addvarvar KNEEDAMAGE TEMPVAR }
+      // ifvare CHARACTERSELECTED? 6 nullop
+      // ifvare CHARACTERSELECTED? 7 nullop
+      // ifvare CHARACTERSELECTED? 8 nullop
+      // ifvare CHARACTERSELECTED? 9 nullop
+      ifvare CHARACTERSELECTED? 10 
+      { 
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 0 { addvar KNEEDAMAGE 22 randvar TEMPVAR 5 addvarvar KNEEDAMAGE TEMPVAR sound NEWBEAST_ATTACK } else { addvar KNEEDAMAGE 36 randvar TEMPVAR 8 addvarvar KNEEDAMAGE TEMPVAR } 
+      } 
+      // ifvare CHARACTERSELECTED? 11 { addvar KNEEDAMAGE 7 randvar TEMPVAR 3 addvarvar KNEEDAMAGE TEMPVAR }
+      // ifvare CHARACTERSELECTED? 12 nullop
+      // ifvare CHARACTERSELECTED? 13 nullop
+      // ifvare CHARACTERSELECTED? 14 nullop
+      ifvare CHARACTERSELECTED? 15 { ifrnd 128 { addvar KNEEDAMAGE 5 randvar TEMPVAR 1 addvarvar KNEEDAMAGE TEMPVAR } else { addvar KNEEDAMAGE 9 randvar TEMPVAR 1 addvarvar KNEEDAMAGE TEMPVAR } }
+
+      ifvare PUBLICBETA? 0 
+      {
+       ifvare CHARACTERSELECTED? 10 
+       { 
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 2 } else { mulvar KNEEDAMAGE 3 } 
+       } 
+      }
+      ifvare PUBLICBETA? 0 { ifvare CHARACTERSELECTED? 14 mulvar KNEEDAMAGE 4 }
+      state checkdamagecaps-knee
+
+      // Check If Monsters are Aireal
+      // End Check
+
+      //*******************************
+      //*******************************
+      //*******************************
+
+      // Stage 2p of Damage Formula
+      //***************************************
+      //*Overall Damage Support [Bubsy / Lori]*
+      //***************************************
+      ifvare tempe APLAYER
+      {
+       setvar DAMAGEMODIFIER 1000
+       state support-monsteroveralleffect-extra
+       state damagemod-enemy-knee
+      }
+      state checkdamagecaps-knee
+
+      //*******************************
+      //*******************************
+      //*******************************
+
+      // Stage 3p of Damage Formula
+      ifvare CHARACTERSELECTED? 1
+      {
+       // ***************************************************
+       // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
+       // ***************************************************
+       ifvare FLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare FLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+       ifvare CEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare CEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+
+       ifvare EMUFLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare EMUFLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+       ifvare EMUCEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+       ifvare EMUCEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+      }
+
+      ifvare CHARACTERSELECTED? 3
+      {
+       // *****************************************************
+       // *Setting Up Bubsy's bonus damage when in "Mask Form*
+       // *****************************************************
+       setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+       ifvarg MISCARRAYID_AMOUNTTEMP 0 { mulvar KNEEDAMAGE 5 divvar KNEEDAMAGE 2 }
+      }
+
+      ifvare CHARACTERSELECTED? 4
+      {
+       // **************************************
+       // *Setting up Ami's Water-Bonus Damage *
+       // **************************************
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 { mulvar KNEEDAMAGE 6 } // 6x Damage
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar KNEEDAMAGE 7 divvar KNEEDAMAGE 2 } // 3.5x Damage
+       // *******************************
+       // *Setting Up Ami's Form Bonuses*
+       // *******************************
+       setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+       ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
+       ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
+       // ********************************
+       // *Mercury Aqua Protection (Buff)*
+       // ********************************
+       setvar CHARACTERARRAY 4
+       getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+       ifvarand TEMPVAR 256
+       {
+         ifp pducking divvar KNEEDAMAGE 20 else divvar KNEEDAMAGE 5
+       }
+       // ************************
+       // *Mercury Super-Computer*
+       // ************************
+       setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+       ifvare MISCARRAYID_AMOUNTTEMP 1
+       {
+        ifvare player[THISACTOR].heat_on 1
+        {
+         mulvar KNEEDAMAGE 7
+         divvar KNEEDAMAGE 4
+        }
+       }
+      }
+
+      ifvare CHARACTERSELECTED? 10
+      {
+       // **********************************
+       // *Setting Up Nethra's Form Bonuses*
+       // **********************************
+       setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+       ifvare MISCARRAYID_AMOUNTTEMP 1
+       {
+        setvarvar TEMPVAR2 KNEEDAMAGE
+        state checkdamage-crisisbooster
+        setvarvar KNEEDAMAGE TEMPVAR2
+       }
+      }
+
+      ifvare CHARACTERSELECTED? 13
+      {
+       // **********************************
+       // *Setting Up Minako's Form Bonuses*
+       // **********************************
+       setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+       ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
+       ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
+      }
+      state checkdamagecaps-knee
+
+      // Stage 4p of Damage Formula
+      // *****************************
+      // *Power Wrist[s] (Equippable)*
+      // *****************************
+      // Check for Power Wrist [equippable item]
+      setvar DAMAGEMODIFIER 1000
+      ifvare PLAYEREQUIPSLOTITEM1 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM2 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM3 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM4 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM5 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM6 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM7 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      ifvare PLAYEREQUIPSLOTITEM8 18
+      {
+       randvar TEMPVAR2 25
+       ifrnd 128 mulvar TEMPVAR2 -1
+       addvar TEMPVAR2 250
+       addvarvar DAMAGEMODIFIER TEMPVAR2
+       // +22.5%-27.5% 
+      }
+      mulvarvar KNEEDAMAGE DAMAGEMODIFIER
+      divvar KNEEDAMAGE 1000
+      state checkdamagecaps-knee
+
+
+      // Stage 5p of Damage Formula
+      // **********************************
+      // *Jewel of Four Souls [Equippable]*
+      // **********************************
+      setvar DAMAGEMODIFIER 1
+      ifvare PLAYEREQUIPSLOTITEM1 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM2 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM3 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM4 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM5 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM6 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM7 28 addvar DAMAGEMODIFIER 10
+      ifvare PLAYEREQUIPSLOTITEM8 28 addvar DAMAGEMODIFIER 10
+      ifvarg DAMAGEMODIFIER 1 subvar DAMAGEMODIFIER 1
+      mulvarvar KNEEDAMAGE DAMAGEMODIFIER
+      state checkdamagecaps-knee
+
+      // Stage 6p of Damage Formula
+      //****************
+      //*?????? ?? ????*
+      //****************
+      ifvarn ENEMYHASSHIKON? 0 divvar KNEEDAMAGE 10
+      state checkdamagecaps-knee
+
+      // Stage 7p of Damage Formula
+      //***********************
+      //*Attacker is Poisoned?*
+      //***********************
+      ifvarand PLAYERSTATUS? 8
+      {
+       randvar TEMPVAR 125
+       ifrnd 128 mulvar TEMPVAR -1
+       addvar TEMPVAR 500
+       mulvarvar KNEEDAMAGE TEMPVAR
+       divvar KNEEDAMAGE 1000
+      }
+      state checkdamagecaps-knee
+
+      // Stage 8p of Damage Formula
+      //***********************
+      //*Defender is Poisoned?*
+      //***********************
+      ifvarand ACTORSTATUS? 8
+      {
+       randvar TEMPVAR 125
+       ifrnd 128 mulvar TEMPVAR -1
+       addvar TEMPVAR 1500
+       mulvarvar KNEEDAMAGE TEMPVAR
+       divvar KNEEDAMAGE 1000
+      }
+      state checkdamagecaps-knee
+
+      // Stage 9p of Damage Formula
+      // **********************
+      // *Triad Booster (Buff)*
+      // **********************
+      ifvarand PLAYERSTATUS? 4096
+      {
+       randvar temp 25
+       setvar tempb 250
+       ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+       setvar tempc 1000
+       addvarvar tempc tempb
+       // 122.5%-127.5% 
+
+       mulvarvar KNEEDAMAGE tempc
+       divvar KNEEDAMAGE 1000
+      }
+
+      state checkdamagecaps-knee
+
+      // Stage 10p of Damage Formula
+      // *****************
+      // *Jump Kick Bonus*
+      // *****************
+      ifvarn sector[PLAYERSECTOR].lotag 2
+      {
+       getplayer[THISACTOR].jetpack_on TEMPVAR3
+       ifvare TEMPVAR3 0
+       {
+        ifvare INTHEAIR? 1
+        {
+         randvar temp 166
+         setvar tempb 500
+         ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+         setvar tempc 1000
+         addvarvar tempc tempb
+         // 133.4%-166.6% 
+
+         mulvarvar KNEEDAMAGE tempc
+         divvar KNEEDAMAGE 1000
+        }
+       }
+      }
+      state checkdamagecaps-knee
+
+      // Stage 11p of Damage Formula
+      // *********************
+      // *Damage Shell (Buff)*
+      // *********************
+      ifvarand ACTORSTATUS? 512
+      {
+       sound SHELL_HIT
+       randvar temp 33
+       setvar tempb 333
+       ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+       ifvarg tempb 1000 setvar tempb 1000
+       setvar tempc 1000
+       subvarvar tempc tempb
+       // -30.0%-36.6% 
+
+       mulvarvar KNEEDAMAGE tempc
+       divvar KNEEDAMAGE 1000
+      }
+      state checkdamagecaps-knee
+
+      // Stage 12p of Damage Formula
+      // ****************************************
+      // *Setting Up Death-based Support Bonuses*
+      // ****************************************
+      setvar DAMAGEMODIFIER 1000
+      state playersupport-deadcharacters
+      mulvarvar KNEEDAMAGE DAMAGEMODIFIER
+      divvar KNEEDAMAGE 1000
+      state checkdamagecaps-knee
+
+      // Stage 13p of Damage Formula
+      // **************************************************
+      // *Setting up Critical Hits [Norm/Super/Mega/Ultra]*
+      // **************************************************
+      ifvarg ACTORHP 0
+      {
+       state calccriticalhits
+       mulvarvar KNEEDAMAGE CRITICALHITMULTI 
+       ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
+       // ifvarg CRITICAL? 0 addlogvar PLAYERDAMAGE
+      }
+      state checkdamagecaps-knee
+
+      // Stage 14p of Damage Formula
+      // *************************************************
+      // *Setting up Special Formulas for Defense Factors*
+      // *************************************************
+      getactor[THISACTOR].picnum temp
+      state assessactortype
+      setvarvar ACTORDEFENSETEMP ACTORDEFENSE
+ 
+      state serpenthelmet_check
+
+      ifvarand CHEATBITFIELD? 8
+      {
+       ifvare HITACTORTYPE? 1
+       {
+        ifvare CHARACTERSELECTED? 15
+        {
+         ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4
+        }
+        else
+        ifvare CHARACTERSELECTED? 14
+        {
+         ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2
+        }
+        else
+        ifvare CHARACTERSELECTED? 10
+        {
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
+         else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 }
+        }
+        else
+        ifvare CHARACTERSELECTED? 3
+        {
+         mulvar ACTORDEFENSETEMP 2
+         divvar ACTORDEFENSETEMP 5
+        }
+ 
+        ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
+        subvarvar KNEEDAMAGE ACTORDEFENSETEMP
+       }
+       else
+       {
+        ifvare CHARACTERSELECTED? 15
+        {
+         ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4
+        }
+        ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
+        subvarvar KNEEDAMAGE ACTORDEFENSETEMP
+        state cheatersound
+        mulvar KNEEDAMAGE 1000
+        ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
+       }
+      }
+      else
+      { 
+       ifvare CHARACTERSELECTED? 15
+       {
+        ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4
+       }
+       else
+       ifvare CHARACTERSELECTED? 14
+       {
+        ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2
+       }
+       else
+       ifvare CHARACTERSELECTED? 10
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
+        else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 }
+       }
+       else
+       ifvare CHARACTERSELECTED? 3
+       {
+        mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5
+       }
+ 
+       ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
+       subvarvar KNEEDAMAGE ACTORDEFENSETEMP
+      }
+      state checkdamagecaps-knee
+
+      // Stage 15p of Damage Formula
+      //******************
+      //*"Elite" Monsters*
+      //******************
+      ifvarand ACTORFLAGS 512 // If the monster is an "Elite" they only suffer 25% to 50% damage
+      {
+       randvar TEMPVAR 25
+       addvar TEMPVAR 25
+       mulvarvar KNEEDAMAGE TEMPVAR
+       divvar KNEEDAMAGE 100
+      }
+      state checkdamagecaps-knee
+
+      // Stage 16p of Damage Formula
+      //*************
+      //*Quad Damage*
+      //*************
+      ifvare tempvehicleid -1
+      {
+       ifvarg QUADTIME 0 mulvar KNEEDAMAGE 4
+      }
+      else
+      {
+       ifvarg actorvar[tempvehicleid].ACTORQUADTIME 0 mulvar KNEEDAMAGE 4
+      }
+      ifvarl KNEEDAMAGE 1 setvar KNEEDAMAGE 1
+      ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
+      state checkdamagecaps-knee
+
+      // Stage 17p of Damage Formula
+      //********************
+      //*Check Enemy Invuln*
+      //********************
+      ifvarg ACTORINVULNTIME 0
+      {
+       ifvare PICNUMTEMP APLAYER // If the attacking actor is the player
+       {
+        setvarvar ACTORDEFLECTEDDAMAGE KNEEDAMAGE
+        setvar KNEEDAMAGE 0
+        setactor[THISACTOR].htextra 0 // TODO: Leave this
+        sound INVULNITEM3
+       }
+       setvar ACTORINVULN? 1
+      }
+      else
+      {
+       setvar ACTORINVULN? 0
+      }
+      state checkdamagecaps-knee
+
+      // Stage 18p of Damage Formula
+      //*******************************************
+      //*Mystery Lady's Sabre Special Attack Bonus*
+      //*******************************************
+      ifvare PUBLICBETA? 0
+      {
+       ifvare CHARACTERSELECTED? 14
+       {
+        stopsound KICK_HIT
+        sound SHORT_CIRCUIT state sparkstate
+        sound SHORT_CIRCUIT state sparkstate
+        sound SHORT_CIRCUIT state sparkstate
+        setactor[THISACTOR].htpicnum RADIUSEXPLOSION
+        ifvarg ACTORINVULNTIME 0
+        {
+         ifvarg CRITICAL? 0
+         {
+          setvar ACTORINVULNTIME 0
+          redefinequote 335 ^22DESTROYED ENEMY'S INVULNERBILITY!!
+         }
+         else
+         {
+          setvar TEMP2 10
+          randvar TEMP3 5
+          ifrnd 128 addvarvar TEMP2 TEMP3 else subvarvar TEMP2 TEMP3
+          setvarvar TEMP3 TEMP2
+          mulvar TEMP2 26
+          subvarvar ACTORINVULNTIME TEMP2
+          ifvarl ACTORINVULNTIME 0 setvar ACTORINVULNTIME 0
+          redefinequote 335 ^22REDUCED ENEMY'S INVULNERBILITY TIME BY %d SECONDS!
+          qsprintf 335 335 TEMP3
+         }
+         setvarvar fta fta_normal setvar ftq 335
+        }
+        else
+        {
+         randvar TEMP3 99 addvar TEMP3 1
+         setvar CHARACTERARRAY 14
+         getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMP2
+         ifvarvarg TEMP3 TEMP2
+         {
+          setvarvar TEMP3 ACTORHP
+          randvar TEMP2 2
+          addvar TEMP2 2
+          ifvarn TEMP2 0 divvarvar TEMP3 TEMP2
+          addvarvar KNEEDAMAGE TEMP3
+
+          setvarvar TEMP3 ACTORAP
+          randvar TEMP2 2
+          addvar TEMP2 2
+          ifvarn TEMP2 0 divvarvar TEMP3 TEMP2
+          addvarvar KNEEDAMAGE TEMP3
+         }
+         else
+         {
+          setvarvar TEMP3 ACTORMAXHP
+          randvar TEMP2 1
+          addvar TEMP2 1
+          ifvarn TEMP2 0 divvarvar TEMP3 TEMP2
+          addvarvar KNEEDAMAGE TEMP3
+
+          setvarvar TEMP3 ACTORMAXAP
+          randvar TEMP2 1
+          addvar TEMP2 1
+          ifvarn TEMP2 0 divvarvar TEMP3 TEMP2
+          addvarvar KNEEDAMAGE TEMP3 
+
+          redefinequote 335 ^22CRITICAL STRIKE!!
+          setvarvar fta fta_normal setvar ftq 335
+         }
+        }
+       }
+      }
+      state checkdamagecaps-knee
+
+      // Stage 19p of Damage Formula
+      // *************************
+      // * IMPORTANT ARMOR START *
+      // *************************
+      setvarvar tempd KNEEDAMAGE
+
+      ifvarg VAMPIRETIME 0 setvarvar TEMPVAR5 ACTORARMORPERCENT
+      state enemyarmordamage
+      state showdamage_actor-kneeap
+      setvarvar KNEEDAMAGE tempd
+      // ***********************
+      // * IMPORTANT ARMOR END *
+      // ***********************
+      state checkdamagecaps-knee
+
+      // Stage 20p of Damage Formula
+      // ************************
+      // * Check Snake Armbands *
+      // ************************
+      ifvarg KNEEDAMAGE 0 state snakearmband_check
+      state checkdamagecaps-knee
+
+      // Stage 21p of Damage Formula
+      // *********************************************
+      // * Check Melee Attacks for Confusion Ailment *
+      // *********************************************
+      // Damage to HP must be >5-10% (20-25% for elites) to have the chance for Blunt hits to confuse them.
+      setvarvar TEMP3 ACTORMAXHP
+      ifvarand ACTORFLAGS 512 // Elite
+      {
+       ifvarand ACTORFLAGS 1024 // Elite Boss
+       {
+        randvar TEMP2 125 addvar TEMP2 250	// 25.0%-37.5%
+       }
+       else // Only Elite
+       {
+        randvar TEMP2 50 addvar TEMP2 200	// 20.0%-25.0%
+       }
+      }
+      else
+      {
+       ifvarand ACTORFLAGS 1024 // Elite Boss
+       {
+        randvar TEMP2 125 addvar TEMP2 100	// 10.0%-22.5%
+       }
+       else
+       {
+        randvar TEMP2 50 addvar TEMP2 50	// 5.0%-10.0%
+       }
+      }
+      mulvarvar TEMP3 TEMP2
+      divvar TEMP3 1000
+
+      ifvarvarg KNEEDAMAGE TEMP3
+      {
+       ifvare CHARACTERSELECTED? 10
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 0
+        {
+         ifrnd 51
+         {
+          ifvarand ACTORSTATUS? 16
+          {
+           randvar TEMP 390
+           addvar TEMP 390
+           addvarvar ACTORDIMNESSTIMER TEMP
+          } 
+          else 
+          { 
+           addvar ACTORSTATUS? 16
+           randvar TEMP 390
+           addvar TEMP 390
+           addvarvar ACTORDIMNESSTIMER TEMP
+           redefinequote 335 ^22YOU HAVE DIMMED AN ENEMY!
+           setvarvar fta fta_normal setvar ftq 335
+          }   
+         }   
+        }
+        else
+        {
+         ifrnd 51
+         {
+          ifvarand ACTORSTATUS? 128
+          { 
+           randvar TEMP 390
+           addvar TEMP 390
+           addvarvar ACTORCONFUSIONTIMER TEMP
+          } 
+          else 
+          { 
+           addvar ACTORSTATUS? 128
+           randvar TEMP 390
+           addvar TEMP 390
+           addvarvar ACTORCONFUSIONTIMER TEMP
+           redefinequote 335 ^22YOU HAVE CONFUSED AN ENEMY!
+           setvarvar fta fta_normal setvar ftq 335
+          }   
+         }   
+        }
+       }
+       else
+       {
+        ifrnd 51
+        {
+         ifvarand ACTORSTATUS? 128
+         { 
+          randvar TEMP 390
+          addvar TEMP 390
+          addvarvar ACTORCONFUSIONTIMER TEMP
+         } 
+         else 
+         { 
+          addvar ACTORSTATUS? 128
+          randvar TEMP 390
+          addvar TEMP 390
+          addvarvar ACTORCONFUSIONTIMER TEMP
+          redefinequote 335 ^22YOU HAVE CONFUSED AN ENEMY!
+          setvarvar fta fta_normal setvar ftq 335
+         }   
+        }   
+       }
+      }
+      state checkdamagecaps-knee
+
+      // Stage 22p of Damage Formula
+      //*********************
+      //* Misc Arrangements *
+      //*********************
+      setvarvar TEMPVAR KNEEDAMAGE
+      setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+      setvar DEFENDERDISPLAYTIMER 0
+      ifvare TEMPVAR 0 setvar ACTORNULLDAMAGE 1 else setvar ACTORNULLDAMAGE 0
+      setvarvar ACTORARMORDAMAGETEMP ACTORARMORDAMAGE
+      setvar ACTORARMORDISPLAYTIMER 0
+
+      ifvarg CURRENTACTORARMORPERCENT 0 { ifvare ACTORARMORDAMAGETEMP 0 setvar ACTORARMORNULLDAMAGE 1 else setvar ACTORARMORNULLDAMAGE 0 }
+      state checkdamagecaps-knee
+      // FINAL DAMAGE COUNT HERE
+
+      // Stage 23p of Damage Formula
+      //*********************************************************************************
+      //* Drain Artifact and Twilight Cloaks [for players since this is monster damage] *
+      //*********************************************************************************
+      ifvarg KNEEDAMAGE 0
+      {
+       ifvarvare OWNERTEMP PLAYERID
+       {
+        ifvare tempvehicleid -1
+        {
+         ifvarg VAMPIREMAXDMGFACTOR 1000 // ifvarg VAMPIRETIME 0
+         {
+          setvarvar TEMP MAXHITPOINTS
+
+          mulvarvar TEMP VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+          divvar TEMP 1000
+
+          ifvarvarl CURRENTHITPOINTS TEMP
+          {
+           setvarvar TEMP2 KNEEDAMAGE
+           ifvarvarg TEMP2 ACTORHP setvarvar TEMP2 ACTORHP
+           mulvarvar TEMP2 VAMPIREDMGFACTOR
+           divvar TEMP2 1000
+           addvarvar CURRENTHITPOINTS TEMP2
+        
+           setvarvar TEMP3 MAXHITPOINTS
+           mulvarvar TEMP3 VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+           divvar TEMP3 1000
+  
+           ifvarvarg CURRENTHITPOINTS TEMP3 setvarvar CURRENTHITPOINTS TEMP3
+           ifvarg TEMP2 0
+           {
+            setvarvar TEMPHEALTH TEMP2
+            state showhealing_playerhp
+
+            setvar PLAYERHPDAMAGED? -1
+            sound DRAIN_HP
+            sound DRAIN_HP
+            sound DRAIN_HP
+           }
+          }
+         }
+        }
+        else
+        {
+         getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR6 // getactorvar[tempvehicleid].ACTORVAMPIRETIME TEMPVAR5
+         ifvarg TEMPVAR6 1000
+         {
+          getactorvar[tempvehicleid].ACTORMAXHP TEMP
+
+          getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+          mulvarvar TEMP TEMPVAR3 // Heals up to 125% HP on Public Beta
+          divvar TEMP 1000
+
+          getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+          ifvarvarl TEMPVAR4 TEMP
+          {
+           setvarvar TEMP2 KNEEDAMAGE
+           ifvarvarg TEMP2 ACTORHP setvarvar TEMP2 ACTORHP
+           getactorvar[tempvehicleid].ACTORVAMPIREDMGFACTOR TEMPVAR3
+           mulvarvar TEMP2 TEMPVAR3
+           divvar TEMP2 1000
+           addvarvar TEMPVAR4 TEMP2
+      
+           getactorvar[tempvehicleid].ACTORMAXHP TEMP3
+           getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+           mulvarvar TEMP3 TEMPVAR3 // Heals up to 125% HP on Public Beta
+           divvar TEMP3 1000
+
+           ifvarvarg TEMPVAR4 TEMP3 setvarvar TEMPVAR4 TEMP3
+           setactorvar[tempvehicleid].ACTORHP TEMPVAR4
+           ifvarg TEMP2 0
+           {
+            setvarvar TEMPHEALTH TEMP2
+            state showhealing_playerhp
+
+            setvar VEHICLEHPDAMAGED? -1
+            sound DRAIN_HP
+            sound DRAIN_HP
+            sound DRAIN_HP
+           }
+          }
+         }
+        }
+       }
+      }
+
+      ifvarg ACTORARMORDAMAGE 0
+      {
+       ifvarvare OWNERTEMP PLAYERID
+       {
+        ifvare tempvehicleid -1
+        {
+         ifvarg VAMPIREMAXDMGFACTOR 1000 // ifvarg VAMPIRETIME 0
+         {
+          setvarvar TEMP MAXARMORPOINTS
+ 
+          mulvarvar TEMP VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+          divvar TEMP 1000
+
+          ifvarvarl CURRENTARMORPOINTS TEMP
+          {
+           setvarvar TEMP2 ACTORARMORDAMAGE
+           mulvarvar TEMP2 VAMPIREDMGFACTOR
+           divvar TEMP2 1000
+           addvarvar CURRENTARMORPOINTS TEMP2
+       
+           setvarvar TEMP3 MAXARMORPOINTS
+           mulvarvar TEMP3 VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+           divvar TEMP3 1000
+
+           ifvarvarg CURRENTARMORPOINTS TEMP3 setvarvar CURRENTARMORPOINTS TEMP3
+
+           ifvarvarl ARMORPERCENT ACTORARMORPERCENT setvarvar ARMORPERCENT ACTORARMORPERCENT
+           ifvarg TEMP2 0
+           {
+            setvarvar RECEIVEDARMOR TEMP2
+            state showhealing_playerap
+
+            setvar PLAYERAPDAMAGED? -1
+            sound DRAIN_AP
+            sound DRAIN_AP
+            sound DRAIN_AP
+           }
+          }
+         }
+        }
+        else
+        {
+         getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR6 // getactorvar[tempvehicleid].ACTORVAMPIRETIME TEMPVAR5
+         ifvarg TEMPVAR6 1000
+         {
+          getactorvar[tempvehicleid].ACTORMAXAP TEMP
+
+          getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+          mulvarvar TEMP TEMPVAR3 // Heals up to 125% HP on Public Beta
+          divvar TEMP 1000
+
+          getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+          ifvarvarl TEMPVAR4 TEMP
+          {
+           setvarvar TEMP2 ACTORARMORDAMAGE
+           getactorvar[tempvehicleid].ACTORVAMPIREDMGFACTOR TEMPVAR3
+           mulvarvar TEMP2 TEMPVAR3
+           divvar TEMP2 1000
+           addvarvar TEMPVAR4 TEMP2
+       
+           getactorvar[tempvehicleid].ACTORMAXAP TEMP3
+           getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+           mulvarvar TEMP3 TEMPVAR3 // Heals up to 125% HP on Public Beta
+           divvar TEMP3 1000
+
+           ifvarvarg TEMPVAR4 TEMP3 setvarvar TEMPVAR4 TEMP3
+           setactorvar[tempvehicleid].ACTORAP TEMPVAR4
+
+           getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR4
+           ifvarvarl TEMPVAR4 ACTORARMORPERCENT { setvarvar TEMPVAR4 ACTORARMORPERCENT setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR4 }
+           ifvarg TEMP2 0
+           {
+            setvarvar RECEIVEDARMOR TEMP2
+            state showhealing_playerap
+
+            setvar VEHICLEAPDAMAGED? -1
+            sound DRAIN_AP  
+            sound DRAIN_AP
+            sound DRAIN_AP
+           }
+          }
+         }
+        }
+       }
+      }
+      // End Drain Artifact [for players since this is monster damage]
+      state checkdamagecaps-knee
+
+      // Stage 24p of Damage Formula
+      ifvarg KNEEDAMAGE 0 setvar ACTORHPDAMAGED? 1
+      subvarvar ACTORHP KNEEDAMAGE state showdamage_actor-kneehp
+      setvarvar ACTORLASTDAMAGE KNEEDAMAGE
+      ifvarg ACTORHP 0
+      {
+       setactor[THISACTOR].extra 8193
+       setactor[THISACTOR].htextra 1
+      }
+      else
+      {
+       setvar ACTORHP 0
+       setactor[THISACTOR].extra 0
+       state checkactorsurvivalvalue
+       ifvarg KNEEDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra KNEEDAMAGE
+      }
+      // FINAL DAMAGE COUNT HERE
+
+      setvarvar ACTORHEALTH ACTORHP
+
+      setvarvar DAMAGETEMP KNEEDAMAGE 
+      setvarvar TEMPHITACTORVARHP ACTORMAXHP
+      setvarvar TEMPHITACTORVARAP ACTORMAXAP
+      setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+      setvar DEFENDERDISPLAYTIMER 0
+      state checkdamagecaps-knee
+     } // ifvare PICNUMTEMP APLAYER
+     else // if the attacking actor is not either the player or the same species, damage is divided by half BEFORE defense is factored in
+     { // ifvarn PICNUMTEMP APLAYER
+      // Stage 2e of Damage Formula
+      state calccriticalhits_actor
+      mulvarvar KNEEDAMAGE CRITICALHITMULTI
+      ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
+      // ifvarg ACTORCRITICAL? 0 addlogvar PLAYERDAMAGE
+      state checkdamagecaps-knee
+
+      // Stage 3e of Damage Formula
+      divvar KNEEDAMAGE 2
+      subvarvar KNEEDAMAGE ACTORDEFENSE
+      state checkdamagecaps-knee
+
+      // Stage 4e of Damage Formula
+      // FINAL DAMAGE COUNT HERE
+      ifvarg KNEEDAMAGE 0 setvar ACTORHPDAMAGED? 1
+      subvarvar ACTORHP KNEEDAMAGE state showdamage_actor-kneehp
+      setvarvar ACTORLASTDAMAGE KNEEDAMAGE
+      ifvarg ACTORHP 0
+      {
+       setactor[THISACTOR].htextra 1
+       setactor[THISACTOR].extra 8193
+      }
+      else
+      {
+       setvar ACTORHP 0
+       setactor[THISACTOR].extra 0
+       state checkactorsurvivalvalue
+       setactor[THISACTOR].htextra KNEEDAMAGE
+      }
+
+      state checkdamagecaps-knee
+      // FINAL DAMAGE COUNT HERE
+     } // ifvarn PICNUMTEMP APLAYER
+   
+    } // ifvarn KNEEDAMAGE 0 
+  } // ifvarg tempb 0
+ends 
+
+state enemyabsorbdamage
+     addvarvar ACTORHP GENERALDAMAGE
+     setvar ACTORLASTDAMAGE 0
+     ifvarvarg ACTORHP ACTORMAXHPATOMIC setvarvar ACTORHP ACTORMAXHPATOMIC
+     setactor[THISACTOR].htextra -1
+     sound ABSORB_DAMAGE
+
+     setvarvar ITEMSEEK THISACTOR
+     setvarvar ITEMSEEKC GENERALDAMAGE
+     state showhealing_actorhp
+
+     setvar ACTORHPDAMAGED? -1
+     setvar GENERALDAMAGE 0 
+     break
+ends
+
+state freeze-chilleffect_actors
+     setvar tempf 45
+     ifvare temp BOSS1 { setvar tempf 75 addvar tempf 1 }
+     ifvare temp BOSS2 setvar tempf 90 
+     ifvare temp BOSS3 { setvar tempf 112 ifrnd 128 addvar tempf 1 }
+     ifvare temp BOSS4 setvar tempf 18
+     ifvare temp NEWBEAST setvar tempf 36
+     ifvare temp DRONE setvar tempf 0
+     ifvare temp EMPTYTANK setvar tempf 0
+     ifvare temp TANK setvar tempf 0
+     ifvare temp SCORPIONTANK setvar tempf 0
+     ifvare temp ROTATEGUN setvar tempf 0
+     mulvarvar tempf enemywinterclothes
+     divvar tempf 100
+
+     setvar temph 50
+     ifvare temp BOSS1 setvar temph 75
+     ifvare temp BOSS2 setvar temph 100 
+     ifvare temp BOSS3 setvar temph 125
+     ifvare temp BOSS4 setvar temph 20
+     ifvare temp NEWBEAST setvar temph 40
+     ifvare temp DRONE setvar temph 0
+     ifvare temp EMPTYTANK setvar temph 0
+     ifvare temp TANK setvar temph 0
+     ifvare temp SCORPIONTANK setvar temph 0
+     ifvare temp ROTATEGUN setvar temph 0
+     subvarvar temph tempf
+ends
+
+
+state checkdamagecaps-general
+  ifvarvarg GENERALDAMAGE STATLIMITATOMIC setvarvar GENERALDAMAGE STATLIMITATOMIC
+  ifvarvarg ACTORARMORDAMAGE STATLIMITATOMIC setvarvar ACTORARMORDAMAGE STATLIMITATOMIC
+  // addlogvar GENERALDAMAGE
+  // addlogvar ACTORARMORDAMAGE
+ends
+
 //************************************************************************
 //*State for calculating overall non-player damage from non melee-attacks*
 //************************************************************************
