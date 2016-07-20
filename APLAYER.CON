@@ -1,3 +1,2261 @@
+state standard_pjibs
+/*
+  guts JIBS1 1
+  guts JIBS3 2
+  guts JIBS4 1
+  guts JIBS5 1
+  guts JIBS6 2
+  guts DUKETORSO 1
+  guts DUKELEG 2
+  guts DUKEGUN 1
+*/
+ends
+
+state randomdeathtaunt
+ ifrnd 28 globalsound KAHNTAUNT1
+ else ifrnd 32 globalsound KAHNTAUNT2
+ else ifrnd 37 globalsound KAHNTAUNT3
+ else ifrnd 42 globalsound KAHNTAUNT4
+ else ifrnd 53 globalsound KAHNTAUNT5
+ else ifrnd 64 globalsound KAHNTAUNT6
+ else ifrnd 85 globalsound KAHNTAUNT7
+ else ifrnd 128 globalsound KAHNTAUNT8
+ else globalsound KAHNTAUNT9
+ends
+
+move DUKENOTMOVING
+state handle_dead_dukes
+  ifvare mainmenu 0 fall
+  ifmove 0   // 1st time initializiation...
+  {
+    ifrnd 128
+      cstat 4
+    else
+      cstat 0
+    move DUKENOTMOVING
+  }
+
+  ifsquished
+  {
+    sound SQUISHED
+    state random_ooz
+    killit
+  }
+  else
+    ifcount 1024
+      ifpdistg 4096
+        killit
+  else
+  {
+    strength 0
+    ifhitweapon
+      ifwasweapon RADIUSEXPLOSION
+    {
+      state standard_jibs
+      killit
+    }
+  }
+ends
+
+action PLYINGFRAMES 0 1 0 1 1
+actor DUKELYINGDEAD 0 PLYINGFRAMES
+  state handle_dead_dukes
+enda
+
+//************************************************************
+//*Actions for all of the sprites representing the characters*
+//************************************************************
+// APLAYER Sprite = 1405
+
+// Duke Nukem [sprite actions]
+action PGROWING   		0
+action PSTAND     		0   1   5   1  1
+action PEXPLODE   		106   5   1   1   10
+action PEXPLODEAD		113   1   1
+action PJPHOUVER  		15   1   5   1
+action PWALK    		20   4   5   1   16
+action PRUN     		20   4   5   1   10
+action PWALKBACK  		45   4   5  -1   16
+action PRUNBACK   		45   4   5  -1   10
+action PJUMPING   		50   4   5   1   30
+action PFALLING   		65   1   5
+action PDUCKING   		86   1   5
+action PCRAWLING  		86   3   5   1   20
+action PAKICKING  		40   2   5   1   25
+action PFLINTCHING		106  1   1   1   10
+action PTHROWNBACK		106  5   1   1   18
+action PFROZEN    		20  1   5
+action PLYINGDEAD  		113  1   1
+action PSWIMMINGGO		375   1   5   1   10
+action PSWIMMING   		375   4   5   1   13
+action PSWIMMINGWAIT 	395   1   5   1   13
+action PTREDWATER  		395   2   5   1   17
+// Jack Walker
+
+// Bubsy Bobcat [Normal]
+
+// Bubsy Bobcat [The Mask]
+
+// Ami Mizuno [Civilian]
+
+// Ami Mizuno [Senshi]
+
+// Ami Mizuno [Balanced]
+
+// Higa Hakaisha
+
+// ESSence Margalan [Armor]
+
+// ESSence Margalan [Armorless]
+
+// Ted Maldoras
+
+// Lisa Bates
+
+// Cybanis Morgandos
+
+// Nethra Maboroshi [Drone Form]
+
+// Nethra Maboroshi [Human Form]
+
+// Paula Polestar
+
+// Lori Stephens
+
+// Minako Aino [Civilian]
+
+// Minako Aino [Senshi]
+
+// Minako Aino [Balanced]
+
+// "Mystery Woman"
+
+// Maken Shinkara
+
+// Riot Tanks
+
+action PTANKWAIT 4030 1 7 1 1 cstat 1 // 5435 = 1405 = 4030
+// action PTANKWAIT 4766 1 7 1 1 cstat 1 // 6171 = 1405 = 4766
+
+move PSTOPED
+move PSHRINKING 		// used as a var only
+move PGROWINGPOP        // Used only as a variable
+
+//***********************************************
+//*States for Handling Branching APLAYER actions*
+//***********************************************
+
+state setplayeraction_pstand
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PSTAND
+       }
+       else action PSTAND
+ends
+
+state setplayeraction_prun
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PRUN
+       }
+       else action PRUN
+ends
+
+state setplayeraction_prunback
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PRUNBACK
+       }
+       else action PRUNBACK
+ends
+
+state setplayeraction_pwalk
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PWALK
+       }
+       else action PWALK
+ends
+
+state setplayeraction_pwalkback
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PWALKBACK
+       }
+       else action PWALKBACK
+ends
+
+state setplayeraction_pjumping
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PJUMPING
+       }
+       else action PJUMPING
+ends
+
+state setplayeraction_pfalling
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PFALLING
+       }
+       else action PFALLING
+ends
+
+state setplayeraction_pducking
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PDUCKING
+       }
+       else action PDUCKING
+ends
+
+state setplayeraction_pcrawling
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PCRAWLING
+       }
+       else action PCRAWLING
+ends
+
+state setplayeraction_pakicking
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PAKICKING
+       }
+       else action PAKICKING
+ends
+
+state setplayeraction_pjphouver
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PJPHOUVER
+       }
+       else action PJPHOUVER
+ends
+
+state setplayeraction_pswimming
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PSWIMMING
+       }
+       else action PSWIMMING
+ends
+
+state setplayeraction_pswimminggo
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PSWIMMINGGO
+       }
+       else action PSWIMMINGGO
+ends
+
+state setplayeraction_pswimmingwait
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PSWIMMINGWAIT
+       }
+       else action PSWIMMINGWAIT
+ends
+
+state setplayeraction_ptredwater
+       ifvarn VEHICLEID -1
+       {
+        ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 action PTANKWAIT
+        else action PTREDWATER
+       }
+       else action PTREDWATER
+ends
+
+state check_pstandard
+  ifp pwalking state setplayeraction_pwalk
+  else ifp pkicking state setplayeraction_pakicking
+  else ifp pwalkingback state setplayeraction_pwalkback
+  else ifp prunning state setplayeraction_prun
+  else ifp prunningback state setplayeraction_prunback
+  else ifp pjumping state setplayeraction_pjumping
+  else ifp pducking state setplayeraction_pducking
+ends
+
+state wallclimbspeedcheck
+  addvar WALLCLIMBSNDTIMER 1
+  getuserdef[THISACTOR].auto_run tempc
+  setvarvar CHARACTERSPEEDVARTEMP CHARACTERSPEEDVAR
+
+  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+  ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar CHARACTERSPEEDVARTEMP 3 divvar CHARACTERSPEEDVARTEMP 5 }
+  else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar CHARACTERSPEEDVARTEMP 4 divvar CHARACTERSPEEDVARTEMP 5 }
+
+  ifvare tempc 0 // Walking...
+  {
+   ifvarg CHARACTERSPEEDVARTEMP -1 ifvarl CHARACTERSPEEDVARTEMP 14 setvar TEMP 17 // 0-13
+   ifvarg CHARACTERSPEEDVARTEMP 13 ifvarl CHARACTERSPEEDVARTEMP 26 setvar TEMP 16 // 14-25
+   ifvarg CHARACTERSPEEDVARTEMP 25 ifvarl CHARACTERSPEEDVARTEMP 39 setvar TEMP 15 // 26-38
+   ifvarg CHARACTERSPEEDVARTEMP 38 ifvarl CHARACTERSPEEDVARTEMP 51 setvar TEMP 14 // 39-50
+   ifvarg CHARACTERSPEEDVARTEMP 50 ifvarl CHARACTERSPEEDVARTEMP 58 setvar TEMP 13 // 51-57
+   ifvarg CHARACTERSPEEDVARTEMP 57 ifvarl CHARACTERSPEEDVARTEMP 65 setvar TEMP 12 // 58-64
+   ifvarg CHARACTERSPEEDVARTEMP 64 ifvarl CHARACTERSPEEDVARTEMP 71 setvar TEMP 11 // 65-70
+   ifvarg CHARACTERSPEEDVARTEMP 70 ifvarl CHARACTERSPEEDVARTEMP 81 setvar TEMP 10 // 71-80
+   ifvarg CHARACTERSPEEDVARTEMP 80 ifvarl CHARACTERSPEEDVARTEMP 86 setvar TEMP 9 // 81-85
+   ifvarg CHARACTERSPEEDVARTEMP 85 ifvarl CHARACTERSPEEDVARTEMP 91 setvar TEMP 8 // 86-90
+   ifvarg CHARACTERSPEEDVARTEMP 90 ifvarl CHARACTERSPEEDVARTEMP 96 setvar TEMP 7 // 91-95
+   ifvarg CHARACTERSPEEDVARTEMP 95 ifvarl CHARACTERSPEEDVARTEMP 106 setvar TEMP 6 // 96-105
+   ifvarg CHARACTERSPEEDVARTEMP 105 ifvarl CHARACTERSPEEDVARTEMP 116 setvar TEMP 5 // 106-115
+   ifvarg CHARACTERSPEEDVARTEMP 115 setvar TEMP 4 // 116+
+  }
+  else // Running
+  {
+   ifvarg CHARACTERSPEEDVARTEMP -1 ifvarl CHARACTERSPEEDVARTEMP 26 setvar TEMP 9 // 0-25
+   ifvarg CHARACTERSPEEDVARTEMP 25 ifvarl CHARACTERSPEEDVARTEMP 51 setvar TEMP 8 // 26-50
+   ifvarg CHARACTERSPEEDVARTEMP 50 ifvarl CHARACTERSPEEDVARTEMP 61 setvar TEMP 7 // 51-60
+   ifvarg CHARACTERSPEEDVARTEMP 60 ifvarl CHARACTERSPEEDVARTEMP 71 setvar TEMP 6 // 61-70
+   ifvarg CHARACTERSPEEDVARTEMP 70 ifvarl CHARACTERSPEEDVARTEMP 91 setvar TEMP 5 // 71-90
+   ifvarg CHARACTERSPEEDVARTEMP 90 ifvarl CHARACTERSPEEDVARTEMP 116 setvar TEMP 4 // 91-115
+   ifvarg CHARACTERSPEEDVARTEMP 115 setvar TEMP 3 // 116+
+  }
+
+  switch WALLCLIMBSOUND
+   case 535 case 536
+    ifvarvarg WALLCLIMBSNDTIMER TEMP { ifvare footstepsndtoggle 1 { ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2 } setvar WALLCLIMBSNDTIMER 0 }
+   break
+   default
+    ifvarvarg WALLCLIMBSNDTIMER TEMP { ifvare footstepsndtoggle 1 { ifvarn WALLCLIMBSOUND -1 soundvar WALLCLIMBSOUND } setvar WALLCLIMBSNDTIMER 0 }
+   break
+  endswitch
+/*
+  ifvare WALLCLIMBSOUND 535 
+  {
+   ifvarvarg WALLCLIMBSNDTIMER TEMP
+   {
+    ifvare footstepsndtoggle 1 { ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2 }
+    setvar WALLCLIMBSNDTIMER 0
+   }
+  }
+  else
+  ifvare WALLCLIMBSOUND 536
+  {
+   ifvarvarg WALLCLIMBSNDTIMER TEMP
+   {
+    ifvare footstepsndtoggle 1 { ifrnd 128 sound LADDER_CLIMB1 else sound LADDER_CLIMB2 }
+    setvar WALLCLIMBSNDTIMER 0
+   }
+  }
+  else
+  {
+   ifvarvarg WALLCLIMBSNDTIMER TEMP
+   {
+    ifvare footstepsndtoggle 1 { ifvarn WALLCLIMBSOUND -1 soundvar WALLCLIMBSOUND }
+    setvar WALLCLIMBSNDTIMER 0
+   }
+  }
+*/
+ends
+
+
+state wallclimbcode
+
+ ifaction PSTAND nullop
+ else state setplayeraction_pstand
+
+/*
+ ifvare WALLTYPE 4
+ {
+  getplayer[THISACTOR].ang CLIMBWALLANG
+  setvarvar digx CLIMBWALLIDX
+  addvar digx 320
+  subvar digy 0
+  rotatepoint CLIMBWALLIDX CLIMBWALLIDY digx digy CLIMBWALLANG CLIMBWALLX CLIMBWALLY
+  updatesectorz CLIMBWALLX CLIMBWALLY z mysector
+  ifvarn mysector -1
+  {
+   setplayer[THISACTOR].posx CLIMBWALLX
+   setplayer[THISACTOR].posy CLIMBWALLY
+   setactor[PLAYERID].x CLIMBWALLX
+   setactor[PLAYERID].y CLIMBWALLY
+  }
+
+  // addlogvar CLIMBWALLIDX
+  // addlogvar CLIMBWALLIDY
+  // addlogvar digx
+  // addlogvar digy
+  // addlogvar CLIMBWALLANG
+  // addlogvar CLIMBWALLX
+  // addlogvar CLIMBWALLY
+
+  setvarvar TEMPVAR4 CLIMBWALLIDX
+  setvarvar TEMPVAR5 CLIMBWALLIDY
+  getplayer[THISACTOR].posx TEMPVAR2
+  getplayer[THISACTOR].posy TEMPVAR3
+  subvarvar TEMPVAR4 TEMPVAR2
+  subvarvar TEMPVAR5 TEMPVAR3
+  getangle TEMPVAR TEMPVAR4 TEMPVAR5
+  setplayer[THISACTOR].ang TEMPVAR
+ }
+*/
+
+ ifp ponground setvar bpress 0
+ setplayer[THISACTOR].falling_counter 0
+ ifvare fpress 0 ifvare bpress 0
+ {
+  setvar CLIMBINGSPEED -256
+  getplayer[THISACTOR].posx CLIMBWALLX
+  getplayer[THISACTOR].posy CLIMBWALLY
+  getactor[PLAYERID].x CLIMBWALLX
+  getactor[PLAYERID].y CLIMBWALLY
+ }
+ else
+ {
+  getplayer[THISACTOR].posz z
+  updatesectorz CLIMBWALLX CLIMBWALLY z mysector
+  ifvarn mysector -1
+  {
+   setplayer[THISACTOR].posx CLIMBWALLX
+   setplayer[THISACTOR].posy CLIMBWALLY
+   setactor[PLAYERID].x CLIMBWALLX
+   setactor[PLAYERID].y CLIMBWALLY
+  }
+ }
+
+ ifp ponground setvar CLIMBINGSPEED 0 else
+ {
+  setplayer[THISACTOR].posxv 0
+  setplayer[THISACTOR].posyv 0
+ }
+
+ subvar ONAWALL? 1
+
+ setplayer[THISACTOR].poszv CLIMBINGSPEED
+ ifvarg CLIMBINGSPEED 256 state wallclimbspeedcheck else ifvarl CLIMBINGSPEED -256 state wallclimbspeedcheck
+ends
+
+state playershrink
+      ifvare oldskoolmode 0
+      {
+       randvar TEMPVAR5 999 addvar TEMPVAR5 1
+       ifvarvarg TEMPVAR5 SHRINKINGRESISTPLAYER
+       {
+        state stoppainsounds
+        ifrnd 128 state deflectshrinker 
+        else 
+        { 
+         ifvarn VEHICLEID -1 nullop
+         else
+         {
+          setvar SHRUNK? 1
+          palfrom 48 0 48
+          move PSHRINKING // used as a var only.
+          sound ACTOR_SHRINKING
+          cstat 0
+          break
+         }
+        }
+       }
+       else state deflectshrinker 
+      }
+      else
+      {
+       state stoppainsounds
+       setvar SHRUNK? 1
+       palfrom 48 0 48
+       move PSHRINKING // used as a var only.
+       sound ACTOR_SHRINKING
+       cstat 0
+       break
+      }
+ends
+
+state canceldeadactions
+ ifaction PEXPLODE { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ ifaction PEXPLODEAD { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ ifaction PFLINTCHING { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ ifaction PTHROWNBACK { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ ifaction PLYINGDEAD { ifvarg PARTYALIVE 0 state setplayeraction_pstand }
+ends
+
+state mercurycomputerautomapcheck
+ setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+ ifvare MISCARRAYID_AMOUNTTEMP 1
+ {
+  getuserdef[THISACTOR].showallmap temp
+  ifvarn temp 1 activatecheat 17 
+ }
+ends
+
+state checkplayergrowthrates
+ setvarvar CHARACTERARRAY CHARACTERSELECTED?
+ getactorvar[CHARACTERARRAY].CHARACTERHPINCREASECURVE PLAYERHPINCREASECURVE
+ getactorvar[CHARACTERARRAY].CHARACTERAPINCREASECURVE PLAYERAPINCREASECURVE
+ getactorvar[CHARACTERARRAY].CHARACTEREPINCREASECURVE PLAYEREPINCREASECURVE
+ getactorvar[CHARACTERARRAY].CHARACTERATKINCREASECURVE PLAYERATKINCREASECURVE
+ getactorvar[CHARACTERARRAY].CHARACTERDEFINCREASECURVE PLAYERDEFINCREASECURVE
+
+// getactorvar[CHARACTERARRAY].CHARACTERLIFTSTRENGTH PLAYERLIFTSTRENGTH
+ends
+
+state checkplayerinventoryitems
+ setvarvar CHARACTERARRAY CHARACTERSELECTED?
+ ifvarg INVENTORYSLOTMAX 0 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 PLAYEREQUIPSLOTITEM1 else setvar PLAYEREQUIPSLOTITEM1 -1
+ ifvarg INVENTORYSLOTMAX 1 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 PLAYEREQUIPSLOTITEM2 else setvar PLAYEREQUIPSLOTITEM2 -1
+ ifvarg INVENTORYSLOTMAX 2 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 PLAYEREQUIPSLOTITEM3 else setvar PLAYEREQUIPSLOTITEM3 -1
+ ifvarg INVENTORYSLOTMAX 3 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 PLAYEREQUIPSLOTITEM4 else setvar PLAYEREQUIPSLOTITEM4 -1
+ ifvarg INVENTORYSLOTMAX 4 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 PLAYEREQUIPSLOTITEM5 else setvar PLAYEREQUIPSLOTITEM5 -1
+ ifvarg INVENTORYSLOTMAX 5 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 PLAYEREQUIPSLOTITEM6 else setvar PLAYEREQUIPSLOTITEM6 -1
+ ifvarg INVENTORYSLOTMAX 6 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 PLAYEREQUIPSLOTITEM7 else setvar PLAYEREQUIPSLOTITEM7 -1
+ ifvarg INVENTORYSLOTMAX 7 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 PLAYEREQUIPSLOTITEM8 else setvar PLAYEREQUIPSLOTITEM8 -1
+ends
+
+state removeexcessinventory-checkids
+  ifvare TEMPVAR3 1 { state checksunrings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 2 { state checkaquarings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 3 { state checkplasmarings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 4 { state checkspiritrings addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 5 { state checkcharmankhs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 6 { state checkmirrorshields addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 7 { state checkexpbadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 8 { state checkrankbadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 9 { state checkmoneybadges addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 10 { state checkriotshields addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 11 { state checknyxglovepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 12 { state checkrabbitsfoots addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 13 { state checkjumpbootpairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 14 { state checkshockabbootpairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 15 { state checkhappyshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 16 { state checkstyleshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 17 { state checkcharmshoepairs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 18 { state checkpowerwrists addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 19 { state checkhockeymasks addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 20 { state checkgemstonecrowns addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 21 { state checkironrunes addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 22 { state checktwilightcapes addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 23 { state checksnakearmbands addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 24 { state checkmedicbags addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 25 { state checkserpenthelmets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 26 { state checkenergyincurments addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 27 { state checkyinyangorbs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 28 { state checkshikonjewels addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 29 { state checkliquidmetalamulets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 30 { state checkmandalabracelets addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  ifvare TEMPVAR3 31 { state checkaqualungs addvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+  //addlogvar TEMPVAR3
+  setvar TEMPVAR3 0
+ends
+
+state characterperformremoveslot1
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR3 }
+ends
+state characterperformremoveslot2
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR3 }
+ends
+state characterperformremoveslot3
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR3 }
+ends
+state characterperformremoveslot4
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR3 }
+ends
+state characterperformremoveslot5
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 TEMPVAR3 }
+ends
+state characterperformremoveslot6
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 TEMPVAR3 }
+ends
+state characterperformremoveslot7
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 TEMPVAR3 }
+ends
+state characterperformremoveslot8
+  getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR3 ifvarn TEMPVAR3 0 { state removeexcessinventory-checkids setactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR3 }
+ends
+
+state removeexcessinventoryslots
+ ifvarl INVENTORYSLOTMAX 8
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot8
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot8
+ }
+ ifvarl INVENTORYSLOTMAX 7
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot7
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot7
+ }
+ ifvarl INVENTORYSLOTMAX 6
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot6
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot6
+ }
+ ifvarl INVENTORYSLOTMAX 5
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot5
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot5
+ }
+ ifvarl INVENTORYSLOTMAX 4
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot4
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot4
+ }
+ ifvarl INVENTORYSLOTMAX 3
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot3
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot3
+ }
+ ifvarl INVENTORYSLOTMAX 2
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot2
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot2
+ }
+ ifvarl INVENTORYSLOTMAX 1
+ {
+  setvarvar CHARACTERARRAY 1 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 2 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 3 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 4 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 5 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 6 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 7 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 8 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 9 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 10 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 11 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 12 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 13 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 14 state characterperformremoveslot1
+  setvarvar CHARACTERARRAY 15 state characterperformremoveslot1
+ }
+ends
+
+state checkplayersupportlevels
+ setvarvar CHARACTERARRAY CHARACTERSELECTED?
+ ifvare DUKE? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTDUKE PLAYERSUPPORTDUKE else setvar PLAYERSUPPORTDUKE -1
+ ifvare JACK? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTJACK PLAYERSUPPORTJACK else setvar PLAYERSUPPORTJACK -1
+ ifvare BUBSY? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTBUBSY PLAYERSUPPORTBUBSY else setvar PLAYERSUPPORTBUBSY -1
+ ifvare AMI? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTAMI PLAYERSUPPORTAMI else setvar PLAYERSUPPORTAMI -1
+ ifvare LOWANG? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLOWANG PLAYERSUPPORTLOWANG else setvar PLAYERSUPPORTLOWANG -1
+ ifvare ESSENCE? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTESSENCE PLAYERSUPPORTESSENCE else setvar PLAYERSUPPORTESSENCE -1
+ ifvare TED? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTTED PLAYERSUPPORTTED else setvar PLAYERSUPPORTTED -1
+ ifvare LISA? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLISA PLAYERSUPPORTLISA else setvar PLAYERSUPPORTLISA -1
+ ifvare CYBANIS? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTCYBANIS PLAYERSUPPORTCYBANIS else setvar PLAYERSUPPORTCYBANIS -1
+ ifvare NETHRA? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTNETHRA PLAYERSUPPORTNETHRA else setvar PLAYERSUPPORTNETHRA -1
+ ifvare PAULA? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTPAULA PLAYERSUPPORTPAULA else setvar PLAYERSUPPORTPAULA -1
+ ifvare LORI? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTLORI PLAYERSUPPORTLORI else setvar PLAYERSUPPORTLORI -1
+ ifvare MINAKO? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMINAKO PLAYERSUPPORTMINAKO else setvar PLAYERSUPPORTMINAKO -1
+ ifvare MYSTERY1? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMYSTERY1 PLAYERSUPPORTMYSTERY1 else setvar PLAYERSUPPORTMYSTERY1 -1
+ ifvare MAKEN? 1 getactorvar[CHARACTERARRAY].CHARACTERSUPPORTMAKEN PLAYERSUPPORTMAKEN else setvar PLAYERSUPPORTMAKEN -1
+ends
+
+state checkplayermaxhp
+  getactorvar[CHARACTERARRAY].CHARACTERHP temp
+  getactorvar[CHARACTERARRAY].CHARACTERMAXHP tempb
+  ifvarvarl temp tempb setvarvar temp tempb
+  setactorvar[CHARACTERARRAY].CHARACTERHP temp
+ends
+
+state characterformspeedmod
+   getplayer[THISACTOR].posxv posxv
+   mulvarvar posxv TEMPVAR4
+   divvar posxv 100
+   setplayer[THISACTOR].posxv posxv
+   getplayer[THISACTOR].posyv posyv
+   mulvarvar posyv TEMPVAR4
+   divvar posyv 100
+   setplayer[THISACTOR].posyv posyv
+ends
+
+state getaccelerationlimits
+    getplayer[THISACTOR].runspeed CALCVAR1
+    subvar CALCVAR1 46500
+    ifvarl CALCVAR1 0 setvar CALCVAR1 0
+    ifvarg CALCVAR1 14500 setvar CALCVAR1 14500
+    divvar CALCVAR1 145
+
+    ifvare CALCVAR1 0 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 0 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 0 else setvar ACCELFACTOR 0 }
+    ifvare CALCVAR1 1 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 19 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 12 else setvar ACCELFACTOR 16 }
+    ifvare CALCVAR1 2 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 33 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 22 else setvar ACCELFACTOR 28 }
+    ifvare CALCVAR1 3 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 44 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 31 else setvar ACCELFACTOR 38 }
+    ifvare CALCVAR1 4 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 53 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 38 else setvar ACCELFACTOR 46 }
+    ifvare CALCVAR1 5 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 61 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 44 else setvar ACCELFACTOR 53 }
+    ifvare CALCVAR1 6 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 67 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 50 else setvar ACCELFACTOR 59 }
+    ifvare CALCVAR1 7 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 72 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 54 else setvar ACCELFACTOR 64 }
+    ifvare CALCVAR1 8 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 76 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 59 else setvar ACCELFACTOR 68 }
+    ifvare CALCVAR1 9 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 80 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 62 else setvar ACCELFACTOR 72 }
+    ifvare CALCVAR1 10 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 83 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 66 else setvar ACCELFACTOR 76 }
+    ifvare CALCVAR1 11 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 86 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 69 else setvar ACCELFACTOR 79 }
+    ifvare CALCVAR1 12 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 88 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 72 else setvar ACCELFACTOR 81 }
+    ifvare CALCVAR1 13 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 91 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 74 else setvar ACCELFACTOR 84 }
+    ifvare CALCVAR1 14 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 92 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 76 else setvar ACCELFACTOR 86 }
+    ifvare CALCVAR1 15 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 94 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 78 else setvar ACCELFACTOR 88 }
+    ifvare CALCVAR1 16 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 96 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 80 else setvar ACCELFACTOR 89 }
+    ifvare CALCVAR1 17 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 97 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 82 else setvar ACCELFACTOR 91 }
+    ifvare CALCVAR1 18 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 98 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 84 else setvar ACCELFACTOR 92 }
+    ifvare CALCVAR1 19 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 99 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 85 else setvar ACCELFACTOR 93 }
+    ifvare CALCVAR1 20 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 100 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 86 else setvar ACCELFACTOR 95 }
+    ifvare CALCVAR1 21 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 101 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 88 else setvar ACCELFACTOR 96 }
+    ifvare CALCVAR1 22 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 89 else setvar ACCELFACTOR 97 }
+    ifvare CALCVAR1 23 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 90 else setvar ACCELFACTOR 97 }
+    ifvare CALCVAR1 24 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 91 else setvar ACCELFACTOR 98 }
+    ifvare CALCVAR1 25 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 92 else setvar ACCELFACTOR 99 }
+    ifvare CALCVAR1 26 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 92 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 27 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 93 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 28 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 94 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 29 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 94 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 30 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 95 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 31 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 96 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 32 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 96 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 33 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 97 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 34 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 97 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 35 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 97 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 36 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 37 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 38 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 39 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 40 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 41 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 42 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 43 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 44 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 45 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 46 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 47 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 48 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 49 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 50 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 51 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 52 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 53 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 54 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 55 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 56 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 57 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 58 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 59 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 60 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 108 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 61 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 62 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 63 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 64 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 65 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 105 }
+    ifvare CALCVAR1 66 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 67 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 68 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 107 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 69 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 70 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 71 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 101 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 72 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 73 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 74 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 104 }
+    ifvare CALCVAR1 75 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 106 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 76 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 77 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 78 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 79 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 80 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 81 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 105 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 82 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 100 else setvar ACCELFACTOR 103 }
+    ifvare CALCVAR1 83 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 84 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 } 
+    ifvare CALCVAR1 85 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 86 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 87 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 104 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 88 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 89 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 102 }
+    ifvare CALCVAR1 90 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 91 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 99 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 92 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 93 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 103 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 94 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 95 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 101 }
+    ifvare CALCVAR1 96 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 97 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 98 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 98 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 99 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 102 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 97 else setvar ACCELFACTOR 100 }
+    ifvare CALCVAR1 100 { ifvarand PLAYERSTATUS? 2 setvar ACCELFACTOR 101 else ifvarand PLAYERSTATUS? 4 setvar ACCELFACTOR 97 else setvar ACCELFACTOR 100 }
+
+    ifvare sector[PLAYERSECTOR].lotag 1 { ifp ponground subvar ACCELFACTOR 3 }
+    ifvare CHARACTERSELECTED? 3 
+    {
+     setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 addvar ACCELFACTOR 1 
+     setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar ACCELFACTOR 75 divvar ACCELFACTOR 100 }
+    }
+    ifvare CHARACTERSELECTED? 4
+    {
+     setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 2 addvar ACCELFACTOR 1 
+    }
+    ifvare CHARACTERSELECTED? 6
+    {
+     setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACCELFACTOR 875 divvar ACCELFACTOR 1000 }
+    }
+    ifvare CHARACTERSELECTED? 10 
+    {
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 addvar ACCELFACTOR 1 
+    }
+    ifvare CHARACTERSELECTED? 13
+    {
+     setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 2 addvar ACCELFACTOR 1 
+    }
+ends
+
+state liftaccelcap
+   ifvarn SPRITEID-HOLDING -1 ifvare SPRITEID-TELEKENESIS_P -1
+   {
+    setvarvar STRENGTHRATIO PLAYERLIFTSTRENGTHTEMP
+    mulvar STRENGTHRATIO 100
+    divvarvar STRENGTHRATIO actorvar[SPRITEID-HOLDING].ACTORWEIGHT
+
+    // limit player speed
+    ifvarvarg STRENGTHRATIO GRABRATIO
+    {
+     setvarvar PHYSICSTEMPC STRENGTHRATIO
+     subvarvar PHYSICSTEMPC GRABRATIO
+     addvar PHYSICSTEMPC 1
+
+     setvarvar PHYSICSTEMPB LIFTRATIO
+     subvarvar PHYSICSTEMPB GRABRATIO
+     addvar PHYSICSTEMPB 1
+
+     mulvar PHYSICSTEMPC 60 // 100
+     divvarvar PHYSICSTEMPC PHYSICSTEMPB
+
+     setvar PHYSICSTEMP 20
+     addvarvar PHYSICSTEMP PHYSICSTEMPC
+     ifvarl PHYSICSTEMP 20 setvar PHYSICSTEMP 20
+     ifvarg PHYSICSTEMP 100 setvar PHYSICSTEMP 100
+     
+     mulvarvar ACCELFACTOR PHYSICSTEMP
+     divvar ACCELFACTOR 100
+
+     ifp pwalking { mulvar ACCELFACTOR 4 divvar ACCELFACTOR 5 }
+     else ifp pducking { mulvar ACCELFACTOR 3 divvar ACCELFACTOR 5 }
+    }
+   }
+ends
+
+state moveaccelcap
+   ifvarn PLAYERPUSHINGTIMER 0
+   {
+    ifvarand extbits 1 mulvar ACCELFACTOR 35 divvar ACCELFACTOR 100
+    ifvarand extbits 2 mulvar ACCELFACTOR 25 divvar ACCELFACTOR 100
+   }
+ends
+
+state healthaccelcap
+ ifvarn oldskoolmode 1
+ {
+  setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
+  ifvarl MISCARRAYID_AMOUNTTEMP 101 { mulvar ACCELFACTOR 3 divvar ACCELFACTOR 5 }
+  else ifvarg MISCARRAYID_AMOUNTTEMP 100 ifvarl MISCARRAYID_AMOUNTTEMP 251 { mulvar ACCELFACTOR 4 divvar ACCELFACTOR 5 }
+ }
+ends
+
+state weaponaccelcap
+ setvar TEMPVAR4 0
+ ifvare CHARACTERSELECTED? 6 addvar TEMPVAR4 1 // ESSence has the strength to carry all of his weapons with no weight-penalty
+ ifvare CHARACTERSELECTED? 9 addvar TEMPVAR4 1 // Cybanis has the strength to carry all of his weapons with no weight-penalty
+ ifvare CHARACTERSELECTED? 14 addvar TEMPVAR4 1 // 'Mystery Lady' has the strength to carry all of her weapons with no weight-penalty
+ ifvare TEMPVAR4 0 // other characters will experience some degree of weight-penalty when equipped with certain weapons
+ {
+  ifvare SPRITEID-HOLDING -1 // ifvare SPRITEID-TELEKENESIS_P -1
+  {
+   ifvare VEHICLEID -1
+   {
+    ifp ponsteroids 
+    {
+     ifvare player[THISACTOR].curr_weapon 0 { mulvar ACCELFACTOR 3000 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 1 { mulvar ACCELFACTOR 2999 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 2 { mulvar ACCELFACTOR 2997 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 3 { mulvar ACCELFACTOR 2996 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 4 { mulvar ACCELFACTOR 2991 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 5 { mulvar ACCELFACTOR 2998 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 6 { mulvar ACCELFACTOR 2995 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 7 { mulvar ACCELFACTOR 2993 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 8 { mulvar ACCELFACTOR 2997 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 9 { mulvar ACCELFACTOR 2996 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 10 { mulvar ACCELFACTOR 3000 divvar ACCELFACTOR 3000 }
+     else ifvare player[THISACTOR].curr_weapon 11 { mulvar ACCELFACTOR 2995 divvar ACCELFACTOR 3000 }		
+    }
+    else
+    {
+     ifvare player[THISACTOR].curr_weapon 0 { mulvar ACCELFACTOR 300 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 1 { mulvar ACCELFACTOR 299 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 2 { mulvar ACCELFACTOR 297 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 3 { mulvar ACCELFACTOR 296 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 4 { mulvar ACCELFACTOR 291 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 5 { mulvar ACCELFACTOR 298 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 6 { mulvar ACCELFACTOR 295 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 7 { mulvar ACCELFACTOR 293 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 8 { mulvar ACCELFACTOR 297 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 9 { mulvar ACCELFACTOR 296 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 10 { mulvar ACCELFACTOR 300 divvar ACCELFACTOR 300 }
+     else ifvare player[THISACTOR].curr_weapon 11 { mulvar ACCELFACTOR 295 divvar ACCELFACTOR 300 }		
+    }
+
+   }
+  }
+ }
+ends
+
+state winterclothesaccelcap
+       ifvarg winterclothes 0
+       {
+        setvar tempc 8
+        mulvarvar tempc winterclothes
+        divvar tempc 100
+
+        setvar tempb 150
+        subvarvar tempb tempc
+
+        mulvarvar ACCELFACTOR tempb
+        divvar ACCELFACTOR 150
+       }
+ends
+
+// Factors regenerating air supply
+state playerairrestorecheck
+      ifvarvarl AIRTIME MAXAIRTIME
+      {
+       ifvare mainmenu 0 addvar AIRTICCOUNTER 1
+       ifvare AIRTICCOUNTER 1
+       {
+        setvarvar TEMPVAR5 MAXAIRTIME
+        divvar TEMPVAR5 130
+        ifvarl TEMPVAR5 1 setvar TEMPVAR5 1
+        ifvare mainmenu 0 ifvarg CURRENTHITPOINTS 0 addvarvar AIRTIME TEMPVAR5
+        setvar AIRTICCOUNTER 0
+       }
+      }
+      ifvarvarg AIRTIME MAXAIRTIME setvarvar AIRTIME MAXAIRTIME 
+ends
+
+state enforceoverheadsprites
+  ifvare OVERHEADSPRITE 0 setvar OVERHEADSPRITE 1
+  addvar OVERHEADSPRITE 1
+  ifvarg OVERHEADSPRITE 16 setvar OVERHEADSPRITE 1
+ends
+
+state enforcespeedlimits
+   ifvarvarg posxv PLAYERMOVEPLUSVEL
+   {
+    setvarvar posxv PLAYERMOVEPLUSVEL
+    setplayer[THISACTOR].posxv posxv
+
+    ifvarvarg posyv PLAYERMOVEPLUSVEL
+    {
+     setvarvar posyv PLAYERMOVEPLUSVEL
+     setplayer[THISACTOR].posyv posyv
+    }
+    else
+    {
+     ifvarvarl posyv PLAYERMOVEMINUSVEL
+     {
+      setvarvar posyv PLAYERMOVEMINUSVEL
+      setplayer[THISACTOR].posyv posyv
+     }
+    }
+   }
+   else
+   {
+    ifvarvarl posxv PLAYERMOVEMINUSVEL
+    {
+     setvarvar posxv PLAYERMOVEMINUSVEL
+     setplayer[THISACTOR].posxv posxv
+
+     ifvarvarg posyv PLAYERMOVEPLUSVEL
+     {
+      setvarvar posyv PLAYERMOVEPLUSVEL
+      setplayer[THISACTOR].posyv posyv
+     }
+     else
+     {
+      ifvarvarl posyv PLAYERMOVEMINUSVEL
+      {
+       setvarvar posyv PLAYERMOVEMINUSVEL
+       setplayer[THISACTOR].posyv posyv
+      }
+     }
+    }
+    else
+    {
+     ifvarvarg posyv PLAYERMOVEPLUSVEL
+     {
+      setvarvar posyv PLAYERMOVEPLUSVEL
+      setplayer[THISACTOR].posyv posyv
+     }
+     else
+     {
+      ifvarvarl posyv PLAYERMOVEMINUSVEL
+      {
+       setvarvar posyv PLAYERMOVEMINUSVEL
+       setplayer[THISACTOR].posyv posyv
+      }
+     }
+    }
+   }
+ends
+
+state checkspeeddisplays
+      setvarvar CHARACTERSPEEDVAR CHARACTERSPEEDTRUE
+      setvarvar TEMPVAR5 CHARACTERSPEEDVAR
+      subvar TEMPVAR5 46500
+      mulvar TEMPVAR5 25
+      divvar TEMPVAR5 100
+      ifvarand PLAYERSTATUS? 2 addvarvar CHARACTERSPEEDVAR TEMPVAR5
+      else ifvarand PLAYERSTATUS? 4 subvarvar CHARACTERSPEEDVAR TEMPVAR5
+      setvarvar CHARACTERSPEEDDEBUG CHARACTERSPEEDVAR
+
+      setvarvar CHARACTERSPEEDVAR CHARACTERSPEEDTRUE
+      subvar CHARACTERSPEEDVAR 46500
+      ifvarn CHARACTERSPEEDVAL 0 divvarvar CHARACTERSPEEDVAR CHARACTERSPEEDVAL
+      ifvarand PLAYERSTATUS? 2 { mulvar CHARACTERSPEEDVAR 125 divvar CHARACTERSPEEDVAR 100 }
+      else ifvarand PLAYERSTATUS? 4 { mulvar CHARACTERSPEEDVAR 75 divvar CHARACTERSPEEDVAR 100 }
+      setvarvar CHARACTERSPEEDSTAT CHARACTERSPEEDVAR
+ends
+
+state showsecretmessages
+   ifvare TEMPVAR5 0 redefinequote 9 ^17A SECRET PLACE!
+   ifvare TEMPVAR5 1 redefinequote 9 ^17YOU FOUND A SECRET AREA!
+   ifvare TEMPVAR5 2 redefinequote 9 ^17A SECRET IS REVEALED!
+   ifvare TEMPVAR5 3 redefinequote 9 ^17YOU HAVE UNCOVERED A SECRET!
+ends
+
+state happystylecharm_rndmulti
+ ifrnd 192 mulvar TEMPVAR4 1
+ else ifrnd 192 mulvar TEMPVAR4 2
+ else ifrnd 192 mulvar TEMPVAR4 3
+ else mulvar TEMPVAR4 4
+ends
+
+state happystylecharm_lvlcalc
+ setvarvar TEMPVAR3 AVERAGELEVEL divvar TEMPVAR2 2
+ setvarvar TEMPVAR2 PLAYERLEVEL divvar TEMPVAR2 4
+ addvarvar TEMPVAR3 TEMPVAR2
+ends
+
+state player_havehappyshoes
+ setvarvar TEMPVAR4 EXPPTS
+ randvar TEMPVAR5 25600 addvar TEMPVAR5 25600
+ divvarvar TEMPVAR4 TEMPVAR5
+ ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+
+ state happystylecharm_rndmulti
+ state happystylecharm_lvlcalc
+ mulvarvar TEMPVAR4 TEMPVAR3
+
+ ifvare CHARACTERSELECTED? 2 { mulvar TEMPVAR4 5 divvar TEMPVAR4 4 } // Jack gets 25% more EXP
+ ifvare CHARACTERSELECTED? 9 { mulvar TEMPVAR4 11 divvar TEMPVAR4 8 } // Cybanis gets 37.5% more EXP
+ ifvare CHARACTERSELECTED? 12 { mulvar TEMPVAR4 3 divvar TEMPVAR4 2 } // Lori gets 50% more EXP
+ ifvare CHARACTERSELECTED? 15 { mulvar TEMPVAR4 5 divvar TEMPVAR4 4 } // Maken gets 25% more EXP
+
+ // Support System
+ setvar DAMAGEMODIFIER 100
+ ifvarn CHARACTERSELECTED? 2 // If the character is not Jack, check their support level with him once
+ {
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 0 addvar DAMAGEMODIFIER 4 // "C" Support
+  ifvarg PLAYERSUPPORTJACK 1 addvar DAMAGEMODIFIER 6 // "B" Support
+  ifvarg PLAYERSUPPORTJACK 2 addvar DAMAGEMODIFIER 9 // "A" Support
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ else // If the character is Jack, check for "S" and "*" support levels with all 14 other characters
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 12 // "S" Support /w Jack
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 36 // "*" Support /w Jack
+ }
+ ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+ ifvarg DAMAGEMODIFIER 234 setvar DAMAGEMODIFIER 234
+ mulvarvar TEMPVAR4 DAMAGEMODIFIER
+ divvar TEMPVAR4 100
+
+ // EXP Badge
+ setvar TEMP3 0
+ ifvare PLAYEREQUIPSLOTITEM1 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM2 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM3 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM4 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM5 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM6 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM7 7 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM8 7 addvar TEMP3 2
+ ifvarg TEMP3 0 mulvarvar TEMPVAR4 TEMP3
+
+ addvarvar EXPPTS TEMPVAR4
+ends
+
+state player_havestyleshoes
+ setvarvar TEMPVAR4 RANKPOINTS
+ randvar TEMPVAR5 25600 addvar TEMPVAR5 25600
+ divvarvar TEMPVAR4 TEMPVAR5
+ ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+
+ state happystylecharm_rndmulti
+ state happystylecharm_lvlcalc
+ mulvarvar TEMPVAR4 TEMPVAR3
+
+ ifvare CHARACTERSELECTED? 6 { mulvar TEMPVAR4 11 divvar TEMPVAR4 8 } // ESSence gets 37.5% more RANK
+ ifvare CHARACTERSELECTED? 7 { mulvar TEMPVAR4 3 divvar TEMPVAR4 2 } // Ted gets 50% more RANK
+ ifvare CHARACTERSELECTED? 11 { mulvar TEMPVAR4 5 divvar TEMPVAR4 4 } // Paula gets 25% more RANK
+ ifvare CHARACTERSELECTED? 15 { mulvar TEMPVAR4 5 divvar TEMPVAR4 4 } // Maken gets 25% more RANK
+
+ // Support System
+ setvar DAMAGEMODIFIER 100
+ ifvarn CHARACTERSELECTED? 6 // If the character is not ESSence, check their support level with him once
+ {
+  // ESSence
+  ifvarg PLAYERSUPPORTESSENCE 0 addvar DAMAGEMODIFIER 4 // "C" Support
+  ifvarg PLAYERSUPPORTESSENCE 1 addvar DAMAGEMODIFIER 6 // "B" Support
+  ifvarg PLAYERSUPPORTESSENCE 2 addvar DAMAGEMODIFIER 9 // "A" Support
+  ifvarg PLAYERSUPPORTESSENCE 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTESSENCE 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ else // If the character is ESSence, check for "S" and "*" support levels with all 14 other characters
+ {
+  // Duke
+  ifvarg PLAYERSUPPORTDUKE 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTDUKE 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Jack
+  ifvarg PLAYERSUPPORTJACK 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTJACK 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Bubsy
+  ifvarg PLAYERSUPPORTBUBSY 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTBUBSY 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Ami
+  ifvarg PLAYERSUPPORTAMI 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTAMI 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lo Wang
+  ifvarg PLAYERSUPPORTLOWANG 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLOWANG 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Ted
+  ifvarg PLAYERSUPPORTTED 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTTED 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lisa
+  ifvarg PLAYERSUPPORTLISA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLISA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Cybanis
+  ifvarg PLAYERSUPPORTCYBANIS 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTCYBANIS 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Nethra
+  ifvarg PLAYERSUPPORTNETHRA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTNETHRA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Paula
+  ifvarg PLAYERSUPPORTPAULA 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTPAULA 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Lori
+  ifvarg PLAYERSUPPORTLORI 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTLORI 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Minako
+  ifvarg PLAYERSUPPORTMINAKO 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMINAKO 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // "Mystery Lady"
+  ifvarg PLAYERSUPPORTMYSTERY1 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMYSTERY1 4 addvar DAMAGEMODIFIER 36 // "*" Support
+  // Maken
+  ifvarg PLAYERSUPPORTMAKEN 3 addvar DAMAGEMODIFIER 12 // "S" Support
+  ifvarg PLAYERSUPPORTMAKEN 4 addvar DAMAGEMODIFIER 36 // "*" Support
+ }
+ ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+ ifvarg DAMAGEMODIFIER 234 setvar DAMAGEMODIFIER 234
+ mulvarvar TEMPVAR4 DAMAGEMODIFIER
+ divvar TEMPVAR4 100
+
+ // Rank Badge
+ setvar TEMP3 0
+ ifvare PLAYEREQUIPSLOTITEM1 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM2 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM3 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM4 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM5 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM6 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM7 8 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM8 8 addvar TEMP3 2
+ ifvarg TEMP3 0 mulvarvar TEMPVAR4 TEMP3
+
+ addvarvar RANKPOINTS TEMPVAR4
+ends
+
+state player_havecharmshoes
+ setvarvar TEMPVAR4 DOLLARS
+ randvar TEMPVAR5 25600 addvar TEMPVAR5 25600
+ divvarvar TEMPVAR4 TEMPVAR5
+ ifvarl TEMPVAR4 1 setvar TEMPVAR4 1
+
+ state happystylecharm_rndmulti
+ state happystylecharm_lvlcalc
+ mulvarvar TEMPVAR4 TEMPVAR3
+
+ ifvare CHARACTERSELECTED? 8 // Lisa's "Lady Luck" ability also affects Charm Shoes and their effect
+ {
+  ifvarg PLAYERTEMPLEVEL 10 ifvarl PLAYERTEMPLEVEL 31 { mulvar TEMPVAR4 9 divvar TEMPVAR4 8 }
+  else ifvarg PLAYERTEMPLEVEL 30 ifvarl PLAYERTEMPLEVEL 61 { mulvar TEMPVAR4 5 divvar TEMPVAR4 4 }
+  else ifvarg PLAYERTEMPLEVEL 60 { mulvar TEMPVAR4 3 divvar TEMPVAR4 2 }
+  ifvare PLAYERTEMPLEVEL 100 { mulvar TEMPVAR4 3 divvar TEMPVAR4 2 }
+ }
+
+ // Money Badge
+ setvar TEMP3 0
+ ifvare PLAYEREQUIPSLOTITEM1 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM2 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM3 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM4 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM5 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM6 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM7 9 addvar TEMP3 2
+ ifvare PLAYEREQUIPSLOTITEM8 9 addvar TEMP3 2
+ ifvarg TEMP3 0 mulvarvar TEMPVAR4 TEMP3
+
+ ifvarg TEMPVAR4 10000000 setvar TEMPVAR4 10000000
+
+ addvarvar CENTS TEMPVAR4
+ addvarvar DISPLAYCENTS TEMPVAR4
+ state displaymoney
+
+ setvar TEMPVAR2 0
+ setvarvar CHARACTERARRAY CHARACTERSELECTED?
+ getactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS TEMPVAR3
+ divvar TEMPVAR4 8
+ ifrnd 32 { ifvarl TEMPVAR4 1 setvar TEMPVAR4 1 }
+ addvarvar TEMPVAR3 TEMPVAR4
+ ifvarg TEMPVAR3 99
+ { 
+  setvarvar TEMPVAR2 TEMPVAR3
+  divvar TEMPVAR2 100
+  modvar TEMPVAR3 100
+
+ }
+ setactorvar[CHARACTERARRAY].CHARACTERATMMONEYCENTS TEMPVAR3
+
+ getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR5
+ addvarvar TEMPVAR5 TEMPVAR2
+ ifvarg TEMPVAR5 2000000000 setvar TEMPVAR5 2000000000
+ setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR5
+ setvar TEMPVAR2 0
+ends
+
+state getskillusecosts
+ setvar CHARACTERARRAY 1 // Duke
+ getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR
+ // Nothing For Duke [Yet :P]
+
+
+ setvar CHARACTERARRAY 2 // Jack
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 1 // 1 is "Damage Shell"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 1 // 1 is "Damage Shell"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 5
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 1 // 1 is "Damage Shell"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 4
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 1 // 1 is "Damage Shell"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 3
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 3 // Bubsy
+ getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR
+ // Nothing For Bubsy [Yet :P]
+
+
+ setvar CHARACTERARRAY 4 // Ami
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 2 // 2 is "Mercury Aqua Protection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 20
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 3 // 3 is "Mercury Quickening"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 2 // 2 is "Mercury Aqua Protection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 18
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 3 // 3 is "Mercury Quickening"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 5
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 2 // 2 is "Mercury Aqua Protection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 16
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 3 // 3 is "Mercury Quickening"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 4
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 2 // 2 is "Mercury Aqua Protection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 13
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 3 // 3 is "Mercury Quickening"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 3
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 5 // Higa
+ getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR
+ // Nothing For Higa [Yet :P]
+
+
+ setvar CHARACTERARRAY 6 // ESSence
+ getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR
+ // Nothing For ESSence [Yet :P]
+
+
+ setvar CHARACTERARRAY 7 // Ted
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 4 // 4 is "Fortify [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 14
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 5 // 5 is "Fortify [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 35
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 6 // 6 is "Fortify [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 63
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 4 // 4 is "Fortify [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 13
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 5 // 5 is "Fortify [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 33
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 6 // 6 is "Fortify [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 60
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 4 // 4 is "Fortify [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 12
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 5 // 5 is "Fortify [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 31
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 6 // 6 is "Fortify [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 57
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 4 // 4 is "Fortify [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 10
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 5 // 5 is "Fortify [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 29
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 6 // 6 is "Fortify [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 53
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 8 // Lisa
+ getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR
+ // Nothing For Lisa [Yet :P]
+
+
+ setvar CHARACTERARRAY 9 // Cybanis
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 7 // 7 is "Bloodlusting"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 7 // 7 is "Bloodlusting"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 5
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 7 // 7 is "Bloodlusting"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 4
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 7 // 7 is "Bloodlusting"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 3
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 10 // Christina/Nethra
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 8 // 8 is "Lesser Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 16
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 9 // 9 is "Heal Life [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 8
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 10 // 10 is "Cure Ailment [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 12
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 11 // 11 is "Heal Life [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 20
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 12 // 12 is "Greater Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 32
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 13 // 13 is "Cure Ailment [Greatest]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 24
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 8 // 8 is "Lesser Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 15
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 9 // 9 is "Heal Life [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 7
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 10 // 10 is "Cure Ailment [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 11
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 11 // 11 is "Heal Life [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 19
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 12 // 12 is "Greater Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 30
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 13 // 13 is "Cure Ailment [Greatest]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 22
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 8 // 8 is "Lesser Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 14
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 9 // 9 is "Heal Life [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 10 // 10 is "Cure Ailment [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 10
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 11 // 11 is "Heal Life [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 17
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 12 // 12 is "Greater Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 28
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 13 // 13 is "Cure Ailment [Greatest]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 20
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 8 // 8 is "Lesser Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 12
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 9 // 9 is "Heal Life [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 5
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 10 // 10 is "Cure Ailment [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 9
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 11 // 11 is "Heal Life [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 15
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 12 // 12 is "Greater Resurrection"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 25
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 13 // 13 is "Cure Ailment [Greatest]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 17
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 11 // Paula
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 14 // 14 is "PK Shield"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 14 // 14 is "PK Shield"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 5
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 14 // 14 is "PK Shield"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 4
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 14 // 14 is "PK Shield"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 3
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 12 // Lori
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 15 // 15 is "Triad Refractor"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 15
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 16 // 16 is "Triad Ragnarok"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 21
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 15 // 15 is "Triad Refractor"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 14
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 16 // 16 is "Triad Ragnarok"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 20
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 15 // 15 is "Triad Refractor"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 13
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 16 // 16 is "Triad Ragnarok"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 18
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 15 // 15 is "Triad Refractor"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 11
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 16 // 16 is "Triad Ragnarok"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 15
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 13 // Minako
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 10
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 24
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 42
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 9
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 23
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 40
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 8
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 22
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 39
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 21 // 21 is "Venus Steel Mending [Lesser]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 22 // 22 is "Venus Steel Mending [Moderate]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 20
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 23 // 23 is "Venus Steel Mending [Greater]"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 36
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 14 // Mystery Lady
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 17 // 17 is "Resurrection Prime"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 12
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 18 // 18 is "Resurrection Ultima"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 30
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 17 // 17 is "Resurrection Prime"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 11
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 18 // 18 is "Resurrection Ultima"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 28
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 17 // 17 is "Resurrection Prime"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 10
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 18 // 18 is "Resurrection Ultima"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 26
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 17 // 17 is "Resurrection Prime"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 9
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 18 // 18 is "Resurrection Ultima"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 23
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+
+ setvar CHARACTERARRAY 15 // Maken
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL -1 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 34
+ {
+  setvar USESKILLARRAY 19 // 19 is "Triad Blitzkrieg"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 18
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 20 // 20 is "Triad Booster"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 6
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 33 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 67
+ {
+  setvar USESKILLARRAY 19 // 19 is "Triad Blitzkrieg"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 17
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 20 // 20 is "Triad Booster"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 5
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvarg actorvar[CHARACTERARRAY].CHARACTERLEVEL 66 ifvarl actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 19 // 19 is "Triad Blitzkrieg"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 15
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 20 // 20 is "Triad Booster"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 4
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+ else
+ ifvare actorvar[CHARACTERARRAY].CHARACTERLEVEL 100
+ {
+  setvar USESKILLARRAY 19 // 19 is "Triad Blitzkrieg"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 13
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+
+  setvar USESKILLARRAY 20 // 20 is "Triad Booster"
+  setactorvar[USESKILLARRAY].USESKILLPERCENTCOST 3
+  setactorvar[USESKILLARRAY].USESKILLEXACTCOST 0
+ }
+
+ setvar CHARACTERARRAY 0 // ?
+ setvar USESKILLARRAY 0 // ?
+ends
+
+state checknonusecharcAP
+ ifvarl actorvar[CHARACTERARRAY].CHARACTERAP 1
+ {
+  setactorvar[CHARACTERARRAY].CHARACTERAPABSORB 0
+ }
+ else
+ {
+  ifvarl actorvar[CHARACTERARRAY].CHARACTERAPABSORB 100 setactorvar[CHARACTERARRAY].CHARACTERAPABSORB 100
+ }
+ends
+
+state checkfreezetimer_heatratio
+  getactorvar[temp].FLOORHEATRATIO temph mulvarvar tempg temph divvar tempg 100
+ends
+
+state shikonchecker2
+   ifvarg INVENTORYSLOTMAX 0 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM1 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 1 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM2 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 2 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM3 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 3 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM4 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 4 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM5 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 5 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM6 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 6 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM7 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+   ifvarg INVENTORYSLOTMAX 7 getactorvar[CHARACTERARRAY].CHARACTEREQUIPSLOTITEM8 TEMPVAR5 else setvar TEMPVAR5 -1
+   ifvare TEMPVAR5 28 setvar HAVEASHIKONJEWEL? 2
+ends
+
+state checkforexistingshikons
+   setvar HAVEASHIKONJEWEL? 0
+
+   state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar HAVEASHIKONJEWEL? 1
+   setvar CHARACTERARRAY 1 state shikonchecker2
+   setvar CHARACTERARRAY 2 state shikonchecker2
+   setvar CHARACTERARRAY 3 state shikonchecker2
+   setvar CHARACTERARRAY 4 state shikonchecker2
+   setvar CHARACTERARRAY 5 state shikonchecker2
+   setvar CHARACTERARRAY 6 state shikonchecker2
+   setvar CHARACTERARRAY 7 state shikonchecker2
+   setvar CHARACTERARRAY 8 state shikonchecker2
+   setvar CHARACTERARRAY 9 state shikonchecker2
+   setvar CHARACTERARRAY 10 state shikonchecker2
+   setvar CHARACTERARRAY 11 state shikonchecker2
+   setvar CHARACTERARRAY 12 state shikonchecker2
+   setvar CHARACTERARRAY 13 state shikonchecker2
+   setvar CHARACTERARRAY 14 state shikonchecker2
+   setvar CHARACTERARRAY 15 state shikonchecker2
+
+   ifvare HAVEASHIKONJEWEL? 1 { state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 1 setvar ITEMARRAYID_AMOUNTTEMP 1 state setitemidarrayamount }
+   ifvare HAVEASHIKONJEWEL? 2 { state checkshikonjewels ifvarg ITEMARRAYID_AMOUNTTEMP 0 setvar ITEMARRAYID_AMOUNTTEMP 0 state setitemidarrayamount }
+ends
+
+state randomseedgen-2
+// Randomseed Randomizer - Version 2
+ ifvare DUKE? 1 ifrnd 1 { }
+ ifvare JACK? 1 ifrnd 1 { }
+ ifvare BUBSY? 1 ifrnd 1 { }
+ ifvare AMI? 1 ifrnd 1 { }
+ ifvare LOWANG? 1 ifrnd 1 { }
+ ifvare ESSENCE? 1 ifrnd 1 { }
+ ifvare TED? 1 ifrnd 1 { }
+ ifvare LISA? 1 ifrnd 1 { }
+ ifvare CYBANIS? 1 ifrnd 1 { }
+ ifvare NETHRA? 1 ifrnd 1 { }
+ ifvare PAULA? 1 ifrnd 1 { }
+ ifvare LORI? 1 ifrnd 1 { }
+ ifvare MINAKO? 1 ifrnd 1 { }
+ ifvare MYSTERY1? 1 ifrnd 1 { }
+ ifvare MAKEN? 1 ifrnd 1 { }
+
+ ifvarg PARTYSIZE 0 ifrnd 1 { }
+ ifvarg PARTYSIZE 1 ifrnd 1 { }
+ ifvarg PARTYSIZE 2 ifrnd 1 { }
+ ifvarg PARTYSIZE 3 ifrnd 1 { }
+ ifvarg PARTYSIZE 4 ifrnd 1 { }
+ ifvarg PARTYSIZE 5 ifrnd 1 { }
+ ifvarg PARTYSIZE 6 ifrnd 1 { }
+ ifvarg PARTYSIZE 7 ifrnd 1 { }
+ ifvarg PARTYSIZE 8 ifrnd 1 { }
+ ifvarg PARTYSIZE 9 ifrnd 1 { }
+ ifvarg PARTYSIZE 10 ifrnd 1 { }
+ ifvarg PARTYSIZE 11 ifrnd 1 { }
+ ifvarg PARTYSIZE 12 ifrnd 1 { }
+ ifvarg PARTYSIZE 13 ifrnd 1 { }
+ ifvarg PARTYSIZE 14 ifrnd 1 { }
+
+ setvarvar TEMPVAR randomseed
+ modvar TEMPVAR 2
+ ifvarl TEMPVAR 0 mulvar TEMPVAR -1
+ setvarvar TEMPVAR2 randomseed
+ modvar TEMPVAR2 8
+ ifvarl TEMPVAR2 0 mulvar TEMPVAR2 -1
+ setvarvar TEMPVAR3 randomseed
+ modvar TEMPVAR3 128
+ ifvarl TEMPVAR3 0 mulvar TEMPVAR3 -1
+ setvarvar TEMPVAR4 randomseed
+ modvar TEMPVAR4 512
+ ifvarl TEMPVAR4 0 mulvar TEMPVAR4 -1
+ setvarvar TEMPVAR5 randomseed
+ modvar TEMPVAR5 2048
+ ifvarl TEMPVAR5 0 mulvar TEMPVAR5 -1
+ setvarvar TEMPVAR6 randomseed
+ modvar TEMPVAR6 8192
+ ifvarl TEMPVAR6 0 mulvar TEMPVAR6 -1
+
+ randvarvar temp TEMPVAR addvar temp 1
+ ifrnd 128 addvarvar randomseed temp else subvarvar randomseed temp
+ ifrnd 64 mulvarvar randomseed temp
+ randvarvar temp TEMPVAR2 addvar temp 1
+ ifrnd 128 addvarvar randomseed temp else subvarvar randomseed temp
+ ifrnd 32 mulvarvar randomseed temp
+ randvarvar temp TEMPVAR3 addvar temp 1
+ ifrnd 128 addvarvar randomseed temp else subvarvar randomseed temp
+ ifrnd 16 mulvarvar randomseed temp
+ randvarvar temp TEMPVAR4 addvar temp 1
+ ifrnd 128 addvarvar randomseed temp else subvarvar randomseed temp
+ ifrnd 8 mulvarvar randomseed temp
+ randvarvar temp TEMPVAR5 addvar temp 1
+ ifrnd 128 addvarvar randomseed temp else subvarvar randomseed temp
+ ifrnd 4 mulvarvar randomseed temp
+ randvarvar temp TEMPVAR6 addvar temp 1
+ ifrnd 128 addvarvar randomseed temp else subvarvar randomseed temp
+ ifrnd 2 mulvarvar randomseed temp
+ends
+
+state rank_payment_stuff
+ ifvare DUKE? 1
+ {
+  setvar CHARACTERARRAY 1
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare JACK? 1
+ {
+  setvar CHARACTERARRAY 2
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare BUBSY? 1
+ {
+  setvar CHARACTERARRAY 3
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare AMI? 1
+ {
+  setvar CHARACTERARRAY 4
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare LOWANG? 1
+ {
+  setvar CHARACTERARRAY 5
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare ESSENCE? 1
+ {
+  setvar CHARACTERARRAY 6
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare TED? 1
+ {
+  setvar CHARACTERARRAY 7
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare LISA? 1
+ {
+  setvar CHARACTERARRAY 8
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare CYBANIS? 1
+ {
+  setvar CHARACTERARRAY 9
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare NETHRA? 1
+ {
+  setvar CHARACTERARRAY 10
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare PAULA? 1
+ {
+  setvar CHARACTERARRAY 11
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare LORI? 1
+ {
+  setvar CHARACTERARRAY 12
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare MINAKO? 1
+ {
+  setvar CHARACTERARRAY 13
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare MYSTERY1? 1
+ {
+  setvar CHARACTERARRAY 14
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+
+ ifvare MAKEN? 1
+ {
+  setvar CHARACTERARRAY 15
+  setvarvar TEMPVAR2 TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+  addvarvar TEMPVAR3 TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERATMMONEYDOLLARS TEMPVAR3
+ }
+ redefinequote 1058 ^22RECEIVED $%d PAYMENT FROM EDF FOR YOUR RANK! ^14[CHECK YOUR CHARACTERS' ATM ACCOUNTS]
+ qsprintf 1058 1058 TEMPVAR
+ userquote 1058
+ palfrom 12 0 64
+ globalsound RANK_PAYOUT
+ globalsound GEMSMALL
+ globalsound RANK_PAYOUT
+ globalsound GEMMEDIUM
+ globalsound RANK_PAYOUT
+ globalsound GEMLARGE
+ends
+
+state checkpkshieldamounts
+ getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR7
+ getactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER TEMPVAR8
+ ifvarand TEMPVAR7 1024 nullop
+ else
+ {
+  ifvarg TEMPVAR8 0 addvar TEMPVAR7 1024
+  setactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR7
+  setactorvar[CHARACTERARRAY].CHARACTERPSISHIELDTIMER TEMPVAR8
+ }
+ends
+
+state drowndamage-checkequips
+     setvar TEMPVAR5 1000
+     ifvare PLAYEREQUIPSLOTITEM1 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM2 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM3 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM4 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM5 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM6 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM7 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvare PLAYEREQUIPSLOTITEM8 31 subvar TEMPVAR5 50 // Aqualung [-5% Drowning Damage]
+     ifvarl TEMPVAR5 1 setvar TEMPVAR5 1
+     // addlogvar TEMPVAR5
+     mulvarvar TEMPVAR2 TEMPVAR5
+     divvar TEMPVAR2 1000
+     // addlogvar TEMPVAR2
+ends
+
+state airtimedrain-checkequips
+               ifvare PLAYEREQUIPSLOTITEM1 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM2 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM3 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM4 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM5 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM6 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM7 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvare PLAYEREQUIPSLOTITEM8 28 divvar TEMPVAR4 10 // Jewel of Four Souls
+               ifvarl TEMPVAR4 1 setvar TEMPVAR4 1               
+
+               setvar TEMPVAR5 1000
+               ifvare PLAYEREQUIPSLOTITEM1 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM2 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM3 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM4 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM5 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM6 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM7 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvare PLAYEREQUIPSLOTITEM8 31 subvar TEMPVAR5 100 // Aqualung [-10% Oxygen Consumption]
+               ifvarl TEMPVAR5 1 setvar TEMPVAR5 1
+               // addlogvar TEMPVAR5
+               mulvarvar TEMPVAR4 TEMPVAR5
+               divvar TEMPVAR4 1000
+               // addlogvar TEMPVAR4
+ends
+
+state airtimedrain-checkextratics
+               subvarvar AIRTIMEEXTRA TEMPVAR4
+               ifvarl AIRTIMEEXTRA 1
+               {
+                subvar AIRTIME 1
+                addvar AIRTIMEEXTRA 1000
+               }
+ends
+
 //************************************************************************************************************************
 //************************************************************************************************************************
 //************************************************************************************************************************

@@ -460,9 +460,11 @@ state checkdamagecaps-knee
   // addlogvar ACTORARMORDAMAGE
 ends
 
-//********************************************************
-//*State for Calculating Kick/Melee Damage to non-players*
-//********************************************************
+//*********************************************************
+//*********************************************************
+//**State for Calculating Kick/Melee Damage to non-players*
+//*********************************************************
+//*********************************************************
 state add_playermeleedamage
   setvar ACTORLASTDAMAGE 0
   getactor[THISACTOR].htextra tempb
@@ -5075,3 +5077,27 @@ ifvarg tempb 0
 } // ifvarg tempb 0
 ends 
 //** Formatting End **
+
+state status_attack_damage_control
+ ifvare mainmenu 0
+ {
+  ifvarg ACTORHP 0
+  {
+   getactor[THISACTOR].htpicnum picnum 
+   ifvare picnum KNEE state add_playermeleedamage
+   else ifvare picnum SHRINKER nullop
+   else ifvare picnum SHRINKSPARK nullop
+   else ifvare picnum 0 nullop
+   else state add_generaldamage
+  }
+  break
+ }
+ else
+ {
+  getactor[THISACTOR].htpicnum TEMP
+  ifvarn TEMP -1 setactor[THISACTOR].htpicnum -1
+  getactor[THISACTOR].htextra TEMP
+  ifvarn TEMP -1 setactor[THISACTOR].htextra -1
+  break
+ }
+ends
