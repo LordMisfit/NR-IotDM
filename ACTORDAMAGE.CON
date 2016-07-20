@@ -1,3 +1,8 @@
+state monster_defense_calc
+  getactor[THISACTOR].picnum DEFENDINGACTOR
+  getactor[THISACTOR].pal DEFENDINGACTORPAL
+ends
+
 state calccriticalhits
  ifvare oldskoolmode 0
  {
@@ -79,6 +84,39 @@ state prevent_redundantdamage // Prevents damage from being inflicted on "Cloake
     ifvarg tempb -1 state null_damage
    }
    ifvarl TEMP -1 state null_damage
+ends
+
+state randomshrapnel
+    randvar TEMPVAR8 4
+    ifvare TEMPVAR8 0 debris SCRAP1 1
+    ifvare TEMPVAR8 1 debris SCRAP2 1
+    ifvare TEMPVAR8 2 debris SCRAP3 1
+    ifvare TEMPVAR8 3 debris SCRAP4 1
+    ifvare TEMPVAR8 4 debris SCRAP5 1
+ends
+
+state enemyarmorbitsshrapnel
+    setvarvar ARMORDAMAGEFACTOR ACTORARMORDAMAGE
+    mulvar ARMORDAMAGEFACTOR 1000
+    ifvarn ACTORMAXAP 0 divvarvar ARMORDAMAGEFACTOR ACTORMAXAP
+
+    ifvarg ACTORARMORDAMAGE 0 { sound ARMOR_HIT state sparkstate state randomshrapnel }
+    ifvarg ARMORDAMAGEFACTOR 125 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 250 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 375 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 500 { state sparkstate state randomshrapnel }
+    ifvarg ARMORDAMAGEFACTOR 625 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 750 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 875 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 1000 { state sparkstate state randomshrapnel }
+    ifvarg ARMORDAMAGEFACTOR 1125 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 1250 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 1375 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 1500 { state sparkstate state randomshrapnel }
+    ifvarg ARMORDAMAGEFACTOR 1625 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 1750 state randomshrapnel
+    ifvarg ARMORDAMAGEFACTOR 1875 state randomshrapnel
+    ifvare ARMORDAMAGEFACTOR 2000 { state sparkstate state randomshrapnel }
 ends
 
 // State for EnemyArmor Damage [via reflected damage]

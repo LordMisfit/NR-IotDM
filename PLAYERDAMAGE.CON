@@ -1,3 +1,65 @@
+state calccriticalhits_actor
+ ifvare oldskoolmode 0
+ {
+    setvar CRITICALHITMULTI 1
+    ifvarn ATTACKINGACTOR -1
+    {
+     ifvare ATTACKINGACTORPICNUM APLAYER setvarvar TEMPVAR5 CRITICALHITCHANCE2
+     else getactorvar[ATTACKINGACTOR].ACTORCRITICALHITCHANCE2 TEMPVAR5
+    }
+    else setvar TEMPVAR5 -1
+
+    randvar TEMPVAR8 9999
+    addvar TEMPVAR8 1
+    ifvarvarl TEMPVAR8 TEMPVAR5
+    { 
+     randvar TEMPVAR8 39999
+     addvar TEMPVAR8 1
+     ifvarvarl TEMPVAR8 TEMPVAR5
+     {
+      randvar TEMPVAR8 159999
+      addvar TEMPVAR8 1
+      ifvarvarl TEMPVAR8 TEMPVAR5
+      {
+       randvar TEMPVAR8 639999
+       addvar TEMPVAR8 1
+       ifvarvarl TEMPVAR8 TEMPVAR5
+       {
+        setvar ACTORCRITICAL? 4
+        setvar CRITICALHITMULTI 16
+        globalsound SMAAASH2
+        globalsound SMAAASH2
+        globalsound SMAAASH2
+        globalsound SMAAASH2
+       }
+       else
+       {
+        setvar ACTORCRITICAL? 3
+        setvar CRITICALHITMULTI 8
+        globalsound SMAAASH2
+        globalsound SMAAASH2
+        globalsound SMAAASH2
+       }
+      }
+      else
+      {
+       setvar ACTORCRITICAL? 2
+       setvar CRITICALHITMULTI 4
+       globalsound SMAAASH2
+       globalsound SMAAASH2
+      }
+     }
+     else
+     {
+      setvar ACTORCRITICAL? 1
+      setvar CRITICALHITMULTI 2
+      globalsound SMAAASH2
+     }
+    }    
+    else setvar ACTORCRITICAL? 0
+ }
+ends
+
 // State for all Player-related defense, armor formulas, etc
 state dmgmodcalc-player
  ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
