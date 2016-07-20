@@ -5188,13 +5188,13 @@ setvarvar MAXENERGYPOINTS TEMPVAR
 
 ifvarvarn CURRENTHITPOINTS MAXHITPOINTS setvarvar CURRENTHITPOINTS MAXHITPOINTS
 ifvarvarn CURRENTENERGYPOINTS MAXENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
-addlogvar CURRENTHITPOINTS
-addlogvar MAXHITPOINTS
-addlogvar CURRENTARMORPOINTS
-addlogvar MAXARMORPOINTS
-addlogvar CURRENTENERGYPOINTS
-addlogvar MAXENERGYPOINTS
-getplayer[THISACTOR].player_par TEMPVAR5 addlogvar TEMPVAR5
+//addlogvar CURRENTHITPOINTS
+//addlogvar MAXHITPOINTS
+//addlogvar CURRENTARMORPOINTS
+//addlogvar MAXARMORPOINTS
+//addlogvar CURRENTENERGYPOINTS
+//addlogvar MAXENERGYPOINTS
+getplayer[THISACTOR].player_par TEMPVAR5 //addlogvar TEMPVAR5
 
 ends
 
@@ -18297,7 +18297,7 @@ state enemytyperandomizer
       ifvarand ACTORFLAGS 2048 nullop // if not flagged to include 2048, it will randomize him into a different LIZTROOP species
       else
       {
-       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1 addlogvar TEMPVAR7
+       displayrandvar TEMPVAR7 999 addvar TEMPVAR7 1 //addlogvar TEMPVAR7
        ifvarg TEMPVAR7 0 ifvarl TEMPVAR7 168 spritepal 14 // Shrink [16.7%]
        else ifvarg TEMPVAR7 167 ifvarl TEMPVAR7 333 spritepal 19 // Ravager [16.7%]
        else ifvarg TEMPVAR7 334 ifvarl TEMPVAR7 557 spritepal 21 // Captain [22.2%]
@@ -18540,7 +18540,7 @@ state enemytyperandomizer
      }
     break
    endswitch
-   getactor[THISACTOR].pal ACTORPAL addlogvar ACTORPAL
+   getactor[THISACTOR].pal ACTORPAL //addlogvar ACTORPAL
    //addlogvar TEMPVAR7
 
    ifvarand ACTORFLAGS 2048 nullop
@@ -18553,8 +18553,8 @@ state enemytyperandomizer
      else addvar ACTORFLAGS 512
     }
    }
-   addlogvar TEMPVAR7
-   addlogvar ACTORFLAGS
+   //addlogvar TEMPVAR7
+   //addlogvar ACTORFLAGS
   }
 
   addvar RANDOMIZERSET? 1

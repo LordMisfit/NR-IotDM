@@ -1,0 +1,3528 @@
+//************************************************************************
+//*State for calculating overall non-player damage from non melee-attacks*
+//************************************************************************
+state add_generaldamage
+  setvar ACTORLASTDAMAGE 0
+  getactor[THISACTOR].picnum temp
+  getactor[THISACTOR].htextra tempb
+  getactor[THISACTOR].htpicnum tempc
+  // ifvarn tempb -1 addlogvar tempb
+  ifvare tempc RPG { ifvarg tempb 0 ifvarl tempb 76 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
+  setvarvar TEMP ACTORHP
+
+  ifvarg ACTORDEATHSWITCHDELAY 0 { setactor[THISACTOR].htextra -1 break }
+
+  //** Formatting Start **
+  ifvarg oldskoolmode 0
+  {
+   getactor[THISACTOR].pal tempd
+   ifvare tempd 9
+   {
+    ifvare temp BOSS1 mulvar tempb 4
+    ifvare temp BOSS2 mulvar tempb 4
+    ifvare temp BOSS3 mulvar tempb 4
+    ifvare temp BOSS4 mulvar tempb 4
+   }
+   setvarvar ACTORLASTDAMAGE tempb
+   subvarvar ACTORHP tempb
+   break
+  }
+  state prevent_redundantdamage
+
+  ifvare tempc INVULNICON
+  {
+   setvarvar SHOWDAMAGE STATLIMITMAXIMUM
+   setvar SHOWDAMAGETYPE 0
+   setvarvar SHOWDAMAGEACTORID THISACTOR
+   state showdamage
+
+   getactor[THISACTOR].picnum DEFENDINGACTORDEBUG
+   getactor[THISACTOR].pal DEFENDINGACTORPAL
+   setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+   setvarvar ACTORARMORDAMAGE 0
+   setvarvar TEMPVAR GENERALDAMAGE 
+   setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+   setvar DEFENDERDISPLAYTIMER 0
+   ifvare TEMPVAR 0 setvar ACTORNULLDAMAGE 1 else setvar ACTORNULLDAMAGE 0
+   setvarvar ACTORARMORDAMAGETEMP ACTORARMORDAMAGE
+   setvar ACTORARMORDISPLAYTIMER 54
+
+   setvar CRITICAL? 0
+   setvarvar DAMAGETEMP GENERALDAMAGE 
+   setvarvar TEMPHITACTORVARHP ACTORMAXHP
+   setvarvar TEMPHITACTORVARAP ACTORMAXAP
+   setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+   setvar DEFENDERDISPLAYTIMER 0
+   setvar CRITICALHITMULTI 0
+ 
+   setvar ACTORHP 0
+   setactor[THISACTOR].extra 0
+   state checkactorsurvivalvalue
+   // setactor[THISACTOR].htowner PLAYERID
+   setactor[THISACTOR].htpicnum RPG
+   setactor[THISACTOR].htextra 1
+   break
+  }
+
+ifvarg tempb 0
+{ // ifvarg tempb 0
+ ifvare mainmenu 1 // if in the menus, receive no damage and cancel event
+ { 
+  setactor[THISACTOR].htextra -1 // 0 // TODO: LEAVE-THIS
+  break 
+ }
+ setvar ACTORARMORDAMAGE 0
+ ifvarg FLOORDAMAGETEMP 0 nullop // Prevents Sector Damage like Lava from being augumented by the damage formula
+ else // Else go on to the main formulas
+ {
+  getactor[THISACTOR].htextra GENERALDAMAGE // TODO: LEAVE-THIS
+  setactor[THISACTOR].htextra 1
+
+  // Stage 1 of Damage Formula
+  //*******************************************************************************
+  //*Special State for Deathgate/Stroke Missiles due to their immense base damages*
+  //*******************************************************************************
+  ifvare tempc GATEMISSILE_MAIN addvar GENERALDAMAGE 6300
+  ifvare tempc GATEMISSILE_SPLIT addvar GENERALDAMAGE 945
+  ifvare tempc STROKEMISSILE_MAIN addvar GENERALDAMAGE 25200
+  ifvare tempc STROKEMISSILE_SPLIT addvar GENERALDAMAGE 1260
+  ifvare tempc BIOMETRICBLAST1
+  {
+   setvar GENERALDAMAGE 1536
+   ifvare ESHIELDADVANCEMENT 0 randvar TEMPVAR5 128 else randvar TEMPVAR5 512
+   ifrnd 128 subvarvar GENERALDAMAGE TEMPVAR5 else addvarvar GENERALDAMAGE TEMPVAR5
+
+   setvar TEMPVAR5 1536
+   setvarvar TEMPVAR4 SKILLLEVEL
+   addvar TEMPVAR4 1
+   divvarvar TEMPVAR5 TEMPVAR4
+   addvarvar GENERALDAMAGE TEMPVAR5
+
+   ifvare HAVEENERGYSHIELD? 1
+   {
+    ifvare ESHIELDADVANCEMENT 0 setvar TEMPVAR5 128 else setvar TEMPVAR5 512
+    mulvarvar TEMPVAR5 ESHIELDDMGFACTOR
+    addvarvar GENERALDAMAGE TEMPVAR5
+   }
+  }
+  getactor[THISACTOR].htowner tempd
+  getactorvar[tempd].VEHICLEID tempvehicleid
+  getactorvar[tempd].VEHICLETYPE tempvehicletype
+  getactor[tempd].picnum tempe
+  state checkdamagecaps-general
+
+  // Stage 2 of Damage Formula
+  //*****************************************************
+  //*Add Support for extra damage from Fire/Steam Actors*
+  //*****************************************************
+  switch tempe
+   case SEENINE
+   case OOZFILTER
+   case FIRE
+   case FIRE2
+   case BURNING
+   case BURNING2
+   case FIREVASE
+   case FIREBARREL
+   case STEAM
+   case CEILINGSTEAM
+    getactorvar[tempd].ACTORATTACK TEMP
+    mulvar TEMP 3
+    divvar TEMP 4
+    addvarvar GENERALDAMAGE TEMP
+    setvar TEMP 0
+   break
+
+   case TRIPBOMB
+    getactorvar[tempd].ACTORATTACK TEMP
+    mulvar TEMP 3
+    divvar TEMP 4
+    addvarvar GENERALDAMAGE TEMP
+    setvar TEMP 0
+    getactorvar[tempd].PLAYERTRIPBOMB? TEMP
+    ifvare TEMP 1 setvar tempe APLAYER
+   break
+  endswitch
+  state checkdamagecaps-general
+
+
+  // Stage 3 of Damage Formula
+  //******************************************************************
+  //*Check Lori's Triad Refractor, Mirror Shields and Invulnerability*
+  //******************************************************************
+  ifvare REFRACTORSTATE 1 // Pyramid Refractor [Lori]
+  {
+   ifvarg ACTORINVULNTIME 0
+   {
+    setvar CRITICAL? 0
+    setvar DEFLECTEDDAMAGE 0
+    state nullgendamage
+    setactor[THISACTOR].htextra 0 // TODO: LEAVE-THIS
+    setvar REFRACTORSTATE 0
+   }
+   else
+   {
+    setvar CRITICAL? 0
+    addvarvar DEFLECTEDDAMAGE GENERALDAMAGE
+    addvarvar DEFLECTEDDAMAGE MELEEDAMAGE
+
+    ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+    {
+     randvar TEMPVAR 25
+     addvar TEMPVAR 25
+     mulvarvar DEFLECTEDDAMAGE TEMPVAR
+     divvar DEFLECTEDDAMAGE 100
+    }
+
+    setvarvar TEMPVAR8 PLAYERLEVEL
+
+    setvar tempc 3000
+    setvar tempd -250
+    mulvarvar tempd SKILLLEVEL
+    ifvarg SKILLLEVEL 4 addvar tempd 250
+    addvarvar tempc tempd
+    mulvarvar TEMPVAR8 tempc
+
+    divvar TEMPVAR8 1000
+
+    addvar TEMPVAR8 100
+    mulvarvar DEFLECTEDDAMAGE TEMPVAR8
+    divvar DEFLECTEDDAMAGE 100
+    ifvarvarg DEFLECTEDDAMAGE STATLIMITMAXIMUM setvarvar DEFLECTEDDAMAGE STATLIMITMAXIMUM
+
+    // Freeze-Chill Effect from Ice-Elemental Attacks
+    ifvare tempc FREEZEBLAST
+    {
+     state freeze-chilleffect_actors
+
+     mulvarvar temph TEMPVAR8
+     divvar temph 100
+
+     ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+     {
+      randvar TEMPVAR 25
+      addvar TEMPVAR 25
+      mulvarvar temph TEMPVAR
+      divvar temph 100
+     }
+
+     randvarvar tempg temph
+     addvarvar tempg temph
+     addvarvar freezetimer tempg
+     state dealfreezedamage-actor
+    }
+ 
+    setvarvar tempd DEFLECTEDDAMAGE
+    state calcenemyarmor
+    setvarvar DEFLECTEDDAMAGE tempd
+    setvarvar ACTORARMORDAMAGETEMP ACTORARMORDAMAGE state showdamage_actor-deflectap
+    setvar ACTORARMORDISPLAYTIMER 0
+ 
+    getactor[THISACTOR].picnum DEFENDINGACTORDEBUG
+    getactor[THISACTOR].pal DEFENDINGACTORPAL
+    globalsound REFRACTOR_SOUND
+
+    setvarvar DAMAGETEMP DEFLECTEDDAMAGE 
+    setvarvar TEMPHITACTORVARHP ACTORMAXHP
+    setvarvar TEMPHITACTORVARAP ACTORMAXAP
+    ifvare DAMAGETEMP 0 setvar ACTORNULLDAMAGE 1 else setvar ACTORNULLDAMAGE 0
+    setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+    setvar DEFENDERDISPLAYTIMER 0
+    state nullgendamage
+    setvar MELEEDAMAGE 0
+    subvarvar ACTORHP DEFLECTEDDAMAGE state showdamage_actor-deflecthp
+    ifvarg DEFLECTEDDAMAGE 0 setvar ACTORHPDAMAGED? 1
+    setvarvar ACTORLASTDAMAGE DEFLECTEDDAMAGE
+    ifvarg ACTORHP 0
+    {
+     ifvarg DEFLECTEDDAMAGE 0 setactor[THISACTOR].htextra 1
+     setactor[THISACTOR].extra 8193
+     setvar DEFLECTEDDAMAGE 0
+     setvar REFRACTORSTATE 0
+     break
+    }
+    else
+    {
+     setvar ACTORHP 0
+     setactor[THISACTOR].extra 0
+     state checkactorsurvivalvalue
+     ifvarg DEFLECTEDDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra DEFLECTEDDAMAGE
+     setvar DEFLECTEDDAMAGE 0
+     setvar REFRACTORSTATE 0
+     break
+    }  
+   }
+  }
+  else
+  ifvare MIRRORSHIELDSTATE 1
+  {
+   ifvarg ACTORINVULNTIME 0
+   {
+    setvar CRITICAL? 0
+    setvar DEFLECTEDDAMAGE 0
+    state nullgendamage
+    setactor[THISACTOR].htextra 0 // TODO: LEAVE-THIS
+    setvar MIRRORSHIELDSTATE 0
+   }
+   else
+   {
+    setvar CRITICAL? 0
+    addvarvar DEFLECTEDDAMAGE GENERALDAMAGE
+    addvarvar DEFLECTEDDAMAGE MELEEDAMAGE
+
+    ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+    {
+     randvar TEMPVAR 25
+     addvar TEMPVAR 25
+     mulvarvar DEFLECTEDDAMAGE TEMPVAR
+     divvar DEFLECTEDDAMAGE 100
+    }
+
+    // Freeze-Chill Effect from Ice-Elemental Attacks
+    ifvare tempc FREEZEBLAST
+    {
+     state freeze-chilleffect_actors
+
+     ifvare PLAYEREQUIPSLOTITEM1 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM2 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM3 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM4 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM5 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM6 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM7 2 { mulvar temph 3 divvar temph 2 }
+     ifvare PLAYEREQUIPSLOTITEM8 2 { mulvar temph 3 divvar temph 2 }
+
+     ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+     {
+      randvar TEMPVAR 25
+      addvar TEMPVAR 25
+      mulvarvar temph TEMPVAR
+      divvar temph 100
+     }
+
+     randvarvar tempg temph
+     addvarvar tempg temph
+     addvarvar freezetimer tempg
+     state dealfreezedamage-actor
+    }
+
+    ifvarvarg DEFLECTEDDAMAGE STATLIMITMAXIMUM setvarvar DEFLECTEDDAMAGE STATLIMITMAXIMUM
+ 
+    setvarvar tempd DEFLECTEDDAMAGE
+    state calcenemyarmor
+    setvarvar DEFLECTEDDAMAGE tempd
+    setvarvar ACTORARMORDAMAGETEMP ACTORARMORDAMAGE state showdamage_actor-deflectap
+    setvar ACTORARMORDISPLAYTIMER 0
+ 
+    getactor[THISACTOR].picnum DEFENDINGACTORDEBUG
+    getactor[THISACTOR].pal DEFENDINGACTORPAL
+    globalsound DEFLECT1
+
+    setvarvar DAMAGETEMP DEFLECTEDDAMAGE 
+    setvarvar TEMPHITACTORVARHP ACTORMAXHP
+    setvarvar TEMPHITACTORVARAP ACTORMAXAP
+    ifvare DAMAGETEMP 0 setvar ACTORNULLDAMAGE 1 else setvar ACTORNULLDAMAGE 0
+    setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+    setvar DEFENDERDISPLAYTIMER 0
+    state nullgendamage
+    setvar MELEEDAMAGE 0
+    subvarvar ACTORHP DEFLECTEDDAMAGE state showdamage_actor-deflecthp
+    ifvarg DEFLECTEDDAMAGE 0 setvar ACTORHPDAMAGED? 1
+    setvarvar ACTORLASTDAMAGE DEFLECTEDDAMAGE
+    ifvarg ACTORHP 0
+    {
+     ifvarg DEFLECTEDDAMAGE 0 setactor[THISACTOR].htextra 1
+     setactor[THISACTOR].extra 8193
+     setvar DEFLECTEDDAMAGE 0
+     setvar MIRRORSHIELDSTATE 0
+     break
+    }
+    else
+    {
+     setvar ACTORHP 0
+     setactor[THISACTOR].extra 0
+     state checkactorsurvivalvalue
+     ifvarg DEFLECTEDDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra DEFLECTEDDAMAGE
+     setvar DEFLECTEDDAMAGE 0
+     setvar MIRRORSHIELDSTATE 0
+     break
+    }
+    
+   }
+  }
+  else
+  ifvare DEFLECTDAMAGESTATE 1 // If the player is in God Mode or under the effect of an Invuln item, they deflect all enemy damage
+  {
+   // General Damage Reduction or Increase for reflected damage [to sooth the screaming masses of people who hate overwhelming amounts of deflected damage :P]
+   //addlogvar DEFLECTEDDAMAGE
+   mulvarvar DEFLECTEDDAMAGE INVULNREFLECTRATE
+   divvar DEFLECTEDDAMAGE 1000
+   //addlogvar DEFLECTEDDAMAGE
+
+   ifvare INVULNREFLECTRATE 0
+   {
+    setvar CRITICAL? 0
+    setvar DEFLECTEDDAMAGE 0
+    state nullgendamage
+    setactor[THISACTOR].htextra 0 // TODO: LEAVE-THIS
+    setvar DEFLECTDAMAGESTATE 0
+   }
+   else
+   {
+    ifvarg ACTORINVULNTIME 0
+    {
+     setvar CRITICAL? 0
+     setvar DEFLECTEDDAMAGE 0
+     state nullgendamage
+     setactor[THISACTOR].htextra 0 // TODO: LEAVE-THIS
+     setvar DEFLECTDAMAGESTATE 0
+    }
+    else
+    {
+     setvar CRITICAL? 0
+     getactor[THISACTOR].picnum DEFENDINGACTORDEBUG
+     getactor[THISACTOR].pal DEFENDINGACTORPAL
+     addvarvar DEFLECTEDDAMAGE GENERALDAMAGE
+     addvarvar DEFLECTEDDAMAGE MELEEDAMAGE
+ 
+     ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+     {
+      randvar TEMPVAR 25
+      addvar TEMPVAR 25
+      mulvarvar DEFLECTEDDAMAGE TEMPVAR
+      divvar DEFLECTEDDAMAGE 100
+     }
+ 
+     // Freeze-Chill Effect from Ice-Elemental Attacks
+     ifvare tempc FREEZEBLAST
+     {
+      state freeze-chilleffect_actors
+ 
+      ifvarand ACTORFLAGS 512 // Elite Monsters will cut reflected damage by 50-75%
+      {
+       randvar TEMPVAR 25
+       addvar TEMPVAR 25
+       mulvarvar temph TEMPVAR
+       divvar temph 100
+      }
+ 
+      randvarvar tempg temph
+      addvarvar tempg temph
+      addvarvar freezetimer tempg
+      state dealfreezedamage-actor
+     }
+
+     setvarvar DAMAGETEMP DEFLECTEDDAMAGE 
+     setvarvar TEMPHITACTORVARHP ACTORMAXHP
+     setvarvar TEMPHITACTORVARAP ACTORMAXAP
+     setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+     setvar DEFENDERDISPLAYTIMER 0
+     state nullgendamage
+     setvar MELEEDAMAGE 0
+     globalsound DEFLECT1
+
+     subvarvar ACTORHP DEFLECTEDDAMAGE state showdamage_actor-deflecthp
+     ifvarg DEFLECTEDDAMAGE 0 setvar ACTORHPDAMAGED? 1
+     setvarvar ACTORLASTDAMAGE DEFLECTEDDAMAGE
+     ifvarg ACTORHP 0
+     {
+      ifvarg DEFLECTEDDAMAGE 0 setactor[THISACTOR].htextra 1
+      setactor[THISACTOR].extra 8193
+      setvar DEFLECTEDDAMAGE 0
+      setvar DEFLECTDAMAGESTATE 0
+      setvar MIRRORSHIELDSTATE 0
+      setvar REFRACTORSTATE 0
+      break
+     }
+     else
+     {
+      setvar ACTORHP 0
+      setactor[THISACTOR].extra 0
+      state checkactorsurvivalvalue
+      ifvarg DEFLECTEDDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra DEFLECTEDDAMAGE
+      setvar DEFLECTEDDAMAGE 0
+      setvar DEFLECTDAMAGESTATE 0
+      setvar MIRRORSHIELDSTATE 0
+      setvar REFRACTORSTATE 0
+      break
+     }
+    }
+
+   }
+  }
+  else
+  ifvarg GENERALDAMAGE 0 
+  { 
+   getactor[THISACTOR].htowner OWNERTEMP 
+   getactor[OWNERTEMP].picnum PICNUMTEMP
+   getactor[THISACTOR].pal DEFENDINGPAL
+   state monster_defense_calc
+
+   ifvarn tempc RADIUSEXPLOSION
+   ifvarn tempc RPG nullop else
+   {
+    getactor[THISACTOR].xvel TEMP 
+    mulvar TEMP -1 
+    setactor[THISACTOR].xvel TEMP
+    getactor[THISACTOR].yvel TEMP 
+    mulvar TEMP -1 
+    setactor[THISACTOR].yvel TEMP
+   }
+   state checkdamagecaps-general
+
+
+  // Stage 4 of Damage Formula
+  //*******************************************************
+  //*Monster Vulnerability Section. (tempc = [ATTACKNAME])*
+  //*******************************************************
+  // Warmth in Cold Environs
+  ifvare tempc RPG { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc RPG_NOAIM { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc GENERAL_RPG { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc COMMANDER_RPG { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc LEADER_RPG { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc BAALO_RPG { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc GATEMISSILE_MAIN { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc GATEMISSILE_SPLIT { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc STROKEMISSILE_MAIN { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc STROKEMISSILE_SPLIT { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc MORTER { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc SEENINE { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc OOZFILTER { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc RADIUSEXPLOSION { ifvarg freezetimer 0 { randvar tempg 64 addvar tempg 64 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc GROWSPARK { ifvarg freezetimer 0 { randvar tempg 12 addvar tempg 12 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc OCTANINE_RPG { ifvarg freezetimer 0 { randvar tempg 32 addvar tempg 32 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc FIRELASER { ifvarg freezetimer 0 { randvar tempg 8 addvar tempg 8 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc BIOMETRICBLAST1 { ifvarg freezetimer 0 { randvar tempg 192 addvar tempg 192 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+  ifvare tempc FREEZEBLAST
+  {
+   // Freeze Chilling Effect
+   ifvarl ACTORINVULNTIME 1
+   {
+    state freeze-chilleffect_actors
+
+    randvarvar tempg temph
+    addvarvar tempg temph
+    addvarvar freezetimer tempg
+    state dealfreezedamage-actor    
+   }
+  }
+  state checkdamagecaps-general
+
+
+  // Stage 5 of Damage Formula
+  switch temp
+   // Protozoid Slimer Eggs [EGG]
+   case EGG
+    ifvare DEFENDINGPAL 9 nullop // No Natural Resistances, Weaknesses, Immunities or Absorbancies :P
+    else // All other Eggs
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -990 // -99% Expander Damage
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 4000 // +400% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // No Natural Resistance to Overall Damage [XD]
+    }
+   break
+
+   // Sharks [SHARK]
+   case SHARK
+    ifvare DEFENDINGPAL 24 // Bloodtooth Shark
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -600 // -60% Expander Damage
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 500 // +50% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(random 0 to 40)% Overall Damage
+     randvar TEMPVAR 200
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 800
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop  // No Natural Resistances or Immunities :P
+    else // All other Sharks
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -300 // -30% Freezethrower Damage
+     // Weaknesses
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 1500 // +150% Expander Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(random 0 to 10)% Overall Damage
+     randvar TEMPVAR 50
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 950
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Mounted Turrets [ROTATEGUN]
+   case ROTATEGUN
+    ifvare DEFENDINGPAL 19 // Mounted Missile Turret
+    { 
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc RPG addvar DAMAGEMODIFIER -250 // -25% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -250 // -25% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Baalo the Colosuss] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -250 // -25% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -250 // -25% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -250 // -25% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -250 // -25% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -250 // -25% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -250 // -25% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -250 // -25% 0oz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -250 // -25% Radius Explosion Damage
+     // Weaknesses
+     ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 200 // +20% Zapper 1 Damage
+     ifvare tempc ZAPPER2 addvar DAMAGEMODIFIER 200 // +20% Zapper 2 Damage
+     ifvare tempc ZAPPER3 addvar DAMAGEMODIFIER 200 // +20% Zapper 3 Damage
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 200 // +20% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -9.375% Overall Damage
+     setvar TEMPVAR 906
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else 
+    ifvare DEFENDINGPAL 17 // Mounted Shotgun Turret
+    { 
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -250 // -25% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -250 // -25% Shotgun Damage
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -250 // -25% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -250 // -25% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -250 // -25% Chaingun Damage
+     // Weaknesses
+     ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 200 // +20% Zapper 1 Damage
+     ifvare tempc ZAPPER2 addvar DAMAGEMODIFIER 200 // +20% Zapper 2 Damage
+     ifvare tempc ZAPPER3 addvar DAMAGEMODIFIER 200 // +20% Zapper 3 Damage
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 200 // +20% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -9.375% Overall Damage
+     setvar TEMPVAR 906
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop // No Natural Resistances or Immunities :P
+    else // All other Turrets
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -250 // -25% Laser Damage
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -250 // -25% Expander Damage
+     // Weaknesses
+     ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 200 // +20% Zapper 1 Damage
+     ifvare tempc ZAPPER2 addvar DAMAGEMODIFIER 200 // +20% Zapper 2 Damage
+     ifvare tempc ZAPPER3 addvar DAMAGEMODIFIER 200 // +20% Zapper 3 Damage
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 200 // +20% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -6.25% Overall Damage
+     setvar TEMPVAR 937
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Predatars, aka "Assault Troopers" [LIZTROOP]
+   case LIZTROOP
+   case LIZTROOPSTAYPUT
+   case LIZTROOPSHOOT
+   case LIZTROOPDUCKING
+   case LIZTROOPJETPACK
+   case LIZTROOPRUNNING
+   case LIZTROOPONTOILET
+   case LIZTROOPJUSTSIT
+    ifvare DEFENDINGPAL 21 // Assault Captain
+    {
+     // Resistances
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -100 // -10% Laser Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -4% Overall Damage
+     setvar TEMPVAR 960
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 19 // Ravager Captain
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -100 // -10% Laser Damage
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -667 // -66% Expander Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -667 // -66% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -667 // -66% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -667 // -66% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -667 // -66% RPG[Baalo the Collosus] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -667 // -66% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -667 // -66% RPG[General] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -667 // -66% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -667 // -66% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -667 // -66% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -667 // -66% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -667 // -66% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -667 // -66% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -667 // -66% Ooz Canister Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -667 // -66% Radius Explosion Damage
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 333 // +33% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 14 // Shrink Trooper
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -200 // -20% Laser Damage
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -800 // -80% Expander Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -16.66% Overall Damage
+     setvar TEMPVAR 833
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 17 // Commander Zerman [Species-Specfic BOSS]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -500 // -50% Laser Damage
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -750 // -75% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -750 // -75% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -750 // -75% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -750 // -75% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -750 // -75% Chaingun Damage
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -980 // -98% Freezethrower Damage
+     // Weaknesses
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER 200 // +20% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER 200 // +20% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER 200 // +20% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER 200 // +20% RPG[Baalo the Collosus] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER 200 // +20% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER 200 // +20% RPG[General] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER 200 // +20% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER 200 // +20% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER 200 // +20% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER 200 // +20% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER 200 // +20% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER 200 // +20% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER 200 // +20% Ooz Canister Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER 200 // +20% Radius Explosion Damage
+     ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 80 // +8% Electrical Blast #1[Medium] Damage
+     ifvare tempc ZAPPER2 addvar DAMAGEMODIFIER 80 // +8% Electrical Blast #2[Small] Damage
+     ifvare tempc ZAPPER3 addvar DAMAGEMODIFIER 80 // +8% Electrical Blast #3[Large] Damage     
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     // -50% Overall Damage
+     setvar TEMPVAR 500
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else ifvare DEFENDINGPAL 11 nullop // No Natural Resistances, Weaknesses, Immunities or Absorbancies :P
+    else ifvare DEFENDINGPAL 10 nullop // No Natural Resistances, Weaknesses, Immunities or Absorbancies :P
+    else // All other Predatar/Assault Trooper[LIZTROOP] forms
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -50 // -5% Laser Damage [Natural]
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -1% Overall Damage
+     setvar TEMPVAR 990
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Anfarciars, aka "Enforcers" [LIZMAN]
+   case LIZMAN
+   case LIZMANSTAYPUT
+   case LIZMANJUMP
+   case LIZMANSPITTING
+    ifvare DEFENDINGPAL 19 // Laser Enforcer
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -333 // -33% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -333 // -33% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -333 // -33% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -333 // -33% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -333 // -33% Chaingun Damage
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -750 // -75% Laser Damage
+     ifvare tempc SPIT addvar DAMAGEMODIFIER -200 // -20% Spit Damage
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 3000 // +300% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 6 // Bio-Warrior Enforcer
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -600 // -60% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -600 // -60% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -600 // -60% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -600 // -60% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -600 // -60% Chaingun Damage
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -875 // -87.5% Laser Damage
+     ifvare tempc SPIT addvar DAMAGEMODIFIER -600 // -80% Spit Damage
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 333 // +33% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -25% Overall Damage
+     setvar TEMPVAR 750
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 17 // Commander Fertang [Species-Specfic BOSS]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -800 // -80% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -800 // -80% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -800 // -80% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -800 // -80% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -800 // -80% Chaingun Damage
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -900 // -90% Laser Damage
+     ifvare tempc SPIT addvar DAMAGEMODIFIER -888 // -88.8% Spit Damage
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 500 // +50% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -50% Overall Damage
+     setvar TEMPVAR 500
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop
+    else
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -333 // -33% Laser Damage
+     ifvare tempc SPIT addvar DAMAGEMODIFIER -100 // -10% Spit Damage
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -250 // -25% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -2.5% Overall Damage
+     setvar TEMPVAR 975
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Sentry Drones [DRONE]
+   case DRONE
+    ifvare DEFENDINGPAL 25 // Super Drone
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 250 // +25% Electrical Blast #1[Medium] Damage
+     ifvare tempc ZAPPER2 addvar DAMAGEMODIFIER 250 // +25% Electrical Blast #2[Small] Damage
+     ifvare tempc ZAPPER3 addvar DAMAGEMODIFIER 250 // +25% Electrical Blast #3[Large] Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(random 0 to 25)% Overall Damage
+     randvar TEMPVAR 125
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 875
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop
+    else // All other Sentry Drones
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 1000 // +100% Electrical Blast #1[Medium] Damage
+     ifvare tempc ZAPPER2 addvar DAMAGEMODIFIER 1000 // +100% Electrical Blast #2[Small] Damage
+     ifvare tempc ZAPPER3 addvar DAMAGEMODIFIER 1000 // +100% Electrical Blast #3[Large] Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(random 0 to 5)% Overall Damage
+     randvar TEMPVAR 25
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 975
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Octabrainians aka "Octabrains" [OCTABRAIN]
+   case OCTABRAIN
+   case OCTABRAINSTAYPUT
+    ifvare DEFENDINGPAL 14 // Octanine
+    {
+     // Absorbancies
+     ifvare tempc OCTANINE_RPG { divvar GENERALDAMAGE 10 state enemyabsorbdamage } // Absorbs 10% of RPG[Octanine] damage into healing
+     // Immunities
+     ifvare tempc COOLEXPLOSION1 setvar GENERALDAMAGE 0 // No Damage from Mindblasts
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -500 // -50% Freezethrower Damage
+     // Weaknesses
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER 130 // +13% Laser Damage
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 50 // +5% Expander Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER 100 // +10% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER 100 // +10% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER 100 // +10% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER 100 // +10% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER 100 // +10% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER 100 // +10% RPG[Baalo the Collosus] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER 100 // +10% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER 100 // +10% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER 100 // +10% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER 100 // +10% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER 100 // +10% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER 100 // +10% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER 100 // +10% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER 100 // +10% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(15 to 20)% Overall Damage
+     randvar TEMPVAR 25
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     setvar TEMPVAR 825
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop
+    else // All other Octabrains
+    {
+     // Immunities
+     ifvare tempc COOLEXPLOSION1 setvar GENERALDAMAGE 0 // No Damage from Mindblasts
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -750 // -75% Freezethrower Damage
+     ifvare tempc OCTANINE_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Octanine] damage
+     // Weaknesses
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER 650 // +65% Laser Damage
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 250 // +25% Expander Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER 500 // +50% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER 500 // +50% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER 500 // +50% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER 500 // +50% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER 500 // +50% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER 500 // +50% RPG[Baalo the Collosus] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER 500 // +50% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER 500 // +50% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER 500 //+50% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER 500 // +50% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER 500 // +50% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER 500 // +50% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER 500 // +50% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER 500 // +50% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(2.5 to 7.5)% Overall Damage
+     randvar TEMPVAR 25
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     setvar TEMPVAR 950
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Mutateous Humana Hoggis' aka "Pigcops"
+   case PIGCOP
+   case PIGCOPSTAYPUT
+   case PIGCOPDIVE
+    ifvare DEFENDINGPAL 21 // Pigcop Captain
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -100 // -10% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -100 // -10% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -100 // -10% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -100 // -10% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -100 // -10% Chaingun Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -100 // -10% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -100 // -10% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Asaault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Baalo the Collosus] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -100 // -10% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -100 // -10% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -100 // -10% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -100 // -10% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -100 // -10% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -100 // -10% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -100 // -10% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -100 // -10% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 14 // Pigcop Sargeant
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -166 // -16% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -166 // -16% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -166 // -16% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -166 // -16% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -166 // -16% Chaingun Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -250 // -25% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -250 // -25% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Asaault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Baalo the Collosus] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -250 // -25% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -250 // -25% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -250 // -25% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -250 // -25% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -250 // -25% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -250 // -25% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -250 // -25% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -250 // -25% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -25% Overall Damage
+     setvar TEMPVAR 750
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 24 // Pigcop Colonel Ramone [Species-Specfic BOSS]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -333 // -33% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -333 // -33% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -333 // -33% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -333 // -33% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -333 // -33% Chaingun Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -333 // -33% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -333 // -33% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -333 // -33% RPG[Asaault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -333 // -33% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -333 // -33% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -333 // -33% RPG[Baalo the Collosus] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -333 // -33% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -333 // -3% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -333 // -33% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -333 // -33% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -333 // -33% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -333 // -33% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -333 // -33% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -333 // -33% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -50% Overall Damage
+     setvar TEMPVAR 500
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop
+    else // All other Pigcops
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -40 // -4% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -40 // -4% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -40 // -4% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -40 // -4% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -40 // -4% Chaingun Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -40 // -4% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -40 // -4% RPG[Asaault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -40 // -4% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -40 // -4% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -40 // -4% RPG[Baalo the Collosus] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -40 // -4% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -40 // -4% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -40 // -4% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -40 // -4% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -40 // -4% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -40 // -4% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -40 // -4% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -40 // -4% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -2.5% Overall Damage
+     setvar TEMPVAR 975
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Medatarions aka "Battlelords" [BOSS1]
+   case BOSS1
+   case BOSS1STAYPUT
+   case BOSS1SHOOT
+   case BOSS1LOB
+    ifvare DEFENDINGPAL 24 // Elimination Squad Soldier
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 3500 // +350% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -60% Overall Damage
+     setvar TEMPVAR 400
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 0 // Boss Battlelord [Ends Game]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 500 // +50% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -35% Overall Damage
+     setvar TEMPVAR 650
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 3 // Boss Battlelord [No End-Game]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 500 // +50% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -35% Overall Damage
+     setvar TEMPVAR 650
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else ifvare DEFENDINGPAL 9 nullop
+    else ifvare DEFENDINGPAL 10 nullop
+    else // All other Mini-Battlelords
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 2000 // +200% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Cycloidians aka "Cycloid Emperors" [BOSS2]
+   case BOSS2
+   case BOSS2STAYPUT
+   case BOSS2SHOOT
+   case BOSS2BREATH
+    ifvare DEFENDINGPAL 24 // Cycloid Void-Annhilator
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 2500 // +250% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -40% Overall Damage
+     setvar TEMPVAR 600
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 0 // Cycloid Emperor [Ends Game]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 250 // +25% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -25% Overall Damage
+     setvar TEMPVAR 750
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 3 // Cycloid Emperor [Non Endgame]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 250 // +25% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -25% Overall Damage
+     setvar TEMPVAR 750
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else ifvare DEFENDINGPAL 9 nullop
+    else ifvare DEFENDINGPAL 10 nullop
+    else // All other Cycloid Princes
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 1000 // +100% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Kerionars aka "Overlords" [BOSS3]
+   case BOSS3
+   case BOSS3STAYPUT
+   case BOSS3LOB
+    ifvare DEFENDINGPAL 24 // Megaton Overlord
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 5000 // +500% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -50% Overall Damage
+     setvar TEMPVAR 500
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 0 // Boss Overlord [Ends Game]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 1000 // +100% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -30% Overall Damage
+     setvar TEMPVAR 700
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 3 // Boss Overlord [Non Endgame]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 1000 // +100% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -30% Overall Damage
+     setvar TEMPVAR 700
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else ifvare DEFENDINGPAL 9 nullop
+    else ifvare DEFENDINGPAL 10 nullop
+    else // All other Boss Overlords
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Weaknesses
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 3000 // +300% Freezethrower Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Gultasiamos aka "Assault Commanders" [COMMANDER]
+   case COMMANDER
+   case COMMANDERSTAYPUT
+    ifvare DEFENDINGPAL 14 // Assault General
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -150 // -15% Expander Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -998 // -99.8% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -100 // -10% RPG[Baalo The Collosus] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -100 // -10% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -100 // -10% RPG[General] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -100 // -10% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -100 // -10% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -100 // -10% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -100 // -10% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -100 // -10% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -100 // -10% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -100 // -10% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -100 // -10% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -2.5% Overall Damage
+     setvar TEMPVAR 975
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 25 // Assault Leader
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -525 // -52.5% Expander Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -350 // -35% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -350 // -35% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -998 // -99.8% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -350 // -35% RPG[Baalo the Collosus] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -350 // -35% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -350 // -35% RPG[General] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -350 // -35% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -350 // -35% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -350 // -35% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -350 // -35% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -350 // -35% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -350 // -35% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -350 // -35% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -350 // -35% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -25% Overall Damage
+     setvar TEMPVAR 750
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 24 // Baalo the Collosus [Species-Specfic BOSS]
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -750 // -75% Expander Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -500 // -50% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -500 // -50% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -500 // -50% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -998 // -99.8% RPG[Baalo the Collosus] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -500 // -50% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -500 // -50% RPG[General] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -500 // -50% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -500 // -50% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -500 // -50% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -500 // -50% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -500 // -50% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -500 // -50% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -500 // -50% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -500 // -50% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -50% Overall Damage
+     setvar TEMPVAR 500
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop // "Old-Skool" Assault Commander
+    else // All other Assault Commanders
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -300 // -30% Expander Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -200 // -20% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -998 // -99.8% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -200 // -20% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -200 // -20% RPG[Baalo the Collosus] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -200 // -20% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -200 // -20% RPG[General] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -200 // -20% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -200 // -20% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -200 // -20% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -200 // -20% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -200 // -20% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -200 // -20% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -200 // -20% Ooz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -200 // -20% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Pigcop Riot Tanks [TANK] & Empty Riot Tanks [EMPTYTANK]
+   case TANK
+   case EMPTYTANK
+    ifvare DEFENDINGPAL 17 // Shotgun Riot Tank
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -250 // -25% Pistol/Bullet Damage
+     ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -250 // -25% Shotgun Damage
+     ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -250 // -25% Pistol/Bullet Damage
+     ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -250 // -25% Shotgun Damage
+     ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -250 // -25% Chaingun Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(15 to 20)% Overall Damage
+     randvar TEMPVAR 50
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 800
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 19 // Missile Riot Tank
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc OCTANINE_RPG addvar DAMAGEMODIFIER -125 // -12.5% RPG[Octabrain] Damage
+     ifvare tempc RPG addvar DAMAGEMODIFIER -250 // -25% RPG[General] Damage
+     ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER -250 // -25% RPG[General] Damage
+     ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault General] Damage
+     ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault Commander] Damage
+     ifvare tempc LEADER_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Assault Leader] Damage
+     ifvare tempc BAALO_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Baalo the Colosuss] Damage
+     ifvare tempc GATEMISSILE_MAIN addvar DAMAGEMODIFIER -250 // -25% Full DeathGate Damage
+     ifvare tempc GATEMISSILE_SPLIT addvar DAMAGEMODIFIER -250 // -25% Split DeathGate Damage
+     ifvare tempc STROKEMISSILE_MAIN addvar DAMAGEMODIFIER -250 // -25% Full DeathStroke Damage
+     ifvare tempc STROKEMISSILE_SPLIT addvar DAMAGEMODIFIER -250 // -25% Split DeathStroke Damage
+     ifvare tempc MORTER addvar DAMAGEMODIFIER -250 // -25% Morter Damage
+     ifvare tempc SEENINE addvar DAMAGEMODIFIER -250 // -25% C9 Damage
+     ifvare tempc OOZFILTER addvar DAMAGEMODIFIER -250 // -25% 0oz Filter Damage
+     ifvare tempc RADIUSEXPLOSION addvar DAMAGEMODIFIER -250 // -25% Radius Explosion Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(15 to 20)% Overall Damage
+     randvar TEMPVAR 50
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 800
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop // "Old-Skool" Riot Tank
+    else // All other Riot Tanks
+    {
+     //**************************
+     //*Attack-Specfic Modifiers*
+     //**************************
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FIRELASER addvar DAMAGEMODIFIER -250 // -25% Laser Damage
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -250 // -25% Expander Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(15 to 20)% Overall Damage
+     randvar TEMPVAR 50
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 800
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Naferlings, aka "Alien Queens" [BOSS4]
+   case BOSS4
+   case BOSS4STAYPUT
+    ifvare DEFENDINGPAL 24 // "Naferia?!" Alien Queen [ESS-Spawner]
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 175% of Electrical Blast #1[Medium] damage into healing
+     ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 175% of Electrical Blast #2[Small] damage into healing
+     ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 175% of Electrical Blast #3[Large] damage into healing
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -70% Overall Damage
+     setvar TEMPVAR 300
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 0 // Alien Queen [Ends Game]
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 125% of Electrical Blast #1[Medium] damage into healing
+     ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 125% of Electrical Blast #2[Small] damage into healing
+     ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 125% of Electrical Blast #3[Large] damage into healing
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -42.5% Overall Damage
+     setvar TEMPVAR 575
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 3 // Alien Queen [Non Endgame]
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 125% of Electrical Blast #1[Medium] damage into healing
+     ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 125% of Electrical Blast #2[Small] damage into healing
+     ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 125% of Electrical Blast #3[Large] damage into healing
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -42.5% Overall Damage
+     setvar TEMPVAR 575
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop // No Natural Resistances, Weaknesses, Immunities or Absorbancies :P
+    else // All "Alien Princess" types
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 75% of Electrical Blast #1[Medium] damage into healing
+     ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 75% of Electrical Blast #2[Small] damage into healing
+     ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 state enemyabsorbdamage } // Absorbs 75% of Electrical Blast #3[Large] damage into healing
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -15% Overall Damage
+     setvar TEMPVAR 850
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Naferling Drones, aka "Protector Drones" [NEWBEAST]
+   case NEWBEAST
+   case NEWBEASTSTAYPUT
+   case NEWBEASTJUMP
+   case NEWBEASTHANG
+    ifvare DEFENDINGPAL 20 // Greater Naferiate
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 9 divvar GENERALDAMAGE 2 state enemyabsorbdamage } // Absorbs 450% of Electrical Blast #1[Medium] damage into healing 
+     ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 9 divvar GENERALDAMAGE 2 state enemyabsorbdamage } // Absorbs 450% of Electrical Blast #2[Small] damage into healing 
+     ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 9 divvar GENERALDAMAGE 2 state enemyabsorbdamage } // Absorbs 450% of Electrical Blast #3[Large] damage into healing 
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -750 // -75% Freezethrower Damage
+     // Weaknesses
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 333 // +33.3% Expander Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -25% Overall Damage
+     setvar TEMPVAR 750
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 17 // Lesser Naferiate
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 2 state enemyabsorbdamage } // Absorbs 150% of Electrical Blast #1[Medium] damage into healing 
+     ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 2 state enemyabsorbdamage } // Absorbs 150% of Electrical Blast #2[Small] damage into healing 
+     ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 2 state enemyabsorbdamage } // Absorbs 150% of Electrical Blast #3[Large] damage into healing 
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -500 // -50% Freezethrower Damage
+     // Weaknesses
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 666 // +66.6% Expander Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -10% Overall Damage
+     setvar TEMPVAR 900
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else
+    ifvare DEFENDINGPAL 9 nullop // No Natural Resistances, Weaknesses, Immunities or Absorbancies :P
+    else
+    {
+     // Absorbancies
+     ifvare tempc ZAPPER1 state enemyabsorbdamage // Absorbs 100% of Electrical Blast #1[Medium] damage into healing 
+     ifvare tempc ZAPPER2 state enemyabsorbdamage // Absorbs 100% of Electrical Blast #2[Small] damage into healing 
+     ifvare tempc ZAPPER3 state enemyabsorbdamage // Absorbs 100% of Electrical Blast #3[Large] damage into healing 
+     setvar DAMAGEMODIFIER 1000
+     // Resistances
+     ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -250 // -25% Freezethrower Damage
+     // Weaknesses
+     ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 1000 // +100.0% Expander Damage
+     state damagemod-enemy-general
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -2.5% Overall Damage
+     setvar TEMPVAR 975
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+
+   // Pigcop Scorpion Tank [SCORPIONTANK]
+   case SCORPIONTANK
+    ifvare DEFENDINGPAL 24 // Ramone's Scorpion Tank
+    {
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(55 to 85)% Overall Damage
+     randvar TEMPVAR 150
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 300
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+    else // All other Scorpion Tanks
+    {
+
+     //**********************
+     //*Support-Based Damage*
+     //**********************
+     state support-monsterdmgeffect
+
+     //************************
+     //*Equipment-Based Damage*
+     //************************
+     state equipment-monsterdmgeffect
+
+     //***************************
+     //*Natural Damage Resistance*
+     //***************************
+     // -(32.5 to 47.5)% Overall Damage
+     randvar TEMPVAR 75
+     ifrnd 128 mulvar TEMPVAR 1 else mulvar TEMPVAR -1
+     addvar TEMPVAR 600
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 1000
+    }
+   break
+  endswitch
+  state checkdamagecaps-general
+  //*********************************************************************************
+  //*********************************************************************************
+  //*********************************************************************************
+
+   // Stage 6 of Damage Formula
+   //***************************************
+   //*Overall Damage Support [Bubsy / Lori]*
+   //***************************************
+   ifvare tempe APLAYER
+   {
+    setvar DAMAGEMODIFIER 1000
+    state support-monsteroveralleffect-extra
+    state damagemod-enemy-general
+   }
+   state checkdamagecaps-general
+
+   //*********************************************************************************
+   //*********************************************************************************
+   //*********************************************************************************
+   ifvarvare PICNUMTEMP DEFENDINGACTOR // If the attacking actor is the same species (i.e. Octabrain hits another Octabrain)...
+   { 
+
+    ifvare DEFENDINGACTOR APLAYER nullop // Prevents the player from effectively becoming immune/absorbant to his own damage :P
+    else
+    {
+     ifvarl ACTORINVULNTIME 1
+     {
+      // Stage 7e of Damage Formula
+      //***************
+      //*Critical Hits*
+      //***************
+      state calccriticalhits_actor
+      mulvarvar GENERALDAMAGE CRITICALHITMULTI
+      ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+      state checkdamagecaps-general
+
+      // Stage 8e of Damage Formula
+      state assessactortype
+      ifvare tempc BIOMETRICBLAST1
+      {
+       setvarvar TEMPVAR5 ACTORDEFENSE
+       divvar TEMPVAR5 2
+       subvarvar GENERALDAMAGE TEMPVAR5
+      }
+      else
+      {
+       subvarvar GENERALDAMAGE ACTORDEFENSE
+      }
+      state checkdamagecaps-general
+
+      // Stage 9e of Damage Formula
+      ifvarl GENERALDAMAGE 1 { ifrnd 224 setvar GENERALDAMAGE 1 else setvar GENERALDAMAGE 0 }
+      state checkdamagecaps-general
+
+      // Stage 10e of Damage Formula
+      //*************************
+      //*Check Difficulty Levels*
+      //*************************
+      ifvarg SKILLLEVEL 6 // If the Skill level is 7 to 9, a monster of the same species as it's attacker will be healed instead of damaged
+      {
+       ifvare HITACTORTYPE? 0
+       {
+        setactor[THISACTOR].htextra 0 // TODO: LEAVE-THIS
+        setvarvar TEMPVAR5 ACTORHP
+        addvarvar TEMPVAR5 GENERALDAMAGE
+        ifvarvarg TEMPVAR5 STATLIMITATOMIC setvarvar TEMPVAR5 STATLIMITATOMIC
+        setvarvar ACTORHP TEMPVAR5
+
+        setvarvar ITEMSEEK THISACTOR
+        setvarvar ITEMSEEKC GENERALDAMAGE
+        state showhealing_actorhp
+
+        soundonce ABSORB_DAMAGE
+        setvar ACTORHPDAMAGED? -1
+        break
+       }
+       else
+       ifvare HITACTORTYPE? 1
+       {
+        setvarvar tempd GENERALDAMAGE
+        state enemyarmordamage
+        state showdamage_actor-generalap
+        setvarvar GENERALDAMAGE tempd
+       }
+      }
+      else
+      ifvarl SKILLLEVEL 7
+      ifvarg SKILLLEVEL 3
+      {
+       ifvare HITACTORTYPE? 0 state nullgendamage
+       else ifvare HITACTORTYPE? 1
+       {
+        setvarvar tempd GENERALDAMAGE
+        state enemyarmordamage
+        state showdamage_actor-generalap
+        setvarvar GENERALDAMAGE tempd
+       }
+      }
+      else
+      ifvarl SKILLLEVEL 4
+      ifvarg SKILLLEVEL 0
+      {
+       ifvare HITACTORTYPE? 0 divvar GENERALDAMAGE 2
+       setvarvar tempd GENERALDAMAGE
+       state enemyarmordamage
+       state showdamage_actor-generalap
+       setvarvar GENERALDAMAGE tempd
+      }
+      else
+      {
+       ifvare HITACTORTYPE? 0 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 }
+       setvarvar tempd GENERALDAMAGE
+       state enemyarmordamage
+       state showdamage_actor-generalap
+       setvarvar GENERALDAMAGE tempd
+      }
+      state checkdamagecaps-general
+
+      // Stage 11e of Damage Formula
+      subvarvar ACTORHP GENERALDAMAGE state showdamage_actor-generalhp
+      setvarvar ACTORLASTDAMAGE GENERALDAMAGE
+      ifvarg ACTORHP 0
+      {
+       ifvarg GENERALDAMAGE 0 setactor[THISACTOR].htextra 1
+       setactor[THISACTOR].extra 8193
+       break
+      }
+      else
+      {
+       setvar ACTORHP 0
+       setactor[THISACTOR].extra 0
+       state checkactorsurvivalvalue
+       ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+       break
+      }
+      state checkdamagecaps-general
+
+     }
+     else
+     {
+      // Stage 12e of Damage Formula
+      setvarvar ACTORDEFLECTEDDAMAGE GENERALDAMAGE
+      state nullgendamage
+      setactor[THISACTOR].htextra 0 // TODO: Leave this
+      sound INVULNITEM3
+
+      /*
+      // Deflecting Damage back at monsters of the same species
+      setvar ACTORDEFLECTDAMAGESTATE 1 // TO BE FIXED LATER
+      setactor[OWNERTEMP].htextra 0
+      */
+      setvar ACTORINVULN? 1
+      state checkdamagecaps-general
+     }
+    }
+
+   }
+   else
+   ifvare PICNUMTEMP APLAYER // If the attacking actor is the Player themself...
+   {
+    setvarvar DEFENDINGACTORDEBUG DEFENDINGACTOR
+    {
+     // Stage 7p of Damage Formula
+     // For Damage Inflicted by the Player directly.
+     setvarvar PLAYERATTACKTEMP PLAYERATTACK
+     state watchovermeskill-attack
+     ifvare tempc BIOMETRICBLAST1
+     {
+      ifp ponsteroids mulvar PLAYERATTACKTEMP 3 else mulvar PLAYERATTACKTEMP 5
+      ifp ponsteroids divvar PLAYERATTACKTEMP 2 else divvar PLAYERATTACKTEMP 6
+     }
+     else
+     {
+      ifp ponsteroids mulvar PLAYERATTACKTEMP 4 else mulvar PLAYERATTACKTEMP 3
+      ifp ponsteroids divvar PLAYERATTACKTEMP 3 else divvar PLAYERATTACKTEMP 4
+     }
+     state checkdamagecaps-general
+
+     // Stage 8p of Damage Formula
+     ifvarn tempvehicleid -1 { ifvare PUBLICBETA? 0 divvar PLAYERATTACKTEMP 25 else divvar PLAYERATTACKTEMP 10 }
+     addvarvar GENERALDAMAGE PLAYERATTACKTEMP
+     state checkdamagecaps-general
+
+     // Stage 9p of Damage Formula
+     //*********************************************
+     //*Get Damage Inflicted by Player Vehicles. :P*
+     //*********************************************
+     ifvarn tempvehicleid -1
+     {
+      getactorvar[tempvehicleid].ACTORATTACK TEMPVAR3
+      ifp ponsteroids mulvar TEMPVAR3 4 else mulvar TEMPVAR3 3
+      ifp ponsteroids divvar TEMPVAR3 3 else divvar TEMPVAR3 4
+      addvarvar GENERALDAMAGE TEMPVAR3
+     }
+    }
+    state checkdamagecaps-general
+
+    ifvare DEFENDINGACTOR SPACESHUTTLE state nullgendamage
+    else ifvare DEFENDINGACTOR MIKE state nullgendamage
+    else ifvare DEFENDINGACTOR BURNING state nullgendamage
+    else ifvare DEFENDINGACTOR BURNING2 state nullgendamage
+    else
+    {
+        // Stage 10p of Damage Formula
+        //************************************************
+        //*Check active character for bonuses/deficancies*
+        //************************************************
+        ifvare CHARACTERSELECTED? 1 // Duke Nukem
+        {
+         // ***************************************************
+         // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
+         // ***************************************************
+         ifvare FLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare FLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+         ifvare CEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare CEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+
+         ifvare EMUFLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare EMUFLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+         ifvare EMUCEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+         ifvare EMUCEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+        }
+
+        ifvare CHARACTERSELECTED? 2 // Jack Walker
+        {
+         // ******************************************
+         // *Setting up Jack's 'Skills' Bonus Damage *
+         // ******************************************
+         setvar CHARACTERARRAY 2
+         getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Jack current level
+         setvarvar TEMPVAR2 TEMPVAR
+         ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 1000
+         ifvare SKILLLEVEL 1 mulvar TEMPVAR2 900
+         ifvare SKILLLEVEL 2 mulvar TEMPVAR2 800
+         ifvare SKILLLEVEL 3 mulvar TEMPVAR2 700
+         ifvare SKILLLEVEL 4 mulvar TEMPVAR2 600
+         ifvare SKILLLEVEL 5 mulvar TEMPVAR2 500
+         ifvare SKILLLEVEL 6 mulvar TEMPVAR2 400
+         ifvare SKILLLEVEL 7 mulvar TEMPVAR2 300
+         ifvare SKILLLEVEL 8 mulvar TEMPVAR2 200
+         ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 100
+         divvar TEMPVAR2 1000
+
+         setvarvar TEMPVAR GENERALDAMAGE
+         mulvarvar TEMPVAR TEMPVAR2
+         divvar TEMPVAR 100
+         addvarvar GENERALDAMAGE TEMPVAR
+         setvar TEMPVAR 0
+         setvar TEMPVAR2 0
+        }
+
+        ifvare CHARACTERSELECTED? 3 // Bubsy Bobcat
+        {
+         // *****************************************************
+         // *Setting Up Bubsy's bonus damage when in "Mask Form*
+         // *****************************************************
+         setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+         ifvarg MISCARRAYID_AMOUNTTEMP 0 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 2 } // +150% Damage if Bubsy is in "Loki Mask" form
+        }
+
+        ifvare CHARACTERSELECTED? 4 // Ami Mizuno
+        {
+         // **************************************
+         // *Setting up Ami's Water-Bonus Damage *
+         // **************************************
+         ifvare sector[PLAYERSECTOR].lotag 1 { ifvare WATER? 1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 2 } } // +250% Damage if Ami is 'in water' at the moment of damage
+         ifvare sector[PLAYERSECTOR].lotag 2 { ifvare WATER? 2 { mulvar GENERALDAMAGE 6 } } // +500% Damage if Ami is 'underwater' at the moment of damage
+         // *******************************
+         // *Setting Up Ami's Form Bonuses*
+         // *******************************
+         setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+         ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Ami is in Civilian Form
+         ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Ami is in Senshi form
+         ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Ami is in Balanced Form
+         // ********************************
+         // *Mercury Aqua Protection (Buff)*
+         // ********************************
+         setvar CHARACTERARRAY 4
+         getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+         ifvarand TEMPVAR 256
+         {
+          ifp pducking divvar GENERALDAMAGE 20 // -95% Damage if Ami is crouching with Aqua Protection active
+          else divvar GENERALDAMAGE 5 // -80% Damage if Ami has with Aqua Protection active 
+         }
+         // ************************
+         // *Mercury Super-Computer*
+         // ************************
+         setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+         ifvare MISCARRAYID_AMOUNTTEMP 1
+         {
+          ifvare player[THISACTOR].heat_on 1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // +75% Damage if Ami is has the Mercury Computer and has the VR Goggles turned on
+         }
+         // *********************
+         // *Freezethrower Shots*
+         // *********************
+         ifvare tempc FREEZEBLAST mulvar GENERALDAMAGE 3 // Ami does +200% Damage for all Ice-elemental damage she inflicts
+        }
+
+        // ifvare CHARACTERSELECTED? 5 { } // Lo Wang
+
+        // ifvare CHARACTERSELECTED? 6 { } // ESSence
+
+        ifvare CHARACTERSELECTED? 7 // Ted Maldoras
+        {
+         // ***********************************
+         // *Setting Up Ted's Explosives Bonus*
+         // ***********************************
+          ifvare tempc RPG { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+          ifvare tempc GATEMISSILE_MAIN { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+          ifvare tempc GATEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+          ifvare tempc STROKEMISSILE_MAIN { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+          ifvare tempc STROKEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+          ifvare tempc MORTER { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+          ifvare tempc RADIUSEXPLOSION { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+        }
+
+        ifvare CHARACTERSELECTED? 8 // Lisa Bates
+        {
+         // ***************************************
+         // *Setting Up Lisa's Energy-Weapon Bonus*
+         // ***************************************
+         ifvare tempc FIRELASER { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc SHRINKSPARK { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc SHRINKER { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc GROWSPARK { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc COOLEXPLOSION1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc FREEZEBLAST { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc ZAPPER1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc ZAPPER2 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+         ifvare tempc ZAPPER3 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+        }
+
+        // ifvare CHARACTERSELECTED? 9 { } // Cybanis Morgandos
+
+        ifvare CHARACTERSELECTED? 10 // Nethra Maboroshi/Christina Mitchell
+        {
+         // **********************************
+         // *Setting Up Nethra's Form Bonuses*
+         // **********************************
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 // If Nethra is currently "Nethra"
+         {
+          ifvare tempc ZAPPER1 mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Electrical Blast #1[Medium] damage she inflicts in Protector Drone form
+          ifvare tempc ZAPPER2 mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Electrical Blast #2[Small] damage she inflicts in Protector Drone form
+          ifvare tempc ZAPPER3 mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Electrical Blast #3[Large] damage she inflicts in Protector Drone form
+         }
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
+         {
+          ifvare tempc FREEZEBLAST mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Freezethrower damage she inflicts in human form
+
+          setvarvar TEMPVAR2 GENERALDAMAGE
+          state checkdamage-crisisbooster
+          setvarvar GENERALDAMAGE TEMPVAR2
+         }
+        }
+
+        // ifvare CHARACTERSELECTED? 11 { } // Paula Polestar
+
+        // ifvare CHARACTERSELECTED? 12 { } // Lori Stevens
+
+        ifvare CHARACTERSELECTED? 13 // Minako Aino
+        {
+         ifvare tempc SHOTSPARK1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 5 } // Minako does +40% Damage with Pistol/Bullet attacks
+         ifvare tempc SHOTGUN { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 5 } // Minako does +40% Damage with Shotgun attacks
+         ifvare tempc CHAINGUN { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 5 } // Minako does +40% Damage with Chaingun attacks
+
+         // **********************************
+         // *Setting Up Minako's Form Bonuses*
+         // **********************************
+         setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+         ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Minako is in Civilian Form
+         ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Minako is in Senshi form
+         ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Minako is in Balanced Form
+        }
+
+        // ifvare CHARACTERSELECTED? 14 { } // Mystery Lady
+
+        // ifvare CHARACTERSELECTED? 15 { } // Maken Shinkara
+
+        state checkdamagecaps-general
+
+        // Stage 11p of Damage Formula
+        // *****************************
+        // *Power Wrist[s] (Equippable)*
+        // *****************************
+        // Check for Power Wrist [equippable item]
+        setvar DAMAGEMODIFIER 1000
+        ifvare PLAYEREQUIPSLOTITEM1 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM2 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM3 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM4 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM5 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM6 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM7 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        ifvare PLAYEREQUIPSLOTITEM8 18
+        {
+         randvar TEMPVAR2 10
+         ifrnd 128 mulvar TEMPVAR2 -1
+         addvar TEMPVAR2 100
+         addvarvar DAMAGEMODIFIER TEMPVAR2
+        }
+        mulvarvar GENERALDAMAGE DAMAGEMODIFIER
+        divvar GENERALDAMAGE 1000
+        state checkdamagecaps-general
+
+        // Stage 12p of Damage Formula
+        // **********************************
+        // *Jewel of Four Souls [Equippable]*
+        // **********************************
+        setvar DAMAGEMODIFIER 1
+        ifvare PLAYEREQUIPSLOTITEM1 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM2 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM3 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM4 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM5 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM6 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM7 28 addvar DAMAGEMODIFIER 10
+        ifvare PLAYEREQUIPSLOTITEM8 28 addvar DAMAGEMODIFIER 10
+        ifvarg DAMAGEMODIFIER 1 subvar DAMAGEMODIFIER 1
+        mulvarvar GENERALDAMAGE DAMAGEMODIFIER
+        state checkdamagecaps-general
+ 
+        // Stage 13p of Damage Formula
+        //****************
+        //*?????? ?? ????*
+        //****************
+        ifvarn ENEMYHASSHIKON? 0 divvar GENERALDAMAGE 10
+        state checkdamagecaps-general
+
+        // Stage 14p of Damage Formula
+        //***********************
+        //*Attacker is Poisoned?*
+        //***********************
+        ifvarand PLAYERSTATUS? 8
+         {
+         randvar TEMPVAR 125
+         ifrnd 128 mulvar TEMPVAR -1
+         addvar TEMPVAR 500
+         mulvarvar GENERALDAMAGE TEMPVAR
+         divvar GENERALDAMAGE 1000
+        }
+        state checkdamagecaps-general
+
+        // Stage 15p of Damage Formula
+        //***********************
+        //*Defender is Poisoned?*
+        //***********************
+        ifvarand ACTORSTATUS? 8
+        {
+         randvar TEMPVAR 125
+         ifrnd 128 mulvar TEMPVAR -1
+         addvar TEMPVAR 1500
+         mulvarvar GENERALDAMAGE TEMPVAR
+         divvar GENERALDAMAGE 1000
+        }
+        state checkdamagecaps-general
+
+        // Stage 16p of Damage Formula
+        // **********************
+        // *Triad Booster (Buff)*
+        // **********************
+        ifvarand PLAYERSTATUS? 4096
+        {
+         randvar temp 25
+         setvar tempb 250
+         ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+         setvar tempc 1000
+         addvarvar tempc tempb
+         // 122.5%-127.5% 
+
+         mulvarvar GENERALDAMAGE tempc
+         divvar GENERALDAMAGE 1000
+        }
+        state checkdamagecaps-general
+
+        // Stage 17p of Damage Formula
+        // *********************
+        // *Damage Shell (Buff)*
+        // *********************
+        ifvarand ACTORSTATUS? 512
+        {
+         sound SHELL_HIT
+         randvar temp 33
+         setvar tempb 333
+         ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+         ifvarg tempb 1000 setvar tempb 1000
+         setvar tempc 1000
+         subvarvar tempc tempb
+         // 30.0%-36.6% 
+
+         mulvarvar GENERALDAMAGE tempc
+         divvar GENERALDAMAGE 1000
+        }
+        state checkdamagecaps-general
+
+        // Stage 18p of Damage Formula
+        // ****************************************
+        // *Setting Up Death-based Support Bonuses*
+        // ****************************************
+        setvar DAMAGEMODIFIER 1000
+        state playersupport-deadcharacters
+        mulvarvar GENERALDAMAGE DAMAGEMODIFIER
+        divvar GENERALDAMAGE 1000
+        state checkdamagecaps-general
+
+        // Stage 19p of Damage Formula
+        // **************************************************
+        // *Setting up Critical Hits [Norm/Super/Mega/Ultra]*
+        // **************************************************
+
+        ifvarg ACTORHP 0
+        {
+         state calccriticalhits
+         mulvarvar GENERALDAMAGE CRITICALHITMULTI 
+         ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+        }
+
+    }
+    state checkdamagecaps-general
+
+    // Stage 20p of Damage Formula
+    // ***************************************************************************
+    // *Sets up the Multiplier for Steroids-based damage dependant on skill level*
+    // ***************************************************************************
+
+    ifvare PUBLICBETA? 1
+    {
+     ifp ponsteroids
+     {
+      ifvarg ACTORHP 0
+      {
+       ifvarl SKILLLEVEL 4 mulvar GENERALDAMAGE 175
+       else ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar GENERALDAMAGE 150
+       else ifvarg SKILLLEVEL 6 mulvar GENERALDAMAGE 125
+       divvar GENERALDAMAGE 100
+      }
+     }
+    }
+    state checkdamagecaps-general
+
+    // Stage 21p of Damage Formula
+    //******************
+    //*"Elite" Monsters*
+    //******************
+    ifvarand ACTORFLAGS 512 // If the monster is an "Elite" they only suffer 25% to 50% damage
+    {
+     randvar TEMPVAR 25
+     addvar TEMPVAR 25
+     mulvarvar GENERALDAMAGE TEMPVAR
+     divvar GENERALDAMAGE 100
+    }
+    state checkdamagecaps-general
+
+    // Stage 22p of Damage Formula
+    // ifvare ISDEVASTATOR? 1 divvar GENERALDAMAGE 2
+    setvarvar ACTORDEFENSETEMP ACTORDEFENSE
+    state checkdamagecaps-general
+
+    // Stage 23p of Damage Formula
+    state serpenthelmet_check
+    state checkdamagecaps-general
+
+    // Stage 24p of Damage Formula
+    ifvare ISDEVASTATOR? 1 divvar ACTORDEFENSETEMP 4
+    // addlogvar ISDEVASTATOR?
+    ifvare tempc SPIT { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc FIRELASER { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc GROWSPARK { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc FREEZEBLAST { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
+    ifvare tempc COOLEXPLOSION1 { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 3 }
+    ifvare tempc RADIUSEXPLOSION divvar ACTORDEFENSETEMP 2
+    ifvare tempc RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc RPG_NOAIM divvar ACTORDEFENSETEMP 2
+    ifvare tempc GENERAL_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc COMMANDER_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc LEADER_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc BAALO_RPG divvar ACTORDEFENSETEMP 2
+    ifvare tempc GATEMISSILE_MAIN divvar ACTORDEFENSETEMP 2
+    ifvare tempc GATEMISSILE_SPLIT divvar ACTORDEFENSETEMP 30
+    ifvare tempc STROKEMISSILE_MAIN divvar ACTORDEFENSETEMP 4
+    ifvare tempc STROKEMISSILE_SPLIT divvar ACTORDEFENSETEMP 60
+    state checkdamagecaps-general
+
+    // Stage 25p of Damage Formula
+    ifvarand CHEATBITFIELD? 8
+    {
+     ifvare HITACTORTYPE? 1
+     {
+      ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
+      ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
+      subvarvar GENERALDAMAGE ACTORDEFENSETEMP
+     }
+     else
+     {
+      ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
+      ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
+      subvarvar GENERALDAMAGE ACTORDEFENSETEMP
+      state cheatersound
+      mulvar GENERALDAMAGE 1000
+      ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+     }
+    }
+    else
+    {
+     ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
+     ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
+     subvarvar GENERALDAMAGE ACTORDEFENSETEMP
+    }
+
+    ifvarl GENERALDAMAGE 0 setvar GENERALDAMAGE 0
+    state checkdamagecaps-general
+
+
+    ifvare DEFENDINGACTOR SPACESHUTTLE state nullgendamage
+    else ifvare DEFENDINGACTOR MIKE state nullgendamage
+    else ifvare DEFENDINGACTOR BURNING state nullgendamage
+    else ifvare DEFENDINGACTOR BURNING2 state nullgendamage
+    else
+    { 
+     // Stage 26p of Damage Formula
+     ifvare tempvehicleid -1
+     {
+      ifvarg QUADTIME 0 mulvar GENERALDAMAGE 4
+     }
+     else
+     {
+      ifvarg actorvar[tempvehicleid].ACTORQUADTIME 0 mulvar GENERALDAMAGE 4
+     }
+     state checkdamagecaps-general
+ 
+     // Stage 27p of Damage Formula
+     ifvarg ACTORHP 0 { ifvarl GENERALDAMAGE 1 setvar GENERALDAMAGE 1 }
+ 
+     state checkdamagecaps-general
+    }
+
+    ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+
+    ifvarg ACTORINVULNTIME 0
+    {
+     ifvare tempc BIOMETRICBLAST1
+     {
+      setvar TEMP2 2
+      randvar TEMP3 1
+      ifvarg CRITICAL? 0
+      {
+       mulvar TEMP2 5
+       mulvar TEMP3 5
+      }
+      ifrnd 128 addvarvar TEMP2 TEMP3 else subvarvar TEMP2 TEMP3
+      setvarvar TEMP3 TEMP2
+      mulvar TEMP2 26
+      subvarvar ACTORINVULNTIME TEMP2
+      ifvarl ACTORINVULNTIME 0 setvar ACTORINVULNTIME 0
+      redefinequote 335 ^22REDUCED ENEMY'S INVULNERBILITY TIME BY %d SECONDS!
+      qsprintf 335 335 TEMP3
+      setvarvar fta fta_normal setvar ftq 335
+     }
+
+     setvarvar ACTORDEFLECTEDDAMAGE GENERALDAMAGE
+     state nullgendamage
+     setactor[THISACTOR].htextra 0 // TODO: Leave this
+     sound INVULNITEM3
+
+     setvarvar DEFLECTATTACKPICNUM tempc
+     setvar ACTORDEFLECTDAMAGESTATE 1 // TO BE FIXED LATER
+     setactor[PLAYERID].htextra 0
+
+     setvar ACTORINVULN? 1
+    }
+    else setvar ACTORINVULN? 0
+
+    // Stage 28p of Damage Formula
+    // *************************
+    // * IMPORTANT ARMOR START *
+    // *************************
+    setvarvar tempd GENERALDAMAGE
+    ifvarg VAMPIRETIME 0 setvarvar TEMPVAR5 ACTORARMORPERCENT
+    state enemyarmordamage
+    state showdamage_actor-generalap
+    setvarvar GENERALDAMAGE tempd
+
+    // ***********************
+    // * IMPORTANT ARMOR END *
+    // ***********************
+    // FINAL DAMAGE COUNT
+    setactor[THISACTOR].htextra tempd
+    state checkdamagecaps-general
+
+    // Stage 29p of Damage Formula
+    ifvarg GENERALDAMAGE 0 state snakearmband_check
+    state checkdamagecaps-general
+
+    // Stage 30p of Damage Formula
+    setvarvar TEMP3 ACTORMAXHP
+    ifvarand ACTORSTATUS? 512
+    { 
+     ifvarand ACTORSTATUS? 1024
+     { 
+      randvar TEMP2 150
+      addvar TEMP2 200
+     }
+     else
+     {
+      randvar TEMP2 125
+      addvar TEMP2 125
+     }
+    }
+    else
+    {
+     ifvarand ACTORSTATUS? 1024
+     { 
+      randvar TEMP2 70
+      addvar TEMP2 105
+     }
+     else
+     {
+      randvar TEMP2 50
+      addvar TEMP2 50
+     }
+    }
+    mulvarvar TEMP3 TEMP2
+    divvar TEMP3 1000
+    // Damage to HP must be >5-10% to have the chance for Mindblasts to Confuse or for Spit Loogies to Poison, or for Freezethrower attacks to Slow
+
+    ifvare tempc FREEZEBLAST ifvarvarg GENERALDAMAGE TEMP3 // Freezethrower Shot [Slow Only, Damage is above]
+    {
+     ifrnd 25
+     {
+      ifvarand ACTORSTATUS? 4 
+      { 
+       randvar TEMP 390
+       addvar TEMP 390
+       addvarvar ACTORSLOWTIMER TEMP
+      } 
+      else 
+      { 
+       addvar ACTORSTATUS? 4 
+       randvar TEMP 390
+       addvar TEMP 390
+       addvarvar ACTORSLOWTIMER TEMP
+       ifvarand ACTORSTATUS? 2 { subvar ACTORSTATUS? 2 setvar ACTORHASTETIMER 0 } 
+       redefinequote 335 ^22YOU HAVE SLOWN DOWN AN ENEMY!
+       setvarvar fta fta_normal setvar ftq 335
+      }   
+     }
+    }
+    ifvare tempc SPIT ifvarvarg GENERALDAMAGE TEMP3 // Freezethrower Shot [Slow Only, Damage is above]
+    {
+     ifrnd 25
+     {
+      ifvarand ACTORSTATUS? 8
+      { 
+       randvar TEMP 390
+       addvar TEMP 390
+       addvarvar ACTORPOISONTIMER TEMP
+      } 
+      else 
+      { 
+       addvar ACTORSTATUS? 8
+       randvar TEMP 390
+       addvar TEMP 390
+       addvarvar ACTORPOISONTIMER TEMP
+       redefinequote 335 ^22YOU HAVE POISONED AN ENEMY!
+       setvarvar fta fta_normal setvar ftq 335
+      }   
+     }
+    }
+    state checkdamagecaps-general
+
+    // Stage 31p of Damage Formula
+    randvar TEMPVAR 1
+    ifvarg enemywinterclothes 0 { ifrnd 128 subvarvar enemywinterclothes TEMPVAR }
+    state checkdamagecaps-general
+
+    // Stage 32p of Damage Formula
+    setvarvar DAMAGEFACTOR GENERALDAMAGE
+    mulvar DAMAGEFACTOR 100
+    divvarvar DAMAGEFACTOR ACTORMAXHP
+    divvar DAMAGEFACTOR 5
+    ifvarg enemywinterclothes 0 subvarvar enemywinterclothes DAMAGEFACTOR
+    state checkdamagecaps-general
+
+    // Stage 33p of Damage Formula
+    setvarvar DAMAGEFACTOR ACTORARMORDAMAGE
+    mulvar DAMAGEFACTOR 100
+    divvarvar DAMAGEFACTOR ACTORMAXAP
+    divvar DAMAGEFACTOR 10
+    ifvarg enemywinterclothes 0 subvarvar enemywinterclothes DAMAGEFACTOR
+    state checkdamagecaps-general
+
+    // Stage 34p of Damage Formula
+    // Drain Artifact [for players since this is monster damage]
+    ifvarg GENERALDAMAGE 0
+    {
+     ifvarvare OWNERTEMP PLAYERID
+     {
+      ifvare tempvehicleid -1
+      {
+       ifvarg VAMPIREMAXDMGFACTOR 1000 // ifvarg VAMPIRETIME 0
+       {
+        setvarvar TEMP MAXHITPOINTS
+        mulvarvar TEMP VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+        divvar TEMP 1000
+ 
+        ifvarvarl CURRENTHITPOINTS TEMP
+        {
+         setvarvar TEMP2 GENERALDAMAGE
+         ifvarvarg TEMP2 ACTORHP setvarvar TEMP2 ACTORHP
+         mulvarvar TEMP2 VAMPIREDMGFACTOR
+         divvar TEMP2 1000
+         addvarvar CURRENTHITPOINTS TEMP2
+      
+         setvarvar TEMP3 MAXHITPOINTS
+         mulvarvar TEMP3 VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+         divvar TEMP3 1000
+
+         ifvarvarg CURRENTHITPOINTS TEMP3 setvarvar CURRENTHITPOINTS TEMP3
+         ifvarg TEMP2 0
+         {
+          setvarvar TEMPHEALTH TEMP2
+          state showhealing_playerhp
+
+          setvar PLAYERHPDAMAGED? -1
+          sound DRAIN_HP
+          sound DRAIN_HP
+          sound DRAIN_HP
+         }
+        }
+       }
+      }
+      else
+      {
+       getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR6 // getactorvar[tempvehicleid].ACTORVAMPIRETIME TEMPVAR5
+       ifvarg TEMPVAR6 1000
+       {
+        getactorvar[tempvehicleid].ACTORMAXHP TEMP
+        getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+        mulvarvar TEMP TEMPVAR3 // Heals up to 125% HP on Public Beta
+        divvar TEMP 1000
+ 
+        getactorvar[tempvehicleid].ACTORHP TEMPVAR4
+        ifvarvarl TEMPVAR4 TEMP
+        {
+         setvarvar TEMP2 GENERALDAMAGE
+         ifvarvarg TEMP2 ACTORHP setvarvar TEMP2 ACTORHP
+         getactorvar[tempvehicleid].ACTORVAMPIREDMGFACTOR TEMPVAR3
+         mulvarvar TEMP2 TEMPVAR3
+         divvar TEMP2 1000
+         addvarvar TEMPVAR4 TEMP2
+      
+         getactorvar[tempvehicleid].ACTORMAXHP TEMP3
+         getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+         mulvarvar TEMP3 TEMPVAR3 // Heals up to 125% HP on Public Beta
+         divvar TEMP3 1000
+
+         ifvarvarg TEMPVAR4 TEMP3 setvarvar TEMPVAR4 TEMP3
+         setactorvar[tempvehicleid].ACTORHP TEMPVAR4
+         ifvarg TEMP2 0
+         {
+          setvarvar TEMPHEALTH TEMP2
+          state showhealing_playerhp
+
+          setvar VEHICLEHPDAMAGED? -1
+          sound DRAIN_HP
+          sound DRAIN_HP
+          sound DRAIN_HP
+         }
+        }
+       }
+      }
+     }
+    }
+
+    ifvarg ACTORARMORDAMAGE 0
+    {
+     ifvarvare OWNERTEMP PLAYERID
+     {
+      ifvare tempvehicleid -1
+      {
+       ifvarg VAMPIREMAXDMGFACTOR 1000 // ifvarg VAMPIRETIME 0
+       {
+        setvarvar TEMP MAXARMORPOINTS
+        mulvarvar TEMP VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+        divvar TEMP 1000
+ 
+        ifvarvarl CURRENTARMORPOINTS TEMP
+        {
+         setvarvar TEMP2 ACTORARMORDAMAGE
+         mulvarvar TEMP2 VAMPIREDMGFACTOR
+         divvar TEMP2 1000
+         addvarvar CURRENTARMORPOINTS TEMP2
+      
+         setvarvar TEMP3 MAXARMORPOINTS
+         mulvarvar TEMP3 VAMPIREMAXDMGFACTOR // Heals up to 125% HP on Public Beta
+         divvar TEMP3 1000
+
+         ifvarvarg CURRENTARMORPOINTS TEMP3 setvarvar CURRENTARMORPOINTS TEMP3
+         ifvarvarl ARMORPERCENT ACTORARMORPERCENT setvarvar ARMORPERCENT ACTORARMORPERCENT
+         ifvarg TEMP2 0
+         {
+          setvarvar RECEIVEDARMOR TEMP2
+          state showhealing_playerap
+
+          setvar PLAYERAPDAMAGED? -1
+          sound DRAIN_AP
+          sound DRAIN_AP
+          sound DRAIN_AP
+         }
+        }
+       }
+      }
+      else
+      {
+       getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR6 // getactorvar[tempvehicleid].ACTORVAMPIRETIME TEMPVAR5
+       ifvarg TEMPVAR6 1000
+       {
+        getactorvar[tempvehicleid].ACTORMAXAP TEMP
+        getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+        mulvarvar TEMP TEMPVAR3 // Heals up to 125% HP on Public Beta
+        divvar TEMP 1000
+ 
+        getactorvar[tempvehicleid].ACTORAP TEMPVAR4
+        ifvarvarl TEMPVAR4 TEMP
+        {
+         setvarvar TEMP2 ACTORARMORDAMAGE
+         getactorvar[tempvehicleid].ACTORVAMPIREDMGFACTOR TEMPVAR3
+         mulvarvar TEMP2 TEMPVAR3
+         divvar TEMP2 1000
+         addvarvar TEMPVAR4 TEMP2
+      
+         getactorvar[tempvehicleid].ACTORMAXAP TEMP3
+         getactorvar[tempvehicleid].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+         mulvarvar TEMP3 TEMPVAR3 // Heals up to 125% HP on Public Beta
+         divvar TEMP3 1000
+
+         ifvarvarg TEMPVAR4 TEMP3 setvarvar TEMPVAR4 TEMP3
+         setactorvar[tempvehicleid].ACTORAP TEMPVAR4
+         getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR4
+         ifvarvarl TEMPVAR4 ACTORARMORPERCENT { setvarvar TEMPVAR4 ACTORARMORPERCENT setactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR4 }
+         ifvarg TEMP2 0
+         {
+          setvarvar RECEIVEDARMOR TEMP2
+          state showhealing_playerap
+
+          setvar VEHICLEAPDAMAGED? -1
+          sound DRAIN_AP
+          sound DRAIN_AP
+          sound DRAIN_AP
+         }
+        }
+       }
+      }
+     }
+    }
+    state checkdamagecaps-general
+    // End Drain Artifact [for players since this is monster damage]
+
+    // Stage 35p of Damage Formula
+    ifvarg GENERALDAMAGE 0 setvar ACTORHPDAMAGED? 1
+    subvarvar ACTORHP GENERALDAMAGE state showdamage_actor-generalhp
+    setvarvar ACTORLASTDAMAGE GENERALDAMAGE
+    ifvarg ACTORHP 0
+    {
+     setactor[THISACTOR].htextra 1
+     setactor[THISACTOR].extra 16384
+    }
+    else
+    {
+     setvar ACTORHP 0
+     setactor[THISACTOR].extra 0
+     state checkactorsurvivalvalue
+     ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+    }
+    state checkdamagecaps-general
+    // FINAL DAMAGE COUNT
+
+    // Stage 36p of Damage Formula
+    setvarvar TEMPVAR GENERALDAMAGE 
+    setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+    setvar DEFENDERDISPLAYTIMER 0
+    ifvare TEMPVAR 0 setvar ACTORNULLDAMAGE 1 else setvar ACTORNULLDAMAGE 0
+    setvarvar ACTORARMORDAMAGETEMP ACTORARMORDAMAGE
+    setvar ACTORARMORDISPLAYTIMER 0
+
+    ifvarg CURRENTACTORARMORPERCENT 0 { ifvare ACTORARMORDAMAGETEMP 0 setvar ACTORARMORNULLDAMAGE 1 else setvar ACTORARMORNULLDAMAGE 0 }
+
+    setvarvar ACTORHEALTH ACTORHP
+    setvarvar DAMAGETEMP GENERALDAMAGE 
+    setvarvar TEMPHITACTORVARHP ACTORMAXHP
+    setvarvar TEMPHITACTORVARAP ACTORMAXAP
+    setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
+    setvar DEFENDERDISPLAYTIMER 0
+    setvar CRITICALHITMULTI 0
+    state checkdamagecaps-general
+   } 
+   else // Monsters are of the same species
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     // Stage 7s of Damage Formula
+     state calccriticalhits_actor
+     mulvarvar GENERALDAMAGE CRITICALHITMULTI
+     ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
+     state checkdamagecaps-general
+
+
+     // Stage 8s of Damage Formula
+     state assessactortype
+     subvarvar GENERALDAMAGE ACTORDEFENSE
+     ifvarl GENERALDAMAGE 1 { ifrnd 224 setvar GENERALDAMAGE 1 else setvar GENERALDAMAGE 0 }
+     state checkdamagecaps-general
+
+     // Stage 9s of Damage Formula
+     ifvarg SKILLLEVEL 6 // And the skill level is Damn I'm Good! or greater, same species monsters will heal each other and themselves instead of inflicting damage
+     {
+      ifvare HITACTORTYPE? 0 state nullgendamage
+      else ifvare HITACTORTYPE? 1
+      {
+       setvarvar tempd GENERALDAMAGE
+       state enemyarmordamage
+       state showdamage_actor-generalap
+       setvarvar GENERALDAMAGE tempd
+      }
+      state nullgendamage
+     }
+     else
+     ifvarl SKILLLEVEL 7
+     ifvarg SKILLLEVEL 3
+     {
+      ifvare HITACTORTYPE? 0 divvar GENERALDAMAGE 2
+      setvarvar tempd GENERALDAMAGE
+      state enemyarmordamage
+      state showdamage_actor-generalap
+      setvarvar GENERALDAMAGE tempd
+     }
+     else
+     ifvarl SKILLLEVEL 4
+     ifvarg SKILLLEVEL 0
+     {
+      ifvare HITACTORTYPE? 0
+      {
+       mulvar GENERALDAMAGE 3
+       divvar GENERALDAMAGE 4
+      }
+      setvarvar tempd GENERALDAMAGE
+      state enemyarmordamage
+      state showdamage_actor-generalap
+      setvarvar GENERALDAMAGE tempd
+     }
+     else
+     {
+      ifvare HITACTORTYPE? 0
+      {
+       mulvar GENERALDAMAGE 7
+       divvar GENERALDAMAGE 8
+      }
+      setvarvar tempd GENERALDAMAGE
+      state enemyarmordamage
+      state showdamage_actor-generalap
+      setvarvar GENERALDAMAGE tempd
+     }
+     state checkdamagecaps-general
+
+     // Stage 10s of Damage Formula
+     ifvarg GENERALDAMAGE 0 setvar ACTORHPDAMAGED? 1
+     subvarvar ACTORHP GENERALDAMAGE state showdamage_actor-generalhp
+     setvarvar ACTORLASTDAMAGE GENERALDAMAGE
+     state checkdamagecaps-general
+
+     // Stage 11s of Damage Formula
+     ifvarg ACTORHP 0
+     {
+      ifvarg GENERALDAMAGE 0 setactor[THISACTOR].htextra 1
+      setactor[THISACTOR].extra 8193
+      break
+     }
+     else
+     {
+      setvar ACTORHP 0
+      setactor[THISACTOR].extra 0
+      state checkactorsurvivalvalue
+      ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+      break
+     }
+    }
+    else
+    {
+      setvarvar ACTORDEFLECTEDDAMAGE GENERALDAMAGE
+      state nullgendamage
+      setactor[THISACTOR].htextra 0
+      sound INVULNITEM3
+      /*
+      // Deflecting Damage back at monsters of a different species
+      setvar ACTORDEFLECTDAMAGESTATE 1 // TO BE FIXED LATER
+      setactor[OWNERTEMP].htextra 0
+      */
+      setvar ACTORINVULN? 1
+    }
+    state checkdamagecaps-general
+
+   }
+  }
+ }
+} // ifvarg tempb 0
+ends 
+//** Formatting End **

@@ -122,8 +122,8 @@ onevent EVENT_EGS
    getactor[THISACTOR].owner TEMPVAR6
    getactor[TEMPVAR6].pal TEMPVAR7
    setactor[THISACTOR].pal TEMPVAR7
-   addlogvar TEMPVAR6
-   addlogvar TEMPVAR7
+   //addlogvar TEMPVAR6
+   //addlogvar TEMPVAR7
   }
  }
 
@@ -4298,7 +4298,7 @@ ifvare TEMPVAR5 APLAYER // APLAYER actor
   ifvare TEMPVAR4 4 addvar TEMPVAR3 33282
   ifvare TEMPVAR4 5 addvar TEMPVAR3 33282
   settspr[THISACTOR].tsprcstat TEMPVAR3
-  addlogvar TEMPVAR3
+  //addlogvar TEMPVAR3
  }
  else
  {
@@ -4817,11 +4817,11 @@ onevent EVENT_NEWGAME // WARNING: Unsynchronized Event
    subvar TEMPVAR8 1 
   } 
   savegamevar numruns
-  addlogvar numruns
-  addlogvar randomseed
+  //addlogvar numruns
+  //addlogvar randomseed
 
   readgamevar ENEMYRANDOMIZERCHANCE // CRITICAL for Randomizations on a new game or loading an unique usermap
-  addlogvar ENEMYRANDOMIZERCHANCE
+  //addlogvar ENEMYRANDOMIZERCHANCE
 
   setvar MISCARRAYID 0 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // ENEMIES-KILLED-LEVEL
   setvar MISCARRAYID 1 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 0 // ENEMIES-KILLED-GAME

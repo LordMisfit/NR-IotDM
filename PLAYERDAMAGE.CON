@@ -1,0 +1,2874 @@
+state pkshieldblockhit
+    setvar PLAYERDAMAGE 0 
+    state nullflash 
+
+    setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+    setvar ATTACKERDISPLAYTIMER 0
+    setvarvar PLAYERDAMAGETEMP PLAYERDAMAGE
+    setvar HEALTHDAMAGETIMER 0
+    setvarvar PLAYERARMORDAMAGETEMP ARMORDAMAGE
+    setvar ARMORDAMAGETIMER 0
+
+  // Tries to cut back the throwback speed of the player relevant to how much damage in HP they received.
+
+    ifvare PLAYERDAMAGETEMP 0 setvar NULLDAMAGE 1 else setvar NULLDAMAGE 0
+    ifvare tempvehicleid -1
+    {
+     ifvarg CURRENTARMORPOINTS 0 { ifvare PLAYERARMORDAMAGETEMP 0 setvar ARMORNULLDAMAGE 1 else setvar ARMORNULLDAMAGE 0 }
+    }
+    else
+    {
+     getactorvar[tempvehicleid].ACTORAP TEMPVAR3
+     ifvarg TEMPVAR3 0 { ifvare PLAYERARMORDAMAGETEMP 0 setvar ARMORNULLDAMAGE 1 else setvar ARMORNULLDAMAGE 0 }
+    }
+
+    ifvare tempvehicleid -1
+    {
+     ifvare CHARACTERSELECTED? 8
+     {
+      ifvare HAVEENERGYSHIELD? 1 
+      {
+       ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+       {
+        ifvare ENERGYSHIELDMODE 1 
+        {
+         setvar CELLDAMAGETIMER 0
+         ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1
+         else setvar BIOSHIELDNULLDAMAGE 0
+        }
+       }
+      }
+     }
+    }
+
+    stopsound NODAMAGE
+    ifvarg NULLDAMAGE 0
+    {
+     setvar PKSHIELDHIT_TIMER 9 // to display the crystal animation like in Mother 3 when a shielded character is hit.
+     stopsound PKSHIELD_HIT
+     stopsound PKSHIELD_HIT2
+     ifrnd 205 { setvar PKSHIELDHITTYPE 0 sound PKSHIELD_HIT } // 80% Block Rate
+     else { setvar PKSHIELDHITTYPE 1 sound PKSHIELD_HIT2 } // 20% Deflect Rate
+
+     stopsound PISTOL_BODYHIT
+     ifvarn MELEEATTACK? 1
+     {
+      getactor[ATTACKINGACTOR].ang ATTACKERANGLE
+     }
+     ifvare MELEEATTACK? 1
+     {
+      setactor[THISACTOR].htpicnum SHOTSPARK1
+     }
+     getactor[PLAYERID].ang PLAYERHITANGLE
+     setvarvar SYSDIFFANGLE ATTACKERANGLE
+     subvarvar SYSDIFFANGLE PLAYERHITANGLE
+     ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+    }
+
+    setvar MELEEATTACK? 0
+    setvar MELEEATTACKERID -1
+//    setvar ATTACKINGACTOR -1
+
+    subvar PLAYERPSISHIELDTIMER 1
+    ifvarl PLAYERPSISHIELDTIMER 1
+    {
+     redefinequote 335 ^22YOU ARE NO LONGER PK SHIELDED!
+
+     subvar PLAYERSTATUS? 1024
+     setvar PLAYERPSISHIELDTIMER 0
+     setvarvar fta fta_normal setvar ftq 335
+    }
+    break
+ends
+
+state freezeblast-chilleffect_player
+      //**********************************
+      //** Freeze-Chill in Cold Environs**
+      //**********************************
+      ifvarl INVULNTIME 1
+      {
+       // Reduceable Freeze Range
+       setvar tempc 45
+       ifvare CHARACTERSELECTED? 3 
+       { 
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 // Cuts damage to Bubsy to 50% if he's wearing his diving suit.
+        {
+         setvar tempc 29 ifrnd 64 addvar tempc 1 
+        }
+        else
+        {
+         setvar tempc 59 ifrnd 128 addvar tempc 1 
+        }
+       }
+       ifvare CHARACTERSELECTED? 4 setvar tempc 4
+       ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
+       ifvare CHARACTERSELECTED? 9 setvar tempc 90
+       ifvare CHARACTERSELECTED? 10
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempc 18 else setvar tempc 36 
+       }
+       ifvare CHARACTERSELECTED? 14 { setvar tempc 22 ifrnd 128 addvar tempc 1 }
+       mulvarvar tempc winterclothes
+       divvar tempc 100
+
+       // Base Freeze Range [%]
+       setvar tempb 50
+       ifvare CHARACTERSELECTED? 3
+       {
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 33 else setvar tempb 66
+       }
+       ifvare CHARACTERSELECTED? 4 setvar tempb 5
+       ifvare CHARACTERSELECTED? 6 setvar tempb 75
+       ifvare CHARACTERSELECTED? 9 setvar tempb 100
+       ifvare CHARACTERSELECTED? 10 
+       { 
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 20 else setvar tempb 40 
+       }
+       ifvare CHARACTERSELECTED? 14 setvar tempb 25
+       subvarvar tempb tempc
+
+       ifvarn ATTACKINGACTORPICNUM APLAYER
+       {
+        ifvare PLAYEREQUIPSLOTITEM1 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM2 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM3 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM4 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM5 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM6 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM7 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM8 2 divvar tempb 2
+        ifvare CHARACTERSELECTED? 12 ifvarand PLAYERSTATUS? 32 divvar tempb 2 // Triad Refractor
+       }
+       else
+       {
+        ifvarvarn ATTACKINGACTOR PLAYERID
+        {
+         ifvare PLAYEREQUIPSLOTITEM1 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM2 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM3 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM4 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM5 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM6 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM7 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM8 2 divvar tempb 2
+         ifvare CHARACTERSELECTED? 12 ifvarand PLAYERSTATUS? 32 divvar tempb 2 // Triad Refractor
+        }
+       }
+       ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0 setvar tempb 0
+       // addlogvar tempb
+
+       randvarvar tempg tempb
+       addvarvar tempg tempb
+       addvarvar freezetimer tempg
+
+       ifvarl freezetimer 0 setvar freezetimer 0
+       state dealfreezedamage-player
+      }
+ends
+
+state watchovermeskill-defense
+   ifvare CHARACTERSELECTED? 11 // Paula
+   {
+    setvar MISCARRAYID 62 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NUMBER-OF-PARTY-DEAD
+    ifvarg MISCARRAYID_AMOUNTTEMP 0
+    {
+     //addlogvar PLAYERDEFENSETEMP
+     ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar PLAYERDEFENSETEMP 140 // +40% [40]
+     ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERDEFENSETEMP 200 // +100% [60]
+     ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar PLAYERDEFENSETEMP 280 // +180% [80]
+     ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar PLAYERDEFENSETEMP 380 // +280% [100]
+     ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar PLAYERDEFENSETEMP 500 // +400% [120]
+     ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar PLAYERDEFENSETEMP 640 // +540% [140]
+     ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar PLAYERDEFENSETEMP 800 // +700% [160]
+     ifvare MISCARRAYID_AMOUNTTEMP 8 mulvar PLAYERDEFENSETEMP 980 // +880% [180]
+     ifvare MISCARRAYID_AMOUNTTEMP 9 mulvar PLAYERDEFENSETEMP 1180 // +1080% [200]
+     ifvare MISCARRAYID_AMOUNTTEMP 10 mulvar PLAYERDEFENSETEMP 1400 // +1300% [220]
+     ifvare MISCARRAYID_AMOUNTTEMP 11 mulvar PLAYERDEFENSETEMP 1640 // +1540% [240]
+     ifvare MISCARRAYID_AMOUNTTEMP 12 mulvar PLAYERDEFENSETEMP 1900 // +1800% [260]
+     ifvare MISCARRAYID_AMOUNTTEMP 13 mulvar PLAYERDEFENSETEMP 2180 // +2080% [280]
+     ifvare MISCARRAYID_AMOUNTTEMP 14 mulvar PLAYERDEFENSETEMP 2480 // +2380% [300]
+     ifvarg MISCARRAYID_AMOUNTTEMP 14 mulvar PLAYERDEFENSETEMP 2800 // +2700% [320]
+     divvar PLAYERDEFENSETEMP 100
+     ifvarvarg PLAYERDEFENSETEMP STATLIMIT setvarvar PLAYERDEFENSETEMP STATLIMIT
+     //addlogvar PLAYERDEFENSETEMP
+    } 
+   }
+ends
+
+//*****************************************************
+//*****************************************************
+//*****************************************************
+//***MAIN STATE FOR PLAYER DAMAGE/DEFENSES/ETC BELOW***
+//*****************************************************
+//*****************************************************
+//*****************************************************
+state player_defense
+
+  getactor[THISACTOR].htowner ATTACKINGACTOR
+  getactorvar[ATTACKINGACTOR].ACTORATTACK tempb
+  ifvarn MELEEATTACKERID -1 getactorvar[MELEEATTACKERID].ACTORATTACK tempe else setvar tempe 0
+  getactor[THISACTOR].htpicnum ATTACKPICNUM
+  getactor[THISACTOR].htextra PLAYERDAMAGE // The true variable for determining the end damage the actor receives
+  ifvare ATTACKPICNUM RPG { ifvarg PLAYERDAMAGE 10 ifvarl PLAYERDAMAGE 60 setvar ISDEVASTATOR? 1 else setvar ISDEVASTATOR? 0 } else { setvar ISDEVASTATOR? 0 }
+  getactorvar[THISACTOR].VEHICLEID tempvehicleid
+  getactorvar[THISACTOR].VEHICLETYPE tempvehicletype
+  setvarvar TEMP CURRENTHITPOINTS
+
+  ifvare SHRUNK? 1 { setactor[THISACTOR].htowner -1 setactor[THISACTOR].htpicnum -1 setactor[THISACTOR].htextra -1 break }
+
+  ifvarg oldskoolmode 0 // tries to emulate classic damage amounts in Old-Skool mode
+  {
+   ifvare ATTACKPICNUM RPG
+   {
+    getactor[ATTACKINGACTOR].picnum TEMP2
+    ifvarn TEMP2 APLAYER
+    {
+     ifvare TEMP2 COMMANDER { randvar PLAYERDAMAGE 15 addvar PLAYERDAMAGE 35 }
+     ifvare TEMP2 BOSS2 { randvar PLAYERDAMAGE 60 addvar PLAYERDAMAGE 140 }
+     ifvare TEMP2 BOSS3 { randvar PLAYERDAMAGE 60 addvar PLAYERDAMAGE 140 }
+    }
+   }
+   ifvare ATTACKPICNUM COOLEXPLOSION1 { randvar PLAYERDAMAGE 6 addvar PLAYERDAMAGE 38 }
+
+   mulvarvar PLAYERDAMAGE MAXHITPOINTS divvar PLAYERDAMAGE 100
+
+   ifvarg PLAYERDAMAGE 0
+   {
+    ifvarg CURRENTARMORPOINTS 0
+    {
+     setvarvar TEMP PLAYERDAMAGE
+ 
+     randvar temp 30
+     addvar temp 20
+ 
+     setvarvar tempb TEMP
+     mulvarvar tempb temp
+     divvar tempb 100
+     subvarvar PLAYERDAMAGE tempb
+     setvarvar ARMORDAMAGE tempb
+
+     ifvarvarg ARMORDAMAGE CURRENTARMORPOINTS
+     {
+      setvarvar tempc ARMORDAMAGE      
+      subvarvar tempc CURRENTARMORPOINTS
+      addvarvar PLAYERDAMAGE tempc
+      subvarvar ARMORDAMAGE tempc
+     }
+     subvarvar CURRENTARMORPOINTS ARMORDAMAGE
+    }
+ 
+    subvarvar CURRENTHITPOINTS PLAYERDAMAGE
+    state checkbuddhamode
+    ifvarg CURRENTHITPOINTS 0
+    {
+     setactor[THISACTOR].htextra -1
+     ifvarg PLAYERDAMAGE 0
+     {
+      setvarvar TEMPVAR PLAYERDAMAGE
+      mulvar TEMPVAR 100
+      ifvarn MAXHITPOINTS 0 divvarvar TEMPVAR MAXHITPOINTS
+      setactor[THISACTOR].htextra TEMPVAR
+      setactor[THISACTOR].extra 16384
+      setplayer[THISACTOR].last_extra 16384
+ 
+      setvarvar temp TEMPVAR
+      divvar temp 3
+      addvar temp 1
+      ifvarg temp 64 setvar temp 64
+      setplayer[THISACTOR].pals_time temp 
+      setplayer[THISACTOR].pals 0 64 
+      setplayer[THISACTOR].pals 1 0 
+      setplayer[THISACTOR].pals 2 0
+     }
+    }
+    else setactor[THISACTOR].htextra 0
+   }
+   break
+  }
+
+  ifvare ATTACKPICNUM INVULNICON
+  {
+   ifvare PUBLICBETA? 0 { ifvare CHARACTERSELECTED? 14 setactor[PLAYERID].htextra -1 break }
+   getactor[ATTACKINGACTOR].picnum ATTACKINGACTORPICNUM
+   getactor[ATTACKINGACTOR].pal ATTACKINGACTORPAL
+   getactor[ATTACKINGACTOR].ang ATTACKERANGLE
+   getactor[PLAYERID].ang PLAYERHITANGLE
+   setvarvar SYSDIFFANGLE ATTACKERANGLE
+   subvarvar SYSDIFFANGLE PLAYERHITANGLE
+   ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+   setvarvar PLAYERDAMAGETEMP STATLIMITMAXIMUM
+   setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+   setvar ATTACKERDISPLAYTIMER 0
+   setvar HEALTHDAMAGETIMER 0
+  
+   ifvarand CHEATBITFIELD? 4 setactor[THISACTOR].extra 0
+   ifvarand CHEATBITFIELD? 4 setplayer[THISACTOR].last_extra 0
+   setactor[THISACTOR].htextra 1
+   ifactor BOSS1 setactor[THISACTOR].htpicnum INVULNICON
+   else ifactor BOSS2 setactor[THISACTOR].htpicnum INVULNICON
+   else ifactor BOSS3 setactor[THISACTOR].htpicnum INVULNICON
+   else ifactor BOSS4 setactor[THISACTOR].htpicnum INVULNICON
+   else setactor[THISACTOR].htpicnum RPG
+   break
+  }
+
+  ifvare MELEEATTACKERID -1
+  {
+   addvarvar tempb tempe
+   // Factors in the enemy's attack stat and 
+   mulvar tempb 3
+   divvar tempb 4
+   addvarvar PLAYERDAMAGE tempb
+   setvar tempe 0
+  }
+  else
+  {
+   setvarvar MELEEDAMAGETEMP tempe // MELEEDAMAGE
+   mulvar MELEEDAMAGETEMP 2 // MELEEDAMAGE
+   randvarvar TEMPVAR6 tempe
+   divvar TEMPVAR6 2
+   ifrnd 128 addvarvar MELEEDAMAGETEMP TEMPVAR6 else subvarvar MELEEDAMAGETEMP TEMPVAR6
+   setvarvar PLAYERDAMAGE MELEEDAMAGE
+   addvarvar PLAYERDAMAGE MELEEDAMAGETEMP
+   setvar tempe 0
+   setvar MELEEDAMAGE 0
+   setvar MELEEDAMAGETEMP 0
+   setvarvar ATTACKINGACTOR MELEEATTACKERID
+  }
+
+  ifvarg PLAYERDAMAGE 0
+  {
+   ifvarl TEMP 1
+   { 
+    ifvarl PARTYALIVE 1
+    {
+     setactor[THISACTOR].htextra -1
+     break
+    }
+   }
+
+   // if in the menus, receive no damage and cancel event
+   ifvare mainmenu 1
+   {
+    setactor[THISACTOR].htextra -1 // 0
+    palfrom 0 0 
+    break 
+   }
+ 
+   // Allows a the incoming character a small reprieve from damage if the last character was killed by one of a series of attacks.
+   setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+   ifvarg MISCARRAYID_AMOUNTTEMP 0
+   {
+    setactor[THISACTOR].htextra -1 // 0
+    palfrom 0 0 
+    break 
+   } 
+ 
+   // Special State for Deathgate/Stroke Missiles due to their immense base damages
+   ifvare ATTACKPICNUM GATEMISSILE_MAIN addvar GENERALDAMAGE 6300
+   ifvare ATTACKPICNUM GATEMISSILE_SPLIT addvar GENERALDAMAGE 945
+   ifvare ATTACKPICNUM STROKEMISSILE_MAIN addvar GENERALDAMAGE 25200
+   ifvare ATTACKPICNUM STROKEMISSILE_SPLIT addvar GENERALDAMAGE 1260
+ 
+   getactor[ATTACKINGACTOR].picnum ATTACKINGACTORPICNUM
+   getactor[ATTACKINGACTOR].pal ATTACKINGACTORPAL
+   ifvare ATTACKINGACTORPICNUM APLAYER
+   {
+    ifvarn MELEEATTACK? 1
+    {
+     setvarvar PLAYERATTACKTEMP PLAYERATTACK
+     ifp ponsteroids { mulvar PLAYERATTACKTEMP 4 divvar PLAYERATTACKTEMP 3 } else { mulvar PLAYERATTACKTEMP 3 divvar PLAYERATTACKTEMP 4 }
+ //  ENABLE THE FOLLOWING LINES TO MAKE THE ATTACK STAT HAVE EXTRA EFFECT ON WEAPON ATTACKS
+     addvarvar PLAYERDAMAGE PLAYERATTACKTEMP
+    }
+   }
+  }
+
+  ifvare tempvehicleid -1
+  {
+   ifvare CHARACTERSELECTED? 6 // ESSence
+   {
+    ifvare ATTACKPICNUM 3770 divvar PLAYERDAMAGE 8 // Boss-Crushing
+ 
+    ifvare ATTACKINGACTORPICNUM BOSS1
+    {
+     ifvare ATTACKINGACTORPAL 24 divvar PLAYERDAMAGE 4
+     else ifvare ATTACKINGACTORPAL 0 divvar PLAYERDAMAGE 8
+     else ifvare ATTACKINGACTORPAL 3 divvar PLAYERDAMAGE 8
+     else ifvare ATTACKINGACTORPAL 9 divvar PLAYERDAMAGE 8
+     else divvar PLAYERDAMAGE 16
+    }
+   }
+ 
+   ifvare CHARACTERSELECTED? 9 // Cybanis
+   {
+    ifvare ATTACKPICNUM 3770 divvar PLAYERDAMAGE 8 // Boss-Crushing
+ 
+    ifvare ATTACKINGACTORPICNUM BOSS2
+    {
+     ifvare ATTACKINGACTORPAL 24 divvar PLAYERDAMAGE 4
+     else ifvare ATTACKINGACTORPAL 0 divvar PLAYERDAMAGE 8
+     else ifvare ATTACKINGACTORPAL 3 divvar PLAYERDAMAGE 8
+     else ifvare ATTACKINGACTORPAL 9 divvar PLAYERDAMAGE 8
+     else divvar PLAYERDAMAGE 16
+    }
+   }
+ 
+   ifvare CHARACTERSELECTED? 10
+   {
+    ifvare ATTACKPICNUM 3770 // Boss-Crushing
+    {
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 divvar PLAYERDAMAGE 24 else divvar PLAYERDAMAGE 12
+    }
+   }
+ 
+   ifvare CHARACTERSELECTED? 14
+   {
+    ifvare ATTACKPICNUM 3770 divvar PLAYERDAMAGE 32 // Boss-Crushing
+   }
+  }
+  else
+  {
+   ifvare ATTACKPICNUM 3770 divvar PLAYERDAMAGE 128 // Boss-Crushing
+  }
+
+  //**************************
+  //**************************
+  //**Attack-Damage Formulas**
+  //**************************
+  //**************************
+
+  ifvare ATTACKPICNUM COOLEXPLOSION1 // Octabrainian Mindblast [Psychic Elemental (Mystic-Type)] (Damage-Only, Confusion Ailment is further below)
+  { 
+   ifvare tempvehicleid -1 // Player/Character is NOT inside of a vehicle...
+   {
+    ifvarand PLAYERSTATUS? 1024 // If the player has PK Shield up, block the attack entirely with a chance to deflect it
+    {
+     state pkshieldblockhit
+    }
+    else // Otherwise, splat! :P
+    {
+     //***************************
+     //*Character-Based Modifiers*
+     //***************************
+     ifvare CHARACTERSELECTED? 4 // If Ami is selected when hit by the Mindblast, cut damage by 1/3
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -333
+      state dmgmodcalc-player
+      // * 66.7% Damage
+     }
+     ifvare CHARACTERSELECTED? 5 // If Lo Wang is selected when hit by the Mindblase, cut damage by 1/4
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -250
+      state dmgmodcalc-player
+      // * 75% Damage
+     }
+     ifvare CHARACTERSELECTED? 8 // If Lisa is selected when hit by the Mindblast, cut damage by 1/5 to 1/4
+     {
+      setvar DAMAGEMODIFIER 1000
+      randvar TEMP -50
+      addvar TEMP -200
+      addvarvar DAMAGEMODIFIER TEMP
+      state dmgmodcalc-player
+      // * 75%-80% Damage
+     }
+     ifvare CHARACTERSELECTED? 11 // If Paula is selected when hit by the Mindblast, cut damage by 3/4s
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -750
+      state dmgmodcalc-player
+      // * 25% Damage
+     }
+ 
+     //*******************
+     //*Support Modifiers*
+     //*******************
+     setvar DAMAGEMODIFIER 1000
+     state support-psionicsresist
+     state dmgmodcalc-player
+  
+     //*********************
+     //*Equipment Modifiers*
+     //*********************
+     setvar DAMAGEMODIFIER 1000
+     ifvare PLAYEREQUIPSLOTITEM1 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #1
+     ifvare PLAYEREQUIPSLOTITEM2 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #2
+     ifvare PLAYEREQUIPSLOTITEM3 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #3
+     ifvare PLAYEREQUIPSLOTITEM4 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #4
+     ifvare PLAYEREQUIPSLOTITEM5 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #5
+     ifvare PLAYEREQUIPSLOTITEM6 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #6
+     ifvare PLAYEREQUIPSLOTITEM7 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #7
+     ifvare PLAYEREQUIPSLOTITEM8 4 addvar DAMAGEMODIFIER -166 // Spirit Ring (-16.6% Damage) - Equipment Slot #8
+     ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+     state dmgmodcalc-player
+    }
+   }
+  }
+
+  ifvare ATTACKPICNUM SPIT // Anfaciar/Enforcer Spit Loogies [Poison Elemental] (Damage Only, Poison Ailment is below)
+  { 
+   randvar TEMP 1
+   addvar TEMP 1
+   divvarvar PLAYERDAMAGE TEMP
+
+   ifvare tempvehicleid -1 // Player/Character is NOT inside of a vehicle...
+   {
+    //***************************
+    //*Character-Based Modifiers*
+    //***************************
+    ifvare CHARACTERSELECTED? 1 // If Duke is selected when hit by the Loogie, cut damage by 1/4
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -250
+     state dmgmodcalc-player
+     // * 75% Damage
+    }
+    ifvare CHARACTERSELECTED? 2 // If Jack is selected when hit by the Loogie, cut damage by 2/5s
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -400
+     state dmgmodcalc-player
+     // * 60% Damage
+    }
+    ifvare CHARACTERSELECTED? 12 // If Lori is selected when hit by the Loogie, cut damage by 1/5
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -200
+     state dmgmodcalc-player
+     // * 80% Damage
+    }
+
+    //*******************
+    //*Support Modifiers*
+    //*******************
+    setvar DAMAGEMODIFIER 1000
+    state support-poisonresist
+    state dmgmodcalc-player
+
+    //*********************
+    //*Equipment Modifiers*
+    //*********************
+    setvar DAMAGEMODIFIER 1000
+    // Equipment Slot #1
+    // Equipment Slot #2
+    // Equipment Slot #3
+    // Equipment Slot #4
+    // Equipment Slot #5
+    // Equipment Slot #6
+    // Equipment Slot #7
+    // Equipment Slot #8
+    state dmgmodcalc-player
+   }
+  }
+
+  ifvare ATTACKPICNUM GROWSPARK // Expander Microwave [Fire (50%) & Energy (50%) Elemental]
+  {
+   ifvare tempvehicleid -1 // Player/Character is NOT inside of a vehicle...
+   {
+    //***************************
+    //*Character-Based Modifiers*
+    //***************************
+    ifvare CHARACTERSELECTED? 4 // Ami
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER 333
+     state dmgmodcalc-player 
+     // * 133.3% Damage
+    }
+    ifvare CHARACTERSELECTED? 7 // Ted
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -667
+     state dmgmodcalc-player 
+     // * 33.3% Damage
+    }
+    ifvare CHARACTERSELECTED? 8 // Lisa
+    {
+     setvar DAMAGEMODIFIER 1000
+     randvar TEMP -50
+     addvar TEMP -200
+     addvarvar DAMAGEMODIFIER TEMP
+     state dmgmodcalc-player
+     // * 75%-80% Damage
+    }
+    ifvare CHARACTERSELECTED? 10 // Nethra
+    {
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 // Protector Drone Form
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -500
+      state dmgmodcalc-player 
+      // * 50% Damage
+     }
+    }
+    ifvare CHARACTERSELECTED? 11 // Paula
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -333
+     state dmgmodcalc-player 
+     // * 66.7% Damage
+    }
+    ifvare CHARACTERSELECTED? 13 // Minako
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -333
+     state dmgmodcalc-player 
+     // * 66.7% Damage
+    }
+    ifvare CHARACTERSELECTED? 15 // Maken
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -833
+     state dmgmodcalc-player 
+     // * 16.7% Damage
+    }
+ 
+    // Warmth in Cold Environs
+    ifvarg freezetimer 0 { randvar tempg 12 addvar tempg 12 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 }
+
+    //*******************
+    //*Support Modifiers*
+    //*******************
+    setvar DAMAGEMODIFIER 1000
+    state support-fireresist
+    state dmgmodcalc-player
+ 
+    //*********************
+    //*Equipment Modifiers*
+    //*********************
+    setvar DAMAGEMODIFIER 1000
+    state dmg_checkplayer_sunrings
+    ifvare PLAYEREQUIPSLOTITEM1 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM2 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM3 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM4 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM5 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM6 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM7 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvare PLAYEREQUIPSLOTITEM8 3 addvar DAMAGEMODIFIER -250 // Plasma Ring (-25% Damage)
+    ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+    state dmgmodcalc-player
+   }
+   else // Player/Character is inside a vehicle...
+   {
+    //*************************
+    //*Vehicle-Based Modifiers*
+    //*************************
+    ifvare tempvehicletype 0 // -25% for Green Riot Tank
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -250
+     state dmgmodcalc-player 
+     // * 75% Damage
+    }
+   }
+  }
+
+  ifvare ATTACKPICNUM DRAGONICRIPBULLET setvar PLAYERDAMAGE 0 
+
+  ifvare ATTACKPICNUM DRAGONICRIP setvar PLAYERDAMAGE 0 
+
+  ifvare ATTACKPICNUM OCTANINE_RPG // Octanine-Created RPGs [Explosion (50%) & Psychic (50%) Elemental]
+  { 
+    ifvare tempvehicleid -1 // Player/Character is NOT inside of a vehicle...
+    {
+     ifvarand PLAYERSTATUS? 1024 // If the player has PK Shield up, block the attack entirely with a chance to deflect it
+     {
+      state pkshieldblockhit
+     }
+     else
+     {
+      //***************************
+      //*Character-Based Modifiers*
+      //***************************
+      ifvare CHARACTERSELECTED? 4 // Ami
+      {
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER -166 // Explosion Elemental Portion
+       addvar DAMAGEMODIFIER 166 // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 100% Damage
+      }
+      ifvare CHARACTERSELECTED? 5 // Lo Wang
+      {
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER 0 // Explosion Elemental Portion
+       addvar DAMAGEMODIFIER -125 // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 87.5% Damage
+      }
+      ifvare CHARACTERSELECTED? 7 // Ted
+      { 
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER -334 // Explosion Elemental Portion
+       addvar DAMAGEMODIFIER 0 // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 66.6% Damage
+      }
+      ifvare CHARACTERSELECTED? 8 // Lisa
+      {
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER 0 // Explosion Elemental Portion
+       randvar TEMP -25
+       addvar TEMP -100
+       addvarvar DAMAGEMODIFIER TEMP // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 87.5%-90% Damage
+      }
+      ifvare CHARACTERSELECTED? 11 // Paula
+      {
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER 0 // Explosion Elemental Portion
+       addvar DAMAGEMODIFIER -375 // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 62.5% Damage
+      }
+      ifvare CHARACTERSELECTED? 13 // Minako
+      {
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER -166 // Explosion Elemental Portion
+       addvar DAMAGEMODIFIER 0 // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 83.4% Damage
+      }
+      ifvare CHARACTERSELECTED? 15 // Maken
+      {
+       setvar DAMAGEMODIFIER 1000
+       addvar DAMAGEMODIFIER -416 // Explosion Elemental Portion
+       addvar DAMAGEMODIFIER 0 // Psychic Elemental Portion
+       state dmgmodcalc-player
+       // * 58.4% Damage
+      }
+  
+      // Warmth in Cold Environs
+      ifvarg freezetimer 0 { randvar tempg 32 addvar tempg 32 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 }
+
+      //*******************
+      //*Support Modifiers*
+      //*******************
+      setvar DAMAGEMODIFIER 1000
+      state support-explosionresist
+      state support-psionicsresist
+      state dmgmodcalc-player
+  
+      //*********************
+      //*Equipment Modifiers*
+      //*********************
+      setvar DAMAGEMODIFIER 1000
+      state dmg_checkplayer_sunrings
+      state dmgmodcalc-player
+
+     }
+    }
+    else // Player/Character is inside a vehicle...
+    {
+     //*************************
+     //*Vehicle-Based Modifiers*
+     //*************************
+     ifvare tempvehicletype 2
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -125
+      state dmgmodcalc-player 
+      // * 87.5% Damage
+     }
+    }
+  }
+
+  ifvare ATTACKPICNUM SEENINE state player_explosiveattackdmg // C9 Canisters [Explosion Elemental]
+  ifvare ATTACKPICNUM OOZFILTER state player_explosiveattackdmg // Explosive Slime Canister [Explosion Elemental]
+  ifvare ATTACKPICNUM RPG state player_explosiveattackdmg // RPG [Explosive Elemental]
+  ifvare ATTACKPICNUM RPG_NOAIM state player_explosiveattackdmg // RPG w/o Aiming [Explosive Elemental]
+  ifvare ATTACKPICNUM GENERAL_RPG state player_explosiveattackdmg // Assault General's RPG [Explosive Elemental]
+  ifvare ATTACKPICNUM COMMANDER_RPG state player_explosiveattackdmg // Assault Commander's RPG [Explosive Elemental]
+  ifvare ATTACKPICNUM LEADER_RPG state player_explosiveattackdmg // Assault Leader's RPG [Explosive Elemental]
+  ifvare ATTACKPICNUM BAALO_RPG state player_explosiveattackdmg // Baalo's RPG [Explosive Elemental]
+  ifvare ATTACKPICNUM GATEMISSILE_MAIN state player_explosiveattackdmg // DeathGate Missile (whole) [Explosive Elemental]
+  ifvare ATTACKPICNUM GATEMISSILE_SPLIT state player_explosiveattackdmg // DeathGate Missile (split) [Explosive Elemental]
+  ifvare ATTACKPICNUM STROKEMISSILE_MAIN state player_explosiveattackdmg // DeathStroke Missile (whole) [Explosive Elemental]
+  ifvare ATTACKPICNUM STROKEMISSILE_SPLIT state player_explosiveattackdmg // DeathStroke Missile (split) [Explosive Elemental]
+  ifvare ATTACKPICNUM RADIUSEXPLOSION // General Explosion Radius [Explosive Elemental]
+  {
+   ifvare ATTACKINGACTORPICNUM OCTANINE_RPG
+   {
+    ifvarand PLAYERSTATUS? 1024 // If the player has PK Shield up, block the attack entirely with a chance to deflect it
+    {
+     state pkshieldblockhit
+    }
+   }
+   ifvare ATTACKINGACTORPICNUM APLAYER
+   {
+    setvar ATTACKINGACTORPAL 0
+    setvar ATTACKINGACTORPICNUM 1895
+    setvarvar TEMPVAR5 PLAYERATTACK
+    mulvar TEMPVAR5 3
+    divvar TEMPVAR5 8
+    subvarvar PLAYERDAMAGE TEMPVAR5
+    ifvarl PLAYERDAMAGE 1 setvar PLAYERDAMAGE 1
+   } // EXPLOSION2-Frame7
+   state player_explosiveattackdmg
+  }
+
+  ifvare ATTACKPICNUM FIREEXT // Fire Extinguisher [Explosive Elemental]
+  {
+   ifvare ATTACKINGACTORPICNUM APLAYER setvar ATTACKINGACTORPICNUM 916
+   state player_explosiveattackdmg
+  }
+
+  ifvare ATTACKPICNUM MORTER // Mortar Grenade [Explosive Elemental]
+  {
+   ifvare ATTACKINGACTORPICNUM APLAYER setvar ATTACKINGACTORPICNUM 1651
+   state player_explosiveattackdmg
+  }
+
+  ifvare ATTACKPICNUM SHOTSPARK1 // Bullet Type #1a [Metal Elemental]
+  { 
+   ifvare ATTACKINGACTORPICNUM LIZMAN { mulvar PLAYERDAMAGE 5 divvar PLAYERDAMAGE 8 }
+   ifvare ATTACKINGACTORPICNUM BOSS1 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS2 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS3 divvar PLAYERDAMAGE 2
+   state player_bulletattackdmg
+  }
+
+  ifvare ATTACKPICNUM NEWSHOTSPARK1 // Bullet Type #1b [Metal Elemental]
+  {
+   ifvare ATTACKINGACTORPICNUM LIZMAN { mulvar PLAYERDAMAGE 5 divvar PLAYERDAMAGE 8 }
+   ifvare ATTACKINGACTORPICNUM BOSS1 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS2 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS3 divvar PLAYERDAMAGE 2
+   state player_bulletattackdmg
+  }
+
+  ifvare ATTACKPICNUM SHOTGUN // Bullet Type #2a [Metal Elemental]
+  {
+   ifvare ATTACKINGACTORPICNUM PIGCOP { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 2 }
+   ifvare ATTACKINGACTORPICNUM BOSS2 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS3 divvar PLAYERDAMAGE 2
+   state player_bulletattackdmg
+  }
+
+  ifvare ATTACKPICNUM NEWSHOTGUN // Bullet Type #2b [Metal Elemental]
+  {
+   ifvare ATTACKINGACTORPICNUM PIGCOP { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 2 }
+   ifvare ATTACKINGACTORPICNUM BOSS2 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS3 divvar PLAYERDAMAGE 2
+   state player_bulletattackdmg
+  }
+
+  ifvare ATTACKPICNUM CHAINGUN // Bullet Type #3 [Metal Elemental]
+  { 
+   ifvare ATTACKINGACTORPICNUM BOSS2 { mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 4 }
+   ifvare ATTACKINGACTORPICNUM BOSS3 divvar PLAYERDAMAGE 2
+   state player_bulletattackdmg
+  }
+
+  ifvare ATTACKPICNUM ZAPPER1 state player_electricalattackdmg // Electric Bolt (Long Bolt) [Electric (50%) / Energy (50%) Elemental]
+  ifvare ATTACKPICNUM ZAPPER2 state player_electricalattackdmg // Electric Bolt (Small Ball) [Electric (50%) / Energy (50%) Elemental]
+  ifvare ATTACKPICNUM ZAPPER3 state player_electricalattackdmg // Electric Bolt (Large Ball) [Electric (50%) / Energy (50%) Elemental]
+
+  ifvare ATTACKPICNUM FIRELASER // Laser Shot [Energy Elemental]
+  { 
+   ifvare ATTACKINGACTORPICNUM LIZMAN { ifvare ATTACKINGACTORPAL 19 { mulvar PLAYERDAMAGE 7 divvar PLAYERDAMAGE 10 } }
+
+   ifvare tempvehicleid -1
+   {
+    //***************************
+    //*Character-Based Modifiers*
+    //***************************
+    ifvare CHARACTERSELECTED? 8 // Lisa
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -333
+     state dmgmodcalc-player
+     // * 66.7% Damage
+    }
+
+    // Warmth in Cold Environs
+    ifvarg freezetimer 0 { randvar tempg 8 addvar tempg 8 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 }
+
+    //*******************
+    //*Support Modifiers*
+    //*******************
+    setvar DAMAGEMODIFIER 1000
+    state support-energyresist
+    state dmgmodcalc-player
+
+    //*********************
+    //*Equipment Modifiers*
+    //*********************
+    setvar DAMAGEMODIFIER 1000
+    ifvare PLAYEREQUIPSLOTITEM1 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #1
+    ifvare PLAYEREQUIPSLOTITEM2 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #2
+    ifvare PLAYEREQUIPSLOTITEM3 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #3
+    ifvare PLAYEREQUIPSLOTITEM4 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #4
+    ifvare PLAYEREQUIPSLOTITEM5 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #5
+    ifvare PLAYEREQUIPSLOTITEM6 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #6
+    ifvare PLAYEREQUIPSLOTITEM7 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #7
+    ifvare PLAYEREQUIPSLOTITEM8 3 addvar DAMAGEMODIFIER -250 // Plasma Ring - Equipment Slot #8
+    ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+    state dmgmodcalc-player
+   }
+   else
+   {
+    //*************************
+    //*Vehicle-Based Modifiers*
+    //*************************
+    ifvare tempvehicletype 0 // -25% for Green Riot Tank
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -250
+     state dmgmodcalc-player 
+     // * 75% Damage
+    }
+   }
+  }
+
+  ifvare ATTACKPICNUM BIOMETRICBLAST1
+  {
+   ifvare tempvehicleid -1
+   {
+    // Warmth in Cold Environs
+    ifvarg freezetimer 0 { randvar tempg 192 addvar tempg 192 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 }
+
+    ifvare CHARACTERSELECTED? 8
+    {
+     ifvarvare ATTACKINGACTOR THISACTOR setvar PLAYERDAMAGE 0
+     else
+     {
+      setvar DAMAGEMODIFIER 1000
+      setvarvar TEMPVAR4 SKILLLEVEL
+      mulvar TEMPVAR4 25
+      setvar TEMPVAR5 -975
+      addvarvar TEMPVAR5 TEMPVAR4
+      addvarvar DAMAGEMODIFIER TEMPVAR5
+      state dmgmodcalc-player
+     }
+    }
+   }
+  }
+
+  ifvare ATTACKPICNUM FREEZEBLAST // Freezer Shot [100% Ice Elemental, 100% Energy Elemental]
+  { 
+   ifvare tempvehicleid -1
+   {
+    //***************************
+    //*Character-Based Modifiers*
+    //***************************
+    ifvare CHARACTERSELECTED? 3 // Bubsy
+    {
+     setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+     ifvare MISCARRAYID_AMOUNTTEMP 1 // Cuts damage to Bubsy to 50% if he's wearing his diving suit.
+     {
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -500
+     }
+     else
+     {
+      setvar DAMAGEMODIFIER 1000
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 addvar DAMAGEMODIFIER 500 else ifvare MISCARRAYID_AMOUNTTEMP 1 addvar DAMAGEMODIFIER 250
+     }
+     state dmgmodcalc-player
+     // * 150.0% Damage [normal], 125.0% Damage [mask form] (50.0% Damage if in Diving Suit)
+    }
+    ifvare CHARACTERSELECTED? 4 // Ami
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -900
+     state dmgmodcalc-player
+     // * 10% Damage
+    }
+    ifvare CHARACTERSELECTED? 6 // ESSence
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER 667
+     state dmgmodcalc-player
+     // * 166.7% Damage
+    }
+    ifvare CHARACTERSELECTED? 8 // Lisa
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -333
+     state dmgmodcalc-player
+     // * 66.7% Damage
+    }
+    ifvare CHARACTERSELECTED? 9 // Cybanis
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER 1000
+     state dmgmodcalc-player
+     // * 200% Damage
+    }
+    ifvare CHARACTERSELECTED? 10 // Nethra
+    { 
+     setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+     ifvare MISCARRAYID_AMOUNTTEMP 0 
+     { 
+      setvar DAMAGEMODIFIER 1000
+      addvar DAMAGEMODIFIER -333
+      state dmgmodcalc-player
+      // * 66.7% Damage
+     } 
+     else 
+     { 
+      state calcplayermaxhealthatomic
+      mulvar PLAYERDAMAGE 2
+      state playerabsorbdamage
+      // * 200% Healing
+     } 
+    }
+    ifvare CHARACTERSELECTED? 14 // "Mystery Lady"
+    {
+     setvar DAMAGEMODIFIER 1000
+     addvar DAMAGEMODIFIER -500
+     state dmgmodcalc-player
+     // * 50% Damage
+    }
+
+    state freezeblast-chilleffect_player
+
+    //*****************
+    //*Winter Clothing*
+    //*****************
+    setvar TEMPVAR3 0
+    ifvarg winterclothes 0
+    {
+     setvar TEMPVAR3 -900
+     mulvarvar TEMPVAR3 winterclothes
+     divvar TEMPVAR3 100
+
+     setvar DAMAGEMODIFIER 1000
+     addvarvar DAMAGEMODIFIER TEMPVAR3
+     state dmgmodcalc-player
+    }
+
+
+    //*******************
+    //*Support Modifiers*
+    //*******************
+    setvar DAMAGEMODIFIER 1000
+    state support-iceresist
+    state support-energyresist
+    state dmgmodcalc-player
+
+    //*********************
+    //*Equipment Modifiers*
+    //*********************
+    setvar DAMAGEMODIFIER 1000
+    ifvare PLAYEREQUIPSLOTITEM1 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #1
+    ifvare PLAYEREQUIPSLOTITEM2 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #2
+    ifvare PLAYEREQUIPSLOTITEM3 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #3
+    ifvare PLAYEREQUIPSLOTITEM4 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #4
+    ifvare PLAYEREQUIPSLOTITEM5 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #5
+    ifvare PLAYEREQUIPSLOTITEM6 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #6
+    ifvare PLAYEREQUIPSLOTITEM7 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #7
+    ifvare PLAYEREQUIPSLOTITEM8 2 addvar DAMAGEMODIFIER -250 // Aqua Ring - Equipment Slot #8
+    ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+    state dmgmodcalc-player
+   }
+  }
+
+  // Overall Damage [Support]
+  ifvare tempvehicleid -1 // Player/Character is not in a vehicle
+  {
+   setvar DAMAGEMODIFIER 1000
+   state support-overallresist
+   state dmgmodcalc-player
+  }
+  else // Player/Character is in a vehicle...
+  {
+   ifvarg tempvehicletype -1 ifvarl tempvehicletype 3
+   {
+    // -(15 to 25)% Overall Damage for all Riot Tanks
+    setvar DAMAGEMODIFIER 1000
+    addvar DAMAGEMODIFIER 0
+    randvar TEMP -50
+    ifrnd 128 mulvar TEMP 1 else mulvar TEMP -1
+    addvar TEMP -200
+    addvarvar DAMAGEMODIFIER TEMP
+    state dmgmodcalc-player
+   }
+  }
+
+  ifvare ATTACKPICNUM CRATE1 divvar PLAYERDAMAGE 2
+  ifvare ATTACKPICNUM CRATE2
+  {
+   setactor[THISACTOR].htpicnum RADIUSEXPLOSION
+   divvar PLAYERDAMAGE 2
+  }
+
+  //**************************
+  //**************************
+  //**************************
+  //**************************
+  //**************************
+
+ ifvare ATTACKPICNUM SHRINKER { setactor[THISACTOR].htextra 0 break }
+ else ifvare ATTACKPICNUM SHRINKSPARK { setactor[THISACTOR].htextra 0 break }
+ else
+ { // Fix positioning 3
+  setvarvar TEMPVAR4 PLAYERDAMAGE // TEMPVAR4 is for setting damage to 0 if Defense is 8x [4x on Release Mode] or more the damage of the attack
+  ifvare PUBLICBETA? 0 mulvar TEMPVAR4 8 else mulvar TEMPVAR4 4
+  subvar TEMPVAR4 1
+
+  ifvare ACTORDEFLECTDAMAGESTATE 1 // If the enemy is under the effect of an Invuln item, they deflect all player damage
+  {
+   ifvarg INVULNTIME 0
+   {
+    setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0
+   }
+   else
+   {
+    // General Damage Reduction or Increase for reflected damage [to sooth the screaming masses of people who hate overwhelming amounts of deflected damage :P]
+    //addlogvar ACTORDEFLECTEDDAMAGE
+    mulvarvar ACTORDEFLECTEDDAMAGE INVULNREFLECTRATE
+    divvar ACTORDEFLECTEDDAMAGE 1000
+    //addlogvar ACTORDEFLECTEDDAMAGE
+
+    ifvare INVULNREFLECTRATE 0
+    {
+     setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0
+    }
+    else
+    { 
+     setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+     ifvarn MISCARRAYID_AMOUNTTEMP 0 // Prevents Deflected Damage from hurting an incoming character after one has just died for 1.5 secs :P
+     {
+      setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0
+     }
+     else
+     {
+      ifvare tempvehicleid -1 // Player/Character is not in a vehicle
+      {
+       ifvare CHARACTERSELECTED? 8
+       {
+        ifvare DEFLECTATTACKPICNUM BIOMETRICBLAST1 divvar ACTORDEFLECTEDDAMAGE 20
+       }
+       ifvare CHARACTERSELECTED? 10
+       {
+        ifvare PUBLICBETA? 0
+        {
+         ifrnd 255
+         {
+          setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTEDDAMAGE 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+         }
+        }
+       }
+       ifvare CHARACTERSELECTED? 14
+       {
+        ifvare PUBLICBETA? 0
+        {
+         setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTEDDAMAGE 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+        }
+       }
+      }
+      else // Player/Character is in a vehicle...
+      {
+       setvar TEMPVAR3 0
+       getactorvar[tempvehicleid].ACTORINVULNTIME TEMPVAR3
+       ifvarg TEMPVAR3 0
+       {
+        setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTEDDAMAGE 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+       }
+      }
+
+      ifvare ATTACKPICNUM FREEZEBLAST state freezeblast-chilleffect_player
+
+      // Check Malakian Gems
+      setvarvar TEMP7 ACTORDEFLECTEDDAMAGE
+      state malakiangemcheck
+      setvarvar ACTORDEFLECTEDDAMAGE TEMP7
+
+      ifvarand CHEATBITFIELD? 8 divvar ACTORDEFLECTEDDAMAGE 1000
+      getactor[ATTACKINGACTOR].picnum ATTACKINGACTORPICNUM
+      getactor[ATTACKINGACTOR].pal ATTACKINGACTORPAL
+      getactor[ATTACKINGACTOR].ang ATTACKERANGLE
+      getactor[PLAYERID].ang PLAYERHITANGLE
+      setvarvar SYSDIFFANGLE ATTACKERANGLE
+      subvarvar SYSDIFFANGLE PLAYERHITANGLE
+      ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+     
+      ifvare tempvehicleid -1 // Player/Character is not in a vehicle
+      {
+       ifvare BIOSHIELDBLOCKINVULN? 1 // Allows the Bio-Shield to parry invuln-deflected damage
+       {
+        ifvare CHARACTERSELECTED? 8
+        {
+         ifvare HAVEENERGYSHIELD? 1 
+         { 
+          ifvare ENERGYSHIELDMODE 1 
+          {
+           ifvarg ACTORDEFLECTEDDAMAGE 0
+           {
+            ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+            {
+             setvarvar CELLDAMAGE ACTORDEFLECTEDDAMAGE 
+
+             ifvare ESHIELDADVANCEMENT 1 { divvar CELLDAMAGE 2 divvar ACTORDEFLECTEDDAMAGE 2 }
+
+             setvarvar CELLDAMAGETEMP CELLDAMAGE setvar CELLDAMAGETIMER 0 // For the displays
+             ifvarn ESHIELDDMGFACTOR 0 divvarvar CELLDAMAGE ESHIELDDMGFACTOR
+             ifvarvarg CELLDAMAGE CURRENTCELLS setvarvar CELLDAMAGE CURRENTCELLS
+             setvarvar tempc CELLDAMAGE
+             mulvarvar tempc ESHIELDDMGFACTOR
+             subvarvar ACTORDEFLECTEDDAMAGE tempc
+             ifvarg ACTORDEFLECTEDDAMAGE 0 subvarvar CELLDAMAGETEMP ACTORDEFLECTEDDAMAGE // For the displays
+             subvarvar CURRENTCELLS CELLDAMAGE
+             setvar CELLDAMAGELEFT 0
+
+             // Now to Calculate to deal with remaining ACTORDEFLECTEDDAMAGE
+             ifvarg CURRENTCELLS 0 // 1 or more cells left
+             {
+              ifvarvarg ACTORDEFLECTEDDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the current cell
+              {
+               setvarvar TEMP3 ACTORDEFLECTEDDAMAGE
+               setvar ACTORDEFLECTEDDAMAGE 0
+               addvarvar CELLDAMAGETEMP TEMP3
+               subvarvar DAMAGEINCELL TEMP3
+               ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              }
+              else // Damage is less than or equal to the remaining power in the current cell
+              {
+               addvarvar CELLDAMAGETEMP ACTORDEFLECTEDDAMAGE
+               subvarvar DAMAGEINCELL ACTORDEFLECTEDDAMAGE
+               setvar ACTORDEFLECTEDDAMAGE 0
+               ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+              }
+             }
+             else // 0 cells
+             {
+              ifvarvarg ACTORDEFLECTEDDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the last cell
+              {
+               addvarvar CELLDAMAGETEMP DAMAGEINCELL
+               subvarvar ACTORDEFLECTEDDAMAGE DAMAGEINCELL
+               setvar DAMAGEINCELL 0
+              }
+              else // Damage is less than the remaining power in the last cell
+              {
+               addvarvar CELLDAMAGETEMP ACTORDEFLECTEDDAMAGE
+               subvarvar DAMAGEINCELL ACTORDEFLECTEDDAMAGE
+               setvar ACTORDEFLECTEDDAMAGE 0
+              }
+             }
+
+             stopsound NODAMAGE
+             ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
+             state bioshieldhitsounds
+             palfrom 32 0 0 64
+             ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
+             state showdamage_playerbioshield
+             setvar ATTACKERDISPLAYTIMER 0
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+ 
+      setvarvar PLAYERDAMAGETEMP ACTORDEFLECTEDDAMAGE 
+      setvar ATTACKERDISPLAYTIMER 0
+      setvar HEALTHDAMAGETIMER 0
+      setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+      setvarvar PLAYERDAMAGE ACTORDEFLECTEDDAMAGE
+
+      setactor[THISACTOR].htpicnum -1
+      ifvare tempvehicleid -1
+      {
+       subvarvar CURRENTHITPOINTS PLAYERDAMAGE
+       state checkbuddhamode
+       state showdamage_playerhp
+       setvarvar PAINSOUNDFACTOR PLAYERDAMAGE
+       state checkpainfactor
+       ifvarg PLAYERDAMAGE 0 state characterpainsounds
+      }
+      else
+      {
+       getactorvar[tempvehicleid].ACTORHP TEMPVAR3
+       subvarvar TEMPVAR3 PLAYERDAMAGE
+       state showdamage_playerhp
+       setactorvar[tempvehicleid].ACTORHP TEMPVAR3
+       state checkbuddhamode
+      }
+
+      ifvarg CURRENTHITPOINTS 0
+      {
+       setactor[THISACTOR].htextra -1
+       ifvarg PLAYERDAMAGE 0
+       {
+        setvarvar TEMPVAR PLAYERDAMAGE
+        mulvar TEMPVAR 100
+        ifvarn MAXHITPOINTS 0 divvarvar TEMPVAR MAXHITPOINTS
+        ifvare tempvehicleid -1 setactor[THISACTOR].htextra TEMPVAR else setactor[THISACTOR].htextra -1 
+
+        setactor[THISACTOR].extra 16384
+        setplayer[THISACTOR].last_extra 16384
+        ifvarn tempvehicleid -1 setactor[tempvehicleid].extra 16384
+
+        setvarvar DAMAGEHUEFACTOR PLAYERDAMAGE
+        ifvare tempvehicleid -1 state playerdamagehues
+        else state playerdamagehues_vehicle
+       }
+      }
+      else setactor[THISACTOR].htextra -1
+
+      setvarvar ATTACKINGACTORPICNUM DEFENDINGACTOR
+      setvarvar ATTACKINGACTORPAL DEFENDINGACTORPAL
+      globalsound DEFLECT2
+      stopsound NODAMAGE
+      state invulnflash 
+      setvar ACTORDEFLECTEDDAMAGE 0
+      setvar ACTORCRITICAL? 0
+      setvar ACTORDEFLECTDAMAGESTATE 0
+      setvar PLAYERDAMAGE 0
+      break
+     }
+    }
+
+   }
+  }
+
+  ifvare tempvehicleid -1 setvarvar TEMPVAR5 INVULNTIME else getactorvar[tempvehicleid].ACTORINVULNTIME TEMPVAR5
+  ifvarg TEMPVAR5 0 ifvarg PLAYERDAMAGE 0 
+  {
+   setvar DEFLECTDAMAGESTATE 1
+   setvarvar DEFLECTEDDAMAGE PLAYERDAMAGE
+   setactor[ATTACKINGACTOR].htowner PLAYERID
+   setactor[ATTACKINGACTOR].htextra 1
+   state setplayerinvulnprop
+   sound INVULNITEM3
+  }
+  else ifvarand CHEATBITFIELD? 32 ifvarg PLAYERDAMAGE 0 
+  {
+   setvar DEFLECTDAMAGESTATE 1
+   mulvar PLAYERDAMAGE 2
+   setvarvar DEFLECTEDDAMAGE PLAYERDAMAGE
+   setactor[ATTACKINGACTOR].htowner PLAYERID
+   setactor[ATTACKINGACTOR].htextra 1
+   state setplayerinvulnprop
+  }
+  else
+  { // Fix positioning 2
+   ifvarg PLAYERDAMAGE 0 
+   { // Fix positioning 1
+    ifvarn MELEEATTACK? 1 getactor[ATTACKINGACTOR].ang ATTACKERANGLE
+    getactor[PLAYERID].ang PLAYERHITANGLE
+    setvarvar SYSDIFFANGLE ATTACKERANGLE
+    subvarvar SYSDIFFANGLE PLAYERHITANGLE
+    ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+ 
+    ifvare ATTACKINGACTORPICNUM APLAYER { ifvarg QUADTIME 0 mulvar PLAYERDAMAGE 4 }
+
+    ifvarg ATTACKINGACTORPAL 8 ifvarl ATTACKINGACTORPAL 12 nullop
+    else
+    {
+     ifvare tempvehicleid -1
+     {
+      ifvare PUBLICBETA? 1
+      {
+       // Determines the base damage ratio on each Skill level
+       ifvare SKILLLEVEL 0 mulvar PLAYERDAMAGE 500 // 50% Damage
+       ifvare SKILLLEVEL 1 mulvar PLAYERDAMAGE 800 // 80% Damage
+       ifvare SKILLLEVEL 2 mulvar PLAYERDAMAGE 1000 // 100% Damage
+       ifvare SKILLLEVEL 3 mulvar PLAYERDAMAGE 1025 // 102.5% Damage
+       ifvare SKILLLEVEL 4 mulvar PLAYERDAMAGE 1075 // 107.5% Damage
+       ifvare SKILLLEVEL 5 mulvar PLAYERDAMAGE 1150 // 115% Damage
+       ifvare SKILLLEVEL 6 mulvar PLAYERDAMAGE 1250 // 125% Damage
+       ifvare SKILLLEVEL 7 mulvar PLAYERDAMAGE 1375 // 137.5% Damage
+       ifvare SKILLLEVEL 8 mulvar PLAYERDAMAGE 1525 // 152.5% Damage
+       ifvare SKILLLEVEL 9 mulvar PLAYERDAMAGE 1700 // 170% Damage
+       divvar PLAYERDAMAGE 1000
+ 
+       // Determines the base damage ratio on each Episode
+       setvar MISCARRAYID 80 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-EPISODE
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar PLAYERDAMAGE 1000 // 100% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERDAMAGE 1033 // 103.3% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar PLAYERDAMAGE 1066 // 106.6% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar PLAYERDAMAGE 1100 // 110% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar PLAYERDAMAGE 1134 // 113.4% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar PLAYERDAMAGE 1167 // 116.7% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar PLAYERDAMAGE 1200 // 120% Damage
+       divvar PLAYERDAMAGE 1000
+ 
+       // Determines the base damage ratio on each Level
+       setvar MISCARRAYID 81 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DISPLAY-LEVEL
+       ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar PLAYERDAMAGE 1000 // 100% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 2 mulvar PLAYERDAMAGE 1006 // 100.6% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 3 mulvar PLAYERDAMAGE 1013
+       ifvare MISCARRAYID_AMOUNTTEMP 4 mulvar PLAYERDAMAGE 1019
+       ifvare MISCARRAYID_AMOUNTTEMP 5 mulvar PLAYERDAMAGE 1026
+       ifvare MISCARRAYID_AMOUNTTEMP 6 mulvar PLAYERDAMAGE 1032
+       ifvare MISCARRAYID_AMOUNTTEMP 7 mulvar PLAYERDAMAGE 1039
+       ifvare MISCARRAYID_AMOUNTTEMP 8 mulvar PLAYERDAMAGE 1045
+       ifvare MISCARRAYID_AMOUNTTEMP 9 mulvar PLAYERDAMAGE 1052
+       ifvare MISCARRAYID_AMOUNTTEMP 10 mulvar PLAYERDAMAGE 1058
+       ifvare MISCARRAYID_AMOUNTTEMP 11 mulvar PLAYERDAMAGE 1065
+       ifvare MISCARRAYID_AMOUNTTEMP 12 mulvar PLAYERDAMAGE 1071
+       ifvare MISCARRAYID_AMOUNTTEMP 13 mulvar PLAYERDAMAGE 1077
+       ifvare MISCARRAYID_AMOUNTTEMP 14 mulvar PLAYERDAMAGE 1084
+       ifvare MISCARRAYID_AMOUNTTEMP 15 mulvar PLAYERDAMAGE 1090
+       ifvare MISCARRAYID_AMOUNTTEMP 16 mulvar PLAYERDAMAGE 1097 // 109.7% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 17 mulvar PLAYERDAMAGE 1103 // 110.3% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 18 mulvar PLAYERDAMAGE 1110
+       ifvare MISCARRAYID_AMOUNTTEMP 19 mulvar PLAYERDAMAGE 1116
+       ifvare MISCARRAYID_AMOUNTTEMP 20 mulvar PLAYERDAMAGE 1123
+       ifvare MISCARRAYID_AMOUNTTEMP 21 mulvar PLAYERDAMAGE 1129
+       ifvare MISCARRAYID_AMOUNTTEMP 22 mulvar PLAYERDAMAGE 1135
+       ifvare MISCARRAYID_AMOUNTTEMP 23 mulvar PLAYERDAMAGE 1142
+       ifvare MISCARRAYID_AMOUNTTEMP 24 mulvar PLAYERDAMAGE 1148
+       ifvare MISCARRAYID_AMOUNTTEMP 25 mulvar PLAYERDAMAGE 1155
+       ifvare MISCARRAYID_AMOUNTTEMP 26 mulvar PLAYERDAMAGE 1161
+       ifvare MISCARRAYID_AMOUNTTEMP 27 mulvar PLAYERDAMAGE 1167
+       ifvare MISCARRAYID_AMOUNTTEMP 28 mulvar PLAYERDAMAGE 1174
+       ifvare MISCARRAYID_AMOUNTTEMP 29 mulvar PLAYERDAMAGE 1181
+       ifvare MISCARRAYID_AMOUNTTEMP 30 mulvar PLAYERDAMAGE 1187
+       ifvare MISCARRAYID_AMOUNTTEMP 31 mulvar PLAYERDAMAGE 1194 // 119.4% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 32 mulvar PLAYERDAMAGE 1200 // 120% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 33 mulvar PLAYERDAMAGE 1206 // 120.6% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 34 mulvar PLAYERDAMAGE 1213
+       ifvare MISCARRAYID_AMOUNTTEMP 35 mulvar PLAYERDAMAGE 1219
+       ifvare MISCARRAYID_AMOUNTTEMP 36 mulvar PLAYERDAMAGE 1226
+       ifvare MISCARRAYID_AMOUNTTEMP 37 mulvar PLAYERDAMAGE 1232
+       ifvare MISCARRAYID_AMOUNTTEMP 38 mulvar PLAYERDAMAGE 1239
+       ifvare MISCARRAYID_AMOUNTTEMP 39 mulvar PLAYERDAMAGE 1245
+       ifvare MISCARRAYID_AMOUNTTEMP 40 mulvar PLAYERDAMAGE 1252
+       ifvare MISCARRAYID_AMOUNTTEMP 41 mulvar PLAYERDAMAGE 1258
+       ifvare MISCARRAYID_AMOUNTTEMP 42 mulvar PLAYERDAMAGE 1265
+       ifvare MISCARRAYID_AMOUNTTEMP 43 mulvar PLAYERDAMAGE 1271
+       ifvare MISCARRAYID_AMOUNTTEMP 44 mulvar PLAYERDAMAGE 1277
+       ifvare MISCARRAYID_AMOUNTTEMP 45 mulvar PLAYERDAMAGE 1284
+       ifvare MISCARRAYID_AMOUNTTEMP 46 mulvar PLAYERDAMAGE 1290
+       ifvare MISCARRAYID_AMOUNTTEMP 47 mulvar PLAYERDAMAGE 1297 // 129.7% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 48 mulvar PLAYERDAMAGE 1303 // 130.3% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 49 mulvar PLAYERDAMAGE 1310
+       ifvare MISCARRAYID_AMOUNTTEMP 50 mulvar PLAYERDAMAGE 1316
+       ifvare MISCARRAYID_AMOUNTTEMP 51 mulvar PLAYERDAMAGE 1323
+       ifvare MISCARRAYID_AMOUNTTEMP 52 mulvar PLAYERDAMAGE 1329
+       ifvare MISCARRAYID_AMOUNTTEMP 53 mulvar PLAYERDAMAGE 1335
+       ifvare MISCARRAYID_AMOUNTTEMP 54 mulvar PLAYERDAMAGE 1342
+       ifvare MISCARRAYID_AMOUNTTEMP 55 mulvar PLAYERDAMAGE 1348
+       ifvare MISCARRAYID_AMOUNTTEMP 56 mulvar PLAYERDAMAGE 1355
+       ifvare MISCARRAYID_AMOUNTTEMP 57 mulvar PLAYERDAMAGE 1361
+       ifvare MISCARRAYID_AMOUNTTEMP 58 mulvar PLAYERDAMAGE 1367
+       ifvare MISCARRAYID_AMOUNTTEMP 59 mulvar PLAYERDAMAGE 1374
+       ifvare MISCARRAYID_AMOUNTTEMP 60 mulvar PLAYERDAMAGE 1381
+       ifvare MISCARRAYID_AMOUNTTEMP 61 mulvar PLAYERDAMAGE 1387
+       ifvare MISCARRAYID_AMOUNTTEMP 62 mulvar PLAYERDAMAGE 1394 // 139.4% Damage
+       ifvare MISCARRAYID_AMOUNTTEMP 63 mulvar PLAYERDAMAGE 1400 // 140% Damage
+       divvar PLAYERDAMAGE 1000
+      }
+     }
+    }
+
+    ifvarg actorvar[ATTACKINGACTOR].ACTORQUADTIME 0 mulvar PLAYERDAMAGE 4
+
+    ifvare ISDEVASTATOR? 1 divvar PLAYERDAMAGE 2
+
+    // Defense Formula
+    ifvare tempvehicleid -1 { setvarvar PLAYERDEFENSETEMP PLAYERDEFENSE }
+    else { getactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR3 setvarvar PLAYERDEFENSETEMP TEMPVAR3 }
+    state watchovermeskill-defense
+    ifvare ISDEVASTATOR? 1 divvar PLAYERDEFENSETEMP 10
+    ifvare ATTACKPICNUM SPIT { mulvar PLAYERDEFENSETEMP 2 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM GROWSPARK { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM FREEZEBLAST { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM FIRELASER { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+    ifvare ATTACKPICNUM COOLEXPLOSION1 { mulvar PLAYERDEFENSETEMP 2 divvar PLAYERDEFENSETEMP 3 }
+    ifvare ATTACKPICNUM RADIUSEXPLOSION divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM RPG_NOAIM divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM GENERAL_RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM COMMANDER_RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM LEADER_RPG divvar PLAYERDEFENSETEMP 2
+    ifvare ATTACKPICNUM BAALO_RPG divvar PLAYERDEFENSETEMP 2
+
+    subvarvar PLAYERDAMAGE PLAYERDEFENSETEMP
+
+    ifvarand CHEATBITFIELD? 16
+    {
+     state cheatersound
+     divvar PLAYERDAMAGE 1000
+    }
+
+    // ******************************************************************************
+    // *Malakian Gems [Permenant Boost Item] & Jewel of Four Souls [Rare Equippable]*
+    // ******************************************************************************
+    setvarvar TEMP7 PLAYERDAMAGE
+    state malakiangemcheck
+    setvarvar PLAYERDAMAGE TEMP7
+ 
+    //***********************
+    //*Hit By Elite Monster?*
+    //***********************
+    getactorvar[ATTACKINGACTOR].ACTORFLAGS TEMPVAR
+    ifvarand TEMPVAR 512 // If the monster is an "Elite" the player will suffer 25% to 50% more damage
+    {
+     randvar TEMPVAR 250
+     addvar TEMPVAR 1250
+     mulvarvar PLAYERDAMAGE TEMPVAR
+     divvar PLAYERDAMAGE 1000
+    }
+
+    //****************
+    //*?????? ?? ????*
+    //****************
+    getactorvar[ATTACKINGACTOR].ENEMYHASSHIKON? TEMPVAR
+    ifvarn TEMPVAR 0 mulvar PLAYERDAMAGE 10
+
+    //***********************
+    //*Attacker is Poisoned?*
+    //***********************
+    getactor[ATTACKINGACTOR].picnum TEMPVAR3
+    ifvare TEMPVAR3 APLAYER getactorvar[ATTACKINGACTOR].PLAYERSTATUS? TEMPVAR2
+    else getactorvar[ATTACKINGACTOR].ACTORSTATUS? TEMPVAR2
+    ifvarand TEMPVAR2 8
+    {
+     randvar TEMPVAR 125
+     ifrnd 128 mulvar TEMPVAR -1
+     addvar TEMPVAR 500
+     mulvarvar PLAYERDAMAGE TEMPVAR
+     divvar PLAYERDAMAGE 1000
+    }
+    // * 37.5%-62.5% damage
+
+    //***********************
+    //*Defender is Poisoned?*
+    //***********************
+    ifvarand PLAYERSTATUS? 8
+    {
+     randvar TEMPVAR 125
+     ifrnd 128 mulvar TEMPVAR -1
+     addvar TEMPVAR 1500
+     mulvarvar PLAYERDAMAGE TEMPVAR
+     divvar PLAYERDAMAGE 1000
+    }
+    // * 137.5%-162.5% damage
+
+    //***************************************************
+    //***************************************************
+    //**SETS UP SPECIAL DEFENSE ABILITIES OF CHARACTERS**
+    //***************************************************
+    //***************************************************
+ 
+   ifvare tempvehicleid -1
+   {
+     // Duke
+     ifvare CHARACTERSELECTED? 1
+     {
+      randvar temp 50
+      setvar tempb 100
+      addvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 10%-15%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+  
+      ifvare FLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare FLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+      ifvare CEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare CEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+
+      ifvare EMUFLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare EMUFLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+      ifvare EMUCEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+      ifvare EMUCEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+     }
+
+     // Jack
+     ifvare CHARACTERSELECTED? 2
+     {
+      randvar temp 18
+      setvar tempb 36
+      addvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 3.8%-5.4%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+
+     // Bubsy
+     ifvare CHARACTERSELECTED? 3
+     {
+      randvar temp 15
+      setvar tempb 30
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      setvar tempc 1000
+      // *****************************************************
+      // *Setting Up Bubsy's bonus defense when in "Mask Form*
+      // *****************************************************
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 
+      {
+       randvar tempd 200
+       setvar tempe 600
+       ifrnd 128 addvarvar tempe tempd else subvarvar tempe tempd
+       addvarvar tempb tempe 
+      }
+      subvarvar tempc tempb
+      // 1.5%-4.5% [Normal] / 41.5%-84.5% [Loki Mask]
+ 
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+  
+      // ********************************************
+      // *Setting Up Bubsy's weakness in/under water*
+      // ********************************************
+      setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+      ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 3 // Cuts damage to Bubsy by 67% if he's wearing his diving suit.
+      else
+      {
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2 // 200% if underwater
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 } // 133% if knee-high in water
+      }
+  
+      // ********************************************************
+      // *Setting Up Bubsy's 25% Block Chance when in "Mask Form*
+      // ********************************************************
+      setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+      ifvarg MISCARRAYID_AMOUNTTEMP 0
+      {
+       ifvarg PLAYERDAMAGE 0
+       {
+        ifrnd 64
+        {
+         setvar PLAYERDAMAGE 0
+         redefinequote 321 ^20BLOCKED THE ATTACK!!
+         setvarvar fta fta_normal setvar ftq 321
+        }
+       }
+      }
+     }
+
+     // Ami
+     ifvare CHARACTERSELECTED? 4
+     {
+      randvar temp 5
+      setvar tempb 15
+      addvarvar tempb temp
+      setvar tempc 1000
+      // *******************************************************
+      // *Setting Up Ami's bonus defense when in "Balanced Form*
+      // *******************************************************
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 2
+      {
+       setvar tempe 100
+       addvarvar tempb tempe 
+      }
+      subvarvar tempc tempb
+      // 1.5%-2.0% [normal & senshi] / 11.5%-12.0% [balanced form]
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+      // **************************************
+      // *Setting up Ami's Water-Bonus Defense*
+      // **************************************
+      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar PLAYERDAMAGE 6
+      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 7 }
+      // *******************************
+      // *Setting Up Ami's Form Bonuses*
+      // *******************************
+      setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+      ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
+      ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 2
+      ifvarg MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 3
+      // ********************************
+      // *Mercury Aqua Protection (Buff)*
+      // ********************************
+      setvar CHARACTERARRAY 4
+      getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+      ifvarand TEMPVAR 256
+      {
+       ifp pducking divvar PLAYERDAMAGE 20 else divvar PLAYERDAMAGE 5
+      }
+     }
+
+     // Higa
+     ifvare CHARACTERSELECTED? 5
+     {
+      randvar temp 25
+      setvar tempb 50
+      addvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 5.0%-7.5%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+
+     // ESSence
+     ifvare CHARACTERSELECTED? 6
+     {
+      randvar temp 50
+      setvar tempb 100
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+  
+      // **********************************
+      // *Setting Up ESSence's Armor Bonus*
+      // **********************************
+      setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 addvar tempb 600
+      // 65%-75%/5%-15% (Wearing ESS Armor/Not Wearing ESS Armor)
+  
+      setvar tempc 1000
+      subvarvar tempc tempb
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+
+     // Ted
+     ifvare CHARACTERSELECTED? 7
+     {
+      randvar temp 58
+      setvar tempb 75
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 1.7%-13.3%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+
+     // Lisa
+     ifvare CHARACTERSELECTED? 8
+     {
+      randvar temp 50
+      setvar tempb 75
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 2.5%-12.5%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+  
+      // ******************************************
+      // *Setting Up Lisa's Bio-Cell Energy Shield*
+      // ******************************************
+      ifvare HAVEENERGYSHIELD? 1 
+      {
+       ifvare ENERGYSHIELDMODE 1 
+       {
+        ifvarg PLAYERDAMAGE 0
+        {
+         ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+         {
+          setvarvar CELLDAMAGE PLAYERDAMAGE
+  
+          ifvare ESHIELDADVANCEMENT 1 { divvar CELLDAMAGE 2 divvar PLAYERDAMAGE 2 }
+  
+          // Check Specfic Projectile Types
+  
+          ifvare ATTACKPICNUM FIRELASER { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
+          ifvare ATTACKPICNUM FREEZEBLAST { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
+          ifvare ATTACKPICNUM GROWSPARK { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
+          ifvare ATTACKPICNUM ZAPPER1 { mulvar CELLDAMAGE 3 divvar CELLDAMAGE 5 mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 5 }
+          ifvare ATTACKPICNUM ZAPPER2 { mulvar CELLDAMAGE 3 divvar CELLDAMAGE 5 mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 5 }
+          ifvare ATTACKPICNUM ZAPPER3 { mulvar CELLDAMAGE 3 divvar CELLDAMAGE 5 mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 5 }
+          // Some Energy-Damage is reduced by the natural properties of the Bio-Shield
+  
+          ifvare ATTACKPICNUM BIOMETRICBLAST1 { setvar CELLDAMAGE 0 setvar PLAYERDAMAGE 0 ifvarvarl CURRENTCELLS MAXCELLS addvar CURRENTCELLS 5 addvar CURRENTENERGYPOINTS 25 } // Biometric Energy is created from the Bio Shield, so it will reabsorb the blast harmlessly 
+          // End Check Specfic Projectile Types 
+
+          ifvarn ATTACKPICNUM BIOMETRICBLAST1 
+          {
+           setvarvar CELLDAMAGETEMP CELLDAMAGE setvar CELLDAMAGETIMER 0 // For the displays
+          }
+          ifvarn ESHIELDDMGFACTOR 0 divvarvar CELLDAMAGE ESHIELDDMGFACTOR
+          ifvarvarg CELLDAMAGE CURRENTCELLS setvarvar CELLDAMAGE CURRENTCELLS // Prevents EShield from absorbing more damage then your current cells can handle
+          setvarvar tempc CELLDAMAGE // tempc is the damage to be taken initall absorbed from the player's damage value
+          mulvarvar tempc ESHIELDDMGFACTOR // multiply by the damage factor
+          subvarvar PLAYERDAMAGE tempc // remove tempc from PLAYERDAMAGE
+          ifvarn ATTACKPICNUM BIOMETRICBLAST1 
+          {
+           ifvarg PLAYERDAMAGE 0 subvarvar CELLDAMAGETEMP PLAYERDAMAGE // For the displays
+          }
+          subvarvar CURRENTCELLS CELLDAMAGE
+          setvar CELLDAMAGELEFT 0
+  
+          // Now to Calculate to deal with remaining PLAYERDAMAGE
+          ifvarg CURRENTCELLS 0 // 1 or more cells left
+          {
+           ifvarvarg PLAYERDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the current cell
+           {
+            setvarvar TEMP3 PLAYERDAMAGE
+            setvar PLAYERDAMAGE 0
+            addvarvar CELLDAMAGETEMP TEMP3
+            subvarvar DAMAGEINCELL TEMP3
+            ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+           }
+           else // Damage is less than or equal to the remaining power in the current cell
+           {
+            addvarvar CELLDAMAGETEMP PLAYERDAMAGE
+            subvarvar DAMAGEINCELL PLAYERDAMAGE
+            setvar PLAYERDAMAGE 0
+            ifvarl DAMAGEINCELL 1 { subvar CURRENTCELLS 1 addvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
+           }
+          }
+          else // 0 cells
+          {
+           ifvarvarg PLAYERDAMAGE DAMAGEINCELL // Damage exceeds the remaining power in the last cell
+           {
+            addvarvar CELLDAMAGETEMP DAMAGEINCELL
+            subvarvar PLAYERDAMAGE DAMAGEINCELL
+            setvar DAMAGEINCELL 0
+           }
+           else // Damage is less than the remaining power in the last cell
+           {
+            addvarvar CELLDAMAGETEMP PLAYERDAMAGE
+            subvarvar DAMAGEINCELL PLAYERDAMAGE
+            setvar PLAYERDAMAGE 0
+           }
+          }
+  
+          stopsound NODAMAGE
+          ifvarn ATTACKPICNUM BIOMETRICBLAST1 
+          {
+           ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
+           state bioshieldhitsounds
+           palfrom 32 0 0 64
+           ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
+           state showdamage_playerbioshield
+           setvar ATTACKERDISPLAYTIMER 0
+          }
+          else
+          {
+           setvar CELLDAMAGETEMP 0
+           sound ABSORB_DAMAGE
+           stopsound PISTOL_BODYHIT
+           setactor[THISACTOR].htextra -1
+           break
+          }
+         }
+        }
+       }
+      }
+     }
+ 
+     // Cybanis
+     ifvare CHARACTERSELECTED? 9
+     {
+      randvar temp 50
+      setvar tempb 450
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+  
+      setvar tempc 1000
+      subvarvar tempc tempb
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+      // 40%-50%
+     }
+ 
+    // Nethra
+     ifvare CHARACTERSELECTED? 10
+     {
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 // Protector Drone Form
+      {
+       randvar temp 25
+       setvar tempb 200
+       ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+       // 17.5%-22.5%
+      }
+      else // Human Form
+      {
+       randvar temp 25
+       setvar tempb 25
+       ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+       // 0%-5%
+      }
+      ifvare PUBLICBETA? 0 // adds 22.2%-44.4% in Commerical Mode
+      {
+       randvar temp 111
+       addvar tempb 333
+       ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      }
+      setvar tempc 1000
+      subvarvar tempc tempb
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+
+     // Paula
+     ifvare CHARACTERSELECTED? 11
+     {
+      randvar temp 200
+      setvar tempb 0
+      addvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 0%-20%
+   
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+      // ******************************************************
+      // *Setting Up Paula's ability to Null Attacks at Random*
+      // ******************************************************
+      ifvarg PLAYERDAMAGE 0
+      {
+       ifrnd 56
+       {
+        setvar PLAYERDAMAGE 0
+        redefinequote 321 ^20NULLED THE ATTACK!!
+        setvarvar fta fta_normal setvar ftq 321
+       }
+      }
+     }
+
+     // Lori
+     ifvare CHARACTERSELECTED? 12
+     {
+      randvar temp 55
+      setvar tempb 55
+      addvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 5.5%-11.0%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+      // ************************************
+      // *Setting Up Lori's Pyramid Ragnarok*
+      // ************************************
+      ifvare MELEEATTACK? 1
+      {
+       ifvarn MELEEATTACKER APLAYER // Prevents the player from making Lori stronger in a cheap manner by constantly inflicting self-damage
+       {
+        setvar CHARACTERARRAY 12
+        getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+        ifvarand TEMPVAR 64 // If Lori has the "Pyramid Ragnarok" status
+        {
+         mulvar PLAYERDAMAGE 3
+         divvar PLAYERDAMAGE 2
+         state triadragnarok
+         ifrnd 51 state triadragnarok
+         ifrnd 10 state triadragnarok
+         ifrnd 2 state triadragnarok
+        }
+       }
+      }
+      else
+      {
+       ifvarn ATTACKINGACTORPICNUM APLAYER // Prevents the player from making Lori stronger in a cheap manner by constantly inflicting self-damage
+       {
+        setvar CHARACTERARRAY 12
+        getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+        ifvarand TEMPVAR 64 // If Lori has the "Pyramid Ragnarok" status
+        {
+         mulvar PLAYERDAMAGE 3
+         divvar PLAYERDAMAGE 2
+         state triadragnarok
+         ifrnd 51 state triadragnarok
+         ifrnd 10 state triadragnarok
+         ifrnd 2 state triadragnarok
+        }
+       }
+      }
+      // *************************************
+      // *Setting Up Lori's Pyramid Refractor*
+      // *************************************
+      setvar CHARACTERARRAY 12
+      getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+      ifvarand TEMPVAR 32 // If Lori has the "Pyramid Refractor" status
+      {
+       ifvarg PLAYERDAMAGE 0
+       {
+        setvarvar TEMPPLAYERDAMAGE PLAYERDAMAGE
+        divvar PLAYERDAMAGE 2 // Divide Lori's Damage in half...
+        ifvare PLAYEREQUIPSLOTITEM1 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM2 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM3 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM4 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM5 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM6 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM7 6 divvar PLAYERDAMAGE 2
+        ifvare PLAYEREQUIPSLOTITEM8 6 divvar PLAYERDAMAGE 2
+        subvarvar TEMPPLAYERDAMAGE PLAYERDAMAGE
+        ifvarn ATTACKPICNUM SHRINKER // Prevents the Refractor from being able to shrink the enemy with the deflected damage, but keeps the Projectile ID of other  attacks in the queue (Deflected Freeze damage still Freezes enemies, deflected Expander damage still enlarges enemies)  
+        { 
+         setvar REFRACTORSTATE 1
+ 
+         ifvare MELEEATTACK? 0 
+         { 
+          ifvarn ATTACKINGACTORPICNUM APLAYER addvar TEMPVAR7 1
+          ifvare ATTACKINGACTORPICNUM FIRE setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM FIRE2 setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM FIREBARREL setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM FIREVASE setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM BURNING setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM BURNING2 setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM STEAM setvar TEMPVAR7 0
+          ifvare ATTACKINGACTORPICNUM CEILINGSTEAM setvar TEMPVAR7 0
+
+          ifvare TEMPVAR7 1
+          { 
+           setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
+           setactor[ATTACKINGACTOR].htextra 1 // TODO: Leave This
+           setactor[ATTACKINGACTOR].htpicnum ATTACKPICNUM 
+           setactor[ATTACKINGACTOR].htowner PLAYERID
+          } 
+         }
+         else
+         ifvare MELEEATTACK? 1 
+         { 
+          ifvarn MELEEATTACKER APLAYER addvar TEMPVAR7 1
+          ifvare MELEEATTACKER FIRE setvar TEMPVAR7 0
+          ifvare MELEEATTACKER FIRE2 setvar TEMPVAR7 0
+          ifvare MELEEATTACKER FIREBARREL setvar TEMPVAR7 0
+          ifvare MELEEATTACKER FIREVASE setvar TEMPVAR7 0
+          ifvare MELEEATTACKER BURNING setvar TEMPVAR7 0
+          ifvare MELEEATTACKER BURNING2 setvar TEMPVAR7 0
+          ifvare MELEEATTACKER STEAM setvar TEMPVAR7 0
+          ifvare MELEEATTACKER CEILINGSTEAM setvar TEMPVAR7 0
+
+          ifvare TEMPVAR7 1
+          { 
+           setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
+           setactor[MELEEATTACKERID].htextra 1 // TODO: Leave This
+           setactor[MELEEATTACKERID].htpicnum SHOTSPARK1
+           setactor[MELEEATTACKERID].htowner PLAYERID
+          } 
+         }   
+        } 
+       }
+      }
+      else
+      {
+       state player_mirrorshield
+      }
+     }
+
+     // Minako
+     ifvare CHARACTERSELECTED? 13
+     {
+      randvar temp 5
+      setvar tempb 15
+      addvarvar tempb temp
+      setvar tempc 1000
+      // **********************************************************
+      // *Setting Up Minako's bonus defense when in "Balanced Form*
+      // **********************************************************
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 2
+      {
+       setvar tempe 100
+       addvarvar tempb tempe 
+      }
+      subvarvar tempc tempb
+      // 1.5%-2.0% [normal & senshi] / 11.5%-12.0% [balanced form]
+ 
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+      // **********************************
+      // *Setting Up Minako's Form Bonuses*
+      // **********************************
+      setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
+      ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 }
+      ifvare MISCARRAYID_AMOUNTTEMP 1 { divvar PLAYERDAMAGE 2 }
+      ifvarg MISCARRAYID_AMOUNTTEMP 1 { divvar PLAYERDAMAGE 3 }
+     }
+ 
+     // Mystery Woman
+     ifvare CHARACTERSELECTED? 14
+     {
+      randvar temp 111
+      setvar tempb 667
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 55.6%-77.8%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+ 
+     // Maken
+     ifvare CHARACTERSELECTED? 15
+     {
+      randvar temp 55
+      setvar tempb 55
+      addvarvar tempb temp
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 5.5%-11%
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+
+     // ***************************
+     // *Mirror Shields [Non-Lori]*
+     // ***************************
+     ifvarn CHARACTERSELECTED? 12 state player_mirrorshield
+
+     // *********************
+     // *Damage Shell (Buff)*
+     // *********************
+     ifvarand PLAYERSTATUS? 512
+     {
+      sound SHELL_HIT
+      randvar temp 33
+      setvar tempb 333
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      ifvarg tempb 1000 setvar tempb 1000
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 30.0%-36.6% 
+  
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+ 
+     // **********************
+     // *Triad Booster (Buff)*
+     // **********************
+     ifvarand PLAYERSTATUS? 4096
+     {
+      randvar temp 25
+      setvar tempb 250
+      ifrnd 128 addvarvar tempb temp else subvarvar tempb temp
+      ifvarg tempb 1000 setvar tempb 1000
+      setvar tempc 1000
+      subvarvar tempc tempb
+      // 22.5%-27.5% 
+ 
+      mulvarvar PLAYERDAMAGE tempc
+      divvar PLAYERDAMAGE 1000
+     }
+ 
+     // **************************************************
+     // *Setting up Critical Hits [Norm/Super/Mega/Ultra]*
+     // **************************************************
+     ifvare ATTACKINGACTORPICNUM APLAYER
+     {
+      ifvarg CURRENTHITPOINTS 0
+      {
+       state calccriticalhits_actor
+       mulvarvar PLAYERDAMAGE CRITICALHITMULTI 
+       ifvarvarg PLAYERDAMAGE STATLIMITMAXIMUM setvarvar PLAYERDAMAGE STATLIMITMAXIMUM
+       // ifvarg ACTORCRITICAL? 0 addlogvar PLAYERDAMAGE
+       ifvarg ACTORCRITICAL? 0 wackplayer
+      }
+     }
+     else
+     {
+      ifvarg CURRENTHITPOINTS 0
+      {
+       state calccriticalhits_actor
+       mulvarvar PLAYERDAMAGE CRITICALHITMULTI 
+       ifvarvarg PLAYERDAMAGE STATLIMITMAXIMUM setvarvar PLAYERDAMAGE STATLIMITMAXIMUM
+       // ifvarg ACTORCRITICAL? 0 addlogvar PLAYERDAMAGE
+       ifvarg ACTORCRITICAL? 0 wackplayer
+      }
+     }
+ 
+     // ********************
+     // *Self-Damage Factor*
+     // ********************
+     ifvare ATTACKINGACTORPICNUM APLAYER
+     {
+      setvar tempc 100
+      setvar tempd 10
+      mulvarvar tempd SKILLLEVEL
+      subvarvar tempc tempd
+      setvarvar tempb PLAYERLEVEL
+      mulvarvar tempb tempc
+      divvar tempb 100
+  
+      setvar temp 100
+      subvarvar temp tempb
+      mulvarvar PLAYERDAMAGE temp
+      divvar PLAYERDAMAGE 100
+     }
+
+     // ********************
+     // *Defense Mode Check*
+     // ********************
+     ifvare DEFENSEMODE? 1 { ifvarg PLAYERDAMAGE 0 divvar PLAYERDAMAGE 2 }
+    }
+/*
+    else // ifvarn tempvehicleid -1
+    {
+    }
+*/
+
+    //**************************************************
+    //**************************************************
+    //**END OF SPECIAL DEFENSE ABILITIES OF CHARACTERS**
+    //**************************************************
+    //**************************************************
+
+    ifvare tempvehicleid -1
+    {
+     ifp ponsteroids
+     {
+      ifvare SKILLLEVEL 0 setvar TEMP3 1
+      else
+      {
+       setvar TEMP3 10
+       mulvarvar TEMP3 SKILLLEVEL
+      }
+      mulvarvar PLAYERDAMAGE TEMP3
+      divvar PLAYERDAMAGE 100
+     }
+    }
+/*
+    else // ifvarn tempvehicleid -1
+    {
+    }
+*/
+
+    ifvarl PLAYERDAMAGE 1 
+    { 
+     ifvare PLAYEREQUIPSLOTITEM1 28
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } 
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM2 28 
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM3 28
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM4 28
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM5 28
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM6 28
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM7 28
+     {
+     ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     ifvare PLAYEREQUIPSLOTITEM8 28
+     {
+      ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
+     }
+     else
+     {
+      ifvarvarg PLAYERDEFENSETEMP TEMPVAR4 // If Player has 8x the defense of the attack's damage [4 times on Release mode], they will receive 0 damage from any hit 
+      { 
+       setvar PLAYERDAMAGE 0 
+       state nullflash 
+      }
+      else
+      { 
+       ifrnd 224 // 87.5% chance of taking damage
+       { 
+        ifvare tempvehicleid -1
+        {
+         ifvare CHARACTERSELECTED? 3
+         { 
+          setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+          ifvare MISCARRAYID_AMOUNTTEMP 1 nullop else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
+         } 
+         else 
+         ifvare CHARACTERSELECTED? 8 
+         { 
+          ifvare HAVEENERGYSHIELD? 1 
+          {
+           ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+           {
+            ifvare ENERGYSHIELDMODE 1 nullop
+            else 
+            { 
+             setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 
+            }
+           }
+           else 
+           { 
+            setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 
+           }
+          }
+          else 
+          { 
+           setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 
+          }
+         } 
+         else 
+         ifvare CHARACTERSELECTED? 12
+         { 
+          ifvarand PLAYERSTATUS? 32
+          {
+           setvar PLAYERDAMAGE 0 
+           state nullflash 
+          }
+          else
+          {
+           setvar PLAYERDAMAGE 1 
+           palfrom 0 64 64 64 
+          }
+         }
+         else 
+         {
+          setvar PLAYERDAMAGE 1 
+          palfrom 0 64 64 64 
+         }
+        }
+        else
+        {
+         setvar PLAYERDAMAGE 1 
+         palfrom 0 64 64 64 
+        }
+       } 
+       else // 12.5% of the time the character will not actually take any damage at all if their defense fully protects them
+       { 
+        setvar PLAYERDAMAGE 0 
+        state nullflash 
+       } 
+      }
+     }
+    }
+
+    // Cap Maximum Damage at the Specfied Amount
+    ifvarvarg PLAYERDAMAGE STATLIMITMAXIMUM setvarvar PLAYERDAMAGE STATLIMITMAXIMUM
+
+    ifvare tempvehicleid -1
+    {
+     ifvare ATTACKPICNUM SPIT // [Jack's absorbsion only, Damage above, and Poison below]
+     {
+      ifvare CHARACTERSELECTED? 2
+      {
+       state calcplayermaxhealthatomic
+       state playerabsorbdamage
+      }
+     }
+    }
+/*
+    else // ifvarn tempvehicleid -1
+    {
+    }
+*/
+
+    //***********************************
+    //***********************************
+    //**CALCULATES DAMAGE THROUGH ARMOR**
+    //***********************************
+    //***********************************
+ 
+/*
+    ifvare tempvehicleid -1
+    {
+    }
+    else
+    {
+    }
+*/
+
+    ifvarg PLAYERDAMAGE 0
+    {
+     ifvare tempvehicleid -1
+     {
+      setvarvar ARMORLIMIT PLAYERDAMAGE
+      mulvarvar ARMORLIMIT ARMORPERCENT // 50
+      divvar ARMORLIMIT 1000
+      subvar ARMORLIMIT 1
+ 
+      ifvarvarg CURRENTARMORPOINTS ARMORLIMIT
+      {
+       setvarvar ARMORDAMAGE PLAYERDAMAGE
+       mulvarvar ARMORDAMAGE ARMORPERCENT // 50
+       divvar ARMORDAMAGE 1000
+  
+       mulvarvar PLAYERDAMAGE DAMAGEPERCENT // 50
+       divvar PLAYERDAMAGE 1000
+       subvarvar CURRENTARMORPOINTS ARMORDAMAGE
+      }
+      else
+      {
+       subvarvar PLAYERDAMAGE CURRENTARMORPOINTS
+       setvarvar ARMORDAMAGE CURRENTARMORPOINTS
+       setvar CURRENTARMORPOINTS 0
+      }
+     }
+     else
+     {
+      getactorvar[tempvehicleid].ACTORAP TEMPVAR3
+      getactorvar[tempvehicleid].ACTORARMORPERCENT TEMPVAR4
+      setvarvar ARMORLIMIT PLAYERDAMAGE
+      mulvarvar ARMORLIMIT TEMPVAR4 // 50
+      divvar ARMORLIMIT 1000
+      subvar ARMORLIMIT 1
+ 
+      ifvarvarg TEMPVAR3 ARMORLIMIT
+      {
+       setvarvar ARMORDAMAGE PLAYERDAMAGE
+       mulvarvar ARMORDAMAGE TEMPVAR4 // 50
+       divvar ARMORDAMAGE 1000
+  
+       setvar TEMPVAR5 1000
+       subvarvar TEMPVAR5 TEMPVAR4
+       mulvarvar PLAYERDAMAGE TEMPVAR5 // 50
+       divvar PLAYERDAMAGE 1000
+       subvarvar TEMPVAR3 ARMORDAMAGE
+       setactorvar[tempvehicleid].ACTORAP TEMPVAR3
+      }
+      else
+      {
+       subvarvar PLAYERDAMAGE TEMPVAR3
+       setvarvar ARMORDAMAGE TEMPVAR3
+       setactorvar[tempvehicleid].ACTORAP 0
+      }
+     }
+    }
+    else
+    {
+     setvar ARMORDAMAGE 0
+    }
+ 
+    ifvarg ARMORDAMAGE 0
+    {
+     // Check for Tactical Riot Shields to reduce AP Loss
+     setvar DAMAGEMODIFIER 1000
+     state dmg_checkplayer_riotshields2
+     ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+     mulvarvar ARMORDAMAGE DAMAGEMODIFIER
+     divvar ARMORDAMAGE 1000
+     ifvarl ARMORDAMAGE 1 setvar ARMORDAMAGE 1
+     ifvarvarg ARMORDAMAGE STATLIMITMAXIMUM setvarvar ARMORDAMAGE STATLIMITMAXIMUM
+ 
+     state playerarmorbitsshrapnel
+     ifvare tempvehicleid -1 setvar PLAYERAPDAMAGED? 1 else setvar VEHICLEAPDAMAGED? 1
+    }
+
+    //********************************
+    //********************************
+    //**END ARMOR DAMAGE CALCULATION**
+    //********************************
+    //********************************
+
+    setvarvar TEMP3 MAXHITPOINTS
+    randvar TEMP2 50
+    addvar TEMP2 50
+    mulvarvar TEMP3 TEMP2
+    divvar TEMP3 1000
+    // Damage to HP must be >5-10% to have the chance for Mindblasts to Confuse or for Spit Loogies to Poison, or for Freezethrower attacks to Slow
+
+    ifvare ATTACKPICNUM FREEZEBLAST ifvarvarg PLAYERDAMAGE TEMP3 // Freezethrower Shot [Slow Only, Damage is above]
+    {
+     ifvare CHARACTERSELECTED? 4
+     {
+      ifvarand PLAYERSTATUS? 256
+      {
+       ifrnd 5 state addslow
+      }
+      else
+      {
+       ifrnd 28 state addslow
+      }
+     }
+     else 
+     ifvare CHARACTERSELECTED? 8 
+     {
+      ifvare HAVEENERGYSHIELD? 1 
+      {
+       ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+       {
+        ifvare ENERGYSHIELDMODE 1 nullop 
+        else
+        {
+         ifrnd 112 state addslow
+        } 
+       }
+       else
+       {
+        ifrnd 112 state addslow
+       } 
+      }
+      else
+      {
+       ifrnd 112 state addslow
+      } 
+     }
+     else 
+     ifvare CHARACTERSELECTED? 10
+     {
+      setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+      ifvare MISCARRAYID_AMOUNTTEMP 0 { ifrnd 56 state addslow }
+     }
+     else 
+     ifvare CHARACTERSELECTED? 15
+     {
+      ifrnd 56 state addslow
+     }
+     else
+     {
+      ifrnd 112 state addslow
+     }
+    }
+ 
+    ifvare ATTACKPICNUM SPIT ifvarvarg PLAYERDAMAGE TEMP3 // Spit Loogie [Poison Only, Damage is above]
+    { 
+     ifvare CHARACTERSELECTED? 4
+     {
+      ifvarand PLAYERSTATUS? 256
+      {
+       ifrnd 6 state addpoison
+       ifrnd 6 state addcorrosion
+      }
+      else
+      {
+       ifrnd 32 state addpoison
+       ifrnd 32 state addcorrosion
+      }
+     }
+     else 
+     ifvare CHARACTERSELECTED? 8 
+     {
+      ifvare HAVEENERGYSHIELD? 1 
+      {
+       ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+       {
+        ifvare ENERGYSHIELDMODE 1 nullop 
+        else
+        {
+         ifrnd 64 state addpoison 
+         ifrnd 64 state addcorrosion
+        } 
+       }
+       else
+       {
+        ifrnd 64 state addpoison 
+        ifrnd 64 state addcorrosion
+       } 
+      }
+      else
+      {
+       ifrnd 64 state addpoison 
+       ifrnd 64 state addcorrosion
+      } 
+     }
+     else 
+     ifvare CHARACTERSELECTED? 15
+     {
+      ifrnd 32 state addpoison 
+      ifrnd 32 state addcorrosion
+     }
+     else 
+     {
+      ifrnd 64 state addpoison 
+      ifrnd 64 state addcorrosion
+     }
+    }
+ 
+    ifvare ATTACKPICNUM COOLEXPLOSION1 ifvarvarg PLAYERDAMAGE TEMP3 // Mindblast [Confusion Only, Damage is above]
+    { 
+     ifvare CHARACTERSELECTED? 9 // Cybanis will rarely be confused by mindblasts from other Cycloid-species
+     {
+      ifvare ATTACKINGACTORPICNUM BOSS2
+      {
+       ifrnd 6 state addconfusion
+      }
+      else
+      {
+       ifrnd 36 state addconfusion
+      }
+     }
+     else
+     ifvare CHARACTERSELECTED? 11 // If Paula is selected when hit by the Mindblast, cut damage by 3/4s and cut Confusion chance by 5/6s its normal possibility
+     {
+      ifrnd 24 state addconfusion
+     }
+     else
+     ifvare CHARACTERSELECTED? 4 // If Ami is selected when hit by the Mindblast, cut damage by 1/3 and cut Confusion chance by 2/5s its normal possibility
+     {
+      ifvarand PLAYERSTATUS? 256
+      {
+       ifrnd 19 state addconfusion
+      }
+      else
+      {
+       ifrnd 96 state addconfusion
+      }
+     }
+     else
+     ifvare CHARACTERSELECTED? 8 // Lisa's Bio-Shield will completely prevent confusion if it's active when taking a hit
+     {
+      ifvare HAVEENERGYSHIELD? 1
+      {
+       ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+       {
+        ifvare ENERGYSHIELDMODE 1 nullop
+        else 
+        {
+         ifrnd 144 state addconfusion 
+        }
+       }
+       else
+       {
+        ifrnd 144 state addconfusion 
+       }
+      }
+      else
+      {
+       ifrnd 144 state addconfusion 
+      }
+     }
+     else
+     ifvare CHARACTERSELECTED? 15 // Maken is only 50% vulnerable to Confusion
+     {
+      ifrnd 72 state addconfusion
+     }
+     else
+     {
+      ifrnd 144 state addconfusion
+     }
+    }
+ 
+    //***************************
+    //***************************
+    //**FINAL DAMAGE VALUE HERE**
+    //***************************
+    //***************************
+
+    // Drain Artifact [for monsters since this is player damage]
+    getactorvar[ATTACKINGACTOR].ACTORVAMPIREMAXDMGFACTOR temp // getactorvar[ATTACKINGACTOR].ACTORVAMPIRETIME temp
+    ifvarg temp 1000
+    {
+     ifvarg PLAYERDAMAGE 0
+     {
+      getactorvar[ATTACKINGACTOR].ACTORHP TEMPVAR
+      getactorvar[ATTACKINGACTOR].ACTORMAXHP TEMP
+   
+      getactorvar[ATTACKINGACTOR].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+      mulvarvar TEMP TEMPVAR3 // Heals up to 125% HP on Public Beta
+      divvar TEMP 1000
+   
+      ifvarvarl TEMPVAR TEMP
+      {
+       getactorvar[ATTACKINGACTOR].ACTORHP TEMPVAR
+       setvarvar TEMP2 PLAYERDAMAGE
+       ifvarvarg TEMP2 CURRENTHITPOINTS setvarvar TEMP2 CURRENTHITPOINTS
+       getactorvar[ATTACKINGACTOR].ACTORVAMPIREDMGFACTOR TEMPVAR3
+       mulvarvar TEMP2 TEMPVAR3
+       divvar TEMP2 1000
+       addvarvar TEMPVAR TEMP2
+       
+       getactorvar[ATTACKINGACTOR].ACTORMAXHP TEMP3
+       getactorvar[ATTACKINGACTOR].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+       mulvarvar TEMP3 TEMPVAR3
+       divvar TEMP3 1000
+   
+       ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+       setactorvar[ATTACKINGACTOR].ACTORHP TEMPVAR
+       ifvarg TEMP2 0
+       {
+        setvarvar ITEMSEEK ATTACKINGACTOR
+        setvarvar ITEMSEEKC TEMP2
+        state showhealing_actorhp
+  
+        setactorvar[ATTACKINGACTOR].ACTORHPDAMAGED? -1
+        sound DRAIN_HP
+        sound DRAIN_HP
+        sound DRAIN_HP
+       }
+      }
+     }
+  
+     ifvarg ARMORDAMAGE 0
+     {
+      getactorvar[ATTACKINGACTOR].ACTORAP TEMPVAR
+      getactorvar[ATTACKINGACTOR].ACTORMAXAP TEMP
+   
+      getactorvar[ATTACKINGACTOR].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+      mulvarvar TEMP TEMPVAR3 // Heals up to 125% HP on Public Beta
+      divvar TEMP 1000
+   
+      ifvarvarl TEMPVAR TEMP
+      {
+       getactorvar[ATTACKINGACTOR].ACTORAP TEMPVAR
+       setvarvar TEMP2 ARMORDAMAGE
+       getactorvar[ATTACKINGACTOR].ACTORVAMPIREDMGFACTOR TEMPVAR3
+       mulvarvar TEMP2 TEMPVAR3
+       divvar TEMP2 1000
+       addvarvar TEMPVAR TEMP2
+       
+       getactorvar[ATTACKINGACTOR].ACTORMAXAP TEMP3
+       getactorvar[ATTACKINGACTOR].ACTORVAMPIREMAXDMGFACTOR TEMPVAR3
+       mulvarvar TEMP3 TEMPVAR3
+       divvar TEMP3 1000
+   
+       getactorvar[ATTACKINGACTOR].ACTORARMORPERCENT TEMPVAR4
+       ifvarvarl TEMPVAR4 ARMORPERCENT { setvarvar TEMPVAR4 ARMORPERCENT setactorvar[ATTACKINGACTOR].ACTORARMORPERCENT TEMPVAR4 }
+  
+       ifvarvarg TEMPVAR TEMP3 setvarvar TEMPVAR TEMP3
+       setactorvar[ATTACKINGACTOR].ACTORAP TEMPVAR
+       ifvarg TEMP2 0 
+       {
+        setvarvar ITEMSEEK ATTACKINGACTOR
+        setvarvar ITEMSEEKC TEMP2
+        state showhealing_actorap
+  
+        setactorvar[ATTACKINGACTOR].ACTORAPDAMAGED? -1
+        sound DRAIN_AP 
+        sound DRAIN_AP 
+        sound DRAIN_AP 
+       }
+      }
+     }
+    }
+    // End Drain Artifact [for monsters since this is player damage]
+
+    // Inflict Final Damage
+    ifvare tempvehicleid -1 { subvarvar CURRENTHITPOINTS PLAYERDAMAGE state checkbuddhamode state showdamage_playerhp }
+    else
+    {
+     stopsound PISTOL_BODYHIT
+     getactorvar[tempvehicleid].ACTORHP TEMPVAR3
+     subvarvar TEMPVAR3 PLAYERDAMAGE state showdamage_playerhp
+     setactorvar[tempvehicleid].ACTORHP TEMPVAR3
+     state checkbuddhamode
+     ifvarg tempvehicletype -1 ifvarl tempvehicletype 3
+     {
+      ifvarl PLAYERDAMAGE 1
+      {
+       ifvarg ARMORDAMAGE 0
+       {
+        state sparkstate
+        ifrnd 85 sound HITMETAL
+        else ifrnd 128 sound HITMETAL2
+        else sound HITMETAL3
+       }
+      }
+      else
+      {
+       state sparkstate
+       ifrnd 85 sound HITMETAL
+       else ifrnd 128 sound HITMETAL2
+       else sound HITMETAL3
+      }
+     }
+    }
+    ifvarg PLAYERDAMAGE 0
+    {
+     ifvare tempvehicleid -1 setvar PLAYERHPDAMAGED? 1 else setvar VEHICLEHPDAMAGED? 1
+    }
+    ifvarg CURRENTHITPOINTS 0
+    {
+     setactor[THISACTOR].htextra -1
+     ifvarg PLAYERDAMAGE 0
+     {
+      setvarvar TEMPVAR PLAYERDAMAGE
+      mulvar TEMPVAR 100
+      ifvarn MAXHITPOINTS 0 divvarvar TEMPVAR MAXHITPOINTS
+      ifvare tempvehicleid -1 setactor[THISACTOR].htextra TEMPVAR else setactor[THISACTOR].htextra -1 
+  
+      setactor[THISACTOR].extra 16384
+      setplayer[THISACTOR].last_extra 16384
+      ifvarn tempvehicleid -1 setactor[tempvehicleid].extra 16384
+  
+      setvarvar DAMAGEHUEFACTOR PLAYERDAMAGE
+      ifvare tempvehicleid -1 state playerdamagehues
+      else state playerdamagehues_vehicle
+
+      // Mandala Bracelet Check
+      setvar TEMPMOD 0 setvar DAMAGEMODIFIER 0 setvar TEMPVAR5 0
+      ifvare PLAYEREQUIPSLOTITEM1 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM2 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM3 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM4 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM5 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM6 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM7 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvare PLAYEREQUIPSLOTITEM8 30 { addvar TEMPMOD 1 randvar DAMAGEMODIFIER 4 addvar DAMAGEMODIFIER 9 addvarvar TEMPVAR5 DAMAGEMODIFIER } // [+9 to 13 tics of mercy invincibility]
+      ifvarl TEMPVAR5 0 setvar TEMPVAR5 0
+      ifvarg TEMPVAR5 104 setvar TEMPVAR5 104
+      ifvarg TEMPMOD 0 
+      {
+       setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT TEMPVAR5 // DEATHSWITCH-DELAY
+       addlogvar TEMPMOD
+       addlogvar TEMPVAR5
+      }
+     }
+    }
+    else setactor[THISACTOR].htextra 0
+
+    //**************************
+    //**************************
+    //**END FINAL DAMAGE VALUE**
+    //**************************
+    //**************************
+ 
+    ifvare tempvehicleid -1
+    {
+     ifvare CHARACTERSELECTED? 8
+     {
+      ifvare HAVEENERGYSHIELD? 1 
+      {
+       ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
+       {
+        ifvare ENERGYSHIELDMODE 1
+        { 
+         stopsound NODAMAGE
+         ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
+         state bioshieldhitsounds
+         palfrom 32 0 0 64
+         ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
+         setvar ATTACKERDISPLAYTIMER 0
+        }
+        else state finaldmgcalc
+       }
+       else state finaldmgcalc
+       }
+      else state finaldmgcalc
+     }
+     else state finaldmgcalc
+    }
+    else state finaldmgcalc
+
+    ifvarg NULLDAMAGE 0
+    {
+     sound NODAMAGE
+     stopsound PISTOL_BODYHIT
+     ifvarn MELEEATTACK? 1
+     {
+      getactor[ATTACKINGACTOR].ang ATTACKERANGLE
+     }
+     ifvare MELEEATTACK? 1
+     {
+      setactor[THISACTOR].htpicnum SHOTSPARK1
+     }
+     getactor[PLAYERID].ang PLAYERHITANGLE
+     setvarvar SYSDIFFANGLE ATTACKERANGLE
+     subvarvar SYSDIFFANGLE PLAYERHITANGLE
+     ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
+    }
+    setvar MELEEATTACK? 0
+
+
+   } // Fix positioning 1
+  } // Fix positioning 2
+
+ } // Fix positioning 3
+ setvar MELEEATTACKERID -1
+ setvar ATTACKINGACTOR -1
+ends

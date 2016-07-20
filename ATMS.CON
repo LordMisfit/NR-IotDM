@@ -1702,7 +1702,7 @@ state atm_showwiretonames
   ifvare atm_wacctnum 92012 redefinequote 332 Todd Ferguson
   ifvare atm_wacctnum 960503 redefinequote 332 Mathias Andren
 
-  addlogvar atm_wacctnum
+  //addlogvar atm_wacctnum
 // Fill in more beyond here
 ends
 
@@ -9746,7 +9746,7 @@ state cmd_wiremoney_sender
 // Fill in Here
        else
        {
-        addlogvar atm_serrortype
+        //addlogvar atm_serrortype
         setvar atm_wacctnum 0 setvar atm_serrortimer 26 setvar atm_serrortype 2
         state randomatmbeeps sound MENU_ERROR
        }

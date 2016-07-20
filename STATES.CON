@@ -4798,9 +4798,9 @@ state bloodpooldamagemonster
           else
           {
            getactorvar[PYTHAGORASTARGET].ACTORHP TEMPVAR8
-           addlogvar TEMPVAR8
+           //addlogvar TEMPVAR8
            getactor[PYTHAGORASTARGET].picnum tempc
-           addlogvar tempc
+           //addlogvar tempc
            ifvare tempc TANK
            {
             randvar tempe 2
@@ -4859,7 +4859,7 @@ state bloodpooldamagemonster
            ifvarn ENEMYHASSHIKON? 0 divvar tempe 10
 
            subvarvar TEMPVAR8 tempe
-           addlogvar TEMPVAR8
+           //addlogvar TEMPVAR8
            ifvarg tempe 0
            {
             setvarvar SHOWDAMAGE tempe
@@ -4873,7 +4873,7 @@ state bloodpooldamagemonster
             setactor[PYTHAGORASTARGET].htowner THISACTOR
             setactor[PYTHAGORASTARGET].htpicnum NEWBLOODPOOL
            }
-           addlogvar TEMPVAR8
+           //addlogvar TEMPVAR8
            setactorvar[PYTHAGORASTARGET].ACTORHP TEMPVAR8
            ifvarg tempe 0 
            {
@@ -29697,15 +29697,15 @@ ends
  ends
 
 state enemyfall-flyingcheck
-     addlogvar ACTORFALLING?
-     addlogvar ACTORFALLCOUNTER
-     addlogvar ACTORFALLRESIST
+     //addlogvar ACTORFALLING?
+     //addlogvar ACTORFALLCOUNTER
+     //addlogvar ACTORFALLRESIST
      ifvarn ACTORFALLING? 0 setvar ACTORFALLING? 0 
      ifvarn ACTORFALLCOUNTER 0 setvar ACTORFALLCOUNTER 0
      ifvarvarn ACTORFALLRESIST ACTORMAXFALLRESIST setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
-     addlogvar ACTORFALLING?
-     addlogvar ACTORFALLRESIST
-     addlogvar ACTORFALLCOUNTER
+     //addlogvar ACTORFALLING?
+     //addlogvar ACTORFALLRESIST
+     //addlogvar ACTORFALLCOUNTER
 ends
 
 state checkfallcounter_nonplayer
