@@ -1,0 +1,1362 @@
+// MINI-CHECKS
+
+state enemyquaddamage
+    ifvare mainmenu 0 ifvarn FROZEN? 1 subvar ACTORQUADTIME 1
+    //state itemfullbright
+    ifvare ACTORQUADTIME 104 sound QUADDAMAGE2
+    ifvare ACTORQUADTIME 1
+    {
+      state getitemseekerspeciesquote
+      ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 301 ^10AN ENEMY'S QUAD DAMAGE JUST WORE OFF! :D
+      ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 301 ^15A CIVILIAN'S QUAD DAMAGE JUST WORE OFF! -_-
+      ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 301 ^15A VEHICLE'S QUAD DAMAGE JUST WORE OFF! :(
+      setvarvar fta fta_normal setvar ftq 301 
+    }
+ends
+
+state enemyvampireitem
+    ifvare mainmenu 0 ifvarn FROZEN? 1 subvar ACTORVAMPIRETIME 1
+    //state itemfullbright
+    ifvare ACTORVAMPIRETIME 1
+    {
+      state getitemseekerspeciesquote
+      ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 301 ^10AN ENEMY'S VAMPIRE MASK JUST WORE OFF! XD
+      ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 301 ^15A CIVILIAN'S VAMPIRE MASK JUST WORE OFF! @_@
+      ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 301 ^15A VEHICLE'S VAMPIRE MASK JUST WORE OFF! :(
+      setvarvar fta fta_normal setvar ftq 301 
+    }
+ends
+
+state enemyinvulnitem
+    ifvare mainmenu 0
+    { 
+     ifvarn FROZEN? 1 
+     {
+      addvar ACTORINVULNCOUNTER 1
+      subvar ACTORINVULNTIME 1 
+     } 
+    }
+    ifvarand ACTORSTATUS? 4 // Remove Slow
+    {
+     subvar ACTORSTATUS? 4
+     setvar ACTORSLOWTIMER 0
+    }
+    ifvarand ACTORSTATUS? 8 // Remove Poison
+    {
+     subvar ACTORSTATUS? 8
+     setvar ACTORPOISONTIMER 0
+    }
+    ifvarand ACTORSTATUS? 16 // Remove Dimness
+    {
+     subvar ACTORSTATUS? 16
+     setvar ACTORDIMNESSTIMER 0
+    }
+    ifvarand ACTORSTATUS? 128 // Remove Confusion
+    {
+     subvar ACTORSTATUS? 128
+     setvar ACTORCONFUSIONTIMER 0
+    }
+    ifvarand ACTORSTATUS? 16384 // Remove Corrosion
+    {
+     subvar ACTORSTATUS? 16384
+     setvar ACTORCORROSIONTIMER 0
+    }
+    //state itemfullbright
+    state invulnicon-nonplayers
+    ifvarg ACTORINVULNCOUNTER 38 { sound INVULN_PULSE setvar ACTORINVULNCOUNTER 0 }
+    ifvare ACTORINVULNTIME 104 sound INVULNITEM2
+    ifvare ACTORINVULNTIME 1
+    {
+      state getitemseekerspeciesquote
+      ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 301 ^10AN ENEMY'S INVULN ITEM JUST WORE OFF! :D
+      ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 301 ^15A CIVILIAN'S INVULN ITEM JUST WORE OFF! -_-
+      ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 301 ^15A VEHICLE'S INVULN ITEM JUST WORE OFF! ;_;
+      setvarvar fta fta_normal setvar ftq 301 
+    }
+ends
+
+state enemyrecover5perhealth
+      addvarvar ACTORHP ACTORREGENAMOUNT2
+      ifvarg ACTORREGENAMOUNT2 0
+      {
+       setvarvar SHOWDAMAGE ACTORREGENAMOUNT2
+       setvar SHOWDAMAGETYPE 3
+       setvarvar SHOWDAMAGEACTORID THISACTOR
+       state showdamage
+      }
+      ifvarvarg ACTORHP STATLIMITATOMIC setvarvar ACTORHP STATLIMITATOMIC
+      ifvarvarg ACTORHP ACTORMAXHPATOMIC setvarvar ACTORHP ACTORMAXHPATOMIC
+      ifvarvarl ACTORHP STATLIMITATOMIC
+      {
+       sound REGEN_HEALTH5 
+       ifvare DRIVERID -1 setvar ACTORHPDAMAGED? -1 else ifvarvare DRIVERID PLAYERID setvar VEHICLEHPDAMAGED? -1
+      }
+ends
+
+state enemyregenitem
+  ifvarg ACTORREGENTIME 0
+  {
+   ifvarand ACTORPOWERUPBITFIELD 4 nullop else addvar ACTORPOWERUPBITFIELD 4
+   //state itemfullbright
+   ifvare mainmenu 0 ifvarn FROZEN? 1 addvar ACTORREGENCOUNTER 1
+   ifvarand ACTORSTATUS? 8 // Remove Poison
+   {
+    subvar ACTORSTATUS? 8
+    setvar ACTORPOISONTIMER 0
+   }
+   ifvarg ACTORREGENCOUNTER 25
+   {
+    setvarvar ACTORREGENAMOUNT1 ACTORMAXHP
+    ifvare PUBLICBETA? 1 mulvar ACTORREGENAMOUNT1 150 else mulvar ACTORREGENAMOUNT1 50
+    divvar ACTORREGENAMOUNT1 1000
+    setvarvar ACTORREGENAMOUNT2 ACTORMAXHP
+    ifvare PUBLICBETA? 1 mulvar ACTORREGENAMOUNT2 50 else mulvar ACTORREGENAMOUNT2 16
+    divvar ACTORREGENAMOUNT2 1000
+
+    ifvarvarl ACTORHP ACTORMAXHPATOMIC ifvarvarg ACTORHP ACTORMAXHP state enemyrecover5perhealth
+    else ifvarvare ACTORHP ACTORMAXHP state enemyrecover5perhealth
+    else ifvarvarl ACTORHP ACTORMAXHP ifvarg ACTORHP -1
+    {
+     addvarvar ACTORHP ACTORREGENAMOUNT1
+     ifvarg ACTORREGENAMOUNT1 0
+     {
+      setvarvar SHOWDAMAGE ACTORREGENAMOUNT1
+      setvar SHOWDAMAGETYPE 3
+      setvarvar SHOWDAMAGEACTORID THISACTOR
+      state showdamage
+     }
+     ifvarvarg ACTORHP STATLIMITATOMIC setvarvar ACTORHP STATLIMITATOMIC
+     ifvarvarg ACTORHP ACTORMAXHPATOMIC setvarvar ACTORHP ACTORMAXHPATOMIC
+     ifvarvarl ACTORHP STATLIMITATOMIC
+     {
+      sound REGEN_HEALTH15 
+      ifvare DRIVERID -1 setvar ACTORHPDAMAGED? -1 else ifvarvare DRIVERID PLAYERID setvar VEHICLEHPDAMAGED? -1
+     }
+    }
+    setvar ACTORREGENCOUNTER 0
+   }
+   ifvare mainmenu 0 ifvarn FROZEN? 1 subvar ACTORREGENTIME 1
+   ifvare ACTORREGENTIME 1
+   {
+    setvar ACTORREGENCOUNTER 0
+
+    state getitemseekerspeciesquote
+    ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 301 ^10AN ENEMY'S REGENERATION ANKH JUST WORE OFF! :D
+    ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 301 ^15A CIVILIAN'S REGENERATION ANKH JUST WORE OFF! -_-
+    ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 301 ^15A VEHICLE'S REGENERATION ANKH JUST WORE OFF! :(
+    setvarvar fta fta_normal setvar ftq 301 
+   }
+  } 
+  else
+  {
+   ifvarand ACTORPOWERUPBITFIELD 4 subvar ACTORPOWERUPBITFIELD 4
+  }
+ends
+
+state enemyrecover5perarmor
+       addvarvar ACTORAP ACTORAPREGENAMOUNT2
+       ifvarg ACTORAPREGENAMOUNT2 0
+       {
+        setvarvar SHOWDAMAGE ACTORAPREGENAMOUNT2
+        setvar SHOWDAMAGETYPE 4
+        setvarvar SHOWDAMAGEACTORID THISACTOR
+        state showdamage
+       }
+       ifvarvarg ACTORAP STATLIMITATOMIC setvarvar ACTORAP STATLIMITATOMIC
+       ifvarvarg ACTORAP ACTORMAXAPATOMIC setvarvar ACTORAP ACTORMAXAPATOMIC
+       ifvarvarl ACTORAP STATLIMITATOMIC
+       {
+        sound REGEN_ARMOR5
+        ifvare DRIVERID -1 setvar ACTORAPDAMAGED? -1 else ifvarvare DRIVERID PLAYERID setvar VEHICLEAPDAMAGED? -1
+       }
+ends
+
+state enemyapregenitem
+   ifvarg ACTORAPREGENTIME 0
+   {
+    ifvarand ACTORPOWERUPBITFIELD 8 nullop else addvar ACTORPOWERUPBITFIELD 8
+    //state itemfullbright
+
+    // setvar ACTORARMORPERCENT 1000
+    setvar TEMPMOD 125
+    ifvare SKILLLEVEL 0 setvar TEMPMOD 333
+    ifvare SKILLLEVEL 1 setvar TEMPMOD 400
+    ifvare SKILLLEVEL 2 setvar TEMPMOD 422
+    ifvare SKILLLEVEL 3 setvar TEMPMOD 444
+    ifvare SKILLLEVEL 4 setvar TEMPMOD 500
+    ifvare SKILLLEVEL 5 setvar TEMPMOD 527
+    ifvare SKILLLEVEL 6 setvar TEMPMOD 555
+    ifvare SKILLLEVEL 7 setvar TEMPMOD 600
+    ifvare SKILLLEVEL 8 setvar TEMPMOD 633
+    ifvare SKILLLEVEL 9 setvar TEMPMOD 666
+    ifvarvarl ACTORARMORPERCENT TEMPMOD setvarvar ACTORARMORPERCENT TEMPMOD
+
+    ifvare mainmenu 0 ifvarn FROZEN? 1 addvar ACTORAPREGENCOUNTER 1 
+    ifvarand ACTORSTATUS? 16384 // Remove Corrosion
+    {
+     subvar ACTORSTATUS? 16384
+     setvar ACTORCORROSIONTIMER 0
+    }
+    ifvarg ACTORAPREGENCOUNTER 25
+    {
+     setvarvar ACTORAPREGENAMOUNT1 ACTORMAXAP
+     ifvare PUBLICBETA? 1 mulvar ACTORAPREGENAMOUNT1 150 else mulvar ACTORAPREGENAMOUNT1 50
+     divvar ACTORAPREGENAMOUNT1 1000
+     setvarvar ACTORAPREGENAMOUNT2 ACTORMAXAP
+     ifvare PUBLICBETA? 1 mulvar ACTORAPREGENAMOUNT2 50 else mulvar ACTORAPREGENAMOUNT2 16
+     divvar ACTORAPREGENAMOUNT2 1000
+
+     ifvarvarl ACTORAP ACTORMAXAPATOMIC ifvarvarg ACTORAP ACTORMAXAP state enemyrecover5perarmor
+     else ifvarvare ACTORAP ACTORMAXAP state enemyrecover5perarmor
+     else ifvarvarl ACTORAP ACTORMAXAP ifvarg ACTORAP -1
+     {
+      addvarvar ACTORAP ACTORAPREGENAMOUNT1
+      ifvarg ACTORAPREGENAMOUNT1 0
+      {
+       setvarvar SHOWDAMAGE ACTORAPREGENAMOUNT1
+       setvar SHOWDAMAGETYPE 4
+       setvarvar SHOWDAMAGEACTORID THISACTOR
+       state showdamage
+      }
+      ifvarvarg ACTORAP STATLIMITATOMIC setvarvar ACTORAP STATLIMITATOMIC
+      ifvarvarg ACTORAP ACTORMAXAPATOMIC setvarvar ACTORAP ACTORMAXAPATOMIC
+      ifvarvarl ACTORAP STATLIMITATOMIC
+      {
+       sound REGEN_ARMOR15
+       ifvare DRIVERID -1 setvar ACTORAPDAMAGED? -1 else ifvarvare DRIVERID PLAYERID setvar VEHICLEAPDAMAGED? -1
+      }
+     }
+     setvar ACTORAPREGENCOUNTER 0
+    }
+    ifvare mainmenu 0 ifvarn FROZEN? 1 subvar ACTORAPREGENTIME 1
+    ifvare ACTORAPREGENTIME 1
+    {
+     setvar ACTORAPREGENCOUNTER 0
+     state getitemseekerspeciesquote
+     ifvare ITEMSEEKSPECIESTYPE 0 redefinequote 301 ^10AN ENEMY'S SHIELD EMBLEM JUST WORE OFF! :D
+     ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 301 ^15A CIVILIAN'S SHIELD EMBLEM JUST WORE OFF! -_-
+     ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 301 ^15A VEHICLE'S SHIELD EMBLEM JUST WORE OFF! :(
+     setvarvar fta fta_normal setvar ftq 301 
+    }
+
+   } 
+   else
+   {
+    ifvarand ACTORPOWERUPBITFIELD 8 subvar ACTORPOWERUPBITFIELD 8
+   }
+ends
+
+state hpcheckfor0hp
+ setvarvar ACTORMAXHPATOMIC ACTORMAXHP
+ mulvar ACTORMAXHPATOMIC 2
+
+ ifvarg ACTORDEATHSWITCHDELAY 0 // When 'Recovering' from a mortal-hit, flicker the enemy, platformer-style.
+ {
+  ifvarl ACTORHP 1 setvar ACTORHP 1
+  getplayer[THISACTOR].player_par TEMPVAR4
+  modvar TEMPVAR4 6
+  getactor[THISACTOR].cstat TEMPVAR3
+  ifvarand TEMPVAR3 2 subvar TEMPVAR3 2
+  ifvarand TEMPVAR3 512 subvar TEMPVAR3 512
+  ifvarand TEMPVAR3 32768 subvar TEMPVAR3 32768
+  ifvare TEMPVAR4 0 addvar TEMPVAR3 2
+  ifvare TEMPVAR4 1 addvar TEMPVAR3 2
+  ifvare TEMPVAR4 2 addvar TEMPVAR3 514
+  ifvare TEMPVAR4 3 addvar TEMPVAR3 514
+  ifvare TEMPVAR4 4 addvar TEMPVAR3 33282
+  ifvare TEMPVAR4 5 addvar TEMPVAR3 33282
+  setactor[THISACTOR].cstat TEMPVAR3
+  subvar ACTORDEATHSWITCHDELAY 1
+ }
+ else
+ {
+  ifvarn CLOAKED? 0
+  {
+   setactor[THISACTOR].cstat 32768
+  }
+  else
+  {
+   getactor[THISACTOR].cstat TEMPVAR3
+   ifvarand TEMPVAR3 2 subvar TEMPVAR3 2
+   ifvarand TEMPVAR3 512 subvar TEMPVAR3 512
+   ifvarand TEMPVAR3 32768 subvar TEMPVAR3 32768
+   setactor[THISACTOR].cstat TEMPVAR3
+  }
+ }
+
+ ifvarl ACTORDEATHSWITCHDELAY 0 setvar ACTORDEATHSWITCHDELAY 0
+ // Forces the enemy to die if they have exactly 0 HP and they are not frozen over [or choking in the case of the LIZTROOP] [normally a monster will only die if it receives hittype damage when <=-1 HP]
+ ifvarn SKILLSET? 0 ifvare ACTORDEATHSWITCHDELAY 0
+ {
+  ifvarl ACTORHP 1 
+  {
+   setvar ACTORHP 0 
+   ifvarn FROZEN? 1 
+   { 
+    ifvarn CHOKING? 1
+    {
+     ifvarn EXPANDING? 1
+     {
+      ifvare ACTORHP 0
+      {
+       // Kill the Monster/Actor
+       ifvarl ZEROHITS 6
+       {
+        ifvare ZEROHITS 0 setactor[THISACTOR].extra 0
+        setactor[THISACTOR].htpicnum SHOTSPARK1 
+        setactor[THISACTOR].htextra 1
+        addvar ZEROHITS 1
+       } 
+      }
+     }
+    }
+   }
+  }
+ }
+ends
+
+state level_calccritrateactor
+        setvarvar ACTORCRITICALHITCHANCE2 ACTORCRITICALHITCHANCE
+        ifvarand ACTORFLAGS 512
+        {
+         mulvar ACTORCRITICALHITCHANCE2 5
+         divvar ACTORCRITICALHITCHANCE2 2
+        }
+
+        ifvare PUBLICBETA? 1
+        {
+         // Skill Level Bonus
+         ifvarand ACTORFLAGS 512
+         {
+          ifvare SKILLLEVEL 0 addvar ACTORCRITICALHITCHANCE2 100
+          ifvare SKILLLEVEL 1 addvar ACTORCRITICALHITCHANCE2 200
+          ifvare SKILLLEVEL 2 addvar ACTORCRITICALHITCHANCE2 300
+          ifvare SKILLLEVEL 3 addvar ACTORCRITICALHITCHANCE2 400
+          ifvare SKILLLEVEL 4 addvar ACTORCRITICALHITCHANCE2 500 
+          ifvare SKILLLEVEL 5 addvar ACTORCRITICALHITCHANCE2 600
+          ifvare SKILLLEVEL 6 addvar ACTORCRITICALHITCHANCE2 700
+          ifvare SKILLLEVEL 7 addvar ACTORCRITICALHITCHANCE2 800
+          ifvare SKILLLEVEL 8 addvar ACTORCRITICALHITCHANCE2 900
+          ifvare SKILLLEVEL 9 addvar ACTORCRITICALHITCHANCE2 1000
+         }
+         else
+         {
+          ifvare SKILLLEVEL 0 addvar ACTORCRITICALHITCHANCE2 25
+          ifvare SKILLLEVEL 1 addvar ACTORCRITICALHITCHANCE2 50 
+          ifvare SKILLLEVEL 2 addvar ACTORCRITICALHITCHANCE2 75 
+          ifvare SKILLLEVEL 3 addvar ACTORCRITICALHITCHANCE2 100
+          ifvare SKILLLEVEL 4 addvar ACTORCRITICALHITCHANCE2 125 
+          ifvare SKILLLEVEL 5 addvar ACTORCRITICALHITCHANCE2 150
+          ifvare SKILLLEVEL 6 addvar ACTORCRITICALHITCHANCE2 175
+          ifvare SKILLLEVEL 7 addvar ACTORCRITICALHITCHANCE2 200
+          ifvare SKILLLEVEL 8 addvar ACTORCRITICALHITCHANCE2 225
+          ifvare SKILLLEVEL 9 addvar ACTORCRITICALHITCHANCE2 250
+         }
+        }
+
+        ifvarn ENEMYHASSHIKON? 0 mulvar ACTORCRITICALHITCHANCE2 10
+ends
+
+state level_calcsurvivalrateactor
+        setvarvar ACTORSURVIVALVALUE_TEMP ACTORSURVIVALVALUE
+
+        // Elite Monsters Get 20% of their remaining value added automatically.
+        ifvarand ACTORFLAGS 512
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 ACTORSURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 1
+         divvar TEMPVAR5 5
+         addvarvar ACTORSURVIVALVALUE_TEMP TEMPVAR5
+        }
+
+        ifvare PUBLICBETA? 1
+        {
+         // Skill Level Bonus
+         ifvarand ACTORFLAGS 512
+         {
+          ifvare SKILLLEVEL 0 addvar ACTORSURVIVALVALUE_TEMP 100
+          ifvare SKILLLEVEL 1 addvar ACTORSURVIVALVALUE_TEMP 200
+          ifvare SKILLLEVEL 2 addvar ACTORSURVIVALVALUE_TEMP 300
+          ifvare SKILLLEVEL 3 addvar ACTORSURVIVALVALUE_TEMP 400
+          ifvare SKILLLEVEL 4 addvar ACTORSURVIVALVALUE_TEMP 500 
+          ifvare SKILLLEVEL 5 addvar ACTORSURVIVALVALUE_TEMP 600
+          ifvare SKILLLEVEL 6 addvar ACTORSURVIVALVALUE_TEMP 700
+          ifvare SKILLLEVEL 7 addvar ACTORSURVIVALVALUE_TEMP 800
+          ifvare SKILLLEVEL 8 addvar ACTORSURVIVALVALUE_TEMP 900
+          ifvare SKILLLEVEL 9 addvar ACTORSURVIVALVALUE_TEMP 1000
+         }
+         else
+         {
+          ifvare SKILLLEVEL 0 addvar ACTORSURVIVALVALUE_TEMP 25
+          ifvare SKILLLEVEL 1 addvar ACTORSURVIVALVALUE_TEMP 50 
+          ifvare SKILLLEVEL 2 addvar ACTORSURVIVALVALUE_TEMP 75 
+          ifvare SKILLLEVEL 3 addvar ACTORSURVIVALVALUE_TEMP 100
+          ifvare SKILLLEVEL 4 addvar ACTORSURVIVALVALUE_TEMP 125 
+          ifvare SKILLLEVEL 5 addvar ACTORSURVIVALVALUE_TEMP 150
+          ifvare SKILLLEVEL 6 addvar ACTORSURVIVALVALUE_TEMP 175
+          ifvare SKILLLEVEL 7 addvar ACTORSURVIVALVALUE_TEMP 200
+          ifvare SKILLLEVEL 8 addvar ACTORSURVIVALVALUE_TEMP 225
+          ifvare SKILLLEVEL 9 addvar ACTORSURVIVALVALUE_TEMP 250
+         }
+        }
+
+        // Factor in Level
+        setvarvar TEMPVAR5 ACTORLEVEL
+
+        ifactor RECON
+        {
+         mulvar TEMPVAR5 10
+        }
+        else
+        ifactor SHARK
+        {
+         ifspritepal 24 mulvar TEMPVAR5 16
+         else mulvar TEMPVAR5 4
+        }
+        else
+        ifactor ROTATEGUN
+        {
+         ifspritepal 17 mulvar TEMPVAR5 8
+         else ifspritepal 19 mulvar TEMPVAR5 6
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor LIZTROOP
+        {
+         ifspritepal 21 mulvar TEMPVAR5 6
+         else ifspritepal 19 mulvar TEMPVAR5 8
+         else ifspritepal 14 mulvar TEMPVAR5 9
+         else ifspritepal 17 mulvar TEMPVAR5 25
+         else mulvar TEMPVAR5 5
+        }        
+        else
+        ifactor LIZMAN
+        {
+         ifspritepal 19 mulvar TEMPVAR5 10
+         else ifspritepal 6 mulvar TEMPVAR5 12
+         else ifspritepal 17 mulvar TEMPVAR5 25
+         else mulvar TEMPVAR5 8
+        }
+        else
+        ifactor DRONE
+        {
+         ifspritepal 25 mulvar TEMPVAR5 20
+         else mulvar TEMPVAR5 8
+        }
+        else
+        ifactor OCTABRAIN
+        {
+         ifspritepal 14 mulvar TEMPVAR5 24
+         else mulvar TEMPVAR5 6
+        }
+        else
+        ifactor PIGCOP
+        {
+         ifspritepal 21 mulvar TEMPVAR5 11
+         else ifspritepal 14 mulvar TEMPVAR5 13
+         else ifspritepal 24 mulvar TEMPVAR5 25
+         else mulvar TEMPVAR5 9
+        }
+        else
+        ifactor BOSS1
+        {
+         ifspritepal 0 mulvar TEMPVAR5 20
+         else ifspritepal 3 mulvar TEMPVAR5 20
+         else ifspritepal 9 mulvar TEMPVAR5 20
+         else ifspritepal 24 mulvar TEMPVAR5 30
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor BOSS2
+        {
+         ifspritepal 0 mulvar TEMPVAR5 20
+         else ifspritepal 3 mulvar TEMPVAR5 20
+         else ifspritepal 9 mulvar TEMPVAR5 20
+         else ifspritepal 24 mulvar TEMPVAR5 30
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor BOSS3
+        {
+         ifspritepal 0 mulvar TEMPVAR5 20
+         else ifspritepal 3 mulvar TEMPVAR5 20
+         else ifspritepal 9 mulvar TEMPVAR5 20
+         else ifspritepal 24 mulvar TEMPVAR5 30
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor BOSS4
+        {
+         ifspritepal 0 mulvar TEMPVAR5 20
+         else ifspritepal 3 mulvar TEMPVAR5 20
+         else ifspritepal 9 mulvar TEMPVAR5 20
+         else ifspritepal 24 mulvar TEMPVAR5 30
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor COMMANDER
+        {
+         ifspritepal 14 mulvar TEMPVAR5 8
+         else ifspritepal 25 mulvar TEMPVAR5 20
+         else ifspritepal 24 mulvar TEMPVAR5 35
+         else mulvar TEMPVAR5 14
+        }
+        else
+        ifactor NEWBEAST
+        {
+         ifspritepal 17 mulvar TEMPVAR5 15
+         else ifspritepal 20 mulvar TEMPVAR5 20
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor TANK
+        {
+         ifspritepal 17 mulvar TEMPVAR5 8
+         else ifspritepal 19 mulvar TEMPVAR5 6
+         else mulvar TEMPVAR5 10
+        }
+        else
+        ifactor SCORPIONTANK
+        {
+         mulvar TEMPVAR5 15
+        }
+        else
+        {
+         mulvar TEMPVAR5 5
+        }
+        // Elite Monsters 
+        ifvarand ACTORFLAGS 512
+        {
+         mulvar TEMPVAR5 3
+         divvar TEMPVAR5 2
+        }
+        addvarvar ACTORSURVIVALVALUE_TEMP TEMPVAR5
+        ifvarg ACTORSURVIVALVALUE_TEMP 10000 setvar ACTORSURVIVALVALUE_TEMP 10000
+
+        // Factor in Jewel of Four Souls
+        ifvarn ENEMYHASSHIKON? 0
+        {
+         setvarvar TEMPVAR5 10001
+         subvarvar TEMPVAR5 ACTORSURVIVALVALUE_TEMP
+         mulvar TEMPVAR5 9
+         divvar TEMPVAR5 10
+         addvarvar ACTORSURVIVALVALUE_TEMP TEMPVAR5
+        }
+
+        ifvarg ACTORSURVIVALVALUE_TEMP 10000 setvar ACTORSURVIVALVALUE_TEMP 10000
+ends
+
+state assessskillflags
+ ifvare SKILLLEVELFLAGS 0 { setvar SKILLLEVELFLAGS 1023 } // All Skills
+ // Checks Survival Rate
+ setvarvar ACTORSURVIVALVALUE_TEMP ACTORSURVIVALVALUE
+ state level_calcsurvivalrateactor
+
+ ifvare SKILLLEVEL 0 { ifvarand SKILLLEVELFLAGS 1 nullop else killit }
+ ifvare SKILLLEVEL 1 { ifvarand SKILLLEVELFLAGS 2 nullop else killit }
+ ifvare SKILLLEVEL 2 { ifvarand SKILLLEVELFLAGS 4 nullop else killit }
+ ifvare SKILLLEVEL 3 { ifvarand SKILLLEVELFLAGS 8 nullop else killit }
+ ifvare SKILLLEVEL 4 { ifvarand SKILLLEVELFLAGS 16 nullop else killit }
+ ifvare SKILLLEVEL 5 { ifvarand SKILLLEVELFLAGS 32 nullop else killit }
+ ifvare SKILLLEVEL 6 { ifvarand SKILLLEVELFLAGS 64 nullop else killit }
+ ifvare SKILLLEVEL 7 { ifvarand SKILLLEVELFLAGS 128 nullop else killit }
+ ifvare SKILLLEVEL 8 { ifvarand SKILLLEVELFLAGS 256 nullop else killit }
+ ifvare SKILLLEVEL 9 { ifvarand SKILLLEVELFLAGS 512 nullop else killit }
+ends
+
+//*********************
+//**ENEMY HP TRACKING**
+//*********************
+state enemymaxhpcountdown
+
+ setvar MISCARRAYID 74 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ATTACHED-OBJECTS?
+ // Check if actor's taken HP Damage of any kind [ >0 ]
+ ifvarn MISCARRAYID_AMOUNTTEMP 0 { ifvarn HPBARCHILD -1 { ifvarl ACTORHPDAMAGED? 0 { setactorvar[HPBARCHILD].HPBARFLASHTIMER -28 } } addvar EDISPLAYHPFLASHTIMER -28 setvar ACTORHPDAMAGED? 0 }
+ ifvarn MISCARRAYID_AMOUNTTEMP 0 { ifvarn HPBARCHILD -1 { ifvarg ACTORHPDAMAGED? 0 { setactorvar[HPBARCHILD].HPBARFLASHTIMER 28 } } addvar EDISPLAYHPFLASHTIMER 28 setvar ACTORHPDAMAGED? 0 }
+ // Check if actor's taken AP Damage of any kind [ >0 ]
+ ifvarn MISCARRAYID_AMOUNTTEMP 0 { ifvarn APBARCHILD -1 { ifvarl ACTORAPDAMAGED? 0 { setactorvar[APBARCHILD].APBARFLASHTIMER -28 } } addvar EDISPLAYAPFLASHTIMER -28 setvar ACTORAPDAMAGED? 0 }
+ ifvarn MISCARRAYID_AMOUNTTEMP 0 { ifvarn APBARCHILD -1 { ifvarg ACTORAPDAMAGED? 0 { setactorvar[APBARCHILD].APBARFLASHTIMER 28 } } addvar EDISPLAYAPFLASHTIMER 28 setvar ACTORAPDAMAGED? 0 }
+
+ ifvarl EDISPLAYHPFLASHTIMER 0 { addvar EDISPLAYHPFLASHTIMER 1 } else ifvarg EDISPLAYHPFLASHTIMER 0 { subvar EDISPLAYHPFLASHTIMER 1 }
+ ifvarl EDISPLAYFAFLASHTIMER 0 { addvar EDISPLAYFAFLASHTIMER 1 } else ifvarg EDISPLAYFAFLASHTIMER 0 { subvar EDISPLAYFAFLASHTIMER 1 }
+
+
+ ifvarl EDISPLAYAPFLASHTIMER 0 { addvar EDISPLAYAPFLASHTIMER 1 } else ifvarg EDISPLAYAPFLASHTIMER 0 { subvar EDISPLAYAPFLASHTIMER 1 }
+
+ // Check water or not
+ ifinwater
+ {
+  setvar WATER? 2 
+ }
+ else 
+ setvar WATER? 0
+
+ getplayer[THISACTOR].posz TEMPVAR2
+ getsector[THISACTOR].floorz TEMPVAR3
+ getsector[THISACTOR].floorz TEMPVAR4
+ addvar TEMPVAR4 -8960 //-17920
+ ifvarvarg TEMPVAR2 TEMPVAR4 ifvarvarl TEMPVAR2 TEMPVAR3 ifvare sector[THISACTOR].lotag 1
+ {
+  setvar WATER? 1
+ }
+
+ // Checks Survival Rate
+ state level_calcsurvivalrateactor
+
+ // Sets up how enemies use their Regeneration Ankh
+ state hpcheckfor0hp
+
+ // Enemy Regen Powerup
+ ifvare CLOAKED? 1 nullop else state enemyregenitem
+ // Sets up how enemies use their Shield Emblem
+ ifvare CLOAKED? 1 nullop else state enemyapregenitem
+
+ // Check Critical Hit Rate
+ state level_calccritrateactor
+
+ // Monster Vampire-Mask Dmg Factors
+ ifvare PUBLICBETA? 0 // Commerical Versions
+ {
+  setvar ACTORVAMPIREDMGFACTOR 0
+  setvar ACTORVAMPIREMAXDMGFACTOR 0
+  ifvarg ACTORVAMPIRETIME 0
+  {
+   setvar ACTORVAMPIREDMGFACTOR 250
+   randvar ACTORVAMPIREDMGRANDOM 50
+   ifrnd 128 addvarvar ACTORVAMPIREDMGFACTOR ACTORVAMPIREDMGRANDOM else subvarvar ACTORVAMPIREDMGFACTOR ACTORVAMPIREDMGRANDOM
+   setvar ACTORVAMPIREMAXDMGFACTOR 1250
+  }
+ }
+ else
+ {
+  setvar ACTORVAMPIREDMGFACTOR 0
+  setvar ACTORVAMPIREMAXDMGFACTOR 0
+  ifvarg ACTORVAMPIRETIME 0
+  {
+   setvar ACTORVAMPIREDMGFACTOR 500
+   randvar ACTORVAMPIREDMGRANDOM 100
+   ifrnd 128 addvarvar ACTORVAMPIREDMGFACTOR ACTORVAMPIREDMGRANDOM else subvarvar ACTORVAMPIREDMGFACTOR ACTORVAMPIREDMGRANDOM
+   setvar ACTORVAMPIREMAXDMGFACTOR 1500
+  }
+ }
+
+ // Force Limit Checks on Non-Player Actor Stats
+ ifvarvarg ACTORMAXHP STATLIMIT setvarvar ACTORMAXHP STATLIMIT
+ ifvarvarg ACTORMAXAP STATLIMIT setvarvar ACTORMAXAP STATLIMIT
+ ifvarvarg ACTORHP STATLIMITATOMIC setvarvar ACTORHP STATLIMITATOMIC
+ ifvarvarg ACTORAP STATLIMITATOMIC setvarvar ACTORAP STATLIMITATOMIC
+ ifvarvarg ACTORFIRSTAID STATLIMITATOMIC setvarvar ACTORFIRSTAID STATLIMITATOMIC
+ ifvarvarg ACTORATTACK STATLIMIT setvarvar ACTORATTACK STATLIMIT
+ ifvarvarg ACTORDEFENSE STATLIMIT setvarvar ACTORDEFENSE STATLIMIT
+
+ getactor[THISACTOR].cstat TEMP
+ ifvarand TEMP 1024 nullop else addvar TEMP 1024
+ setactor[THISACTOR].cstat TEMP
+
+ends
+
+//***********************
+//**GENERAL ENEMY STUFF**
+//***********************
+state enemy_general_stuff
+
+ // Enemy Armor Checks
+ ifvarl ACTORAP 1
+ { 
+  setvar ACTORARMORPERCENT 0 
+ }
+ else
+ {
+  ifvarl ACTORARMORPERCENT 100 setvar ACTORARMORPERCENT 100
+  ifvarg ACTORARMORPERCENT 1000 setvar ACTORARMORPERCENT 1000
+ }
+
+
+ // Enemy Natural Regeneration / Poison Damage Degeneration
+ ifvare mainmenu 0 ifvarg ACTORHP 0
+ {
+  ifvare CLOAKED? 1 nullop 
+  else ifvare FROZEN? 1 nullop
+  else ifvare EXPANDING? 1 nullop
+  else addvar ACTORREGENTIMER 1
+
+  ifvare PUBLICBETA? 0 { ifvarand ACTORSTATUS? 8 setvar ACTORREGENINTERVAL 39 else setvar ACTORREGENINTERVAL 78 } else { setvar ACTORREGENINTERVAL 26 }
+  ifvarvarg ACTORREGENTIMER ACTORREGENINTERVAL
+  {
+   ifvarand ACTORSTATUS? 8 // Has Poison
+   { 
+    setvarvar TEMPVAR ACTORMAXHP
+    randvar TEMPVAR2 10
+    setvar TEMPVAR3 20
+    ifrnd 128 addvarvar TEMPVAR3 TEMPVAR2 else subvarvar TEMPVAR3 TEMPVAR2
+    mulvarvar TEMPVAR TEMPVAR3
+    divvar TEMPVAR 1000
+    mulvar TEMPVAR -1
+ 
+    ifvarn ENEMYHASSHIKON? 0 divvar TEMPVAR 10
+
+    ifvarl TEMPVAR 0
+    {
+     ifvarl TEMPVAR3 11 { ifrnd 40 state monsterpainsounds2 }
+     ifvare TEMPVAR3 11 { ifrnd 48 state monsterpainsounds2 }
+     ifvare TEMPVAR3 12 { ifrnd 56 state monsterpainsounds2 }
+     ifvare TEMPVAR3 13 { ifrnd 64 state monsterpainsounds2 }
+     ifvare TEMPVAR3 14 { ifrnd 72 state monsterpainsounds2 }
+     ifvare TEMPVAR3 15 { ifrnd 80 state monsterpainsounds2 }
+     ifvare TEMPVAR3 16 { ifrnd 88 state monsterpainsounds2 }
+     ifvare TEMPVAR3 17 { ifrnd 96 state monsterpainsounds2 }
+     ifvare TEMPVAR3 18 { ifrnd 112 state monsterpainsounds2 }
+     ifvare TEMPVAR3 19 { ifrnd 120 state monsterpainsounds2 }
+     ifvare TEMPVAR3 20 { ifrnd 128 state monsterpainsounds2 }
+     ifvare TEMPVAR3 21 { ifrnd 136 state monsterpainsounds2 }
+     ifvare TEMPVAR3 22 { ifrnd 144 state monsterpainsounds2 }
+     ifvare TEMPVAR3 23 { ifrnd 152 state monsterpainsounds2 }
+     ifvare TEMPVAR3 24 { ifrnd 160 state monsterpainsounds2 }
+     ifvare TEMPVAR3 25 { ifrnd 168 state monsterpainsounds2 }
+     ifvare TEMPVAR3 26 { ifrnd 176 state monsterpainsounds2 }
+     ifvare TEMPVAR3 27 { ifrnd 184 state monsterpainsounds2 }
+     ifvare TEMPVAR3 28 { ifrnd 192 state monsterpainsounds2 }
+     ifvare TEMPVAR3 29 { ifrnd 200 state monsterpainsounds2 }
+     ifvarg TEMPVAR3 29 { ifrnd 208 state monsterpainsounds2 }
+     addvarvar ACTORHP TEMPVAR
+     setactor[THISACTOR].htowner THISACTOR
+
+     setvarvar ITEMSEEKC TEMPVAR
+     mulvar ITEMSEEKC -1
+     ifvarg ITEMSEEKC 0
+     {
+      setvarvar SHOWDAMAGE ITEMSEEKC
+      setvar SHOWDAMAGETYPE 0
+      setvarvar SHOWDAMAGEACTORID THISACTOR
+      state showdamage
+     }
+ 
+     setvar ACTORHPDAMAGED? 1
+    }
+
+    ifvarn ENEMYHASSHIKON? 0
+    {
+     ifvare PUBLICBETA? 0 { setvar ACTORREGENTIMER -35 } else { setvar ACTORREGENTIMER -24 }
+    }
+    else setvar ACTORREGENTIMER 0
+   }
+   else
+   {
+    ifvarl ACTORREGENTIME 1 ifvarg ACTORHP 0 ifvarvarl ACTORHP ACTORMAXHP
+    {
+     setvarvar TEMPVAR ACTORMAXHP
+     mulvarvar TEMPVAR ACTORLEVEL
+     divvar TEMPVAR 10000
+     ifvarl TEMPVAR 1 setvar TEMPVAR 1
+ 
+     randvar TEMPVAR8 120
+     addvar TEMPVAR8 1
+     ifvarg TEMPVAR8 0 ifvarl TEMPVAR8 2 mulvar TEMPVAR 5 // 1
+     else ifvarg TEMPVAR8 1 ifvarl TEMPVAR8 5 mulvar TEMPVAR 4 // 2-4 +3
+     else ifvarg TEMPVAR8 4 ifvarl TEMPVAR8 14 mulvar TEMPVAR 3 // 5-13 +9
+     else ifvarg TEMPVAR8 13 ifvarl TEMPVAR8 41 mulvar TEMPVAR 2 // 14-40 +27
+     else ifvarg TEMPVAR8 40 ifvarl TEMPVAR8 122 mulvar TEMPVAR 1 // 41-121 +81 
+
+     ifvarand ACTORFLAGS 512 
+     {
+      mulvar TEMPVAR 5
+      divvar TEMPVAR 2
+     }
+ 
+     ifvare PUBLICBETA? 0 divvar TEMPVAR 9 else divvar TEMPVAR 3
+  
+     ifvarl TEMPVAR 1 setvar TEMPVAR 1
+     ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+ 
+     ifvarn ENEMYHASSHIKON? 0 mulvar TEMPVAR 10
+
+     ifvarl TEMPVAR 1 setvar TEMPVAR 1
+     ifvarvarg TEMPVAR STATLIMITMAXIMUM setvarvar TEMPVAR STATLIMITMAXIMUM
+
+     setvar ACTORHPDAMAGED? -1
+     addvarvar ACTORHP TEMPVAR
+     ifvarvarg ACTORHP ACTORMAXHP setvarvar ACTORHP ACTORMAXHP
+
+     setvarvar ITEMSEEKC TEMPVAR
+     ifvarg ITEMSEEKC 0
+     {
+      setvarvar SHOWDAMAGE ITEMSEEKC
+      setvar SHOWDAMAGETYPE 3
+      setvarvar SHOWDAMAGEACTORID THISACTOR
+      state showdamage
+     }
+
+     // Reset the interval timer
+     setvarvar TEMPVAR4 ACTORLEVEL divvar TEMPVAR4 20
+     ifvarn ENEMYHASSHIKON? 0
+     {
+      ifvare PUBLICBETA? 0 { setvar ACTORREGENTIMER 71 } else { setvar ACTORREGENTIMER 24 }
+     }
+     else setvar ACTORREGENTIMER 0
+     addvarvar ACTORREGENTIMER TEMPVAR4
+
+     // Elites Regenerate 4-9 tics faster depending on level range
+     ifvarand ACTORFLAGS 512 
+     {
+      randvar TEMPVAR4 2
+      addvar TEMPVAR4 4
+      ifvarg ACTORLEVEL 33 addvar TEMPVAR4 1
+      ifvarg ACTORLEVEL 66 addvar TEMPVAR4 1
+      ifvarg ACTORLEVEL 99 addvar TEMPVAR4 1
+      addvarvar ACTORREGENTIMER TEMPVAR4
+     }
+    } 
+   } 
+  }
+ }
+
+
+ // Enemy Natural Armor Regeneration / Corrosion Damage Degeneration
+ ifvare mainmenu 0 ifvarg ACTORAP 0
+ {
+  ifvare CLOAKED? 1 nullop 
+  else ifvare FROZEN? 1 nullop
+  else ifvare EXPANDING? 1 nullop
+  else addvar ACTORAPREGENTIMER 1
+
+  ifvare PUBLICBETA? 0 { ifvarand ACTORSTATUS? 16384 setvar ACTORAPREGENINTERVAL 39 else setvar ACTORAPREGENINTERVAL 78 } else { setvar ACTORAPREGENINTERVAL 26 }
+  ifvarvarg ACTORAPREGENTIMER ACTORAPREGENINTERVAL
+  {
+   ifvarand ACTORSTATUS? 16384 // Has Corrosion
+   { 
+    setvarvar TEMPVAR ACTORMAXAP
+    randvar TEMPVAR2 10
+    setvar TEMPVAR3 20
+    ifrnd 128 addvarvar TEMPVAR3 TEMPVAR2 else subvarvar TEMPVAR3 TEMPVAR2
+    mulvarvar TEMPVAR TEMPVAR3
+    divvar TEMPVAR 1000
+    mulvar TEMPVAR -1
+ 
+    ifvarn ENEMYHASSHIKON? 0 divvar TEMPVAR 10
+
+    ifvarl TEMPVAR 0
+    {
+     addvarvar ACTORAP TEMPVAR
+     ifvarl ACTORAP 0 setvar ACTORAP 0
+     setactor[THISACTOR].htowner THISACTOR
+
+     setvarvar ITEMSEEKC TEMPVAR
+     mulvar ITEMSEEKC -1
+     ifvarg ITEMSEEKC 0
+     {
+      setvarvar SHOWDAMAGE ITEMSEEKC
+      setvar SHOWDAMAGETYPE 1
+      setvarvar SHOWDAMAGEACTORID THISACTOR
+      state showdamage
+     }
+ 
+     setvar ACTORAPDAMAGED? 1
+    }
+
+    // Start of 'Damage AP-Absorb' Code
+    randvar TEMPVAR5 10 addvar TEMPVAR5 5 // [0.5% to 1.5% AP-Absorb loss per interval (base)]
+    setvar TEMPVAR8 437 // 7/16 chance of AP-Absorb loss occuring at all [base]
+    randvar TEMPVAR7 999 addvar TEMPVAR7 1
+    ifvarvarg TEMPVAR7 TEMPVAR8 nullop else { subvarvar ACTORARMORPERCENT TEMPVAR5 ifvarl ACTORARMORPERCENT 100 setvar ACTORARMORPERCENT 100 }
+
+    ifvarn ENEMYHASSHIKON? 0
+    {
+     ifvare PUBLICBETA? 0 { setvar ACTORAPREGENTIMER -35 } else { setvar ACTORAPREGENTIMER -24 }
+    }
+    else setvar ACTORAPREGENTIMER 0
+   }
+   // else nullop // Currently, monsters have no way to get natural AP regen [though this will need to be implemented later for the 'Doppelganger' bosses >_>
+  }
+ }
+
+
+ // Corrosion Effect Check
+ ifvare ACTORAP 0 ifvarand ACTORSTATUS? 16384 state removecorrosion_actor_noarmor
+
+ 
+ // Sets up how enemies use their Quad Damage
+ ifvarg ACTORQUADTIME 0
+ {
+  ifvarand ACTORPOWERUPBITFIELD 1 nullop else addvar ACTORPOWERUPBITFIELD 1
+  ifvare CLOAKED? 1 nullop else state enemyquaddamage
+ }
+ else
+ {
+  ifvarand ACTORPOWERUPBITFIELD 1 subvar ACTORPOWERUPBITFIELD 1
+ }
+
+
+ // Sets up how enemies use their Icon of the Defender
+ ifvarg ACTORINVULNTIME 0
+ {
+  ifvarand ACTORPOWERUPBITFIELD 2 nullop else addvar ACTORPOWERUPBITFIELD 2
+  ifvare CLOAKED? 1 nullop else state enemyinvulnitem
+ }
+ else
+ {
+  ifvarand ACTORPOWERUPBITFIELD 2 subvar ACTORPOWERUPBITFIELD 2
+ }
+
+
+ // Sets up how enemies use their Vampire Mask
+ ifvarg ACTORVAMPIRETIME 0
+ {
+  ifvarand ACTORPOWERUPBITFIELD 16 nullop else addvar ACTORPOWERUPBITFIELD 16
+  ifvare CLOAKED? 1 nullop else state enemyvampireitem
+ }
+ else
+ {
+  ifvarand ACTORPOWERUPBITFIELD 16 subvar ACTORPOWERUPBITFIELD 16
+ }
+
+
+ // Check all statuses and make sure to decrement any timers they have.
+ ifvarand ACTORSTATUS? 2 // Haste
+ {
+  ifvarg ACTORHASTETIMER 0
+  {
+   ifvare CLOAKED? 1 nullop 
+   else ifvare FROZEN? 1 nullop
+   else ifvare SHRUNK? 1 nullop
+   else
+   {
+    setvar TEMPVAR5 0
+    ifvarn ENEMYHASSHIKON? 0 addvar TEMPVAR5 1
+    ifvarg TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 TIMERRAWFORMAT 
+     modvar TEMPVAR4 5
+     ifvare TEMPVAR4 4 subvar ACTORHASTETIMER 1
+    }
+    else
+    {
+     subvar ACTORHASTETIMER 1
+    }
+   }
+  }
+  else
+  {
+   redefinequote 335 ^33AN ENEMY'S HASTINESS HAS WORN OFF! :D
+   subvar ACTORSTATUS? 2
+   setvar ACTORHASTETIMER 0
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+ ifvarand ACTORSTATUS? 4 // Slow
+ {
+  ifvarg ACTORSLOWTIMER 0
+  {
+   ifvare CLOAKED? 1 nullop 
+   else ifvare FROZEN? 1 nullop
+   else ifvare SHRUNK? 1 nullop
+   else
+   {
+    setvar TEMPVAR5 1
+    ifvarn ENEMYHASSHIKON? 0 mulvar TEMPVAR5 5
+    subvarvar ACTORSLOWTIMER TEMPVAR5
+   }
+  }
+  else
+  {
+   redefinequote 335 ^10AN ENEMY'S SLOWNESS HAS WORN OFF! D:
+   subvar ACTORSTATUS? 4
+   setvar ACTORSLOWTIMER 0
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+
+ ifvarand ACTORSTATUS? 8 // Poison
+ {
+  ifactor ROTATEGUN // Machines Cannot be Poisoned [they have no "blood"]
+  {
+   subvar ACTORSTATUS? 8
+   setvar ACTORPOISONTIMER 0
+  }
+  else
+  ifactor DRONE // Machines Cannot be Poisoned [they have no "blood"]
+  {
+   subvar ACTORSTATUS? 8
+   setvar ACTORPOISONTIMER 0
+  }
+  else
+  ifactor TANK // Machines Cannot be Poisoned [they have no "blood"]
+  {
+   subvar ACTORSTATUS? 8
+   setvar ACTORPOISONTIMER 0
+  }
+  else
+  ifactor EMPTYTANK // Machines Cannot be Poisoned [they have no "blood"]
+  {
+   subvar ACTORSTATUS? 8
+   setvar ACTORPOISONTIMER 0
+  }
+  else
+  ifactor SCORPIONTANK // Machines Cannot be Poisoned [they have no "blood"]
+  {
+   subvar ACTORSTATUS? 8
+   setvar ACTORPOISONTIMER 0
+  }
+  else
+  {
+   ifvarg ACTORPOISONTIMER 0
+   {
+    ifvare CLOAKED? 1 nullop 
+    else ifvare FROZEN? 1 nullop
+    else ifvare SHRUNK? 1 nullop
+    else
+    {
+     setvar TEMPVAR5 1
+     ifvarn ENEMYHASSHIKON? 0 mulvar TEMPVAR5 5
+     subvarvar ACTORPOISONTIMER TEMPVAR5
+    }
+   }
+   else
+   {
+    redefinequote 335 ^10AN ENEMY'S POISON HAS WORN OFF! :(
+    subvar ACTORSTATUS? 8
+    setvar ACTORPOISONTIMER 0
+    setvarvar fta fta_normal setvar ftq 335
+   }
+  }
+ }
+ ifvarand ACTORSTATUS? 16 // Dimness
+ {
+  ifactor EMPTYTANK // Tanks Cannot Be Dimmed [they have no "eyes"]
+  {
+   subvar ACTORSTATUS? 16
+   setvar ACTORDIMNESSTIMER 0
+  }
+  else
+  ifactor TANK // Tanks Cannot Be Dimmed [they have no "eyes"]
+  {
+   subvar ACTORSTATUS? 16
+   setvar ACTORDIMNESSTIMER 0
+  }
+  else
+  ifactor SCORPIONTANK // Tanks Cannot be Dimmed [they have no "eyes"]
+  {
+   subvar ACTORSTATUS? 16
+   setvar ACTORDIMNESSTIMER 0
+  }
+  else
+  {
+   ifvare mainmenu 0 // only mess with the view angles when the menu isn't open
+   {
+    getactor[THISACTOR].ang ACTORANGLE 
+    randvar TEMPVAR4 10 // 7
+    ifrnd 128 mulvar TEMPVAR4 -1
+    addvar TEMPVAR4 40 // 25
+ 
+    addvar DIMNESSSWITCHTIMER 1
+    ifvarvarg DIMNESSSWITCHTIMER TEMPVAR4 // Will randomly set the direction of spinning while dimmed every second
+    {
+     randvar DIMNESSDIRECTION 1
+     setvar DIMNESSSWITCHTIMER 0
+    } 
+ 
+    ifvare DIMNESSDIRECTION 0
+    { 
+     randvar TEMPVAR 4
+     randvar TEMPVAR2 2 addvar TEMPVAR2 1
+     mulvarvar TEMPVAR TEMPVAR2
+     ifrnd 128 mulvar TEMPVAR -1
+     addvar ACTORANGLE 24
+     addvarvar ACTORANGLE TEMPVAR
+    }
+    else
+    {
+     randvar TEMPVAR 4
+     randvar TEMPVAR2 2 addvar TEMPVAR2 1
+     mulvarvar TEMPVAR TEMPVAR2
+     ifrnd 128 mulvar TEMPVAR -1
+     subvar ACTORANGLE 24
+     subvarvar ACTORANGLE TEMPVAR
+    }
+    setactor[THISACTOR].ang ACTORANGLE 
+   }
+
+   ifvarg ACTORDIMNESSTIMER 0
+   {
+    ifvare CLOAKED? 1 nullop 
+    else ifvare FROZEN? 1 nullop
+    else ifvare SHRUNK? 1 nullop
+    else
+    {
+     setvar TEMPVAR5 1
+     ifvarn ENEMYHASSHIKON? 0 mulvar TEMPVAR5 5
+     subvarvar ACTORDIMNESSTIMER TEMPVAR5
+    }
+   }
+   else
+   {
+    redefinequote 335 ^10AN ENEMY'S DIMNESS HAS WORN OFF! :(
+    subvar ACTORSTATUS? 16
+    setvar ACTORDIMNESSTIMER 0
+    setvarvar fta fta_normal setvar ftq 335
+   }
+  }
+ }
+ ifvarand ACTORSTATUS? 128 // Confusion
+ {
+  ifactor EMPTYTANK // Tanks Cannot Be Confused [they're driven by enemies who cannot be currently confused due to the tank's protective armor]
+  {
+   subvar ACTORSTATUS? 128
+   setvar ACTORCONFUSIONTIMER 0
+  }
+  else
+  ifactor TANK // Tanks Cannot Be Confused [they're driven by enemies who cannot be currently confused due to the tank's protective armor]
+  {
+   subvar ACTORSTATUS? 128
+   setvar ACTORCONFUSIONTIMER 0
+  }
+  else
+  ifactor SCORPIONTANK // Tanks Cannot Be Confused [they're driven by enemies who cannot be currently confused due to the tank's protective armor]
+  {
+   subvar ACTORSTATUS? 128
+   setvar ACTORCONFUSIONTIMER 0
+  }
+  else
+  {
+   ifvare mainmenu 0 // only mess with the view angles when the menu isn't open
+   {
+    getactor[THISACTOR].ang ACTORANGLE 
+    randvar TEMPVAR4 5 // 7
+    ifrnd 128 mulvar TEMPVAR4 -1
+    addvar TEMPVAR4 20 // 25
+
+    addvar CONFUSESWITCHTIMER 1
+    ifvarvarg CONFUSESWITCHTIMER TEMPVAR4 // Will randomly set the direction of spinning while confused every second
+    {
+     randvar CONFUSEDIRECTION 1
+     setvar CONFUSESWITCHTIMER 0
+    }
+
+    ifvare CONFUSEDIRECTION 0
+    { 
+     randvar TEMPVAR 16
+     randvar TEMPVAR2 2 addvar TEMPVAR2 1
+     mulvarvar TEMPVAR TEMPVAR2
+     ifrnd 128 mulvar TEMPVAR -1
+     ifrnd 85 addvar ACTORANGLE 32 else ifrnd 128 addvar ACTORANGLE 64 else addvar ACTORANGLE 96
+     addvarvar ACTORANGLE TEMPVAR
+    }
+    else
+    {
+     randvar TEMPVAR 16
+     randvar TEMPVAR2 2 addvar TEMPVAR2 1
+     mulvarvar TEMPVAR TEMPVAR2
+     ifrnd 128 mulvar TEMPVAR -1
+     ifrnd 85 subvar ACTORANGLE 32 else ifrnd 128 subvar ACTORANGLE 64 else subvar ACTORANGLE 96
+     subvarvar ACTORANGLE TEMPVAR
+    }
+    setactor[THISACTOR].ang ACTORANGLE 
+   } 
+
+   ifvarg ACTORCONFUSIONTIMER 0
+   {
+    ifvare CLOAKED? 1 nullop 
+    else ifvare FROZEN? 1 nullop
+    else ifvare SHRUNK? 1 nullop
+    else
+    {
+     setvar TEMPVAR5 1
+     ifvarn ENEMYHASSHIKON? 0 mulvar TEMPVAR5 5
+     subvarvar ACTORCONFUSIONTIMER TEMPVAR5
+    }
+   }
+   else
+   {
+    redefinequote 335 ^10AN ENEMY'S CONFUSION HAS WORN OFF! :(
+    subvar ACTORSTATUS? 128
+    setvar ACTORCONFUSIONTIMER 0
+    setvarvar fta fta_normal setvar ftq 335
+   }
+  }
+ }
+ ifvarand ACTORSTATUS? 512 // Damage Shell
+ {
+  ifvarg ACTORSHELLTIMER 0
+  {
+   ifvare CLOAKED? 1 nullop 
+   else ifvare FROZEN? 1 nullop
+   else ifvare SHRUNK? 1 nullop
+   else
+   {
+    setvar TEMPVAR5 0
+    ifvarn ENEMYHASSHIKON? 0 addvar TEMPVAR5 1
+    ifvarg TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 TIMERRAWFORMAT 
+     modvar TEMPVAR4 5
+     ifvare TEMPVAR4 4 subvar ACTORSHELLTIMER 1
+    }
+    else
+    {
+     subvar ACTORSHELLTIMER 1
+    }
+   }
+  }
+  else
+  {
+   redefinequote 335 ^22AN ENEMY'S DAMAGE-SHELL HAS WORN OFF! :)
+   subvar ACTORSTATUS? 512
+   setvar ACTORSHELLTIMER 0
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+ ifvarand ACTORSTATUS? 1024 // Psychic Shield
+ {
+  ifvarg ACTORPSISHIELDTIMER 0
+  {
+   ifvare CLOAKED? 1 nullop 
+   else ifvare FROZEN? 1 nullop
+   else ifvare SHRUNK? 1 nullop
+   else
+   {
+    setvar TEMPVAR5 0
+    ifvarn ENEMYHASSHIKON? 0 addvar TEMPVAR5 1
+    ifvarg TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 TIMERRAWFORMAT 
+     modvar TEMPVAR4 5
+     ifvare TEMPVAR4 4 subvar ACTORPSISHIELDTIMER 1
+    }
+    else
+    {
+     subvar ACTORPSISHIELDTIMER 1
+    }
+   }
+  }
+  else
+  {
+   redefinequote 335 ^22AN ENEMY'S PSYCHIC-SHIELD HAS WORN OFF! :)
+   subvar ACTORSTATUS? 1024
+   setvar ACTORPSISHIELDTIMER 0
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+ ifvarand ACTORSTATUS? 16384 // Corrosion
+ {
+  ifvarg ACTORCORROSIONTIMER 0
+  {
+   ifvare CLOAKED? 1 nullop 
+   else ifvare FROZEN? 1 nullop
+   else ifvare SHRUNK? 1 nullop
+   else
+   {
+    setvar TEMPVAR5 0
+    ifvarn ENEMYHASSHIKON? 0 addvar TEMPVAR5 1
+    ifvarg TEMPVAR5 0
+    {
+     setvarvar TEMPVAR4 TIMERRAWFORMAT 
+     modvar TEMPVAR4 5
+     ifvare TEMPVAR4 4 subvar ACTORCORROSIONTIMER 1
+    }
+    else
+    {
+     subvar ACTORCORROSIONTIMER 1
+    }
+   }
+  }
+  else
+  {
+   redefinequote 335 ^22AN ENEMY'S ARMOR HAS STOPPED CORRODING! :(
+   subvar ACTORSTATUS? 16384
+   setvar ACTORCORROSIONTIMER 0
+   setvarvar fta fta_normal setvar ftq 335
+  }
+ }
+
+
+ // Makes the enemy use their First Aid Kit if they have one everytime they lose health until it runs out
+ ifvarg ACTORHP 0 ifvarg actorvar[ITEMSEEK].ACTORFIRSTAID 0
+ {
+  ifvare TEMPVAR5 0 setvar RNDMIZERLIMIT 240 // ifrnd 16 = (256 - 16 = 240)
+  else ifvare TEMPVAR5 1 setvar RNDMIZERLIMIT 254 // ifrnd 2 = (256 - 2 = 254)
+
+  ifvarand ACTORSTATUS? 128 // If confused, make chances less
+  {
+   ifvare SKILLLEVEL 0 setvar RNDMIZERLIMIT 255 // ifrnd 1
+   ifvare SKILLLEVEL 1 setvar RNDMIZERLIMIT 255 // ifrnd 1
+   ifvare SKILLLEVEL 2 setvar RNDMIZERLIMIT 254 // ifrnd 2
+   ifvare SKILLLEVEL 3 setvar RNDMIZERLIMIT 253 // ifrnd 3
+   ifvare SKILLLEVEL 4 setvar RNDMIZERLIMIT 249 // ifrnd 7
+   ifvare SKILLLEVEL 5 setvar RNDMIZERLIMIT 244 // ifrnd 12
+   ifvare SKILLLEVEL 6 setvar RNDMIZERLIMIT 234 // ifrnd 22
+   ifvare SKILLLEVEL 7 setvar RNDMIZERLIMIT 218 // ifrnd 38
+   ifvare SKILLLEVEL 8 setvar RNDMIZERLIMIT 198 // ifrnd 58
+   ifvare SKILLLEVEL 9 setvar RNDMIZERLIMIT 192 // ifrnd 64
+  }
+  else
+  {
+   ifvare SKILLLEVEL 0 setvar RNDMIZERLIMIT 255 // ifrnd 1
+   ifvare SKILLLEVEL 1 setvar RNDMIZERLIMIT 253 // ifrnd 3
+   ifvare SKILLLEVEL 2 setvar RNDMIZERLIMIT 249 // ifrnd 7
+   ifvare SKILLLEVEL 3 setvar RNDMIZERLIMIT 241 // ifrnd 15
+   ifvare SKILLLEVEL 4 setvar RNDMIZERLIMIT 229 // ifrnd 27
+   ifvare SKILLLEVEL 5 setvar RNDMIZERLIMIT 208 // ifrnd 48
+   ifvare SKILLLEVEL 6 setvar RNDMIZERLIMIT 170 // ifrnd 86
+   ifvare SKILLLEVEL 7 setvar RNDMIZERLIMIT 105 // ifrnd 151
+   ifvare SKILLLEVEL 8 setvar RNDMIZERLIMIT 27 // ifrnd 229
+   ifvare SKILLLEVEL 9 setvar RNDMIZERLIMIT 1 // ifrnd 255
+  }
+  state rndmizer256
+
+  ifvarvarg RNDMIZER RNDMIZERLIMIT // Makes Enemy use their Medikit at a specfic frequency depending on Difficulty Level
+  {
+   ifvarg ACTORHP 0
+    ifvarvarl ACTORHP ACTORMAXHP
+   {
+    setvarvar TEMPVAR ACTORMAXHP
+    subvarvar TEMPVAR ACTORHP
+    ifvarvarl TEMPVAR ACTORFIRSTAID
+    {
+     addvarvar ACTORHP TEMPVAR
+     subvarvar ACTORFIRSTAID TEMPVAR
+
+     setvarvar ITEMSEEK THISACTOR
+     setvarvar ITEMSEEKC TEMPVAR
+     state showhealing_actorhp
+
+     setvar TEMPVAR 0
+     sound USE_MEDIKITITEM
+    }
+    else
+    {
+     addvarvar ACTORHP ACTORFIRSTAID
+     setvarvar TEMPVAR ACTORFIRSTAID
+     setvar ACTORFIRSTAID 0
+
+     setvarvar ITEMSEEK THISACTOR
+     setvarvar ITEMSEEKC TEMPVAR
+     state showhealing_actorhp
+
+     setvar TEMPVAR 0
+     sound USE_MEDIKITITEM
+    }
+
+    ifvare DRIVERID -1
+    {
+     setvar EDISPLAYFAFLASHTIMER 28
+     setvar ACTORHPDAMAGED? -1
+    }
+    else ifvarvare DRIVERID PLAYERID
+    {
+     setvar VDISPLAYFAFLASHTIMER 28
+     setvar VEHICLEHPDAMAGED? -1
+    }
+   }
+  }
+ }
+
+  // Do a final check to make sure timers for ailments that aren't active are reset to 0
+  ifvarand ACTORSTATUS? 2 nullop else setvar ACTORHASTETIMER 0
+  ifvarand ACTORSTATUS? 4 nullop else setvar ACTORSLOWTIMER 0
+  ifvarand ACTORSTATUS? 8 nullop else setvar ACTORPOISONTIMER 0
+  ifvarand ACTORSTATUS? 16 nullop else setvar ACTORDIMNESSTIMER 0
+  ifvarand ACTORSTATUS? 128 nullop else setvar ACTORCONFUSIONTIMER 0
+  ifvarand ACTORSTATUS? 512 nullop else setvar ACTORSHELLTIMER 0
+  ifvarand ACTORSTATUS? 1024 nullop else setvar ACTORPSISHIELDTIMER 0
+  ifvarand ACTORSTATUS? 16384 nullop else setvar ACTORCORROSIONTIMER 0
+ends

@@ -579,6 +579,7 @@ include SUPPORT.CON 			// Loads the Support System States
 include STATES.CON 				// Loads Special States
 include CHARACTERS.CON 			// Loads the character information
 include PICKUPS.CON				// Loads the Pickups information
+include ENEMYSTATES.CON			// Loads Enemy handling of things like AP/Portable Medikits/Inventory Items, etc
 
 // Prevents in-game shade from overriding the below
 spritenoshade GATEMISSILE_SPLIT
@@ -4448,7 +4449,7 @@ state actorproperangle
 state enemyfloorhurt
 state accquireenemystats
 state enemymaxhpcountdown
-state enemyarmortype
+state enemy_general_stuff
 state freezecode_actor
 state healingsector_actor
 
@@ -5508,9 +5509,11 @@ useractor notenemy ROBOTDOG PIRATEGALSTRENGTH
   }
 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
- state enemymaxhpcountdown state enemyarmortype 
+ state enemymaxhpcountdown 
+ state enemy_general_stuff 
  state freezecode_actor
  state healingsector_actor
 enda
@@ -5715,7 +5718,7 @@ useractor notenemy ROBOTDOG2 PIRATEGALSTRENGTH
   state enemyfloorhurt
   state enemyunderwater
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -5933,10 +5936,11 @@ useractor notenemy PRESIDENTCLINTON MANWOMANSTRENGTH
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
  state actorseekingitem
  state breakobject 
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -6013,7 +6017,7 @@ useractor notenemy OTTO TOUGH
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -6218,9 +6222,12 @@ useractor notenemy DANCE1 TOUGH
 
 // state breakobject
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
- state enemymaxhpcountdown state enemyarmortype state freezecode_actor
+ state enemymaxhpcountdown 
+ state enemy_general_stuff 
+ state freezecode_actor
  state healingsector_actor
 enda 
 
@@ -6411,10 +6418,11 @@ useractor notenemy DANCE2 TOUGH
   }
 
 // state breakobject  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -6617,10 +6625,11 @@ useractor notenemy DANCE3 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -6823,10 +6832,11 @@ useractor notenemy DANCE5 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -7019,10 +7029,11 @@ useractor notenemy DANCE6 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -7227,10 +7238,11 @@ useractor notenemy DANCE7 TOUGH
 
 // state breakobject
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -7432,10 +7444,11 @@ useractor notenemy DANCE9 TOUGH
   }
 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -7631,10 +7644,11 @@ useractor notenemy STAND1 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -7830,10 +7844,11 @@ useractor notenemy STAND3 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda 
@@ -8029,10 +8044,11 @@ useractor notenemy STAND4 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
 enda
 
@@ -8227,10 +8243,11 @@ useractor notenemy COP1 TOUGH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -8431,7 +8448,7 @@ useractor notenemy COP2 TOUGH
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 
@@ -8632,7 +8649,7 @@ useractor notenemy PUNKDUDE TOUGH
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -8831,7 +8848,7 @@ useractor notenemy SITTINGDUDE TOUGH
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -9032,10 +9049,11 @@ useractor notenemy ANIMEGIRL1 MANWOMANSTRENGTH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -9236,10 +9254,11 @@ useractor notenemy ANIMEGIRL2 MANWOMANSTRENGTH
 
 // state breakobject 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -9441,10 +9460,11 @@ useractor notenemy ANIMEGIRL3 MANWOMANSTRENGTH
  state breakobject 
 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -9647,7 +9667,7 @@ useractor notenemy ANIMEGIRL4 MANWOMANSTRENGTH
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -9836,10 +9856,11 @@ useractor notenemy WOLFDUDE 1453
   }
 
  state actorseekingitem
- state checkfallcounter_nonplayer state enemyfloorhurt
+ state checkfallcounter_nonplayer 
+ state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -10110,7 +10131,7 @@ useractor notenemy DEALER TOUGH
  state enemyfloorhurt
  state enemyunderwater
  state enemymaxhpcountdown
- state enemyarmortype
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
 enda
@@ -12175,9 +12196,10 @@ actor ROTATEGUN ROTTURRETSTRENGTH
   state accquireenemystats
   state enemyunderwater
   state enemyfloorhurt
-  state enemyarmortype // state freezecode_actor
-  state healingsector_actor
   state enemymaxhpcountdown
+  state enemy_general_stuff 
+  // state freezecode_actor
+  state healingsector_actor
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
 
   ifvare SKILLSET? -1 state rankstarbeta // tries to regenerate any attached-objects not spawned or that vanish prematurely
@@ -13119,12 +13141,13 @@ actor FEM1 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13222,12 +13245,13 @@ actor FEM2 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13308,12 +13332,13 @@ actor FEM3 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13394,12 +13419,13 @@ actor FEM4 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13480,13 +13506,14 @@ actor FEM5 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state killme
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13567,13 +13594,14 @@ actor FEM6 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state killme
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13654,13 +13682,14 @@ actor FEM7 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state tipme
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13763,12 +13792,13 @@ actor FEM9 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13849,13 +13879,14 @@ actor FEM10 TOUGH FEMANIMATESLOW
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state tipme
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -13936,13 +13967,14 @@ actor TOUGHGAL MANWOMANSTRENGTH TOUGHGALANIM
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state toughgaltalk
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -14029,7 +14061,7 @@ actor NAKED1 TOUGH FEMANIMATE
   state killme
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -14241,13 +14273,14 @@ actor PODFEM1 TOUGH FEMANIMATE
  ifvare SKILLSET? 1 state rankstarbeta
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state actorseekingitem
-  state checkfallcounter_nonplayer state enemyfloorhurt
+  state checkfallcounter_nonplayer 
+  state enemyfloorhurt
   state enemyunderwater
   ifvare oldskoolmode 0 { ifvarn CANUSECOILS? 0 state civsave }
   state killme
   state femcode
   state enemymaxhpcountdown
-  state enemyarmortype
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
 enda
@@ -16591,10 +16624,10 @@ ends
 
 
 actor LIZTROOPJETPACK TROOPSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checktrooppalette
   ifvarn SKILLSET? -1
@@ -16608,10 +16641,10 @@ actor LIZTROOPJETPACK TROOPSTRENGTH
   cactor LIZTROOP
 enda
 actor LIZTROOPDUCKING TROOPSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checktrooppalette
   ifvarn SKILLSET? -1
@@ -16627,10 +16660,10 @@ actor LIZTROOPDUCKING TROOPSTRENGTH
     move DONTGETUP
 enda
 actor LIZTROOPSHOOT TROOPSTRENGTH ATROOPSTAND
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checktrooppalette
   ifvarn SKILLSET? -1
@@ -16644,10 +16677,10 @@ actor LIZTROOPSHOOT TROOPSTRENGTH ATROOPSTAND
   cactor LIZTROOP
 enda
 actor LIZTROOPSTAYPUT TROOPSTRENGTH ATROOPSTAYSTAND
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checktrooppalette
   ifvarn SKILLSET? -1
@@ -16661,10 +16694,10 @@ actor LIZTROOPSTAYPUT TROOPSTRENGTH ATROOPSTAYSTAND
   cactor LIZTROOP
 enda
 actor LIZTROOPRUNNING TROOPSTRENGTH ATROOPSTAND
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checktrooppalette
   ifvarn SKILLSET? -1
@@ -16678,10 +16711,10 @@ actor LIZTROOPRUNNING TROOPSTRENGTH ATROOPSTAND
   cactor LIZTROOP
 enda
 actor LIZTROOPONTOILET TROOPSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp 
   ifvarvarn temp THISACTOR
   {
@@ -16728,10 +16761,10 @@ actor LIZTROOPONTOILET TROOPSTRENGTH
 enda
 
 actor LIZTROOPJUSTSIT TROOPSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   ifvarvarn temp THISACTOR
   {
    getactor[THISACTOR].htextra temp 
@@ -16836,10 +16869,10 @@ ends
 
 actor LIZTROOP TROOPSTRENGTH ATROOPSTAND
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checktrooppalette
   state troopcode
@@ -17990,10 +18023,10 @@ state lizdodgestate
 ends
 
 actor LIZMANSTAYPUT LIZSTRENGTH 
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checklizmanpalette 
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
@@ -18003,10 +18036,10 @@ actor LIZMANSTAYPUT LIZSTRENGTH
 enda
 
 actor LIZMANSPITTING LIZSTRENGTH 
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checklizmanpalette 
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
@@ -18016,10 +18049,10 @@ actor LIZMANSPITTING LIZSTRENGTH
 enda
 
 actor LIZMANJUMP LIZSTRENGTH 
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checklizmanpalette 
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
@@ -18321,10 +18354,10 @@ actor LIZMAN LIZSTRENGTH
   setactor[THISACTOR].mdflags TEMP 
 
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checklizmanpalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -19163,10 +19196,10 @@ actor DRONE DRONESTRENGTH
   setactor[THISACTOR].mdflags TEMP 
 
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   // state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state checkdronenearplayer
   state droneseekitem
@@ -19830,10 +19863,10 @@ state octadyingstate
 ends
 
 actor OCTABRAINSTAYPUT OCTASTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkoctapalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -19877,10 +19910,10 @@ actor OCTABRAIN OCTASTRENGTH
   setactor[THISACTOR].mdflags TEMP 
 
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkoctapalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -20110,7 +20143,7 @@ ifai 0
    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
    setvar ACTORCRITICALHITCHANCE PIGCAPTAINCRITCHANCE
    setvar ACTORSURVIVALVALUE PIGCAPTAINSURVIVALCHANCE
-   state enemyarmortype
+   state enemy_general_stuff
    state freezecode_actor
    state healingsector_actor
    state newenemystatcalc
@@ -20129,7 +20162,7 @@ ifai 0
    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
    setvar ACTORCRITICALHITCHANCE PIGSARGEANTCRITCHANCE
    setvar ACTORSURVIVALVALUE PIGSARGEANTSURVIVALCHANCE
-   state enemyarmortype
+   state enemy_general_stuff
    state freezecode_actor
    state healingsector_actor
    state newenemystatcalc
@@ -20149,7 +20182,7 @@ ifai 0
    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
    setvar ACTORCRITICALHITCHANCE RAMONECRITCHANCE
    setvar ACTORSURVIVALVALUE RAMONESURVIVALCHANCE
-   state enemyarmortype
+   state enemy_general_stuff
    state freezecode_actor
    state healingsector_actor
    state newenemystatcalc
@@ -20167,7 +20200,7 @@ ifai 0
    setvarvar ACTORFALLRESIST ACTORMAXFALLRESIST
    setvar ACTORCRITICALHITCHANCE PIGCOPCRITCHANCE
    setvar ACTORSURVIVALVALUE PIGCOPSURVIVALCHANCE
-   state enemyarmortype
+   state enemy_general_stuff
    state freezecode_actor
    state healingsector_actor
    state newenemystatcalc
@@ -21060,10 +21093,10 @@ state pigdyingstate
 ends
 
 actor PIGCOPDIVE PIGCOPSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkpigcoppalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -21073,10 +21106,10 @@ actor PIGCOPDIVE PIGCOPSTRENGTH
   cactor PIGCOP
 enda
 actor PIGCOPSTAYPUT PIGCOPSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkpigcoppalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -21137,10 +21170,10 @@ actor PIGCOP PIGCOPSTRENGTH APIGSTAND
 
   ifvare mainmenu 0 fall
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkpigcoppalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -22295,10 +22328,10 @@ ends
 
 useractor enemy BOSS1LOB BOSS1STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss1health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -22309,10 +22342,10 @@ enda
 
 useractor enemy BOSS1SHOOT BOSS1STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss1health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -22322,10 +22355,10 @@ useractor enemy BOSS1SHOOT BOSS1STRENGTH
 enda
 
 actor BOSS1STAYPUT BOSS1STRENGTH  
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss1health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -22399,10 +22432,10 @@ actor BOSS1 BOSS1STRENGTH
 
  ifvare mainmenu 0 fall
  state actorproperangle
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state boss1code 
  state boss1seekitem
@@ -23424,10 +23457,10 @@ ends
 
 useractor enemy BOSS2BREATH BOSS2STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss2health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -23438,10 +23471,10 @@ enda
 
 useractor enemy BOSS2SHOOT BOSS2STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss2health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -23452,10 +23485,10 @@ enda
 
 useractor enemystayput BOSS2STAYPUT BOSS2STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss2health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -23529,10 +23562,10 @@ actor BOSS2 BOSS2STRENGTH
 
  ifvare mainmenu 0 fall
  state actorproperangle
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state boss2code 
  state boss2seekitem
@@ -24442,10 +24475,10 @@ ends
 
 useractor enemy BOSS3LOB BOSS3STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss3health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -24456,10 +24489,10 @@ enda
 
 useractor enemystayput BOSS3STAYPUT BOSS3STRENGTH  
  cstat 257
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state setboss3health
  ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -24533,10 +24566,10 @@ actor BOSS3 BOSS3STRENGTH
 
  ifvare mainmenu 0 fall
  state actorproperangle
- state enemyarmortype
+ state enemymaxhpcountdown
+ state enemy_general_stuff
  state freezecode_actor
  state healingsector_actor
- state enemymaxhpcountdown
  getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
  state boss3code 
  state boss3seekitem
@@ -24870,10 +24903,10 @@ state checkcommhitstate
 ends
 
 actor COMMANDERSTAYPUT COMMANDERSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkcommanderpalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -24935,10 +24968,10 @@ actor COMMANDER COMMANDERSTRENGTH
   setactor[THISACTOR].mdflags TEMP 
 
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state checkcommanderpalette
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -25812,10 +25845,10 @@ useractor enemy TANK TANKSTRENGTH
 
   ifvare mainmenu 0 fall
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   // state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state tankseekitem
 
@@ -27006,10 +27039,10 @@ state boss4code
 ends
 
 actor BOSS4STAYPUT BOSS4STRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
 
   ifvare mainmenu 0 fall
@@ -27075,10 +27108,10 @@ actor BOSS4 BOSS4STRENGTH
   setactor[THISACTOR].mdflags TEMP 
 
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state boss4seekitem
 
@@ -27235,10 +27268,10 @@ state newbeast_20heal
 ends
 
 useractor enemy NEWBEASTHANG NEWBEASTSTRENGTH
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   ifaction 0
   {
@@ -28309,10 +28342,10 @@ state newbeastdodgestate
 ends
 
 useractor enemystayput NEWBEASTSTAYPUT NEWBEASTSTRENGTH 
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
   state setnewbeasthealth 
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
@@ -28325,10 +28358,10 @@ useractor enemystayput NEWBEASTSTAYPUT NEWBEASTSTRENGTH
   enda
 
 useractor enemy NEWBEASTJUMP NEWBEASTSTRENGTH 
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state setnewbeasthealth 
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control } 
@@ -28837,10 +28870,10 @@ useractor enemy NEWBEAST NEWBEASTSTRENGTH
   setactor[THISACTOR].mdflags TEMP 
 
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   state setnewbeasthealth
   ifvarn SKILLSET? -1 { state checkbosslifemeters state getenemyid setvar SKILLSET? -1 }
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
@@ -28984,10 +29017,10 @@ useractor enemy SCORPIONTANK SCORPIONTANKSTRENGTH
 
   ifvare mainmenu 0 fall
   state actorproperangle
-  state enemyarmortype
+  state enemymaxhpcountdown
+  state enemy_general_stuff
   // state freezecode_actor
   state healingsector_actor
-  state enemymaxhpcountdown
   getactor[THISACTOR].htowner temp ifvarvarn temp THISACTOR { getactor[THISACTOR].htextra temp ifvarg temp -1 state status_attack_damage_control }
   state scorpiontankseekitem
 
@@ -41859,10 +41892,10 @@ useractor notenemy EMPTYTANK TANKSTRENGTH AEMPTYTANKWAIT
   }
   ifvarg SKILLSET? 1 
   {
-   state enemyarmortype 
+   state enemymaxhpcountdown
+   state enemy_general_stuff 
    // state freezecode_actor
    state healingsector_actor
-   state enemymaxhpcountdown
    state accquireenemystats
    ifvare DRIVERID -1 state enemyunderwater
    ifvare DRIVERID -1 state checkfallcounter_nonplayer
