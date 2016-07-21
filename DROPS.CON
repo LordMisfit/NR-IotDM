@@ -2891,3 +2891,1947 @@ state ryansitems
 ends
 
 // END OF "RYAN'S HOPE" NPC RESCUE SYSTEM
+
+state dropfiveclips
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn AMMO state scatterdrops
+  espawn AMMO state scatterdrops
+  espawn AMMO state scatterdrops
+  espawn AMMO state scatterdrops
+  espawn AMMO state scatterdrops
+ }
+ends
+
+state dropfiveshotgunboxes
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn SHOTGUNAMMO state scatterdrops
+  espawn SHOTGUNAMMO state scatterdrops
+  espawn SHOTGUNAMMO state scatterdrops
+  espawn SHOTGUNAMMO state scatterdrops
+  espawn SHOTGUNAMMO state scatterdrops
+ }
+ends
+
+state dropfivebatteries
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn BATTERYAMMO state scatterdrops
+  espawn BATTERYAMMO state scatterdrops
+  espawn BATTERYAMMO state scatterdrops
+  espawn BATTERYAMMO state scatterdrops
+  espawn BATTERYAMMO state scatterdrops
+ }
+ends
+
+state dropfiverocketboxes
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn RPGAMMO state scatterdrops
+  espawn RPGAMMO state scatterdrops
+  espawn RPGAMMO state scatterdrops
+  espawn RPGAMMO state scatterdrops
+  espawn RPGAMMO state scatterdrops
+ }
+ends
+
+state dropfivepipeboxes
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn HBOMBAMMO state scatterdrops
+  espawn HBOMBAMMO state scatterdrops
+  espawn HBOMBAMMO state scatterdrops
+  espawn HBOMBAMMO state scatterdrops
+  espawn HBOMBAMMO state scatterdrops
+ }
+ends
+
+state dropfiveshrinkcrystals
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn CRYSTALAMMO state scatterdrops
+  espawn CRYSTALAMMO state scatterdrops
+  espawn CRYSTALAMMO state scatterdrops
+  espawn CRYSTALAMMO state scatterdrops
+  espawn CRYSTALAMMO state scatterdrops
+ }
+ends
+
+state dropfiveexpandermics
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn GROWAMMO state scatterdrops
+  espawn GROWAMMO state scatterdrops
+  espawn GROWAMMO state scatterdrops
+  espawn GROWAMMO state scatterdrops
+  espawn GROWAMMO state scatterdrops
+ }
+ends
+
+state dropfivestingerboxes
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn DEVISTATORAMMO state scatterdrops
+  espawn DEVISTATORAMMO state scatterdrops
+  espawn DEVISTATORAMMO state scatterdrops
+  espawn DEVISTATORAMMO state scatterdrops
+  espawn DEVISTATORAMMO state scatterdrops
+ }
+ends
+
+state dropfivefreezemodules
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+  espawn FREEZEAMMO state scatterdrops
+  espawn FREEZEAMMO state scatterdrops
+  espawn FREEZEAMMO state scatterdrops
+  espawn FREEZEAMMO state scatterdrops
+  espawn FREEZEAMMO state scatterdrops
+ }
+ends
+
+state droprandomshrinkerstuff
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+        ifrnd 85 { espawn CRYSTALAMMO state scatterdrops }
+        else ifrnd 128 { espawn GROWAMMO state scatterdrops }
+        else { { espawn CRYSTALAMMO state scatterdrops } { espawn GROWAMMO state scatterdrops } }
+ }
+ends
+
+state droptripbombs
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+        ifrnd 24 { espawn TRIPBOMBSPRITE state scatterdrops }
+        ifrnd 24 { espawn TRIPBOMBSPRITE state scatterdrops }
+        ifrnd 24 { espawn TRIPBOMBSPRITE state scatterdrops }
+ }
+ends
+
+state droprandomexplosivestuff
+ state 16outof256rnd
+ ifvarvarg RNDMIZER RNDMIZERLIMIT
+ {
+        ifrnd 64 { espawn RPGAMMO state scatterdrops }
+        else ifrnd 85 { espawn DEVISTATORAMMO state scatterdrops }
+        else ifrnd 128 { espawn HBOMBAMMO state scatterdrops }
+        else { espawn RPGAMMO state scatterdrops espawn DEVISTATORAMMO state scatterdrops espawn HBOMBAMMO state scatterdrops }
+ }
+ends
+
+state drop_ammo
+  ifrnd SPAWNAMMOODDS
+  {
+   ifspritepal 19 
+   { 
+    ifrnd 16 { espawn RPGSPRITE state scatterdrops }
+    ifrnd 16 { espawn DEVISTATORSPRITE state scatterdrops }
+    state droptripbombs
+    state droptripbombs
+    state droprandomexplosivestuff
+    state droprandomexplosivestuff
+   }
+   ifspritepal 14 
+   { 
+    ifrnd 16 { espawn SHRINKERSPRITE state scatterdrops }
+    state droprandomshrinkerstuff
+    state droprandomshrinkerstuff
+   }
+   ifspritepal 17 
+   { 
+    ifrnd 26 state dropfiveclips
+    else ifrnd 28 state dropfiveshotgunboxes
+    else ifrnd 32 state dropfivebatteries
+    else ifrnd 36 state dropfiverocketboxes
+    else ifrnd 42 state dropfivepipeboxes
+    else ifrnd 53 state dropfiveshrinkcrystals
+    else ifrnd 64 state dropfiveexpandermics
+    else ifrnd 85 state dropfivestingerboxes
+    else ifrnd 128 state dropfivefreezemodules
+    else { state dropfiveclips state dropfiveshotgunboxes state dropfivebatteries state dropfiverocketboxes state dropfivepipeboxes state dropfiveshrinkcrystals state dropfiveexpandermics state dropfivestingerboxes state dropfivefreezemodules }
+   }
+   else 
+   { 
+    ifvare oldskoolmode 0 
+    { 
+     ifrnd 240 { espawn AMMO state scatterdrops } else { espawn FIRSTGUNSPRITE state scatterdrops } 
+    }
+    else { espawn AMMO state scatterdrops }    
+   }
+   ifvare oldskoolmode 0 { ifrnd 1 { ifrnd 64 { espawn JETPACK state scatterdrops } } }
+  }
+ends
+
+state drop_battery
+  ifrnd SPAWNAMMOODDS { espawn BATTERYAMMO state scatterdrops }
+ends
+
+state drop_sgshells
+  ifrnd SPAWNAMMOODDS { espawn SHOTGUNAMMO state scatterdrops }
+ends
+
+state drop_armor
+  ifrnd SPAWNAMMOODDS
+   {
+    ifvare oldskoolmode 0
+    {
+     ifrnd 112
+     {
+      espawn SHIELD
+      setactorvar[RETURN].ARMORISUSED? 1
+      state scatterdrops
+     }
+     else
+     ifrnd 224
+     {
+      espawn COLORSHIELD
+      setactorvar[RETURN].ARMORISUSED? 1
+      state scatterdrops
+     }
+     else
+     {
+      espawn SUPERSHIELD
+      setactorvar[RETURN].ARMORISUSED? 1
+      state scatterdrops
+     } 
+    }
+    else
+    {
+     espawn SHIELD state scatterdrops
+    }    
+   }
+ends
+
+state drop_shotgun
+  ifrnd SPAWNAMMOODDS
+   {
+    ifvare oldskoolmode 0
+    {
+     ifrnd 128 { espawn SHOTGUNSPRITE state scatterdrops } else { espawn SHOTGUNAMMO state scatterdrops } 
+    }
+    else
+    {
+     espawn SHOTGUNSPRITE state scatterdrops
+    }    
+   }
+ends
+
+state drop_chaingun
+  ifrnd SPAWNAMMOODDS
+  {
+   ifrnd 64 { espawn CHAINGUNSPRITE state scatterdrops } else { espawn BATTERYAMMO state scatterdrops }    
+  }
+ends
+
+//*********************************
+//* Dropped into Money Bag States *
+//*********************************
+state mbag_rndcoinlesser2
+   randvar RANDOMVARIABLE 1
+   addvar RANDOMVARIABLE 1
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 3 setvar RANDOMVARIABLE 3 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 5 setvar RANDOMVARIABLE 5 } }
+
+   ifvare RANDOMVARIABLE 1 addvar zvelsav 1
+   ifvare RANDOMVARIABLE 2 addvar zvelsav 5
+   ifvare RANDOMVARIABLE 3 addvar zvelsav 10 
+   ifvare RANDOMVARIABLE 4 addvar zvelsav 25
+   ifvare RANDOMVARIABLE 5 addvar zvelsav 50 
+ends
+
+state mbag_rndcoinlesser
+   setvar LISAMONEYTURNS 0
+
+   state mbag_rndcoinlesser2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+
+    ifvare LISAMONEYTURNS 1
+    {
+     state mbag_rndcoinlesser2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 2
+    {
+     state mbag_rndcoinlesser2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 3
+    {
+     state mbag_rndcoinlesser2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+   }
+ends
+
+state mbag_rndcoingreater2
+   randvar RANDOMVARIABLE 1
+   addvar RANDOMVARIABLE 1
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 3 setvar RANDOMVARIABLE 3 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 5 setvar RANDOMVARIABLE 5 } }
+
+   ifvare RANDOMVARIABLE 1 addvar zvelsav 10 
+   ifvare RANDOMVARIABLE 2 addvar zvelsav 25 
+   ifvare RANDOMVARIABLE 3 addvar zvelsav 50 
+   ifvare RANDOMVARIABLE 4 addvar TEMP2 1 
+   ifvare RANDOMVARIABLE 5 addvar TEMP2 1
+ends
+
+state mbag_rndcoingreater
+   setvar LISAMONEYTURNS 0
+
+   state mbag_rndcoingreater2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+
+    ifvare LISAMONEYTURNS 1
+    {
+     state mbag_rndcoingreater2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 2
+    {
+     state mbag_rndcoingreater2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 3
+    {
+     state mbag_rndcoingreater2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+   }
+ends
+
+state mbag_rndcoingreatest2
+   randvar RANDOMVARIABLE 1
+   addvar RANDOMVARIABLE 1
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 3 setvar RANDOMVARIABLE 3 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 5 setvar RANDOMVARIABLE 5 } }
+
+   ifvare RANDOMVARIABLE 1 addvar zvelsav 50 
+   ifvare RANDOMVARIABLE 2 addvar TEMP2 1 
+   ifvare RANDOMVARIABLE 3 addvar TEMP2 1 
+   ifvare RANDOMVARIABLE 4 addvar TEMP2 2
+   ifvare RANDOMVARIABLE 5 addvar TEMP2 5 
+ends
+
+state mbag_rndcoingreatest
+   setvar LISAMONEYTURNS 0
+
+   state mbag_rndcoingreatest2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+
+    ifvare LISAMONEYTURNS 1
+    {
+     state mbag_rndcoingreatest2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 2
+    {
+     state mbag_rndcoingreatest2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 3
+    {
+     state mbag_rndcoingreatest2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+   }
+ends
+
+state mbag_rnddollarlesser2
+   randvar RANDOMVARIABLE 8
+   addvar RANDOMVARIABLE 1
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 10 setvar RANDOMVARIABLE 10 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 12 setvar RANDOMVARIABLE 12 } }
+
+   ifvare RANDOMVARIABLE 1 addvar TEMP2 1 
+   ifvare RANDOMVARIABLE 2 addvar TEMP2 2
+   ifvare RANDOMVARIABLE 3 addvar TEMP2 2
+   ifvare RANDOMVARIABLE 4 addvar TEMP2 5
+   ifvare RANDOMVARIABLE 5 addvar TEMP2 5
+   ifvare RANDOMVARIABLE 6 addvar TEMP2 9
+   ifvare RANDOMVARIABLE 7 addvar TEMP2 10
+   ifvare RANDOMVARIABLE 8 addvar TEMP2 10
+   ifvare RANDOMVARIABLE 9 addvar TEMP2 20
+   ifvare RANDOMVARIABLE 10 addvar TEMP2 50
+   ifvare RANDOMVARIABLE 11 addvar TEMP2 80
+   ifvare RANDOMVARIABLE 12 addvar TEMP2 100
+ends
+
+state mbag_rnddollarlesser
+   setvar LISAMONEYTURNS 0
+
+   state mbag_rnddollarlesser2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+
+    ifvare LISAMONEYTURNS 1
+    {
+     state mbag_rnddollarlesser2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 2
+    {
+     state mbag_rnddollarlesser2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 3
+    {
+     state mbag_rnddollarlesser2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+   }
+ends
+
+state mbag_rnddollargreater2
+   randvar RANDOMVARIABLE 3
+   addvar RANDOMVARIABLE 1
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 ifvarg RANDOMVARIABLE 5 setvar RANDOMVARIABLE 5 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 ifvarg RANDOMVARIABLE 7 setvar RANDOMVARIABLE 7 } }
+
+   ifvare RANDOMVARIABLE 1 addvar TEMP2 50
+   ifvare RANDOMVARIABLE 2 addvar TEMP2 80
+   ifvare RANDOMVARIABLE 3 addvar TEMP2 100
+   ifvare RANDOMVARIABLE 4 addvar TEMP2 500
+   ifvarg RANDOMVARIABLE 4 ifvarl RANDOMVARIABLE 7 addvar TEMP2 1000
+   ifvare RANDOMVARIABLE 7 addvar TEMP2 5000
+ends
+
+state mbag_rnddollargreater
+   setvar LISAMONEYTURNS 0
+
+   state mbag_rnddollargreater2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+
+    ifvare LISAMONEYTURNS 1
+    {
+     state mbag_rnddollargreater2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 2
+    {
+     state mbag_rnddollargreater2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 3
+    {
+     state mbag_rnddollargreater2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+   }
+ends
+
+state mbag_rnddollargreatest2
+   randvar RANDOMVARIABLE 34
+   addvar RANDOMVARIABLE 1
+   ifvare CHARACTERSELECTED? 8 { ifvarg LISAMONEYTURNS2 2 { addvar RANDOMVARIABLE 1 } }
+   ifvare CHARACTERSELECTED? 8 { ifvare LISAMONEYMAXLEVEL 1 { addvar RANDOMVARIABLE 2 } }
+   ifvarg RANDOMVARIABLE 34 { ifrnd 32 setvar RANDOMVARIABLE 35 else setvar RANDOMVARIABLE 34 }
+
+   ifvarg RANDOMVARIABLE 0 ifvarl RANDOMVARIABLE 9 addvar TEMP2 1000
+   ifvarg RANDOMVARIABLE 8 ifvarl RANDOMVARIABLE 17 addvar TEMP2 5000
+   ifvarg RANDOMVARIABLE 16 ifvarl RANDOMVARIABLE 25 addvar TEMP2 10000
+   ifvarg RANDOMVARIABLE 24 ifvarl RANDOMVARIABLE 33 addvar TEMP2 100000
+   ifvarg RANDOMVARIABLE 32 ifvarl RANDOMVARIABLE 35 addvar TEMP2 1000000
+   ifvare RANDOMVARIABLE 35 addvar TEMP2 1000000000
+ends
+
+state mbag_rnddollargreatest
+   setvar LISAMONEYTURNS 0
+
+   state mbag_rnddollargreatest2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+
+    ifvare LISAMONEYTURNS 1
+    {
+     state mbag_rnddollargreatest2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 2
+    {
+     state mbag_rnddollargreatest2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+    ifvare LISAMONEYTURNS 3
+    {
+     state mbag_rnddollargreatest2
+     ifvarvarl LISAMONEYTURNS LISAMONEYTURNS2 addvar LISAMONEYTURNS 1
+    }
+   }
+ends
+
+state mbag_rndmoneylesser2
+ ifvare CHARACTERSELECTED? 8
+ {
+  ifvare LISAMONEYMAXLEVEL 1
+  {
+   ifrnd 64 state mbag_rndcoinlesser else state mbag_rnddollarlesser
+  }
+  else
+  {
+   ifrnd 128 state mbag_rndcoinlesser else state mbag_rnddollarlesser
+  }
+ }
+ else
+ {
+  ifrnd 128 state mbag_rndcoinlesser else state mbag_rnddollarlesser
+ }
+ends
+
+state mbag_rndmoneylesser
+   setvar LISAMONEYTURNS0 0
+
+   state mbag_rndmoneylesser2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+
+    ifvare LISAMONEYTURNS0 1
+    {
+     state mbag_rndmoneylesser2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+    ifvare LISAMONEYTURNS0 2
+    {
+     state mbag_rndmoneylesser2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+    ifvare LISAMONEYTURNS0 3
+    {
+     state mbag_rndmoneylesser2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+   }
+ends
+
+state mbag_rndmoneygreater2
+ ifvare CHARACTERSELECTED? 8
+ {
+  ifvare LISAMONEYMAXLEVEL 1
+  {
+   ifrnd 64 state mbag_rndcoingreater else state mbag_rnddollargreater
+  }
+  else
+  {
+   ifrnd 128 state mbag_rndcoingreater else state mbag_rnddollargreater
+  }
+ }
+ else
+ {
+  ifrnd 128 state mbag_rndcoingreater else state mbag_rnddollargreater
+ }
+ends
+
+state mbag_rndmoneygreater
+   setvar LISAMONEYTURNS0 0
+
+   state mbag_rndmoneygreater2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+
+    ifvare LISAMONEYTURNS0 1
+    {
+     state mbag_rndmoneygreater2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+    ifvare LISAMONEYTURNS0 2
+    {
+     state mbag_rndmoneygreater2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+    ifvare LISAMONEYTURNS0 3
+    {
+     state mbag_rndmoneygreater2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+   }
+ends
+
+state mbag_rndmoneygreatest2
+ ifvare CHARACTERSELECTED? 8
+ {
+  ifvare LISAMONEYMAXLEVEL 1
+  {
+   ifrnd 64 state mbag_rndcoingreatest else state mbag_rnddollargreatest
+  }
+  else
+  {
+   ifrnd 128 state mbag_rndcoingreatest else state mbag_rnddollargreatest
+  }
+ }
+ else
+ {
+  ifrnd 128 state mbag_rndcoingreatest else state mbag_rnddollargreatest
+ }
+ends
+
+state mbag_rndmoneygreatest
+   setvar LISAMONEYTURNS0 0
+
+   state mbag_rndmoneygreatest2
+
+   ifvare CHARACTERSELECTED? 8
+   {
+    ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+
+    ifvare LISAMONEYTURNS0 1
+    {
+     state mbag_rndmoneygreatest2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+    ifvare LISAMONEYTURNS0 2
+    {
+     state mbag_rndmoneygreatest2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+    ifvare LISAMONEYTURNS0 3
+    {
+     state mbag_rndmoneygreatest2
+     ifvarvarl LISAMONEYTURNS0 LISAMONEYTURNS2 addvar LISAMONEYTURNS0 1
+    }
+   }
+ends
+
+//****************************************
+//* End of Dropped into Money Bag States *
+//****************************************
+
+state boss_dropmoneybag
+  ifspritepal 24
+  {
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 240 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 160 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 80 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 40 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rndcoingreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rndcoingreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rndcoingreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rnddollargreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rnddollargreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rnddollargreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rndmoneygreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rndmoneygreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 20 state mbag_rndmoneygreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rndcoingreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rndcoingreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rndcoingreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rnddollargreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rnddollargreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rnddollargreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rndmoneygreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rndmoneygreatest }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 10 state mbag_rndmoneygreatest }
+  }
+  else
+  {
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 224 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 224 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 224 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 56 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 56 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 56 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 28 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 28 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 28 state mbag_rndmoneygreater }
+  }
+ends
+
+state actor_dropmoneybag
+  espawn MONEYBAG state setdroppedmoneyowner
+  getactorvar[RETURN].MONEYBAGDOLLARS TEMP2
+  getactorvar[RETURN].MONEYBAGCENTS zvelsav
+  
+  ifactor PIGCOP
+  {
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 224 state mbag_rndcoinlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 224 state mbag_rnddollarlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 224 state mbag_rndmoneylesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rndcoinlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rnddollarlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rndmoneylesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 112 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 56 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 56 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 56 state mbag_rndmoneygreater }
+  }
+  else // Not a Pigcop
+  {
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 168 state mbag_rndcoinlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 168 state mbag_rnddollarlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 168 state mbag_rndmoneylesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 96 state mbag_rndcoinlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 96 state mbag_rnddollarlesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 96 state mbag_rndmoneylesser }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 96 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 96 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 96 state mbag_rndmoneygreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 21 state mbag_rndcoingreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 21 state mbag_rnddollargreater }
+   state 96outof256rnd ifvarvarg RNDMIZER RNDMIZERLIMIT { ifrnd 21 state mbag_rndmoneygreater }
+  }
+
+  ifactor PIGCOP
+  {
+   ifspritepal 24 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 16 state boss_dropmoneybag
+  }
+  else
+  ifactor BOSS1
+  {
+   state boss_dropmoneybag
+   ifspritepal 24 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 16 state boss_dropmoneybag
+  }
+  else
+  ifactor BOSS2
+  {
+   state boss_dropmoneybag
+   ifspritepal 24 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 16 state boss_dropmoneybag
+  }
+  else
+  ifactor BOSS3
+  {
+   state boss_dropmoneybag
+   ifspritepal 24 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 16 state boss_dropmoneybag
+  }
+  else
+  ifactor BOSS4
+  {
+   state boss_dropmoneybag
+   ifspritepal 24 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 24 ifrnd 16 state boss_dropmoneybag
+  }
+  else
+  ifactor LIZTROOP
+  {
+   ifspritepal 17 state boss_dropmoneybag
+   ifspritepal 17 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 17 ifrnd 16 state boss_dropmoneybag
+  }
+  ifactor LIZMAN
+  {
+   ifspritepal 17 state boss_dropmoneybag
+   ifspritepal 17 ifrnd 64 state boss_dropmoneybag
+   ifspritepal 17 ifrnd 16 state boss_dropmoneybag
+  }
+  ifactor COMMANDER
+  {
+  ifspritepal 24 state boss_dropmoneybag
+  ifspritepal 24 ifrnd 64 state boss_dropmoneybag
+  ifspritepal 24 ifrnd 16 state boss_dropmoneybag
+  }
+  setactorvar[RETURN].MONEYBAGDOLLARS TEMP2
+  setactorvar[RETURN].MONEYBAGCENTS zvelsav
+ends
+
+state monster_drop_bonus2
+  ifvare SKILLLEVEL 9
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 4 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 32 { espawn AFAS_DROP state scatterdrops } } }
+    ifrnd 1 { ifrnd 1 { ifrnd 1 { espawn FAUXLEVELUP state scatterdrops } } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 32 state celldrops
+  }
+  else
+  ifvarl SKILLLEVEL 9
+  ifvarg SKILLLEVEL 4
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 2 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 16 { espawn AFAS_DROP state scatterdrops } } }
+    ifrnd 1 { ifrnd 1 { ifrnd 1 { ifrnd 128 { espawn FAUXLEVELUP state scatterdrops } } } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 2 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 16 state celldrops
+  }
+  else
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } } }
+    ifrnd 1 { ifrnd 1 { ifrnd 1 { ifrnd 64 { espawn FAUXLEVELUP state scatterdrops } } } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 2 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 8 state celldrops
+  }
+ends
+
+state monster_drop_bonus1
+  ifvare SKILLLEVEL 9
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 3 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 24 { espawn AFAS_DROP state scatterdrops } } }
+    ifrnd 1 { ifrnd 1 { ifrnd 1 { ifrnd 96 { espawn FAUXLEVELUP state scatterdrops } } } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 9 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 9 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 9 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 24 state celldrops
+  }
+  ifvarl SKILLLEVEL 9
+  ifvarg SKILLLEVEL 4
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 128 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 4 { espawn AFAS_DROP state scatterdrops } } }
+    ifrnd 1 { ifrnd 1 { ifrnd 1 { ifrnd 16 { espawn FAUXLEVELUP state scatterdrops } } } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 128 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 6 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 12 state celldrops
+  }
+  else
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 64 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 1 { ifrnd 2 { espawn AFAS_DROP state scatterdrops } } }
+    ifrnd 1 { ifrnd 1 { ifrnd 1 { ifrnd 8 { espawn FAUXLEVELUP state scatterdrops } } } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 64 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { ifrnd 128 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 2 { ifrnd 128 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 2 { ifrnd 128 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 3 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 2 { ifrnd 128 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+
+   ifrnd 6 state celldrops
+  }
+ends
+
+state boss_drops
+  ifspritepal 24
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 256 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+  }
+  else // ifspritepal not= 24
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 state gemring_drops
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 1 { espawn RESURRECTIONCHALICE state scatterdrops }
+   }
+  }
+
+  ifvare SKILLLEVEL 9
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { ifrnd 16 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { ifrnd 128 { espawn AFAS_DROP state scatterdrops } }
+    ifrnd 8 { ifrnd 16 { espawn FAUXLEVELUP state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 48 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 48 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 48 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 96 state celldrops
+  }
+  ifvarl SKILLLEVEL 9
+  ifvarg SKILLLEVEL 4
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { ifrnd 8 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { ifrnd 64 { espawn AFAS_DROP state scatterdrops } }
+    ifrnd 4 { ifrnd 16 { espawn FAUXLEVELUP state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 24 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 24 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 24 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+   ifrnd 64 state celldrops
+  }
+  else
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { ifrnd 4 { espawn AIRJUMPBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops } }
+   }
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 2 { ifrnd 32 { espawn AFAS_DROP state scatterdrops } }
+    ifrnd 2 { ifrnd 8 { espawn FAUXLEVELUP state scatterdrops } }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 4 { espawn SATCHEL_LARGE setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn MANTLEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn AIRTIMEBONUS setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn SATCHEL_SMALL setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXHPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXHPAPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn MAXEPUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn ATKUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn DEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 { espawn ATKDEFUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 12 { espawn SPDUP setactorvar[RETURN].ITEMWASDROPPED? 1 state determinebonussizes state scatterdrops }
+   }
+
+   ifrnd 32 state celldrops
+  }
+ends
+
+state drop_health
+ ifactor COMMANDER
+ {
+  state 16outof256rnd
+  ifvarvarg RNDMIZER RNDMIZERLIMIT
+  {
+   ifrnd 224 { espawn COILS state scatterdrops }
+  }
+  state monster_drop_bonus2
+ }
+ else
+ {
+  state 16outof256rnd
+  ifvarvarg RNDMIZER RNDMIZERLIMIT
+  {
+   ifrnd 16 { espawn COILS state scatterdrops }
+  }
+  state monster_drop_bonus2
+ }
+
+ ifactor PIGCOP
+ {
+  state monster_drop_bonus1
+  ifspritepal 24 state boss_drops
+  ifspritepal 24 ifrnd 64 state boss_drops
+  ifspritepal 24 ifrnd 16 state boss_drops
+  ifspritepal 24 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+  ifspritepal 24 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+  ifspritepal 24 { ifrnd 16 { espawn RIOTSHIELD state scatterdrops } }
+ }
+ else
+ ifactor BOSS1
+ {
+  state boss_drops
+  ifspritepal 24 ifrnd 64 state boss_drops
+  ifspritepal 24 ifrnd 16 state boss_drops
+  ifspritepal 24 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+  ifspritepal 24 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+ }
+ else
+ ifactor BOSS2
+ {
+  state boss_drops
+  ifspritepal 24 ifrnd 64 state boss_drops
+  ifspritepal 24 ifrnd 16 state boss_drops
+  ifspritepal 24 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+  ifspritepal 24 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+ }
+ else
+ ifactor BOSS3
+ {
+  state boss_drops
+  ifspritepal 24 ifrnd 64 state boss_drops
+  ifspritepal 24 ifrnd 16 state boss_drops
+  ifspritepal 24 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+  ifspritepal 24 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+ }
+ else
+ ifactor BOSS4
+ {
+  state boss_drops
+  ifspritepal 24 ifrnd 64 state boss_drops
+  ifspritepal 24 ifrnd 16 state boss_drops
+  ifspritepal 24 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+  ifspritepal 24 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+ }
+ else
+ {
+  state monster_drop_bonus1
+  ifactor LIZTROOP
+  {
+   ifspritepal 17 state boss_drops
+   ifspritepal 17 ifrnd 64 state boss_drops
+   ifspritepal 17 ifrnd 16 state boss_drops
+   ifspritepal 17 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+   ifspritepal 17 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+  }
+  ifactor LIZMAN
+  {
+   ifspritepal 17 state boss_drops
+   ifspritepal 17 ifrnd 64 state boss_drops
+   ifspritepal 17 ifrnd 16 state boss_drops
+   ifspritepal 17 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+   ifspritepal 17 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+  }
+  ifactor COMMANDER
+  {
+   ifspritepal 24 state boss_drops
+   ifspritepal 24 ifrnd 64 state boss_drops
+   ifspritepal 24 ifrnd 16 state boss_drops
+   ifspritepal 24 { ifrnd 8 { espawn AFAS_DROP state scatterdrops } }
+   ifspritepal 24 { ifrnd 2 { espawn FAUXLEVELUP state scatterdrops } }
+  }
+ }
+
+ ifvarg enemywinterclothes 0
+ {
+  ifrnd 16 espawn WINTERCLOTHES state scatterdrops
+  setvar enemywinterclothes 0
+ }
+ else
+ {
+  ifvarg freezing 0 ifvarl freezing 17
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 8 espawn WINTERCLOTHES state scatterdrops
+   }
+  }
+  else
+  ifvarg freezing 16 ifvarl freezing 33
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 16 espawn WINTERCLOTHES state scatterdrops
+   }
+  }
+  else
+  ifvarg freezing 32 ifvarl freezing 65
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 32 espawn WINTERCLOTHES state scatterdrops
+   }
+  }
+  else
+  ifvarg freezing 64 ifvarl freezing 257
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 64 espawn WINTERCLOTHES state scatterdrops
+   }
+  }
+  else
+  ifvarg freezing 256
+  {
+   state 16outof256rnd
+   ifvarvarg RNDMIZER RNDMIZERLIMIT
+   {
+    ifrnd 128 espawn WINTERCLOTHES state scatterdrops
+   }
+  }
+ }
+
+ ifrnd HEALTHDROPODDS
+ {
+  state 16outof256rnd
+  ifvarvarg RNDMIZER RNDMIZERLIMIT
+  {
+   state drop_randomized_item
+  }
+ }
+
+ state actor_dropmoneybag
+
+ ifvare SKILLLEVEL 0 { ifrnd 1 { state drop_health } }
+ ifvare SKILLLEVEL 1 { ifrnd 2 { state drop_health } }
+ ifvare SKILLLEVEL 2 { ifrnd 3 { state drop_health } }
+ ifvare SKILLLEVEL 3 { ifrnd 4 { state drop_health } }
+ ifvare SKILLLEVEL 4 { ifrnd 6 { state drop_health } }
+ ifvare SKILLLEVEL 5 { ifrnd 8 { state drop_health } }
+ ifvare SKILLLEVEL 6 { ifrnd 12 { state drop_health } }
+ ifvare SKILLLEVEL 7 { ifrnd 16 { state drop_health } }
+ ifvare SKILLLEVEL 8 { ifrnd 24 { state drop_health } }
+ ifvare SKILLLEVEL 9 { ifrnd 32 { state drop_health } }
+ends
+
