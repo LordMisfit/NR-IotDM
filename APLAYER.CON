@@ -1,3 +1,352 @@
+state freezecode_player
+
+ ifvare mainmenu 0
+ {
+  ifvarand CHEATBITFIELD? 32
+  {
+   ifvarg freezetimer 0 { randvar tempb 2 addvar tempb 1 subvarvar freezetimer tempb }
+   ifvarl freezetimer 0 setvar freezetimer 0
+  }
+  else
+  {
+   ifvarl INVULNTIME 1
+   {
+    ifvare VEHICLEID -1
+    {
+     setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
+     ifvarl MISCARRAYID_AMOUNTTEMP 1
+     {
+      setvarvar tempe freezing
+      ifvarl tempe 1 setvar tempe 1
+
+      // Checks if you're outside, inside, underwater, sitting in water, etc
+      ifoutside
+      {
+       ifvare WATER? 1 // 240%
+       {
+        getactor[THISACTOR].sectnum temp
+        getsector[temp].floorpicnum TEMPVAR3
+        ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+        else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+        else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+        else
+        {
+         getactor[THISACTOR].sectnum temp
+         getsector[temp].hitag TEMPVAR3
+         ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+         else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+         else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+         else
+         {
+          mulvar tempe 12
+          divvar tempe 5
+         }
+        }
+       }
+       else
+       ifvare WATER? 2 // 560%
+       {
+        getactor[THISACTOR].sectnum temp
+        getsector[temp].ceilingpicnum TEMPVAR3
+        ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+        else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+        else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+        else
+        {
+         getactor[THISACTOR].sectnum temp
+         getsector[temp].hitag TEMPVAR3
+         ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+         else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+         else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+         else
+         {
+          mulvar tempe 28
+          divvar tempe 5
+         }
+        }
+       }
+       else // 100%
+       {
+        mulvar tempe 5
+        divvar tempe 5
+       }
+       ifvarl tempe 1 setvar tempe 1
+      }
+      else
+      {
+       ifvare WATER? 1 // 240%
+       {
+        getactor[THISACTOR].sectnum temp
+        getsector[temp].floorpicnum TEMPVAR3
+        ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+        else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+        else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+        else
+        {
+         getactor[THISACTOR].sectnum temp
+         getsector[temp].hitag TEMPVAR3
+         ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+         else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+         else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+         else
+         {
+          mulvar tempe 12
+          divvar tempe 5
+         }
+        }
+       }
+       else
+       ifvare WATER? 2 // 560%
+       {
+        getactor[THISACTOR].sectnum temp
+        getsector[temp].ceilingpicnum TEMPVAR3
+        ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+        else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+        else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+        else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+        else
+        {
+         getactor[THISACTOR].sectnum temp
+         getsector[temp].hitag TEMPVAR3
+         ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
+         else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
+         else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
+         else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+         else
+         {
+          mulvar tempe 28
+          divvar tempe 5
+         }
+        }
+       }
+       else // 25%
+       {
+        mulvar tempe 1
+        divvar tempe 4
+       }
+      }
+      ifvarg winterclothes 0
+      {
+       setvar tempc 95
+       mulvarvar tempc winterclothes
+       divvar tempc 100
+
+       setvar tempb 100
+       subvarvar tempb tempc
+
+       mulvarvar tempe tempb
+       divvar tempe 100
+      }
+
+      // Character conditionals
+      ifvare CHARACTERSELECTED? 3
+      {
+       setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar tempe 50 divvar tempe 100 } // -50% Ice damage w/ Diving Suit on
+      }
+    
+      ifvare PLAYEREQUIPSLOTITEM1 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM2 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM3 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM4 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM5 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM6 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM7 28 divvar tempe 10
+      ifvare PLAYEREQUIPSLOTITEM8 28 divvar tempe 10
+      ifvarl tempe 1
+      {
+       setvarvar RNDMIZERLIMIT freezing
+       ifvare PLAYEREQUIPSLOTITEM1 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM2 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM3 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM4 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM5 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM6 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM7 28 divvar RNDMIZERLIMIT 10
+       ifvare PLAYEREQUIPSLOTITEM8 28 divvar RNDMIZERLIMIT 10
+       ifvarg winterclothes 0
+       {
+        mulvar RNDMIZERLIMIT -4 addvar RNDMIZERLIMIT 256
+        ifvarl RNDMIZERLIMIT 0 setvar RNDMIZERLIMIT 0 ifvarg RNDMIZERLIMIT 256 setvar RNDMIZERLIMIT 256
+        mulvarvar RNDMIZERLIMIT winterclothes
+        divvar RNDMIZERLIMIT 100
+        state rndmizer256
+ 
+        ifvarvarg RNDMIZER RNDMIZERLIMIT setvar tempe 1
+        else
+        {
+         setvar tempe 0
+         
+         setvar RNDMIZERLIMIT 20
+         mulvarvar RNDMIZERLIMIT winterclothes
+         divvar RNDMIZERLIMIT 100
+         addvar RNDMIZERLIMIT 5
+         mulvar RNDMIZERLIMIT -1
+         addvar RNDMIZERLIMIT 256
+         ifvarl RNDMIZERLIMIT 0 setvar RNDMIZERLIMIT 0 ifvarg RNDMIZERLIMIT 256 setvar RNDMIZERLIMIT 256
+         state rndmizer256
+         ifvarvarg RNDMIZER RNDMIZERLIMIT { subvar freezetimer 1 ifvarl freezetimer 0 setvar freezetimer 0 }
+        }
+       }
+       else
+       {
+        mulvar RNDMIZERLIMIT -40 addvar RNDMIZERLIMIT 256
+        ifvarl RNDMIZERLIMIT 0 setvar RNDMIZERLIMIT 0 ifvarg RNDMIZERLIMIT 256 setvar RNDMIZERLIMIT 256
+        state rndmizer256
+ 
+        ifvarvarg RNDMIZER RNDMIZERLIMIT setvar tempe 1
+        else
+        {
+         setvar tempe 0
+ 
+         ifrnd 5 { subvar freezetimer 1 ifvarl freezetimer 0 setvar freezetimer 0 }
+        }
+       }
+      }
+
+      // Sound Checks dependant on Freezing Strength
+      ifvarg freezing 76
+      {
+       ifoutside ifvarn WATER? 2
+       {
+        soundonce WIND_AMBIENCE_NR1
+        ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+        ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+        ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+       }
+       else
+       {
+        ifvarn WATER? 2
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         soundonce WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+        else
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+       }
+      }
+      else ifvarg freezing 40 ifvarl freezing 77
+      {
+       ifoutside ifvarn WATER? 2
+       {
+        ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+        soundonce WIND_AMBIENCE_NR2
+        ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+        ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+       }
+       else
+       {
+        ifvarn WATER? 2
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         soundonce WIND_AMBIENCE_NR4
+        }
+        else
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+       }
+      }
+      else ifvarg freezing 16 ifvarl freezing 41
+      {
+       ifoutside ifvarn WATER? 2
+       {
+        ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+        ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+        ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+        soundonce WIND_AMBIENCE_NR4
+       }
+       else
+       {
+        ifvarn WATER? 2
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         soundonce WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+        else
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+       }
+      }
+      else ifvarg freezing 0 ifvarl freezing 17
+      {
+       ifoutside ifvarn WATER? 2
+       {
+        ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+        ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+        soundonce WIND_AMBIENCE_NR3
+        ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+       }
+       else
+       {
+        ifvarn WATER? 2
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+        else
+        {
+         ifsound WIND_AMBIENCE_NR1 stopsound WIND_AMBIENCE_NR1
+         ifsound WIND_AMBIENCE_NR2 stopsound WIND_AMBIENCE_NR2
+         ifsound WIND_AMBIENCE_NR3 stopsound WIND_AMBIENCE_NR3
+         ifsound WIND_AMBIENCE_NR4 stopsound WIND_AMBIENCE_NR4
+        }
+       }
+      }
+
+      ifvare FROZEN? 0 addvarvar freezetimer tempe
+      state dealfreezedamage-player
+     }
+    }
+    else
+    {
+     ifvarg freezetimer 0 { randvar tempb 2 addvar tempb 1 subvarvar freezetimer tempb }
+     ifvarl freezetimer 0 setvar freezetimer 0
+    }
+   }
+   else
+   {
+    ifvarg freezetimer 0 { randvar tempb 2 addvar tempb 1 subvarvar freezetimer tempb }
+    ifvarl freezetimer 0 setvar freezetimer 0
+   }
+  }
+ }
+ends
+
 // Mantling?
 
 define MANTDIST 384 // 480-384=96

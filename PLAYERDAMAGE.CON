@@ -1,3 +1,167 @@
+state check_winterclothes_damage
+         setvar tempc 90
+         mulvarvar tempc winterclothes
+         divvar tempc 100
+
+         setvar tempb 100
+         subvarvar tempb tempc
+
+         mulvarvar tempd tempb
+         divvar tempd 100
+ends
+
+state dealfreezedamage-player
+      ifvarvarg freezetimer freezetimermax
+      {
+       setvarvar tempd MAXHITPOINTS
+
+       setvarvar tempb freezing
+       divvar tempb 4
+       addvar tempb 56
+
+       setvarvar tempc tempb
+       divvar tempc 2
+
+       randvarvar tempf tempc 
+       ifrnd 128 mulvar tempf -1
+       addvarvar tempb tempf
+
+       mulvarvar tempd tempb
+       divvar tempd 1000
+
+       setvarvar TEMPDAMAGEVAR tempd
+       state char_icedamage_misc
+       setvarvar tempd TEMPDAMAGEVAR
+
+       ifvarg winterclothes 0
+       {
+        ifvare CHARACTERSELECTED? 4
+        {
+         setvar tempc -760
+         mulvarvar tempc winterclothes
+         divvar tempc 100
+
+         setvar tempb -40
+         addvarvar tempb tempc
+
+         mulvarvar tempd tempb
+         divvar tempd 100
+
+         sound ABSORB_DAMAGE
+        }
+        else
+        ifvare CHARACTERSELECTED? 10
+        {
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 1 nullop 
+         else
+         {
+          state check_winterclothes_damage
+         }
+        }
+        else
+        {
+         state check_winterclothes_damage
+        }
+       }
+
+       //******************
+       //*Equipment System*
+       //******************
+       ifvarg tempd 0
+       {
+        setvar DAMAGEMODIFIER 1000
+        // Equipment Slot #1
+        ifvare PLAYEREQUIPSLOTITEM1 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #2
+        ifvare PLAYEREQUIPSLOTITEM2 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #3
+        ifvare PLAYEREQUIPSLOTITEM3 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #4
+        ifvare PLAYEREQUIPSLOTITEM4 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #5
+        ifvare PLAYEREQUIPSLOTITEM5 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #6
+        ifvare PLAYEREQUIPSLOTITEM6 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #7
+        ifvare PLAYEREQUIPSLOTITEM7 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        // Equipment Slot #8
+        ifvare PLAYEREQUIPSLOTITEM8 2 addvar DAMAGEMODIFIER -225 // Aqua Ring
+        ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
+
+        mulvarvar tempd DAMAGEMODIFIER
+        divvar tempd 1000
+        ifvarl tempd 1 setvar tempd 1
+        ifvarvarg tempd STATLIMITMAXIMUM setvarvar tempd STATLIMITMAXIMUM
+       }
+
+       //*********************
+       //*Check Malakian Gems*
+       //*********************
+       setvarvar TEMP7 tempd
+       state malakiangemcheck 
+       setvarvar tempd TEMP7
+
+       ifvarand CHEATBITFIELD? 16
+       {
+        divvar tempd 1000 state cheatersound
+        ifvarg tempd 0 { ifvarl tempd 1 setvar tempd 1 }
+        ifvarl tempd 0 { ifvarg tempd -1 setvar tempd -1 }
+       }
+
+       ifvarg CURRENTHITPOINTS 0
+       {
+        subvarvar CURRENTHITPOINTS tempd
+        state checkbuddhamode
+        ifvarl CURRENTHITPOINTS 0 setvar CURRENTHITPOINTS 0
+        ifvarvarg CURRENTHITPOINTS MAXHITPOINTSATOMIC setvarvar CURRENTHITPOINTS MAXHITPOINTSATOMIC
+        ifvarg tempd 0 setvar PLAYERHPDAMAGED? 1
+        ifvarl tempd 0 setvar PLAYERHPDAMAGED? -1
+        ifvarn player[THISACTOR].over_shoulder_on 0
+        {
+         ifvarg tempd 0
+         {
+          setvarvar SHOWDAMAGE tempd
+          setvar SHOWDAMAGETYPE 0
+          setvarvar SHOWDAMAGEACTORID PLAYERID
+          state showdamage
+         }
+         else
+         ifvarl tempd 0
+         {
+          setvarvar SHOWDAMAGE tempd
+          mulvar SHOWDAMAGE -1
+          setvar SHOWDAMAGETYPE 3
+          setvarvar SHOWDAMAGEACTORID PLAYERID
+          state showdamage
+         }
+        }
+
+        // addlogvar tempd
+        ifvarg tempd 0
+        {
+         setvarvar PAINSOUNDFACTOR tempd
+         state checkpainfactor
+
+         setvar ATTACKINGACTORPICNUM 4010
+         getactor[THISACTOR].pal TEMP
+         setvarvar ATTACKINGACTORPAL TEMP
+         setvar ACTORCRITICAL? 0
+         setvarvar PLAYERDAMAGETEMP tempd
+         setactor[THISACTOR].htpicnum -1
+         setvarvar TEMPHITCHARACTERVAR CHARACTERSELECTED?
+         setvar ATTACKERDISPLAYTIMER 0 setvar NULLDAMAGE 0
+         ifvarg tempe 0 setvar HEALTHDAMAGETIMER 0
+
+         state characterpainsounds
+         setvarvar DAMAGEHUEFACTOR tempd
+         state playerdamagehues-icetype
+        }
+       }  
+       ifvarvarg freezing freezetimermax setvar freezetimer 0 else subvarvar freezetimer freezetimermax
+      }
+ends
+
 state calccriticalhits_actor
  ifvare oldskoolmode 0
  {
