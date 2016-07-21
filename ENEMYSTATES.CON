@@ -1,3 +1,225 @@
+// Checks for bosses to put up life meters.
+state checkbosslifemeters
+ ifvarand ACTORFLAGS 1024
+ {
+  ifvare BOSSMETERID1 -1
+  {
+   setvarvar BOSSMETERID1 THISACTOR
+  }
+  else
+  {
+   ifvare BOSSMETERID2 -1
+   {
+    setvarvar BOSSMETERID2 BOSSMETERID1
+    setvarvar BOSSMETERID1 THISACTOR
+   }
+   else
+   {
+    setvarvar BOSSMETERID3 BOSSMETERID2
+    setvarvar BOSSMETERID2 BOSSMETERID1
+    setvarvar BOSSMETERID1 THISACTOR
+   }
+  }
+ }
+ends
+
+// Makes it that monsters have to be properly facing the player to land damage with melee attacks [like for if they're blinded or confused]
+state miscmeleeangle_check
+        findnearsprite APLAYER 2560 TEMP 
+        ifvarn TEMP -1 
+        {
+         getactor[TEMP].x mx
+         getactor[TEMP].y my
+         getactor[THISACTOR].x x 
+         getactor[THISACTOR].y y
+         subvarvar mx x
+         subvarvar my y
+         getangle angvar mx my
+         setvarvar temp angvar
+         subvar temp 256
+         addvar temp 2048
+         setvarvar tempb angvar
+         addvar tempb 256
+         addvar tempb 2048
+        } 
+        getactor[THISACTOR].ang tempc
+        addvar tempc 2048
+ends
+
+// Clamps Angle checks for specfic actors
+state actorproperangle
+  getactor[THISACTOR].ang tempe
+  ifvarl tempe 0 addvar tempe 2048
+  ifvarg tempe 2047 subvar tempe 2048
+  setactor[THISACTOR].ang tempe
+ends
+
+state miscspeedchecks-actors
+  // Check Status Ailments
+  ifvarand ACTORSTATUS? 2 // Haste
+  {
+   mulvar ACTORSPEED 125
+   divvar ACTORSPEED 100
+  }
+  else
+  ifvarand ACTORSTATUS? 4 // Slow
+  {
+   mulvar ACTORSPEED 75
+   divvar ACTORSPEED 100
+  }
+
+  ifvarand ACTORSTATUS? 16 // Dimness
+  {
+   // Random 90-100% speed
+   randvar TEMPVAR 5
+   ifrnd 128 mulvar TEMPVAR -1
+   addvar TEMPVAR 95
+   mulvarvar ACTORSPEED TEMPVAR4
+   divvar ACTORSPEED 100
+  }
+
+  ifvarand ACTORSTATUS? 128 // Confusion
+  {
+   // Random 80-100% speed
+   randvar TEMPVAR 10
+   ifrnd 128 mulvar TEMPVAR -1
+   addvar TEMPVAR 90
+   mulvarvar ACTORSPEED TEMPVAR4
+   divvar ACTORSPEED 100
+  }
+ 
+  // Check Winter Clothes
+  ifactor ROTATEGUN nullop
+  else ifactor DRONE nullop
+  else ifactor TANK nullop
+  else ifactor EMPTYTANK nullop
+  else ifactor SCORPIONTANK nullop
+  else
+  {
+   ifvarg enemywinterclothes 0
+   {
+    setvar TEMPVAR4 8
+    mulvarvar TEMPVAR4 enemywinterclothes
+    divvar TEMPVAR4 100
+
+    setvar TEMPVAR 150
+    subvarvar TEMPVAR TEMPVAR4
+ 
+    mulvarvar ACTORSPEED TEMPVAR
+    divvar ACTORSPEED 150
+   }
+  }
+
+  // Check Enemy's Health Levels
+  setvarvar TEMPVAR4 ACTORHP
+  mulvar TEMPVAR4 1000
+  divvarvar TEMPVAR4 ACTORMAXHP
+  ifvarl TEMPVAR4 101
+  {
+   mulvar ACTORSPEED 60
+   divvar ACTORSPEED 100
+  }
+  else
+  ifvarg TEMPVAR4 100 ifvarl TEMPVAR4 251
+  {
+   mulvar ACTORSPEED 80
+   divvar ACTORSPEED 100
+  }
+
+  // Check for Elite Flag
+  ifvarand ACTORFLAGS 512
+  {
+   mulvar ACTORSPEED 112
+   divvar ACTORSPEED 100
+  }
+ends
+
+// Sets the Monster's Max HP Atomic Levels [2x]
+state accquireenemystats
+ setvarvar ACTORMAXHPATOMIC ACTORMAXHP
+ mulvar ACTORMAXHPATOMIC 2
+ setvarvar ACTORMAXAPATOMIC ACTORMAXAP
+ mulvar ACTORMAXAPATOMIC 2
+ends
+
+// Allows Monsters and other Actors to damage each other with the Icon of the Defender
+state invulnicon-nonplayers
+ ifvare oldskoolmode 0
+ {
+  getactor[THISACTOR].x TESTX 
+  getactor[THISACTOR].y TESTY
+  getactor[THISACTOR].z TESTZ
+  getactor[THISACTOR].picnum TEMP
+  setactor[THISACTOR].x TESTX
+  setactor[THISACTOR].y TESTY 
+  setactor[THISACTOR].z TESTZ
+  getactor[THISACTOR].xrepeat TESTXREPEAT1 
+  getactor[THISACTOR].yrepeat TESTYREPEAT1 
+  getactorvar[THISACTOR].ACTORSHEIGHT INVULNAURARANGEZ
+  mulvarvar INVULNAURARANGEZ TESTYREPEAT1
+  mulvar INVULNAURARANGEZ 4
+  setvar INVULNAURARANGEXY 844
+  addvarvar INVULNAURARANGEXY TESTXREPEAT1
+  addvar INVULNAURARANGEZ 1688
+  addvarvar INVULNAURARANGEZ TESTYREPEAT1
+  addvarvar INVULNAURARANGEZ TESTYREPEAT1
+
+    getactor[THISACTOR].picnum TEMP
+    ifvare TEMP ROTATEGUN state invulntarget_monsters
+    ifvare TEMP SHARK state invulntarget_monsters
+    ifvare TEMP LIZTROOP state invulntarget_monsters
+    ifvare TEMP PIGCOP state invulntarget_monsters
+    ifvare TEMP RECON state invulntarget_monsters
+    ifvare TEMP LIZMAN state invulntarget_monsters
+    ifvare TEMP OCTABRAIN state invulntarget_monsters
+    ifvare TEMP DRONE state invulntarget_monsters
+    ifvare TEMP NEWBEAST state invulntarget_monsters
+    ifvare TEMP COMMANDER state invulntarget_monsters
+    ifvare TEMP TANK state invulntarget_monsters
+    ifvare TEMP SCORPIONTANK state invulntarget_monsters
+    ifvare TEMP BOSS1 state invulntarget_monsters
+    ifvare TEMP BOSS2 state invulntarget_monsters
+    ifvare TEMP BOSS3 state invulntarget_monsters
+    ifvare TEMP BOSS4 state invulntarget_monsters
+    ifvare TEMP PRESIDENTCLINTON state invulntarget_civilians
+    ifvare TEMP ROBOTDOG state invulntarget_civilians
+    ifvare TEMP ROBOTDOG2 state invulntarget_civilians
+    ifvare TEMP PODFEM1 state invulntarget_civilians
+    ifvare TEMP NAKED1 state invulntarget_civilians
+    ifvare TEMP FEM1 state invulntarget_civilians
+    ifvare TEMP FEM2 state invulntarget_civilians
+    ifvare TEMP FEM3 state invulntarget_civilians
+    ifvare TEMP FEM4 state invulntarget_civilians
+    ifvare TEMP FEM5 state invulntarget_civilians
+    ifvare TEMP FEM6 state invulntarget_civilians
+    ifvare TEMP FEM7 state invulntarget_civilians
+    ifvare TEMP FEM9 state invulntarget_civilians
+    ifvare TEMP FEM10 state invulntarget_civilians
+    ifvare TEMP TOUGHGAL state invulntarget_civilians
+    ifvare TEMP WOMAN state invulntarget_civilians
+    ifvare TEMP DANCE1 state invulntarget_civilians
+    ifvare TEMP DANCE2 state invulntarget_civilians
+    ifvare TEMP DANCE3 state invulntarget_civilians
+    ifvare TEMP DANCE5 state invulntarget_civilians
+    ifvare TEMP DANCE6 state invulntarget_civilians
+    ifvare TEMP DANCE7 state invulntarget_civilians
+    ifvare TEMP DANCE9 state invulntarget_civilians
+    ifvare TEMP STAND1 state invulntarget_civilians
+    ifvare TEMP DEALER state invulntarget_civilians
+    ifvare TEMP STAND3 state invulntarget_civilians
+    ifvare TEMP STAND4 state invulntarget_civilians
+    ifvare TEMP WOLFDUDE state invulntarget_civilians
+    ifvare TEMP COP1 state invulntarget_civilians
+    ifvare TEMP PUNKDUDE state invulntarget_civilians
+    ifvare TEMP COP2 state invulntarget_civilians
+    ifvare TEMP SITTINGDUDE state invulntarget_civilians
+    ifvare TEMP ANIMEGIRL1 state invulntarget_civilians
+    ifvare TEMP ANIMEGIRL2 state invulntarget_civilians
+    ifvare TEMP ANIMEGIRL3 state invulntarget_civilians
+    ifvare TEMP ANIMEGIRL4 state invulntarget_civilians
+ }
+ends
+
 // Healing Sectors [ACTORS]
 state healingsector_actor
 ifvare mainmenu 0 ifvarg ACTORHP 0
@@ -1188,6 +1410,222 @@ state assessskillflags
  ifvare SKILLLEVEL 7 { ifvarand SKILLLEVELFLAGS 128 nullop else killit }
  ifvare SKILLLEVEL 8 { ifvarand SKILLLEVELFLAGS 256 nullop else killit }
  ifvare SKILLLEVEL 9 { ifvarand SKILLLEVELFLAGS 512 nullop else killit }
+ends
+
+//******************************
+//**ENEMY AIRTIME/SPACE CHECKS**
+//******************************
+// State for allowing monsters to have their own set of 'lungs' underwater, and for effecting Damage from drowning. [also affects monsters in SPPAAAAAAAAAAACE!!! XD]
+state enemy_underwater-space
+
+// If the monster is in a space sector...
+getactor[THISACTOR].sectnum tempf getactorvar[tempf].SPACESECTOR? tempe
+ifvare tempe 1 // If In Space Sector
+{
+ ifvare mainmenu 0 ifvarg ACTORHP 0
+ {
+  ifvarl ACTORINVULNTIME 1
+  {
+   getactor[THISACTOR].picnum tempc
+   switch tempc
+    case EMPTYTANK
+    case TANK
+    case SCORPIONTANK
+    case ROTATEGUN
+    case DRONE
+     setvar tempb 0
+    break
+   
+    default
+     setvar tempb 1
+    break
+   endswitch
+
+   ifvare tempb 0 nullop
+   else
+   {
+    // HP Damage
+    setvarvar tempd ACTORMAXHP mulvar tempd 3 divvar tempd 100
+    ifvarn ENEMYHASSHIKON? 0 divvar tempd 10
+    ifvarg tempd 0 state monsterpainsounds2
+    ifvarg ACTORHP 0
+    {
+     subvarvar ACTORHP tempd
+     ifvarg tempd 0
+     {
+      setvarvar SHOWDAMAGE tempd
+      setvar SHOWDAMAGETYPE 0
+      setvarvar SHOWDAMAGEACTORID THISACTOR
+      state showdamage
+     }
+    }
+
+   }
+  }
+  else
+  {
+   sound INVULNITEM3
+  }
+ }
+}
+
+ifvare sector[THISACTOR].lotag 2 // If the monster is underwater...
+{
+ getactor[THISACTOR].picnum tempc
+ switch tempc
+  case SHARK
+  case ROTATEGUN
+  case DRONE
+  case EMPTYTANK
+  case TANK
+  case SCORPIONTANK
+  case OCTABRAIN
+  case OCTABRAINSTAYPUT
+  case NEWBEAST
+  case NEWBEASTSTAYPUT
+  case NEWBEASTHANG
+  case NEWBEASTJUMP
+  case BOSS4
+  case BOSS4STAYPUT
+   setvar tempb 0
+  break
+   
+  default
+   setvar tempb 1
+  break
+ endswitch
+
+ ifvare tempb 0 nullop
+ else
+ {
+  ifvarg ACTORAIRTANKAMOUNT 0
+  {
+   ifvarvarl ACTORAIRTIME ACTORMAXAIRTIME
+   {
+    setvarvar TEMPVAR5 ACTORMAXAIRTIME
+    divvar TEMPVAR5 130
+    addvarvar ACTORAIRTIME TEMPVAR5 // This prevents the monster from continuing to drown if they pick up a Scuba Gear with no breath left. Also emulates a 'transfer' of missing air from a scuba tank to the monster.
+    subvarvar ACTORAIRTANKAMOUNT TEMPVAR5 // This prevents the monster from continuing to drown if they pick up a Scuba Gear with no breath left. Also emulates a 'transfer' of missing air from a scuba tank to the monster.
+   }
+   else ifvarvare ACTORAIRTIME ACTORMAXAIRTIME { setvar ACTORAIRTIMEEXTRA 1000 }
+   else ifvarvarg ACTORAIRTIME ACTORMAXAIRTIME
+   {
+    setvarvar TEMPVAR5 ACTORAIRTIME
+    subvarvar TEMPVAR5 ACTORMAXAIRTIME
+    subvarvar ACTORAIRTIME TEMPVAR5 // For making sure none of the airtank tics are wasted when quick-filling the air bar
+    addvarvar ACTORAIRTANKAMOUNT TEMPVAR5 // For making sure none of the airtank tics are wasted when quick-filling the air bar
+    setvar ACTORAIRTIMEEXTRA 1000
+   }
+  }
+
+  ifvare ACTORDEATHSWITCHDELAY 0 ifvarl ACTORINVULNTIME 1 // If the monster has no Invulnerability time, then they need to breathe...
+  {
+   ifvarl ACTORAIRTANKAMOUNT 1 // If the monster has no scuba tank energy
+   {
+    ifvarg ACTORAIRTIME 0 // If the enemy has airtime left in their lungs
+    {
+     ifvare mainmenu 0 ifvare FROZEN? 0
+     {
+      setvar TEMPVAR5 1000
+      ifvarn ENEMYHASSHIKON? 0 divvar TEMPVAR5 10
+      subvarvar ACTORAIRTIMEEXTRA TEMPVAR5
+
+      ifvarl ACTORAIRTIMEEXTRA 1
+      {
+       subvar ACTORAIRTIME 1 // Minus air supply by 1 per tic
+       addvar ACTORAIRTIMEEXTRA 1000
+      }
+     }
+     setvar DROWNDMGFACTOR 10
+    }
+    else // If the monster has <0 airtime left, start the drowning counter
+    {
+     ifvare mainmenu 0 ifvarg ACTORHP 0 addvar ACTORDROWNTIME 1 // Increment Drown meter 1 per tic
+     ifvare ACTORDROWNTIME 8 // if 8 tics of the drown meter count...
+     {
+      setvarvar ACTORBASEDROWNDMG ACTORMAXHP
+      randvar ACTOREXTRADROWNDMG 3
+      addvarvar DROWNDMGFACTOR ACTOREXTRADROWNDMG
+
+      mulvarvar ACTORBASEDROWNDMG DROWNDMGFACTOR
+      divvar ACTORBASEDROWNDMG 1000
+
+      setvarvar ACTORTOTALDROWNDMG ACTORBASEDROWNDMG
+      addvarvar ACTORTOTALDROWNDMG ACTOREXTRADROWNDMG
+
+      ifvarn ENEMYHASSHIKON? 0 divvar ACTORTOTALDROWNDMG 10
+
+      ifvarg ACTORTOTALDROWNDMG 0
+      {
+       setvarvar SHOWDAMAGE ACTORTOTALDROWNDMG
+       setvar SHOWDAMAGETYPE 0
+       setvarvar SHOWDAMAGEACTORID THISACTOR
+       state showdamage
+      }
+      subvarvar ACTORHP ACTORTOTALDROWNDMG
+      ifrnd 192
+      {
+       ifrnd 128
+	   {
+	    stopsound SOMEONE_DROWNING1
+ 	    stopsound SOMEONE_DROWNING2 
+	   }
+       ifrnd 128 sound SOMEONE_DROWNING1 else sound SOMEONE_DROWNING2
+      }
+
+      ifvarl ACTORHP 1
+      {
+       setvar ACTORHP 0
+       setactor[THISACTOR].extra 0
+       state checkactorsurvivalvalue
+      }
+      ifvare ACTORHP 0
+      {
+       stopsound SOMEONE_DROWNING1
+       stopsound SOMEONE_DROWNING2
+       stopsound SOMEONE_DROWNED1
+       stopsound SOMEONE_DROWNED2
+       ifrnd 128 globalsound SOMEONE_DROWNED1 else globalsound SOMEONE_DROWNED2
+       setactor[THISACTOR].extra 0
+       setactor[THISACTOR].htowner THISACTOR
+       setactor[THISACTOR].htpicnum SHOTSPARK1
+       setactor[THISACTOR].htextra 8000
+
+       setvarvar tempe THISACTOR 
+       ifvarl THISACTOR 16383 addvar tempe 1 else subvar tempe 1
+      }
+      state drownbubbles
+      state drownbubbles
+      setvar ACTORDROWNTIME 0 // Reset the drown meter count to prevent cheap drown deaths
+     }
+    }
+   }
+   else // If the monster does have Scuba Tank energy
+   {
+    ifvare mainmenu 0 ifvare FROZEN? 0 subvar ACTORAIRTANKAMOUNT 1  // Decrease Scuba energy by 1 per tic
+   }
+  }
+ }
+}
+else // If the monster is NOT underwater
+{
+ setvar ACTORBASEDROWNDMG 0
+ setvar ACTOREXTRADROWNDMG 0 // Resets the Extra Drown Damage increments
+ setvar ACTORTOTALDROWNDMG 0
+ setvar ACTORDROWNTIME 0 // Reset Drown counter
+ ifvarvarl ACTORAIRTIME ACTORMAXAIRTIME // If the monster's airtime is not at it's maximum
+ {
+  setvarvar TEMPVAR8 ACTORMAXAIRTIME
+  divvar TEMPVAR8 130
+  addvarvar ACTORAIRTIME TEMPVAR8 // Restore air time by [Enemy's Airtime/130] per tic
+ }
+ ifvarvare ACTORAIRTIME ACTORMAXAIRTIME { setvar ACTORAIRTIMEEXTRA 1000 }
+ ifvarvarg ACTORAIRTIME ACTORMAXAIRTIME 
+ {
+  setvarvar ACTORAIRTIME ACTORMAXAIRTIME // If the monster's airtime goes over maximum
+  setvar ACTORAIRTIMEEXTRA 1000
+ }
+}
 ends
 
 //*********************
