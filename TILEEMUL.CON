@@ -1,9 +1,12 @@
-//**********************************
-//*DamageHazard Formulas and States*
-//**********************************
+//************************************
+//************************************
+//**DamageHazard Formulas and States**
+//************************************
+//************************************
 
-// ENEMY SIDE TILEEMUL stuff
-
+//***************************
+//*ENEMY SIDE TILEEMUL stuff*
+//***************************
 state enemyfloordamagesounds
  ifvarg ACTORHP 0 state monsterpainsounds2
 ends
@@ -2227,7 +2230,9 @@ ifvare ACTORDEATHSWITCHDELAY 0
 }
 ends
 
-// PLAYER SIDE TILEEMUL stuff
+//****************************
+//*PLAYER SIDE TILEEMUL stuff*
+//****************************
 
 state playercheckboots
            ifvare VEHICLEID -1

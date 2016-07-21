@@ -30,6 +30,8 @@ define FIREBARREL_OUT 1399
 define POLEFEM2 1411
 define PODFEM1POD 1412
 
+define SCORPIONTANK 1870
+
 define RECONNR 1966
 
 define HITSCANDOT 2527 // 2484
@@ -37,7 +39,12 @@ define HITSCANDOT 2527 // 2484
 define COMMANDERDEADSPRITE 1957
 define LIZMANSHOOTING 2190
 define BOSS1DEADSPRITE 2685
+define BOSS2STAYPUT 2711
+define BOSS2SHOOT 2730
+define BOSS2BREATH 2740
 define BOSS2DEADSPRITE 2758
+define BOSS3STAYPUT 2761
+define BOSS3LOB 2780
 define BOSS3DEADSPRITE 2809
 define KEYPAD 3069
 
@@ -124,6 +131,18 @@ define ENERGYSHELL 5217
 define ENERGYCELL_SMALL 5218
 define ENERGYCELL_MEDIUM 5219
 define ENERGYCELL_LARGE 5220
+
+define SATCHEL_SMALL 5249
+define SATCHEL_LARGE 5250
+define MAXHPUP 5251
+define MAXHPAPUP 5258
+define MAXAPUP 5265
+define MAXEPUP 5510
+define ATKUP 5291
+define DEFUP 5309
+define ATKDEFUP 5300
+define SPDUP 5331
+
 define CONTINUEITEM 5277
 define FAUXLEVELUP 5284
 define HACKERVISION 5289
@@ -553,6 +572,8 @@ define WORLDTILE256 8447
 
 include USERDEFS.CON			// USER.CON and DEFS.CON are now combined! :P
 include GAMEVARS.CON 			// Loads the majority of the defined gamevars
+include INVENTORYCHECK.CON      // Defines the inventory array for checking and setting item amounts.
+include DROPS.CON               // Loads drop definitions
 include SPECIAL.CON 			// Loads the majority of the key information
 include SUPPORT.CON 			// Loads the Support System States
 include STATES.CON 				// Loads Special States
