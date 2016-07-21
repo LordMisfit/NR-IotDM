@@ -4523,6 +4523,20 @@ state airtimedrain-checkextratics
                }
 ends
 
+state initsetplayermaxhpep
+  getactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERMAXHP TEMPVAR2
+  ifvare TEMPVAR 0 setvarvar TEMPVAR TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTERHP TEMPVAR
+  // addlogvar TEMPVAR
+
+  getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
+  getactorvar[CHARACTERARRAY].CHARACTERMAXEP TEMPVAR2
+  ifvare TEMPVAR 0 setvarvar TEMPVAR TEMPVAR2
+  setactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
+  // addlogvar TEMPVAR
+ends
+
 //************************************************************************************************************************
 //************************************************************************************************************************
 //************************************************************************************************************************
@@ -4532,13 +4546,30 @@ ends
 //************************************************************************************************************************
 
 actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
-/*
-ifvare player[THISACTOR].player_par 2
+
+// Temporary Fix for the issue where the starting character's EP likes not being set to the max based on the initial load up of a first level in a new game. :V
+ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 16
 {
- ifvarvarn CURRENTHITPOINTS MAXHITPOINTS setvarvar CURRENTHITPOINTS MAXHITPOINTS
- ifvarvarn CURRENTENERGYPOINTS MAXENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
+  ifvarvarn CURRENTHITPOINTS MAXHITPOINTS setvarvar CURRENTHITPOINTS MAXHITPOINTS
+  ifvarvarn CURRENTENERGYPOINTS MAXENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
+
+  setvar CHARACTERARRAY 1 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 2 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 3 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 4 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 5 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 6 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 7 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 8 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 9 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 10 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 11 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 12 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 13 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 14 state initsetplayermaxhpep
+  setvar CHARACTERARRAY 15 state initsetplayermaxhpep
 }
-*/
+
 setvar MISCARRAYID 229 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // RANK-POINTS-LOWEST
 ifvarvarl RANKPOINTS MISCARRAYID_AMOUNTTEMP setvarvar RANKPOINTS MISCARRAYID_AMOUNTTEMP
 setvar MISCARRAYID 230 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // RANK-POINTS-HIGHEST
@@ -4591,20 +4622,6 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
  ifvarl MISCARRAYID_AMOUNTTEMP 0 setvar MISCARRAYID_AMOUNTTEMP 0
  ifvarg MISCARRAYID_AMOUNTTEMP 200 setvar MISCARRAYID_AMOUNTTEMP 200
  setvar MISCARRAYID 87 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // mouse-cursor-y
-}
-
-ifvarg TIMERRAWFORMAT -1 ifvarl TIMERRAWFORMAT 3
-{
- ifvare CHARACTERSELECTED? 1 { ifvare CURRENTENERGYPOINTS 0 { setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS } } // addlogvar CURRENTENERGYPOINTS
- else
- {
-  setvar CHARACTERARRAY 1
-  getactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
-  getactorvar[CHARACTERARRAY].CHARACTERMAXEP TEMPVAR2
-  ifvare TEMPVAR 0 setvarvar TEMPVAR TEMPVAR2
-  setactorvar[CHARACTERARRAY].CHARACTEREP TEMPVAR
-  // addlogvar TEMPVAR
- }
 }
 
  // Determine Inventory Maximums
