@@ -2,6 +2,2270 @@
 //*DamageHazard Formulas and States*
 //**********************************
 
+// ENEMY SIDE TILEEMUL stuff
+
+state enemyfloordamagesounds
+ ifvarg ACTORHP 0 state monsterpainsounds2
+ends
+
+state enemybootscheck
+        subvarvar ACTORBOOTSAMOUNT TEMPVAR
+        ifvarl ACTORBOOTSAMOUNT 1
+        {
+         debris SCRAP1 1
+         debris SCRAP2 1
+         debris SCRAP3 1
+         setvar ACTORBOOTSAMOUNT 0
+        }
+ends
+
+state enemycheckhealthdmgflr
+  setvarvar TEMPFLRDMG ACTORHP
+ends
+
+state enemycheckdamagefloor
+ ifvarl TEMP6 1 state showdamage_actor-dmgflrhp
+ setvar FLOORDAMAGETEMP 0
+ ifvarg TEMPFLRDMG -1
+ {
+  setvarvar ACTORHP TEMPFLRDMG
+  setvarvar tempb ACTORHP
+  ifvarl TEMPFLRDMG 0
+  {
+   setvarvar ACTORHP 0
+   setactor[THISACTOR].extra 0
+   state checkactorsurvivalvalue
+   setactor[THISACTOR].htpicnum RPG
+   setvarvar tempe THISACTOR 
+   ifvarl THISACTOR 16383 addvar tempe 1 else subvar tempe 1
+   setactor[THISACTOR].htowner THISACTOR // tempe
+   setactor[THISACTOR].htextra 1
+   setvarvar tempc ACTORHP
+  }
+ }
+ else
+ {
+  setvarvar ACTORHP 0
+  setactor[THISACTOR].extra 0
+  state checkactorsurvivalvalue
+  setactor[THISACTOR].htpicnum RPG
+  setvarvar tempe THISACTOR 
+  ifvarl THISACTOR 16383 addvar tempe 1 else subvar tempe 1
+  setactor[THISACTOR].htowner THISACTOR // tempe
+  setactor[THISACTOR].htextra 1
+  setvarvar tempc ACTORHP
+ }
+ends
+
+state check-heatratio-enemy
+  getactor[THISACTOR].sectnum tempf
+  getactorvar[tempf].FLOORHEATRATIO tempg
+  mulvarvar FLOORDAMAGETEMP tempg
+  divvar FLOORDAMAGETEMP 100
+ends
+
+state enemyelitecheckdmgflr
+  ifvarand ACTORFLAGS 512 // Elite Monsters Suffer 6.3% to 12.5% Sector-Based Damage
+  {
+   randvar TEMP 62
+   addvar TEMP 63
+   mulvarvar FLOORDAMAGETEMP TEMP
+   divvar FLOORDAMAGETEMP 1000
+   ifvarl FLOORDAMAGETEMP 1 { ifrnd 128 setvar FLOORDAMAGETEMP 0 else setvar FLOORDAMAGETEMP 1 }
+  }
+
+  ifvarn ENEMYHASSHIKON? 0
+  {
+   divvar FLOORDAMAGETEMP 10
+   ifvarl FLOORDAMAGETEMP 1 { ifrnd 231 setvar FLOORDAMAGETEMP 0 else setvar FLOORDAMAGETEMP 1 }
+  }
+
+  getactor[THISACTOR].sectnum tempf
+  getsector[tempf].floorpicnum tempg
+  ifvare tempg NEWFLOORPLASMA state check-heatratio-enemy
+  ifvare tempg HOTLAVA state check-heatratio-enemy
+  ifvare tempg MEGALAVA state check-heatratio-enemy
+  ifvare tempg ULTRALAVA state check-heatratio-enemy
+  ifvare tempg HYPERMAGMA state check-heatratio-enemy
+
+ends
+
+state enemydealflrdmg
+     ifvare SHRUNK? 1
+     {
+      ifrnd 128 mulvar FLOORDAMAGETEMP 5 else mulvar FLOORDAMAGETEMP 4
+     }
+     subvarvar TEMPFLRDMG FLOORDAMAGETEMP 
+     ifvarg FLOORDAMAGETEMP 0 setvar ACTORHPDAMAGED? 1
+     state enemyfloordamagesounds
+     state enemycheckdamagefloor
+ends
+
+state enemydmgflr_hpmaxcalcend
+        ifvarl tempe 1 setvar tempe 1
+        addvarvar FLOORDAMAGETEMP tempe
+        state enemyelitecheckdmgflr
+        state enemydealflrdmg
+ends
+
+ state enemynewfloorslime_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 setvar tempd 0
+        ifvare SKILLLEVEL 8 setvar tempd 0
+        ifvare SKILLLEVEL 7 setvar tempd 0
+        ifvare SKILLLEVEL 6 setvar tempd 0
+        ifvare SKILLLEVEL 5 setvar tempd 0
+        ifvare SKILLLEVEL 4 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 3 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 2 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 1 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 0 { randvar tempd 1 addvar tempd 1 }
+       }
+       else setvar tempd 1 // 0.1%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-newfloorslime
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 4
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 2 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewfloorslime_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 4 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 2
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 1
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 0
+         state enemynewfloorslime_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+         ifrnd 4 state addpoison_actor
+         ifrnd 4 state addcorrosion_actor
+        }
+       }
+      }
+      else ifrnd 2 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+       {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 16
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          subvar ACTORBOOTSAMOUNT 1 
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 3 
+          mulvar FLOORDAMAGETEMP 1 
+          addvar FLOORDAMAGETEMP 1
+          state enemynewfloorslime_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+          ifrnd 4 state addpoison_actor
+          ifrnd 4 state addcorrosion_actor
+         }
+        }
+       }
+       else
+       {
+        ifrnd 16 sound INVULNITEM3
+       }
+      }
+     break
+
+     case BOOTS
+      ifrnd 16
+      {
+       setvar FLOORDAMAGETEMP 1
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+       // addlogvar POWERUPBENEFIT
+      }
+     break
+
+     // Drones and Turrents are machines and therefore poisoning cannot be done to them.
+     case DRONE
+     case ROTATEGUN
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 16
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewfloorslime_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 16 sound INVULNITEM3
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 16
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewfloorslime_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+         ifrnd 4 state addpoison_actor
+         ifrnd 4 state addcorrosion_actor
+        }
+       }
+      }
+      else ifrnd 16 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemynewhurtrail_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 setvar tempd 0
+        ifvare SKILLLEVEL 8 setvar tempd 0
+        ifvare SKILLLEVEL 7 setvar tempd 0
+        ifvare SKILLLEVEL 6 setvar tempd 0
+        ifvare SKILLLEVEL 5 setvar tempd 0
+        ifvare SKILLLEVEL 4 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 3 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 2 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 1 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 0 { randvar tempd 1 addvar tempd 1 }
+       }
+       else setvar tempd 1 // 0.1%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-newhurtrail
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 8
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 2 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewhurtrail_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+         sound SHORT_CIRCUIT
+        }
+       }
+      }
+      else ifrnd 8 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 4
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 1
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 0
+         state enemynewhurtrail_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+         sound SHORT_CIRCUIT
+        }
+       }
+      }
+      else ifrnd 4 sound INVULNITEM3
+     break
+
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 4
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 12
+         mulvar FLOORDAMAGETEMP 4
+         addvar FLOORDAMAGETEMP 4
+//
+         setvarvar tempe ACTORMAXHP
+         ifvare DMGFLRTYPE 0
+         {
+          ifvare SKILLLEVEL 9 setvar tempd 0
+          ifvare SKILLLEVEL 8 setvar tempd 0
+          ifvare SKILLLEVEL 7 setvar tempd 0
+          ifvare SKILLLEVEL 6 setvar tempd 0
+          ifvare SKILLLEVEL 5 setvar tempd 0
+          ifvare SKILLLEVEL 4 { randvar tempd 1 addvar tempd 0 }
+          ifvare SKILLLEVEL 3 { randvar tempd 1 addvar tempd 0 }
+          ifvare SKILLLEVEL 2 { randvar tempd 1 addvar tempd 0 }
+          ifvare SKILLLEVEL 1 { randvar tempd 1 addvar tempd 1 }
+          ifvare SKILLLEVEL 0 { randvar tempd 1 addvar tempd 1 }
+         }
+         else setvar tempd 1 // 0.1%
+         mulvarvar tempe tempd
+         divvar tempe 2250
+//
+         ifvare SHRUNK? 1
+         {
+          ifrnd 128 mulvar FLOORDAMAGETEMP 5 else mulvar FLOORDAMAGETEMP 4
+         }
+         addvarvar TEMPFLRDMG FLOORDAMAGETEMP 
+         ifvarg FLOORDAMAGETEMP 0 soundonce ABSORB_DAMAGE
+
+         setvarvar ITEMSEEK THISACTOR
+         setvarvar ITEMSEEKC FLOORDAMAGETEMP
+         state showhealing_actorhp
+         setvarvar TEMP6 FLOORDAMAGETEMP
+
+         setvar ACTORHPDAMAGED? -1
+         state enemycheckdamagefloor
+         sound SHORT_CIRCUIT
+        }
+       }
+      }
+      else ifrnd 4 sound INVULNITEM3
+     break
+
+     case NEWBEAST
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 32
+       {
+        state enemycheckhealthdmgflr 
+        randvar FLOORDAMAGETEMP 3 
+        mulvar FLOORDAMAGETEMP 1 
+        addvar FLOORDAMAGETEMP 1
+//
+        setvarvar tempe ACTORMAXHP
+        ifvare DMGFLRTYPE 0
+        {
+         ifvare SKILLLEVEL 9 setvar tempd 0
+         ifvare SKILLLEVEL 8 setvar tempd 0
+         ifvare SKILLLEVEL 7 setvar tempd 0
+         ifvare SKILLLEVEL 6 setvar tempd 0
+         ifvare SKILLLEVEL 5 setvar tempd 0
+         ifvare SKILLLEVEL 4 { randvar tempd 1 addvar tempd 0 }
+         ifvare SKILLLEVEL 3 { randvar tempd 1 addvar tempd 0 }
+         ifvare SKILLLEVEL 2 { randvar tempd 1 addvar tempd 0 }
+         ifvare SKILLLEVEL 1 { randvar tempd 1 addvar tempd 1 }
+         ifvare SKILLLEVEL 0 { randvar tempd 1 addvar tempd 1 }
+        }
+        else setvar tempd 1 // 0.1%
+        mulvarvar tempe tempd
+        divvar tempe 1000
+//
+        ifspritepal 17 { mulvar FLOORDAMAGETEMP 5 divvar FLOORDAMAGETEMP 2 }
+        else ifspritepal 20 mulvar FLOORDAMAGETEMP 4
+        getactor[THISACTOR].extra temp
+        ifvarg temp -1 
+        {
+         ifvare SHRUNK? 1
+         {
+          ifrnd 128 mulvar FLOORDAMAGETEMP 5 else mulvar FLOORDAMAGETEMP 4
+         }
+         addvarvar TEMPFLRDMG FLOORDAMAGETEMP
+         ifvarg FLOORDAMAGETEMP 0 soundonce ABSORB_DAMAGE
+
+         setvarvar ITEMSEEK THISACTOR
+         setvarvar ITEMSEEKC FLOORDAMAGETEMP
+         state showhealing_actorhp
+         setvarvar TEMP6 FLOORDAMAGETEMP
+
+         setvar ACTORHPDAMAGED? -1
+         state enemycheckdamagefloor
+         sound SHORT_CIRCUIT
+        }      
+       }
+      }
+      else ifrnd 32 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 32
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          subvar ACTORBOOTSAMOUNT 1 
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 3 
+          mulvar FLOORDAMAGETEMP 1 
+          addvar FLOORDAMAGETEMP 1
+          state enemynewhurtrail_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+          sound SHORT_CIRCUIT
+         }
+        }
+       }
+       else ifrnd 32 sound INVULNITEM3
+      }
+     break
+
+     case DRONE
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 32
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         ifspritepal 25 { mulvar FLOORDAMAGETEMP 5 divvar FLOORDAMAGETEMP 4 } else mulvar FLOORDAMAGETEMP 2
+         state enemynewhurtrail_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+         sound SHORT_CIRCUIT
+        }
+       }
+      }
+      else ifrnd 32 sound INVULNITEM3
+     break
+
+     case BOOTS
+      ifrnd 32
+      {
+       setvar FLOORDAMAGETEMP 1
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 32
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewhurtrail_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+         sound SHORT_CIRCUIT
+        }
+       }
+      }
+      else ifrnd 32 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemynewfloorplasma_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 setvar tempd 0
+        ifvare SKILLLEVEL 8 setvar tempd 0
+        ifvare SKILLLEVEL 7 setvar tempd 0
+        ifvare SKILLLEVEL 6 setvar tempd 0
+        ifvare SKILLLEVEL 5 setvar tempd 0
+        ifvare SKILLLEVEL 4 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 3 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 2 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 1 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 0 { randvar tempd 1 addvar tempd 1 }
+       }
+       else setvar tempd 1 // 0.1%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-newfloorplasma
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 8
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 2 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewfloorplasma_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 8 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 4
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 1
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 0
+         state enemynewfloorplasma_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 4 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 32
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          subvar ACTORBOOTSAMOUNT 1 
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 3 
+          mulvar FLOORDAMAGETEMP 1 
+          addvar FLOORDAMAGETEMP 1
+          state enemynewfloorplasma_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+         }
+        }
+       }
+       else ifrnd 32 sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      ifrnd 32
+      {
+       setvar FLOORDAMAGETEMP 1
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 32
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3 
+         mulvar FLOORDAMAGETEMP 1 
+         addvar FLOORDAMAGETEMP 1
+         state enemynewfloorplasma_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 32 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemynewpurplelava_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 setvar tempd 0
+        ifvare SKILLLEVEL 8 setvar tempd 0
+        ifvare SKILLLEVEL 7 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 6 { randvar tempd 1 addvar tempd 0 }
+        ifvare SKILLLEVEL 5 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 4 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 3 { randvar tempd 1 addvar tempd 2 }
+        ifvare SKILLLEVEL 2 { randvar tempd 1 addvar tempd 2 }
+        ifvare SKILLLEVEL 1 { randvar tempd 2 addvar tempd 2 }
+        ifvare SKILLLEVEL 0 { randvar tempd 2 addvar tempd 2 }
+       }
+       else setvar tempd 2 // 0.1%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-newpurplelava
+  ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+  {
+   getactor[THISACTOR].picnum TEMPVAR4
+   ifvare TEMPVAR4 BOOTS
+   {
+    ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+   }
+   else
+   {
+    ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+   }
+  }
+
+  ifvare ACTORDAMAGEFLOORTIMER 1
+  {
+    ifvarl ACTORBOOTSAMOUNT 1 setvar FLOORDAMAGETEMP 1
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 64
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        {  
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         setvar FLOORDAMAGETEMP 1
+         state enemynewpurplelava_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 64 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 32
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        {  
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         setvar FLOORDAMAGETEMP 1
+         state enemynewpurplelava_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+         ifrnd 12 state addpoison_actor
+         ifrnd 12 state addcorrosion_actor
+        }
+       }
+      }
+      else ifrnd 32 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      { 
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        {  
+         subvar ACTORBOOTSAMOUNT 1 
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         setvar FLOORDAMAGETEMP 1
+         state enemynewpurplelava_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+         ifrnd 12 state addpoison_actor
+         ifrnd 12 state addcorrosion_actor
+        }
+       }
+       else sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      setvar FLOORDAMAGETEMP 1
+      subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+     break
+
+     // Drones and Turrents are machines and therefore poisoning cannot be done to them.
+     case DRONE
+     case ROTATEGUN
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifvarg ACTORBOOTSAMOUNT 0 
+       {  
+        subvar ACTORBOOTSAMOUNT 1 
+        state enemybootscheck
+       } 
+       else 
+       { 
+        state enemycheckhealthdmgflr 
+        setvar FLOORDAMAGETEMP 1
+        state enemynewpurplelava_hpmaxcalc
+        divvar tempe 1000
+        state enemydmgflr_hpmaxcalcend
+       }
+      }
+      else sound INVULNITEM3
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifvarg ACTORBOOTSAMOUNT 0 
+       {  
+        subvar ACTORBOOTSAMOUNT 1 
+        state enemybootscheck
+       } 
+       else 
+       { 
+        state enemycheckhealthdmgflr 
+        setvar FLOORDAMAGETEMP 1
+        state enemynewpurplelava_hpmaxcalc
+        divvar tempe 1000
+        state enemydmgflr_hpmaxcalcend
+        ifrnd 12 state addpoison_actor
+        ifrnd 12 state addcorrosion_actor
+       }
+      }
+      else sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+  }
+ends
+
+ state enemyhotlava_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 randvar tempd 1
+        ifvare SKILLLEVEL 8 randvar tempd 1
+        ifvare SKILLLEVEL 7 { randvar tempd 1 addvar tempd 2 }
+        ifvare SKILLLEVEL 6 { randvar tempd 2 addvar tempd 1 }
+        ifvare SKILLLEVEL 5 { randvar tempd 2 addvar tempd 2 }
+        ifvare SKILLLEVEL 4 { randvar tempd 3 addvar tempd 3 }
+        ifvare SKILLLEVEL 3 { randvar tempd 4 addvar tempd 4 }
+        ifvare SKILLLEVEL 2 { randvar tempd 6 addvar tempd 6 }
+        ifvare SKILLLEVEL 1 { randvar tempd 9 addvar tempd 9 }
+        ifvare SKILLLEVEL 0 { randvar tempd 14 addvar tempd 13 }
+       }
+       else setvar tempd 13 // 1.3%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-hotlava
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 16
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 1
+         addvar TEMPVAR 5
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3
+         mulvar FLOORDAMAGETEMP 6
+         addvar FLOORDAMAGETEMP 5
+         state enemyhotlava_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 16 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 8
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 1
+         addvar TEMPVAR 5
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 1
+         mulvar FLOORDAMAGETEMP 5
+         addvar FLOORDAMAGETEMP 2
+         state enemyhotlava_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 8 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 64
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          randvar TEMPVAR 1
+          addvar TEMPVAR 5
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 4 
+          mulvar FLOORDAMAGETEMP 9 
+          addvar FLOORDAMAGETEMP 9
+          state enemyhotlava_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+         }
+        }
+       }
+       else ifrnd 64 sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      ifrnd 64
+      {
+       randvar FLOORDAMAGETEMP 1
+       addvar FLOORDAMAGETEMP 5
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 64
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 1
+         addvar TEMPVAR 5
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 4 
+         mulvar FLOORDAMAGETEMP 9 
+         addvar FLOORDAMAGETEMP 9
+         state enemyhotlava_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 64 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemyamoebaacid_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 setvar tempd 0
+        ifvare SKILLLEVEL 8 setvar tempd 0
+        ifvare SKILLLEVEL 7 randvar tempd 1
+        ifvare SKILLLEVEL 6 randvar tempd 1
+        ifvare SKILLLEVEL 5 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 4 { randvar tempd 2 addvar tempd 1 }
+        ifvare SKILLLEVEL 3 { randvar tempd 2 addvar tempd 2 }
+        ifvare SKILLLEVEL 2 { randvar tempd 3 addvar tempd 3 }
+        ifvare SKILLLEVEL 1 { randvar tempd 5 addvar tempd 4 }
+        ifvare SKILLLEVEL 0 { randvar tempd 7 addvar tempd 6 }
+       }
+       else { randvar tempd 1 addvar tempd 6 } // 0.6% to 0.7%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-amoebaacid
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 10
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 1
+         addvar TEMPVAR 2
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3
+         mulvar FLOORDAMAGETEMP 3
+         addvar FLOORDAMAGETEMP 2
+         state enemyamoebaacid_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 10 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 5
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 1
+         addvar TEMPVAR 2
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 1
+         mulvar FLOORDAMAGETEMP 2
+         addvar FLOORDAMAGETEMP 1
+         state enemyamoebaacid_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+         ifrnd 40 state addpoison_actor
+         ifrnd 40 state addcorrosion_actor
+        }
+       }
+      }
+      else ifrnd 5 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 40
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          randvar TEMPVAR 1
+          addvar TEMPVAR 2
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 4
+          mulvar FLOORDAMAGETEMP 4
+          addvar FLOORDAMAGETEMP 4
+          state enemyamoebaacid_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+          ifrnd 40 state addpoison_actor
+          ifrnd 40 state addcorrosion_actor
+         }
+        }
+       }
+       else ifrnd 40 sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      ifrnd 40
+      {
+       randvar FLOORDAMAGETEMP 1
+       addvar FLOORDAMAGETEMP 2
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 40
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 1
+         addvar TEMPVAR 2
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 4
+         mulvar FLOORDAMAGETEMP 4
+         addvar FLOORDAMAGETEMP 4
+         state enemyamoebaacid_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+         ifrnd 40 state addpoison_actor
+         ifrnd 40 state addcorrosion_actor
+        }
+       }
+      }
+      else ifrnd 40 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemymegalava_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 { randvar tempd 1 addvar tempd 1 }
+        ifvare SKILLLEVEL 8 { randvar tempd 2 addvar tempd 1 }
+        ifvare SKILLLEVEL 7 { randvar tempd 3 addvar tempd 2 }
+        ifvare SKILLLEVEL 6 { randvar tempd 4 addvar tempd 3 }
+        ifvare SKILLLEVEL 5 { randvar tempd 5 addvar tempd 5 }
+        ifvare SKILLLEVEL 4 { randvar tempd 8 addvar tempd 7 }
+        ifvare SKILLLEVEL 3 { randvar tempd 10 addvar tempd 10 }
+        ifvare SKILLLEVEL 2 { randvar tempd 15 addvar tempd 15 }
+        ifvare SKILLLEVEL 1 { randvar tempd 23 addvar tempd 22 }
+        ifvare SKILLLEVEL 0 { randvar tempd 34 addvar tempd 33 }
+       }
+       else { randvar tempd 1 addvar tempd 33 } // 3.3% to 3.4%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-megalava
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 24
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 2
+         addvar TEMPVAR 7
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3
+         mulvar FLOORDAMAGETEMP 50
+         addvar FLOORDAMAGETEMP 42
+         state enemymegalava_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 24 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 12
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 2
+         addvar TEMPVAR 7
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 2
+         mulvar FLOORDAMAGETEMP 38
+         addvar FLOORDAMAGETEMP 20
+         state enemymegalava_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 12 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 96
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          randvar TEMPVAR 2
+          addvar TEMPVAR 7
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 5
+          mulvar FLOORDAMAGETEMP 75
+          addvar FLOORDAMAGETEMP 75
+          state enemymegalava_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+         }
+        }
+       }
+       else ifrnd 96 sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      ifrnd 96
+      {
+       randvar FLOORDAMAGETEMP 2
+       addvar FLOORDAMAGETEMP 7
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 96
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 2
+         addvar TEMPVAR 7
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 5
+         mulvar FLOORDAMAGETEMP 75
+         addvar FLOORDAMAGETEMP 75
+         state enemymegalava_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 96 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemyultramagma_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 { randvar tempd 5 addvar tempd 5 }
+        ifvare SKILLLEVEL 8 { randvar tempd 8 addvar tempd 7 }
+        ifvare SKILLLEVEL 7 { randvar tempd 10 addvar tempd 10 }
+        ifvare SKILLLEVEL 6 { randvar tempd 15 addvar tempd 15 }
+        ifvare SKILLLEVEL 5 { randvar tempd 20 addvar tempd 20 }
+        ifvare SKILLLEVEL 4 { randvar tempd 30 addvar tempd 30 }
+        ifvare SKILLLEVEL 3 { randvar tempd 40 addvar tempd 40 }
+        ifvare SKILLLEVEL 2 { randvar tempd 60 addvar tempd 60 }
+        ifvare SKILLLEVEL 1 { randvar tempd 90 addvar tempd 90 }
+        ifvare SKILLLEVEL 0 { randvar tempd 135 addvar tempd 135 }
+       }
+       else setvar tempd 135 // 13.5%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-ultramagma
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 32
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 3
+         addvar TEMPVAR 12
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3
+         mulvar FLOORDAMAGETEMP 160
+         addvar FLOORDAMAGETEMP 133
+         state enemyultramagma_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 32 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 16
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 3
+         addvar TEMPVAR 12
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 2
+         mulvar FLOORDAMAGETEMP 120
+         addvar FLOORDAMAGETEMP 64
+         state enemyultramagma_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 16 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14 nullop
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 128
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          randvar TEMPVAR 3
+          addvar TEMPVAR 12
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 5
+          mulvar FLOORDAMAGETEMP 240
+          addvar FLOORDAMAGETEMP 240
+          state enemyultramagma_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+         }
+        }
+       }
+       else ifrnd 128 sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      ifrnd 128
+      {
+       randvar FLOORDAMAGETEMP 3
+       addvar FLOORDAMAGETEMP 12
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 128
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 3
+         addvar TEMPVAR 12
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 5
+         mulvar FLOORDAMAGETEMP 240
+         addvar FLOORDAMAGETEMP 240
+         state enemyultramagma_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 128 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+ state enemyhypermagma_hpmaxcalc
+       setvarvar tempe ACTORMAXHP
+       ifvare DMGFLRTYPE 0
+       {
+        ifvare SKILLLEVEL 9 { randvar tempd 20 addvar tempd 20 }
+        ifvare SKILLLEVEL 8 { randvar tempd 32 addvar tempd 32 }
+        ifvare SKILLLEVEL 7 { randvar tempd 40 addvar tempd 40 }
+        ifvare SKILLLEVEL 6 { randvar tempd 60 addvar tempd 60 }
+        ifvare SKILLLEVEL 5 { randvar tempd 80 addvar tempd 80 }
+        ifvare SKILLLEVEL 4 { randvar tempd 120 addvar tempd 120 }
+        ifvare SKILLLEVEL 3 { randvar tempd 160 addvar tempd 160 }
+        ifvare SKILLLEVEL 2 { randvar tempd 240 addvar tempd 240 }
+        ifvare SKILLLEVEL 1 { randvar tempd 360 addvar tempd 360 }
+        ifvare SKILLLEVEL 0 { randvar tempd 540 addvar tempd 540 }
+       }
+       else setvar tempd 540 // 54.0%
+       mulvarvar tempe tempd
+ ends
+
+state enemy-hypermagma
+  iffloordistl 16
+  {
+   ifvare mainmenu 0 ifvare ACTORDEATHSWITCHDELAY 0 
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    ifvare TEMPVAR4 BOOTS
+    {
+     ifvarl ITEMDROPPEDTIME 1 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+    else
+    {
+     ifvarg ACTORHP 0 addvar ACTORDAMAGEFLOORTIMER 1
+    }
+   }
+   
+   ifvare ACTORDAMAGEFLOORTIMER 1
+   {
+    getactor[THISACTOR].picnum TEMPVAR4
+    switch TEMPVAR4
+     case EMPTYTANK
+     case TANK
+     case SCORPIONTANK
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 56
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 6
+         addvar TEMPVAR 28
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 4
+         mulvar FLOORDAMAGETEMP 533
+         addvar FLOORDAMAGETEMP 443
+         state enemyhypermagma_hpmaxcalc
+         divvar tempe 1500
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 56 sound INVULNITEM3
+     break
+
+     case BOSS1
+     case BOSS2
+     case BOSS3
+     case BOSS4
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 28
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 6
+         addvar TEMPVAR 28
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 3
+         mulvar FLOORDAMAGETEMP 400
+         addvar FLOORDAMAGETEMP 214
+         state enemyhypermagma_hpmaxcalc
+         divvar tempe 2250
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 28 sound INVULNITEM3
+     break
+
+     case OCTABRAIN
+      ifspritepal 14
+      { 
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 28
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          randvar TEMPVAR 6
+          addvar TEMPVAR 28
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 3
+          mulvar FLOORDAMAGETEMP 400
+          addvar FLOORDAMAGETEMP 400
+          state enemyhypermagma_hpmaxcalc
+          divvar tempe 4000
+          state enemydmgflr_hpmaxcalcend
+         }
+        }
+       }
+       else ifrnd 28 sound INVULNITEM3
+      }
+      else
+      {
+       ifvarl ACTORINVULNTIME 1
+       {
+        ifrnd 224
+        {
+         ifvarg ACTORBOOTSAMOUNT 0 
+         { 
+          randvar TEMPVAR 6
+          addvar TEMPVAR 28
+          state enemybootscheck
+         } 
+         else 
+         { 
+          state enemycheckhealthdmgflr 
+          randvar FLOORDAMAGETEMP 6
+          mulvar FLOORDAMAGETEMP 800
+          addvar FLOORDAMAGETEMP 800
+          state enemyhypermagma_hpmaxcalc
+          divvar tempe 1000
+          state enemydmgflr_hpmaxcalcend
+         }
+        }
+       }
+       else ifrnd 224 sound INVULNITEM3
+      }
+     break
+
+     case BOOTS
+      ifrnd 224
+      {
+       randvar FLOORDAMAGETEMP 6
+       addvar FLOORDAMAGETEMP 28
+       subvarvar POWERUPBENEFIT FLOORDAMAGETEMP 
+      }
+     break
+
+     default
+      ifvarl ACTORINVULNTIME 1
+      {
+       ifrnd 224
+       {
+        ifvarg ACTORBOOTSAMOUNT 0 
+        { 
+         randvar TEMPVAR 6
+         addvar TEMPVAR 28
+         state enemybootscheck
+        } 
+        else 
+        { 
+         state enemycheckhealthdmgflr 
+         randvar FLOORDAMAGETEMP 6
+         mulvar FLOORDAMAGETEMP 800
+         addvar FLOORDAMAGETEMP 800
+         state enemyhypermagma_hpmaxcalc
+         divvar tempe 1000
+         state enemydmgflr_hpmaxcalcend
+        }
+       }
+      }
+      else ifrnd 224 sound INVULNITEM3
+     break
+    endswitch 
+
+    setvar ACTORDAMAGEFLOORTIMER 0
+   }
+  }
+ends
+
+state checkfreezetimer_heatratio2
+  getactor[THISACTOR].sectnum TEMPVAR getactorvar[TEMPVAR].FLOORHEATRATIO temph
+  mulvarvar tempg temph divvar tempg 100
+ends
+
+state enemytileemulationhurt
+ getactor[THISACTOR].sectnum TEMPVAR
+ //getactorvar[TEMPVAR].SECTOREXTRA ENEMYTILEEMUL
+
+ ifvare sector[THISACTOR].lotag 2
+ {
+  ifvare CLOAKED? 0
+  {
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5389 // NEWFLOORPLASMA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 1 addvar tempg 2
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 3780 // HOTLAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 2 addvar tempg 5
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 4091 // MEGALAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 8 addvar tempg 17
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5401 // ULTRALAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 20 addvar tempg 41
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5443 // HYPERMAGMA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 80 addvar tempg 161
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5385 state enemy-newfloorslime // NEWFLOORSLIME [Slime]
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 5388 state enemy-newhurtrail // NEWHURTRAIL [Electric Chair/Electrified Floors]
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 5389 state enemy-newfloorplasma // NEWFLOORPLASMA [Lava]   
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 5395 state enemy-newpurplelava // NEWPURPLELAVA [Superlava]
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 3780 state enemy-hotlava // HOTLAVA
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 3796 state enemy-amoebaacid // AMOEBAACID
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 4091 state enemy-megalava // MEGALAVA
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 5401 state enemy-ultramagma // ULTRALAVA
+   else ifvare actorvar[TEMPVAR].SECTOREXTRA 5443 state enemy-hypermagma // HYPERMAGMA
+   else // non-damagefloor
+   {
+    setvar ACTORDAMAGEFLOORTIMER 0
+    setvar FLOORDAMAGETEMP 0
+   } 
+  }
+ }
+ else // Out of Water
+ {
+  ifvare CLOAKED? 0
+  {
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5389 // NEWFLOORPLASMA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 1 addvar tempg 2
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 3780 // HOTLAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 2 addvar tempg 5
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 4091 // MEGALAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 8 addvar tempg 17
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5401 // ULTRALAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 20 addvar tempg 41
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5443 // HYPERMAGMA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 80 addvar tempg 161
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+  }
+
+  getactor[THISACTOR].x x
+  getactor[THISACTOR].y y
+  updatesector x y TEMP
+  getflorzofslope TEMP x y tempb
+  getactor[THISACTOR].z tempc
+  addvar tempc 256
+  setvarvar tempe tempb
+  addvar tempe -8
+  addvar tempb 8
+  getsector[THISACTOR].lotag temp
+  ifvare temp 1 addvar tempb 6144
+
+  ifvare CLOAKED? 0
+  {
+   ifvare actorvar[TEMPVAR].SECTOREXTRA 5395 state enemy-newpurplelava
+   else ifvarvarl tempc tempb ifvarvarg tempc tempe 
+   {
+    ifvare actorvar[TEMPVAR].SECTOREXTRA 5385 state enemy-newfloorslime // NEWFLOORSLIME [Slime]
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 5388 state enemy-newhurtrail // NEWHURTRAIL [Electric Chair/Electrified Floors]
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 5389 state enemy-newfloorplasma // NEWFLOORPLASMA [Lava]
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 3780 state enemy-hotlava // HOTLAVA
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 3796 state enemy-amoebaacid // AMOEBAACID
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 4091 state enemy-megalava // MEGALAVA
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 5401 state enemy-ultramagma // ULTRALAVA
+    else ifvare actorvar[TEMPVAR].SECTOREXTRA 5443 state enemy-hypermagma // HYPERMAGMA
+    else // non-damagefloor
+    {
+     setvar ACTORDAMAGEFLOORTIMER 0
+     setvar FLOORDAMAGETEMP 0
+    }
+   } // ifvarvarl tempc tempd ifvarvarg tempc tempe 
+  } // ifvare CLOAKED? 0
+ }
+
+ends
+
+state enemyceilinghurt
+
+ ifvare sector[THISACTOR].lotag 2
+ {
+  ifvare CLOAKED? 0
+  {
+   ifvare sector[THISACTOR].ceilingpicnum 5389 // NEWFLOORPLASMA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 1 addvar tempg 2
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare sector[THISACTOR].ceilingpicnum 3780 // HOTLAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 2 addvar tempg 5
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare sector[THISACTOR].ceilingpicnum 4091 // MEGALAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 8 addvar tempg 17
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare sector[THISACTOR].ceilingpicnum 5401 // ULTRALAVA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 20 addvar tempg 41
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+   else
+   ifvare sector[THISACTOR].ceilingpicnum 5443 // HYPERMAGMA
+   {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 80 addvar tempg 161
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+   }
+
+   ifvare sector[THISACTOR].ceilingpicnum 5385 state enemy-newfloorslime // NEWFLOORSLIME [Slime]
+   else ifvare sector[THISACTOR].ceilingpicnum 5388 state enemy-newhurtrail // NEWHURTRAIL [Electric Chair/Electrified Floors]
+   else ifvare sector[THISACTOR].ceilingpicnum 5389 state enemy-newfloorplasma // NEWFLOORPLASMA [Lava]
+   else ifvare sector[THISACTOR].ceilingpicnum 5395 state enemy-newpurplelava // NEWPURPLELAVA [Superlava]
+   else ifvare sector[THISACTOR].ceilingpicnum 3780 state enemy-hotlava // HOTLAVA
+   else ifvare sector[THISACTOR].ceilingpicnum 3796 state enemy-amoebaacid // AMOEBAACID
+   else ifvare sector[THISACTOR].ceilingpicnum 4091 state enemy-megalava // MEGALAVA
+   else ifvare sector[THISACTOR].ceilingpicnum 5401 state enemy-ultramagma // ULTRALAVA
+   else ifvare sector[THISACTOR].ceilingpicnum 5443 state enemy-hypermagma // HYPERMAGMA
+   else // non-damagefloor
+   {
+    setvar ACTORDAMAGEFLOORTIMER 0
+    setvar FLOORDAMAGETEMP 0
+   } 
+  }
+ }
+ends
+
+state enemyfloorhurt // State for allowing monsters/actors to take damage from damagefloors[lava/floorslime/purplelava/hurtrail/etc]
+
+ifvare ACTORDEATHSWITCHDELAY 0
+{
+ ifvare CLOAKED? 0
+ {
+  ifvare sector[THISACTOR].floorpicnum 5389 // NEWFLOORPLASMA
+  {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 1 addvar tempg 2
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+  }
+  else
+  ifvare sector[THISACTOR].floorpicnum 3780 // HOTLAVA
+  {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 2 addvar tempg 5
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+  }
+  else
+  ifvare sector[THISACTOR].floorpicnum 4091 // MEGALAVA
+  {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 8 addvar tempg 17
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+  }
+  else
+  ifvare sector[THISACTOR].floorpicnum 5401 // ULTRALAVA
+  {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 20 addvar tempg 41
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+  }
+  else
+  ifvare sector[THISACTOR].floorpicnum 5443 // HYPERMAGMA
+  {
+    ifvarl ACTORINVULNTIME 1
+    {
+     ifvarg freezetimer 0
+     {
+      randvar tempg 80 addvar tempg 161
+      state checkfreezetimer_heatratio2
+      subvarvar freezetimer tempg
+      ifvarl freezetimer 0 setvar freezetimer 0
+     }
+    }
+  }
+ }
+
+ getactor[THISACTOR].x x
+ getactor[THISACTOR].y y
+ updatesector x y TEMP
+ getflorzofslope TEMP x y tempb
+ getactor[THISACTOR].z tempc
+ addvar tempc 256
+ setvarvar tempe tempb
+ addvar tempe -8
+ addvar tempb 8
+ getsector[THISACTOR].lotag temp
+ ifvare temp 1 addvar tempb 6144
+
+ ifvare CLOAKED? 0
+ {
+  ifvare sector[THISACTOR].floorpicnum 5395 state enemy-newpurplelava // NEWPURPLELAVA [Superlava]
+  else ifvarvarl tempc tempb ifvarvarg tempc tempe 
+  {
+   ifvare sector[THISACTOR].floorpicnum 5385 state enemy-newfloorslime // NEWFLOORSLIME [Slime]
+   else ifvare sector[THISACTOR].floorpicnum 5388 state enemy-newhurtrail // NEWHURTRAIL [Electric Chair/Electrified Floors]
+   else ifvare sector[THISACTOR].floorpicnum 5389 state enemy-newfloorplasma // NEWFLOORPLASMA [Lava]
+   else ifvare sector[THISACTOR].floorpicnum 3780 state enemy-hotlava // HOTLAVA
+   else ifvare sector[THISACTOR].floorpicnum 3796 state enemy-amoebaacid // AMOEBAACID
+   else ifvare sector[THISACTOR].floorpicnum 4091 state enemy-megalava // MEGALAVA
+   else ifvare sector[THISACTOR].floorpicnum 5401 state enemy-ultramagma // ULTRALAVA
+   else ifvare sector[THISACTOR].floorpicnum 5443 state enemy-hypermagma // HYPERMAGMA
+   else // non-damagefloor
+   {
+    setvar ACTORDAMAGEFLOORTIMER 0
+    setvar FLOORDAMAGETEMP 0
+   }
+  } // ifvarvarl tempc tempd ifvarvarg tempc tempe 
+ } // ifvare CLOAKED? 0
+
+ state enemyceilinghurt
+ state enemytileemulationhurt
+}
+ends
+
+// PLAYER SIDE TILEEMUL stuff
+
+state playercheckboots
+           ifvare VEHICLEID -1
+           {
+            ifvarl BOOTSTIME 1
+            {
+             debris SCRAP1 1
+             debris SCRAP2 1
+             debris SCRAP3 1
+             setvar BOOTSTIME 0
+            }
+           }
+           else
+           {
+            ifvarl TEMPVAR2 1
+            {
+             debris SCRAP1 1
+             debris SCRAP2 1
+             debris SCRAP3 1
+             setvar TEMPVAR2 0
+             setactorvar[VEHICLEID].ACTORBOOTSAMOUNT TEMPVAR2
+            }
+           }
+ends
+
+state getplayerhealthondmgflr
+ // addlogvar CURRENTHITPOINTS
+ ifvare VEHICLEID -1 setvarvar temp CURRENTHITPOINTS else getactorvar[VEHICLEID].ACTORHP temp
+ // addlogvar temp
+ends
+
+state setplayerhealthondmgflr
+ setactor[THISACTOR].htpicnum -1
+ // addlogvar VEHICLEID
+ ifvare VEHICLEID -1 setvarvar CURRENTHITPOINTS temp else setactorvar[VEHICLEID].ACTORHP temp
+ state checkbuddhamode
+ends
+
 state dmgflr-defensecheat
               ifvarand CHEATBITFIELD? 16 { divvar TEMPVAR 1000 ifvarl TEMPVAR 1 setvar TEMPVAR 1 state cheatersound }
 ends
