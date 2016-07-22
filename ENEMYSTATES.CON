@@ -2423,3 +2423,4 @@ state enemy_general_stuff
   ifvarand ACTORSTATUS? 1024 nullop else setvar ACTORPSISHIELDTIMER 0
   ifvarand ACTORSTATUS? 16384 nullop else setvar ACTORCORROSIONTIMER 0
 ends
+

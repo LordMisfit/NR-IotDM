@@ -787,7 +787,7 @@ else // ifvare mainmenu 0
    }
    else
    {
-    // Lisa's new ability to change her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
+    // Lisa's new ability to charge her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
     getinput[THISACTOR].extbits TEMP3
     ifvarand TEMP3 12
     {
@@ -797,15 +797,15 @@ else // ifvare mainmenu 0
       else
       {
        subvar CURRENTENERGYPOINTS 1
-       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 8 else addvar TEMPVAR 3
+       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 16 else addvar TEMPVAR 6
        setvarvar tempb ESHIELDDMGFACTOR
-       divvar tempb 32
+       divvar tempb 16
        addvarvar TEMPVAR tempb
 
-       ifvare SKILLLEVEL 0 mulvar TEMPVAR 3
-       ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 mulvar TEMPVAR 2
-       ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar TEMPVAR 1
-       ifvarg SKILLLEVEL 6 { mulvar TEMPVAR 2 divvar TEMPVAR 3 }
+       ifvare SKILLLEVEL 0 mulvar TEMPVAR 6 // 600%
+       ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 mulvar TEMPVAR 4 // 400%
+       ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar TEMPVAR 2 // 200%
+       ifvarg SKILLLEVEL 6 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133.3%
 
        // addlogvar TEMPVAR
        addvarvar DAMAGEINCELL TEMPVAR
