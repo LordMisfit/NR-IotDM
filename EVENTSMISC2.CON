@@ -793,24 +793,31 @@ else // ifvare mainmenu 0
     {
      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
      {
-      ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR nullop
+      ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR setvar ESHIELDCHARGETIMER 0
       else
       {
-       setvarvar ESHIELDCHARGEMULTI ESHIELDCHARGETIMER
-	   divvar ESHIELDCHARGEMULTI 104
-	   addvar ESHIELDCHARGEMULTI 1
-	   setvar tempc 1 mulvarvar tempc ESHIELDCHARGEMULTI
-	   subvarvar CURRENTENERGYPOINTS tempc
-       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 12 else addvar TEMPVAR 5
+       setvarvar ESHIELDCHARGEMULTI ESHIELDCHARGETIMER divvar ESHIELDCHARGEMULTI 52 addvar ESHIELDCHARGEMULTI 1
+	   subvarvar CURRENTENERGYPOINTS ESHIELDCHARGEMULTI
+       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 8 else addvar TEMPVAR 3
        setvarvar tempb ESHIELDDMGFACTOR
-       divvar tempb 24
+       divvar tempb 32
        addvarvar TEMPVAR tempb
 
-       ifvare SKILLLEVEL 0 { mulvar TEMPVAR 10 divvar TEMPVAR 3 } // 333.3%
-       ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { mulvar TEMPVAR 8 divvar TEMPVAR 3 } // 266.7%
-       ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar TEMPVAR 2 // 200%
-       ifvarg SKILLLEVEL 6 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133.3%
+       switch SKILLLEVEL
+	     case 0 mulvar TEMPVAR 12 break
+	     case 1 mulvar TEMPVAR 11 break
+	     case 2 mulvar TEMPVAR 10 break
+	     case 3 mulvar TEMPVAR 9 break
+	     case 4 mulvar TEMPVAR 8 break
+	     case 5 mulvar TEMPVAR 7 break
+	     case 6 mulvar TEMPVAR 6 break
+	     case 7 mulvar TEMPVAR 5 break
+	     case 8 mulvar TEMPVAR 4 break
+	     case 9 mulvar TEMPVAR 3 break
+	   endswitch
+       divvar TEMPVAR 4
 
+	   ifvarl TEMPVAR 1 setvar TEMPVAR 1
 	   mulvarvar TEMPVAR ESHIELDCHARGEMULTI
 	   
        // addlogvar TEMPVAR
@@ -838,10 +845,6 @@ else // ifvare mainmenu 0
        }
 	   addvar ESHIELDCHARGETIMER 1
       }
-	  else
- 	  {
-	   setvar ESHIELDCHARGETIMER 0
-	  }
      }
 	 else
 	 {

@@ -2021,23 +2021,35 @@ state pressoncolamachine
          {
           ifvarg DOLLARS 49
           {
-           ifvare CHARACTERSELECTED? 4 setvarvar tempg MAXHITPOINTSATOMIC
-           else setvarvar tempg MAXHITPOINTS
-           ifvarvarl CURRENTHITPOINTS tempg
+		   setvar tempf 0
+           ifvare CHARACTERSELECTED? 4 setvarvar tempg MAXHITPOINTSATOMIC else setvarvar tempg MAXHITPOINTS
+           ifvarvarl CURRENTHITPOINTS tempg addvar tempf 1
+           ifvare CHARACTERSELECTED? 4 setvarvar temph MAXENERGYPOINTSATOMIC else setvarvar temph MAXENERGYPOINTS
+           ifvarvarl CURRENTENERGYPOINTS temph addvar tempf 1
+           ifvarg tempf 0
            {
             state gotmedsyoureallyneeded
             subvar DOLLARS 50
             subvar DISPLAYDOLLARS 50
             state displaymoney
-            setvarvar temp MAXHITPOINTS
 
+            // HP Restore
+            setvarvar temp MAXHITPOINTS
             ifvare CHARACTERSELECTED? 4 setvar TEMP7 150 else setvar TEMP7 100 
             state secretrecipecheck
             mulvarvar temp TEMP7
             divvar temp 1000
-
             addvarvar CURRENTHITPOINTS temp
             ifvarvarg CURRENTHITPOINTS tempg setvarvar CURRENTHITPOINTS tempg
+
+            // EP Restore
+            setvarvar temp MAXENERGYPOINTS
+            ifvare CHARACTERSELECTED? 4 setvar TEMP7 75 else setvar TEMP7 50 
+            state secretrecipecheck
+            mulvarvar temp TEMP7
+            divvar temp 1000
+            addvarvar CURRENTENERGYPOINTS temp
+            ifvarvarg CURRENTENERGYPOINTS temph setvarvar CURRENTENERGYPOINTS temph
 
             ifvarn player[THISACTOR].over_shoulder_on 0
             {
@@ -2071,13 +2083,18 @@ state pressoncolamachine
              divvar TEMP4 10
              setvarvar TEMP5 TEMP7
              modvar TEMP5 10
-             redefinequote 321 ^20YOU DRANK A COLA FROM THE MACHINE! +%d.%d% HP!
-             qsprintf 321 321 TEMP4 TEMP5
+			 setvarvar TEMP8 TEMP7 divvar TEMP8 2
+             setvarvar TEMP2 TEMP8
+             divvar TEMP2 10
+             setvarvar TEMP3 TEMP8
+             modvar TEMP3 10
+             redefinequote 321 ^20YOU DRANK A COLA FROM THE MACHINE! +%d.%d% HP/+%d.%d% EP!
+             qsprintf 321 321 TEMP4 TEMP5 TEMP2 TEMP3
             }
             else
             {
-             ifvare CHARACTERSELECTED? 4 redefinequote 321 ^20YOU DRANK A COLA FROM THE MACHINE! +15% HP!
-             else redefinequote 321 ^20YOU DRANK A COLA FROM THE MACHINE! +10% HP!
+             ifvare CHARACTERSELECTED? 4 redefinequote 321 ^20YOU DRANK A COLA FROM THE MACHINE! +15% HP/+7.5% EP!
+             else redefinequote 321 ^20YOU DRANK A COLA FROM THE MACHINE! +10% HP/+5% EP!
             }
             setvar PLAYERHPDAMAGED? -1
            }
@@ -2135,21 +2152,33 @@ state pressonsnackmachine
          {
           ifvarg DOLLARS 24
           {          
-           ifvarvarl CURRENTHITPOINTS MAXHITPOINTS
+		   setvar tempf 0
+           ifvarvarl CURRENTHITPOINTS MAXHITPOINTS addvar tempf 1
+           ifvarvarl CURRENTENERGYPOINTS MAXENERGYPOINTS addvar tempf 1
+           ifvarg tempf 0
            {
             state gotmedsyoureallyneeded
             subvar DOLLARS 25
             subvar DISPLAYDOLLARS 25
             state displaymoney
-            setvarvar temp MAXHITPOINTS
 
+            // HP Restore
+            setvarvar temp MAXHITPOINTS
             setvar TEMP7 50 
             state secretrecipecheck
             mulvarvar temp TEMP7
             divvar temp 1000
-
             addvarvar CURRENTHITPOINTS temp
             ifvarvarg CURRENTHITPOINTS MAXHITPOINTS setvarvar CURRENTHITPOINTS MAXHITPOINTS
+
+            // EP Restore
+            setvarvar temp MAXENERGYPOINTS
+            setvar TEMP7 100
+            state secretrecipecheck
+            mulvarvar temp TEMP7
+            divvar temp 1000
+            addvarvar CURRENTENERGYPOINTS temp
+            ifvarvarg CURRENTENERGYPOINTS MAXENERGYPOINTS setvarvar CURRENTENERGYPOINTS MAXENERGYPOINTS
 
             ifvarn player[THISACTOR].over_shoulder_on 0
             {
@@ -2183,12 +2212,17 @@ state pressonsnackmachine
              divvar TEMP4 10
              setvarvar TEMP5 TEMP7
              modvar TEMP5 10
-             redefinequote 321 ^20YOU ATE A SNACK FROM THE MACHINE! +%d.%d% HP!
-             qsprintf 321 321 TEMP4 TEMP5
+			 setvarvar TEMP8 TEMP7 mulvar TEMP8 2
+             setvarvar TEMP2 TEMP8
+             divvar TEMP2 10
+             setvarvar TEMP3 TEMP8
+             modvar TEMP3 10
+             redefinequote 321 ^20YOU ATE A SNACK FROM THE MACHINE! +%d.%d% HP/+%d.%d% EP!
+             qsprintf 321 321 TEMP4 TEMP5 TEMP2 TEMP3
             }
             else
             {
-             redefinequote 321 ^20YOU ATE A SNACK FROM THE MACHINE! +5% HP!
+             redefinequote 321 ^20YOU ATE A SNACK FROM THE MACHINE! +5% HP/+10% EP!
             }      
             setvar PLAYERHPDAMAGED? -1
            }
