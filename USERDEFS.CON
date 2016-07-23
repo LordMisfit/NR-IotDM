@@ -2674,6 +2674,15 @@ define SUPERCRITICALHITCHANCE    625    // Out of 256 ( 3.25% )
 define MEGACRITICALHITCHANCE     313    // Out of 256 ( 3.25% )
 define ULTRACRITICALHITCHANCE    313    // Out of 256 ( 3.25% )
 
+define FIRSTAIDSTATIONMINDIST   -423    // Negative Values only
+define FIRSTAIDSTATIONMAXDIST    423    // Positive Values only
+
+define VENDINGMACHINEMINDIST    -845    // Negative Values only 
+define VENDINGMACHINEMAXDIST     845    // Positive Values only
+
+define ATMMACHINEMINDIST    -845    // Negative Values only 
+define ATMMACHINEMAXDIST     845    // Positive Values only
+
 define YELLHURTSOUNDSTRENGTH     614
 define YELLHURTSOUNDSTRENGTHMP   767
 

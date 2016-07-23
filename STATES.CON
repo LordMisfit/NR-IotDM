@@ -812,151 +812,6 @@ state playerdamagehues-watertype
      setvar DAMAGEHUEPAL 1
 ends
 
-state char_firedamage_misc
-           ifvare CHARACTERSELECTED? 3 // Bubsy
-           {
-            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage in Loki Mask form
-           }           
-           ifvare CHARACTERSELECTED? 4 // Ami
-           {
-            ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6 // 16.6% Damage under water
-            ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 } // 29% damage while in water
-
-            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage in Civilian form
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage in Senshi Form
-            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage in Balanced Form
-            ifvarand PLAYERSTATUS? 256 // Mercury Aqua Protection buff
-            {
-             ifp pducking divvar TEMPDAMAGEVAR 25 // 4% Damage while crouching and using MAP
-             else divvar TEMPDAMAGEVAR 5 // 20% Damage while not-crouching and using MAP
-            }
-            mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 // 133% Damage from Fire
-           }
-           
-           ifvare CHARACTERSELECTED? 6 // ESSence
-           {
-            setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
-           }
-           ifvare CHARACTERSELECTED? 7 divvar TEMPDAMAGEVAR 3 // Ted [33% Damage]
-           ifvare CHARACTERSELECTED? 9 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Cybanis [60% Damage]
-           ifvare CHARACTERSELECTED? 11 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // Paula [66% Damage]
-           ifvare CHARACTERSELECTED? 13 // Minako
-           {
-            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage in Civilian form
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage in Senshi Form
-            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage in Balanced Form
-            mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 // 66% Damage from Fire
-           }           
-           ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
-           ifvare CHARACTERSELECTED? 15 divvar TEMPDAMAGEVAR 6 // Maken [17% Damage]
-ends
-
-state char_icedamage_misc
-           ifvare CHARACTERSELECTED? 3 // Bubsy
-           {
-            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 2 } // 150% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 5 divvar TEMPDAMAGEVAR 4 } // 125% Damage
-
-            setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // -50% Ice damage w/ Diving Suit on
-           }
-           ifvare CHARACTERSELECTED? 4 // Ami
-           {
-            ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6
-            ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 }
-
-            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
-            ifvarand PLAYERSTATUS? 256
-            {
-             ifp pducking divvar TEMPDAMAGEVAR 25 // 4% Damage
-             else divvar TEMPDAMAGEVAR 5 // 20% Damage
-            }
-            divvar TEMPDAMAGEVAR 10 // 10% Damage
-           }
-           ifvare CHARACTERSELECTED? 6 // ESSence
-           {
-            setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
-
-            mulvar TEMPDAMAGEVAR 3 // 300% Damage
-           }
-           ifvare CHARACTERSELECTED? 9 // Cybanis
-           {
-            mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 // 60% Damage
-            mulvar TEMPDAMAGEVAR 2 // 200% Damage
-           }
-           ifvare CHARACTERSELECTED? 10 // Nethra/Christina
-           {
-            setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // 66% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR -2 sound ABSORB_DAMAGE } // 200% Absorbsion
-           }
-           ifvare CHARACTERSELECTED? 13 // Minako
-           {
-            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
-           }
-           ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
-ends
-
-state char_elecdamage_misc
-           ifvare CHARACTERSELECTED? 3 // Bubsy
-           {
-            setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage
-
-            setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 5 // -80% Electric damage w/ Diving Suit on
-           }
-           ifvare CHARACTERSELECTED? 4 // Ami
-           {
-            ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar TEMPDAMAGEVAR 6
-            ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 7 }
-
-            setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
-            ifvarand PLAYERSTATUS? 256
-            {
-             ifp pducking divvar TEMPDAMAGEVAR 25 // 4% Damage
-             else divvar TEMPDAMAGEVAR 5 // 20% Damage
-            }
-            mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 // 133% Damage
-           }
-           ifvare CHARACTERSELECTED? 6 // ESSence
-           {
-            setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 5 } // 40% Damage when in ESS armor
-           }
-           ifvare CHARACTERSELECTED? 8 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Lisa [60% Damage]          
-           ifvare CHARACTERSELECTED? 9 { mulvar TEMPDAMAGEVAR 3 divvar TEMPDAMAGEVAR 5 } // Cybanis [60% Damage]
-           ifvare CHARACTERSELECTED? 10 // Nethra/Christina
-           {
-            setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR -11 divvar TEMPDAMAGEVAR 2 sound ABSORB_DAMAGE } // 550% Absorbsion
-            ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar TEMPDAMAGEVAR 2 divvar TEMPDAMAGEVAR 3 } // 66% Damage
-           }
-           ifvare CHARACTERSELECTED? 13 // Minako
-           {
-            setvar MISCARRAYID 113 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // MINAKO-FORM?
-            ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar TEMPDAMAGEVAR 4 divvar TEMPDAMAGEVAR 3 } // 133% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 1 divvar TEMPDAMAGEVAR 2 // 50% Damage
-            ifvare MISCARRAYID_AMOUNTTEMP 2 divvar TEMPDAMAGEVAR 3 // 33% Damage
-           }
-           ifvare CHARACTERSELECTED? 14 divvar TEMPDAMAGEVAR 2 // "Mystery Lady" [50% Damage]
-ends
-
 state checkmoneyowner
   getactor[THISACTOR].owner TEMP3
   ifvarvarn THISACTOR TEMP3 { ifvarn RETURN -1 setactor[RETURN].owner TEMP3 }
@@ -8777,7 +8632,7 @@ state queenshootzappers
            setactor[PLAYERID].htextra MELEEDAMAGE
  
            setvarvar TEMPDAMAGEVAR MELEEDAMAGE
-           state char_elecdamage_misc
+           ifvarn VEHICLEID -1 state char_elecdamage_misc
            setvarvar MELEEDAMAGE TEMPDAMAGEVAR
 
            //****************
@@ -8836,7 +8691,7 @@ state queenshootzappers
           setactor[PLAYERID].htextra MELEEDAMAGE
 
           setvarvar TEMPDAMAGEVAR MELEEDAMAGE
-          state char_elecdamage_misc
+          ifvarn VEHICLEID -1 state char_elecdamage_misc
           setvarvar MELEEDAMAGE TEMPDAMAGEVAR
 
           //****************
@@ -16692,7 +16547,7 @@ state keypadhandscannerdamage
      state nyxgloveschecker ifvare DAMAGEMODIFIER 0 palfrom 16 32 32 32
 
      setvarvar TEMPDAMAGEVAR tempe
-     state char_elecdamage_misc
+     state char_elecdamage_misc // Used by Player [ignores Drivable Tank checks]
      setvarvar tempe TEMPDAMAGEVAR
     }
     else
@@ -16702,7 +16557,7 @@ state keypadhandscannerdamage
      state nyxgloveschecker ifvare DAMAGEMODIFIER 0 palfrom 16 0 0 32
 
      setvarvar TEMPDAMAGEVAR tempe
-     state char_icedamage_misc
+     state char_icedamage_misc // Used by Player [ignores Drivable Tank checks]
      setvarvar tempe TEMPDAMAGEVAR
      ifrnd 106 state addslow_overridevehicle
     }
@@ -16713,7 +16568,7 @@ state keypadhandscannerdamage
      state nyxgloveschecker ifvare DAMAGEMODIFIER 0 palfrom 16 64 32
 
      setvarvar TEMPDAMAGEVAR tempe
-     state char_firedamage_misc
+     state char_firedamage_misc // Used by Player [ignores Drivable Tank checks]
      setvarvar tempe TEMPDAMAGEVAR
     }
     else
@@ -19907,7 +19762,7 @@ state atmbroken_dealdamage
           ifrnd 85 mulvar tempe 3 else ifrnd 128 mulvar tempe 5 else mulvar tempe 7
 
           setvarvar TEMPDAMAGEVAR tempe
-          state char_elecdamage_misc
+          state char_elecdamage_misc // Used by Player [ignores Drivable Tank checks]
           setvarvar tempe TEMPDAMAGEVAR
 
           //*********************
@@ -20093,7 +19948,7 @@ state plug_dealdamage
           mulvarvar tempe tempd
    
           setvarvar TEMPDAMAGEVAR tempe
-          state char_elecdamage_misc
+          state char_elecdamage_misc // Used by Player [ignores Drivable Tank checks]
           setvarvar tempe TEMPDAMAGEVAR
 
           //*********************

@@ -787,10 +787,9 @@ else // ifvare mainmenu 0
    }
    else
    {
-    // Lisa's new ability to charge her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
-    getinput[THISACTOR].extbits TEMP3
-    ifvarand TEMP3 12
+    ifvarand TEMP3 12 // Holding down Strafe Left & Strafe Right as well
     {
+     // Lisa's new ability to charge her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
      {
       ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR setvar ESHIELDCHARGETIMER 0

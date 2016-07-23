@@ -2317,63 +2317,66 @@ else
      setvar digx 25
      ifvare CHARACTERSELECTED? 1 // Using Duke
      {
-      ifvare FLOORDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+      ifvare VEHICLEID -1
       {
-       addvar digx 7
-       setvar tilenum 8081
-       state orientation27
-       state rs
-      }
-      ifvare FLOORDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8082
-       state orientation27
-       state rs
-      }
-      ifvare CEILINGDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8081
-       state orientation27
-       state rs
-      }
-      ifvare CEILINGDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8082
-       state orientation27
-       state rs
-      }
+       ifvare FLOORDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8081
+        state orientation27
+        state rs
+       }
+       ifvare FLOORDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8082
+        state orientation27
+        state rs
+       }
+       ifvare CEILINGDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8081
+        state orientation27
+        state rs
+       }
+       ifvare CEILINGDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8082
+        state orientation27
+        state rs
+       }
 
-      ifvare EMUFLOORDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8081
-       state orientation27
-       state rs
-      }
-      ifvare EMUFLOORDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8082
-       state orientation27
-       state rs
-      }
-      ifvare EMUCEILINGDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8081
-       state orientation27
-       state rs
-      }
-      ifvare EMUCEILINGDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
-      {
-       addvar digx 7
-       setvar tilenum 8082
-       state orientation27
-       state rs
-      }
+       ifvare EMUFLOORDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8081
+        state orientation27
+        state rs
+       }
+       ifvare EMUFLOORDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8082
+        state orientation27
+        state rs
+       }
+       ifvare EMUCEILINGDAMAGETYPE? 1 // Toxic Revenge Mk. 1 [4x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8081
+        state orientation27
+        state rs
+       }
+       ifvare EMUCEILINGDAMAGETYPE? 4 // Toxic Revenge Mk. 2 [10x Damage]
+       {
+        addvar digx 7
+        setvar tilenum 8082
+        state orientation27
+        state rs
+       }
+	  }
      }
      ifvare CHARACTERSELECTED? 3 // Using Bubsy
      {
@@ -2387,38 +2390,44 @@ else
       }
       else
       {
-       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Weakness Lv. 1
-       {
-        addvar digx 7
-        setvar tilenum 8090
-        state orientation27
-        state rs
-       }
-       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 // Water Weakness Lv. 2
-       { 
-        addvar digx 7
-        setvar tilenum 8091
-        state orientation27
-        state rs
-       }
+	   ifvare VEHICLEID -1
+	   {
+        ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Weakness Lv. 1
+        {
+         addvar digx 7
+         setvar tilenum 8090
+         state orientation27
+         state rs
+        }
+        ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 // Water Weakness Lv. 2
+        { 
+         addvar digx 7
+         setvar tilenum 8091
+         state orientation27
+         state rs
+        }
+	   }
       }
      }
      ifvare CHARACTERSELECTED? 4 // Using Ami
      {
-      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Adaptivity Mk 1 [3.5x Damage/Defense]
-      {
-       addvar digx 7
-       setvar tilenum 8083
-       state orientation27
-       state rs
-      }
-      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 // Water Adaptivity Mk 2 [6x Damage/Defense]
-      { 
-       addvar digx 7
-       setvar tilenum 8084
-       state orientation27
-       state rs
-      }
+	  ifvare VEHICLEID -1
+	  {
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 // Water Adaptivity Mk 1 [3.5x Damage/Defense]
+       {
+        addvar digx 7
+        setvar tilenum 8083
+        state orientation27
+        state rs
+       }
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 // Water Adaptivity Mk 2 [6x Damage/Defense]
+       { 
+        addvar digx 7
+        setvar tilenum 8084
+        state orientation27
+        state rs
+       }
+	  }
      }
      ifvare CHARACTERSELECTED? 8 // Using Lisa
      {
@@ -9432,7 +9441,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist ATMMACHINEMINDIST ifvarl wallxdist ATMMACHINEMAXDIST ifvarg wallydist ATMMACHINEMINDIST ifvarl wallydist ATMMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           setvar temp 332
           setvarvar digx 320
@@ -9458,7 +9467,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist ATMMACHINEMINDIST ifvarl wallxdist ATMMACHINEMAXDIST ifvarg wallydist ATMMACHINEMINDIST ifvarl wallydist ATMMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           ifvare CHARACTERSELECTED? 8
           {
@@ -9502,7 +9511,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           setvar temp 332
           setvarvar digx 320
@@ -9538,7 +9547,7 @@ else
         setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
         ifvare MISCARRAYID_AMOUNTTEMP -1 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           ifvare CHARACTERSELECTED? 8
           {
@@ -9582,7 +9591,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           setvar temp 332
           setvarvar digx 320
@@ -9618,7 +9627,7 @@ else
         setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
         ifvare MISCARRAYID_AMOUNTTEMP -1 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           ifvare CHARACTERSELECTED? 8
           {
@@ -9662,7 +9671,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           setvar temp 332
           setvarvar digx 320
@@ -9698,7 +9707,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           setvar temp 332
           setvarvar digx 320
@@ -9734,7 +9743,7 @@ else
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
         {
-         ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
          {
           setvar temp 332
           setvarvar digx 320
@@ -14540,6 +14549,18 @@ else
      setvar temp 332
      state gtz // state dnz
      addvar digx 0 // 110
+     addvar digy 4 // 53     
+     getinput[THISACTOR].bits varname
+     redefinequote 332 .BITS: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
+     addvar digy 4 // 53     
+     getinput[THISACTOR].extbits varname
+     redefinequote 332 .EXTBITS: ^21%d
+     qsprintf 332 332 varname
+     setvar temp 332
+     state gtz // state dn
      addvar digy 4 // 53     
      getactorvar[PLAYERID].FROZENTIMER varname
      redefinequote 332 FREEZE-TIMER: ^21%d

@@ -572,6 +572,7 @@ define WORLDTILE256 8447
 
 include USERDEFS.CON			// USER.CON and DEFS.CON are now combined! :P
 include GAMEVARS.CON 			// Loads the majority of the defined gamevars
+include DAMAGETYPES.CON			// Defines for elemental damage
 include INVENTORYCHECK.CON      // Defines the inventory array for checking and setting item amounts.
 include DROPS.CON               // Loads drop definitions
 include SPECIAL.CON 			// Loads the majority of the key information
@@ -10258,7 +10259,6 @@ state burningstate
          ifvarg CURRENTHITPOINTS 0 // ifp palive 
          { 
           state getmeleedmg
-
           setvarvar TEMPDAMAGEVAR MELEEDAMAGE
           state char_firedamage_misc
           setvarvar MELEEDAMAGE TEMPDAMAGEVAR
@@ -12400,7 +12400,9 @@ ifvare sector[THISACTOR].lotag 2
     {
      ifrnd 32
      {
-       ifcansee
+      ifcansee
+      {
+       ifvare VEHICLEID -1
        {
         setvar MELEEDAMAGE 5
         randvar MELEEDAMAGEVAR 2
@@ -12476,6 +12478,26 @@ ifvare sector[THISACTOR].lotag 2
          }
         }
        }
+       else
+       {
+        ifrnd 32
+        {
+         setvar MELEEDAMAGE 3
+         randvar MELEEDAMAGEVAR 1
+         state meleerandomdmg
+         ifvarg CURRENTHITPOINTS 0 state getmeleedmg
+         ifvarg INVULNTIME 0 state invulnflash 
+         else ifvarl PLAYERDAMAGE 1 state nullflash
+         else
+         {
+          ifvarg CURRENTHITPOINTS 0 // ifp palive
+          {
+           ifvarg PLAYERDAMAGE 0 palfrom 24 0 16
+          }
+         }
+        }
+       }
+	  }
      }
     }
   }
@@ -41043,29 +41065,32 @@ useractor notenemy NEWBLOODPOOL
               ifvarl TEMPVAR2 1 setvar TEMPVAR2 1
               addvarvar tempe TEMPVAR2
  
-              ifvare CHARACTERSELECTED? 2 subvar tempe 2
-              else ifvare CHARACTERSELECTED? 3
+	          ifvare VEHICLEID -1
               {
-               setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
-               ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 4
-              }
-              else
-              ifvare CHARACTERSELECTED? 4
-              {
-               ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar tempe 6
-               ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar tempe 2 divvar tempe 7 }
-
-               setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-               ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 } // 133% Damage
-               else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2 // 50% Damage
-               else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3 // 33% Damage
-               ifvarand PLAYERSTATUS? 256
+               ifvare CHARACTERSELECTED? 2 subvar tempe 2
+               else ifvare CHARACTERSELECTED? 3
                {
-                ifp pducking divvar tempe 25 else divvar tempe 5
+                setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
+                ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 4
                }
-              }
-              else ifvare CHARACTERSELECTED? 12 subvar tempe 1
-              else ifvare CHARACTERSELECTED? 14 divvar tempe 10
+               else
+               ifvare CHARACTERSELECTED? 4
+               {
+                ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar tempe 6
+                ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar tempe 2 divvar tempe 7 }
+
+                setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+                ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar tempe 4 divvar tempe 3 } // 133% Damage
+                else ifvare MISCARRAYID_AMOUNTTEMP 1 divvar tempe 2 // 50% Damage
+                else ifvare MISCARRAYID_AMOUNTTEMP 2 divvar tempe 3 // 33% Damage
+                ifvarand PLAYERSTATUS? 256
+                {
+                 ifp pducking divvar tempe 25 else divvar tempe 5
+                }
+               }
+               else ifvare CHARACTERSELECTED? 12 subvar tempe 1
+               else ifvare CHARACTERSELECTED? 14 divvar tempe 10
+			  }
               ifvarl tempe 1 { ifrnd 128 setvar tempe 1 else setvar tempe 0 }
 
               //********
@@ -42671,16 +42696,8 @@ useractor notenemy FIRSTAIDPANEL_ON 0
   setvarvar wallydist y
   subvarvar wallydist posy
 
-  ifvarg wallxdist -423 // -845
+  ifvarg wallxdist FIRSTAIDSTATIONMINDIST ifvarl wallxdist FIRSTAIDSTATIONMINDIST ifvarg wallydist FIRSTAIDSTATIONMINDIST ifvarl wallydist FIRSTAIDSTATIONMINDIST ifvarg CURRENTHITPOINTS 0
   {
-   ifvarl wallxdist 423 // 845
-   {
-    ifvarg wallydist -423 // -845
-    {
-     ifvarl wallydist 423 // 845
-     {
-      ifvarg CURRENTHITPOINTS 0 // ifp palive
-      {
        ifhitspace
        { 
         state stopsearchsounds
@@ -42797,10 +42814,6 @@ useractor notenemy FIRSTAIDPANEL_ON 0
          setvarvar com_pause tempc
         }
        }
-      }
-     }
-    }
-   }
   }
  }
 

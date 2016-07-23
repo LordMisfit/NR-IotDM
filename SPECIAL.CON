@@ -84,14 +84,17 @@ ends
 state statustempvar5_check
      ifvare CHARACTERSELECTED? 1 // Duke
      {
-      ifvare FLOORDAMAGETYPE? 1 addvar TEMPVAR5 1
-      ifvare FLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
-      ifvare CEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
-      ifvare CEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
-      ifvare EMUFLOORDAMAGETYPE? 1 addvar TEMPVAR5 1
-      ifvare EMUFLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
-      ifvare EMUCEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
-      ifvare EMUCEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
+      ifvare VEHICLEID -1
+      {
+       ifvare FLOORDAMAGETYPE? 1 addvar TEMPVAR5 1
+       ifvare FLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
+       ifvare CEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
+       ifvare CEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
+       ifvare EMUFLOORDAMAGETYPE? 1 addvar TEMPVAR5 1
+       ifvare EMUFLOORDAMAGETYPE? 4 addvar TEMPVAR5 1
+       ifvare EMUCEILINGDAMAGETYPE? 1 addvar TEMPVAR5 1
+       ifvare EMUCEILINGDAMAGETYPE? 4 addvar TEMPVAR5 1
+	  }
      }
      ifvare CHARACTERSELECTED? 3 // Bubsy
      {
@@ -99,14 +102,20 @@ state statustempvar5_check
       ifvare MISCARRAYID_AMOUNTTEMP 1 addvar TEMPVAR5 1 // If Bubsy is wearing the diving suit.
       else
       {
-       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 addvar TEMPVAR5 1
-       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 addvar TEMPVAR5 1
+	   ifvare VEHICLEID -1
+	   {
+        ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 addvar TEMPVAR5 1
+        ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 addvar TEMPVAR5 1
+	   }
       }
      }
      ifvare CHARACTERSELECTED? 4 // Ami
      {
-      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 addvar TEMPVAR5 1
-      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 addvar TEMPVAR5 1
+	  ifvare VEHICLEID -1
+	  {
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 addvar TEMPVAR5 1
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 addvar TEMPVAR5 1
+	  }
      }
      ifvare CHARACTERSELECTED? 8 // Lisa
      {
@@ -29208,14 +29217,8 @@ state healpaneldisplay
     setvarvar wallydist y
     subvarvar wallydist posy 
 
-    ifvarg wallxdist -423 // -845
+    ifvarg wallxdist FIRSTAIDSTATIONMINDIST ifvarl wallxdist FIRSTAIDSTATIONMINDIST ifvarg wallydist FIRSTAIDSTATIONMINDIST ifvarl wallydist FIRSTAIDSTATIONMINDIST
     {
-     ifvarl wallxdist 423 // 845
-     {
-      ifvarg wallydist -423 // -845
-      {
-       ifvarl wallydist 423 // 845
-       {
         state orientation10
         setvar pal 0
         getactorvar[hitsprite].HEALPANEL_CHARGES varname
@@ -29435,11 +29438,7 @@ state healpaneldisplay
           state gtz
          }
         }
-
         setvar shade 0
-       }
-      }
-     }
     }
    }
 

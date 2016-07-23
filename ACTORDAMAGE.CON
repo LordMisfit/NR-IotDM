@@ -460,6 +460,23 @@ state checkdamagecaps-knee
   // addlogvar ACTORARMORDAMAGE
 ends
 
+state jack_calcskillsdmg
+         setvar CHARACTERARRAY 2
+         getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Jack current level
+         setvarvar TEMPVAR2 TEMPVAR
+         ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 1375
+         ifvare SKILLLEVEL 1 mulvar TEMPVAR2 1250
+         ifvare SKILLLEVEL 2 mulvar TEMPVAR2 1125
+         ifvare SKILLLEVEL 3 mulvar TEMPVAR2 1000
+         ifvare SKILLLEVEL 4 mulvar TEMPVAR2 875
+         ifvare SKILLLEVEL 5 mulvar TEMPVAR2 750
+         ifvare SKILLLEVEL 6 mulvar TEMPVAR2 625
+         ifvare SKILLLEVEL 7 mulvar TEMPVAR2 500
+         ifvare SKILLLEVEL 8 mulvar TEMPVAR2 375
+         ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 250
+         divvar TEMPVAR2 1000
+ends
+
 //*********************************************************
 //*********************************************************
 //**State for Calculating Kick/Melee Damage to non-players*
@@ -605,20 +622,43 @@ state add_playermeleedamage
       //*******************************
 
       // Stage 3p of Damage Formula
+      //************************************************
+      //*Check active character for bonuses/deficancies*
+      //************************************************
       ifvare CHARACTERSELECTED? 1
       {
-       // ***************************************************
-       // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
-       // ***************************************************
-       ifvare FLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
-       ifvare FLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
-       ifvare CEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
-       ifvare CEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+   	   ifvare VEHICLEID -1
+	   {
+        // ***************************************************
+        // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
+        // ***************************************************
+        ifvare FLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+        ifvare FLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+        ifvare CEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+        ifvare CEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+        ifvare EMUFLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+        ifvare EMUFLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+        ifvare EMUCEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
+        ifvare EMUCEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+	   }
+      }
 
-       ifvare EMUFLOORDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
-       ifvare EMUFLOORDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
-       ifvare EMUCEILINGDAMAGETYPE? 1 mulvar KNEEDAMAGE 4
-       ifvare EMUCEILINGDAMAGETYPE? 4 mulvar KNEEDAMAGE 10
+      ifvare CHARACTERSELECTED? 2 // Jack Walker
+      {
+       addlogvar KNEEDAMAGE
+	   // ******************************************
+       // *Setting up Jack's 'Skills' Bonus Damage *
+       // ******************************************
+       state jack_calcskillsdmg
+
+       setvarvar TEMPVAR KNEEDAMAGE
+       mulvarvar TEMPVAR TEMPVAR2
+       divvar TEMPVAR 100
+       addvarvar KNEEDAMAGE TEMPVAR
+       setvar TEMPVAR 0
+       setvar TEMPVAR2 0
+
+       addlogvar KNEEDAMAGE
       }
 
       ifvare CHARACTERSELECTED? 3
@@ -632,39 +672,42 @@ state add_playermeleedamage
 
       ifvare CHARACTERSELECTED? 4
       {
-       // **************************************
-       // *Setting up Ami's Water-Bonus Damage *
-       // **************************************
-       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 { mulvar KNEEDAMAGE 6 } // 6x Damage
-       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar KNEEDAMAGE 7 divvar KNEEDAMAGE 2 } // 3.5x Damage
-       // *******************************
-       // *Setting Up Ami's Form Bonuses*
-       // *******************************
-       setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
-       ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
-       ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
-       ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
-       // ********************************
-       // *Mercury Aqua Protection (Buff)*
-       // ********************************
-       setvar CHARACTERARRAY 4
-       getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
-       ifvarand TEMPVAR 256
-       {
-         ifp pducking divvar KNEEDAMAGE 20 else divvar KNEEDAMAGE 5
-       }
-       // ************************
-       // *Mercury Super-Computer*
-       // ************************
-       setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
-       ifvare MISCARRAYID_AMOUNTTEMP 1
-       {
-        ifvare player[THISACTOR].heat_on 1
+   	   ifvare VEHICLEID -1
+	   {
+        // **************************************
+        // *Setting up Ami's Water-Bonus Damage *
+        // **************************************
+        ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 { mulvar KNEEDAMAGE 6 } // 6x Damage
+        ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar KNEEDAMAGE 7 divvar KNEEDAMAGE 2 } // 3.5x Damage
+        // ********************************
+        // *Mercury Aqua Protection (Buff)*
+        // ********************************
+        setvar CHARACTERARRAY 4
+        getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+        ifvarand TEMPVAR 256
         {
-         mulvar KNEEDAMAGE 7
-         divvar KNEEDAMAGE 4
+         ifp pducking divvar KNEEDAMAGE 20 else divvar KNEEDAMAGE 5
         }
-       }
+	   }
+        // *******************************
+        // *Setting Up Ami's Form Bonuses*
+        // *******************************
+        setvar MISCARRAYID 104 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // AMI-FORM?
+        ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 2 }
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 divvar KNEEDAMAGE 4 }
+        ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar KNEEDAMAGE 3 }
+        // ************************
+        // *Mercury Super-Computer*
+        // ************************
+        setvar MISCARRAYID 78 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HAVE-MERCURY-COMPUTER?
+        ifvare MISCARRAYID_AMOUNTTEMP 1
+        {
+         ifvare player[THISACTOR].heat_on 1
+         {
+          mulvar KNEEDAMAGE 7
+          divvar KNEEDAMAGE 4
+         }
+        }
       }
 
       ifvare CHARACTERSELECTED? 10
@@ -4136,39 +4179,29 @@ ifvarg tempb 0
         //************************************************
         ifvare CHARACTERSELECTED? 1 // Duke Nukem
         {
-         // ***************************************************
-         // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
-         // ***************************************************
-         ifvare FLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
-         ifvare FLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
-         ifvare CEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
-         ifvare CEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
-
-         ifvare EMUFLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
-         ifvare EMUFLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
-         ifvare EMUCEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
-         ifvare EMUCEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+		 ifvare VEHICLEID -1
+		 {
+          // ***************************************************
+          // *Setting up Duke's Nukage/Purplelava-Bonus Damage *
+          // ***************************************************
+          ifvare FLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+          ifvare FLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+          ifvare CEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+          ifvare CEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+          ifvare EMUFLOORDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+          ifvare EMUFLOORDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+          ifvare EMUCEILINGDAMAGETYPE? 1 mulvar GENERALDAMAGE 4 // +300% Damage if Duke is standing in Toxic Sludge/Green Nukage at the moment of damage
+          ifvare EMUCEILINGDAMAGETYPE? 4 mulvar GENERALDAMAGE 10 // +900% Damage if Duke is standing in Purpleacid at the moment of damage
+		 }
         }
 
         ifvare CHARACTERSELECTED? 2 // Jack Walker
         {
+         addlogvar GENERALDAMAGE
          // ******************************************
          // *Setting up Jack's 'Skills' Bonus Damage *
          // ******************************************
-         setvar CHARACTERARRAY 2
-         getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Jack current level
-         setvarvar TEMPVAR2 TEMPVAR
-         ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 1000
-         ifvare SKILLLEVEL 1 mulvar TEMPVAR2 900
-         ifvare SKILLLEVEL 2 mulvar TEMPVAR2 800
-         ifvare SKILLLEVEL 3 mulvar TEMPVAR2 700
-         ifvare SKILLLEVEL 4 mulvar TEMPVAR2 600
-         ifvare SKILLLEVEL 5 mulvar TEMPVAR2 500
-         ifvare SKILLLEVEL 6 mulvar TEMPVAR2 400
-         ifvare SKILLLEVEL 7 mulvar TEMPVAR2 300
-         ifvare SKILLLEVEL 8 mulvar TEMPVAR2 200
-         ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 100
-         divvar TEMPVAR2 1000
+         state jack_calcskillsdmg
 
          setvarvar TEMPVAR GENERALDAMAGE
          mulvarvar TEMPVAR TEMPVAR2
@@ -4176,6 +4209,8 @@ ifvarg tempb 0
          addvarvar GENERALDAMAGE TEMPVAR
          setvar TEMPVAR 0
          setvar TEMPVAR2 0
+
+         addlogvar GENERALDAMAGE
         }
 
         ifvare CHARACTERSELECTED? 3 // Bubsy Bobcat
@@ -4189,11 +4224,24 @@ ifvarg tempb 0
 
         ifvare CHARACTERSELECTED? 4 // Ami Mizuno
         {
-         // **************************************
-         // *Setting up Ami's Water-Bonus Damage *
-         // **************************************
-         ifvare sector[PLAYERSECTOR].lotag 1 { ifvare WATER? 1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 2 } } // +250% Damage if Ami is 'in water' at the moment of damage
-         ifvare sector[PLAYERSECTOR].lotag 2 { ifvare WATER? 2 { mulvar GENERALDAMAGE 6 } } // +500% Damage if Ami is 'underwater' at the moment of damage
+		 ifvare VEHICLEID -1
+		 {
+          // **************************************
+          // *Setting up Ami's Water-Bonus Damage *
+          // **************************************
+          ifvare sector[PLAYERSECTOR].lotag 1 { ifvare WATER? 1 { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 2 } } // +250% Damage if Ami is 'in water' at the moment of damage
+          ifvare sector[PLAYERSECTOR].lotag 2 { ifvare WATER? 2 { mulvar GENERALDAMAGE 6 } } // +500% Damage if Ami is 'underwater' at the moment of damage
+          // ********************************
+          // *Mercury Aqua Protection (Buff)*
+          // ********************************
+          setvar CHARACTERARRAY 4
+          getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
+          ifvarand TEMPVAR 256
+          {
+           ifp pducking divvar GENERALDAMAGE 20 // -95% Damage if Ami is crouching with Aqua Protection active
+           else divvar GENERALDAMAGE 5 // -80% Damage if Ami has with Aqua Protection active 
+          }
+		 }
          // *******************************
          // *Setting Up Ami's Form Bonuses*
          // *******************************
@@ -4201,16 +4249,6 @@ ifvarg tempb 0
          ifvarl MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 2 } // +100% Damage if Ami is in Civilian Form
          ifvare MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 divvar GENERALDAMAGE 4 } // -25% Damage if Ami is in Senshi form
          ifvarg MISCARRAYID_AMOUNTTEMP 1 { mulvar GENERALDAMAGE 3 } // +200% Damage if Ami is in Balanced Form
-         // ********************************
-         // *Mercury Aqua Protection (Buff)*
-         // ********************************
-         setvar CHARACTERARRAY 4
-         getactorvar[CHARACTERARRAY].CHARACTERSTATUS? TEMPVAR
-         ifvarand TEMPVAR 256
-         {
-          ifp pducking divvar GENERALDAMAGE 20 // -95% Damage if Ami is crouching with Aqua Protection active
-          else divvar GENERALDAMAGE 5 // -80% Damage if Ami has with Aqua Protection active 
-         }
          // ************************
          // *Mercury Super-Computer*
          // ************************
@@ -4234,13 +4272,13 @@ ifvarg tempb 0
          // ***********************************
          // *Setting Up Ted's Explosives Bonus*
          // ***********************************
-          ifvare tempc RPG { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
-          ifvare tempc GATEMISSILE_MAIN { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
-          ifvare tempc GATEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
-          ifvare tempc STROKEMISSILE_MAIN { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
-          ifvare tempc STROKEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
-          ifvare tempc MORTER { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
-          ifvare tempc RADIUSEXPLOSION { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc RPG { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc GATEMISSILE_MAIN { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc GATEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc STROKEMISSILE_MAIN { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc STROKEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc MORTER { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+         ifvare tempc RADIUSEXPLOSION { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
         }
 
         ifvare CHARACTERSELECTED? 8 // Lisa Bates
@@ -4277,7 +4315,6 @@ ifvarg tempb 0
          ifvare MISCARRAYID_AMOUNTTEMP 1 // If Nethra is currently "Christina"
          {
           ifvare tempc FREEZEBLAST mulvar GENERALDAMAGE 2 // Nethra does +100% damage for all Freezethrower damage she inflicts in human form
-
           setvarvar TEMPVAR2 GENERALDAMAGE
           state checkdamage-crisisbooster
           setvarvar GENERALDAMAGE TEMPVAR2

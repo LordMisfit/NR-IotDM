@@ -2826,7 +2826,7 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
               //*********************
               // 1 to 4 dmg per tic (12.5% chance)
               ifvare CHARACTERSELECTED? 10 
-              { 
+              {
                setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
                ifvare MISCARRAYID_AMOUNTTEMP 0 // Nethra in Protector Drone form will absorb Electricity and heal :P
                {
@@ -2851,7 +2851,7 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
                else // This is specfically for Nethra in Human form [Christina]. This code does not affect other characters or Nethra in Alien Form.
                {
                 setvarvar TEMPDAMAGEVAR TEMPVAR
-                state char_elecdamage_misc
+                ifvarn VEHICLEID -1 state char_elecdamage_misc
                 setvarvar TEMPVAR TEMPDAMAGEVAR
                 ifvarl TEMPVAR 1 { ifrnd 128 setvar TEMPVAR 1 else setvar TEMPVAR 0 }
 
@@ -2929,7 +2929,7 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
               else // This is for damage to anyone who's not Nethra in her Human form [Christina]. This code will not affect Christina or Nethra
               {
                setvarvar TEMPDAMAGEVAR TEMPVAR
-               state char_elecdamage_misc
+               ifvarn VEHICLEID -1 state char_elecdamage_misc
                setvarvar TEMPVAR TEMPDAMAGEVAR
 
                //*********************
@@ -2972,22 +2972,14 @@ state player-newhurtrail_dmg   // NEWHURTRAIL [Atomic / Electric Elemental]
                ifvarg TEMPVAR 0
                {
                 setvar DAMAGEMODIFIER 1000
-                // Equipment Slot #1
-                ifvare PLAYEREQUIPSLOTITEM1 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #2
-                ifvare PLAYEREQUIPSLOTITEM2 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #3
-                ifvare PLAYEREQUIPSLOTITEM3 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #4
-                ifvare PLAYEREQUIPSLOTITEM4 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #5
-                ifvare PLAYEREQUIPSLOTITEM5 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #6
-                ifvare PLAYEREQUIPSLOTITEM6 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #7
-                ifvare PLAYEREQUIPSLOTITEM7 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
-                // Equipment Slot #8
-                ifvare PLAYEREQUIPSLOTITEM8 3 addvar DAMAGEMODIFIER -238 // Plasma Ring
+                ifvare PLAYEREQUIPSLOTITEM1 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #1
+                ifvare PLAYEREQUIPSLOTITEM2 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #2
+                ifvare PLAYEREQUIPSLOTITEM3 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #3
+                ifvare PLAYEREQUIPSLOTITEM4 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #4
+                ifvare PLAYEREQUIPSLOTITEM5 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #5
+                ifvare PLAYEREQUIPSLOTITEM6 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #6
+                ifvare PLAYEREQUIPSLOTITEM7 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #7
+                ifvare PLAYEREQUIPSLOTITEM8 3 addvar DAMAGEMODIFIER -238 // Plasma Ring - Equipment Slot #8
                 ifvarl DAMAGEMODIFIER 0 setvar DAMAGEMODIFIER 0
                 state damagemod-dmgflr-general
                }
@@ -3176,7 +3168,6 @@ state player-newfloorplasma_dmg
               //*********************
               //*Character Modifiers*
               //*********************
-
               setvarvar TEMPDAMAGEVAR TEMPVAR
               state char_firedamage_misc
               setvarvar TEMPVAR TEMPDAMAGEVAR

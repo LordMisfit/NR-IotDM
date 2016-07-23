@@ -962,6 +962,7 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
        ifvarand PLAYERSTATUS? 2 { mulvar TEMPMOD 1250 divvar TEMPMOD 1000 } // Haste = 125% Speed
        ifvarand PLAYERSTATUS? 4 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Slow = 75% Speed
 
+       // Defending
        ifvare DEFENSEMODE? 1
        {
         ifvare TEMPVAR8 0 // HP Regen
@@ -969,12 +970,14 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Defend Mode = 75% Speed if Poisoned
          else { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // Defend Mode = 133% Speed
         }
-        ifvare TEMPVAR8 2 // AP Regen
+        ifvare TEMPVAR8 2 // EP Regen
         { 
          ifvarand PLAYERSTATUS? 32768 { mulvar TEMPMOD 750 divvar TEMPMOD 1000 } // Defend Mode = 75% Speed if Mindblown
          else { mulvar TEMPMOD 1333 divvar TEMPMOD 1000 } // Defend Mode = 133% Speed
         }
        }
+
+	   // In a Vehicle
        ifvarn VEHICLEID -1 
        {
         ifvarg VEHICLETYPE -1 ifvarl VEHICLETYPE 3 
@@ -991,9 +994,17 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
          }
         }
        }
-       else
+       else // NOT in a Vehicle
        {
-        ifvarand bits 1 // Jump
+        ifvarand bits 536870912 ifvarand extbits 12 // "Focusing" EP
+	    {
+         ifvare TEMPVAR8 2 // EP Regen
+         { 
+		  mulvar TEMPMOD 4
+		 }
+		}
+
+	    ifvarand bits 1 // Jump
         { 
          ifp ponground
          {
@@ -1157,9 +1168,13 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
           else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
          }
          ifvare TEMPVAR8 2 // EP Regen
-         { 
-          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
-          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+         {
+		  ifvarand extbits 12 nullop
+		  else
+		  {
+           ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+           else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+		  }
          }
         }
         else ifvarand extbits 8 // Strafe Right
@@ -1171,8 +1186,12 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
          }
          ifvare TEMPVAR8 2 // EP Regen
          { 
-          ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
-          else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+		  ifvarand extbits 12 nullop
+		  else
+		  {
+           ifvarand PLAYERSTATUS? 8 { mulvar TEMPMOD 2500 divvar TEMPMOD 1000 } // 250% speed if Mindblown
+           else { mulvar TEMPMOD 400 divvar TEMPMOD 1000 }
+		  }
          }
         }
         else ifvarand extbits 16 // Turn Left
@@ -2001,16 +2020,8 @@ ends
 state pressoncolamachine
  ifvare oldskoolmode 0
  {
-  ifvarg wallxdist -845
+  ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0
   {
-   ifvarl wallxdist 845
-   {
-    ifvarg wallydist -845
-    {
-     ifvarl wallydist 845
-     {
-      ifvarg CURRENTHITPOINTS 0 // ifp palive
-      {
        ifhitspace
        { 
         state stopsearchsounds
@@ -2121,10 +2132,6 @@ state pressoncolamachine
          setvar com_pause 39
         }
        }
-      }
-     }
-    }
-   }
   }
  }
 ends
@@ -2132,16 +2139,8 @@ ends
 state pressonsnackmachine
  ifvare oldskoolmode 0
  {
-  ifvarg wallxdist -845
+  ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0
   {
-   ifvarl wallxdist 845
-   {
-    ifvarg wallydist -845
-    {
-     ifvarl wallydist 845
-     {
-      ifvarg CURRENTHITPOINTS 0 // ifp palive
-      {
        ifhitspace
        { 
         state stopsearchsounds
@@ -2249,10 +2248,6 @@ state pressonsnackmachine
          setvar com_pause 39
         }
        }
-      }
-     }
-    }
-   }
   }
  }
 ends
@@ -10531,7 +10526,7 @@ ifvare mainmenu -1
   setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
   ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
   {
-   ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+   ifvarg wallxdist ATMMACHINEMINDIST ifvarl wallxdist ATMMACHINEMAXDIST ifvarg wallydist ATMMACHINEMINDIST ifvarl wallydist ATMMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
     ifhitspace
     { 
@@ -10561,7 +10556,7 @@ ifvare mainmenu -1
   setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
   ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
   {
-   ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+   ifvarg wallxdist ATMMACHINEMINDIST ifvarl wallxdist ATMMACHINEMAXDIST ifvarg wallydist ATMMACHINEMINDIST ifvarl wallydist ATMMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
     ifhitspace
     { 
@@ -10621,7 +10616,7 @@ ifvare mainmenu -1
   setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
   ifvare MISCARRAYID_AMOUNTTEMP -1 ifvare oldskoolmode 0
   {
-   ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+   ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
    {
          ifhitspace
          { 
@@ -10678,7 +10673,7 @@ ifvare mainmenu -1
   {
    ifvare oldskoolmode 0
    {
-    ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
+    ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
     {
          ifhitspace
          { 

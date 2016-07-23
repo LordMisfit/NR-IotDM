@@ -2373,15 +2373,17 @@ state player_defense
       mulvarvar PLAYERDAMAGE tempc
       divvar PLAYERDAMAGE 1000
   
-      ifvare FLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
-      ifvare FLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
-      ifvare CEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
-      ifvare CEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
-
-      ifvare EMUFLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
-      ifvare EMUFLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
-      ifvare EMUCEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
-      ifvare EMUCEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+      ifvare VEHICLEID -1
+      {
+       ifvare FLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+       ifvare FLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+       ifvare CEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+       ifvare CEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+       ifvare EMUFLOORDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+       ifvare EMUFLOORDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+       ifvare EMUCEILINGDAMAGETYPE? 1 divvar PLAYERDAMAGE 4
+       ifvare EMUCEILINGDAMAGETYPE? 4 divvar PLAYERDAMAGE 10
+	  }
      }
 
      // Jack
@@ -2429,8 +2431,11 @@ state player_defense
       ifvare MISCARRAYID_AMOUNTTEMP 1 divvar PLAYERDAMAGE 3 // Cuts damage to Bubsy by 67% if he's wearing his diving suit.
       else
       {
-       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2 // 200% if underwater
-       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 } // 133% if knee-high in water
+	   ifvare VEHICLEID -1
+	   {
+        ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 mulvar PLAYERDAMAGE 2 // 200% if underwater
+        ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 4 divvar PLAYERDAMAGE 3 } // 133% if knee-high in water
+	   }
       }
   
       // ********************************************************
@@ -2475,8 +2480,11 @@ state player_defense
       // **************************************
       // *Setting up Ami's Water-Bonus Defense*
       // **************************************
-      ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar PLAYERDAMAGE 6
-      ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 7 }
+	  ifvare VEHICLEID -1
+	  {
+       ifvare sector[PLAYERSECTOR].lotag 2 ifvare WATER? 2 divvar PLAYERDAMAGE 6
+       ifvare sector[PLAYERSECTOR].lotag 1 ifvare WATER? 1 { mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 7 }
+	  }
       // *******************************
       // *Setting Up Ami's Form Bonuses*
       // *******************************
