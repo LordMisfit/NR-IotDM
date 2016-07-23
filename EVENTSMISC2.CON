@@ -796,17 +796,23 @@ else // ifvare mainmenu 0
       ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR nullop
       else
       {
-       subvar CURRENTENERGYPOINTS 1
-       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 16 else addvar TEMPVAR 6
+       setvarvar ESHIELDCHARGEMULTI ESHIELDCHARGETIMER
+	   divvar ESHIELDCHARGEMULTI 104
+	   addvar ESHIELDCHARGEMULTI 1
+	   setvar tempc 1 mulvarvar tempc ESHIELDCHARGEMULTI
+	   subvarvar CURRENTENERGYPOINTS tempc
+       ifvare ESHIELDADVANCEMENT 1 addvar TEMPVAR 12 else addvar TEMPVAR 5
        setvarvar tempb ESHIELDDMGFACTOR
-       divvar tempb 16
+       divvar tempb 24
        addvarvar TEMPVAR tempb
 
-       ifvare SKILLLEVEL 0 mulvar TEMPVAR 6 // 600%
-       ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 mulvar TEMPVAR 4 // 400%
+       ifvare SKILLLEVEL 0 { mulvar TEMPVAR 10 divvar TEMPVAR 3 } // 333.3%
+       ifvarg SKILLLEVEL 0 ifvarl SKILLLEVEL 4 { mulvar TEMPVAR 8 divvar TEMPVAR 3 } // 266.7%
        ifvarg SKILLLEVEL 3 ifvarl SKILLLEVEL 7 mulvar TEMPVAR 2 // 200%
        ifvarg SKILLLEVEL 6 { mulvar TEMPVAR 4 divvar TEMPVAR 3 } // 133.3%
 
+	   mulvarvar TEMPVAR ESHIELDCHARGEMULTI
+	   
        // addlogvar TEMPVAR
        addvarvar DAMAGEINCELL TEMPVAR
 
@@ -830,9 +836,22 @@ else // ifvare mainmenu 0
        {
         ifvarvarg DAMAGEINCELL ESHIELDDMGFACTOR { addvar CURRENTCELLS 1 subvarvar DAMAGEINCELL ESHIELDDMGFACTOR }
        }
+	   addvar ESHIELDCHARGETIMER 1
       }
+	  else
+ 	  {
+	   setvar ESHIELDCHARGETIMER 0
+	  }
      }
+	 else
+	 {
+	  setvar ESHIELDCHARGETIMER 0
+ 	 }
     }
+	else
+	{
+	 setvar ESHIELDCHARGETIMER 0
+	}
    }
   }
  }
