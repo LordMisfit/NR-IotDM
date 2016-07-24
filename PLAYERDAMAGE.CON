@@ -881,6 +881,74 @@ state pkshieldblockhit
     break
 ends
 
+state freezeblast_frozen-player
+      // addlogvar FROZENTIMER
+      //**********************************
+      //** Freeze-Chill in Cold Environs**
+      //**********************************
+      ifvarl INVULNTIME 1
+      {
+       // Reduceable Freeze Range
+       setvar tempc 45
+       ifvare CHARACTERSELECTED? 3
+       {
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar tempc 29 ifrnd 64 addvar tempc 1 } // -50% Ice damage w/ Diving Suit on
+        else { setvar tempc 59 ifrnd 128 addvar tempc 1 }
+       }
+       ifvare CHARACTERSELECTED? 4 setvar tempc 4
+       ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
+       ifvare CHARACTERSELECTED? 9 setvar tempc 90
+       ifvare CHARACTERSELECTED? 10 
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempc 18 else setvar tempc 36 
+       }
+       ifvare CHARACTERSELECTED? 14 { setvar tempc 22 ifrnd 128 addvar tempc 1 }
+       mulvarvar tempc winterclothes
+       divvar tempc 100
+
+       // Base Freeze Range [%]
+       setvar tempb 50
+       ifvare CHARACTERSELECTED? 3
+       {
+        setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 33 else setvar tempb 66
+       }
+       ifvare CHARACTERSELECTED? 4 setvar tempb 5
+       ifvare CHARACTERSELECTED? 6 setvar tempb 75
+       ifvare CHARACTERSELECTED? 9 setvar tempb 100
+       ifvare CHARACTERSELECTED? 10 
+       {
+        setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+        ifvare MISCARRAYID_AMOUNTTEMP 1 setvar tempb 20 else setvar tempb 40 
+       }
+       ifvare CHARACTERSELECTED? 14 setvar tempb 25
+       subvarvar tempb tempc
+
+       ifvare PLAYEREQUIPSLOTITEM1 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM2 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM3 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM4 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM5 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM6 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM7 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare PLAYEREQUIPSLOTITEM8 2 { mulvar tempb 3 divvar tempb 4 }
+       ifvare CHARACTERSELECTED? 12 ifvarand PLAYERSTATUS? 32 divvar tempb 2
+
+       ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0 setvar tempb 0
+       // addlogvar tempb
+
+       randvarvar tempg tempb
+       addvarvar tempg tempb
+       divvar tempg 8
+       addvarvar FROZENTIMER tempg
+     }
+     ifvarl FROZENTIMER 0 setvar FROZENTIMER 0
+     ifvarg FROZENTIMER 1560 setvar FROZENTIMER 1560
+     // addlogvar FROZENTIMER
+ends
+
 state freezeblast-chilleffect_player
       //**********************************
       //** Freeze-Chill in Cold Environs**
@@ -892,14 +960,8 @@ state freezeblast-chilleffect_player
        ifvare CHARACTERSELECTED? 3 
        { 
         setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
-        ifvare MISCARRAYID_AMOUNTTEMP 1 // Cuts damage to Bubsy to 50% if he's wearing his diving suit.
-        {
-         setvar tempc 29 ifrnd 64 addvar tempc 1 
-        }
-        else
-        {
-         setvar tempc 59 ifrnd 128 addvar tempc 1 
-        }
+        ifvare MISCARRAYID_AMOUNTTEMP 1 { setvar tempc 29 ifrnd 64 addvar tempc 1 } // -50% Ice damage w/ Diving Suit on
+        else { setvar tempc 59 ifrnd 128 addvar tempc 1 }
        }
        ifvare CHARACTERSELECTED? 4 setvar tempc 4
        ifvare CHARACTERSELECTED? 6 { setvar tempc 67 ifrnd 128 addvar tempc 1 }
@@ -933,28 +995,28 @@ state freezeblast-chilleffect_player
 
        ifvarn ATTACKINGACTORPICNUM APLAYER
        {
-        ifvare PLAYEREQUIPSLOTITEM1 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM2 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM3 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM4 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM5 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM6 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM7 2 divvar tempb 2
-        ifvare PLAYEREQUIPSLOTITEM8 2 divvar tempb 2
+        ifvare PLAYEREQUIPSLOTITEM1 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM2 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM3 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM4 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM5 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM6 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM7 2 { mulvar tempb 3 divvar tempb 4 }
+        ifvare PLAYEREQUIPSLOTITEM8 2 { mulvar tempb 3 divvar tempb 4 }
         ifvare CHARACTERSELECTED? 12 ifvarand PLAYERSTATUS? 32 divvar tempb 2 // Triad Refractor
        }
        else
        {
         ifvarvarn ATTACKINGACTOR PLAYERID
         {
-         ifvare PLAYEREQUIPSLOTITEM1 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM2 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM3 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM4 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM5 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM6 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM7 2 divvar tempb 2
-         ifvare PLAYEREQUIPSLOTITEM8 2 divvar tempb 2
+         ifvare PLAYEREQUIPSLOTITEM1 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM2 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM3 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM4 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM5 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM6 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM7 2 { mulvar tempb 3 divvar tempb 4 }
+         ifvare PLAYEREQUIPSLOTITEM8 2 { mulvar tempb 3 divvar tempb 4 }
          ifvare CHARACTERSELECTED? 12 ifvarand PLAYERSTATUS? 32 divvar tempb 2 // Triad Refractor
         }
        }
@@ -963,9 +1025,11 @@ state freezeblast-chilleffect_player
 
        randvarvar tempg tempb
        addvarvar tempg tempb
+       divvar tempg 8
        addvarvar freezetimer tempg
 
        ifvarl freezetimer 0 setvar freezetimer 0
+       ifvarg freezetimer 1560 setvar freezetimer 1560
        state dealfreezedamage-player
       }
 ends
@@ -2456,7 +2520,7 @@ state player_defense
        randvar RNDMIZER 999 addvar RNDMIZER 1
 	   setvar RNDMIZERLIMIT 250 // base of 25% dodge
        setvar CHARACTERARRAY 2
-       getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Paula's current level
+       getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Bubsy's current level
  	   mulvarvar TEMPVAR 15 divvarvar TEMPVAR 4 // 3.75% increase [max of 62.5% at level 100]
  	   subvarvar RNDMIZERLIMIT TEMPVAR
 	   addlogvar RNDMIZERLIMIT

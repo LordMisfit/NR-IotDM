@@ -1,3 +1,91 @@
+state actorcheck_frozentimer
+        ifvare mainmenu 0
+        {
+         getactor[THISACTOR].sectnum TEMPVAR2
+         getactorvar[TEMPVAR2].freezingmod TEMPVAR3
+         addvarvar TEMPVAR3 freezingbase
+
+         ifvarg TEMPVAR3 0
+         {
+          divvar TEMPVAR3 8
+          ifvarl TEMPVAR3 1 { ifrnd 64 setvar TEMPVAR3 1 else setvar TEMPVAR3 0 }
+         }
+         ifvarg TEMPVAR3 1
+         {
+          ifoutside nullop else { mulvar TEMPVAR3 1 divvar TEMPVAR3 4 }
+          ifrnd 192
+          {
+           randvarvar TEMPVAR4 TEMPVAR3
+           ifvare mainmenu 0 addvarvar FROZENTIMER TEMPVAR4
+           ifvarl FROZENTIMER 0 setvar FROZENTIMER 0
+          }
+         }
+
+         subvar FROZENTIMER 1
+         // Actor Checks
+         ifactor COMMANDER
+         {
+          ifrnd 128 subvar FROZENTIMER 1
+          ifrnd 48 subvar FROZENTIMER 1
+         }
+         ifactor BOSS4
+         {
+          ifrnd 224 subvar FROZENTIMER 1
+          ifrnd 128 subvar FROZENTIMER 1
+          ifrnd 48 subvar FROZENTIMER 1
+          ifrnd 14 subvar FROZENTIMER 1
+         }
+        }
+        ifvarl FROZENTIMER 0 setvar FROZENTIMER 0
+        ifvarg FROZENTIMER 1560 setvar FROZENTIMER 1560
+ends
+
+state freezeblast_frozen-actor
+    // addlogvar FROZENTIMER
+    //**********************************
+    //** Freeze-Chill in Cold Environs**
+    //**********************************
+    ifvarl ACTORINVULNTIME 1
+    {
+     setvar tempf 45
+     ifactor BOSS1 { setvar tempf 75 addvar tempf 1 }
+     ifactor BOSS2 setvar tempf 90 
+     ifactor BOSS3 { setvar tempf 112 ifrnd 128 addvar tempf 1 }
+     ifactor BOSS4 setvar tempf 18
+     ifactor NEWBEAST setvar tempf 36
+     ifactor DRONE setvar tempf 0
+     ifactor EMPTYTANK setvar tempf 0
+     ifactor TANK setvar tempf 0
+     ifactor SCORPIONTANK setvar tempf 0
+     ifactor ROTATEGUN setvar tempf 0
+
+     mulvarvar tempf enemywinterclothes
+     divvar tempf 100
+
+     setvar temph 50
+     ifactor BOSS1 setvar temph 75
+     ifactor BOSS2 setvar temph 100 
+     ifactor BOSS3 setvar temph 125
+     ifactor BOSS4 setvar temph 20
+     ifactor NEWBEAST setvar temph 40
+     ifactor DRONE setvar temph 0
+     ifactor EMPTYTANK setvar temph 0
+     ifactor TANK setvar temph 0
+     ifactor SCORPIONTANK setvar temph 0
+     ifactor ROTATEGUN setvar temph 0
+
+     subvarvar temph tempf
+
+     randvarvar tempg temph
+     addvarvar tempg temph
+     divvar tempg 8
+     addvarvar FROZENTIMER tempg
+    }
+    ifvarl FROZENTIMER 0 setvar FROZENTIMER 0
+    ifvarg FROZENTIMER 1560 setvar FROZENTIMER 1560
+    // addlogvar FROZENTIMER
+ends
+
 state monster_defense_calc
   getactor[THISACTOR].picnum DEFENDINGACTOR
   getactor[THISACTOR].pal DEFENDINGACTORPAL
