@@ -477,6 +477,34 @@ state jack_calcskillsdmg
          divvar TEMPVAR2 1000
 ends
 
+state jack_calcskillsdefignore
+        setvar CHARACTERARRAY 2
+        getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Jack current level
+        setvarvar TEMPVAR2 TEMPVAR
+		addlogvar TEMPVAR2
+        ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 625
+        ifvare SKILLLEVEL 1 mulvar TEMPVAR2 650
+        ifvare SKILLLEVEL 2 mulvar TEMPVAR2 675
+        ifvare SKILLLEVEL 3 mulvar TEMPVAR2 700
+        ifvare SKILLLEVEL 4 mulvar TEMPVAR2 725
+        ifvare SKILLLEVEL 5 mulvar TEMPVAR2 750
+        ifvare SKILLLEVEL 6 mulvar TEMPVAR2 775
+        ifvare SKILLLEVEL 7 mulvar TEMPVAR2 800
+        ifvare SKILLLEVEL 8 mulvar TEMPVAR2 825
+        ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 850
+        divvar TEMPVAR2 1000
+		addlogvar TEMPVAR2
+
+        addlogvar ACTORDEFENSETEMP
+        setvarvar TEMPVAR ACTORDEFENSETEMP
+        mulvarvar TEMPVAR TEMPVAR2
+        divvar TEMPVAR 100
+        subvarvar ACTORDEFENSETEMP TEMPVAR
+        setvar TEMPVAR 0
+        setvar TEMPVAR2 0
+        addlogvar ACTORDEFENSETEMP
+ends
+
 //*********************************************************
 //*********************************************************
 //**State for Calculating Kick/Melee Damage to non-players*
@@ -960,42 +988,63 @@ state add_playermeleedamage
  
       state serpenthelmet_check
 
-      ifvarand CHEATBITFIELD? 8
+      ifvarand CHEATBITFIELD? 8 // Damage Cheat :P
       {
-       ifvare HITACTORTYPE? 1
+       ifvare HITACTORTYPE? 1 // Civilians
        {
-        ifvare CHARACTERSELECTED? 15
+        ifvare CHARACTERSELECTED? 2
         {
-         ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4
-        }
-        else
-        ifvare CHARACTERSELECTED? 14
-        {
-         ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2
-        }
-        else
-        ifvare CHARACTERSELECTED? 10
-        {
-         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-         ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
-         else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 }
-        }
-        else
-        ifvare CHARACTERSELECTED? 3
+         state jack_calcskillsdefignore
+ 	    }
+        ifvare CHARACTERSELECTED? 3 // Bubsy [ignores 60$ of defense]
         {
          mulvar ACTORDEFENSETEMP 2
          divvar ACTORDEFENSETEMP 5
         }
- 
+        ifvare CHARACTERSELECTED? 10
+        {
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 } // 0 = Alien Form [Ignore 18.75% defense]
+         else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 } // 1 = Human Form [Ignore 81.25% defense]
+        }
+        ifvare CHARACTERSELECTED? 14
+        {
+         ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2 // ???????? = Ignore 95% or 50% of defense
+        }
+        ifvare CHARACTERSELECTED? 15
+        {
+         ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 // Triad Blitzkrieg = Ignore 75% of defense
+        }
+
         ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
         subvarvar KNEEDAMAGE ACTORDEFENSETEMP
        }
-       else
+       else // Allies or Monsters
        {
+        ifvare CHARACTERSELECTED? 2
+        {
+         state jack_calcskillsdefignore
+ 	    }
+        ifvare CHARACTERSELECTED? 3 // Bubsy [ignores 60$ of defense]
+        {
+         mulvar ACTORDEFENSETEMP 2
+         divvar ACTORDEFENSETEMP 5
+        }
+        ifvare CHARACTERSELECTED? 10
+        {
+         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+         ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 } // 0 = Alien Form [Ignore 18.75% defense]
+         else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 } // 1 = Human Form [Ignore 81.25% defense]
+        }
+        ifvare CHARACTERSELECTED? 14
+        {
+         ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2 // ???????? = Ignore 95% or 50% of defense
+        }
         ifvare CHARACTERSELECTED? 15
         {
-         ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4
+         ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 // Triad Blitzkrieg = Ignore 75% of defense
         }
+
         ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
         subvarvar KNEEDAMAGE ACTORDEFENSETEMP
         state cheatersound
@@ -1003,30 +1052,31 @@ state add_playermeleedamage
         ifvarvarg KNEEDAMAGE STATLIMITMAXIMUM setvarvar KNEEDAMAGE STATLIMITMAXIMUM
        }
       }
-      else
+      else // Damage Cheat off
       { 
-       ifvare CHARACTERSELECTED? 15
+       ifvare CHARACTERSELECTED? 2
        {
-        ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4
-       }
-       else
-       ifvare CHARACTERSELECTED? 14
+        state jack_calcskillsdefignore
+	   }
+       ifvare CHARACTERSELECTED? 3 // Bubsy [ignores 60$ of defense]
        {
-        ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2
+        mulvar ACTORDEFENSETEMP 2
+		divvar ACTORDEFENSETEMP 5
        }
-       else
        ifvare CHARACTERSELECTED? 10
        {
         setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-        ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 }
-        else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 }
+        ifvare MISCARRAYID_AMOUNTTEMP 0 { mulvar ACTORDEFENSETEMP 13 divvar ACTORDEFENSETEMP 16 } // 0 = Alien Form [Ignore 18.75% defense]
+        else { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 16 } // 1 = Human Form [Ignore 81.25% defense]
        }
-       else
-       ifvare CHARACTERSELECTED? 3
+       ifvare CHARACTERSELECTED? 14
        {
-        mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5
+        ifvare PUBLICBETA? 0 divvar ACTORDEFENSETEMP 20 else divvar ACTORDEFENSETEMP 2 // ???????? = Ignore 95% or 50% of defense
        }
- 
+       ifvare CHARACTERSELECTED? 15
+       {
+        ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 // Triad Blitzkrieg = Ignore 75% of defense
+       }
        ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
        subvarvar KNEEDAMAGE ACTORDEFENSETEMP
       }
@@ -4590,17 +4640,25 @@ ifvarg tempb 0
     ifvare tempc STROKEMISSILE_SPLIT divvar ACTORDEFENSETEMP 60
     state checkdamagecaps-general
 
-    // Stage 25p of Damage Formula
+    // Stage 25p of Damage Formula - Defense Ignoring Abilities
     ifvarand CHEATBITFIELD? 8
     {
      ifvare HITACTORTYPE? 1
      {
+      ifvare CHARACTERSELECTED? 2
+	  { 
+	   state jack_calcskillsdefignore
+	  }
       ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
       ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
       subvarvar GENERALDAMAGE ACTORDEFENSETEMP
      }
      else
      {
+      ifvare CHARACTERSELECTED? 2
+	  { 
+	   state jack_calcskillsdefignore
+	  }
       ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
       ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
       subvarvar GENERALDAMAGE ACTORDEFENSETEMP
@@ -4611,6 +4669,10 @@ ifvarg tempb 0
     }
     else
     {
+     ifvare CHARACTERSELECTED? 2
+	 { 
+	  state jack_calcskillsdefignore
+     }
      ifvare CHARACTERSELECTED? 15 { ifvarand PLAYERSTATUS? 2048 divvar ACTORDEFENSETEMP 4 } // If Maken is using "Triad Blitzkreg"
      ifvarl ACTORDEFENSETEMP 0 setvar ACTORDEFENSETEMP 0
      subvarvar GENERALDAMAGE ACTORDEFENSETEMP
