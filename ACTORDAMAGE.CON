@@ -482,16 +482,16 @@ state jack_calcskillsdefignore
         getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Jack current level
         setvarvar TEMPVAR2 TEMPVAR
 		addlogvar TEMPVAR2
-        ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 625
-        ifvare SKILLLEVEL 1 mulvar TEMPVAR2 650
-        ifvare SKILLLEVEL 2 mulvar TEMPVAR2 675
-        ifvare SKILLLEVEL 3 mulvar TEMPVAR2 700
-        ifvare SKILLLEVEL 4 mulvar TEMPVAR2 725
-        ifvare SKILLLEVEL 5 mulvar TEMPVAR2 750
-        ifvare SKILLLEVEL 6 mulvar TEMPVAR2 775
-        ifvare SKILLLEVEL 7 mulvar TEMPVAR2 800
-        ifvare SKILLLEVEL 8 mulvar TEMPVAR2 825
-        ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 850
+        ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 620
+        ifvare SKILLLEVEL 1 mulvar TEMPVAR2 640
+        ifvare SKILLLEVEL 2 mulvar TEMPVAR2 660
+        ifvare SKILLLEVEL 3 mulvar TEMPVAR2 680
+        ifvare SKILLLEVEL 4 mulvar TEMPVAR2 700
+        ifvare SKILLLEVEL 5 mulvar TEMPVAR2 720
+        ifvare SKILLLEVEL 6 mulvar TEMPVAR2 740
+        ifvare SKILLLEVEL 7 mulvar TEMPVAR2 760
+        ifvare SKILLLEVEL 8 mulvar TEMPVAR2 780
+        ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 800
         divvar TEMPVAR2 1000
 		addlogvar TEMPVAR2
 

@@ -3593,6 +3593,7 @@ state player-newpurplelava_dmg
 
               state dmgfloor-pnulldamage
               subvarvar temp TEMPVAR
+
               state setplayerhealthondmgflr
               // 1 dmg per tic (100% chance)
               ifvarl TEMPVAR 0 setvar PLAYERHPDAMAGED? -1
@@ -4102,7 +4103,6 @@ state player-amoebaacid_dmg
               setvarvar TEMPVAR TEMPDAMAGEVAR
 
               state dmgfloor-pnulldamage
-
               subvarvar temp TEMPVAR
 
               state setplayerhealthondmgflr
@@ -4328,8 +4328,8 @@ state player-megalava_dmg
               setvarvar TEMPVAR TEMPDAMAGEVAR
 
               state dmgfloor-pnulldamage
-
               subvarvar temp TEMPVAR
+
               state setplayerhealthondmgflr
               ifvarl TEMPVAR 0 setvar PLAYERHPDAMAGED? -1
               else ifvarg TEMPVAR 0 setvar PLAYERHPDAMAGED? 1
@@ -4554,8 +4554,8 @@ state player-ultralava_dmg
               setvarvar TEMPVAR TEMPDAMAGEVAR
 
               state dmgfloor-pnulldamage
-
               subvarvar temp TEMPVAR
+
               state setplayerhealthondmgflr
               ifvarl TEMPVAR 0 setvar PLAYERHPDAMAGED? -1
               else ifvarg TEMPVAR 0 setvar PLAYERHPDAMAGED? 1
@@ -4780,7 +4780,6 @@ state player-hypermagma_dmg
               setvarvar TEMPVAR TEMPDAMAGEVAR
 
               state dmgfloor-pnulldamage
-
               subvarvar temp TEMPVAR
 
               state setplayerhealthondmgflr

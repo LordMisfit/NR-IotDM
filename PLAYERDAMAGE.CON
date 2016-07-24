@@ -999,6 +999,15 @@ state watchovermeskill-defense
    }
 ends
 
+state dodgeanattack
+       ifvarg PLAYERDAMAGE 0
+	   {
+        setvar PLAYERDAMAGE 0
+        redefinequote 321 ^20DODGED THE ATTACK!!
+        setvarvar fta fta_normal setvar ftq 321
+	   }
+ends
+
 //*****************************************************
 //*****************************************************
 //*****************************************************
@@ -2444,14 +2453,19 @@ state player_defense
       setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
       ifvarg MISCARRAYID_AMOUNTTEMP 0
       {
-       ifvarg PLAYERDAMAGE 0
+       // ******************************************************
+      // *Setting Up Paula's ability to Dodge Attacks at Random*
+       // ******************************************************
+       randvar RNDMIZER 999 addvar RNDMIZER 1
+	   setvar RNDMIZERLIMIT 250 // base of 25% dodge
+       setvar CHARACTERARRAY 2
+       getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Paula's current level
+ 	   mulvarvar TEMPVAR 15 divvarvar TEMPVAR 4 // 3.75% increase [max of 62.5% at level 100]
+ 	   subvarvar RNDMIZERLIMIT TEMPVAR
+	   addlogvar RNDMIZERLIMIT
+       ifvarvarg RNDMIZER RNDMIZERLIMIT
        {
-        ifrnd 64
-        {
-         setvar PLAYERDAMAGE 0
-         redefinequote 321 ^20BLOCKED THE ATTACK!!
-         setvarvar fta fta_normal setvar ftq 321
-        }
+	    state dodgeanattack
        }
       }
      }
@@ -2724,17 +2738,19 @@ state player_defense
       mulvarvar PLAYERDAMAGE tempc
       divvar PLAYERDAMAGE 1000
       // ******************************************************
-      // *Setting Up Paula's ability to Null Attacks at Random*
+      // *Setting Up Paula's ability to Dodge Attacks at Random*
       // ******************************************************
-      ifvarg PLAYERDAMAGE 0
-      {
-       ifrnd 56
-       {
-        setvar PLAYERDAMAGE 0
-        redefinequote 321 ^20NULLED THE ATTACK!!
-        setvarvar fta fta_normal setvar ftq 321
-       }
-      }
+      randvar RNDMIZER 999 addvar RNDMIZER 1
+	  setvar RNDMIZERLIMIT 225 // base of 22.5% dodge
+      setvar CHARACTERARRAY 2
+      getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Paula's current level
+	  mulvarvar TEMPVAR 13 divvarvar TEMPVAR 2 // 6.5% increase [max of 86.8% at level 100]
+	  subvarvar RNDMIZERLIMIT TEMPVAR
+      addlogvar RNDMIZERLIMIT
+      ifvarvarg RNDMIZER RNDMIZERLIMIT
+	  {
+       state dodgeanattack
+	  }
      }
 
      // Lori
