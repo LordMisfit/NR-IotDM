@@ -2453,9 +2453,6 @@ state player_defense
       setvar MISCARRAYID 103 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-FORM?
       ifvarg MISCARRAYID_AMOUNTTEMP 0
       {
-       // ******************************************************
-      // *Setting Up Paula's ability to Dodge Attacks at Random*
-       // ******************************************************
        randvar RNDMIZER 999 addvar RNDMIZER 1
 	   setvar RNDMIZERLIMIT 250 // base of 25% dodge
        setvar CHARACTERARRAY 2
