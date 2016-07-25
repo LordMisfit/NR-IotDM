@@ -317,21 +317,21 @@ state level_calcsurvivalrate
         // Factor in Level
         setvarvar TEMPVAR5 PLAYERTEMPLEVEL
 
-        ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR5 7
-        else ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR5 5
-        else ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR5 11
-        else ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR5 10
-        else ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR5 8
-        else ifvare CHARACTERSELECTED? 6 mulvar TEMPVAR5 3
-        else ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR5 6
-        else ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR5 14
-        else ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR5 2
-        else ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR5 12
-        else ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR5 15
-        else ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR5 4
-        else ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR5 13
-        else ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR5 1
-        else ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR5 9
+        ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR5 7			// Duke
+        else ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR5 5		// Jack
+        else ifvare CHARACTERSELECTED? 3 mulvar TEMPVAR5 11		// Bubsy
+        else ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR5 10		// Ami
+        else ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR5 8		// Lo Wang
+        else ifvare CHARACTERSELECTED? 6 mulvar TEMPVAR5 3		// ESSence
+        else ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR5 6		// Ted
+        else ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR5 14		// Lisa
+        else ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR5 2		// Cybanis
+        else ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR5 12	// Christina/Nethra
+        else ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR5 15	// Paula
+        else ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR5 4		// Lori
+        else ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR5 13	// Minako
+        else ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR5 1		// ???????
+        else ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR5 9		// Maken
         else mulvar TEMPVAR5 5
         addvarvar SURVIVALVALUE_TEMP TEMPVAR5
 

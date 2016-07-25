@@ -1072,6 +1072,10 @@ state dodgeanattack
 	   }
 ends
 
+state player-canceldeflectdmg
+   setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+ends
+
 //*****************************************************
 //*****************************************************
 //*****************************************************
@@ -1992,11 +1996,12 @@ state player_defense
   ifvare PUBLICBETA? 0 mulvar TEMPVAR4 8 else mulvar TEMPVAR4 4
   subvar TEMPVAR4 1
 
-  ifvare ACTORDEFLECTDAMAGESTATE 1 // If the enemy is under the effect of an Invuln item, they deflect all player damage
+  // If the enemy is under the effect of an Invuln item, they deflect all player damage
+  ifvare ACTORDEFLECTDAMAGESTATE 1
   {
    ifvarg INVULNTIME 0
    {
-    setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0
+    state player-canceldeflectdmg
    }
    else
    {
@@ -2008,38 +2013,38 @@ state player_defense
 
     ifvare INVULNREFLECTRATE 0
     {
-     setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0
+     state player-canceldeflectdmg
     }
     else
     { 
      setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
      ifvarn MISCARRAYID_AMOUNTTEMP 0 // Prevents Deflected Damage from hurting an incoming character after one has just died for 1.5 secs :P
      {
-      setvar ACTORDEFLECTEDDAMAGE 0 setvar PLAYERDAMAGE 0 setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTDAMAGESTATE 0
+      state player-canceldeflectdmg
      }
      else
      {
       ifvare tempvehicleid -1 // Player/Character is not in a vehicle
       {
-       ifvare CHARACTERSELECTED? 8
+       ifvare CHARACTERSELECTED? 8 // Lisa
        {
         ifvare DEFLECTATTACKPICNUM BIOMETRICBLAST1 divvar ACTORDEFLECTEDDAMAGE 20
        }
-       ifvare CHARACTERSELECTED? 10
+       ifvare CHARACTERSELECTED? 10 // Christina/Nethra
        {
         ifvare PUBLICBETA? 0
         {
-         ifrnd 255
+         ifrnd 224
          {
-          setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTEDDAMAGE 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+          state player-canceldeflectdmg
          }
         }
        }
-       ifvare CHARACTERSELECTED? 14
+       ifvare CHARACTERSELECTED? 14 // ???????
        {
         ifvare PUBLICBETA? 0
         {
-         setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTEDDAMAGE 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+         state player-canceldeflectdmg
         }
        }
       }
@@ -2049,10 +2054,13 @@ state player_defense
        getactorvar[tempvehicleid].ACTORINVULNTIME TEMPVAR3
        ifvarg TEMPVAR3 0
        {
-        setactor[PLAYERID].htpicnum -1 setactor[PLAYERID].htextra 0 setvar ACTORDEFLECTEDDAMAGE 0 setvar ACTORDEFLECTDAMAGESTATE 0 break
+        state player-canceldeflectdmg
        }
       }
-
+	  //******************************
+      // NO MORE DEFLECT CANCEL CHECKS
+	  //******************************
+	  
       ifvare ATTACKPICNUM FREEZEBLAST state freezeblast-chilleffect_player
 
       // Check Malakian Gems
@@ -2208,6 +2216,7 @@ state player_defense
 
    }
   }
+
 
   ifvare tempvehicleid -1 setvarvar TEMPVAR5 INVULNTIME else getactorvar[tempvehicleid].ACTORINVULNTIME TEMPVAR5
   ifvarg TEMPVAR5 0 ifvarg PLAYERDAMAGE 0 
