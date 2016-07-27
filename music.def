@@ -61,6 +61,7 @@ music { id "E5L5" file "music\NR-Extra\red1.ogg" }
 music { id "E5L6" file "music\NR-Extra\red1.ogg" }
 
 // Episode 6
+
 music { id "E6L1" file "music\dukedc\dc1_hero.ogg" }
 music { id "E6L2" file "music\dukedc\dc2_therain.ogg" }
 music { id "E6L3" file "music\dukedc\dc3_txftrance.ogg" }
@@ -71,6 +72,10 @@ music { id "E6L7" file "music\dukedc\dc7_crabraft.ogg" }
 music { id "E6L8" file "music\dukedc\dc8_tense.ogg" }
 music { id "E6L9" file "music\dukedc\dc9_robocop3.ogg" }
 music { id "E6L10" file "music\dukedc\dcsl_ominous.ogg" }
+
+// Episode 7
+
+
 
 // Sounds that are music
 sound { id "95" file "music\general\barmusic.ogg" }
