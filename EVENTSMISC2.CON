@@ -2139,13 +2139,35 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
 else
 // ifvare mainmenu -1 // Tips
 {
- state getpartime addvar mpresstime 1
- ifvarvare temppartime mpresstime nullop else
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
  {
-  addvar tipdisplayid -1
-  ifvarl tipdisplayid -1 setvar tipdisplayid 31
+   state getpartime
+   addvar hpresstime 1
+   ifvarvare temppartime hpresstime nullop else
+   {
+    ifvare weaponcount 0 
+    {
+        ifvare VEHICLEID -1 state shift-inusecharacter-left 
+        else 
+        {
+         state menuerrorsound
+         redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
+         setvarvar fta fta_normal setvar ftq 410
+        }
+    }
+   }
+   setvarvar hpresstime temppartime
  }
- setvarvar mpresstime temppartime
+ else
+ {
+  state getpartime addvar mpresstime 1
+  ifvarvare temppartime mpresstime nullop else
+  {
+   addvar tipdisplayid -1
+   ifvarl tipdisplayid -1 setvar tipdisplayid 31
+  }
+  setvarvar mpresstime temppartime
+ }
  state setreturn-1 
 }
 /*
@@ -2295,13 +2317,35 @@ ifvare mainmenu 1 ifvarg mainmenutransitiontimer 6
 else
 // ifvare mainmenu -1 // Tips
 {
- state getpartime addvar mpresstime 1
- ifvarvare temppartime mpresstime nullop else
+ ifvarn shop_id -1 ifvarg shoptransitiontimer 6
  {
-  addvar tipdisplayid 1
-  ifvarg tipdisplayid 31 setvar tipdisplayid -1
+   state getpartime
+   addvar hpresstime 1
+   ifvarvare temppartime hpresstime nullop else
+   {
+    ifvare weaponcount 0 
+    {
+        ifvare VEHICLEID -1 state shift-inusecharacter-right 
+        else 
+        {
+         state menuerrorsound
+         redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
+         setvarvar fta fta_normal setvar ftq 410
+        }
+    }
+   }
+   setvarvar hpresstime temppartime
  }
- setvarvar mpresstime temppartime
+ else
+ {
+  state getpartime addvar mpresstime 1
+  ifvarvare temppartime mpresstime nullop else
+  {
+   addvar tipdisplayid 1
+   ifvarg tipdisplayid 31 setvar tipdisplayid -1
+  }
+  setvarvar mpresstime temppartime
+ }
  state setreturn-1 
 }
 /*
@@ -2741,7 +2785,10 @@ onevent EVENT_JUMP
  ifvare mainmenu 1 state setreturn-1 
  else
  {
-  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+  {
+   state setreturn-1
+  }
   else
   {
    ifvarn atm_id -1 state atm-midlowerleftbutton
@@ -2800,7 +2847,10 @@ onevent EVENT_CROUCH
  ifvare mainmenu 1 state setreturn-1 
  else
  {
-  ifvarn shop_id -1 ifvarg shoptransitiontimer 6 state setreturn-1 
+  ifvarn shop_id -1 ifvarg shoptransitiontimer 6
+  {
+   state setreturn-1
+  }
   else
   {
    ifvarn atm_id -1 state atm-midlowerrightbutton
