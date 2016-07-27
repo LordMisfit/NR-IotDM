@@ -2977,45 +2977,20 @@ state shop_display
  setvar textscale 65536
  state mt_free
  setvar orientation 2
-/*
+
  // Legend Line #3
  state digx160 // 89
  setvar digy 194 // 183
  redefinequote 1001 
 
- getkeyname 502 30 0
- redefinequote 501 ^12%s^0=^22EXIT 
- qsprintf 501 501 502
- qstrcat 1001 501
-
- getkeyname 502 31 0
- redefinequote 501 ^12%s^0=^22SHIFT PG 
- qsprintf 501 501 502
- qstrcat 1001 501
-
- getkeyname 502 6 0
- ifvare shopmode 0
+ ifvare VEHICLEID -1
  {
-  ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^0=^14"BUY" ITEM 
-  else redefinequote 501 ^12%s^0=^22BUY ITEM 
+  getkeyname 502 13 0
+  getkeyname 503 14 0
+  redefinequote 501 ^12%s^23/^12%s^21=^22CHANGE CHARACTER
+  qsprintf 501 501 502 503
+  qstrcat 1001 501
  }
- else ifvare shopmode 1
- {
-  ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^0=^14SELL "ITEM" 
-  else redefinequote 501 ^12%s^0=^22SELL ITEM 
- }
- qsprintf 501 501 502
- qstrcat 1001 501
-
- getkeyname 502 0 0
- redefinequote 501 ^12%s^0=^22CURSOR UP 
- qsprintf 501 501 502
- qstrcat 1001 501
-
- getkeyname 502 1 0
- redefinequote 501 ^12%s^0=^22CURSOR DOWN
- qsprintf 501 501 502
- qstrcat 1001 501
 
  setvar temp 1001
  setvar digx 160
@@ -3024,7 +2999,7 @@ state shop_display
  setvar textscale 65536
  state mt_free
  setvar orientation 2
-*/
+
  // Other Lines
  state pal0
  setvar temp 332
