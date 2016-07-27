@@ -27669,7 +27669,7 @@ state showworldtile-titles
   state setquote332
   ifvare mainmenusubmenu 7 // WorldTile Menu
   {
-   setvar digy 177
+   setvar digy 176
    setvar digx 160
    redefinequote 332 ^10[WORLDTILE NOT YET FOUND!]
    ifvare mainmenupage 0 // Page 1: #1-#25
@@ -29217,7 +29217,7 @@ state healpaneldisplay
     setvarvar wallydist y
     subvarvar wallydist posy 
 
-    ifvarg wallxdist FIRSTAIDSTATIONMINDIST ifvarl wallxdist FIRSTAIDSTATIONMINDIST ifvarg wallydist FIRSTAIDSTATIONMINDIST ifvarl wallydist FIRSTAIDSTATIONMINDIST
+    ifvarg wallxdist FIRSTAIDSTATIONMINDIST ifvarl wallxdist FIRSTAIDSTATIONMAXDIST ifvarg wallydist FIRSTAIDSTATIONMINDIST ifvarl wallydist FIRSTAIDSTATIONMAXDIST
     {
         state orientation10
         setvar pal 0

@@ -42696,7 +42696,7 @@ useractor notenemy FIRSTAIDPANEL_ON 0
   setvarvar wallydist y
   subvarvar wallydist posy
 
-  ifvarg wallxdist FIRSTAIDSTATIONMINDIST ifvarl wallxdist FIRSTAIDSTATIONMINDIST ifvarg wallydist FIRSTAIDSTATIONMINDIST ifvarl wallydist FIRSTAIDSTATIONMINDIST ifvarg CURRENTHITPOINTS 0
+  ifvarg wallxdist FIRSTAIDSTATIONMINDIST ifvarl wallxdist FIRSTAIDSTATIONMAXDIST ifvarg wallydist FIRSTAIDSTATIONMINDIST ifvarl wallydist FIRSTAIDSTATIONMAXDIST ifvarg CURRENTHITPOINTS 0
   {
        ifhitspace
        { 

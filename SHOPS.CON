@@ -2649,12 +2649,11 @@ state shop_display
  state pal0
  state shade-31
 
- // Line #1
+ // Item Descriptions
  setvar temp 332
  state pal22
-// Item Descriptions
  state digx160
- setvar digy 177
+ setvar digy 176
 
  redefinequote 332 [UNDEFINED]
  ifvare shopmode 0 
@@ -2902,12 +2901,12 @@ state shop_display
  state mt_free
  setvar orientation 2
 
- // Line #2
+ // Legend Line #1
  setvar temp 1001
  state pal0
-// Key Listings
+ // Key Listings
  state digx160
- setvar digy 183 // 177
+ setvar digy 182 // 177
  redefinequote 1001 
 
  getkeyname 502 17 0
@@ -2932,9 +2931,9 @@ state shop_display
  state mt_free
  setvar orientation 2
 
- // Line #3
+ // Legend Line #2
  state digx160 // 89
- setvar digy 189 // 183
+ setvar digy 188 // 183
  redefinequote 1001 
 
  getkeyname 502 30 0
@@ -2978,7 +2977,54 @@ state shop_display
  setvar textscale 65536
  state mt_free
  setvar orientation 2
+/*
+ // Legend Line #3
+ state digx160 // 89
+ setvar digy 194 // 183
+ redefinequote 1001 
 
+ getkeyname 502 30 0
+ redefinequote 501 ^12%s^0=^22EXIT 
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ getkeyname 502 31 0
+ redefinequote 501 ^12%s^0=^22SHIFT PG 
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ getkeyname 502 6 0
+ ifvare shopmode 0
+ {
+  ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^0=^14"BUY" ITEM 
+  else redefinequote 501 ^12%s^0=^22BUY ITEM 
+ }
+ else ifvare shopmode 1
+ {
+  ifvarvare SHOPCHEATBITTOTAL SHOPCOMBOBITS redefinequote 501 ^12%s^0=^14SELL "ITEM" 
+  else redefinequote 501 ^12%s^0=^22SELL ITEM 
+ }
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ getkeyname 502 0 0
+ redefinequote 501 ^12%s^0=^22CURSOR UP 
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ getkeyname 502 1 0
+ redefinequote 501 ^12%s^0=^22CURSOR DOWN
+ qsprintf 501 501 502
+ qstrcat 1001 501
+
+ setvar temp 1001
+ setvar digx 160
+ setvar orientation 26
+ setvar textflags 8194
+ setvar textscale 65536
+ state mt_free
+ setvar orientation 2
+*/
  // Other Lines
  state pal0
  setvar temp 332

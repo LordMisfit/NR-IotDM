@@ -252,9 +252,9 @@ ifvare mainmenu 1
   ifvare mainmenusubmenu 256 // Cheats Submenu
   {
    state pal21
-   // Line #1
+   // Command Legend Line #1
    state digx160 // 89
-   setvar digy 183
+   setvar digy 182
    redefinequote 1001 
   
    getkeyname 502 30 0
@@ -291,9 +291,9 @@ ifvare mainmenu 1
 
  
 
-   // Line #2
+   // Command Legend Line #2
    state digx160 // 89
-   setvar digy 189
+   setvar digy 188
    redefinequote 1001 
  
    getkeyname 502 0 0
@@ -320,14 +320,16 @@ ifvare mainmenu 1
    setvar textscale 65536
    state mt_free
 
+   // Command Legend Line #3
+
    state setquote332
   }
   else // In the normal menus
   {
    state pal21
-   // Line #1
+   // Command Legend Line #1
    state digx160 // 89
-   setvar digy 183
+   setvar digy 182
    redefinequote 1001 
   
    getkeyname 502 30 0
@@ -576,9 +578,9 @@ ifvare mainmenu 1
    state mt_free
 
 //
-   // Line #2
+   // Command Legend Line #2
    state digx160 // 89
-   setvar digy 189
+   setvar digy 188
    redefinequote 1001 
 
    setvar temp 0
@@ -679,6 +681,8 @@ ifvare mainmenu 1
    setvar textscale 65536
    state mt_free
  
+   // Command Legend Line #3
+
    state setquote332
   }
 
@@ -1024,7 +1028,7 @@ ifvare mainmenu 1
   ifvare mainmenusubmenu 0
   {
    state pal23
-   setvar digy 177
+   setvar digy 176
    ifvare mainmenupage 0
    {
     ifvare mainmenuselection 2 ifvare BUBSY? 1 setvar TEMPVAR3 1
@@ -1060,7 +1064,7 @@ ifvare mainmenu 1
   state setquote332
   ifvare mainmenusubmenu 1
   {
-   setvar digy 177
+   setvar digy 176
    state pal17
  
    redefinequote 332 ^10[EMPTY INVENTORY SLOT]
@@ -1742,7 +1746,7 @@ ifvare mainmenu 1
   state setquote332
   ifvare mainmenusubmenu 2 // Toggle Menu
   {
-   setvar digy 177
+   setvar digy 176
    state pal17
    ifvare mainmenupage 0
    {
@@ -1945,7 +1949,7 @@ ifvare mainmenu 1
   state setquote332
   ifvare mainmenusubmenu 6 // Equipment Menu
   {
-   setvar digy 177
+   setvar digy 176
    state pal17
    ifvare mainmenuselection 0
    {
@@ -2011,7 +2015,7 @@ ifvare mainmenu 1
   state setquote332
   ifvare mainmenusubmenu 256 // Cheats Menu
   {
-   setvar digy 177
+   setvar digy 176
    state pal20
    setvar digx 160
    // 1st Row
@@ -12009,7 +12013,7 @@ ifvarg equipmenuinuse 0
  }
 
 // Row 1
-  setvar digy 177
+  setvar digy 176
   state pal17
 
   redefinequote 332 ^10[EMPTY SLOT]
