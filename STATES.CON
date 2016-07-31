@@ -7743,6 +7743,7 @@ state addpoison_actor
    randvar TEMP 390
    addvar TEMP 390
   }
+  setvarvar ACTORPOISONHITOWNER THISACTOR
   addvarvar ACTORPOISONTIMER TEMP
  } 
  else 
@@ -7758,6 +7759,7 @@ state addpoison_actor
    randvar TEMP 390
    addvar TEMP 390
   }
+  setvarvar ACTORPOISONHITOWNER THISACTOR
   addvarvar ACTORPOISONTIMER TEMP
   // redefinequote 335 ^22AN ENEMY HAS BECOME POISONED!
   state getitemseekerspeciesquote
@@ -7776,7 +7778,7 @@ state removepoison_actor
   ifvare ITEMSEEKSPECIESTYPE 1 redefinequote 335 ^15A CIVILIAN'S POISON HAS WORN OFF! :O
   ifvare ITEMSEEKSPECIESTYPE 2 redefinequote 335 ^15A VEHICLE'S POISON HAS WORN OFF! :O
 
-  ifvarand ACTORSTATUS? 8 { subvar ACTORSTATUS? 8 setvar ACTORPOISONTIMER 0 }
+  ifvarand ACTORSTATUS? 8 { subvar ACTORSTATUS? 8 setvar ACTORPOISONTIMER 0 setvar ACTORPOISONHITOWNER -1 }
   setvarvar fta fta_normal setvar ftq 335
 ends
 

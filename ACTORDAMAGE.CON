@@ -466,7 +466,10 @@ state snakearmband_check
      randvar TEMP 390
      addvar TEMP 390
      addvarvar ACTORPOISONTIMER TEMP
-    }   
+    }
+    getactor[THISACTOR].htowner OWNERTEMP 
+    getactor[OWNERTEMP].picnum PICNUMTEMP
+    setvarvar ACTORPOISONHITOWNER OWNERTEMP 
     redefinequote 335 ^22YOU HAVE SLOWED DOWN AND POISONED AN ENEMY!
     setvarvar fta fta_normal setvar ftq 335
    }
@@ -505,6 +508,9 @@ state snakearmband_check
       addvar TEMP 390
       addvarvar ACTORPOISONTIMER TEMP
      }   
+     getactor[THISACTOR].htowner OWNERTEMP 
+     getactor[OWNERTEMP].picnum PICNUMTEMP
+     setvarvar ACTORPOISONHITOWNER OWNERTEMP 
      redefinequote 335 ^22YOU HAVE POISONED AN ENEMY!
      setvarvar fta fta_normal setvar ftq 335
     }
@@ -4913,6 +4919,9 @@ ifvarg tempb 0
        randvar TEMP 390
        addvar TEMP 390
        addvarvar ACTORPOISONTIMER TEMP
+       getactor[THISACTOR].htowner OWNERTEMP 
+       getactor[OWNERTEMP].picnum PICNUMTEMP
+       setvarvar ACTORPOISONHITOWNER OWNERTEMP 
       } 
       else 
       { 
@@ -4920,6 +4929,9 @@ ifvarg tempb 0
        randvar TEMP 390
        addvar TEMP 390
        addvarvar ACTORPOISONTIMER TEMP
+       getactor[THISACTOR].htowner OWNERTEMP 
+       getactor[OWNERTEMP].picnum PICNUMTEMP
+       setvarvar ACTORPOISONHITOWNER OWNERTEMP 
        redefinequote 335 ^22YOU HAVE POISONED AN ENEMY!
        setvarvar fta fta_normal setvar ftq 335
       }   

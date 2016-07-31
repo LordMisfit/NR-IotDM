@@ -892,6 +892,8 @@ state enemyinvulnitem
     {
      subvar ACTORSTATUS? 8
      setvar ACTORPOISONTIMER 0
+     setvar ACTORPOISONHITOWNER -1
+	 //addlogvar ACTORPOISONHITOWNER
     }
     ifvarand ACTORSTATUS? 16 // Remove Dimness
     {
@@ -950,6 +952,8 @@ state enemyregenitem
    {
     subvar ACTORSTATUS? 8
     setvar ACTORPOISONTIMER 0
+    setvar ACTORPOISONHITOWNER -1
+    //addlogvar ACTORPOISONHITOWNER
    }
    ifvarg ACTORREGENCOUNTER 25
    {
@@ -1783,7 +1787,8 @@ state enemy_general_stuff
      ifvare TEMPVAR3 29 { ifrnd 200 state monsterpainsounds2 }
      ifvarg TEMPVAR3 29 { ifrnd 208 state monsterpainsounds2 }
      addvarvar ACTORHP TEMPVAR
-     setactor[THISACTOR].htowner THISACTOR
+	 //addlogvar ACTORPOISONHITOWNER
+     setactor[THISACTOR].htowner ACTORPOISONHITOWNER
 
      setvarvar ITEMSEEKC TEMPVAR
      mulvar ITEMSEEKC -1
@@ -2035,30 +2040,40 @@ state enemy_general_stuff
   {
    subvar ACTORSTATUS? 8
    setvar ACTORPOISONTIMER 0
+   setvar ACTORPOISONHITOWNER -1
+   //addlogvar ACTORPOISONHITOWNER
   }
   else
   ifactor DRONE // Machines Cannot be Poisoned [they have no "blood"]
   {
    subvar ACTORSTATUS? 8
    setvar ACTORPOISONTIMER 0
+   setvar ACTORPOISONHITOWNER -1
+   //addlogvar ACTORPOISONHITOWNER
   }
   else
   ifactor TANK // Machines Cannot be Poisoned [they have no "blood"]
   {
    subvar ACTORSTATUS? 8
    setvar ACTORPOISONTIMER 0
+   setvar ACTORPOISONHITOWNER -1
+   //addlogvar ACTORPOISONHITOWNER
   }
   else
   ifactor EMPTYTANK // Machines Cannot be Poisoned [they have no "blood"]
   {
    subvar ACTORSTATUS? 8
    setvar ACTORPOISONTIMER 0
+   setvar ACTORPOISONHITOWNER -1
+   //addlogvar ACTORPOISONHITOWNER
   }
   else
   ifactor SCORPIONTANK // Machines Cannot be Poisoned [they have no "blood"]
   {
    subvar ACTORSTATUS? 8
    setvar ACTORPOISONTIMER 0
+   setvar ACTORPOISONHITOWNER -1
+   //addlogvar ACTORPOISONHITOWNER
   }
   else
   {
@@ -2079,6 +2094,8 @@ state enemy_general_stuff
     redefinequote 335 ^10AN ENEMY'S POISON HAS WORN OFF! :(
     subvar ACTORSTATUS? 8
     setvar ACTORPOISONTIMER 0
+    setvar ACTORPOISONHITOWNER -1
+    //addlogvar ACTORPOISONHITOWNER
     setvarvar fta fta_normal setvar ftq 335
    }
   }
@@ -2416,7 +2433,7 @@ state enemy_general_stuff
   // Do a final check to make sure timers for ailments that aren't active are reset to 0
   ifvarand ACTORSTATUS? 2 nullop else setvar ACTORHASTETIMER 0
   ifvarand ACTORSTATUS? 4 nullop else setvar ACTORSLOWTIMER 0
-  ifvarand ACTORSTATUS? 8 nullop else setvar ACTORPOISONTIMER 0
+  ifvarand ACTORSTATUS? 8 nullop else { setvar ACTORPOISONTIMER 0 setvar ACTORPOISONHITOWNER -1 }
   ifvarand ACTORSTATUS? 16 nullop else setvar ACTORDIMNESSTIMER 0
   ifvarand ACTORSTATUS? 128 nullop else setvar ACTORCONFUSIONTIMER 0
   ifvarand ACTORSTATUS? 512 nullop else setvar ACTORSHELLTIMER 0
