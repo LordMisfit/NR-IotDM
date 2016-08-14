@@ -45543,7 +45543,8 @@ case 5002 case 5003 case 5004 case 5005 case 5006 case 5007 case 5008 case 5009
 case 5010 case 5011 case 5012 case 5013 case 5014 case 5015 case 5016 case 5017 
 case 5018 case 5019 case 5020 case 5021 case 5022 case 5023 case 5024 case 5025 
 case 5026 case 5027 case 5028 case 5029
-case 6252 case 6286 case 6290 case 7501 case 7502 case 7503 case 7504
+case 6252 case 6286 case 6290 
+case 7491 case 7492 case 7493 case 7494 case 7495 case 7496 case 7497 case 7498 case 7499 case 7500 case 7501 case 7502 case 7503 case 7504
 ifactor SHOTSPARK1 setvar STEPSOUNDFX 12 else
 ifactor 1 setvar STEPSOUNDFX 10 else
 ifactor 2 setvar STEPSOUNDFX 10 else

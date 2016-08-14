@@ -14570,7 +14570,7 @@ actor SHOTSPARK1 PISTOL_WEAPON_STRENGTH WEAP2FRAMES
       ifvarg FLOORTEX 4805 ifvarl FLOORTEX 4851 state brokentv
       else ifvarg FLOORTEX 4958 ifvarl FLOORTEX 5030 state brokentv
       else ifvare FLOORTEX 6252 state brokentv
-      else ifvarg FLOORTEX 7497 ifvarl FLOORTEX 7502 state brokentv
+      else ifvarg FLOORTEX 7490 ifvarl FLOORTEX 7502 state brokentv
      }
      state CHECKSTEPS
      state BULLETHITSOUNDS
