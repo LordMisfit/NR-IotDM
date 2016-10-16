@@ -12,6 +12,33 @@ tilefromtexture 3581
  alphacut 255
 }
 
+tilefromtexture 4828
+{
+ file "ART Files/Tiles018/4828.png"
+ alphacut 255
+}
+tilefromtexture 4829
+{
+ file "ART Files/Tiles018/4829.png"
+ alphacut 255
+}
+
+tilefromtexture 4848
+{
+ file "ART Files/Tiles018/4848.png"
+ alphacut 255
+}
+tilefromtexture 4849
+{
+ file "ART Files/Tiles018/4849.png"
+ alphacut 255
+}
+tilefromtexture 4850
+{
+ file "ART Files/Tiles018/4850.png"
+ alphacut 255
+}
+
 tilefromtexture 6164
 {
  file "ART Files/Tiles024/6164.png"
