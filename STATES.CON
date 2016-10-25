@@ -4846,78 +4846,19 @@ state maxcivsincrease2
 ends
 
 state swapscreen1
-   randvar tempe 62
-   ifvare tempe 0 setwall[ARRAYPOSITION].picnum 10496
-   ifvare tempe 1 setwall[ARRAYPOSITION].picnum 10497
-   ifvare tempe 2 setwall[ARRAYPOSITION].picnum 10498
-   ifvare tempe 3 setwall[ARRAYPOSITION].picnum 10499
-   ifvare tempe 4 setwall[ARRAYPOSITION].picnum 10500
-   ifvare tempe 5 setwall[ARRAYPOSITION].picnum 10501
-   ifvare tempe 6 setwall[ARRAYPOSITION].picnum 10502
-   ifvare tempe 7 setwall[ARRAYPOSITION].picnum 10503
-   ifvare tempe 8 setwall[ARRAYPOSITION].picnum 10504
-   ifvare tempe 9 setwall[ARRAYPOSITION].picnum 10505
-   ifvare tempe 10 setwall[ARRAYPOSITION].picnum 10506
-   ifvare tempe 11 setwall[ARRAYPOSITION].picnum 10544
-   ifvare tempe 12 setwall[ARRAYPOSITION].picnum 10545
-   ifvare tempe 13 setwall[ARRAYPOSITION].picnum 10546
-   ifvare tempe 14 setwall[ARRAYPOSITION].picnum 10547
-   ifvare tempe 15 setwall[ARRAYPOSITION].picnum 10548
-   ifvare tempe 16 setwall[ARRAYPOSITION].picnum 10549
-   ifvare tempe 17 setwall[ARRAYPOSITION].picnum 10550
-   ifvare tempe 18 setwall[ARRAYPOSITION].picnum 10551
-   ifvare tempe 19 setwall[ARRAYPOSITION].picnum 10552
-   ifvare tempe 20 setwall[ARRAYPOSITION].picnum 10553
-   ifvare tempe 21 setwall[ARRAYPOSITION].picnum 10554
-   ifvare tempe 22 setwall[ARRAYPOSITION].picnum 10555
-   ifvare tempe 23 setwall[ARRAYPOSITION].picnum 10556
-   ifvare tempe 24 setwall[ARRAYPOSITION].picnum 10557
-   ifvare tempe 25 setwall[ARRAYPOSITION].picnum 10558
-   ifvare tempe 26 setwall[ARRAYPOSITION].picnum 10559
-   ifvare tempe 27 setwall[ARRAYPOSITION].picnum 10560
-   ifvare tempe 28 setwall[ARRAYPOSITION].picnum 10561
-   ifvare tempe 29 setwall[ARRAYPOSITION].picnum 10562
-   ifvare tempe 30 setwall[ARRAYPOSITION].picnum 10563
-   ifvare tempe 31 setwall[ARRAYPOSITION].picnum 10564
-   ifvare tempe 32 setwall[ARRAYPOSITION].picnum 10565
-   ifvare tempe 33 setwall[ARRAYPOSITION].picnum 10566
-   ifvare tempe 34 setwall[ARRAYPOSITION].picnum 10567
-   ifvare tempe 35 setwall[ARRAYPOSITION].picnum 10568
-   ifvare tempe 36 setwall[ARRAYPOSITION].picnum 10569
-   ifvare tempe 37 setwall[ARRAYPOSITION].picnum 10570
-   ifvare tempe 38 setwall[ARRAYPOSITION].picnum 10571
-   ifvare tempe 39 setwall[ARRAYPOSITION].picnum 10572
-   ifvare tempe 40 setwall[ARRAYPOSITION].picnum 10573
-   ifvare tempe 41 setwall[ARRAYPOSITION].picnum 10574
-   ifvare tempe 42 setwall[ARRAYPOSITION].picnum 10575
-   ifvare tempe 43 setwall[ARRAYPOSITION].picnum 10576
-   ifvare tempe 44 setwall[ARRAYPOSITION].picnum 10577
-   ifvare tempe 45 setwall[ARRAYPOSITION].picnum 10578
-   ifvare tempe 46 setwall[ARRAYPOSITION].picnum 10579
-   ifvare tempe 47 setwall[ARRAYPOSITION].picnum 10580
-   ifvare tempe 48 setwall[ARRAYPOSITION].picnum 10581
-   ifvare tempe 49 setwall[ARRAYPOSITION].picnum 10582
-   ifvare tempe 50 setwall[ARRAYPOSITION].picnum 10583
-   ifvare tempe 51 setwall[ARRAYPOSITION].picnum 10584
-   ifvare tempe 52 setwall[ARRAYPOSITION].picnum 10585
-   ifvare tempe 53 setwall[ARRAYPOSITION].picnum 10586
-   ifvare tempe 54 setwall[ARRAYPOSITION].picnum 10587
-   ifvare tempe 55 setwall[ARRAYPOSITION].picnum 10588
-   ifvare tempe 56 setwall[ARRAYPOSITION].picnum 10589
-   ifvare tempe 57 setwall[ARRAYPOSITION].picnum 10590
-   ifvare tempe 58 setwall[ARRAYPOSITION].picnum 10591
-   ifvare tempe 59 setwall[ARRAYPOSITION].picnum 10592
-   ifvare tempe 60 setwall[ARRAYPOSITION].picnum 10593
-   ifvare tempe 61 setwall[ARRAYPOSITION].picnum 10594
-   ifvare tempe 62 setwall[ARRAYPOSITION].picnum 10595
-   ifvare tempe 63 setwall[ARRAYPOSITION].picnum 10596
-   ifvare tempe 64 setwall[ARRAYPOSITION].picnum 10597
-   ifvare tempe 65 setwall[ARRAYPOSITION].picnum 10598
-   ifvare tempe 66 setwall[ARRAYPOSITION].picnum 10599
-   ifvare tempe 67 setwall[ARRAYPOSITION].picnum 10600
-   ifvare tempe 68 setwall[ARRAYPOSITION].picnum 10601
-   ifvare tempe 69 setwall[ARRAYPOSITION].picnum 10602
-   ifvare tempe 70 setwall[ARRAYPOSITION].picnum 10603
+   randvar tempe 96
+   ifvarl tempe 11
+   {
+    setvar tempf 10496
+	addvarvar tempf tempe
+	setwall[ARRAYPOSITION].picnum tempf
+   }
+   ifvarg tempe 10
+   {
+    setvar tempf 10533
+	addvarvar tempf tempe
+	setwall[ARRAYPOSITION].picnum tempf
+   }
 ends
 
 state sector_centerpoint2
@@ -5204,6 +5145,7 @@ whilevarn ARRAYPOSITION 16383
     ifvare tempe 9 setwall[ARRAYPOSITION].picnum 6271 // September
    }
    ifvarg wall[ARRAYPOSITION].picnum 7635 ifvarl wall[ARRAYPOSITION].picnum 7680 state setupvendingquanity
+   ifvarg wall[ARRAYPOSITION].picnum 7815 ifvarl wall[ARRAYPOSITION].picnum 7835 state setupvendingquanity
    ifvare wall[ARRAYPOSITION].picnum 10750 state swapscreen1
   }
  }

@@ -9504,9 +9504,13 @@ else
         }
        }
 
-       // Snack Machine Use Notices [1212]
+       // Snack Machine Use Notices [1212, 7677, 7678]
        setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
-       ifvare MISCARRAYID_AMOUNTTEMP 1212 
+       setvar TEMP6 0
+       ifvare MISCARRAYID_AMOUNTTEMP 1212 setvar TEMP6 1
+       ifvare MISCARRAYID_AMOUNTTEMP 7677 setvar TEMP6 1
+       ifvare MISCARRAYID_AMOUNTTEMP 7678 setvar TEMP6 1
+	   ifvare TEMP6 1
        {
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
@@ -9540,7 +9544,7 @@ else
         }
        }
 
-       // Snack Machine Fix Notices
+       // Snack Machine Fix Notices [1214]
        setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
        ifvare MISCARRAYID_AMOUNTTEMP 1214
        {
@@ -9584,9 +9588,14 @@ else
         }
        }
 
-       // Cola Machine Use Notices [1215]
+       // Cola Machine Use Notices [1215, 7636-7676, 7679, 7816-7820]
        setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
-       ifvare MISCARRAYID_AMOUNTTEMP 1215
+       setvar TEMP6 0
+       ifvare MISCARRAYID_AMOUNTTEMP 1215 setvar TEMP6 1
+       ifvarg MISCARRAYID_AMOUNTTEMP 7635 ifvarl MISCARRAYID_AMOUNTTEMP 7677 setvar TEMP6 1
+       ifvare MISCARRAYID_AMOUNTTEMP 7679 setvar TEMP6 1
+       ifvarg MISCARRAYID_AMOUNTTEMP 7615 ifvarl MISCARRAYID_AMOUNTTEMP 7635 setvar TEMP6 1
+	   ifvare TEMP6 1
        {
         setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
         ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
@@ -9664,113 +9673,6 @@ else
         }
        }
 
-       // Cola Machine Use Notices [1215]
-       setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
-       ifvarg MISCARRAYID_AMOUNTTEMP 7635 ifvarl MISCARRAYID_AMOUNTTEMP 7677
-       {
-        setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
-        ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
-        {
-         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
-         {
-          setvar temp 332
-          setvarvar digx 320
-          setvarvar digy 98
-          state pal20
-          redefinequote 332 PRESS THE ^16"
-          getkeyname 888 6 0
-          redefinequote 889 "^20 KEY TO USE THIS COLA MACHINE...
-          qstrcat 332 888
-          qstrcat 332 889
-          setvar textscale 40960
-          state settilealphanum
-          state orientation27
-          state gtz
-          setvar temp 332
-          setvarvar digx 320
-          setvarvar digy 106
-          state pal20
-          redefinequote 332 DRINKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
-          setvar textscale 40960
-          state settilealphanum
-          state orientation27
-          state gtz
-         }
-        }
-       }
-
-       // Snack Machine Use Notices
-       setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
-       ifvarg MISCARRAYID_AMOUNTTEMP 7676 ifvarl MISCARRAYID_AMOUNTTEMP 7679
-       {
-        setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
-        ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
-        {
-         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
-         {
-          setvar temp 332
-          setvarvar digx 320
-          setvarvar digy 98
-          state pal20
-          redefinequote 332 PRESS THE ^16"
-          getkeyname 888 6 0
-          redefinequote 889 "^20 KEY TO USE THIS SNACK MACHINE...
-          qstrcat 332 888
-          qstrcat 332 889
-          setvar textscale 40960
-          state settilealphanum
-          state orientation27
-          state gtz
-          setvar temp 332
-          setvarvar digx 320
-          setvarvar digy 106
-          state pal20
-          redefinequote 332 SNACKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
-          setvar textscale 40960
-          state settilealphanum
-          state orientation27
-          state gtz
-         }
-        }
-       }
-
-       // Cola Machine Use Notices
-       setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
-       ifvare MISCARRAYID_AMOUNTTEMP 7679
-       {
-        setvar MISCARRAYID 211 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-lotag
-        ifvarn MISCARRAYID_AMOUNTTEMP 16384 ifvare oldskoolmode 0
-        {
-         ifvarg wallxdist VENDINGMACHINEMINDIST ifvarl wallxdist VENDINGMACHINEMAXDIST ifvarg wallydist VENDINGMACHINEMINDIST ifvarl wallydist VENDINGMACHINEMAXDIST ifvarg CURRENTHITPOINTS 0 // ifp palive
-         {
-          setvar temp 332
-          setvarvar digx 320
-          setvarvar digy 98
-          state pal20
-          redefinequote 332 PRESS THE ^16"
-          getkeyname 888 6 0
-          redefinequote 889 "^20 KEY TO USE THIS COLA MACHINE...
-          qstrcat 332 888
-          qstrcat 332 889
-          setvar textscale 40960
-          state settilealphanum
-          state orientation27
-          state gtz
-          setvar temp 332
-          setvarvar digx 320
-          setvarvar digy 106
-          state pal20
-          redefinequote 332 DRINKS REMAINING IN MACHINE: ^21%d
-          qsprintf 332 332 actorvar[hitwall].VENDINGQUANITY
-          setvar textscale 40960
-          state settilealphanum
-          state orientation27
-          state gtz
-         }
-        }
-       }
      }
 
     } // ifvarl AUTOMAPMODE 2 [line 6910]

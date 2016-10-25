@@ -10520,6 +10520,7 @@ ifvare mainmenu -1
  //addlogvar wallxdist
  //addlogvar wallydist
 
+ // Broken ATM Machine [867]
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
  ifvare MISCARRAYID_AMOUNTTEMP 867 
  {
@@ -10550,6 +10551,7 @@ ifvare mainmenu -1
   }
  } 
 
+ // Broken ATM Machine [888]
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
  ifvare MISCARRAYID_AMOUNTTEMP 888 
  {
@@ -10600,8 +10602,13 @@ ifvare mainmenu -1
   }
  }
 
+ // Snack Machines [1212, 7677, 7678]
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
- ifvare MISCARRAYID_AMOUNTTEMP 1212
+ setvar TEMP6 0
+ ifvare MISCARRAYID_AMOUNTTEMP 1212 setvar TEMP6 1
+ ifvare MISCARRAYID_AMOUNTTEMP 7677 setvar TEMP6 1
+ ifvare MISCARRAYID_AMOUNTTEMP 7678 setvar TEMP6 1
+ ifvare TEMP6 1
  {
   setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
   ifvare MISCARRAYID_AMOUNTTEMP -1
@@ -10610,6 +10617,7 @@ ifvare mainmenu -1
   }
  }
 
+ // Broken Snack Machine [1214]
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
  ifvare MISCARRAYID_AMOUNTTEMP 1214
  {
@@ -10658,13 +10666,21 @@ ifvare mainmenu -1
   }
  }
 
+
+ // Cola Machines [1215, 7636-7676, 7679, 7816-7826]
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
- ifvare MISCARRAYID_AMOUNTTEMP 1215
+ setvar TEMP6 0
+ ifvare MISCARRAYID_AMOUNTTEMP 1215 setvar TEMP6 1
+ ifvarg MISCARRAYID_AMOUNTTEMP 7635 ifvarl MISCARRAYID_AMOUNTTEMP 7677 setvar TEMP6 1
+ ifvare MISCARRAYID_AMOUNTTEMP 7679 setvar TEMP6 1
+ ifvarg MISCARRAYID_AMOUNTTEMP 7615 ifvarl MISCARRAYID_AMOUNTTEMP 7635 setvar TEMP6 1
+ ifvare TEMP6 1
  {
   setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
   ifvare MISCARRAYID_AMOUNTTEMP -1 state pressoncolamachine
  }
 
+ // Broken Cola Machine [1217]
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
  ifvare MISCARRAYID_AMOUNTTEMP 1217
  {
@@ -10717,27 +10733,6 @@ ifvare mainmenu -1
  }
 
  setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
- ifvarg MISCARRAYID_AMOUNTTEMP 7635 ifvarl MISCARRAYID_AMOUNTTEMP 7677
- {
-  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
-  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressoncolamachine
- }
-
- setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
- ifvarg MISCARRAYID_AMOUNTTEMP 7676 ifvarl MISCARRAYID_AMOUNTTEMP 7679
- {
-  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
-  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressonsnackmachine
- }
-
- setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
- ifvare MISCARRAYID_AMOUNTTEMP 7679
- {
-  setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
-  ifvare MISCARRAYID_AMOUNTTEMP -1 state pressoncolamachine
- }
-
- setvar MISCARRAYID 213 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-picnum
  ifvarg MISCARRAYID_AMOUNTTEMP 10495 ifvarl MISCARRAYID_AMOUNTTEMP 10750
  {
   setvar MISCARRAYID 212 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // hitwall-extra
@@ -10747,15 +10742,15 @@ ifvare mainmenu -1
    {
     ifvarg wallxdist -845 ifvarl wallxdist 845 ifvarg wallydist -845 ifvarl wallydist 845 ifvarg CURRENTHITPOINTS 0 // ifp palive
     {
-         ifhitspace
-         { 
-          state stopsearchsounds
-          state getpartime
-          addvar upresstime 1
-          ifvarvare temppartime upresstime nullop
-          else { sound MENU_SELECTED setvarvar ARRAYPOSITION hitwall state swapscreen1 }
-          setvarvar upresstime temppartime
-         }
+     ifhitspace
+     { 
+      state stopsearchsounds
+      state getpartime
+      addvar upresstime 1
+      ifvarvare temppartime upresstime nullop
+      else { sound MENU_SELECTED setvarvar ARRAYPOSITION hitwall state swapscreen1 }
+      setvarvar upresstime temppartime
+     }
     }
    }
   }

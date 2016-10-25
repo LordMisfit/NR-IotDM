@@ -45384,6 +45384,8 @@ case 7640 case 7641 case 7642 case 7643 case 7644 case 7645 case 7646 case 7647 
 case 7650 case 7651 case 7652 case 7653 case 7654 case 7655 case 7656 case 7657 case 7658 case 7659 
 case 7660 case 7661 case 7662 case 7663 case 7664 case 7665 case 7666 case 7667 case 7668 case 7669
 case 7670 case 7671 case 7672 case 7673 case 7674 case 7675 case 7676 case 7677 case 7678 case 7679
+case 7816 case 7817 case 7818 case 7819 case 7820 case 7821 case 7822 case 7823 case 7824 case 7825 case 7826 case 7827 case 7828 case 7829 case 7830 case 7831
+case 7832 case 7833 case 7834
 setvar STEPSOUNDFX 2 break
 
 //**************
