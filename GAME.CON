@@ -30661,6 +30661,12 @@ useractor notenemy 5992 0 state grabspecialmagazine2 enda // "Universia" Magazin
 useractor notenemy 5993 0 state grabspecialmagazine2 enda // "Universia" Magazine - March 2307: Flora Briscoletti [medium, worn]
 useractor notenemy 5994 0 state grabspecialmagazine2 enda // "Universia" Magazine - March 2307: Flora Briscoletti [full size, mint]
 
+useractor notenemy 6314 0 state grabspecialposter enda // "The Duke Brothers" Poster
+useractor notenemy 6315 0 state grabspecialposter enda // "Faster PiggyCop! KILL! KILL!" Poster
+useractor notenemy 6316 0 state grabspecialposter enda // "Notorious P.I.G" Poster
+useractor notenemy 6317 0 state grabspecialposter enda // "Reservoir Pigs" Poster
+useractor notenemy 6318 0 state grabspecialposter enda // "Pig Fiction" Poster
+
 useractor notenemy 6400 0 state grabspecialposter2 enda // "Visible Frylock" Poster
 useractor notenemy 6401 0 state grabspecialposter2 enda // "TMNT & Battletoads" Poster
 useractor notenemy 6402 0 state grabspecialposter2 enda // "Buurby" Poster
