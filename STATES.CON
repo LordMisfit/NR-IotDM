@@ -4861,6 +4861,23 @@ state swapscreen1
    }
 ends
 
+state swapvendingmachine
+   randvar tempe 46
+   ifvarl tempe 31
+   {
+    setvar tempf 7636
+	addvarvar tempf tempe
+	setwall[ARRAYPOSITION].picnum tempf
+   }
+   ifvare tempe 31 setwall[ARRAYPOSITION].picnum 7679
+   ifvarg tempe 31
+   {
+    setvar tempf 7788
+	addvarvar tempf tempe
+	setwall[ARRAYPOSITION].picnum tempf
+   }
+ends
+
 state sector_centerpoint2
    whilevarvarn TEMPVAR4 TEMPVAR5
    {
@@ -5144,6 +5161,8 @@ whilevarn ARRAYPOSITION 16383
     ifvare tempe 8 setwall[ARRAYPOSITION].picnum 6257 // August
     ifvare tempe 9 setwall[ARRAYPOSITION].picnum 6271 // September
    }
+   ifvare wall[ARRAYPOSITION].picnum 7428 state swapvendingmachine
+
    ifvarg wall[ARRAYPOSITION].picnum 7635 ifvarl wall[ARRAYPOSITION].picnum 7680 state setupvendingquanity
    ifvarg wall[ARRAYPOSITION].picnum 7815 ifvarl wall[ARRAYPOSITION].picnum 7835 state setupvendingquanity
    ifvare wall[ARRAYPOSITION].picnum 10750 state swapscreen1
