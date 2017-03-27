@@ -787,7 +787,7 @@ else // ifvare mainmenu 0
    }
    else
    {
-    ifvarand TEMP3 12 // Holding down Strafe Left & Strafe Right as well
+    ifvarand extbits 12 // Holding down Strafe Left & Strafe Right as well
     {
      // Lisa's new ability to charge her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
      ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
