@@ -4871,6 +4871,8 @@ enda
 //***************
 
 state moneypickupsounds-small
+      ifrnd 64
+	  {
        ifvare CHARACTERSELECTED? 1
        {
         globalsound DUKE_GETWEAPON3
@@ -4889,9 +4891,12 @@ state moneypickupsounds-small
         redefinequote 340 ^10Maken: Hmmm... I found some change over here!
         ifvare oldskoolmode 0 userquote 340
        }
+	  }
 ends
 
 state moneypickupsounds-medium
+      ifrnd 64
+	  {
        ifvare CHARACTERSELECTED? 1
        {
         globalsound DUKE_GETWEAPON1
@@ -4910,9 +4915,12 @@ state moneypickupsounds-medium
         redefinequote 340 ^10Maken: I can probably buy some decent food with this!
         ifvare oldskoolmode 0 userquote 340
        }
+	  }
 ends
 
 state moneypickupsounds-large
+      ifrnd 64
+	  {
        ifvare CHARACTERSELECTED? 1
        {
         globalsound JIBBED_ACTOR2 
@@ -4931,9 +4939,12 @@ state moneypickupsounds-large
         redefinequote 340 ^10Maken: Helllllo new computer, my name's Maken Shinkara!
         ifvare oldskoolmode 0 userquote 340
        }
+	  }
 ends
 
 state moneypickupsounds-larger
+      ifrnd 64
+	  {
        ifvare CHARACTERSELECTED? 1
        {
         globalsound JIBBED_ACTOR4 
@@ -4952,6 +4963,7 @@ state moneypickupsounds-larger
         redefinequote 340 ^10Maken: Oh son of a bitch! I must be dreamin'!
         ifvare oldskoolmode 0 userquote 340
        }
+	  }
 ends
 
 eventloadactor MONEYBAG
