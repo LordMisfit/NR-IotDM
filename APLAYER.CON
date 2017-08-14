@@ -2050,8 +2050,11 @@ state pressoncolamachine
             state secretrecipecheck
             mulvarvar temp TEMP7
             divvar temp 1000
-            addvarvar CURRENTHITPOINTS temp
-            ifvarvarg CURRENTHITPOINTS tempg setvarvar CURRENTHITPOINTS tempg
+			ifvarvarl CURRENTHITPOINTS tempg
+			{
+             addvarvar CURRENTHITPOINTS temp
+             ifvarvarg CURRENTHITPOINTS tempg setvarvar CURRENTHITPOINTS tempg
+			}
 
             // EP Restore
             setvarvar temp MAXENERGYPOINTS
@@ -2059,8 +2062,11 @@ state pressoncolamachine
             state secretrecipecheck
             mulvarvar temp TEMP7
             divvar temp 1000
-            addvarvar CURRENTENERGYPOINTS temp
-            ifvarvarg CURRENTENERGYPOINTS temph setvarvar CURRENTENERGYPOINTS temph
+			ifvarvarl CURRENTENERGYPOINTS temph
+			{
+             addvarvar CURRENTENERGYPOINTS temp
+             ifvarvarg CURRENTENERGYPOINTS temph setvarvar CURRENTENERGYPOINTS temph
+			}
 
             ifvarn player[THISACTOR].over_shoulder_on 0
             {
