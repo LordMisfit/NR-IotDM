@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (5.22.git171)
-definequote 1337 ^22VERSION:^0 5.22.git171.08142017
+setgamename Naferia's Reign (5.22.git172)
+definequote 1337 ^22VERSION:^0 5.22.git172.11242017
 
 action ANULLACTION 0
 
@@ -148,8 +148,8 @@ define FAUXLEVELUP 5284
 define HACKERVISION 5289
 
 define BUBSYDIVINGSUIT 5308
-define SKYBOX_TILE 5318 			// Assign this to surfaces you wish to show skybox
-define NULL_TILE 5319 				// MUST BE AN EMPTY TILE
+define SKYBOX_TILE 5318				// Assign this to surfaces you wish to show skybox
+define NULL_TILE 5319					// MUST BE AN EMPTY TILE
 
 define TELEBEACON 5371
 define AIRBUBBLE 5374
@@ -582,6 +582,8 @@ include CHARACTERS.CON 			// Loads the character information
 include PICKUPS.CON				// Loads the Pickups information
 include ENEMYSTATES.CON			// Loads Enemy handling of things like AP/Portable Medikits/Inventory Items, etc
 
+define TICSBASE 30
+
 // Prevents in-game shade from overriding the below
 spritenoshade GATEMISSILE_SPLIT
 spritenoshade GATEMISSILE_MAIN
@@ -858,116 +860,115 @@ spriteshadow ANIMEGIRL4
 spriteshadow EMPTYTANK
 
 state charactericonpulse
-   ifvare mainmenu 0 addvar TEMP6 1
-   ifvarg TEMP6 31 setvar TEMP6 0
-   ifvare TEMP6 0 setvar TEMP5 0
-   ifvare TEMP6 1 setvar TEMP5 0
-   ifvare TEMP6 2 setvar TEMP5 1
-   ifvare TEMP6 3 setvar TEMP5 1
-   ifvare TEMP6 4 setvar TEMP5 2
-   ifvare TEMP6 5 setvar TEMP5 2
-   ifvare TEMP6 6 setvar TEMP5 3
-   ifvare TEMP6 7 setvar TEMP5 3
-   ifvare TEMP6 8 setvar TEMP5 4
-   ifvare TEMP6 9 setvar TEMP5 4
-   ifvare TEMP6 10 setvar TEMP5 3
-   ifvare TEMP6 11 setvar TEMP5 3
-   ifvare TEMP6 12 setvar TEMP5 2
-   ifvare TEMP6 13 setvar TEMP5 2
-   ifvare TEMP6 14 setvar TEMP5 1
-   ifvare TEMP6 15 setvar TEMP5 1
-   ifvare TEMP6 16 setvar TEMP5 0
-   ifvare TEMP6 17 setvar TEMP5 0
-   ifvare TEMP6 18 setvar TEMP5 -1
-   ifvare TEMP6 19 setvar TEMP5 -1
-   ifvare TEMP6 20 setvar TEMP5 -2
-   ifvare TEMP6 21 setvar TEMP5 -2
-   ifvare TEMP6 22 setvar TEMP5 -3
-   ifvare TEMP6 23 setvar TEMP5 -3
-   ifvare TEMP6 24 setvar TEMP5 -4
-   ifvare TEMP6 25 setvar TEMP5 -4
-   ifvare TEMP6 26 setvar TEMP5 -3
-   ifvare TEMP6 27 setvar TEMP5 -3
-   ifvare TEMP6 28 setvar TEMP5 -2
-   ifvare TEMP6 29 setvar TEMP5 -2
-   ifvare TEMP6 30 setvar TEMP5 -1
-   ifvare TEMP6 31 setvar TEMP5 -1
-   addvar TEMP5 24
+	ifvare mainmenu 0 addvar TEMP6 1
+	ifvarg TEMP6 31 setvar TEMP6 0
 
-   setactor[THISACTOR].xrepeat TEMP5
-   setactor[THISACTOR].yrepeat TEMP5
+	switch TEMP6
+		case 24	case 25
+			setvar TEMP5 -4
+			break
+		case 22	case 23	case 26	case 27
+			setvar TEMP5 -3
+			break
+		case 20 case 21 case 28 case 29
+			setvar TEMP5 -2
+			break
+		case 18 case 19 case 30 case 31
+			setvar TEMP5 -1
+			break
+		case 0 case 1 case 16 case 17
+			setvar TEMP5 0
+			break
+		case 2 case 3 case 14 case 15
+			setvar TEMP5 1
+			break
+		case 4 case 5 case 12 case 13
+			setvar TEMP5 2
+			break
+		case 6 case 7 case 10 case 11
+			setvar TEMP5 3
+			break
+		case 8 case 9
+			setvar TEMP5 4
+			break
+	endswitch
+
+	addvar TEMP5 24
+
+	setactor[THISACTOR].xrepeat TEMP5
+	setactor[THISACTOR].yrepeat TEMP5
 ends
 
 eventloadactor CHAR1ICON
- getactor[THISACTOR].zvel TEMP3 setactor[THISACTOR].zvel 0 
+	getactor[THISACTOR].zvel TEMP3 setactor[THISACTOR].zvel 0 
 enda
 
 useractor notenemy CHAR1ICON 0 
-setactor[THISACTOR].shade -63
-ifvarn TEMP3 0
-{
- ifvare DUKE? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
- sizeat 24 24
- ifvare mainmenu 0 ifvare DUKE? 0
- {
-  ifp pshrunk nullop
-  else
-  {
-   ifvarg CURRENTHITPOINTS 0 // ifp palive
-   {
-    ifpdistl RETRIEVEDISTANCE
-    {
-     ifcount 6
-     {
-      ifcanseetarget
-      {
-       setvar DUKE? 1
-       redefinequote 334 DUKE ADDED TO GROUP!
-       setvar fta 100 setvar ftq 334
-      }
-     }
-    }
-   }
-  }
- }
- state charactericonpulse
-}
+	setactor[THISACTOR].shade -63
+	ifvarn TEMP3 0
+	{
+		ifvare DUKE? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
+		sizeat 24 24
+		ifvare mainmenu 0 ifvare DUKE? 0
+		{
+			ifp pshrunk nullop
+			else
+			{
+			 ifvarg CURRENTHITPOINTS 0 // ifp palive
+			 {
+				ifpdistl RETRIEVEDISTANCE
+				{
+					ifcount 6
+					{
+						ifcanseetarget
+						{
+							setvar DUKE? 1
+							redefinequote 334 DUKE ADDED TO GROUP!
+							setvar fta 100 setvar ftq 334
+						}
+					}
+				}
+			 }
+			}
+		}
+		state charactericonpulse
+	}
 enda
 
 eventloadactor CHAR2ICON
- getactor[THISACTOR].zvel TEMP3 setactor[THISACTOR].zvel 0 
+	getactor[THISACTOR].zvel TEMP3 setactor[THISACTOR].zvel 0 
 enda
 
 useractor notenemy CHAR2ICON 0 
-setactor[THISACTOR].shade -63
-ifvarn TEMP3 0
-{
- ifvare JACK? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
- sizeat 24 24
- ifvare mainmenu 0 ifvare JACK? 0
- {
-  ifp pshrunk nullop
-  else
-  {
-   ifvarg CURRENTHITPOINTS 0 // ifp palive
-   {
-    ifpdistl RETRIEVEDISTANCE
-    {
-     ifcount 6
-     {
-      ifcanseetarget
-      {
-       setvar JACK? 1
-       redefinequote 334 JACK ADDED TO GROUP!
-       setvar fta 100 setvar ftq 334
-      }
-     }
-    }
-   }
-  }
- }
- state charactericonpulse
-}
+	setactor[THISACTOR].shade -63
+	ifvarn TEMP3 0
+	{
+		ifvare JACK? 1 setactor[THISACTOR].cstat 32768 else setactor[THISACTOR].cstat 1
+		sizeat 24 24
+		ifvare mainmenu 0 ifvare JACK? 0
+		{
+			ifp pshrunk nullop
+			else
+			{
+				ifvarg CURRENTHITPOINTS 0 // ifp palive
+				{
+					ifpdistl RETRIEVEDISTANCE
+					{
+						ifcount 6
+						{
+							ifcanseetarget
+							{
+								setvar JACK? 1
+								redefinequote 334 JACK ADDED TO GROUP!
+								setvar fta 100 setvar ftq 334
+							}
+						}
+					}
+				}
+			}
+		}
+		 state charactericonpulse
+	}
 enda
 
 eventloadactor CHAR3ICON
@@ -1476,90 +1477,90 @@ enda
 
 // For using the kill-all-monsters cheat in the cheat-submenu
 state killcheat
- ifvarand CHEATBITFIELD? 64
- {
-  subvar CHEATBITFIELD? 64
-  setvar ARRAYPOSITION 0 // Sprite IDs >.>
-  whilevarn ARRAYPOSITION 16383
-  {
-   getactor[ARRAYPOSITION].statnum TEMPVAR
-   ifvarn TEMPVAR 1024
-   {
-    getactor[ARRAYPOSITION].picnum TEMPVAR
+	ifvarand CHEATBITFIELD? 64
+	{
+		subvar CHEATBITFIELD? 64
+		setvar ARRAYPOSITION 0 // Sprite IDs >.>
+		whilevarn ARRAYPOSITION 16383
+		{
+			getactor[ARRAYPOSITION].statnum TEMPVAR
+			ifvarn TEMPVAR 1024
+			{
+				getactor[ARRAYPOSITION].picnum TEMPVAR
 
-    switch TEMPVAR
+				switch TEMPVAR
 
-    case ROTATEGUN
-    case SHARK
-    case LIZTROOP
-    case LIZTROOPSTAYPUT
-    case LIZTROOPRUNNING
-    case LIZTROOPDUCKING
-    case LIZTROOPSHOOT
-    case LIZTROOPONTOILET
-    case LIZTROOPJUSTSIT
-    case LIZTROOPJETPACK
-    case LIZMAN
-    case LIZMANSTAYPUT
-    case LIZMANJUMP
-    case LIZMANSPITTING
-    case DRONE
-    case OCTABRAIN
-    case OCTABRAINSTAYPUT
-    case PIGCOP
-    case PIGCOPSTAYPUT
-    case PIGCOPDIVE
-    case RECON
-    case COMMANDER
-    case COMMANDERSTAYPUT
-    case NEWBEAST
-    case NEWBEASTSTAYPUT
-    case NEWBEASTHANG
-    case TANK
-    case SCORPIONTANK
-      getactor[ARRAYPOSITION].statnum temp
-      ifvarn temp 1 setactor[ARRAYPOSITION].statnum 1
-      setactorvar[ARRAYPOSITION].ACTORHP 0
-      setactor[ARRAYPOSITION].extra 0
-      setactor[ARRAYPOSITION].htpicnum RADIUSEXPLOSION
-      setactor[ARRAYPOSITION].htextra 1
-      setactor[ARRAYPOSITION].htowner PLAYERID
-    break
+				case ROTATEGUN
+				case SHARK
+				case LIZTROOP
+				case LIZTROOPSTAYPUT
+				case LIZTROOPRUNNING
+				case LIZTROOPDUCKING
+				case LIZTROOPSHOOT
+				case LIZTROOPONTOILET
+				case LIZTROOPJUSTSIT
+				case LIZTROOPJETPACK
+				case LIZMAN
+				case LIZMANSTAYPUT
+				case LIZMANJUMP
+				case LIZMANSPITTING
+				case DRONE
+				case OCTABRAIN
+				case OCTABRAINSTAYPUT
+				case PIGCOP
+				case PIGCOPSTAYPUT
+				case PIGCOPDIVE
+				case RECON
+				case COMMANDER
+				case COMMANDERSTAYPUT
+				case NEWBEAST
+				case NEWBEASTSTAYPUT
+				case NEWBEASTHANG
+				case TANK
+				case SCORPIONTANK
+					getactor[ARRAYPOSITION].statnum temp
+					ifvarn temp 1 setactor[ARRAYPOSITION].statnum 1
+					setactorvar[ARRAYPOSITION].ACTORHP 0
+					setactor[ARRAYPOSITION].extra 0
+					setactor[ARRAYPOSITION].htpicnum RADIUSEXPLOSION
+					setactor[ARRAYPOSITION].htextra 1
+					setactor[ARRAYPOSITION].htowner PLAYERID
+					break
 
-    case BOSS1
-    case BOSS1STAYPUT
-    case BOSS1SHOOT
-    case BOSS1LOB
-    case BOSS2
-    case BOSS2STAYPUT
-    case BOSS2SHOOT
-    case BOSS2BREATH
-    case BOSS3
-    case BOSS3STAYPUT
-    case BOSS3LOB
-    case BOSS4
-    case BOSS4STAYPUT
-     getactor[ARRAYPOSITION].pal temp
-     ifvare temp 0 nullop
-     else
-     {
-      getactor[ARRAYPOSITION].statnum temp
-      ifvarn temp 1 setactor[ARRAYPOSITION].statnum 1
-      setactorvar[ARRAYPOSITION].ACTORHP 0
-      setactor[ARRAYPOSITION].extra 0
-      setactor[ARRAYPOSITION].htpicnum RADIUSEXPLOSION
-      setactor[ARRAYPOSITION].htextra 1
-      setactor[ARRAYPOSITION].htowner PLAYERID
-     }
-    break
+				case BOSS1
+				case BOSS1STAYPUT
+				case BOSS1SHOOT
+				case BOSS1LOB
+				case BOSS2
+				case BOSS2STAYPUT
+				case BOSS2SHOOT
+				case BOSS2BREATH
+				case BOSS3
+				case BOSS3STAYPUT
+				case BOSS3LOB
+				case BOSS4
+				case BOSS4STAYPUT
+					getactor[ARRAYPOSITION].pal temp
+					ifvare temp 0 nullop
+					else
+					{
+						getactor[ARRAYPOSITION].statnum temp
+						ifvarn temp 1 setactor[ARRAYPOSITION].statnum 1
+						setactorvar[ARRAYPOSITION].ACTORHP 0
+						setactor[ARRAYPOSITION].extra 0
+						setactor[ARRAYPOSITION].htpicnum RADIUSEXPLOSION
+						setactor[ARRAYPOSITION].htextra 1
+						setactor[ARRAYPOSITION].htowner PLAYERID
+					}
+					break
 
-    endswitch
-   }
+				endswitch
+			}
 
-   addvar ARRAYPOSITION 1
-   ifvarg ARRAYPOSITION 16383 break
-  }
- }
+			addvar ARRAYPOSITION 1
+			ifvarg ARRAYPOSITION 16383 break
+		}
+	}
 ends
 
 //************************
@@ -1567,20 +1568,20 @@ ends
 //************************
 
 state playerdamagehues
-//     state playerdamagehuestrength2
+//		state playerdamagehuestrength2
 
-     ifvare ATTACKPICNUM FREEZEBLAST state playerdamagehues-icetype
-     else ifvare ATTACKPICNUM SPIT state playerdamagehues-acidtype
-     else state playerdamagehues-normaltype
+		ifvare ATTACKPICNUM FREEZEBLAST state playerdamagehues-icetype
+		else ifvare ATTACKPICNUM SPIT state playerdamagehues-acidtype
+		else state playerdamagehues-normaltype
 
-     state playerdamagehues-shakescreen
+		state playerdamagehues-shakescreen
 ends
 
 state playerdamagehues_vehicle
-     state playerdamagehues-quickcalc
-     setplayer[THISACTOR].pals 0 0 
-     setplayer[THISACTOR].pals 1 64 
-     setplayer[THISACTOR].pals 2 0
+		state playerdamagehues-quickcalc
+		setplayer[THISACTOR].pals 0 0 
+		setplayer[THISACTOR].pals 1 64 
+		setplayer[THISACTOR].pals 2 0
 ends
 
 //*******************************

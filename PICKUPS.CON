@@ -5,61 +5,61 @@
 eventloadactor DONUTS state setpickupflags enda
 useractor notenemy DONUTS WEAK 
 
-  setvar ACTORSHEIGHT 23 setvar ACTORSWIDTH 49
-  state checkitemflags
-  state checkitemflags2 // Checks Item Multiplications for Display Icon
-  ifvare SKILLSET? 0
-  {
-   sizeat 40 40
-   setvar SKILLSET? 1
-  }
-
-  ifvare mainmenu 0 state fallflags
-  ifvare oldskoolmode 1 nullop
-  else
-  {
-   ifvarand ACTORFLAGS 8 nullop
-   else
-   {
-    ifvare mainmenu 0
-    {
-     ifp pshrunk nullop
-     else
-     {
-      ifvarg CURRENTHITPOINTS 0 // ifp palive
-      {
-       ifpdistl RETRIEVEDISTANCE
-       {
-        ifcount 6
-        {
-         ifvarvarl CURRENTHITPOINTS MAXHITPOINTS // If Player's Health Var is less than the Maximum Var
-         {
-          ifcanseetarget
-          {
-           state checkexplodeflag
-           state medikitplayer
-           ifvare oldskoolmode 0 qsprintf 152 265 TEMPHEALTH
-           ifvarand ACTORFLAGS 2 nullop
-           else
-           {
-            setvarvar fta fta_normal setvar ftq 152
-            ifvare CHARACTERSELECTED? 1 globalsound DUKE_EATFOOD1
-            ifvare CHARACTERSELECTED? 5 globalsound WANG_EATFOOD1
-            ifvare CHARACTERSELECTED? 8 globalsound LISA_EATFOOD1
-            ifvare CHARACTERSELECTED? 15 globalsound MAKEN_EATFOOD1
-            sound DUKE_GET
-           }
-           state activationflag killit 
-          }
-         }
-        }
-       }
-      }
-     }
-    }
-   }
-  }
-  state breakobject
+	setvar ACTORSHEIGHT 23 setvar ACTORSWIDTH 49
+	state checkitemflags
+	state checkitemflags2 // Checks Item Multiplications for Display Icon
+	ifvare SKILLSET? 0
+	{
+		sizeat 40 40
+		setvar SKILLSET? 1
+	}
+	
+	ifvare mainmenu 0 state fallflags
+	ifvare oldskoolmode 1 nullop
+	else
+	{
+		ifvarand ACTORFLAGS 8 nullop
+		else
+		{
+			ifvare mainmenu 0
+			{
+				ifp pshrunk nullop
+				else
+				{
+					ifvarg CURRENTHITPOINTS 0 // ifp palive
+					{
+						ifpdistl RETRIEVEDISTANCE
+						{
+							ifcount 6
+							{
+								ifvarvarl CURRENTHITPOINTS MAXHITPOINTS // If Player's Health Var is less than the Maximum Var
+								{
+									ifcanseetarget
+									{
+									state checkexplodeflag
+									state medikitplayer
+									ifvare oldskoolmode 0 qsprintf 152 265 TEMPHEALTH
+									ifvarand ACTORFLAGS 2 nullop
+									else
+									{
+										setvarvar fta fta_normal setvar ftq 152
+										ifvare CHARACTERSELECTED? 1 globalsound DUKE_EATFOOD1
+										ifvare CHARACTERSELECTED? 5 globalsound WANG_EATFOOD1
+										ifvare CHARACTERSELECTED? 8 globalsound LISA_EATFOOD1
+										ifvare CHARACTERSELECTED? 15 globalsound MAKEN_EATFOOD1
+										sound DUKE_GET
+									}
+									state activationflag killit 
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	state breakobject
 enda
 
 eventloadactor DONUTS2 state setpickupflags enda
