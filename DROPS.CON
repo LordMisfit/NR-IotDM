@@ -1,22 +1,22 @@
 // NECESSARY PRE-FLUFF
 
 state stopsearchsounds
-            stopsound DUKE_SEARCH
-            stopsound DUKE_SEARCH2
-            stopsound DUKE_SEARCH1A
-            stopsound DUKE_SEARCH2A
-            stopsound JACK_WALLPUSH1
-            stopsound JACK_WALLPUSH2
-            stopsound WANG_SEARCH1
-            stopsound WANG_SEARCH2
-            stopsound ESSENCE_WALLPUSH1
-            stopsound ESSENCE_WALLPUSH2
-            stopsound LISA_WALLPUSH1
-            stopsound LISA_WALLPUSH2
-            stopsound CYBANIS_WALLPUSH1
-            stopsound CYBANIS_WALLPUSH2
-            stopsound MAKEN_WALLPUSH1
-            stopsound MAKEN_WALLPUSH2
+	stopsound DUKE_SEARCH
+	stopsound DUKE_SEARCH2
+	stopsound DUKE_SEARCH1A
+	stopsound DUKE_SEARCH2A
+	stopsound JACK_WALLPUSH1
+	stopsound JACK_WALLPUSH2
+	stopsound WANG_SEARCH1
+	stopsound WANG_SEARCH2
+	stopsound ESSENCE_WALLPUSH1
+	stopsound ESSENCE_WALLPUSH2
+	stopsound LISA_WALLPUSH1
+	stopsound LISA_WALLPUSH2
+	stopsound CYBANIS_WALLPUSH1
+	stopsound CYBANIS_WALLPUSH2
+	stopsound MAKEN_WALLPUSH1
+	stopsound MAKEN_WALLPUSH2
 ends
 
 state setdroppedmoneyowner

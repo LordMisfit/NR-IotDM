@@ -1,2358 +1,2346 @@
 onevent EVENT_SELECTWEAPON
- ifvare mainmenu 1
- {
-  ifvare mainmenusubmenu 256
-  {
-   ifvare mainmenuselection 15
-   {
-    getinput[THISACTOR].bits temp
-    shiftvarr temp 8
-    andvar temp 0xF
-
-    switch temp
-      case 11
-       subvar RANDOMCHARACTEROPTION 1
-       ifvarl RANDOMCHARACTEROPTION 1 setvar RANDOMCHARACTEROPTION 16
-       state setreturn-1
-      break
-      case 12
-       addvar RANDOMCHARACTEROPTION 1
-       ifvarg RANDOMCHARACTEROPTION 16 setvar RANDOMCHARACTEROPTION 1
-       state setreturn-1
-      break
-    endswitch
-   }
-   else
-   {
-    state setreturn-1
-    state menuerrorsound
-   }
-  }
-  else
-  {
-   ifvare mainmenusubmenu 2 // Toggles Menu
-   {
-    ifvare mainmenupage 0
-    {
-     ifvare mainmenuselection 14
-     {
-      getinput[THISACTOR].bits temp
-      shiftvarr temp 8
-      andvar temp 0xF
- 
-      switch temp
-       case 11
-        subvar INVULNREFLECTRATE 100
-        ifvarl INVULNREFLECTRATE 0 setvar INVULNREFLECTRATE 0
-        savegamevar INVULNREFLECTRATE
-        sound PISTOL_BODYHIT
-        state setreturn-1
-       break
-       case 12
-        addvar INVULNREFLECTRATE 100
-        ifvarg INVULNREFLECTRATE 2000 setvar INVULNREFLECTRATE 2000
-        savegamevar INVULNREFLECTRATE
-        sound PISTOL_BODYHIT
-        state setreturn-1
-       break
-      endswitch
-     }
-     else
-     ifvare mainmenuselection 15
-     {
-      getinput[THISACTOR].bits temp
-      shiftvarr temp 8
-      andvar temp 0xF
- 
-      switch temp
-       case 11
-        ifvare INVULNHEALTHDRAIN 2001 setvar INVULNHEALTHDRAIN 2000
-        else
-        {
-         subvar INVULNHEALTHDRAIN 100
-         ifvarl INVULNHEALTHDRAIN 0 setvar INVULNHEALTHDRAIN 0
-        }
-        savegamevar INVULNHEALTHDRAIN
-        sound PISTOL_BODYHIT
-        state setreturn-1
-       break
-       case 12
-        ifvare INVULNHEALTHDRAIN 2001 nullop
-        else ifvare INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2001
-        else
-        {
-         addvar INVULNHEALTHDRAIN 100
-         ifvarg INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2000
-        }
-        savegamevar INVULNHEALTHDRAIN
-        sound PISTOL_BODYHIT
-        state setreturn-1
-       break
-      endswitch
-     }
-     else
-     ifvare mainmenuselection 16
-     {
-      getinput[THISACTOR].bits temp
-      shiftvarr temp 8
-      andvar temp 0xF
- 
-      switch temp
-       case 11
-        subvar ENEMYRANDOMIZERCHANCE 100
-        ifvarl ENEMYRANDOMIZERCHANCE 0 setvar ENEMYRANDOMIZERCHANCE 0
-        savegamevar ENEMYRANDOMIZERCHANCE
-        sound PISTOL_BODYHIT
-        state setreturn-1
-       break
-       case 12
-        addvar ENEMYRANDOMIZERCHANCE 100
-        ifvarg ENEMYRANDOMIZERCHANCE 1000 setvar ENEMYRANDOMIZERCHANCE 1000
-        savegamevar ENEMYRANDOMIZERCHANCE
-        sound PISTOL_BODYHIT
-        state setreturn-1
-       break
-      endswitch
-     }
-     else
-     {
-      state setreturn-1
-      state menuerrorsound
-     }
-    }
-    // else { }
-   }
-   else
-   {
-    state setreturn-1
-    state menuerrorsound
-   }
-  }
- }
- else
- {
-  ifvare atm_id -1
-  {
-   ifvare shop_id -1
-   {
-    ifvare weapontoggleselect 0
-    {
-     getinput[THISACTOR].bits temp
-     shiftvarr temp 8
-     andvar temp 0xF
-     switch temp
-       case 11
-        ifvare weaponcount 0 
-        {
-         ifvare VEHICLEID -1 state shift-inusecharacter-left 
-         else 
-         {
-          state menuerrorsound
-          redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
-          setvarvar fta fta_normal setvar ftq 410
-         }
-        }
-        state setreturn-1
-       break
-       case 12
-        ifvare weaponcount 0 
-        {
-         ifvare VEHICLEID -1 state shift-inusecharacter-right
-         else
-         {
-          state menuerrorsound
-          redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
-          setvarvar fta fta_normal setvar ftq 410
-         }
-        }
-        state setreturn-1
-       break
-     endswitch
-    }
-   }
-   else
-   {
-    state getpartime
-    addvar mpresstime 1
-    ifvarvare temppartime mpresstime nullop else
-    {
-     getinput[THISACTOR].bits temp
-     shiftvarr temp 8
-     andvar temp 0xF
-
-     switch temp
-       case 0
-        setvar shopamount 1
-        sound MENU_CURSOR
-       break
-       case 1
-        setvar shopamount 10
-        sound MENU_CURSOR
-       break
-       case 2
-        setvar shopamount 20
-        sound MENU_CURSOR
-       break
-       case 3
-        setvar shopamount 30
-        sound MENU_CURSOR
-       break
-       case 4
-        setvar shopamount 40
-        sound MENU_CURSOR
-       break
-       case 5
-        setvar shopamount 50
-        sound MENU_CURSOR
-       break
-       case 6
-        setvar shopamount 60
-        sound MENU_CURSOR
-       break
-       case 7
-        setvar shopamount 70
-        sound MENU_CURSOR
-       break
-       case 8
-        setvar shopamount 80
-        sound MENU_CURSOR
-       break
-       case 9
-        setvar shopamount 90
-        sound MENU_CURSOR
-       break
-       case 10
-        setvar shopamount 100
-        sound MENU_CURSOR
-       break
-       case 11
-        subvar shopamount 10
-        ifvarl shopamount 1 addvar shopamount 100
-        sound MENU_CURSOR
-       break
-       case 12
-        addvar shopamount 10
-        ifvarg shopamount 100 subvar shopamount 100
-        sound MENU_CURSOR
-       break
-     endswitch
-
-     state setreturn-1
-    }
-   }
-  }
-  else
-  {
-   state setreturn-1
-  }
- }
+	ifvare mainmenu 1
+	{
+		ifvare mainmenusubmenu 256
+		{
+			ifvare mainmenuselection 15
+			{
+				getinput[THISACTOR].bits temp
+				shiftvarr temp 8
+				andvar temp 0xF
+		
+				switch temp
+					case 11
+						subvar RANDOMCHARACTEROPTION 1
+						ifvarl RANDOMCHARACTEROPTION 1 setvar RANDOMCHARACTEROPTION 16
+						state setreturn-1
+					break
+					case 12
+						addvar RANDOMCHARACTEROPTION 1
+						ifvarg RANDOMCHARACTEROPTION 16 setvar RANDOMCHARACTEROPTION 1
+						state setreturn-1
+					break
+				endswitch
+			}
+			else
+			{
+				state setreturn-1
+				state menuerrorsound
+			}
+		}
+		else
+		{
+			ifvare mainmenusubmenu 2 // Toggles Menu
+			{
+				ifvare mainmenupage 0
+				{
+					ifvare mainmenuselection 14
+					{
+						getinput[THISACTOR].bits temp
+						shiftvarr temp 8
+						andvar temp 0xF
+			
+						switch temp
+						case 11
+							subvar INVULNREFLECTRATE 100
+							ifvarl INVULNREFLECTRATE 0 setvar INVULNREFLECTRATE 0
+							savegamevar INVULNREFLECTRATE
+							sound PISTOL_BODYHIT
+							state setreturn-1
+						break
+						case 12
+							addvar INVULNREFLECTRATE 100
+							ifvarg INVULNREFLECTRATE 2000 setvar INVULNREFLECTRATE 2000
+							savegamevar INVULNREFLECTRATE
+							sound PISTOL_BODYHIT
+							state setreturn-1
+						break
+						endswitch
+					}
+					else
+					ifvare mainmenuselection 15
+					{
+						getinput[THISACTOR].bits temp
+						shiftvarr temp 8
+						andvar temp 0xF
+			
+						switch temp
+						case 11
+							ifvare INVULNHEALTHDRAIN 2001 setvar INVULNHEALTHDRAIN 2000
+							else
+							{
+							subvar INVULNHEALTHDRAIN 100
+							ifvarl INVULNHEALTHDRAIN 0 setvar INVULNHEALTHDRAIN 0
+							}
+							savegamevar INVULNHEALTHDRAIN
+							sound PISTOL_BODYHIT
+							state setreturn-1
+						break
+						case 12
+							ifvare INVULNHEALTHDRAIN 2001 nullop
+							else ifvare INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2001
+							else
+							{
+							addvar INVULNHEALTHDRAIN 100
+							ifvarg INVULNHEALTHDRAIN 2000 setvar INVULNHEALTHDRAIN 2000
+							}
+							savegamevar INVULNHEALTHDRAIN
+							sound PISTOL_BODYHIT
+							state setreturn-1
+						break
+						endswitch
+					}
+					else
+					ifvare mainmenuselection 16
+					{
+						getinput[THISACTOR].bits temp
+						shiftvarr temp 8
+						andvar temp 0xF
+			
+						switch temp
+						case 11
+							subvar ENEMYRANDOMIZERCHANCE 100
+							ifvarl ENEMYRANDOMIZERCHANCE 0 setvar ENEMYRANDOMIZERCHANCE 0
+							savegamevar ENEMYRANDOMIZERCHANCE
+							sound PISTOL_BODYHIT
+							state setreturn-1
+						break
+						case 12
+							addvar ENEMYRANDOMIZERCHANCE 100
+							ifvarg ENEMYRANDOMIZERCHANCE 1000 setvar ENEMYRANDOMIZERCHANCE 1000
+							savegamevar ENEMYRANDOMIZERCHANCE
+							sound PISTOL_BODYHIT
+							state setreturn-1
+						break
+						endswitch
+					}
+					else
+					{
+						state setreturn-1
+						state menuerrorsound
+					}
+				}
+				// else { }
+			}
+			else
+			{
+				state setreturn-1
+				state menuerrorsound
+			}
+		}
+	}
+	else
+	{
+		ifvare atm_id -1
+		{
+			ifvare shop_id -1
+			{
+				ifvare weapontoggleselect 0
+				{
+					getinput[THISACTOR].bits temp
+					shiftvarr temp 8
+					andvar temp 0xF
+					switch temp
+						case 11
+							ifvare weaponcount 0 
+							{
+								ifvare VEHICLEID -1 state shift-inusecharacter-left 
+								else 
+								{
+									state menuerrorsound
+									redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
+									setvarvar fta fta_normal setvar ftq 410
+								}
+							}
+							state setreturn-1
+							break
+						case 12
+							ifvare weaponcount 0 
+							{
+								ifvare VEHICLEID -1 state shift-inusecharacter-right
+								else
+								{
+									state menuerrorsound
+									redefinequote 410 ^10CANNOT CHANGE CHARACTERS WHILE IN A VEHICLE!
+									setvarvar fta fta_normal setvar ftq 410
+								}
+							}
+							state setreturn-1
+							break
+					endswitch
+				}
+			}
+			else
+			{
+				state getpartime
+				addvar mpresstime 1
+				ifvarvare temppartime mpresstime nullop else
+				{
+					getinput[THISACTOR].bits temp
+					shiftvarr temp 8
+					andvar temp 0xF
+			
+					switch temp
+						case 0
+							setvar shopamount 1
+							sound MENU_CURSOR
+							break
+						case 1
+							setvar shopamount 10
+							sound MENU_CURSOR
+							break
+						case 2
+							setvar shopamount 20
+							sound MENU_CURSOR
+							break
+						case 3
+							setvar shopamount 30
+							sound MENU_CURSOR
+							break
+						case 4
+							setvar shopamount 40
+							sound MENU_CURSOR
+							break
+						case 5
+							setvar shopamount 50
+							sound MENU_CURSOR
+							break
+						case 6
+							setvar shopamount 60
+							sound MENU_CURSOR
+							break
+						case 7
+							setvar shopamount 70
+							sound MENU_CURSOR
+							break
+						case 8
+							setvar shopamount 80
+							sound MENU_CURSOR
+							break
+						case 9
+							setvar shopamount 90
+							sound MENU_CURSOR
+							break
+						case 10
+							setvar shopamount 100
+							sound MENU_CURSOR
+							break
+						case 11
+							subvar shopamount 10
+							ifvarl shopamount 1 addvar shopamount 100
+							sound MENU_CURSOR
+							break
+						case 12
+							addvar shopamount 10
+							ifvarg shopamount 100 subvar shopamount 100
+							sound MENU_CURSOR
+							break
+					endswitch
+			
+					state setreturn-1
+				}
+			}
+		}
+		else
+		{
+			state setreturn-1
+		}
+	}
 endevent
 
 // The actual buttons. Any one should do as long as you set param to the digit and call 'enterdigit'. 
 onevent EVENT_WEAPKEY10
- ifvare mainmenu 0
- {
-  setvar param 0
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 0
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY1
- ifvare mainmenu 0
- {
-  setvar param 1
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 1
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY2
- ifvare mainmenu 0
- {
-  setvar param 2
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 2
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY3
- ifvare mainmenu 0
- {
-  setvar param 3
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 3
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY4
- ifvare mainmenu 0
- {
-  setvar param 4
-  ifvare atm_id -1
-  {
-   ifvare pad_id -1
-   {
-    ifvare DEATHMISSILESUSABLE? 1
-    {
-     ifvare player[THISACTOR].curr_weapon 3
-     {
-      state getpartime
-      addvar mpresstime 1
-      ifvarvare temppartime mpresstime nullop else
-      {
-       ifvare CHAINGUNMODE 0
-       {
-        setvar CHAINGUNMODE 1 
-        redefinequote 1334 ^10CHAINGUN SHOOTS RPG ROCKETS!
-        setvarvar fta fta_normal setvar ftq 1334
-        sound SELECT_WEAPON
-       }
-       else
-       ifvare CHAINGUNMODE 1
-       {
-        setvar CHAINGUNMODE 0
-//        setvar CHAINGUNMODE 2
-        redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
-//        redefinequote 1334 ^21CHAINGUN SHOOTS LASER BLASTS!
-        setvarvar fta fta_normal setvar ftq 1334
-        sound SELECT_WEAPON
-       }
-/*
-       else
-       ifvare CHAINGUNMODE 2
-       {
-        setvar CHAINGUNMODE 0
-        redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
-        setvarvar fta fta_normal setvar ftq 1334
-        sound SELECT_WEAPON
-       }
-*/
-      }
-     }
-     setvarvar mpresstime temppartime
-    }
-   }
-   else
-   {
-    setvar MISCARRAYID 44 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button6timer
-    state enterdigit 
-   }
-  }
-  else // ifvarn atm_id -1
-  {
-   ifvare atm_mode 1 state enterdigitatmacct
-   else ifvare atm_mode 2 state enterdigitatmpin
-   else ifvare atm_mode 4 state enterdigitatmwithdraw
-   else ifvare atm_mode 5 state enterdigitatmdeposit
-   else ifvare atm_mode 7 state enterdigitatmwiremoney
-   else ifvare atm_mode 8 state enterdigitatmwireacct
-   else state setreturn-1
-  }
-//  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 4
+		ifvare atm_id -1
+		{
+			ifvare pad_id -1
+			{
+				ifvare DEATHMISSILESUSABLE? 1
+				{
+					ifvare player[THISACTOR].curr_weapon 3
+					{
+						state getpartime
+						addvar mpresstime 1
+						ifvarvare temppartime mpresstime nullop else
+						{
+							ifvare CHAINGUNMODE 0
+							{
+								setvar CHAINGUNMODE 1 
+								redefinequote 1334 ^10CHAINGUN SHOOTS RPG ROCKETS!
+								setvarvar fta fta_normal setvar ftq 1334
+								sound SELECT_WEAPON
+							}
+							else
+							ifvare CHAINGUNMODE 1
+							{
+								setvar CHAINGUNMODE 0
+								// setvar CHAINGUNMODE 2
+								redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
+								// redefinequote 1334 ^21CHAINGUN SHOOTS LASER BLASTS!
+								setvarvar fta fta_normal setvar ftq 1334
+								sound SELECT_WEAPON
+							}
+							/*
+							else
+							ifvare CHAINGUNMODE 2
+							{
+								setvar CHAINGUNMODE 0
+								redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
+								setvarvar fta fta_normal setvar ftq 1334
+								sound SELECT_WEAPON
+							}
+							*/
+						}
+					}
+					setvarvar mpresstime temppartime
+				}
+			}
+			else
+			{
+				setvar MISCARRAYID 44 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button6timer
+				state enterdigit 
+			}
+		}
+		else // ifvarn atm_id -1
+		{
+			ifvare atm_mode 1 state enterdigitatmacct
+			else ifvare atm_mode 2 state enterdigitatmpin
+			else ifvare atm_mode 4 state enterdigitatmwithdraw
+			else ifvare atm_mode 5 state enterdigitatmdeposit
+			else ifvare atm_mode 7 state enterdigitatmwiremoney
+			else ifvare atm_mode 8 state enterdigitatmwireacct
+			else state setreturn-1
+		}
+		// state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY5
-
- ifvare mainmenu 0
- {
-  setvar param 5
-  ifvare atm_id -1
-  {
-   ifvare pad_id -1
-   {
-    ifvare DEATHMISSILESUSABLE? 1
-    {
-     ifvare player[THISACTOR].curr_weapon 4
-     {
-      state getpartime
-      addvar mpresstime 1
-      ifvarvare temppartime mpresstime nullop else
-      {
-       ifvare DEATHMISSILEMODE 0
-       {
-        setvar DEATHMISSILEMODE 1 
-        redefinequote 1334 ^10DEATHSTROKE MISSILES PRIMED!
-        setvarvar fta fta_normal setvar ftq 1334
-        sound SELECT_WEAPON
-       }
-       else
-       ifvare DEATHMISSILEMODE 1
-       {
-        setvar DEATHMISSILEMODE 0
-        redefinequote 1334 ^21DEATHGATE MISSILES PRIMED!
-        setvarvar fta fta_normal setvar ftq 1334
-        sound SELECT_WEAPON
-       }
-      }
-     }
-     setvarvar mpresstime temppartime
-    }
-   }
-   else
-   {
-    setvar MISCARRAYID 45 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button6timer
-    state enterdigit 
-   }
-  }
-  else // ifvarn atm_id -1
-  {
-   ifvare atm_mode 1 state enterdigitatmacct
-   else ifvare atm_mode 2 state enterdigitatmpin
-   else ifvare atm_mode 4 state enterdigitatmwithdraw
-   else ifvare atm_mode 5 state enterdigitatmdeposit
-   else ifvare atm_mode 7 state enterdigitatmwiremoney
-   else ifvare atm_mode 8 state enterdigitatmwireacct
-   else state setreturn-1
-  }
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 5
+		ifvare atm_id -1
+		{
+			ifvare pad_id -1
+			{
+				ifvare DEATHMISSILESUSABLE? 1
+				{
+					ifvare player[THISACTOR].curr_weapon 4
+					{
+						state getpartime
+						addvar mpresstime 1
+						ifvarvare temppartime mpresstime nullop else
+						{
+							ifvare DEATHMISSILEMODE 0
+							{
+								setvar DEATHMISSILEMODE 1 
+								redefinequote 1334 ^10DEATHSTROKE MISSILES PRIMED!
+								setvarvar fta fta_normal setvar ftq 1334
+								sound SELECT_WEAPON
+							}
+							else
+							ifvare DEATHMISSILEMODE 1
+							{
+								setvar DEATHMISSILEMODE 0
+								redefinequote 1334 ^21DEATHGATE MISSILES PRIMED!
+								setvarvar fta fta_normal setvar ftq 1334
+								sound SELECT_WEAPON
+							}
+						}
+					}
+					setvarvar mpresstime temppartime
+				}
+			}
+			else
+			{
+				setvar MISCARRAYID 45 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT 6 // pad-button6timer
+				state enterdigit 
+			}
+		}
+		else // ifvarn atm_id -1
+		{
+			ifvare atm_mode 1 state enterdigitatmacct
+			else ifvare atm_mode 2 state enterdigitatmpin
+			else ifvare atm_mode 4 state enterdigitatmwithdraw
+			else ifvare atm_mode 5 state enterdigitatmdeposit
+			else ifvare atm_mode 7 state enterdigitatmwiremoney
+			else ifvare atm_mode 8 state enterdigitatmwireacct
+			else state setreturn-1
+		}
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY6
- ifvare mainmenu 0
- {
-  setvar param 6
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 6
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY7
- ifvare mainmenu 0
- {
-  setvar param 7
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 7
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY8
- ifvare mainmenu 0
- {
-  setvar param 8
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 8
+		state keypress
+	}
+	else state setreturn-1
 endevent
 
 onevent EVENT_WEAPKEY9
- ifvare mainmenu 0
- {
-  setvar param 9
-  state keypress
- }
- else state setreturn-1
+	ifvare mainmenu 0
+	{
+		setvar param 9
+		state keypress
+	}
+	else state setreturn-1
 endevent // this makes reseting the code entry easier. 
 
 onevent EVENT_DISPLAYSBAR // WARNING: Unsynchronized Event
-
-// Sound based alterations
-
-// One-Liners (to try to prevent extra 'one-liner quotes' from showing while a character is jabbing a one-liner :P)
-
-// Leave in this state
-ifsound JIBBED_ACTOR1 state setonelineron
-else ifsound JIBBED_ACTOR2 state setonelineron
-else ifsound JIBBED_ACTOR3 state setonelineron
-else ifsound JIBBED_ACTOR4 state setonelineron
-else ifsound JIBBED_ACTOR5 state setonelineron
-else ifsound JIBBED_ACTOR6 state setonelineron
-else ifsound JIBBED_ACTOR7 state setonelineron
-else ifsound JIBBED_ACTOR8 state setonelineron
-else ifsound JIBBED_ACTOR9 state setonelineron
-else ifsound JIBBED_ACTOR10 state setonelineron
-else ifsound JIBBED_ACTOR11 state setonelineron
-else ifsound JIBBED_ACTOR12 state setonelineron
-else ifsound JIBBED_ACTOR13 state setonelineron
-else ifsound JIBBED_ACTOR14 state setonelineron
-else ifsound JIBBED_ACTOR15 state setonelineron
-else ifsound MDEVSPEECH state setonelineron
-else ifsound SMACKED state setonelineron
-else ifsound BONUS_SPEECH3 state setonelineron
-else ifsound JACK_ONELINER01 state setonelineron
-else ifsound JACK_ONELINER02 state setonelineron
-else ifsound JACK_ONELINER03 state setonelineron
-else ifsound JACK_ONELINER04 state setonelineron
-else ifsound JACK_ONELINER05 state setonelineron
-else ifsound JACK_ONELINER06 state setonelineron
-else ifsound JACK_ONELINER07 state setonelineron
-else ifsound JACK_ONELINER08 state setonelineron
-else ifsound JACK_ONELINER09 state setonelineron
-else ifsound JACK_ONELINER10 state setonelineron
-
-else ifsound JACK_ONELINER11 state setonelineron
-else ifsound JACK_ONELINER12 state setonelineron
-else ifsound JACK_ONELINER13 state setonelineron
-else ifsound JACK_ONELINER14 state setonelineron
-else ifsound JACK_ONELINER15 state setonelineron
-else ifsound JACK_ONELINER16 state setonelineron
-else ifsound JACK_ONELINER17 state setonelineron
-else ifsound JACK_ONELINER18 state setonelineron
-else ifsound BUBSY_ONELINER01 state setonelineron
-else ifsound BUBSY_ONELINER02 state setonelineron
-else ifsound BUBSY_ONELINER03 state setonelineron
-else ifsound BUBSY_ONELINER04 state setonelineron
-else ifsound BUBSY_ONELINER05 state setonelineron
-else ifsound BUBSY_ONELINER06 state setonelineron
-else ifsound BUBSY_ONELINER07 state setonelineron
-else ifsound BUBSY_ONELINER08 state setonelineron
-else ifsound BUBSY_ONELINER09 state setonelineron
-else ifsound BUBSY_ONELINER10 state setonelineron
-else ifsound BUBSY_ONELINER11 state setonelineron
-else ifsound BUBSY_ONELINER12 state setonelineron
-else ifsound BUBSY_ONELINER13 state setonelineron
-else ifsound BUBSY_ONELINER14 state setonelineron
-else ifsound BUBSY_ONELINER15 state setonelineron
-else ifsound BUBSY_ONELINER16 state setonelineron
-else ifsound BUBSY_ONELINER17 state setonelineron
-else ifsound BUBSY_ONELINER18 state setonelineron
-// Ami
-else ifsound WANG_ONELINER01 state setonelineron
-else ifsound WANG_ONELINER02 state setonelineron
-else ifsound WANG_ONELINER03 state setonelineron
-else ifsound WANG_ONELINER04 state setonelineron
-else ifsound WANG_ONELINER05 state setonelineron
-else ifsound WANG_ONELINER06 state setonelineron
-else ifsound WANG_ONELINER07 state setonelineron
-else ifsound WANG_ONELINER08 state setonelineron
-else ifsound WANG_ONELINER09 state setonelineron
-else ifsound WANG_ONELINER10 state setonelineron
-else ifsound WANG_ONELINER11 state setonelineron
-else ifsound WANG_ONELINER12 state setonelineron
-else ifsound WANG_ONELINER13 state setonelineron
-else ifsound WANG_ONELINER14 state setonelineron
-else ifsound WANG_ONELINER15 state setonelineron
-else ifsound WANG_ONELINER16 state setonelineron
-else ifsound WANG_ONELINER17 state setonelineron
-else ifsound WANG_ONELINER18 state setonelineron
-else ifsound ESSENCE_ONELINER01 state setonelineron
-else ifsound ESSENCE_ONELINER02 state setonelineron
-else ifsound ESSENCE_ONELINER03 state setonelineron
-else ifsound ESSENCE_ONELINER04 state setonelineron
-else ifsound ESSENCE_ONELINER05 state setonelineron
-else ifsound ESSENCE_ONELINER06 state setonelineron
-else ifsound ESSENCE_ONELINER07 state setonelineron
-else ifsound ESSENCE_ONELINER08 state setonelineron
-else ifsound ESSENCE_ONELINER09 state setonelineron
-else ifsound ESSENCE_ONELINER10 state setonelineron
-else ifsound ESSENCE_ONELINER11 state setonelineron
-else ifsound ESSENCE_ONELINER12 state setonelineron
-else ifsound ESSENCE_ONELINER13 state setonelineron
-else ifsound ESSENCE_ONELINER14 state setonelineron
-else ifsound ESSENCE_ONELINER15 state setonelineron
-else ifsound ESSENCE_ONELINER16 state setonelineron
-else ifsound ESSENCE_ONELINER17 state setonelineron
-else ifsound ESSENCE_ONELINER18 state setonelineron
-else ifsound TED_ONELINER01 state setonelineron
-else ifsound TED_ONELINER02 state setonelineron
-else ifsound TED_ONELINER03 state setonelineron
-else ifsound TED_ONELINER04 state setonelineron
-else ifsound TED_ONELINER05 state setonelineron
-else ifsound TED_ONELINER06 state setonelineron
-else ifsound TED_ONELINER07 state setonelineron
-else ifsound TED_ONELINER08 state setonelineron
-else ifsound TED_ONELINER09 state setonelineron
-else ifsound TED_ONELINER10 state setonelineron
-else ifsound TED_ONELINER11 state setonelineron
-else ifsound TED_ONELINER12 state setonelineron
-else ifsound TED_ONELINER13 state setonelineron
-else ifsound TED_ONELINER14 state setonelineron
-else ifsound TED_ONELINER15 state setonelineron
-else ifsound TED_ONELINER16 state setonelineron
-else ifsound TED_ONELINER17 state setonelineron
-else ifsound TED_ONELINER18 state setonelineron
-else ifsound LISA_ONELINER01 state setonelineron
-else ifsound LISA_ONELINER02 state setonelineron
-else ifsound LISA_ONELINER03 state setonelineron
-else ifsound LISA_ONELINER04 state setonelineron
-else ifsound LISA_ONELINER05 state setonelineron
-else ifsound LISA_ONELINER06 state setonelineron
-else ifsound LISA_ONELINER07 state setonelineron
-else ifsound LISA_ONELINER08 state setonelineron
-else ifsound LISA_ONELINER09 state setonelineron
-else ifsound LISA_ONELINER10 state setonelineron
-else ifsound LISA_ONELINER11 state setonelineron
-else ifsound LISA_ONELINER12 state setonelineron
-else ifsound LISA_ONELINER13 state setonelineron
-else ifsound LISA_ONELINER14 state setonelineron
-else ifsound LISA_ONELINER15 state setonelineron
-else ifsound LISA_ONELINER16 state setonelineron
-else ifsound LISA_ONELINER17 state setonelineron
-else ifsound LISA_ONELINER18 state setonelineron
-else ifsound LISA_ONELINERTANK01 state setonelineron
-else ifsound LISA_ONELINERTANK02 state setonelineron
-else ifsound LISA_ONELINERTANK03 state setonelineron
-else ifsound LISA_ONELINERTANK04 state setonelineron
-else ifsound CYBANIS_ONELINER01 state setonelineron
-else ifsound CYBANIS_ONELINER02 state setonelineron
-else ifsound CYBANIS_ONELINER03 state setonelineron
-else ifsound CYBANIS_ONELINER04 state setonelineron
-else ifsound CYBANIS_ONELINER05 state setonelineron
-else ifsound CYBANIS_ONELINER06 state setonelineron
-else ifsound CYBANIS_ONELINER07 state setonelineron
-else ifsound CYBANIS_ONELINER08 state setonelineron
-else ifsound CYBANIS_ONELINER09 state setonelineron
-else ifsound CYBANIS_ONELINER10 state setonelineron
-else ifsound CYBANIS_ONELINER11 state setonelineron
-else ifsound CYBANIS_ONELINER12 state setonelineron
-else ifsound CYBANIS_ONELINER13 state setonelineron
-else ifsound CYBANIS_ONELINER14 state setonelineron
-else ifsound CYBANIS_ONELINER15 state setonelineron
-else ifsound CYBANIS_ONELINER16 state setonelineron
-else ifsound CYBANIS_ONELINER17 state setonelineron
-else ifsound CYBANIS_ONELINER18 state setonelineron
-else ifsound NETHRA_ONELINER01 state setonelineron
-else ifsound NETHRA_ONELINER02 state setonelineron
-else ifsound NETHRA_ONELINER03 state setonelineron
-else ifsound NETHRA_ONELINER04 state setonelineron
-else ifsound NETHRA_ONELINER05 state setonelineron
-else ifsound NETHRA_ONELINER06 state setonelineron
-else ifsound NETHRA_ONELINER07 state setonelineron
-else ifsound NETHRA_ONELINER08 state setonelineron
-else ifsound NETHRA_ONELINER09 state setonelineron
-else ifsound NETHRA_ONELINER10 state setonelineron
-else ifsound NETHRA_ONELINER11 state setonelineron
-else ifsound NETHRA_ONELINER12 state setonelineron
-else ifsound NETHRA_ONELINER13 state setonelineron
-else ifsound NETHRA_ONELINER14 state setonelineron
-else ifsound NETHRA_ONELINER15 state setonelineron
-else ifsound NETHRA_ONELINER16 state setonelineron
-else ifsound NETHRA_ONELINER17 state setonelineron
-else ifsound NETHRA_ONELINER18 state setonelineron
-else ifsound CHRISTINA_ONELINER01 state setonelineron
-else ifsound CHRISTINA_ONELINER02 state setonelineron
-else ifsound CHRISTINA_ONELINER03 state setonelineron
-else ifsound CHRISTINA_ONELINER04 state setonelineron
-else ifsound CHRISTINA_ONELINER05 state setonelineron
-else ifsound CHRISTINA_ONELINER06 state setonelineron
-else ifsound CHRISTINA_ONELINER07 state setonelineron
-else ifsound CHRISTINA_ONELINER08 state setonelineron
-else ifsound CHRISTINA_ONELINER09 state setonelineron
-else ifsound CHRISTINA_ONELINER10 state setonelineron
-else ifsound CHRISTINA_ONELINER11 state setonelineron
-else ifsound CHRISTINA_ONELINER12 state setonelineron
-else ifsound CHRISTINA_ONELINER13 state setonelineron
-else ifsound CHRISTINA_ONELINER14 state setonelineron
-else ifsound CHRISTINA_ONELINER15 state setonelineron
-else ifsound CHRISTINA_ONELINER16 state setonelineron
-else ifsound CHRISTINA_ONELINER17 state setonelineron
-else ifsound CHRISTINA_ONELINER18 state setonelineron
-// Paula
-// Lori
-else ifsound MINAKO_ONELINER01 state setonelineron
-else ifsound MINAKO_ONELINER02 state setonelineron
-else ifsound MINAKO_ONELINER03 state setonelineron
-else ifsound MINAKO_ONELINER04 state setonelineron
-else ifsound MINAKO_ONELINER05 state setonelineron
-else ifsound MINAKO_ONELINER06 state setonelineron
-else ifsound MINAKO_ONELINER07 state setonelineron
-else ifsound MINAKO_ONELINER08 state setonelineron
-else ifsound MINAKO_ONELINER09 state setonelineron
-else ifsound MINAKO_ONELINER10 state setonelineron
-else ifsound MINAKO_ONELINER11 state setonelineron
-else ifsound MINAKO_ONELINER12 state setonelineron
-else ifsound MINAKO_ONELINER13 state setonelineron
-else ifsound MINAKO_ONELINER14 state setonelineron
-else ifsound MINAKO_ONELINER15 state setonelineron
-else ifsound MINAKO_ONELINER16 state setonelineron
-else ifsound MINAKO_ONELINER17 state setonelineron
-else ifsound MINAKO_ONELINER18 state setonelineron
-// "Mystery Lady"
-else ifsound MAKEN_ONELINER01 state setonelineron
-else ifsound MAKEN_ONELINER02 state setonelineron
-else ifsound MAKEN_ONELINER03 state setonelineron
-else ifsound MAKEN_ONELINER04 state setonelineron
-else ifsound MAKEN_ONELINER05 state setonelineron
-else ifsound MAKEN_ONELINER06 state setonelineron
-else ifsound MAKEN_ONELINER07 state setonelineron
-else ifsound MAKEN_ONELINER08 state setonelineron
-else ifsound MAKEN_ONELINER09 state setonelineron
-else ifsound MAKEN_ONELINER10 state setonelineron
-else ifsound MAKEN_ONELINER11 state setonelineron
-else ifsound MAKEN_ONELINER12 state setonelineron
-else ifsound MAKEN_ONELINER13 state setonelineron
-else ifsound MAKEN_ONELINER14 state setonelineron
-else ifsound MAKEN_ONELINER15 state setonelineron
-else ifsound MAKEN_ONELINER16 state setonelineron
-else ifsound MAKEN_ONELINER17 state setonelineron
-else ifsound MAKEN_ONELINER18 state setonelineron
-else setvar ONELINERINPLAY? 0
-
-// Others to leave in this state
-
-ifsound DUKE_HIT_STRIPPER1
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_HIT_STRIPPER1
-}
-ifsound DUKE_HIT_STRIPPER2
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_HIT_STRIPPER2
-}
-ifsound DUKE_TIP1
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_TIP1
-}
-ifsound DUKE_TIP2
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_TIP2
-}
-ifsound DUKE_BOOBY
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_BOOBY
-}
-ifsound DUKE_GRUNT
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GRUNT
-}
-ifsound DUKE_BREATHING
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_BREATHING
-}
-ifsound DUKE_EXHALING
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_EXHALING
-}
-ifsound GENERIC_AMBIENCE13 // "Damn, those alien bastards are gonna pay for shooting up my ride!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE13
-}
-ifsound GENERIC_AMBIENCE14 // "What, there's only one of you?!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE14
-}
-ifsound GENERIC_AMBIENCE15 // "I think I'll climb aboard!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE15
-}
-ifsound GENERIC_AMBIENCE16 // "Hmmm, that's on DooMed space marine!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE16
-}
-ifsound GENERIC_AMBIENCE17 // "Hmm, got no time to play with myself!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE17
-}
-ifsound GENERIC_AMBIENCE20 // "Hmm, looks like I have the con!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE20
-}
-ifsound GENERIC_AMBIENCE23 // "Damn, that's the second time those alien bastards shot up my ride!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE23
-}
-ifsound WAR_AMBIENCE5 // "This is a force to be reckoned with!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE5
-}
-ifsound WAR_AMBIENCE6 // "I ain't afraid of no 'Quake'!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE6
-}
-ifsound WAR_AMBIENCE7 // "Terminated!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE7
-}
-ifsound WAR_AMBIENCE8 // "Born to be Wild!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE8
-}
-ifsound WAR_AMBIENCE9 // "Nobody Steals Our Chicks, and Lives!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE9
-}
-ifsound WAR_AMBIENCE10 // "It's Time to Kick Ass and Chew Bubblegum, and I'm all Outta Gum!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE10
-}
-ifsound SUPERMARKET // "Looks like cleanup on aisle 4!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound SUPERMARKET
-}
-ifsound MOUSEANNOY // "Damn, that was annoying!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound MOUSEANNOY
-}
-ifsound BOOKEM // "Hmm, book'em, danno!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound BOOKEM
-}
-ifsound SUPERMARKETCRY // "I'm not crying over this!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound SUPERMARKETCRY
-}
-ifsound EATFOOD // "No way I'm eating this sh*t!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound EATFOOD
-}
-ifsound MAKEMYDAY // "Go ahead, make my day!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound MAKEMYDAY
-}
-ifsound WITNESSSTAND // "So help me, Duke!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound WITNESSSTAND
-}
-ifsound VACATIONSPEECH // "Somebody's gonna freakin' pay for ruining my vacation!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound VACATIONSPEECH
-}
-ifsound YIPPEE1 // "Yippie Ky-aee, mother*bleep*er!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound YIPPEE1
-}
-ifsound YOHOO1 //
-{
- ifvarn CHARACTERSELECTED? 1 stopsound YOHOO1
-}
-ifsound YOHOO2 //
-{
- ifvarn CHARACTERSELECTED? 1 stopsound YOHOO2
-}
-ifsound PARTY_SPEECH // "My kinda party, wish I had time..."
-{
- ifvarn CHARACTERSELECTED? 1 stopsound PARTY_SPEECH
-}
-ifsound POSTAL_SPEECH // "Time for me to go postal!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound POSTAL_SPEECH
-}
-ifsound DOGROOMSPEECH // "Nobody messes with my meat!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DOGROOMSPEECH
-}
-ifsound AREA51SPEECH // "Nobody jacks with our independance!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound AREA51SPEECH
-}
-ifsound SNAKESPEECH // "I guess he didn't escape from L.A!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound SNAKESPEECH
-}
-ifsound GETBACKTOWORK // "Get back to work, you slacker!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound GETBACKTOWORK
-}
-ifsound FOUNDJONES // "We meet again, Dr. Jones!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound FOUNDJONES
-}
-ifsound DUKE_KILLED3 // "Ugh, this sucks!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_KILLED3
-}
-ifsound DUKE_KILLED5 // "This really pisses me off!"
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_KILLED5
-}
-ifsound SECRETLEVELSND
-{
- ifvare CHARACTERSELECTED? 5
- {
-  stopsound SECRETLEVELSND
-  globalsound SECRETLEVELSND2
- }
-/*
- else
- {
- }
-*/
-}
-ifsound KTIT
-{
- ifvarn CHARACTERSELECTED? 1 stopsound KTIT
-}
-
-ifsound GENERIC_AMBIENCE5 // Phone busy-tone
-{
- ifvare CHARACTERSELECTED? 5
- {
-  stopsound GENERIC_AMBIENCE5
-  displayrandvar RNDVOICE 3
-  ifvare RNDVOICE 0 
-  {
-   sound WANG_PHONEUSE1
-   redefinequote 340 ^15Higa: Helllllo...? Anybody there??
-   ifvare oldskoolmode 0 userquote 340
-  }
-  ifvare RNDVOICE 1
-  {
-   sound WANG_PHONEUSE2
-   redefinequote 340 ^15Higa: Hello? Is your refrigerator running? Better catch it! Hahahahaha!!
-   ifvare oldskoolmode 0 userquote 340
-  }
-  ifvare RNDVOICE 2
-  {
-   sound WANG_PHONEUSE3
-   redefinequote 340 ^15Higa: Hello? Bowl-a-rama? You got 16-pound balls? Ehahahaha!
-   ifvare oldskoolmode 0 userquote 340
-  }
-  ifvare RNDVOICE 3
-  {
-   sound WANG_PHONEUSE4
-   redefinequote 340 ^15Higa: Hello? Is uh, "Big Bottom" there? First name "Iva"? "Iva Big Bottom?" Hahahahaha!
-   ifvare oldskoolmode 0 userquote 340
-  }
- }
-}
-
-ifsound DUKE_TALKTOBOSSFALL
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_TALKTOBOSSFALL
-}
-ifsound DUKE_CRACK
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_CRACK
-}
-ifsound DUKE_CRACK2
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_CRACK2
-}
-ifsound BONUS_SPEECH1
-{
- ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH1
-}
-ifsound BONUS_SPEECH2
-{
- ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH2
-}
-ifsound BONUS_SPEECH3
-{
- ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH3
-}
-ifsound BONUS_SPEECH4
-{
- ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH4
-}
-ifsound JIBBED_ACTOR1
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR1
-}
-ifsound JIBBED_ACTOR2
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR2
-}
-ifsound JIBBED_ACTOR3
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR3
-}
-ifsound JIBBED_ACTOR4
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR4
-}
-ifsound JIBBED_ACTOR5
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR5
-}
-ifsound JIBBED_ACTOR6
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR6
-}
-ifsound JIBBED_ACTOR7
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR7
-}
-ifsound JIBBED_ACTOR8
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR8
-}
-ifsound JIBBED_ACTOR9
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR9
-}
-ifsound JIBBED_ACTOR10
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR10
-}
-ifsound JIBBED_ACTOR11
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR11
-}
-ifsound JIBBED_ACTOR12
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR12
-}
-ifsound JIBBED_ACTOR13
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR13
-}
-ifsound JIBBED_ACTOR14
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR14
-}
-ifsound JIBBED_ACTOR15
-{
- ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR15
-}
-ifsound DUKE_GETWEAPON1
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON1
-}
-ifsound DUKE_GETWEAPON2
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON2
-}
-ifsound DUKE_GETWEAPON3
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON3
-}
-ifsound DUKE_GETWEAPON4
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON4
-}
-ifsound DUKE_GETWEAPON6
-{
- ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON6
-}
-
-//
-
-setvar CHARACTERARRAY 1
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound JIBBED_ACTOR1 stopsound JIBBED_ACTOR1
-  ifsound JIBBED_ACTOR2 stopsound JIBBED_ACTOR2
-  ifsound JIBBED_ACTOR3 stopsound JIBBED_ACTOR3
-  ifsound JIBBED_ACTOR4 stopsound JIBBED_ACTOR4
-  ifsound JIBBED_ACTOR5 stopsound JIBBED_ACTOR5
-  ifsound JIBBED_ACTOR6 stopsound JIBBED_ACTOR6
-  ifsound JIBBED_ACTOR7 stopsound JIBBED_ACTOR7
-  ifsound JIBBED_ACTOR8 stopsound JIBBED_ACTOR8
-  ifsound JIBBED_ACTOR9 stopsound JIBBED_ACTOR9
-  ifsound JIBBED_ACTOR10 stopsound JIBBED_ACTOR10
-  ifsound JIBBED_ACTOR11 stopsound JIBBED_ACTOR11
-  ifsound JIBBED_ACTOR12 stopsound JIBBED_ACTOR12
-  ifsound JIBBED_ACTOR13 stopsound JIBBED_ACTOR13
-  ifsound JIBBED_ACTOR14 stopsound JIBBED_ACTOR14
-  ifsound JIBBED_ACTOR15 stopsound JIBBED_ACTOR15
-  ifsound MDEVSPEECH stopsound MDEVSPEECH
-  ifsound SMACKED stopsound SMACKED
-  ifsound BONUS_SPEECH3 stopsound BONUS_SPEECH3
-  ifsound ENDSEQVOL2SND7 stopsound ENDSEQVOL2SND7
-  ifsound DUKETALKTOBOSS stopsound DUKETALKTOBOSS
-  ifsound DUKE_CRACK stopsound DUKE_CRACK
-  ifsound DUKE_CRACK2 stopsound DUKE_CRACK2
-  ifsound DUKE_DEAD stopsound DUKE_DEAD
-  ifsound DUKE_LOOKINTOMIRRORA stopsound DUKE_LOOKINTOMIRRORA
-  ifsound DUKE_SEARCH1A stopsound DUKE_SEARCH1A
-  ifsound DUKE_SEARCH2A stopsound DUKE_SEARCH2A
-  ifsound DUKE_HIT_STRIPPER1 stopsound DUKE_HIT_STRIPPER1
-  ifsound DUKE_HIT_STRIPPER2 stopsound DUKE_HIT_STRIPPER2
-  ifsound DUKE_TIP1 stopsound DUKE_TIP1
-  ifsound DUKE_TIP2 stopsound DUKE_TIP2
-  ifsound DUKE_BOOBY stopsound DUKE_BOOBY
-  ifsound DUKE_GRUNT stopsound DUKE_GRUNT
-  ifsound DUKE_BREATHING stopsound DUKE_BREATHING
-  ifsound DUKE_EXHALING stopsound DUKE_EXHALING
-  ifsound DUKE_GASP stopsound DUKE_GASP
-  ifsound DUKE_JUMP1 stopsound DUKE_JUMP1
-  ifsound DUKE_JUMP2 stopsound DUKE_JUMP2
-  ifsound DUKE_AIRJUMP1 stopsound DUKE_AIRJUMP1
-  ifsound DUKE_AIRJUMP2 stopsound DUKE_AIRJUMP2
-  ifsound GENERIC_AMBIENCE13 stopsound GENERIC_AMBIENCE13
-  ifsound GENERIC_AMBIENCE14 stopsound GENERIC_AMBIENCE14
-  ifsound GENERIC_AMBIENCE15 stopsound GENERIC_AMBIENCE15
-  ifsound GENERIC_AMBIENCE16 stopsound GENERIC_AMBIENCE16
-  ifsound GENERIC_AMBIENCE17 stopsound GENERIC_AMBIENCE17
-  ifsound GENERIC_AMBIENCE20 stopsound GENERIC_AMBIENCE20
-  ifsound GENERIC_AMBIENCE23 stopsound GENERIC_AMBIENCE23
-  ifsound WAR_AMBIENCE5 stopsound WAR_AMBIENCE5
-  ifsound WAR_AMBIENCE6 stopsound WAR_AMBIENCE6
-  ifsound WAR_AMBIENCE7 stopsound WAR_AMBIENCE7
-  ifsound WAR_AMBIENCE8 stopsound WAR_AMBIENCE8
-  ifsound WAR_AMBIENCE9 stopsound WAR_AMBIENCE9
-  ifsound WAR_AMBIENCE10 stopsound WAR_AMBIENCE10
-  ifsound SUPERMARKET stopsound SUPERMARKET
-  ifsound MOUSEANNOY stopsound MOUSEANNOY
-  ifsound BOOKEM stopsound BOOKEM
-  ifsound SUPERMARKETCRY stopsound SUPERMARKETCRY
-  ifsound EATFOOD stopsound EATFOOD
-  ifsound MAKEMYDAY stopsound MAKEMYDAY
-  ifsound WITNESSSTAND stopsound WITNESSSTAND
-  ifsound VACATIONSPEECH stopsound VACATIONSPEECH
-  ifsound YIPPEE1 stopsound YIPPEE1
-  ifsound YOHOO1 stopsound YOHOO1
-  ifsound YOHOO2 stopsound YOHOO2
-  ifsound PARTY_SPEECH stopsound PARTY_SPEECH
-  ifsound POSTAL_SPEECH stopsound POSTAL_SPEECH
-  ifsound DOGROOMSPEECH stopsound DOGROOMSPEECH
-  ifsound AREA51SPEECH stopsound AREA51SPEECH
-  ifsound SNAKESPEECH stopsound SNAKESPEECH
-  ifsound GETBACKTOWORK stopsound GETBACKTOWORK
-  ifsound FOUNDJONES stopsound FOUNDJONES
-  ifsound DUKE_KILLED3 stopsound DUKE_KILLED3
-  ifsound DUKE_KILLED5 stopsound DUKE_KILLED5
-  ifsound SECRETLEVELSND stopsound SECRETLEVELSND
-  ifsound DUKE_TALKTOBOSSFALL stopsound DUKE_TALKTOBOSSFALL
-  ifsound DUKE_CRACK stopsound DUKE_CRACK
-  ifsound DUKE_CRACK2 stopsound DUKE_CRACK2
-  ifsound BONUS_SPEECH1 stopsound BONUS_SPEECH1
-  ifsound BONUS_SPEECH2 stopsound BONUS_SPEECH2
-  ifsound BONUS_SPEECH3 stopsound BONUS_SPEECH3
-  ifsound JIBBED_ACTOR1 stopsound JIBBED_ACTOR1
-  ifsound JIBBED_ACTOR2 stopsound JIBBED_ACTOR2
-  ifsound JIBBED_ACTOR3 stopsound JIBBED_ACTOR3
-  ifsound JIBBED_ACTOR4 stopsound JIBBED_ACTOR4
-  ifsound JIBBED_ACTOR5 stopsound JIBBED_ACTOR5
-  ifsound JIBBED_ACTOR6 stopsound JIBBED_ACTOR6
-  ifsound JIBBED_ACTOR7 stopsound JIBBED_ACTOR7
-  ifsound JIBBED_ACTOR8 stopsound JIBBED_ACTOR8
-  ifsound JIBBED_ACTOR9 stopsound JIBBED_ACTOR9
-  ifsound JIBBED_ACTOR10 stopsound JIBBED_ACTOR10
-  ifsound JIBBED_ACTOR11 stopsound JIBBED_ACTOR11
-  ifsound JIBBED_ACTOR12 stopsound JIBBED_ACTOR12
-  ifsound JIBBED_ACTOR13 stopsound JIBBED_ACTOR13
-  ifsound JIBBED_ACTOR14 stopsound JIBBED_ACTOR14
-  ifsound JIBBED_ACTOR15 stopsound JIBBED_ACTOR15
-  ifsound DUKE_GETWEAPON1 stopsound DUKE_GETWEAPON1
-  ifsound DUKE_GETWEAPON2 stopsound DUKE_GETWEAPON2
-  ifsound DUKE_GETWEAPON3 stopsound DUKE_GETWEAPON3
-  ifsound DUKE_GETWEAPON4 stopsound DUKE_GETWEAPON4
-  ifsound DUKE_GETWEAPON6 stopsound DUKE_GETWEAPON6
-  ifsound DUKE_GOTHEALTHATLOW stopsound DUKE_GOTHEALTHATLOW
-  ifsound DUKE_EATFOOD1 stopsound DUKE_EATFOOD1
-  ifsound DUKE_KEYCARD1 stopsound DUKE_KEYCARD1
-  ifsound DUKE_KEYCARD2 stopsound DUKE_KEYCARD2
-  ifsound DUKE_KEYCARD3 stopsound DUKE_KEYCARD3
-  ifsound DUKE_KEYCARD4 stopsound DUKE_KEYCARD4
-  ifsound DUKE_GRABQUAD stopsound DUKE_GRABQUAD
-  ifsound DUKE_GRABINVULN stopsound DUKE_GRABINVULN
-  ifsound DUKE_GRABREGEN stopsound DUKE_GRABREGEN
-  ifsound DUKE_GRABAPREGEN stopsound DUKE_GRABAPREGEN
-  ifsound DUKE_GRABVAMPIRE stopsound DUKE_GRABVAMPIRE
-}
-
-setvar CHARACTERARRAY 2 // Jack
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound JACK_ONELINER01 stopsound JACK_ONELINER01
-  ifsound JACK_ONELINER02 stopsound JACK_ONELINER02
-  ifsound JACK_ONELINER03 stopsound JACK_ONELINER03
-  ifsound JACK_ONELINER04 stopsound JACK_ONELINER04
-  ifsound JACK_ONELINER05 stopsound JACK_ONELINER05
-  ifsound JACK_ONELINER06 stopsound JACK_ONELINER06
-  ifsound JACK_ONELINER07 stopsound JACK_ONELINER07
-  ifsound JACK_ONELINER08 stopsound JACK_ONELINER08
-  ifsound JACK_ONELINER09 stopsound JACK_ONELINER09
-  ifsound JACK_ONELINER10 stopsound JACK_ONELINER10
-  ifsound JACK_ONELINER11 stopsound JACK_ONELINER11
-  ifsound JACK_ONELINER12 stopsound JACK_ONELINER12
-  ifsound JACK_ONELINER13 stopsound JACK_ONELINER13
-  ifsound JACK_ONELINER14 stopsound JACK_ONELINER14
-  ifsound JACK_ONELINER15 stopsound JACK_ONELINER15
-  ifsound JACK_ONELINER16 stopsound JACK_ONELINER16
-  ifsound JACK_ONELINER17 stopsound JACK_ONELINER17
-  ifsound JACK_ONELINER18 stopsound JACK_ONELINER18
-  ifsound JACK_WALLPUSH1 stopsound JACK_WALLPUSH1
-  ifsound JACK_WALLPUSH2 stopsound JACK_WALLPUSH2
-  ifsound JACK_GRABQUAD stopsound JACK_GRABQUAD
-  ifsound JACK_GRABINVULN stopsound JACK_GRABINVULN
-  ifsound JACK_GRABREGEN stopsound JACK_GRABREGEN
-  ifsound JACK_GRABAPREGEN stopsound JACK_GRABAPREGEN
-  ifsound JACK_GRABVAMPIRE stopsound JACK_GRABVAMPIRE
-  ifsound JACK_FALLSCREAM stopsound JACK_FALLSCREAM
-}
-
-setvar CHARACTERARRAY 3 // Bubsy
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound BUBSY_ONELINER01 stopsound BUBSY_ONELINER01
-  ifsound BUBSY_ONELINER02 stopsound BUBSY_ONELINER02
-  ifsound BUBSY_ONELINER03 stopsound BUBSY_ONELINER03
-  ifsound BUBSY_ONELINER04 stopsound BUBSY_ONELINER04
-  ifsound BUBSY_ONELINER05 stopsound BUBSY_ONELINER05
-  ifsound BUBSY_ONELINER06 stopsound BUBSY_ONELINER06
-  ifsound BUBSY_ONELINER07 stopsound BUBSY_ONELINER07
-  ifsound BUBSY_ONELINER08 stopsound BUBSY_ONELINER08
-  ifsound BUBSY_ONELINER09 stopsound BUBSY_ONELINER09
-  ifsound BUBSY_ONELINER10 stopsound BUBSY_ONELINER10
-  ifsound BUBSY_ONELINER11 stopsound BUBSY_ONELINER11
-  ifsound BUBSY_ONELINER12 stopsound BUBSY_ONELINER12
-  ifsound BUBSY_ONELINER13 stopsound BUBSY_ONELINER13
-  ifsound BUBSY_ONELINER14 stopsound BUBSY_ONELINER14
-  ifsound BUBSY_ONELINER15 stopsound BUBSY_ONELINER15
-  ifsound BUBSY_ONELINER16 stopsound BUBSY_ONELINER16
-  ifsound BUBSY_ONELINER17 stopsound BUBSY_ONELINER17
-  ifsound BUBSY_ONELINER18 stopsound BUBSY_ONELINER18
-  ifsound BUBSY_GRABQUAD stopsound BUBSY_GRABQUAD
-  ifsound BUBSY_GRABINVULN stopsound BUBSY_GRABINVULN
-  ifsound BUBSY_GRABREGEN stopsound BUBSY_GRABREGEN
-  ifsound BUBSY_GRABAPREGEN stopsound BUBSY_GRABAPREGEN
-  ifsound BUBSY_GRABVAMPIRE stopsound BUBSY_GRABVAMPIRE
-}
-/*
-setvar CHARACTERARRAY 4 // Ami
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-}
-*/
-setvar CHARACTERARRAY 5 // Lo Wang
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound WANG_ONELINER01 stopsound WANG_ONELINER01
-  ifsound WANG_ONELINER02 stopsound WANG_ONELINER02
-  ifsound WANG_ONELINER03 stopsound WANG_ONELINER03
-  ifsound WANG_ONELINER04 stopsound WANG_ONELINER04
-  ifsound WANG_ONELINER05 stopsound WANG_ONELINER05
-  ifsound WANG_ONELINER06 stopsound WANG_ONELINER06
-  ifsound WANG_ONELINER07 stopsound WANG_ONELINER07
-  ifsound WANG_ONELINER08 stopsound WANG_ONELINER08
-  ifsound WANG_ONELINER09 stopsound WANG_ONELINER09
-  ifsound WANG_ONELINER10 stopsound WANG_ONELINER10
-  ifsound WANG_ONELINER11 stopsound WANG_ONELINER11
-  ifsound WANG_ONELINER12 stopsound WANG_ONELINER12
-  ifsound WANG_ONELINER13 stopsound WANG_ONELINER13
-  ifsound WANG_ONELINER14 stopsound WANG_ONELINER14
-  ifsound WANG_ONELINER15 stopsound WANG_ONELINER15
-  ifsound WANG_ONELINER16 stopsound WANG_ONELINER16
-  ifsound WANG_ONELINER17 stopsound WANG_ONELINER17
-  ifsound WANG_ONELINER18 stopsound WANG_ONELINER18
-  ifsound WANG_SEARCH1 stopsound WANG_SEARCH1
-  ifsound WANG_SEARCH2 stopsound WANG_SEARCH2
-  ifsound WANG_EMERGEFROMWATER stopsound WANG_EMERGEFROMWATER
-  ifsound WANG_DROWNING1 stopsound WANG_DROWNING1
-  ifsound WANG_EATFOOD1 stopsound WANG_EATFOOD1
-  ifsound WANG_EATFOOD2 stopsound WANG_EATFOOD2
-  ifsound SECRETLEVELSND2 stopsound SECRETLEVELSND2
-  ifsound WANG_GOTHEALTHATLOW stopsound WANG_GOTHEALTHATLOW
-  ifsound WANG_JUMP1 stopsound WANG_JUMP1
-  ifsound WANG_JUMP2 stopsound WANG_JUMP2
-  ifsound WANG_AIRJUMP1 stopsound WANG_AIRJUMP1
-  ifsound WANG_AIRJUMP2 stopsound WANG_AIRJUMP2
-}
-
-setvar CHARACTERARRAY 6 // ESSence
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound ESSENCE_ONELINER01 stopsound ESSENCE_ONELINER01
-  ifsound ESSENCE_ONELINER02 stopsound ESSENCE_ONELINER02
-  ifsound ESSENCE_ONELINER03 stopsound ESSENCE_ONELINER03
-  ifsound ESSENCE_ONELINER04 stopsound ESSENCE_ONELINER04
-  ifsound ESSENCE_ONELINER05 stopsound ESSENCE_ONELINER05
-  ifsound ESSENCE_ONELINER06 stopsound ESSENCE_ONELINER06
-  ifsound ESSENCE_ONELINER07 stopsound ESSENCE_ONELINER07
-  ifsound ESSENCE_ONELINER08 stopsound ESSENCE_ONELINER08
-  ifsound ESSENCE_ONELINER09 stopsound ESSENCE_ONELINER09
-  ifsound ESSENCE_ONELINER10 stopsound ESSENCE_ONELINER10
-  ifsound ESSENCE_ONELINER11 stopsound ESSENCE_ONELINER11
-  ifsound ESSENCE_ONELINER12 stopsound ESSENCE_ONELINER12
-  ifsound ESSENCE_ONELINER13 stopsound ESSENCE_ONELINER13
-  ifsound ESSENCE_ONELINER14 stopsound ESSENCE_ONELINER14
-  ifsound ESSENCE_ONELINER15 stopsound ESSENCE_ONELINER15
-  ifsound ESSENCE_ONELINER16 stopsound ESSENCE_ONELINER16
-  ifsound ESSENCE_ONELINER17 stopsound ESSENCE_ONELINER17
-  ifsound ESSENCE_ONELINER18 stopsound ESSENCE_ONELINER18
-  ifsound ESSENCE_WALLPUSH1 stopsound ESSENCE_WALLPUSH1
-  ifsound ESSENCE_WALLPUSH2 stopsound ESSENCE_WALLPUSH2
-  ifsound ESSENCE_GRABQUAD stopsound ESSENCE_GRABQUAD
-  ifsound ESSENCE_GRABINVULN stopsound ESSENCE_GRABINVULN
-  ifsound ESSENCE_GRABREGEN stopsound ESSENCE_GRABREGEN
-  ifsound ESSENCE_GRABAPREGEN stopsound ESSENCE_GRABAPREGEN
-  ifsound ESSENCE_GRABVAMPIRE stopsound ESSENCE_GRABVAMPIRE
-  ifsound ESSENCE_FALLSCREAM stopsound ESSENCE_FALLSCREAM
-}
-setvar CHARACTERARRAY 7 // Ted
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound TED_ONELINER01 stopsound TED_ONELINER01
-  ifsound TED_ONELINER02 stopsound TED_ONELINER02
-  ifsound TED_ONELINER03 stopsound TED_ONELINER03
-  ifsound TED_ONELINER04 stopsound TED_ONELINER04
-  ifsound TED_ONELINER05 stopsound TED_ONELINER05
-  ifsound TED_ONELINER06 stopsound TED_ONELINER06
-  ifsound TED_ONELINER07 stopsound TED_ONELINER07
-  ifsound TED_ONELINER08 stopsound TED_ONELINER08
-  ifsound TED_ONELINER09 stopsound TED_ONELINER09
-  ifsound TED_ONELINER10 stopsound TED_ONELINER10
-  ifsound TED_ONELINER11 stopsound TED_ONELINER11
-  ifsound TED_ONELINER12 stopsound TED_ONELINER12
-  ifsound TED_ONELINER13 stopsound TED_ONELINER13
-  ifsound TED_ONELINER14 stopsound TED_ONELINER14
-  ifsound TED_ONELINER15 stopsound TED_ONELINER15
-  ifsound TED_ONELINER16 stopsound TED_ONELINER16
-  ifsound TED_ONELINER17 stopsound TED_ONELINER17
-  ifsound TED_ONELINER18 stopsound TED_ONELINER18
-}
-setvar CHARACTERARRAY 8 // Lisa
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound LISA_ONELINER01 stopsound LISA_ONELINER01
-  ifsound LISA_ONELINER02 stopsound LISA_ONELINER02
-  ifsound LISA_ONELINER03 stopsound LISA_ONELINER03
-  ifsound LISA_ONELINER04 stopsound LISA_ONELINER04
-  ifsound LISA_ONELINER05 stopsound LISA_ONELINER05
-  ifsound LISA_ONELINER06 stopsound LISA_ONELINER06
-  ifsound LISA_ONELINER07 stopsound LISA_ONELINER07
-  ifsound LISA_ONELINER08 stopsound LISA_ONELINER08
-  ifsound LISA_ONELINER09 stopsound LISA_ONELINER09
-  ifsound LISA_ONELINER10 stopsound LISA_ONELINER10
-  ifsound LISA_ONELINER11 stopsound LISA_ONELINER11
-  ifsound LISA_ONELINER12 stopsound LISA_ONELINER12
-  ifsound LISA_ONELINER13 stopsound LISA_ONELINER13
-  ifsound LISA_ONELINER14 stopsound LISA_ONELINER14
-  ifsound LISA_ONELINER15 stopsound LISA_ONELINER15
-  ifsound LISA_ONELINER16 stopsound LISA_ONELINER16
-  ifsound LISA_ONELINER17 stopsound LISA_ONELINER17
-  ifsound LISA_ONELINER18 stopsound LISA_ONELINER18
-  ifsound LISA_ONELINERTANK01 stopsound LISA_ONELINERTANK01
-  ifsound LISA_ONELINERTANK02 stopsound LISA_ONELINERTANK02
-  ifsound LISA_ONELINERTANK03 stopsound LISA_ONELINERTANK03
-  ifsound LISA_ONELINERTANK04 stopsound LISA_ONELINERTANK04
-  ifsound LISA_GRABQUAD stopsound LISA_GRABQUAD
-  ifsound LISA_GRABINVULN stopsound LISA_GRABINVULN
-  ifsound LISA_GRABREGEN stopsound LISA_GRABREGEN
-  ifsound LISA_GRABAPREGEN stopsound LISA_GRABAPREGEN
-  ifsound LISA_GRABVAMPIRE stopsound LISA_GRABVAMPIRE
-  ifsound LISA_FALLDAMAGE stopsound LISA_FALLDAMAGE
-  ifsound LISA_FALLDAMAGE2 stopsound LISA_FALLDAMAGE2
-  ifsound LISA_FALLDAMAGE3 stopsound LISA_FALLDAMAGE3
-  ifsound LISA_FALLSCREAM stopsound LISA_FALLSCREAM
-  ifsound LISA_WALLGRAB stopsound LISA_WALLGRAB
-  ifsound LISA_WALLPULLUP stopsound LISA_WALLPULLUP
-  ifsound LISA_JUMP1 stopsound LISA_JUMP1
-  ifsound LISA_JUMP2 stopsound LISA_JUMP2
-  ifsound LISA_AIRJUMP1 stopsound LISA_AIRJUMP1
-  ifsound LISA_AIRJUMP2 stopsound LISA_AIRJUMP2
-  ifsound LISA_MELEE1 stopsound LISA_MELEE1
-  ifsound LISA_MELEE2 stopsound LISA_MELEE2
-  ifsound LISA_MELEE3 stopsound LISA_MELEE3
-  ifsound LISA_WALLPUSH1 stopsound LISA_WALLPUSH1
-  ifsound LISA_WALLPUSH2 stopsound LISA_WALLPUSH2
-  ifsound LISA_REFLECTION1 stopsound LISA_REFLECTION1
-  ifsound LISA_REFLECTION2 stopsound LISA_REFLECTION2
-  ifsound LISA_REFLECTION3 stopsound LISA_REFLECTION3
-  ifsound LISA_REFLECTION4 stopsound LISA_REFLECTION4
-  ifsound LISA_IMPATIENT1 stopsound LISA_IMPATIENT1
-  ifsound LISA_IMPATIENT2 stopsound LISA_IMPATIENT2
-  ifsound LISA_RESURFACE1 stopsound LISA_RESURFACE1
-  ifsound LISA_RESURFACE2 stopsound LISA_RESURFACE2
-  ifsound LISA_EATFOOD1 stopsound LISA_EATFOOD1
-  ifsound LISA_GOTHEALTHATLOW stopsound LISA_GOTHEALTHATLOW
-  ifsound LISA_GETMONEYSMALL stopsound LISA_GETMONEYSMALL
-  ifsound LISA_GETMONEYMEDIUM stopsound LISA_GETMONEYMEDIUM
-  ifsound LISA_GETMONEYLARGE stopsound LISA_GETMONEYLARGE
-  ifsound LISA_GETMONEYLARGER stopsound LISA_GETMONEYLARGER
-  ifsound LISA_SAVEREWARD stopsound LISA_SAVEREWARD
-  ifsound LISA_SAVETRAP stopsound LISA_SAVETRAP
-  ifsound LISA_SAVEENEMY stopsound LISA_SAVEENEMY
-  ifsound LISA_STEALITEM stopsound LISA_STEALITEM
-  ifsound LISA_ITEMSTOLEN stopsound LISA_ITEMSTOLEN
-  ifsound LISA_GETWEAPON1 stopsound LISA_GETWEAPON1
-  ifsound LISA_GETWEAPON2 stopsound LISA_GETWEAPON2
-  ifsound LISA_GETWEAPON3 stopsound LISA_GETWEAPON3
-  ifsound LISA_GETWEAPON4 stopsound LISA_GETWEAPON4
-  ifsound LISA_GETWEAPON5 stopsound LISA_GETWEAPON5
-  ifsound LISA_GRABBONUS1 stopsound LISA_GRABBONUS1
-  ifsound LISA_GRABBONUS2 stopsound LISA_GRABBONUS2
-  ifsound LISA_GRABBONUS3 stopsound LISA_GRABBONUS3
-  ifsound LISA_LEVELUP1 stopsound LISA_LEVELUP1
-  ifsound LISA_LEVELUP2 stopsound LISA_LEVELUP2
-  ifsound LISA_LEVELUP3 stopsound LISA_LEVELUP3
-  ifsound LISA_LEVELUP4 stopsound LISA_LEVELUP4
-  ifsound LISA_TAUNTBOSS1 stopsound LISA_TAUNTBOSS1
-  ifsound LISA_TAUNTBOSS2 stopsound LISA_TAUNTBOSS2
-  ifsound LISA_TAUNTBOSS3 stopsound LISA_TAUNTBOSS3
-  ifsound LISA_TAUNTBOSS4 stopsound LISA_TAUNTBOSS4
-  ifsound LISA_KILLBOSS1 stopsound LISA_KILLBOSS1
-  ifsound LISA_KILLBOSS2 stopsound LISA_KILLBOSS2
-  ifsound LISA_KILLBOSS3 stopsound LISA_KILLBOSS3
-  ifsound LISA_KILLBOSS4 stopsound LISA_KILLBOSS4
-  ifsound LISA_KEYCARD1 stopsound LISA_KEYCARD1
-  ifsound LISA_KEYCARD2 stopsound LISA_KEYCARD2
-  ifsound LISA_KEYCARD3 stopsound LISA_KEYCARD3
-  ifsound LISA_KEYCARD4 stopsound LISA_KEYCARD4
-
-  ifsound LISA_GRABSHIELD stopsound LISA_GRABSHIELD
-  ifsound LISA_GRABCELLS stopsound LISA_GRABCELLS
-}
-
-setvar CHARACTERARRAY 9 // Cybanis
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound CYBANIS_ONELINER01 stopsound CYBANIS_ONELINER01
-  ifsound CYBANIS_ONELINER02 stopsound CYBANIS_ONELINER02
-  ifsound CYBANIS_ONELINER03 stopsound CYBANIS_ONELINER03
-  ifsound CYBANIS_ONELINER04 stopsound CYBANIS_ONELINER04
-  ifsound CYBANIS_ONELINER05 stopsound CYBANIS_ONELINER05
-  ifsound CYBANIS_ONELINER06 stopsound CYBANIS_ONELINER06
-  ifsound CYBANIS_ONELINER07 stopsound CYBANIS_ONELINER07
-  ifsound CYBANIS_ONELINER08 stopsound CYBANIS_ONELINER08
-  ifsound CYBANIS_ONELINER09 stopsound CYBANIS_ONELINER09
-  ifsound CYBANIS_ONELINER10 stopsound CYBANIS_ONELINER10
-  ifsound CYBANIS_ONELINER11 stopsound CYBANIS_ONELINER11
-  ifsound CYBANIS_ONELINER12 stopsound CYBANIS_ONELINER12
-  ifsound CYBANIS_ONELINER13 stopsound CYBANIS_ONELINER13
-  ifsound CYBANIS_ONELINER14 stopsound CYBANIS_ONELINER14
-  ifsound CYBANIS_ONELINER15 stopsound CYBANIS_ONELINER15
-  ifsound CYBANIS_ONELINER16 stopsound CYBANIS_ONELINER16
-  ifsound CYBANIS_ONELINER17 stopsound CYBANIS_ONELINER17
-  ifsound CYBANIS_ONELINER18 stopsound CYBANIS_ONELINER18
-  ifsound CYBANIS_REFLECTION1 stopsound CYBANIS_REFLECTION1
-  ifsound CYBANIS_REFLECTION2 stopsound CYBANIS_REFLECTION2
-  ifsound CYBANIS_REFLECTION3 stopsound CYBANIS_REFLECTION3
-  ifsound CYBANIS_REFLECTION4 stopsound CYBANIS_REFLECTION4
-  ifsound CYBANIS_REFLECTION5 stopsound CYBANIS_REFLECTION5
-  ifsound CYBANIS_FALLSCREAM stopsound CYBANIS_FALLSCREAM
-  ifsound CYBANIS_FALLDAMAGE1 stopsound CYBANIS_FALLDAMAGE1
-  ifsound CYBANIS_FALLDAMAGE2 stopsound CYBANIS_FALLDAMAGE2
-  ifsound CYBANIS_WALLPUSH1 stopsound CYBANIS_WALLPUSH1
-  ifsound CYBANIS_WALLPUSH2 stopsound CYBANIS_WALLPUSH2
-  ifsound CYBANIS_JUMP1 stopsound CYBANIS_JUMP1
-  ifsound CYBANIS_JUMP2 stopsound CYBANIS_JUMP2
-  ifsound CYBANIS_AIRJUMP1 stopsound CYBANIS_AIRJUMP1
-  ifsound CYBANIS_AIRJUMP2 stopsound CYBANIS_AIRJUMP2
-  ifsound CYBANIS_GRABQUAD stopsound CYBANIS_GRABQUAD
-  ifsound CYBANIS_GRABINVULN stopsound CYBANIS_GRABINVULN
-  ifsound CYBANIS_GRABREGEN stopsound CYBANIS_GRABREGEN
-  ifsound CYBANIS_GRABAPREGEN stopsound CYBANIS_GRABAPREGEN
-  ifsound CYBANIS_GRABVAMPIRE stopsound CYBANIS_GRABVAMPIRE
-  ifsound CYBANIS_IMPATIENT1 stopsound CYBANIS_IMPATIENT1
-  ifsound CYBANIS_IMPATIENT2 stopsound CYBANIS_IMPATIENT2
-}
-
-setvar CHARACTERARRAY 10 // Nethra/Christina
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound NETHRA_ONELINER01 stopsound NETHRA_ONELINER01
-  ifsound NETHRA_ONELINER02 stopsound NETHRA_ONELINER02
-  ifsound NETHRA_ONELINER03 stopsound NETHRA_ONELINER03
-  ifsound NETHRA_ONELINER04 stopsound NETHRA_ONELINER04
-  ifsound NETHRA_ONELINER05 stopsound NETHRA_ONELINER05
-  ifsound NETHRA_ONELINER06 stopsound NETHRA_ONELINER06
-  ifsound NETHRA_ONELINER07 stopsound NETHRA_ONELINER07
-  ifsound NETHRA_ONELINER08 stopsound NETHRA_ONELINER08
-  ifsound NETHRA_ONELINER09 stopsound NETHRA_ONELINER09
-  ifsound NETHRA_ONELINER10 stopsound NETHRA_ONELINER10
-  ifsound NETHRA_ONELINER11 stopsound NETHRA_ONELINER11
-  ifsound NETHRA_ONELINER12 stopsound NETHRA_ONELINER12
-  ifsound NETHRA_ONELINER13 stopsound NETHRA_ONELINER13
-  ifsound NETHRA_ONELINER14 stopsound NETHRA_ONELINER14
-  ifsound NETHRA_ONELINER15 stopsound NETHRA_ONELINER15
-  ifsound NETHRA_ONELINER16 stopsound NETHRA_ONELINER16
-  ifsound NETHRA_ONELINER17 stopsound NETHRA_ONELINER17
-  ifsound NETHRA_ONELINER18 stopsound NETHRA_ONELINER18
-
-  ifsound CHRISTINA_ONELINER01 stopsound CHRISTINA_ONELINER01
-  ifsound CHRISTINA_ONELINER02 stopsound CHRISTINA_ONELINER02
-  ifsound CHRISTINA_ONELINER03 stopsound CHRISTINA_ONELINER03
-  ifsound CHRISTINA_ONELINER04 stopsound CHRISTINA_ONELINER04
-  ifsound CHRISTINA_ONELINER05 stopsound CHRISTINA_ONELINER05
-  ifsound CHRISTINA_ONELINER06 stopsound CHRISTINA_ONELINER06
-  ifsound CHRISTINA_ONELINER07 stopsound CHRISTINA_ONELINER07
-  ifsound CHRISTINA_ONELINER08 stopsound CHRISTINA_ONELINER08
-  ifsound CHRISTINA_ONELINER09 stopsound CHRISTINA_ONELINER09
-  ifsound CHRISTINA_ONELINER10 stopsound CHRISTINA_ONELINER10
-  ifsound CHRISTINA_ONELINER11 stopsound CHRISTINA_ONELINER11
-  ifsound CHRISTINA_ONELINER12 stopsound CHRISTINA_ONELINER12
-  ifsound CHRISTINA_ONELINER13 stopsound CHRISTINA_ONELINER13
-  ifsound CHRISTINA_ONELINER14 stopsound CHRISTINA_ONELINER14
-  ifsound CHRISTINA_ONELINER15 stopsound CHRISTINA_ONELINER15
-  ifsound CHRISTINA_ONELINER16 stopsound CHRISTINA_ONELINER16
-  ifsound CHRISTINA_ONELINER17 stopsound CHRISTINA_ONELINER17
-  ifsound CHRISTINA_ONELINER18 stopsound CHRISTINA_ONELINER18
-}
-/*
-setvar CHARACTERARRAY 11 // Paula
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-}
-
-setvar CHARACTERARRAY 12 // Lori
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-}
-*/
-
-setvar CHARACTERARRAY 13 // Minako
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound MINAKO_ONELINER01 stopsound MINAKO_ONELINER01
-  ifsound MINAKO_ONELINER02 stopsound MINAKO_ONELINER02
-  ifsound MINAKO_ONELINER03 stopsound MINAKO_ONELINER03
-  ifsound MINAKO_ONELINER04 stopsound MINAKO_ONELINER04
-  ifsound MINAKO_ONELINER05 stopsound MINAKO_ONELINER05
-  ifsound MINAKO_ONELINER06 stopsound MINAKO_ONELINER06
-  ifsound MINAKO_ONELINER07 stopsound MINAKO_ONELINER07
-  ifsound MINAKO_ONELINER08 stopsound MINAKO_ONELINER08
-  ifsound MINAKO_ONELINER09 stopsound MINAKO_ONELINER09
-  ifsound MINAKO_ONELINER10 stopsound MINAKO_ONELINER10
-  ifsound MINAKO_ONELINER11 stopsound MINAKO_ONELINER11
-  ifsound MINAKO_ONELINER12 stopsound MINAKO_ONELINER12
-  ifsound MINAKO_ONELINER13 stopsound MINAKO_ONELINER13
-  ifsound MINAKO_ONELINER14 stopsound MINAKO_ONELINER14
-  ifsound MINAKO_ONELINER15 stopsound MINAKO_ONELINER15
-  ifsound MINAKO_ONELINER16 stopsound MINAKO_ONELINER16
-  ifsound MINAKO_ONELINER17 stopsound MINAKO_ONELINER17
-  ifsound MINAKO_ONELINER18 stopsound MINAKO_ONELINER18
-  ifsound MINAKO_GRABQUAD stopsound MINAKO_GRABQUAD
-  ifsound MINAKO_GRABINVULN stopsound MINAKO_GRABINVULN
-  ifsound MINAKO_GRABREGEN stopsound MINAKO_GRABREGEN
-  ifsound MINAKO_GRABAPREGEN stopsound MINAKO_GRABAPREGEN
-  ifsound MINAKO_GRABVAMPIRE stopsound MINAKO_GRABVAMPIRE
-}
-
-/*
-setvar CHARACTERARRAY 14 // "Mystery Lady"
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-}
-*/
-setvar CHARACTERARRAY 15 // Maken
-ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
-{
-  ifsound MAKEN_ONELINER01 stopsound MAKEN_ONELINER01
-  ifsound MAKEN_ONELINER02 stopsound MAKEN_ONELINER02
-  ifsound MAKEN_ONELINER03 stopsound MAKEN_ONELINER03
-  ifsound MAKEN_ONELINER04 stopsound MAKEN_ONELINER04
-  ifsound MAKEN_ONELINER05 stopsound MAKEN_ONELINER05
-  ifsound MAKEN_ONELINER06 stopsound MAKEN_ONELINER06
-  ifsound MAKEN_ONELINER07 stopsound MAKEN_ONELINER07
-  ifsound MAKEN_ONELINER08 stopsound MAKEN_ONELINER08
-  ifsound MAKEN_ONELINER09 stopsound MAKEN_ONELINER09
-  ifsound MAKEN_ONELINER10 stopsound MAKEN_ONELINER10
-  ifsound MAKEN_ONELINER11 stopsound MAKEN_ONELINER11
-  ifsound MAKEN_ONELINER12 stopsound MAKEN_ONELINER12
-  ifsound MAKEN_ONELINER13 stopsound MAKEN_ONELINER13
-  ifsound MAKEN_ONELINER14 stopsound MAKEN_ONELINER14
-  ifsound MAKEN_ONELINER15 stopsound MAKEN_ONELINER15
-  ifsound MAKEN_ONELINER16 stopsound MAKEN_ONELINER16
-  ifsound MAKEN_ONELINER17 stopsound MAKEN_ONELINER17
-  ifsound MAKEN_ONELINER18 stopsound MAKEN_ONELINER18
-  ifsound MAKEN_ONELINERTANK01 stopsound MAKEN_ONELINERTANK01
-  ifsound MAKEN_ONELINERTANK02 stopsound MAKEN_ONELINERTANK02
-  ifsound MAKEN_ONELINERTANK03 stopsound MAKEN_ONELINERTANK03
-  ifsound MAKEN_ONELINERTANK04 stopsound MAKEN_ONELINERTANK04
-  ifsound MAKEN_GRABQUAD stopsound MAKEN_GRABQUAD
-  ifsound MAKEN_GRABINVULN stopsound MAKEN_GRABINVULN
-  ifsound MAKEN_GRABREGEN stopsound MAKEN_GRABREGEN
-  ifsound MAKEN_GRABAPREGEN stopsound MAKEN_GRABAPREGEN
-  ifsound MAKEN_GRABVAMPIRE stopsound MAKEN_GRABVAMPIRE
-  ifsound MAKEN_FALLDAMAGE1 stopsound MAKEN_FALLDAMAGE1
-  ifsound MAKEN_FALLDAMAGE2 stopsound MAKEN_FALLDAMAGE2
-  ifsound MAKEN_FALLDAMAGE3 stopsound MAKEN_FALLDAMAGE3
-  ifsound MAKEN_FALLSCREAM stopsound MAKEN_FALLSCREAM
-  ifsound MAKEN_WALLPUSH1 stopsound MAKEN_WALLPUSH1
-  ifsound MAKEN_WALLPUSH2 stopsound MAKEN_WALLPUSH2
-  ifsound MAKEN_JUMP1 stopsound MAKEN_JUMP1
-  ifsound MAKEN_JUMP2 stopsound MAKEN_JUMP2
-  ifsound MAKEN_AIRJUMP1 stopsound MAKEN_AIRJUMP1
-  ifsound MAKEN_AIRJUMP2 stopsound MAKEN_AIRJUMP2
-  ifsound MAKEN_REFLECTION1 stopsound MAKEN_REFLECTION1
-  ifsound MAKEN_REFLECTION2 stopsound MAKEN_REFLECTION2
-  ifsound MAKEN_REFLECTION3 stopsound MAKEN_REFLECTION3
-  ifsound MAKEN_REFLECTION4 stopsound MAKEN_REFLECTION4
-  ifsound MAKEN_IMPATIENT1 stopsound MAKEN_IMPATIENT1
-  ifsound MAKEN_IMPATIENT2 stopsound MAKEN_IMPATIENT2
-  ifsound MAKEN_GOTHEALTHATLOW stopsound MAKEN_GOTHEALTHATLOW
-  ifsound MAKEN_RESURFACE1 stopsound MAKEN_RESURFACE1
-  ifsound MAKEN_RESURFACE2 stopsound MAKEN_RESURFACE2
-  ifsound MAKEN_MELEE1 stopsound MAKEN_MELEE1
-  ifsound MAKEN_MELEE2 stopsound MAKEN_MELEE2
-  ifsound MAKEN_MELEE3 stopsound MAKEN_MELEE3
-  ifsound MAKEN_EATFOOD1 stopsound MAKEN_EATFOOD1
-  ifsound MAKEN_GETMONEYSMALL stopsound MAKEN_GETMONEYSMALL
-  ifsound MAKEN_GETMONEYMEDIUM stopsound MAKEN_GETMONEYMEDIUM
-  ifsound MAKEN_GETMONEYLARGE stopsound MAKEN_GETMONEYLARGE
-  ifsound MAKEN_GETMONEYLARGER stopsound MAKEN_GETMONEYLARGER
-  ifsound MAKEN_STEALITEM stopsound MAKEN_STEALITEM
-  ifsound MAKEN_ITEMSTOLEN stopsound MAKEN_ITEMSTOLEN
-  ifsound MAKEN_GETWEAPON1 stopsound MAKEN_GETWEAPON1
-  ifsound MAKEN_GETWEAPON2 stopsound MAKEN_GETWEAPON2
-  ifsound MAKEN_GETWEAPON3 stopsound MAKEN_GETWEAPON3
-  ifsound MAKEN_GETWEAPON4 stopsound MAKEN_GETWEAPON4
-  ifsound MAKEN_GETWEAPON5 stopsound MAKEN_GETWEAPON5
-  ifsound MAKEN_LEVELUP1 stopsound MAKEN_LEVELUP1
-  ifsound MAKEN_LEVELUP2 stopsound MAKEN_LEVELUP2
-  ifsound MAKEN_LEVELUP3 stopsound MAKEN_LEVELUP3
-  ifsound MAKEN_LEVELUP4 stopsound MAKEN_LEVELUP4
-  ifsound MAKEN_SAVEREWARD stopsound MAKEN_SAVEREWARD
-  ifsound MAKEN_SAVETRAP stopsound MAKEN_SAVETRAP
-  ifsound MAKEN_SAVEENEMY stopsound MAKEN_SAVEENEMY
-  ifsound MAKEN_GRABBONUS1 stopsound MAKEN_GRABBONUS1
-  ifsound MAKEN_GRABBONUS2 stopsound MAKEN_GRABBONUS2
-  ifsound MAKEN_GRABBONUS3 stopsound MAKEN_GRABBONUS3
-  ifsound MAKEN_TAUNTBOSS1 stopsound MAKEN_TAUNTBOSS1
-  ifsound MAKEN_TAUNTBOSS2 stopsound MAKEN_TAUNTBOSS2
-  ifsound MAKEN_TAUNTBOSS3 stopsound MAKEN_TAUNTBOSS3
-  ifsound MAKEN_TAUNTBOSS4 stopsound MAKEN_TAUNTBOSS4
-  ifsound MAKEN_KILLBOSS1 stopsound MAKEN_KILLBOSS1
-  ifsound MAKEN_KILLBOSS2 stopsound MAKEN_KILLBOSS2
-  ifsound MAKEN_KILLBOSS3 stopsound MAKEN_KILLBOSS3
-  ifsound MAKEN_KILLBOSS4 stopsound MAKEN_KILLBOSS4
-  ifsound MAKEN_KEYCARD1 stopsound MAKEN_KEYCARD1
-  ifsound MAKEN_KEYCARD2 stopsound MAKEN_KEYCARD2
-  ifsound MAKEN_KEYCARD3 stopsound MAKEN_KEYCARD3
-  ifsound MAKEN_KEYCARD4 stopsound MAKEN_KEYCARD4
-}
-
- // Leave this here x_X
- getuserdef[THISACTOR].pause_on temp
- ifvare temp 0
- {
-  ifsound LISA_PAUSEDGAME1 stopsound LISA_PAUSEDGAME1
-  ifsound LISA_PAUSEDGAME2 stopsound LISA_PAUSEDGAME2
-  ifsound LISA_PAUSEDGAME3 stopsound LISA_PAUSEDGAME3
-  ifsound LISA_PAUSEDGAME4 stopsound LISA_PAUSEDGAME4
-  ifsound LISA_PAUSEDGAME5 stopsound LISA_PAUSEDGAME5
-
-  ifsound MAKEN_PAUSEDGAME1 stopsound MAKEN_PAUSEDGAME1
-  ifsound MAKEN_PAUSEDGAME2 stopsound MAKEN_PAUSEDGAME2
-  ifsound MAKEN_PAUSEDGAME3 stopsound MAKEN_PAUSEDGAME3
-  ifsound MAKEN_PAUSEDGAME4 stopsound MAKEN_PAUSEDGAME4
-  ifsound MAKEN_PAUSEDGAME5 stopsound MAKEN_PAUSEDGAME5
- }
-
- state setreturn-1
+	// Sound based alterations
+	
+	// One-Liners (to try to prevent extra 'one-liner quotes' from showing while a character is jabbing a one-liner :P)
+	
+	// Leave in this state
+	ifsound JIBBED_ACTOR1 state setonelineron
+	else ifsound JIBBED_ACTOR2 state setonelineron
+	else ifsound JIBBED_ACTOR3 state setonelineron
+	else ifsound JIBBED_ACTOR4 state setonelineron
+	else ifsound JIBBED_ACTOR5 state setonelineron
+	else ifsound JIBBED_ACTOR6 state setonelineron
+	else ifsound JIBBED_ACTOR7 state setonelineron
+	else ifsound JIBBED_ACTOR8 state setonelineron
+	else ifsound JIBBED_ACTOR9 state setonelineron
+	else ifsound JIBBED_ACTOR10 state setonelineron
+	else ifsound JIBBED_ACTOR11 state setonelineron
+	else ifsound JIBBED_ACTOR12 state setonelineron
+	else ifsound JIBBED_ACTOR13 state setonelineron
+	else ifsound JIBBED_ACTOR14 state setonelineron
+	else ifsound JIBBED_ACTOR15 state setonelineron
+	else ifsound MDEVSPEECH state setonelineron
+	else ifsound SMACKED state setonelineron
+	else ifsound BONUS_SPEECH3 state setonelineron
+	else ifsound JACK_ONELINER01 state setonelineron
+	else ifsound JACK_ONELINER02 state setonelineron
+	else ifsound JACK_ONELINER03 state setonelineron
+	else ifsound JACK_ONELINER04 state setonelineron
+	else ifsound JACK_ONELINER05 state setonelineron
+	else ifsound JACK_ONELINER06 state setonelineron
+	else ifsound JACK_ONELINER07 state setonelineron
+	else ifsound JACK_ONELINER08 state setonelineron
+	else ifsound JACK_ONELINER09 state setonelineron
+	else ifsound JACK_ONELINER10 state setonelineron
+	else ifsound JACK_ONELINER11 state setonelineron
+	else ifsound JACK_ONELINER12 state setonelineron
+	else ifsound JACK_ONELINER13 state setonelineron
+	else ifsound JACK_ONELINER14 state setonelineron
+	else ifsound JACK_ONELINER15 state setonelineron
+	else ifsound JACK_ONELINER16 state setonelineron
+	else ifsound JACK_ONELINER17 state setonelineron
+	else ifsound JACK_ONELINER18 state setonelineron
+	else ifsound BUBSY_ONELINER01 state setonelineron
+	else ifsound BUBSY_ONELINER02 state setonelineron
+	else ifsound BUBSY_ONELINER03 state setonelineron
+	else ifsound BUBSY_ONELINER04 state setonelineron
+	else ifsound BUBSY_ONELINER05 state setonelineron
+	else ifsound BUBSY_ONELINER06 state setonelineron
+	else ifsound BUBSY_ONELINER07 state setonelineron
+	else ifsound BUBSY_ONELINER08 state setonelineron
+	else ifsound BUBSY_ONELINER09 state setonelineron
+	else ifsound BUBSY_ONELINER10 state setonelineron
+	else ifsound BUBSY_ONELINER11 state setonelineron
+	else ifsound BUBSY_ONELINER12 state setonelineron
+	else ifsound BUBSY_ONELINER13 state setonelineron
+	else ifsound BUBSY_ONELINER14 state setonelineron
+	else ifsound BUBSY_ONELINER15 state setonelineron
+	else ifsound BUBSY_ONELINER16 state setonelineron
+	else ifsound BUBSY_ONELINER17 state setonelineron
+	else ifsound BUBSY_ONELINER18 state setonelineron
+	// Ami
+	else ifsound WANG_ONELINER01 state setonelineron
+	else ifsound WANG_ONELINER02 state setonelineron
+	else ifsound WANG_ONELINER03 state setonelineron
+	else ifsound WANG_ONELINER04 state setonelineron
+	else ifsound WANG_ONELINER05 state setonelineron
+	else ifsound WANG_ONELINER06 state setonelineron
+	else ifsound WANG_ONELINER07 state setonelineron
+	else ifsound WANG_ONELINER08 state setonelineron
+	else ifsound WANG_ONELINER09 state setonelineron
+	else ifsound WANG_ONELINER10 state setonelineron
+	else ifsound WANG_ONELINER11 state setonelineron
+	else ifsound WANG_ONELINER12 state setonelineron
+	else ifsound WANG_ONELINER13 state setonelineron
+	else ifsound WANG_ONELINER14 state setonelineron
+	else ifsound WANG_ONELINER15 state setonelineron
+	else ifsound WANG_ONELINER16 state setonelineron
+	else ifsound WANG_ONELINER17 state setonelineron
+	else ifsound WANG_ONELINER18 state setonelineron
+	else ifsound ESSENCE_ONELINER01 state setonelineron
+	else ifsound ESSENCE_ONELINER02 state setonelineron
+	else ifsound ESSENCE_ONELINER03 state setonelineron
+	else ifsound ESSENCE_ONELINER04 state setonelineron
+	else ifsound ESSENCE_ONELINER05 state setonelineron
+	else ifsound ESSENCE_ONELINER06 state setonelineron
+	else ifsound ESSENCE_ONELINER07 state setonelineron
+	else ifsound ESSENCE_ONELINER08 state setonelineron
+	else ifsound ESSENCE_ONELINER09 state setonelineron
+	else ifsound ESSENCE_ONELINER10 state setonelineron
+	else ifsound ESSENCE_ONELINER11 state setonelineron
+	else ifsound ESSENCE_ONELINER12 state setonelineron
+	else ifsound ESSENCE_ONELINER13 state setonelineron
+	else ifsound ESSENCE_ONELINER14 state setonelineron
+	else ifsound ESSENCE_ONELINER15 state setonelineron
+	else ifsound ESSENCE_ONELINER16 state setonelineron
+	else ifsound ESSENCE_ONELINER17 state setonelineron
+	else ifsound ESSENCE_ONELINER18 state setonelineron
+	else ifsound TED_ONELINER01 state setonelineron
+	else ifsound TED_ONELINER02 state setonelineron
+	else ifsound TED_ONELINER03 state setonelineron
+	else ifsound TED_ONELINER04 state setonelineron
+	else ifsound TED_ONELINER05 state setonelineron
+	else ifsound TED_ONELINER06 state setonelineron
+	else ifsound TED_ONELINER07 state setonelineron
+	else ifsound TED_ONELINER08 state setonelineron
+	else ifsound TED_ONELINER09 state setonelineron
+	else ifsound TED_ONELINER10 state setonelineron
+	else ifsound TED_ONELINER11 state setonelineron
+	else ifsound TED_ONELINER12 state setonelineron
+	else ifsound TED_ONELINER13 state setonelineron
+	else ifsound TED_ONELINER14 state setonelineron
+	else ifsound TED_ONELINER15 state setonelineron
+	else ifsound TED_ONELINER16 state setonelineron
+	else ifsound TED_ONELINER17 state setonelineron
+	else ifsound TED_ONELINER18 state setonelineron
+	else ifsound LISA_ONELINER01 state setonelineron
+	else ifsound LISA_ONELINER02 state setonelineron
+	else ifsound LISA_ONELINER03 state setonelineron
+	else ifsound LISA_ONELINER04 state setonelineron
+	else ifsound LISA_ONELINER05 state setonelineron
+	else ifsound LISA_ONELINER06 state setonelineron
+	else ifsound LISA_ONELINER07 state setonelineron
+	else ifsound LISA_ONELINER08 state setonelineron
+	else ifsound LISA_ONELINER09 state setonelineron
+	else ifsound LISA_ONELINER10 state setonelineron
+	else ifsound LISA_ONELINER11 state setonelineron
+	else ifsound LISA_ONELINER12 state setonelineron
+	else ifsound LISA_ONELINER13 state setonelineron
+	else ifsound LISA_ONELINER14 state setonelineron
+	else ifsound LISA_ONELINER15 state setonelineron
+	else ifsound LISA_ONELINER16 state setonelineron
+	else ifsound LISA_ONELINER17 state setonelineron
+	else ifsound LISA_ONELINER18 state setonelineron
+	else ifsound LISA_ONELINERTANK01 state setonelineron
+	else ifsound LISA_ONELINERTANK02 state setonelineron
+	else ifsound LISA_ONELINERTANK03 state setonelineron
+	else ifsound LISA_ONELINERTANK04 state setonelineron
+	else ifsound CYBANIS_ONELINER01 state setonelineron
+	else ifsound CYBANIS_ONELINER02 state setonelineron
+	else ifsound CYBANIS_ONELINER03 state setonelineron
+	else ifsound CYBANIS_ONELINER04 state setonelineron
+	else ifsound CYBANIS_ONELINER05 state setonelineron
+	else ifsound CYBANIS_ONELINER06 state setonelineron
+	else ifsound CYBANIS_ONELINER07 state setonelineron
+	else ifsound CYBANIS_ONELINER08 state setonelineron
+	else ifsound CYBANIS_ONELINER09 state setonelineron
+	else ifsound CYBANIS_ONELINER10 state setonelineron
+	else ifsound CYBANIS_ONELINER11 state setonelineron
+	else ifsound CYBANIS_ONELINER12 state setonelineron
+	else ifsound CYBANIS_ONELINER13 state setonelineron
+	else ifsound CYBANIS_ONELINER14 state setonelineron
+	else ifsound CYBANIS_ONELINER15 state setonelineron
+	else ifsound CYBANIS_ONELINER16 state setonelineron
+	else ifsound CYBANIS_ONELINER17 state setonelineron
+	else ifsound CYBANIS_ONELINER18 state setonelineron
+	else ifsound NETHRA_ONELINER01 state setonelineron
+	else ifsound NETHRA_ONELINER02 state setonelineron
+	else ifsound NETHRA_ONELINER03 state setonelineron
+	else ifsound NETHRA_ONELINER04 state setonelineron
+	else ifsound NETHRA_ONELINER05 state setonelineron
+	else ifsound NETHRA_ONELINER06 state setonelineron
+	else ifsound NETHRA_ONELINER07 state setonelineron
+	else ifsound NETHRA_ONELINER08 state setonelineron
+	else ifsound NETHRA_ONELINER09 state setonelineron
+	else ifsound NETHRA_ONELINER10 state setonelineron
+	else ifsound NETHRA_ONELINER11 state setonelineron
+	else ifsound NETHRA_ONELINER12 state setonelineron
+	else ifsound NETHRA_ONELINER13 state setonelineron
+	else ifsound NETHRA_ONELINER14 state setonelineron
+	else ifsound NETHRA_ONELINER15 state setonelineron
+	else ifsound NETHRA_ONELINER16 state setonelineron
+	else ifsound NETHRA_ONELINER17 state setonelineron
+	else ifsound NETHRA_ONELINER18 state setonelineron
+	else ifsound CHRISTINA_ONELINER01 state setonelineron
+	else ifsound CHRISTINA_ONELINER02 state setonelineron
+	else ifsound CHRISTINA_ONELINER03 state setonelineron
+	else ifsound CHRISTINA_ONELINER04 state setonelineron
+	else ifsound CHRISTINA_ONELINER05 state setonelineron
+	else ifsound CHRISTINA_ONELINER06 state setonelineron
+	else ifsound CHRISTINA_ONELINER07 state setonelineron
+	else ifsound CHRISTINA_ONELINER08 state setonelineron
+	else ifsound CHRISTINA_ONELINER09 state setonelineron
+	else ifsound CHRISTINA_ONELINER10 state setonelineron
+	else ifsound CHRISTINA_ONELINER11 state setonelineron
+	else ifsound CHRISTINA_ONELINER12 state setonelineron
+	else ifsound CHRISTINA_ONELINER13 state setonelineron
+	else ifsound CHRISTINA_ONELINER14 state setonelineron
+	else ifsound CHRISTINA_ONELINER15 state setonelineron
+	else ifsound CHRISTINA_ONELINER16 state setonelineron
+	else ifsound CHRISTINA_ONELINER17 state setonelineron
+	else ifsound CHRISTINA_ONELINER18 state setonelineron
+	// Paula
+	// Lori
+	else ifsound MINAKO_ONELINER01 state setonelineron
+	else ifsound MINAKO_ONELINER02 state setonelineron
+	else ifsound MINAKO_ONELINER03 state setonelineron
+	else ifsound MINAKO_ONELINER04 state setonelineron
+	else ifsound MINAKO_ONELINER05 state setonelineron
+	else ifsound MINAKO_ONELINER06 state setonelineron
+	else ifsound MINAKO_ONELINER07 state setonelineron
+	else ifsound MINAKO_ONELINER08 state setonelineron
+	else ifsound MINAKO_ONELINER09 state setonelineron
+	else ifsound MINAKO_ONELINER10 state setonelineron
+	else ifsound MINAKO_ONELINER11 state setonelineron
+	else ifsound MINAKO_ONELINER12 state setonelineron
+	else ifsound MINAKO_ONELINER13 state setonelineron
+	else ifsound MINAKO_ONELINER14 state setonelineron
+	else ifsound MINAKO_ONELINER15 state setonelineron
+	else ifsound MINAKO_ONELINER16 state setonelineron
+	else ifsound MINAKO_ONELINER17 state setonelineron
+	else ifsound MINAKO_ONELINER18 state setonelineron
+	// "Mystery Lady"
+	else ifsound MAKEN_ONELINER01 state setonelineron
+	else ifsound MAKEN_ONELINER02 state setonelineron
+	else ifsound MAKEN_ONELINER03 state setonelineron
+	else ifsound MAKEN_ONELINER04 state setonelineron
+	else ifsound MAKEN_ONELINER05 state setonelineron
+	else ifsound MAKEN_ONELINER06 state setonelineron
+	else ifsound MAKEN_ONELINER07 state setonelineron
+	else ifsound MAKEN_ONELINER08 state setonelineron
+	else ifsound MAKEN_ONELINER09 state setonelineron
+	else ifsound MAKEN_ONELINER10 state setonelineron
+	else ifsound MAKEN_ONELINER11 state setonelineron
+	else ifsound MAKEN_ONELINER12 state setonelineron
+	else ifsound MAKEN_ONELINER13 state setonelineron
+	else ifsound MAKEN_ONELINER14 state setonelineron
+	else ifsound MAKEN_ONELINER15 state setonelineron
+	else ifsound MAKEN_ONELINER16 state setonelineron
+	else ifsound MAKEN_ONELINER17 state setonelineron
+	else ifsound MAKEN_ONELINER18 state setonelineron
+	else setvar ONELINERINPLAY? 0
+	
+	// Others to leave in this state
+	
+	ifsound DUKE_HIT_STRIPPER1
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_HIT_STRIPPER1
+	}
+	ifsound DUKE_HIT_STRIPPER2
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_HIT_STRIPPER2
+	}
+	ifsound DUKE_TIP1
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_TIP1
+	}
+	ifsound DUKE_TIP2
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_TIP2
+	}
+	ifsound DUKE_BOOBY
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_BOOBY
+	}
+	ifsound DUKE_GRUNT
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GRUNT
+	}
+	ifsound DUKE_BREATHING
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_BREATHING
+	}
+	ifsound DUKE_EXHALING
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_EXHALING
+	}
+	ifsound GENERIC_AMBIENCE13 // "Damn, those alien bastards are gonna pay for shooting up my ride!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE13
+	}
+	ifsound GENERIC_AMBIENCE14 // "What, there's only one of you?!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE14
+	}
+	ifsound GENERIC_AMBIENCE15 // "I think I'll climb aboard!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE15
+	}
+	ifsound GENERIC_AMBIENCE16 // "Hmmm, that's on DooMed space marine!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE16
+	}
+	ifsound GENERIC_AMBIENCE17 // "Hmm, got no time to play with myself!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE17
+	}
+	ifsound GENERIC_AMBIENCE20 // "Hmm, looks like I have the con!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE20
+	}
+	ifsound GENERIC_AMBIENCE23 // "Damn, that's the second time those alien bastards shot up my ride!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GENERIC_AMBIENCE23
+	}
+	ifsound WAR_AMBIENCE5 // "This is a force to be reckoned with!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE5
+	}
+	ifsound WAR_AMBIENCE6 // "I ain't afraid of no 'Quake'!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE6
+	}
+	ifsound WAR_AMBIENCE7 // "Terminated!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE7
+	}
+	ifsound WAR_AMBIENCE8 // "Born to be Wild!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE8
+	}
+	ifsound WAR_AMBIENCE9 // "Nobody Steals Our Chicks, and Lives!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE9
+	}
+	ifsound WAR_AMBIENCE10 // "It's Time to Kick Ass and Chew Bubblegum, and I'm all Outta Gum!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WAR_AMBIENCE10
+	}
+	ifsound SUPERMARKET // "Looks like cleanup on aisle 4!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound SUPERMARKET
+	}
+	ifsound MOUSEANNOY // "Damn, that was annoying!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound MOUSEANNOY
+	}
+	ifsound BOOKEM // "Hmm, book'em, danno!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound BOOKEM
+	}
+	ifsound SUPERMARKETCRY // "I'm not crying over this!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound SUPERMARKETCRY
+	}
+	ifsound EATFOOD // "No way I'm eating this sh*t!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound EATFOOD
+	}
+	ifsound MAKEMYDAY // "Go ahead, make my day!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound MAKEMYDAY
+	}
+	ifsound WITNESSSTAND // "So help me, Duke!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound WITNESSSTAND
+	}
+	ifsound VACATIONSPEECH // "Somebody's gonna freakin' pay for ruining my vacation!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound VACATIONSPEECH
+	}
+	ifsound YIPPEE1 // "Yippie Ky-aee, mother*bleep*er!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound YIPPEE1
+	}
+	ifsound YOHOO1 //
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound YOHOO1
+	}
+	ifsound YOHOO2 //
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound YOHOO2
+	}
+	ifsound PARTY_SPEECH // "My kinda party, wish I had time..."
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound PARTY_SPEECH
+	}
+	ifsound POSTAL_SPEECH // "Time for me to go postal!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound POSTAL_SPEECH
+	}
+	ifsound DOGROOMSPEECH // "Nobody messes with my meat!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DOGROOMSPEECH
+	}
+	ifsound AREA51SPEECH // "Nobody jacks with our independance!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound AREA51SPEECH
+	}
+	ifsound SNAKESPEECH // "I guess he didn't escape from L.A!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound SNAKESPEECH
+	}
+	ifsound GETBACKTOWORK // "Get back to work, you slacker!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound GETBACKTOWORK
+	}
+	ifsound FOUNDJONES // "We meet again, Dr. Jones!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound FOUNDJONES
+	}
+	ifsound DUKE_KILLED3 // "Ugh, this sucks!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_KILLED3
+	}
+	ifsound DUKE_KILLED5 // "This really pisses me off!"
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_KILLED5
+	}
+	ifsound SECRETLEVELSND
+	{
+		ifvare CHARACTERSELECTED? 5
+		{
+			stopsound SECRETLEVELSND
+			globalsound SECRETLEVELSND2
+		}
+	}
+	ifsound KTIT
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound KTIT
+	}
+	
+	ifsound GENERIC_AMBIENCE5 // Phone busy-tone
+	{
+		ifvare CHARACTERSELECTED? 5
+		{
+			stopsound GENERIC_AMBIENCE5
+			displayrandvar RNDVOICE 3
+			ifvare RNDVOICE 0 
+			{
+				sound WANG_PHONEUSE1
+				redefinequote 340 ^15Higa: Helllllo...? Anybody there??
+				ifvare oldskoolmode 0 userquote 340
+			}
+			ifvare RNDVOICE 1
+			{
+				sound WANG_PHONEUSE2
+				redefinequote 340 ^15Higa: Hello? Is your refrigerator running? Better catch it! Hahahahaha!!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			ifvare RNDVOICE 2
+			{
+				sound WANG_PHONEUSE3
+				redefinequote 340 ^15Higa: Hello? Bowl-a-rama? You got 16-pound balls? Ehahahaha!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			ifvare RNDVOICE 3
+			{
+				sound WANG_PHONEUSE4
+				redefinequote 340 ^15Higa: Hello? Is uh, "Big Bottom" there? First name "Iva"? "Iva Big Bottom?" Hahahahaha!
+				ifvare oldskoolmode 0 userquote 340
+			}
+		}
+	}
+	
+	ifsound DUKE_TALKTOBOSSFALL
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_TALKTOBOSSFALL
+	}
+	ifsound DUKE_CRACK
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_CRACK
+	}
+	ifsound DUKE_CRACK2
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_CRACK2
+	}
+	ifsound BONUS_SPEECH1
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH1
+	}
+	ifsound BONUS_SPEECH2
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH2
+	}
+	ifsound BONUS_SPEECH3
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH3
+	}
+	ifsound BONUS_SPEECH4
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound BONUS_SPEECH4
+	}
+	ifsound JIBBED_ACTOR1
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR1
+	}
+	ifsound JIBBED_ACTOR2
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR2
+	}
+	ifsound JIBBED_ACTOR3
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR3
+	}
+	ifsound JIBBED_ACTOR4
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR4
+	}
+	ifsound JIBBED_ACTOR5
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR5
+	}
+	ifsound JIBBED_ACTOR6
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR6
+	}
+	ifsound JIBBED_ACTOR7
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR7
+	}
+	ifsound JIBBED_ACTOR8
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR8
+	}
+	ifsound JIBBED_ACTOR9
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR9
+	}
+	ifsound JIBBED_ACTOR10
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR10
+	}
+	ifsound JIBBED_ACTOR11
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR11
+	}
+	ifsound JIBBED_ACTOR12
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR12
+	}
+	ifsound JIBBED_ACTOR13
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR13
+	}
+	ifsound JIBBED_ACTOR14
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR14
+	}
+	ifsound JIBBED_ACTOR15
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound JIBBED_ACTOR15
+	}
+	ifsound DUKE_GETWEAPON1
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON1
+	}
+	ifsound DUKE_GETWEAPON2
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON2
+	}
+	ifsound DUKE_GETWEAPON3
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON3
+	}
+	ifsound DUKE_GETWEAPON4
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON4
+	}
+	ifsound DUKE_GETWEAPON6
+	{
+		ifvarn CHARACTERSELECTED? 1 stopsound DUKE_GETWEAPON6
+	}
+	
+	//
+	
+	setvar CHARACTERARRAY 1
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound JIBBED_ACTOR1 stopsound JIBBED_ACTOR1
+		ifsound JIBBED_ACTOR2 stopsound JIBBED_ACTOR2
+		ifsound JIBBED_ACTOR3 stopsound JIBBED_ACTOR3
+		ifsound JIBBED_ACTOR4 stopsound JIBBED_ACTOR4
+		ifsound JIBBED_ACTOR5 stopsound JIBBED_ACTOR5
+		ifsound JIBBED_ACTOR6 stopsound JIBBED_ACTOR6
+		ifsound JIBBED_ACTOR7 stopsound JIBBED_ACTOR7
+		ifsound JIBBED_ACTOR8 stopsound JIBBED_ACTOR8
+		ifsound JIBBED_ACTOR9 stopsound JIBBED_ACTOR9
+		ifsound JIBBED_ACTOR10 stopsound JIBBED_ACTOR10
+		ifsound JIBBED_ACTOR11 stopsound JIBBED_ACTOR11
+		ifsound JIBBED_ACTOR12 stopsound JIBBED_ACTOR12
+		ifsound JIBBED_ACTOR13 stopsound JIBBED_ACTOR13
+		ifsound JIBBED_ACTOR14 stopsound JIBBED_ACTOR14
+		ifsound JIBBED_ACTOR15 stopsound JIBBED_ACTOR15
+		ifsound MDEVSPEECH stopsound MDEVSPEECH
+		ifsound SMACKED stopsound SMACKED
+		ifsound BONUS_SPEECH3 stopsound BONUS_SPEECH3
+		ifsound ENDSEQVOL2SND7 stopsound ENDSEQVOL2SND7
+		ifsound DUKETALKTOBOSS stopsound DUKETALKTOBOSS
+		ifsound DUKE_CRACK stopsound DUKE_CRACK
+		ifsound DUKE_CRACK2 stopsound DUKE_CRACK2
+		ifsound DUKE_DEAD stopsound DUKE_DEAD
+		ifsound DUKE_LOOKINTOMIRRORA stopsound DUKE_LOOKINTOMIRRORA
+		ifsound DUKE_SEARCH1A stopsound DUKE_SEARCH1A
+		ifsound DUKE_SEARCH2A stopsound DUKE_SEARCH2A
+		ifsound DUKE_HIT_STRIPPER1 stopsound DUKE_HIT_STRIPPER1
+		ifsound DUKE_HIT_STRIPPER2 stopsound DUKE_HIT_STRIPPER2
+		ifsound DUKE_TIP1 stopsound DUKE_TIP1
+		ifsound DUKE_TIP2 stopsound DUKE_TIP2
+		ifsound DUKE_BOOBY stopsound DUKE_BOOBY
+		ifsound DUKE_GRUNT stopsound DUKE_GRUNT
+		ifsound DUKE_BREATHING stopsound DUKE_BREATHING
+		ifsound DUKE_EXHALING stopsound DUKE_EXHALING
+		ifsound DUKE_GASP stopsound DUKE_GASP
+		ifsound DUKE_JUMP1 stopsound DUKE_JUMP1
+		ifsound DUKE_JUMP2 stopsound DUKE_JUMP2
+		ifsound DUKE_AIRJUMP1 stopsound DUKE_AIRJUMP1
+		ifsound DUKE_AIRJUMP2 stopsound DUKE_AIRJUMP2
+		ifsound GENERIC_AMBIENCE13 stopsound GENERIC_AMBIENCE13
+		ifsound GENERIC_AMBIENCE14 stopsound GENERIC_AMBIENCE14
+		ifsound GENERIC_AMBIENCE15 stopsound GENERIC_AMBIENCE15
+		ifsound GENERIC_AMBIENCE16 stopsound GENERIC_AMBIENCE16
+		ifsound GENERIC_AMBIENCE17 stopsound GENERIC_AMBIENCE17
+		ifsound GENERIC_AMBIENCE20 stopsound GENERIC_AMBIENCE20
+		ifsound GENERIC_AMBIENCE23 stopsound GENERIC_AMBIENCE23
+		ifsound WAR_AMBIENCE5 stopsound WAR_AMBIENCE5
+		ifsound WAR_AMBIENCE6 stopsound WAR_AMBIENCE6
+		ifsound WAR_AMBIENCE7 stopsound WAR_AMBIENCE7
+		ifsound WAR_AMBIENCE8 stopsound WAR_AMBIENCE8
+		ifsound WAR_AMBIENCE9 stopsound WAR_AMBIENCE9
+		ifsound WAR_AMBIENCE10 stopsound WAR_AMBIENCE10
+		ifsound SUPERMARKET stopsound SUPERMARKET
+		ifsound MOUSEANNOY stopsound MOUSEANNOY
+		ifsound BOOKEM stopsound BOOKEM
+		ifsound SUPERMARKETCRY stopsound SUPERMARKETCRY
+		ifsound EATFOOD stopsound EATFOOD
+		ifsound MAKEMYDAY stopsound MAKEMYDAY
+		ifsound WITNESSSTAND stopsound WITNESSSTAND
+		ifsound VACATIONSPEECH stopsound VACATIONSPEECH
+		ifsound YIPPEE1 stopsound YIPPEE1
+		ifsound YOHOO1 stopsound YOHOO1
+		ifsound YOHOO2 stopsound YOHOO2
+		ifsound PARTY_SPEECH stopsound PARTY_SPEECH
+		ifsound POSTAL_SPEECH stopsound POSTAL_SPEECH
+		ifsound DOGROOMSPEECH stopsound DOGROOMSPEECH
+		ifsound AREA51SPEECH stopsound AREA51SPEECH
+		ifsound SNAKESPEECH stopsound SNAKESPEECH
+		ifsound GETBACKTOWORK stopsound GETBACKTOWORK
+		ifsound FOUNDJONES stopsound FOUNDJONES
+		ifsound DUKE_KILLED3 stopsound DUKE_KILLED3
+		ifsound DUKE_KILLED5 stopsound DUKE_KILLED5
+		ifsound SECRETLEVELSND stopsound SECRETLEVELSND
+		ifsound DUKE_TALKTOBOSSFALL stopsound DUKE_TALKTOBOSSFALL
+		ifsound DUKE_CRACK stopsound DUKE_CRACK
+		ifsound DUKE_CRACK2 stopsound DUKE_CRACK2
+		ifsound BONUS_SPEECH1 stopsound BONUS_SPEECH1
+		ifsound BONUS_SPEECH2 stopsound BONUS_SPEECH2
+		ifsound BONUS_SPEECH3 stopsound BONUS_SPEECH3
+		ifsound JIBBED_ACTOR1 stopsound JIBBED_ACTOR1
+		ifsound JIBBED_ACTOR2 stopsound JIBBED_ACTOR2
+		ifsound JIBBED_ACTOR3 stopsound JIBBED_ACTOR3
+		ifsound JIBBED_ACTOR4 stopsound JIBBED_ACTOR4
+		ifsound JIBBED_ACTOR5 stopsound JIBBED_ACTOR5
+		ifsound JIBBED_ACTOR6 stopsound JIBBED_ACTOR6
+		ifsound JIBBED_ACTOR7 stopsound JIBBED_ACTOR7
+		ifsound JIBBED_ACTOR8 stopsound JIBBED_ACTOR8
+		ifsound JIBBED_ACTOR9 stopsound JIBBED_ACTOR9
+		ifsound JIBBED_ACTOR10 stopsound JIBBED_ACTOR10
+		ifsound JIBBED_ACTOR11 stopsound JIBBED_ACTOR11
+		ifsound JIBBED_ACTOR12 stopsound JIBBED_ACTOR12
+		ifsound JIBBED_ACTOR13 stopsound JIBBED_ACTOR13
+		ifsound JIBBED_ACTOR14 stopsound JIBBED_ACTOR14
+		ifsound JIBBED_ACTOR15 stopsound JIBBED_ACTOR15
+		ifsound DUKE_GETWEAPON1 stopsound DUKE_GETWEAPON1
+		ifsound DUKE_GETWEAPON2 stopsound DUKE_GETWEAPON2
+		ifsound DUKE_GETWEAPON3 stopsound DUKE_GETWEAPON3
+		ifsound DUKE_GETWEAPON4 stopsound DUKE_GETWEAPON4
+		ifsound DUKE_GETWEAPON6 stopsound DUKE_GETWEAPON6
+		ifsound DUKE_GOTHEALTHATLOW stopsound DUKE_GOTHEALTHATLOW
+		ifsound DUKE_EATFOOD1 stopsound DUKE_EATFOOD1
+		ifsound DUKE_KEYCARD1 stopsound DUKE_KEYCARD1
+		ifsound DUKE_KEYCARD2 stopsound DUKE_KEYCARD2
+		ifsound DUKE_KEYCARD3 stopsound DUKE_KEYCARD3
+		ifsound DUKE_KEYCARD4 stopsound DUKE_KEYCARD4
+		ifsound DUKE_GRABQUAD stopsound DUKE_GRABQUAD
+		ifsound DUKE_GRABINVULN stopsound DUKE_GRABINVULN
+		ifsound DUKE_GRABREGEN stopsound DUKE_GRABREGEN
+		ifsound DUKE_GRABAPREGEN stopsound DUKE_GRABAPREGEN
+		ifsound DUKE_GRABVAMPIRE stopsound DUKE_GRABVAMPIRE
+	}
+	
+	setvar CHARACTERARRAY 2 // Jack
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound JACK_ONELINER01 stopsound JACK_ONELINER01
+		ifsound JACK_ONELINER02 stopsound JACK_ONELINER02
+		ifsound JACK_ONELINER03 stopsound JACK_ONELINER03
+		ifsound JACK_ONELINER04 stopsound JACK_ONELINER04
+		ifsound JACK_ONELINER05 stopsound JACK_ONELINER05
+		ifsound JACK_ONELINER06 stopsound JACK_ONELINER06
+		ifsound JACK_ONELINER07 stopsound JACK_ONELINER07
+		ifsound JACK_ONELINER08 stopsound JACK_ONELINER08
+		ifsound JACK_ONELINER09 stopsound JACK_ONELINER09
+		ifsound JACK_ONELINER10 stopsound JACK_ONELINER10
+		ifsound JACK_ONELINER11 stopsound JACK_ONELINER11
+		ifsound JACK_ONELINER12 stopsound JACK_ONELINER12
+		ifsound JACK_ONELINER13 stopsound JACK_ONELINER13
+		ifsound JACK_ONELINER14 stopsound JACK_ONELINER14
+		ifsound JACK_ONELINER15 stopsound JACK_ONELINER15
+		ifsound JACK_ONELINER16 stopsound JACK_ONELINER16
+		ifsound JACK_ONELINER17 stopsound JACK_ONELINER17
+		ifsound JACK_ONELINER18 stopsound JACK_ONELINER18
+		ifsound JACK_WALLPUSH1 stopsound JACK_WALLPUSH1
+		ifsound JACK_WALLPUSH2 stopsound JACK_WALLPUSH2
+		ifsound JACK_GRABQUAD stopsound JACK_GRABQUAD
+		ifsound JACK_GRABINVULN stopsound JACK_GRABINVULN
+		ifsound JACK_GRABREGEN stopsound JACK_GRABREGEN
+		ifsound JACK_GRABAPREGEN stopsound JACK_GRABAPREGEN
+		ifsound JACK_GRABVAMPIRE stopsound JACK_GRABVAMPIRE
+		ifsound JACK_FALLSCREAM stopsound JACK_FALLSCREAM
+	}
+	
+	setvar CHARACTERARRAY 3 // Bubsy
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound BUBSY_ONELINER01 stopsound BUBSY_ONELINER01
+		ifsound BUBSY_ONELINER02 stopsound BUBSY_ONELINER02
+		ifsound BUBSY_ONELINER03 stopsound BUBSY_ONELINER03
+		ifsound BUBSY_ONELINER04 stopsound BUBSY_ONELINER04
+		ifsound BUBSY_ONELINER05 stopsound BUBSY_ONELINER05
+		ifsound BUBSY_ONELINER06 stopsound BUBSY_ONELINER06
+		ifsound BUBSY_ONELINER07 stopsound BUBSY_ONELINER07
+		ifsound BUBSY_ONELINER08 stopsound BUBSY_ONELINER08
+		ifsound BUBSY_ONELINER09 stopsound BUBSY_ONELINER09
+		ifsound BUBSY_ONELINER10 stopsound BUBSY_ONELINER10
+		ifsound BUBSY_ONELINER11 stopsound BUBSY_ONELINER11
+		ifsound BUBSY_ONELINER12 stopsound BUBSY_ONELINER12
+		ifsound BUBSY_ONELINER13 stopsound BUBSY_ONELINER13
+		ifsound BUBSY_ONELINER14 stopsound BUBSY_ONELINER14
+		ifsound BUBSY_ONELINER15 stopsound BUBSY_ONELINER15
+		ifsound BUBSY_ONELINER16 stopsound BUBSY_ONELINER16
+		ifsound BUBSY_ONELINER17 stopsound BUBSY_ONELINER17
+		ifsound BUBSY_ONELINER18 stopsound BUBSY_ONELINER18
+		ifsound BUBSY_GRABQUAD stopsound BUBSY_GRABQUAD
+		ifsound BUBSY_GRABINVULN stopsound BUBSY_GRABINVULN
+		ifsound BUBSY_GRABREGEN stopsound BUBSY_GRABREGEN
+		ifsound BUBSY_GRABAPREGEN stopsound BUBSY_GRABAPREGEN
+		ifsound BUBSY_GRABVAMPIRE stopsound BUBSY_GRABVAMPIRE
+	}
+	/*
+	setvar CHARACTERARRAY 4 // Ami
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+	}
+	*/
+	setvar CHARACTERARRAY 5 // Lo Wang
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound WANG_ONELINER01 stopsound WANG_ONELINER01
+		ifsound WANG_ONELINER02 stopsound WANG_ONELINER02
+		ifsound WANG_ONELINER03 stopsound WANG_ONELINER03
+		ifsound WANG_ONELINER04 stopsound WANG_ONELINER04
+		ifsound WANG_ONELINER05 stopsound WANG_ONELINER05
+		ifsound WANG_ONELINER06 stopsound WANG_ONELINER06
+		ifsound WANG_ONELINER07 stopsound WANG_ONELINER07
+		ifsound WANG_ONELINER08 stopsound WANG_ONELINER08
+		ifsound WANG_ONELINER09 stopsound WANG_ONELINER09
+		ifsound WANG_ONELINER10 stopsound WANG_ONELINER10
+		ifsound WANG_ONELINER11 stopsound WANG_ONELINER11
+		ifsound WANG_ONELINER12 stopsound WANG_ONELINER12
+		ifsound WANG_ONELINER13 stopsound WANG_ONELINER13
+		ifsound WANG_ONELINER14 stopsound WANG_ONELINER14
+		ifsound WANG_ONELINER15 stopsound WANG_ONELINER15
+		ifsound WANG_ONELINER16 stopsound WANG_ONELINER16
+		ifsound WANG_ONELINER17 stopsound WANG_ONELINER17
+		ifsound WANG_ONELINER18 stopsound WANG_ONELINER18
+		ifsound WANG_SEARCH1 stopsound WANG_SEARCH1
+		ifsound WANG_SEARCH2 stopsound WANG_SEARCH2
+		ifsound WANG_EMERGEFROMWATER stopsound WANG_EMERGEFROMWATER
+		ifsound WANG_DROWNING1 stopsound WANG_DROWNING1
+		ifsound WANG_EATFOOD1 stopsound WANG_EATFOOD1
+		ifsound WANG_EATFOOD2 stopsound WANG_EATFOOD2
+		ifsound SECRETLEVELSND2 stopsound SECRETLEVELSND2
+		ifsound WANG_GOTHEALTHATLOW stopsound WANG_GOTHEALTHATLOW
+		ifsound WANG_JUMP1 stopsound WANG_JUMP1
+		ifsound WANG_JUMP2 stopsound WANG_JUMP2
+		ifsound WANG_AIRJUMP1 stopsound WANG_AIRJUMP1
+		ifsound WANG_AIRJUMP2 stopsound WANG_AIRJUMP2
+	}
+	
+	setvar CHARACTERARRAY 6 // ESSence
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound ESSENCE_ONELINER01 stopsound ESSENCE_ONELINER01
+		ifsound ESSENCE_ONELINER02 stopsound ESSENCE_ONELINER02
+		ifsound ESSENCE_ONELINER03 stopsound ESSENCE_ONELINER03
+		ifsound ESSENCE_ONELINER04 stopsound ESSENCE_ONELINER04
+		ifsound ESSENCE_ONELINER05 stopsound ESSENCE_ONELINER05
+		ifsound ESSENCE_ONELINER06 stopsound ESSENCE_ONELINER06
+		ifsound ESSENCE_ONELINER07 stopsound ESSENCE_ONELINER07
+		ifsound ESSENCE_ONELINER08 stopsound ESSENCE_ONELINER08
+		ifsound ESSENCE_ONELINER09 stopsound ESSENCE_ONELINER09
+		ifsound ESSENCE_ONELINER10 stopsound ESSENCE_ONELINER10
+		ifsound ESSENCE_ONELINER11 stopsound ESSENCE_ONELINER11
+		ifsound ESSENCE_ONELINER12 stopsound ESSENCE_ONELINER12
+		ifsound ESSENCE_ONELINER13 stopsound ESSENCE_ONELINER13
+		ifsound ESSENCE_ONELINER14 stopsound ESSENCE_ONELINER14
+		ifsound ESSENCE_ONELINER15 stopsound ESSENCE_ONELINER15
+		ifsound ESSENCE_ONELINER16 stopsound ESSENCE_ONELINER16
+		ifsound ESSENCE_ONELINER17 stopsound ESSENCE_ONELINER17
+		ifsound ESSENCE_ONELINER18 stopsound ESSENCE_ONELINER18
+		ifsound ESSENCE_WALLPUSH1 stopsound ESSENCE_WALLPUSH1
+		ifsound ESSENCE_WALLPUSH2 stopsound ESSENCE_WALLPUSH2
+		ifsound ESSENCE_GRABQUAD stopsound ESSENCE_GRABQUAD
+		ifsound ESSENCE_GRABINVULN stopsound ESSENCE_GRABINVULN
+		ifsound ESSENCE_GRABREGEN stopsound ESSENCE_GRABREGEN
+		ifsound ESSENCE_GRABAPREGEN stopsound ESSENCE_GRABAPREGEN
+		ifsound ESSENCE_GRABVAMPIRE stopsound ESSENCE_GRABVAMPIRE
+		ifsound ESSENCE_FALLSCREAM stopsound ESSENCE_FALLSCREAM
+	}
+	setvar CHARACTERARRAY 7 // Ted
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound TED_ONELINER01 stopsound TED_ONELINER01
+		ifsound TED_ONELINER02 stopsound TED_ONELINER02
+		ifsound TED_ONELINER03 stopsound TED_ONELINER03
+		ifsound TED_ONELINER04 stopsound TED_ONELINER04
+		ifsound TED_ONELINER05 stopsound TED_ONELINER05
+		ifsound TED_ONELINER06 stopsound TED_ONELINER06
+		ifsound TED_ONELINER07 stopsound TED_ONELINER07
+		ifsound TED_ONELINER08 stopsound TED_ONELINER08
+		ifsound TED_ONELINER09 stopsound TED_ONELINER09
+		ifsound TED_ONELINER10 stopsound TED_ONELINER10
+		ifsound TED_ONELINER11 stopsound TED_ONELINER11
+		ifsound TED_ONELINER12 stopsound TED_ONELINER12
+		ifsound TED_ONELINER13 stopsound TED_ONELINER13
+		ifsound TED_ONELINER14 stopsound TED_ONELINER14
+		ifsound TED_ONELINER15 stopsound TED_ONELINER15
+		ifsound TED_ONELINER16 stopsound TED_ONELINER16
+		ifsound TED_ONELINER17 stopsound TED_ONELINER17
+		ifsound TED_ONELINER18 stopsound TED_ONELINER18
+	}
+	setvar CHARACTERARRAY 8 // Lisa
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound LISA_ONELINER01 stopsound LISA_ONELINER01
+		ifsound LISA_ONELINER02 stopsound LISA_ONELINER02
+		ifsound LISA_ONELINER03 stopsound LISA_ONELINER03
+		ifsound LISA_ONELINER04 stopsound LISA_ONELINER04
+		ifsound LISA_ONELINER05 stopsound LISA_ONELINER05
+		ifsound LISA_ONELINER06 stopsound LISA_ONELINER06
+		ifsound LISA_ONELINER07 stopsound LISA_ONELINER07
+		ifsound LISA_ONELINER08 stopsound LISA_ONELINER08
+		ifsound LISA_ONELINER09 stopsound LISA_ONELINER09
+		ifsound LISA_ONELINER10 stopsound LISA_ONELINER10
+		ifsound LISA_ONELINER11 stopsound LISA_ONELINER11
+		ifsound LISA_ONELINER12 stopsound LISA_ONELINER12
+		ifsound LISA_ONELINER13 stopsound LISA_ONELINER13
+		ifsound LISA_ONELINER14 stopsound LISA_ONELINER14
+		ifsound LISA_ONELINER15 stopsound LISA_ONELINER15
+		ifsound LISA_ONELINER16 stopsound LISA_ONELINER16
+		ifsound LISA_ONELINER17 stopsound LISA_ONELINER17
+		ifsound LISA_ONELINER18 stopsound LISA_ONELINER18
+		ifsound LISA_ONELINERTANK01 stopsound LISA_ONELINERTANK01
+		ifsound LISA_ONELINERTANK02 stopsound LISA_ONELINERTANK02
+		ifsound LISA_ONELINERTANK03 stopsound LISA_ONELINERTANK03
+		ifsound LISA_ONELINERTANK04 stopsound LISA_ONELINERTANK04
+		ifsound LISA_GRABQUAD stopsound LISA_GRABQUAD
+		ifsound LISA_GRABINVULN stopsound LISA_GRABINVULN
+		ifsound LISA_GRABREGEN stopsound LISA_GRABREGEN
+		ifsound LISA_GRABAPREGEN stopsound LISA_GRABAPREGEN
+		ifsound LISA_GRABVAMPIRE stopsound LISA_GRABVAMPIRE
+		ifsound LISA_FALLDAMAGE stopsound LISA_FALLDAMAGE
+		ifsound LISA_FALLDAMAGE2 stopsound LISA_FALLDAMAGE2
+		ifsound LISA_FALLDAMAGE3 stopsound LISA_FALLDAMAGE3
+		ifsound LISA_FALLSCREAM stopsound LISA_FALLSCREAM
+		ifsound LISA_WALLGRAB stopsound LISA_WALLGRAB
+		ifsound LISA_WALLPULLUP stopsound LISA_WALLPULLUP
+		ifsound LISA_JUMP1 stopsound LISA_JUMP1
+		ifsound LISA_JUMP2 stopsound LISA_JUMP2
+		ifsound LISA_AIRJUMP1 stopsound LISA_AIRJUMP1
+		ifsound LISA_AIRJUMP2 stopsound LISA_AIRJUMP2
+		ifsound LISA_MELEE1 stopsound LISA_MELEE1
+		ifsound LISA_MELEE2 stopsound LISA_MELEE2
+		ifsound LISA_MELEE3 stopsound LISA_MELEE3
+		ifsound LISA_WALLPUSH1 stopsound LISA_WALLPUSH1
+		ifsound LISA_WALLPUSH2 stopsound LISA_WALLPUSH2
+		ifsound LISA_REFLECTION1 stopsound LISA_REFLECTION1
+		ifsound LISA_REFLECTION2 stopsound LISA_REFLECTION2
+		ifsound LISA_REFLECTION3 stopsound LISA_REFLECTION3
+		ifsound LISA_REFLECTION4 stopsound LISA_REFLECTION4
+		ifsound LISA_IMPATIENT1 stopsound LISA_IMPATIENT1
+		ifsound LISA_IMPATIENT2 stopsound LISA_IMPATIENT2
+		ifsound LISA_RESURFACE1 stopsound LISA_RESURFACE1
+		ifsound LISA_RESURFACE2 stopsound LISA_RESURFACE2
+		ifsound LISA_EATFOOD1 stopsound LISA_EATFOOD1
+		ifsound LISA_GOTHEALTHATLOW stopsound LISA_GOTHEALTHATLOW
+		ifsound LISA_GETMONEYSMALL stopsound LISA_GETMONEYSMALL
+		ifsound LISA_GETMONEYMEDIUM stopsound LISA_GETMONEYMEDIUM
+		ifsound LISA_GETMONEYLARGE stopsound LISA_GETMONEYLARGE
+		ifsound LISA_GETMONEYLARGER stopsound LISA_GETMONEYLARGER
+		ifsound LISA_SAVEREWARD stopsound LISA_SAVEREWARD
+		ifsound LISA_SAVETRAP stopsound LISA_SAVETRAP
+		ifsound LISA_SAVEENEMY stopsound LISA_SAVEENEMY
+		ifsound LISA_STEALITEM stopsound LISA_STEALITEM
+		ifsound LISA_ITEMSTOLEN stopsound LISA_ITEMSTOLEN
+		ifsound LISA_GETWEAPON1 stopsound LISA_GETWEAPON1
+		ifsound LISA_GETWEAPON2 stopsound LISA_GETWEAPON2
+		ifsound LISA_GETWEAPON3 stopsound LISA_GETWEAPON3
+		ifsound LISA_GETWEAPON4 stopsound LISA_GETWEAPON4
+		ifsound LISA_GETWEAPON5 stopsound LISA_GETWEAPON5
+		ifsound LISA_GRABBONUS1 stopsound LISA_GRABBONUS1
+		ifsound LISA_GRABBONUS2 stopsound LISA_GRABBONUS2
+		ifsound LISA_GRABBONUS3 stopsound LISA_GRABBONUS3
+		ifsound LISA_LEVELUP1 stopsound LISA_LEVELUP1
+		ifsound LISA_LEVELUP2 stopsound LISA_LEVELUP2
+		ifsound LISA_LEVELUP3 stopsound LISA_LEVELUP3
+		ifsound LISA_LEVELUP4 stopsound LISA_LEVELUP4
+		ifsound LISA_TAUNTBOSS1 stopsound LISA_TAUNTBOSS1
+		ifsound LISA_TAUNTBOSS2 stopsound LISA_TAUNTBOSS2
+		ifsound LISA_TAUNTBOSS3 stopsound LISA_TAUNTBOSS3
+		ifsound LISA_TAUNTBOSS4 stopsound LISA_TAUNTBOSS4
+		ifsound LISA_KILLBOSS1 stopsound LISA_KILLBOSS1
+		ifsound LISA_KILLBOSS2 stopsound LISA_KILLBOSS2
+		ifsound LISA_KILLBOSS3 stopsound LISA_KILLBOSS3
+		ifsound LISA_KILLBOSS4 stopsound LISA_KILLBOSS4
+		ifsound LISA_KEYCARD1 stopsound LISA_KEYCARD1
+		ifsound LISA_KEYCARD2 stopsound LISA_KEYCARD2
+		ifsound LISA_KEYCARD3 stopsound LISA_KEYCARD3
+		ifsound LISA_KEYCARD4 stopsound LISA_KEYCARD4
+	
+		ifsound LISA_GRABSHIELD stopsound LISA_GRABSHIELD
+		ifsound LISA_GRABCELLS stopsound LISA_GRABCELLS
+	}
+	
+	setvar CHARACTERARRAY 9 // Cybanis
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound CYBANIS_ONELINER01 stopsound CYBANIS_ONELINER01
+		ifsound CYBANIS_ONELINER02 stopsound CYBANIS_ONELINER02
+		ifsound CYBANIS_ONELINER03 stopsound CYBANIS_ONELINER03
+		ifsound CYBANIS_ONELINER04 stopsound CYBANIS_ONELINER04
+		ifsound CYBANIS_ONELINER05 stopsound CYBANIS_ONELINER05
+		ifsound CYBANIS_ONELINER06 stopsound CYBANIS_ONELINER06
+		ifsound CYBANIS_ONELINER07 stopsound CYBANIS_ONELINER07
+		ifsound CYBANIS_ONELINER08 stopsound CYBANIS_ONELINER08
+		ifsound CYBANIS_ONELINER09 stopsound CYBANIS_ONELINER09
+		ifsound CYBANIS_ONELINER10 stopsound CYBANIS_ONELINER10
+		ifsound CYBANIS_ONELINER11 stopsound CYBANIS_ONELINER11
+		ifsound CYBANIS_ONELINER12 stopsound CYBANIS_ONELINER12
+		ifsound CYBANIS_ONELINER13 stopsound CYBANIS_ONELINER13
+		ifsound CYBANIS_ONELINER14 stopsound CYBANIS_ONELINER14
+		ifsound CYBANIS_ONELINER15 stopsound CYBANIS_ONELINER15
+		ifsound CYBANIS_ONELINER16 stopsound CYBANIS_ONELINER16
+		ifsound CYBANIS_ONELINER17 stopsound CYBANIS_ONELINER17
+		ifsound CYBANIS_ONELINER18 stopsound CYBANIS_ONELINER18
+		ifsound CYBANIS_REFLECTION1 stopsound CYBANIS_REFLECTION1
+		ifsound CYBANIS_REFLECTION2 stopsound CYBANIS_REFLECTION2
+		ifsound CYBANIS_REFLECTION3 stopsound CYBANIS_REFLECTION3
+		ifsound CYBANIS_REFLECTION4 stopsound CYBANIS_REFLECTION4
+		ifsound CYBANIS_REFLECTION5 stopsound CYBANIS_REFLECTION5
+		ifsound CYBANIS_FALLSCREAM stopsound CYBANIS_FALLSCREAM
+		ifsound CYBANIS_FALLDAMAGE1 stopsound CYBANIS_FALLDAMAGE1
+		ifsound CYBANIS_FALLDAMAGE2 stopsound CYBANIS_FALLDAMAGE2
+		ifsound CYBANIS_WALLPUSH1 stopsound CYBANIS_WALLPUSH1
+		ifsound CYBANIS_WALLPUSH2 stopsound CYBANIS_WALLPUSH2
+		ifsound CYBANIS_JUMP1 stopsound CYBANIS_JUMP1
+		ifsound CYBANIS_JUMP2 stopsound CYBANIS_JUMP2
+		ifsound CYBANIS_AIRJUMP1 stopsound CYBANIS_AIRJUMP1
+		ifsound CYBANIS_AIRJUMP2 stopsound CYBANIS_AIRJUMP2
+		ifsound CYBANIS_GRABQUAD stopsound CYBANIS_GRABQUAD
+		ifsound CYBANIS_GRABINVULN stopsound CYBANIS_GRABINVULN
+		ifsound CYBANIS_GRABREGEN stopsound CYBANIS_GRABREGEN
+		ifsound CYBANIS_GRABAPREGEN stopsound CYBANIS_GRABAPREGEN
+		ifsound CYBANIS_GRABVAMPIRE stopsound CYBANIS_GRABVAMPIRE
+		ifsound CYBANIS_IMPATIENT1 stopsound CYBANIS_IMPATIENT1
+		ifsound CYBANIS_IMPATIENT2 stopsound CYBANIS_IMPATIENT2
+	}
+	
+	setvar CHARACTERARRAY 10 // Nethra/Christina
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound NETHRA_ONELINER01 stopsound NETHRA_ONELINER01
+		ifsound NETHRA_ONELINER02 stopsound NETHRA_ONELINER02
+		ifsound NETHRA_ONELINER03 stopsound NETHRA_ONELINER03
+		ifsound NETHRA_ONELINER04 stopsound NETHRA_ONELINER04
+		ifsound NETHRA_ONELINER05 stopsound NETHRA_ONELINER05
+		ifsound NETHRA_ONELINER06 stopsound NETHRA_ONELINER06
+		ifsound NETHRA_ONELINER07 stopsound NETHRA_ONELINER07
+		ifsound NETHRA_ONELINER08 stopsound NETHRA_ONELINER08
+		ifsound NETHRA_ONELINER09 stopsound NETHRA_ONELINER09
+		ifsound NETHRA_ONELINER10 stopsound NETHRA_ONELINER10
+		ifsound NETHRA_ONELINER11 stopsound NETHRA_ONELINER11
+		ifsound NETHRA_ONELINER12 stopsound NETHRA_ONELINER12
+		ifsound NETHRA_ONELINER13 stopsound NETHRA_ONELINER13
+		ifsound NETHRA_ONELINER14 stopsound NETHRA_ONELINER14
+		ifsound NETHRA_ONELINER15 stopsound NETHRA_ONELINER15
+		ifsound NETHRA_ONELINER16 stopsound NETHRA_ONELINER16
+		ifsound NETHRA_ONELINER17 stopsound NETHRA_ONELINER17
+		ifsound NETHRA_ONELINER18 stopsound NETHRA_ONELINER18
+	
+		ifsound CHRISTINA_ONELINER01 stopsound CHRISTINA_ONELINER01
+		ifsound CHRISTINA_ONELINER02 stopsound CHRISTINA_ONELINER02
+		ifsound CHRISTINA_ONELINER03 stopsound CHRISTINA_ONELINER03
+		ifsound CHRISTINA_ONELINER04 stopsound CHRISTINA_ONELINER04
+		ifsound CHRISTINA_ONELINER05 stopsound CHRISTINA_ONELINER05
+		ifsound CHRISTINA_ONELINER06 stopsound CHRISTINA_ONELINER06
+		ifsound CHRISTINA_ONELINER07 stopsound CHRISTINA_ONELINER07
+		ifsound CHRISTINA_ONELINER08 stopsound CHRISTINA_ONELINER08
+		ifsound CHRISTINA_ONELINER09 stopsound CHRISTINA_ONELINER09
+		ifsound CHRISTINA_ONELINER10 stopsound CHRISTINA_ONELINER10
+		ifsound CHRISTINA_ONELINER11 stopsound CHRISTINA_ONELINER11
+		ifsound CHRISTINA_ONELINER12 stopsound CHRISTINA_ONELINER12
+		ifsound CHRISTINA_ONELINER13 stopsound CHRISTINA_ONELINER13
+		ifsound CHRISTINA_ONELINER14 stopsound CHRISTINA_ONELINER14
+		ifsound CHRISTINA_ONELINER15 stopsound CHRISTINA_ONELINER15
+		ifsound CHRISTINA_ONELINER16 stopsound CHRISTINA_ONELINER16
+		ifsound CHRISTINA_ONELINER17 stopsound CHRISTINA_ONELINER17
+		ifsound CHRISTINA_ONELINER18 stopsound CHRISTINA_ONELINER18
+	}
+	/*
+	setvar CHARACTERARRAY 11 // Paula
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+	}
+	
+	setvar CHARACTERARRAY 12 // Lori
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+	}
+	*/
+	
+	setvar CHARACTERARRAY 13 // Minako
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound MINAKO_ONELINER01 stopsound MINAKO_ONELINER01
+		ifsound MINAKO_ONELINER02 stopsound MINAKO_ONELINER02
+		ifsound MINAKO_ONELINER03 stopsound MINAKO_ONELINER03
+		ifsound MINAKO_ONELINER04 stopsound MINAKO_ONELINER04
+		ifsound MINAKO_ONELINER05 stopsound MINAKO_ONELINER05
+		ifsound MINAKO_ONELINER06 stopsound MINAKO_ONELINER06
+		ifsound MINAKO_ONELINER07 stopsound MINAKO_ONELINER07
+		ifsound MINAKO_ONELINER08 stopsound MINAKO_ONELINER08
+		ifsound MINAKO_ONELINER09 stopsound MINAKO_ONELINER09
+		ifsound MINAKO_ONELINER10 stopsound MINAKO_ONELINER10
+		ifsound MINAKO_ONELINER11 stopsound MINAKO_ONELINER11
+		ifsound MINAKO_ONELINER12 stopsound MINAKO_ONELINER12
+		ifsound MINAKO_ONELINER13 stopsound MINAKO_ONELINER13
+		ifsound MINAKO_ONELINER14 stopsound MINAKO_ONELINER14
+		ifsound MINAKO_ONELINER15 stopsound MINAKO_ONELINER15
+		ifsound MINAKO_ONELINER16 stopsound MINAKO_ONELINER16
+		ifsound MINAKO_ONELINER17 stopsound MINAKO_ONELINER17
+		ifsound MINAKO_ONELINER18 stopsound MINAKO_ONELINER18
+		ifsound MINAKO_GRABQUAD stopsound MINAKO_GRABQUAD
+		ifsound MINAKO_GRABINVULN stopsound MINAKO_GRABINVULN
+		ifsound MINAKO_GRABREGEN stopsound MINAKO_GRABREGEN
+		ifsound MINAKO_GRABAPREGEN stopsound MINAKO_GRABAPREGEN
+		ifsound MINAKO_GRABVAMPIRE stopsound MINAKO_GRABVAMPIRE
+	}
+	
+	/*
+	setvar CHARACTERARRAY 14 // "Mystery Lady"
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+	}
+	*/
+	setvar CHARACTERARRAY 15 // Maken
+	ifvarand actorvar[CHARACTERARRAY].CHARACTERSTATUS? 1 // Dead
+	{
+		ifsound MAKEN_ONELINER01 stopsound MAKEN_ONELINER01
+		ifsound MAKEN_ONELINER02 stopsound MAKEN_ONELINER02
+		ifsound MAKEN_ONELINER03 stopsound MAKEN_ONELINER03
+		ifsound MAKEN_ONELINER04 stopsound MAKEN_ONELINER04
+		ifsound MAKEN_ONELINER05 stopsound MAKEN_ONELINER05
+		ifsound MAKEN_ONELINER06 stopsound MAKEN_ONELINER06
+		ifsound MAKEN_ONELINER07 stopsound MAKEN_ONELINER07
+		ifsound MAKEN_ONELINER08 stopsound MAKEN_ONELINER08
+		ifsound MAKEN_ONELINER09 stopsound MAKEN_ONELINER09
+		ifsound MAKEN_ONELINER10 stopsound MAKEN_ONELINER10
+		ifsound MAKEN_ONELINER11 stopsound MAKEN_ONELINER11
+		ifsound MAKEN_ONELINER12 stopsound MAKEN_ONELINER12
+		ifsound MAKEN_ONELINER13 stopsound MAKEN_ONELINER13
+		ifsound MAKEN_ONELINER14 stopsound MAKEN_ONELINER14
+		ifsound MAKEN_ONELINER15 stopsound MAKEN_ONELINER15
+		ifsound MAKEN_ONELINER16 stopsound MAKEN_ONELINER16
+		ifsound MAKEN_ONELINER17 stopsound MAKEN_ONELINER17
+		ifsound MAKEN_ONELINER18 stopsound MAKEN_ONELINER18
+		ifsound MAKEN_ONELINERTANK01 stopsound MAKEN_ONELINERTANK01
+		ifsound MAKEN_ONELINERTANK02 stopsound MAKEN_ONELINERTANK02
+		ifsound MAKEN_ONELINERTANK03 stopsound MAKEN_ONELINERTANK03
+		ifsound MAKEN_ONELINERTANK04 stopsound MAKEN_ONELINERTANK04
+		ifsound MAKEN_GRABQUAD stopsound MAKEN_GRABQUAD
+		ifsound MAKEN_GRABINVULN stopsound MAKEN_GRABINVULN
+		ifsound MAKEN_GRABREGEN stopsound MAKEN_GRABREGEN
+		ifsound MAKEN_GRABAPREGEN stopsound MAKEN_GRABAPREGEN
+		ifsound MAKEN_GRABVAMPIRE stopsound MAKEN_GRABVAMPIRE
+		ifsound MAKEN_FALLDAMAGE1 stopsound MAKEN_FALLDAMAGE1
+		ifsound MAKEN_FALLDAMAGE2 stopsound MAKEN_FALLDAMAGE2
+		ifsound MAKEN_FALLDAMAGE3 stopsound MAKEN_FALLDAMAGE3
+		ifsound MAKEN_FALLSCREAM stopsound MAKEN_FALLSCREAM
+		ifsound MAKEN_WALLPUSH1 stopsound MAKEN_WALLPUSH1
+		ifsound MAKEN_WALLPUSH2 stopsound MAKEN_WALLPUSH2
+		ifsound MAKEN_JUMP1 stopsound MAKEN_JUMP1
+		ifsound MAKEN_JUMP2 stopsound MAKEN_JUMP2
+		ifsound MAKEN_AIRJUMP1 stopsound MAKEN_AIRJUMP1
+		ifsound MAKEN_AIRJUMP2 stopsound MAKEN_AIRJUMP2
+		ifsound MAKEN_REFLECTION1 stopsound MAKEN_REFLECTION1
+		ifsound MAKEN_REFLECTION2 stopsound MAKEN_REFLECTION2
+		ifsound MAKEN_REFLECTION3 stopsound MAKEN_REFLECTION3
+		ifsound MAKEN_REFLECTION4 stopsound MAKEN_REFLECTION4
+		ifsound MAKEN_IMPATIENT1 stopsound MAKEN_IMPATIENT1
+		ifsound MAKEN_IMPATIENT2 stopsound MAKEN_IMPATIENT2
+		ifsound MAKEN_GOTHEALTHATLOW stopsound MAKEN_GOTHEALTHATLOW
+		ifsound MAKEN_RESURFACE1 stopsound MAKEN_RESURFACE1
+		ifsound MAKEN_RESURFACE2 stopsound MAKEN_RESURFACE2
+		ifsound MAKEN_MELEE1 stopsound MAKEN_MELEE1
+		ifsound MAKEN_MELEE2 stopsound MAKEN_MELEE2
+		ifsound MAKEN_MELEE3 stopsound MAKEN_MELEE3
+		ifsound MAKEN_EATFOOD1 stopsound MAKEN_EATFOOD1
+		ifsound MAKEN_GETMONEYSMALL stopsound MAKEN_GETMONEYSMALL
+		ifsound MAKEN_GETMONEYMEDIUM stopsound MAKEN_GETMONEYMEDIUM
+		ifsound MAKEN_GETMONEYLARGE stopsound MAKEN_GETMONEYLARGE
+		ifsound MAKEN_GETMONEYLARGER stopsound MAKEN_GETMONEYLARGER
+		ifsound MAKEN_STEALITEM stopsound MAKEN_STEALITEM
+		ifsound MAKEN_ITEMSTOLEN stopsound MAKEN_ITEMSTOLEN
+		ifsound MAKEN_GETWEAPON1 stopsound MAKEN_GETWEAPON1
+		ifsound MAKEN_GETWEAPON2 stopsound MAKEN_GETWEAPON2
+		ifsound MAKEN_GETWEAPON3 stopsound MAKEN_GETWEAPON3
+		ifsound MAKEN_GETWEAPON4 stopsound MAKEN_GETWEAPON4
+		ifsound MAKEN_GETWEAPON5 stopsound MAKEN_GETWEAPON5
+		ifsound MAKEN_LEVELUP1 stopsound MAKEN_LEVELUP1
+		ifsound MAKEN_LEVELUP2 stopsound MAKEN_LEVELUP2
+		ifsound MAKEN_LEVELUP3 stopsound MAKEN_LEVELUP3
+		ifsound MAKEN_LEVELUP4 stopsound MAKEN_LEVELUP4
+		ifsound MAKEN_SAVEREWARD stopsound MAKEN_SAVEREWARD
+		ifsound MAKEN_SAVETRAP stopsound MAKEN_SAVETRAP
+		ifsound MAKEN_SAVEENEMY stopsound MAKEN_SAVEENEMY
+		ifsound MAKEN_GRABBONUS1 stopsound MAKEN_GRABBONUS1
+		ifsound MAKEN_GRABBONUS2 stopsound MAKEN_GRABBONUS2
+		ifsound MAKEN_GRABBONUS3 stopsound MAKEN_GRABBONUS3
+		ifsound MAKEN_TAUNTBOSS1 stopsound MAKEN_TAUNTBOSS1
+		ifsound MAKEN_TAUNTBOSS2 stopsound MAKEN_TAUNTBOSS2
+		ifsound MAKEN_TAUNTBOSS3 stopsound MAKEN_TAUNTBOSS3
+		ifsound MAKEN_TAUNTBOSS4 stopsound MAKEN_TAUNTBOSS4
+		ifsound MAKEN_KILLBOSS1 stopsound MAKEN_KILLBOSS1
+		ifsound MAKEN_KILLBOSS2 stopsound MAKEN_KILLBOSS2
+		ifsound MAKEN_KILLBOSS3 stopsound MAKEN_KILLBOSS3
+		ifsound MAKEN_KILLBOSS4 stopsound MAKEN_KILLBOSS4
+		ifsound MAKEN_KEYCARD1 stopsound MAKEN_KEYCARD1
+		ifsound MAKEN_KEYCARD2 stopsound MAKEN_KEYCARD2
+		ifsound MAKEN_KEYCARD3 stopsound MAKEN_KEYCARD3
+		ifsound MAKEN_KEYCARD4 stopsound MAKEN_KEYCARD4
+	}
+	
+	// Leave this here x_X
+	getuserdef[THISACTOR].pause_on temp
+	ifvare temp 0
+	{
+		ifsound LISA_PAUSEDGAME1 stopsound LISA_PAUSEDGAME1
+		ifsound LISA_PAUSEDGAME2 stopsound LISA_PAUSEDGAME2
+		ifsound LISA_PAUSEDGAME3 stopsound LISA_PAUSEDGAME3
+		ifsound LISA_PAUSEDGAME4 stopsound LISA_PAUSEDGAME4
+		ifsound LISA_PAUSEDGAME5 stopsound LISA_PAUSEDGAME5
+	
+		ifsound MAKEN_PAUSEDGAME1 stopsound MAKEN_PAUSEDGAME1
+		ifsound MAKEN_PAUSEDGAME2 stopsound MAKEN_PAUSEDGAME2
+		ifsound MAKEN_PAUSEDGAME3 stopsound MAKEN_PAUSEDGAME3
+		ifsound MAKEN_PAUSEDGAME4 stopsound MAKEN_PAUSEDGAME4
+		ifsound MAKEN_PAUSEDGAME5 stopsound MAKEN_PAUSEDGAME5
+	}
+	
+	state setreturn-1
 endevent
 
 onevent EVENT_SOUND // WARNING: Unsynchronized Event
-// addlogvar RETURN
-ifvare RETURN 42 { setvar RETURN -1 }
-ifvare RETURN 200 { setvar RETURN -1 } // fix by Hendricks266: prevents DUKE_LAND_HURT [#200] from playing and might help fix a sound issue with fall-damage sounds
+	// addlogvar RETURN
+	ifvare RETURN 42 { setvar RETURN -1 }
+	ifvare RETURN 200 { setvar RETURN -1 } // fix by Hendricks266: prevents DUKE_LAND_HURT [#200] from playing and might help fix a sound issue with fall-damage sounds
+	
+	ifvare RETURN DUKE_TAKEPILLS
+	{
+		stopsound DUKE_TAKEPILLS
+		ifvare CHARACTERSELECTED? 1 globalsound DUKE_EATFOOD1
+		else ifvare CHARACTERSELECTED? 5 globalsound WANG_EATFOOD1
+		else ifvare CHARACTERSELECTED? 8 globalsound LISA_EATFOOD1
+		else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_EATFOOD1
+		else globalsound DUKE_EATFOOD1
+	}
 
-ifvare RETURN DUKE_TAKEPILLS
-{
- stopsound DUKE_TAKEPILLS
- ifvare CHARACTERSELECTED? 1 globalsound DUKE_EATFOOD1
- else ifvare CHARACTERSELECTED? 5 globalsound WANG_EATFOOD1
- else ifvare CHARACTERSELECTED? 8 globalsound LISA_EATFOOD1
- else ifvare CHARACTERSELECTED? 15 globalsound MAKEN_EATFOOD1
- else globalsound DUKE_EATFOOD1
-}
 
-
-ifvare RETURN DUKE_CRACK
-{
- ifvarn CHARACTERSELECTED? 1
- {
-  stopsound DUKE_CRACK
-  stopsound DUKE_CRACK2
-  ifvare CHARACTERSELECTED? 8 // Lisa
-  {
-   displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 
-   { 
-    globalsound LISA_IMPATIENT1
-    redefinequote 340 ^7Lisa: Oh how exciting! I'm standing around doing nothing... YAY ME!!
-    ifvare oldskoolmode 0 userquote 340
-   }
-   else ifvare TEMPVAR 1
-   {
-    globalsound LISA_IMPATIENT2 
-    redefinequote 340 ^7Lisa: Watching the paint dry? Or kicking ass and taking names? Hmmmm....
-    ifvare oldskoolmode 0 userquote 340
-   }
-  }
-  else
-  ifvare CHARACTERSELECTED? 9 // Cybanis
-  {
-   displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0
-   {
-    globalsound CYBANIS_IMPATIENT1 
-    redefinequote 340 ^12Cybanis: *Sigh* Are we gonna go yet, or do I have to order chinese?!
-    ifvare oldskoolmode 0 userquote 340
-   }
-   else ifvare TEMPVAR 1
-   {
-    globalsound CYBANIS_IMPATIENT2 
-    redefinequote 340 ^12Cybanis: *Sigh* If I gotta wait here much longer, I'm going to come over there and kick your ass!
-    ifvare oldskoolmode 0 userquote 340
-   }
-  }
-  else
-  ifvare CHARACTERSELECTED? 15 // Maken
-  {
-   displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0
-   {
-    globalsound MAKEN_IMPATIENT1 
-    redefinequote 340 ^10Maken: COME ON! We got things do to, and asses to kick!
-    ifvare oldskoolmode 0 userquote 340
-   }
-   else ifvare TEMPVAR 1
-   {
-    globalsound MAKEN_IMPATIENT2 
-    redefinequote 340 ^10Maken: Well I have the time, I might as well just take out my laptop!
-    ifvare oldskoolmode 0 userquote 340
-   }
-  }
- }
-}
-ifvare RETURN DUKE_CRACK2
-{
- ifvarn CHARACTERSELECTED? 1
- {
-  stopsound DUKE_CRACK
-  stopsound DUKE_CRACK2
-  ifvare CHARACTERSELECTED? 8 // Lisa
-  {
-   displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0 
-   { 
-    globalsound LISA_IMPATIENT1
-    redefinequote 340 ^7Lisa: Oh how exciting! I'm standing around doing nothing... YAY ME!!
-    ifvare oldskoolmode 0 userquote 340
-   }
-   else ifvare TEMPVAR 1
-   {
-    globalsound LISA_IMPATIENT2 
-    redefinequote 340 ^7Lisa: Watching the paint dry? Or kicking ass and taking names? Hmmmm....
-    ifvare oldskoolmode 0 userquote 340
-   }
-  }
-  else
-  ifvare CHARACTERSELECTED? 9 // Cybanis
-  {
-   displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0
-   {
-    globalsound CYBANIS_IMPATIENT1 
-    redefinequote 340 ^12Cybanis: *Sigh* Are we gonna go yet, or do I have to order chinese?!
-    ifvare oldskoolmode 0 userquote 340
-   }
-   else ifvare TEMPVAR 1
-   {
-    globalsound CYBANIS_IMPATIENT2 
-    redefinequote 340 ^12Cybanis: *Sigh* If I gotta wait here much longer, I'm going to come over there and kick your ass!
-    ifvare oldskoolmode 0 userquote 340
-   }
-  }
-  else
-  ifvare CHARACTERSELECTED? 15 // Maken
-  {
-   displayrandvar TEMPVAR 1
-   ifvare TEMPVAR 0
-   {
-    globalsound MAKEN_IMPATIENT1 
-    redefinequote 340 ^10Maken: COME ON! We got things do to, and asses to kick!
-    ifvare oldskoolmode 0 userquote 340
-   }
-   else ifvare TEMPVAR 1
-   {
-    globalsound MAKEN_IMPATIENT2 
-    redefinequote 340 ^10Maken: Well I have the time, I might as well just take out my laptop!
-    ifvare oldskoolmode 0 userquote 340
-   }
-  }
- }
-}
-
-ifvare RETURN DUKE_GASP
-{
- ifvare CHARACTERSELECTED? 1 // Duke
- {
-  ifvarg SCUBATIME 0 stopsound DUKE_GASP
-  else
-  {
-   stopsound DUKE_GASP
-   globalsound DUKE_GASP2
-  }
- }
- else
- ifvare CHARACTERSELECTED? 5 // Higa
- {
-  ifvarg SCUBATIME 0 stopsound DUKE_GASP
-  else
-  {
-   stopsound DUKE_GASP
-   globalsound WANG_EMERGEFROMWATER
-  }
- }
- else
- ifvare CHARACTERSELECTED? 8 // Lisa
- {
-  ifvarg SCUBATIME 0 stopsound DUKE_GASP
-  else
-  {
-   stopsound DUKE_GASP
-   setvarvar TEMPVAR5 AIRTIME
-   mulvar TEMPVAR5 1000
-   divvarvar TEMPVAR5 MAXAIRTIME
-   ifvarl TEMPVAR5 201 globalsound LISA_RESURFACE2
-   else globalsound LISA_RESURFACE1
-  }
- }
- else
- ifvare CHARACTERSELECTED? 15 // MAKEN
- {
-  ifvarg SCUBATIME 0 stopsound DUKE_GASP
-  else
-  {
-   stopsound DUKE_GASP
-   setvarvar TEMPVAR5 AIRTIME
-   mulvar TEMPVAR5 1000
-   divvarvar TEMPVAR5 MAXAIRTIME
-   ifvarl TEMPVAR5 201 globalsound MAKEN_RESURFACE2
-   else globalsound MAKEN_RESURFACE1
-  }
- }
- else
- {
-  stopsound DUKE_GASP
- }
-}
-
-ifvare RETURN DUKE_DEAD
-{
- stopsound DUKE_DEAD
-}
-
-ifvare RETURN DUKE_LOOKINTOMIRROR
-{
-         stopsound DUKE_LOOKINTOMIRROR
-         ifvare CHARACTERSELECTED? 1 // Duke
-         {
-          globalsound DUKE_LOOKINTOMIRRORA
-          redefinequote 340 ^17Duke: Damn! I'm lookin' good!
-          ifvare oldskoolmode 0 userquote 340
-        }
-         else
-         ifvare CHARACTERSELECTED? 5 // Lo Wang
-         {
-          displayrandvar TEMPVAR 1
-          ifvare TEMPVAR 0
-          {
-           globalsound WANG_REFLECTION1
-           redefinequote 340 ^15Higa: That's no ordinary Wang!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 1
-          {
-           globalsound WANG_REFLECTION2
-           redefinequote 340 ^15Higa: Hah hah hah! That's me!!
-           ifvare oldskoolmode 0 userquote 340
-          }
-         }
-         else
-         ifvare CHARACTERSELECTED? 8 // Lisa
-         {
-          displayrandvar TEMPVAR 3
-          ifvare TEMPVAR 0
-          {
-           globalsound LISA_REFLECTION1 
-           redefinequote 340 ^7Lisa: Aw geez! Look at those split-ends!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 1
-          {
-           globalsound LISA_REFLECTION2 
-           redefinequote 340 ^7Lisa: Mirror mirror... no, I'm not going there...!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 2
-          {
-           globalsound LISA_REFLECTION3 
-           redefinequote 340 ^7Lisa: Man, Lara Croft ain't got nothin' on me!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 3
-          {
-           globalsound LISA_REFLECTION4 
-           redefinequote 340 ^7Lisa: The beauty of a sunset in a nice, neat package!
-           ifvare oldskoolmode 0 userquote 340
-          }
-         }
-         else
-         ifvare CHARACTERSELECTED? 9 // Cybanis
-         {
-          displayrandvar TEMPVAR 4
-          ifvare TEMPVAR 0
-          {
-           globalsound CYBANIS_REFLECTION1 
-           redefinequote 340 ^12Cybanis: I don't really have time to stare at myself right now!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 1
-          {
-           globalsound CYBANIS_REFLECTION2 
-           redefinequote 340 ^12Cybanis: Huh?! Whew, it's just me!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 2
-          {
-           globalsound CYBANIS_REFLECTION3 
-           redefinequote 340 ^12Cybanis: Heh, still lookin' good!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 3
-          {
-           globalsound CYBANIS_REFLECTION4 
-           redefinequote 340 ^12Cybanis: Hey, who's that big tough guy over there? Oh wait, that's me!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 4
-          {
-           globalsound CYBANIS_REFLECTION5 
-           redefinequote 340 ^12Cybanis: Here's me wondering why I haven't been chosen by the ladies yet!
-           ifvare oldskoolmode 0 userquote 340
-          }
-         }
-         else
-         ifvare CHARACTERSELECTED? 15 // Maken
-         {
-          displayrandvar TEMPVAR 4
-          ifvare TEMPVAR 0
-          {
-           globalsound MAKEN_REFLECTION1 
-           redefinequote 340 ^10Maken: What, is it against the law to wear dark colors?!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 1
-          {
-           globalsound MAKEN_REFLECTION2 
-           redefinequote 340 ^10Maken: Looks... and brains... I got it all!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 2
-          {
-           globalsound MAKEN_REFLECTION3 
-           redefinequote 340 ^10Maken: Ya should judge a book by a cover... or a girl by her clothes!
-           ifvare oldskoolmode 0 userquote 340
-          }
-          else ifvare TEMPVAR 3
-          {
-           globalsound MAKEN_REFLECTION4 
-           redefinequote 340 ^10Maken: Lookin' fine... sunshine!
-           ifvare oldskoolmode 0 userquote 340
-          }
-         }
-}
-
-ifvare RETURN DUKE_SEARCH
-{
-         stopsound DUKE_SEARCH
-         stopsound DUKE_SEARCH2
-         ifvare CHARACTERSELECTED? 1
-         {
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound DUKE_SEARCH1A
-         }
-         else
-         ifvare CHARACTERSELECTED? 5
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound WANG_SEARCH1
-         }
-         else
-         ifvare CHARACTERSELECTED? 2
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound JACK_WALLPUSH1
-         }
-         else
-         ifvare CHARACTERSELECTED? 6
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound ESSENCE_WALLPUSH1
-         }
-         else
-         ifvare CHARACTERSELECTED? 8
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound LISA_WALLPUSH1
-         }
-         else
-         ifvare CHARACTERSELECTED? 9
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound CYBANIS_WALLPUSH1
-         }
-         else
-         ifvare CHARACTERSELECTED? 15
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          globalsound MAKEN_WALLPUSH1
-         }
-         else
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-         }
-}
-ifvare RETURN DUKE_SEARCH2
-{
-         stopsound DUKE_SEARCH
-         stopsound DUKE_SEARCH2
-         ifvare CHARACTERSELECTED? 1
-         {
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound DUKE_SEARCH2A
-          redefinequote 340 ^17Duke: Where is it?!
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         ifvare CHARACTERSELECTED? 2
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound JACK_WALLPUSH2
-          redefinequote 340 ^17Jack: []
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         ifvare CHARACTERSELECTED? 5
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound WANG_SEARCH2
-          redefinequote 340 ^15Higa: Oh damn, I'm running into walls now!!
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         ifvare CHARACTERSELECTED? 6
-         {         
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound ESSENCE_WALLPUSH2
-          redefinequote 340 ^12ESSence: Dammit, who put this here?!
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         ifvare CHARACTERSELECTED? 8
-         {         
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound LISA_WALLPUSH2
-          redefinequote 340 ^7Lisa: Who's bright idea was it to put a wall here?!
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         ifvare CHARACTERSELECTED? 9
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-          globalsound CYBANIS_WALLPUSH2
-          redefinequote 340 ^12Cybanis: It's gotta be around here somewhere, dammit!
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         ifvare CHARACTERSELECTED? 15
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          globalsound MAKEN_WALLPUSH2
-          redefinequote 340 ^10Maken: You know, this ain't supposed to be here!
-          ifvare oldskoolmode 0 userquote 340
-         }
-         else
-         {
-          stopsound DUKE_SEARCH1A
-          stopsound DUKE_SEARCH2A
-          stopsound JACK_WALLPUSH1
-          stopsound JACK_WALLPUSH2
-          stopsound WANG_SEARCH1
-          stopsound WANG_SEARCH2
-          stopsound ESSENCE_WALLPUSH1
-          stopsound ESSENCE_WALLPUSH2
-          stopsound LISA_WALLPUSH1
-          stopsound LISA_WALLPUSH2
-          stopsound CYBANIS_WALLPUSH1
-          stopsound CYBANIS_WALLPUSH2
-          stopsound MAKEN_WALLPUSH1
-          stopsound MAKEN_WALLPUSH2
-         }
-}
-
+	ifvare RETURN DUKE_CRACK
+	{
+		ifvarn CHARACTERSELECTED? 1
+		{
+			stopsound DUKE_CRACK
+			stopsound DUKE_CRACK2
+			ifvare CHARACTERSELECTED? 8 // Lisa
+			{
+				displayrandvar TEMPVAR 1
+				ifvare TEMPVAR 0 
+				{ 
+					globalsound LISA_IMPATIENT1
+					redefinequote 340 ^7Lisa: Oh how exciting! I'm standing around doing nothing... YAY ME!!
+					ifvare oldskoolmode 0 userquote 340
+				}
+				else ifvare TEMPVAR 1
+				{
+					globalsound LISA_IMPATIENT2 
+					redefinequote 340 ^7Lisa: Watching the paint dry? Or kicking ass and taking names? Hmmmm....
+					ifvare oldskoolmode 0 userquote 340
+				}
+			}
+			else
+			ifvare CHARACTERSELECTED? 9 // Cybanis
+			{
+				displayrandvar TEMPVAR 1
+				ifvare TEMPVAR 0
+				{
+					globalsound CYBANIS_IMPATIENT1 
+					redefinequote 340 ^12Cybanis: *Sigh* Are we gonna go yet, or do I have to order chinese?!
+					ifvare oldskoolmode 0 userquote 340
+				}
+				else ifvare TEMPVAR 1
+				{
+					globalsound CYBANIS_IMPATIENT2 
+					redefinequote 340 ^12Cybanis: *Sigh* If I gotta wait here much longer, I'm going to come over there and kick your ass!
+					ifvare oldskoolmode 0 userquote 340
+				}
+			}
+			else
+			ifvare CHARACTERSELECTED? 15 // Maken
+			{
+				displayrandvar TEMPVAR 1
+				ifvare TEMPVAR 0
+				{
+					globalsound MAKEN_IMPATIENT1 
+					redefinequote 340 ^10Maken: COME ON! We got things do to, and asses to kick!
+					ifvare oldskoolmode 0 userquote 340
+				}
+				else ifvare TEMPVAR 1
+				{
+					globalsound MAKEN_IMPATIENT2 
+					redefinequote 340 ^10Maken: Well I have the time, I might as well just take out my laptop!
+					ifvare oldskoolmode 0 userquote 340
+				}
+			}
+		}
+	}
+	ifvare RETURN DUKE_CRACK2
+	{
+		ifvarn CHARACTERSELECTED? 1
+		{
+			stopsound DUKE_CRACK
+			stopsound DUKE_CRACK2
+			ifvare CHARACTERSELECTED? 8 // Lisa
+			{
+				displayrandvar TEMPVAR 1
+				ifvare TEMPVAR 0 
+				{ 
+					globalsound LISA_IMPATIENT1
+					redefinequote 340 ^7Lisa: Oh how exciting! I'm standing around doing nothing... YAY ME!!
+					ifvare oldskoolmode 0 userquote 340
+				}
+				else ifvare TEMPVAR 1
+				{
+					globalsound LISA_IMPATIENT2 
+					redefinequote 340 ^7Lisa: Watching the paint dry? Or kicking ass and taking names? Hmmmm....
+					ifvare oldskoolmode 0 userquote 340
+				}
+			}
+			else
+			ifvare CHARACTERSELECTED? 9 // Cybanis
+			{
+				displayrandvar TEMPVAR 1
+				ifvare TEMPVAR 0
+				{
+					globalsound CYBANIS_IMPATIENT1 
+					redefinequote 340 ^12Cybanis: *Sigh* Are we gonna go yet, or do I have to order chinese?!
+					ifvare oldskoolmode 0 userquote 340
+				}
+				else ifvare TEMPVAR 1
+				{
+					globalsound CYBANIS_IMPATIENT2 
+					redefinequote 340 ^12Cybanis: *Sigh* If I gotta wait here much longer, I'm going to come over there and kick your ass!
+					ifvare oldskoolmode 0 userquote 340
+				}
+			}
+			else
+			ifvare CHARACTERSELECTED? 15 // Maken
+			{
+				displayrandvar TEMPVAR 1
+				ifvare TEMPVAR 0
+				{
+					globalsound MAKEN_IMPATIENT1 
+					redefinequote 340 ^10Maken: COME ON! We got things do to, and asses to kick!
+					ifvare oldskoolmode 0 userquote 340
+				}
+				else ifvare TEMPVAR 1
+				{
+					globalsound MAKEN_IMPATIENT2 
+					redefinequote 340 ^10Maken: Well I have the time, I might as well just take out my laptop!
+					ifvare oldskoolmode 0 userquote 340
+				}
+			}
+		}
+	}
+	
+	ifvare RETURN DUKE_GASP
+	{
+		ifvare CHARACTERSELECTED? 1 // Duke
+		{
+			ifvarg SCUBATIME 0 stopsound DUKE_GASP
+			else
+			{
+				stopsound DUKE_GASP
+				globalsound DUKE_GASP2
+			}
+		}
+		else
+		ifvare CHARACTERSELECTED? 5 // Higa
+		{
+			ifvarg SCUBATIME 0 stopsound DUKE_GASP
+			else
+			{
+				stopsound DUKE_GASP
+				globalsound WANG_EMERGEFROMWATER
+			}
+		}
+		else
+		ifvare CHARACTERSELECTED? 8 // Lisa
+		{
+			ifvarg SCUBATIME 0 stopsound DUKE_GASP
+			else
+			{
+				stopsound DUKE_GASP
+				setvarvar TEMPVAR5 AIRTIME
+				mulvar TEMPVAR5 1000
+				divvarvar TEMPVAR5 MAXAIRTIME
+				ifvarl TEMPVAR5 201 globalsound LISA_RESURFACE2
+				else globalsound LISA_RESURFACE1
+			}
+		}
+		else
+		ifvare CHARACTERSELECTED? 15 // MAKEN
+		{
+			ifvarg SCUBATIME 0 stopsound DUKE_GASP
+			else
+			{
+				stopsound DUKE_GASP
+				setvarvar TEMPVAR5 AIRTIME
+				mulvar TEMPVAR5 1000
+				divvarvar TEMPVAR5 MAXAIRTIME
+				ifvarl TEMPVAR5 201 globalsound MAKEN_RESURFACE2
+				else globalsound MAKEN_RESURFACE1
+			}
+		}
+		else
+		{
+			stopsound DUKE_GASP
+		}
+	}
+	
+	ifvare RETURN DUKE_DEAD
+	{
+		stopsound DUKE_DEAD
+	}
+	
+	ifvare RETURN DUKE_LOOKINTOMIRROR
+	{
+		stopsound DUKE_LOOKINTOMIRROR
+		ifvare CHARACTERSELECTED? 1 // Duke
+		{
+			globalsound DUKE_LOOKINTOMIRRORA
+			redefinequote 340 ^17Duke: Damn! I'm lookin' good!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 5 // Lo Wang
+		{
+			displayrandvar TEMPVAR 1
+			ifvare TEMPVAR 0
+			{
+				globalsound WANG_REFLECTION1
+				redefinequote 340 ^15Higa: That's no ordinary Wang!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 1
+			{
+				globalsound WANG_REFLECTION2
+				redefinequote 340 ^15Higa: Hah hah hah! That's me!!
+				ifvare oldskoolmode 0 userquote 340
+			}
+		}
+		else
+		ifvare CHARACTERSELECTED? 8 // Lisa
+		{
+			displayrandvar TEMPVAR 3
+			ifvare TEMPVAR 0
+			{
+				globalsound LISA_REFLECTION1 
+				redefinequote 340 ^7Lisa: Aw geez! Look at those split-ends!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 1
+			{
+				globalsound LISA_REFLECTION2 
+				redefinequote 340 ^7Lisa: Mirror mirror... no, I'm not going there...!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 2
+			{
+				globalsound LISA_REFLECTION3 
+				redefinequote 340 ^7Lisa: Man, Lara Croft ain't got nothin' on me!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 3
+			{
+				globalsound LISA_REFLECTION4 
+				redefinequote 340 ^7Lisa: The beauty of a sunset in a nice, neat package!
+				ifvare oldskoolmode 0 userquote 340
+			}
+		}
+		else
+		ifvare CHARACTERSELECTED? 9 // Cybanis
+		{
+			displayrandvar TEMPVAR 4
+			ifvare TEMPVAR 0
+			{
+				globalsound CYBANIS_REFLECTION1 
+				redefinequote 340 ^12Cybanis: I don't really have time to stare at myself right now!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 1
+			{
+				globalsound CYBANIS_REFLECTION2 
+				redefinequote 340 ^12Cybanis: Huh?! Whew, it's just me!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 2
+			{
+				globalsound CYBANIS_REFLECTION3 
+				redefinequote 340 ^12Cybanis: Heh, still lookin' good!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 3
+			{
+				globalsound CYBANIS_REFLECTION4 
+				redefinequote 340 ^12Cybanis: Hey, who's that big tough guy over there? Oh wait, that's me!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 4
+			{
+				globalsound CYBANIS_REFLECTION5 
+				redefinequote 340 ^12Cybanis: Here's me wondering why I haven't been chosen by the ladies yet!
+				ifvare oldskoolmode 0 userquote 340
+			}
+		}
+		else
+		ifvare CHARACTERSELECTED? 15 // Maken
+		{
+			displayrandvar TEMPVAR 4
+			ifvare TEMPVAR 0
+			{
+				globalsound MAKEN_REFLECTION1 
+				redefinequote 340 ^10Maken: What, is it against the law to wear dark colors?!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 1
+			{
+				globalsound MAKEN_REFLECTION2 
+				redefinequote 340 ^10Maken: Looks... and brains... I got it all!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 2
+			{
+				globalsound MAKEN_REFLECTION3 
+				redefinequote 340 ^10Maken: Ya should judge a book by a cover... or a girl by her clothes!
+				ifvare oldskoolmode 0 userquote 340
+			}
+			else ifvare TEMPVAR 3
+			{
+				globalsound MAKEN_REFLECTION4 
+				redefinequote 340 ^10Maken: Lookin' fine... sunshine!
+				ifvare oldskoolmode 0 userquote 340
+			}
+		}
+	}
+	
+	ifvare RETURN DUKE_SEARCH
+	{
+		stopsound DUKE_SEARCH
+		stopsound DUKE_SEARCH2
+		ifvare CHARACTERSELECTED? 1
+		{
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound DUKE_SEARCH1A
+		}
+		else
+		ifvare CHARACTERSELECTED? 5
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound WANG_SEARCH1
+		}
+		else
+		ifvare CHARACTERSELECTED? 2
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound JACK_WALLPUSH1
+		}
+		else
+		ifvare CHARACTERSELECTED? 6
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound ESSENCE_WALLPUSH1
+		}
+		else
+		ifvare CHARACTERSELECTED? 8
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound LISA_WALLPUSH1
+		}
+		else
+		ifvare CHARACTERSELECTED? 9
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound CYBANIS_WALLPUSH1
+		}
+		else
+		ifvare CHARACTERSELECTED? 15
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			globalsound MAKEN_WALLPUSH1
+		}
+		else
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+		}
+	}
+	ifvare RETURN DUKE_SEARCH2
+	{
+		stopsound DUKE_SEARCH
+		stopsound DUKE_SEARCH2
+		ifvare CHARACTERSELECTED? 1
+		{
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound DUKE_SEARCH2A
+			redefinequote 340 ^17Duke: Where is it?!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 2
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound JACK_WALLPUSH2
+			redefinequote 340 ^17Jack: []
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 5
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound WANG_SEARCH2
+			redefinequote 340 ^15Higa: Oh damn, I'm running into walls now!!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 6
+		{         
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound ESSENCE_WALLPUSH2
+			redefinequote 340 ^12ESSence: Dammit, who put this here?!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 8
+		{         
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound LISA_WALLPUSH2
+			redefinequote 340 ^7Lisa: Who's bright idea was it to put a wall here?!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 9
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+			globalsound CYBANIS_WALLPUSH2
+			redefinequote 340 ^12Cybanis: It's gotta be around here somewhere, dammit!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		ifvare CHARACTERSELECTED? 15
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			globalsound MAKEN_WALLPUSH2
+			redefinequote 340 ^10Maken: You know, this ain't supposed to be here!
+			ifvare oldskoolmode 0 userquote 340
+		}
+		else
+		{
+			stopsound DUKE_SEARCH1A
+			stopsound DUKE_SEARCH2A
+			stopsound JACK_WALLPUSH1
+			stopsound JACK_WALLPUSH2
+			stopsound WANG_SEARCH1
+			stopsound WANG_SEARCH2
+			stopsound ESSENCE_WALLPUSH1
+			stopsound ESSENCE_WALLPUSH2
+			stopsound LISA_WALLPUSH1
+			stopsound LISA_WALLPUSH2
+			stopsound CYBANIS_WALLPUSH1
+			stopsound CYBANIS_WALLPUSH2
+			stopsound MAKEN_WALLPUSH1
+			stopsound MAKEN_WALLPUSH2
+		}
+	}
 endevent
 
 onevent EVENT_RESETINVENTORY
- setvar INITPLAYER 0
+	setvar INITPLAYER 0
 endevent
 
 onevent EVENT_DISPLAYROOMS
+	/*
+	ifvare skybox 1
+	{
+		getplayer[THISACTOR].horiz skybox_horiz
+		getplayer[THISACTOR].horizoff TEMP
+		addvarvar skybox_horiz TEMP
+		getplayer[THISACTOR].ang skybox_angle
+		showview skybox_x skybox_y skybox_z skybox_angle skybox_horiz skybox_sect 1 1 319 199 
+	}
+	*/
 
-/*
-ifvare skybox 1
-{
- getplayer[THISACTOR].horiz skybox_horiz
- getplayer[THISACTOR].horizoff TEMP
- addvarvar skybox_horiz TEMP
- getplayer[THISACTOR].ang skybox_angle
- showview skybox_x skybox_y skybox_z skybox_angle skybox_horiz skybox_sect 1 1 319 199 
-}
-*/
+	ifvare CAMERAMODE? 1
+	{
+		ifp pshrunk nullop
+		else
+		{
+			setvarvar CAMERAZTEMP cameraz
+		
+			ifvare CHARACTERSELECTED? 1 setvar VIEWCAMERAZDIFF 0										// Duke
+			ifvare CHARACTERSELECTED? 2 setvar VIEWCAMERAZDIFF 1626									// Jack
+			ifvare CHARACTERSELECTED? 3 setvar VIEWCAMERAZDIFF 1771									// Bubsy
+			ifvare CHARACTERSELECTED? 4 setvar VIEWCAMERAZDIFF 1607									// Ami
+			ifvare CHARACTERSELECTED? 5 setvar VIEWCAMERAZDIFF 373									// Higa
+			ifvare CHARACTERSELECTED? 6 setvar VIEWCAMERAZDIFF -7691									// ESSence
+			ifvare CHARACTERSELECTED? 7 setvar VIEWCAMERAZDIFF 468									// Ted
+			ifvare CHARACTERSELECTED? 8 setvar VIEWCAMERAZDIFF 1120									// Lisa
+			ifvare CHARACTERSELECTED? 9 setvar VIEWCAMERAZDIFF -8797									// Cybanis
+			ifvare CHARACTERSELECTED? 10 
+			{
+				setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
+				ifvare MISCARRAYID_AMOUNTTEMP 0 setvar VIEWCAMERAZDIFF 164 else setvar VIEWCAMERAZDIFF 936 
+			}	// Nethra/Christina
+			ifvare CHARACTERSELECTED? 11 setvar VIEWCAMERAZDIFF 487									// Paula
+			ifvare CHARACTERSELECTED? 12 setvar VIEWCAMERAZDIFF 740									// Lori
+			ifvare CHARACTERSELECTED? 13 setvar VIEWCAMERAZDIFF 1645									// Minako
+			ifvare CHARACTERSELECTED? 14 setvar VIEWCAMERAZDIFF -51									// "Mystery Lady"
+			ifvare CHARACTERSELECTED? 15 setvar VIEWCAMERAZDIFF 1234									// Maken
+			ifp pducking { mulvar VIEWCAMERAZDIFF 3 divvar VIEWCAMERAZDIFF 5 }
+			getactor[PLAYERID].yrepeat TEMP3
+		
+			mulvarvar VIEWCAMERAZDIFF TEMP3 // get's the player's CURRENT yrepeat and compares it to the usual 36
+			divvar VIEWCAMERAZDIFF 36 // the player's default yrepeat is 36 so it is used as a factor
+			addvarvar CAMERAZTEMP VIEWCAMERAZDIFF
+		
+			state camera_breathingcharacter
+			setvarvar cameraz CAMERAZTEMP
+		}
+	}
+	else
+	{
+		ifp pshrunk nullop
+		else
+		{
+			setvarvar CAMERAZTEMP cameraz
+		
+			state camera_breathingcharacter
+			setvarvar cameraz CAMERAZTEMP
+		}
+	}
+	
+	setvarvar CAMERAXTEMP camerax
+	setvarvar CAMERAYTEMP cameray
+	
+	ifvarg backview 0
+	{
+	 switch backview
+	 
+		 case 52 addvar cameraang 128 break
+		 case 51 addvar cameraang 256 break
+		 case 50 addvar cameraang 384 break
+		 case 49 addvar cameraang 512 break
+		 case 48 addvar cameraang 640 break
+		 case 47 addvar cameraang 768 break
+		 case 46 addvar cameraang 896 break
 
-ifvare CAMERAMODE? 1
-{
- ifp pshrunk nullop
- else
- {
-  setvarvar CAMERAZTEMP cameraz
- 
-  ifvare CHARACTERSELECTED? 1 setvar VIEWCAMERAZDIFF 0										// Duke
-  ifvare CHARACTERSELECTED? 2 setvar VIEWCAMERAZDIFF 1626									// Jack
-  ifvare CHARACTERSELECTED? 3 setvar VIEWCAMERAZDIFF 1771									// Bubsy
-  ifvare CHARACTERSELECTED? 4 setvar VIEWCAMERAZDIFF 1607									// Ami
-  ifvare CHARACTERSELECTED? 5 setvar VIEWCAMERAZDIFF 373									// Higa
-  ifvare CHARACTERSELECTED? 6 setvar VIEWCAMERAZDIFF -7691									// ESSence
-  ifvare CHARACTERSELECTED? 7 setvar VIEWCAMERAZDIFF 468									// Ted
-  ifvare CHARACTERSELECTED? 8 setvar VIEWCAMERAZDIFF 1120									// Lisa
-  ifvare CHARACTERSELECTED? 9 setvar VIEWCAMERAZDIFF -8797									// Cybanis
-  ifvare CHARACTERSELECTED? 10 
-  {
-   setvar MISCARRAYID 110 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // NETHRA-FORM?
-   ifvare MISCARRAYID_AMOUNTTEMP 0 setvar VIEWCAMERAZDIFF 164 else setvar VIEWCAMERAZDIFF 936 
-  }	// Nethra/Christina
-  ifvare CHARACTERSELECTED? 11 setvar VIEWCAMERAZDIFF 487									// Paula
-  ifvare CHARACTERSELECTED? 12 setvar VIEWCAMERAZDIFF 740									// Lori
-  ifvare CHARACTERSELECTED? 13 setvar VIEWCAMERAZDIFF 1645									// Minako
-  ifvare CHARACTERSELECTED? 14 setvar VIEWCAMERAZDIFF -51									// "Mystery Lady"
-  ifvare CHARACTERSELECTED? 15 setvar VIEWCAMERAZDIFF 1234									// Maken
-  ifp pducking { mulvar VIEWCAMERAZDIFF 3 divvar VIEWCAMERAZDIFF 5 }
-  getactor[PLAYERID].yrepeat TEMP3
+		 case 7 addvar cameraang 896 break
+		 case 6 addvar cameraang 768 break
+		 case 5 addvar cameraang 640 break
+		 case 4 addvar cameraang 512 break
+		 case 3 addvar cameraang 384 break
+		 case 2 addvar cameraang 256 break
+		 case 1 addvar cameraang 128 break
 
-  mulvarvar VIEWCAMERAZDIFF TEMP3 // get's the player's CURRENT yrepeat and compares it to the usual 36
-  divvar VIEWCAMERAZDIFF 36 // the player's default yrepeat is 36 so it is used as a factor
-  addvarvar CAMERAZTEMP VIEWCAMERAZDIFF
-
-  state camera_breathingcharacter
-  setvarvar cameraz CAMERAZTEMP
- }
-}
-else
-{
- ifp pshrunk nullop
- else
- {
-  setvarvar CAMERAZTEMP cameraz
-
-  state camera_breathingcharacter
-  setvarvar cameraz CAMERAZTEMP
- }
-}
-
-setvarvar CAMERAXTEMP camerax
-setvarvar CAMERAYTEMP cameray
-
-ifvarg backview 0
-{
- switch backview
- 
- case 52 addvar cameraang 128 break
- case 51 addvar cameraang 256 break
- case 50 addvar cameraang 384 break
- case 49 addvar cameraang 512 break
- case 48 addvar cameraang 640 break
- case 47 addvar cameraang 768 break
- case 46 addvar cameraang 896 break
-
- case 7 addvar cameraang 896 break
- case 6 addvar cameraang 768 break
- case 5 addvar cameraang 640 break
- case 4 addvar cameraang 512 break
- case 3 addvar cameraang 384 break
- case 2 addvar cameraang 256 break
- case 1 addvar cameraang 128 break
-
- default addvar cameraang 1024 break
- 
- endswitch
-}
-
-ifvare nill 1 state showcam
-
+		 default addvar cameraang 1024 break
+	 
+	 endswitch
+	}
+	ifvare nill 1 state showcam
 endevent
 
 onevent EVENT_DISPLAYWEAPON // WARNING: Unsynchronized Event
 endevent
 
 onevent EVENT_DISPLAYMENUREST // WARNING: Unsynchronized Event
-  rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
-  rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim
-
-  state digx320
-
-  setvar shade 0
-  setvar digy 180 // 120
-  setvar textscale 48152
-  redefinequote 332 http://naferia.duke4.net/
-  state setquote332
-  state pal16
-  state settilealphanum
-  state orientation0
-  state gtz
-
-  state digx320
-  setvar digy 186 // 120
-  setvar textscale 48152
-  redefinequote 332 http://misfittechstudios.duke4.net
-  state setquote332
-  state pal0
-  state settilealphanum
-  state orientation0
-  state gtz
-
-  setvar shade 8
-  setvar digy 195 // 120
-  setvar textscale 65536
-  setvar temp 1337
-  state settilealphanum
-  state orientation0
-  state gtz
-  setvar shade 0
+	rotatesprite 20 185 4096 0 3843 0 0 0 0 0 xdim ydim
+	rotatesprite 300 185 4096 0 3843 0 0 0 0 0 xdim ydim
+	
+	state digx320
+	
+	setvar shade 0
+	setvar digy 180 // 120
+	setvar textscale 48152
+	redefinequote 332 http://naferia.duke4.net/
+	state setquote332
+	state pal16
+	state settilealphanum
+	state orientation0
+	state gtz
+	
+	state digx320
+	setvar digy 186 // 120
+	setvar textscale 48152
+	redefinequote 332 http://misfittechstudios.duke4.net
+	state setquote332
+	state pal0
+	state settilealphanum
+	state orientation0
+	state gtz
+	
+	setvar shade 8
+	setvar digy 195 // 120
+	setvar textscale 65536
+	setvar temp 1337
+	state settilealphanum
+	state orientation0
+	state gtz
+	setvar shade 0
 endevent
