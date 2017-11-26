@@ -9718,8 +9718,6 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 	}
 	ifvare player[THISACTOR].hurt_delay 17 setplayer[THISACTOR].hurt_delay 15
 	
-	//ifvarg CURRENTHITPOINTS 0 { ifp palive setvar TAUNT? 0 }
-
 	// Custom Oxygen System
 	ifvarn sector[PLAYERSECTOR].lotag 2 state playerairrestorecheck
 	ifvare sector[PLAYERSECTOR].lotag 2
@@ -12856,12 +12854,7 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 			ifvarl PARTYALIVE 1
 			{
 				setvar gameover? 1
-		
-				ifvare TAUNT? 0 
-				{ 
-					ifvare gameovertransitiontimer 13 { state randomdeathtaunt setvar TAUNT? 1 }         
-				}
-		
+
 				ifvare gameovertransitiontimer 13 state randomdeathtaunt         
 				setvarvar fta fta_normal setvar ftq 13
 				ifhitspace
@@ -12899,8 +12892,8 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 				{
 					ifvarg gameover? 0
 					{
-					state gameover
-					state setplayeraction_pstand
+						state gameover
+						state setplayeraction_pstand
 					}
 				}
 			}
