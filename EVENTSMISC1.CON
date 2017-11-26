@@ -311,14 +311,11 @@ onevent EVENT_WEAPKEY4
 							else
 							ifvare CHAINGUNMODE 1
 							{
-								setvar CHAINGUNMODE 0
-								// setvar CHAINGUNMODE 2
-								redefinequote 1334 ^21CHAINGUN SHOOTS NORMAL BULLETS!
-								// redefinequote 1334 ^21CHAINGUN SHOOTS LASER BLASTS!
+								setvar CHAINGUNMODE 2
+								redefinequote 1334 ^21CHAINGUN SHOOTS LASER BLASTS!
 								setvarvar fta fta_normal setvar ftq 1334
 								sound SELECT_WEAPON
 							}
-							/*
 							else
 							ifvare CHAINGUNMODE 2
 							{
@@ -327,7 +324,6 @@ onevent EVENT_WEAPKEY4
 								setvarvar fta fta_normal setvar ftq 1334
 								sound SELECT_WEAPON
 							}
-							*/
 						}
 					}
 					setvarvar mpresstime temppartime

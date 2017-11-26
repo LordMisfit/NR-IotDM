@@ -4399,7 +4399,7 @@ onevent EVENT_DISPLAYREST // WARNING: Unsynchronized Event
 							getkeyname 401 22 0
 							ifvare CHAINGUNMODE 0 redefinequote 332 ^12%s ^21= ^22ROCKETS [CHAINGUN]
 							else ifvare CHAINGUNMODE 1 redefinequote 332 ^12%s ^21= ^22BULLETS [CHAINGUN]
-							// else ifvare CHAINGUNMODE 2 redefinequote 332 ^12%s ^21= ^22LASERS [CHAINGUN]
+							else ifvare CHAINGUNMODE 2 redefinequote 332 ^12%s ^21= ^22LASERS [CHAINGUN]
 							qsprintf 332 332 401
 							state setquote332
 							state pal21
