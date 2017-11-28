@@ -1,6 +1,6 @@
 state frozenactor-breakcode
- sound GLASS_BREAKING setactor[THISACTOR].extra -1
- setvar FROZEN? 0
+	sound GLASS_BREAKING setactor[THISACTOR].extra -1
+	setvar FROZEN? 0
 ends
 
 state checkbuddhamode
