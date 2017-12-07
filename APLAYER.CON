@@ -863,8 +863,8 @@ state falling
 	{ 
 		ifvare oldskoolmode 0
 		{
-			redefinequote 241 ^21YOU'RE FALLING WAY TOO FAR!!
-			setvarvar fta fta_normal setvar ftq 241
+			redefinequote 242 ^21YOU'RE FALLING WAY TOO FAR!!
+			setvarvar fta fta_normal setvar ftq 242
 		}
 		ifvarg CURRENTHITPOINTS 0 // ifp palive 
 		{ 

@@ -3976,6 +3976,8 @@ definequote 239        MAX EP +%ld
 definequote 240        ^0MAXIMUM EP INCREASED!
 definequote 241        ^0MAXIMUM EP INCREASED! (+%ld)
 
+definequote 242        ^21YOU'RE FALLING WAY TOO FAR!!
+
 definequote 243        ^21TOOK ~# HP IN FALL DAMAGE!
 definequote 244        ^21TOOK ~%ld HP IN FALL DAMAGE!
 definequote 245        [GLIDING QUOTE]
