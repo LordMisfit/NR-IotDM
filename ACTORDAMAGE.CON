@@ -4849,12 +4849,15 @@ state add_generaldamage
 					state checkdamagecaps-general
 		
 					// Stage 33p of Damage Formula
-					setvarvar DAMAGEFACTOR ACTORARMORDAMAGE
-					mulvar DAMAGEFACTOR 100
-					divvarvar DAMAGEFACTOR ACTORMAXAP
-					divvar DAMAGEFACTOR 10
-					ifvarg enemywinterclothes 0 subvarvar enemywinterclothes DAMAGEFACTOR
-					state checkdamagecaps-general
+					ifvarg ACTORMAXAP 0
+					{
+						setvarvar DAMAGEFACTOR ACTORARMORDAMAGE
+						mulvar DAMAGEFACTOR 100
+						divvarvar DAMAGEFACTOR ACTORMAXAP
+						divvar DAMAGEFACTOR 10
+						ifvarg enemywinterclothes 0 subvarvar enemywinterclothes DAMAGEFACTOR
+						state checkdamagecaps-general
+					}
 		
 					// Stage 34p of Damage Formula
 					// Drain Artifact [for players since this is monster damage]
