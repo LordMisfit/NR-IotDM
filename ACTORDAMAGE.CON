@@ -574,7 +574,7 @@ state jack_calcskillsdefignore
 	setvar CHARACTERARRAY 2
 	getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Jack current level
 	setvarvar TEMPVAR2 TEMPVAR
-	addlogvar TEMPVAR2
+	//addlogvar TEMPVAR2
 	ifvarl SKILLLEVEL 1 mulvar TEMPVAR2 620
 	ifvare SKILLLEVEL 1 mulvar TEMPVAR2 640
 	ifvare SKILLLEVEL 2 mulvar TEMPVAR2 660
@@ -586,16 +586,16 @@ state jack_calcskillsdefignore
 	ifvare SKILLLEVEL 8 mulvar TEMPVAR2 780
 	ifvarg SKILLLEVEL 8 mulvar TEMPVAR2 800
 	divvar TEMPVAR2 1000
-	addlogvar TEMPVAR2
+	//addlogvar TEMPVAR2
 
-	addlogvar ACTORDEFENSETEMP
+	//addlogvar ACTORDEFENSETEMP
 	setvarvar TEMPVAR ACTORDEFENSETEMP
 	mulvarvar TEMPVAR TEMPVAR2
 	divvar TEMPVAR 100
 	subvarvar ACTORDEFENSETEMP TEMPVAR
 	setvar TEMPVAR 0
 	setvar TEMPVAR2 0
-	addlogvar ACTORDEFENSETEMP
+	//addlogvar ACTORDEFENSETEMP
 ends
 
 state powerwrist-check-melee
@@ -772,20 +772,20 @@ state add_playermeleedamage
 	
 				ifvare CHARACTERSELECTED? 2 // Jack Walker
 				{
-				addlogvar KNEEDAMAGE
-				// ******************************************
-				// *Setting up Jack's 'Skills' Bonus Damage *
-				// ******************************************
-				state jack_calcskillsdmg
-	
-				setvarvar TEMPVAR KNEEDAMAGE
-				mulvarvar TEMPVAR TEMPVAR2
-				divvar TEMPVAR 100
-				addvarvar KNEEDAMAGE TEMPVAR
-				setvar TEMPVAR 0
-				setvar TEMPVAR2 0
-	
-				addlogvar KNEEDAMAGE
+					//addlogvar KNEEDAMAGE
+					// ******************************************
+					// *Setting up Jack's 'Skills' Bonus Damage *
+					// ******************************************
+					state jack_calcskillsdmg
+		
+					setvarvar TEMPVAR KNEEDAMAGE
+					mulvarvar TEMPVAR TEMPVAR2
+					divvar TEMPVAR 100
+					addvarvar KNEEDAMAGE TEMPVAR
+					setvar TEMPVAR 0
+					setvar TEMPVAR2 0
+		
+					//addlogvar KNEEDAMAGE
 				}
 	
 				ifvare CHARACTERSELECTED? 3
@@ -1681,8 +1681,8 @@ ends
 state checkdamagecaps-general
 	ifvarvarg GENERALDAMAGE STATLIMITATOMIC setvarvar GENERALDAMAGE STATLIMITATOMIC
 	ifvarvarg ACTORARMORDAMAGE STATLIMITATOMIC setvarvar ACTORARMORDAMAGE STATLIMITATOMIC
-	// addlogvar GENERALDAMAGE
-	// addlogvar ACTORARMORDAMAGE
+	//addlogvar GENERALDAMAGE
+	//addlogvar ACTORARMORDAMAGE
 ends
 
 state powerwrist-check-general
@@ -1805,7 +1805,7 @@ state add_generaldamage
 			getactorvar[tempd].VEHICLEID tempvehicleid
 			getactorvar[tempd].VEHICLETYPE tempvehicletype
 			getactor[tempd].picnum tempe
-			state checkdamagecaps-general
+			state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 			// Stage 2 of Damage Formula
 			//*****************************************************
@@ -1836,11 +1836,12 @@ state add_generaldamage
 					addvarvar GENERALDAMAGE TEMP
 					setvar TEMP 0
 					getactorvar[tempd].PLAYERTRIPBOMB? TEMP
+					getactorvar[tempd].PLAYERTRIPBOMB? TEMP5
 					ifvare TEMP 1 setvar tempe APLAYER
 					break
 			endswitch
-			state checkdamagecaps-general
-	
+			state checkdamagecaps-general addlogvar GENERALDAMAGE
+			// TEMP5 = the attack is a PLAYER'S Tripbomb
 	
 			// Stage 3 of Damage Formula
 			//******************************************************************
@@ -2163,7 +2164,7 @@ state add_generaldamage
 					mulvar TEMP -1 
 					setactor[THISACTOR].yvel TEMP
 				}
-				state checkdamagecaps-general
+				state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 		
 				// Stage 4 of Damage Formula
@@ -2188,6 +2189,7 @@ state add_generaldamage
 				ifvare tempc GROWSPARK { ifvarg freezetimer 0 { randvar tempg 12 addvar tempg 12 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
 				ifvare tempc OCTANINE_RPG { ifvarg freezetimer 0 { randvar tempg 32 addvar tempg 32 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
 				ifvare tempc FIRELASER { ifvarg freezetimer 0 { randvar tempg 8 addvar tempg 8 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
+				ifvare tempc FIRELASERP { ifvarg freezetimer 0 { randvar tempg 8 addvar tempg 8 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
 				ifvare tempc BIOMETRICBLAST1 { ifvarg freezetimer 0 { randvar tempg 192 addvar tempg 192 subvarvar freezetimer tempg ifvarl freezetimer 0 setvar freezetimer 0 } }
 				ifvare tempc FREEZEBLAST
 				{
@@ -2202,7 +2204,7 @@ state add_generaldamage
 						state dealfreezedamage-actor    
 					}
 				}
-				state checkdamagecaps-general
+				state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 		
 				// Stage 5 of Damage Formula
@@ -2405,6 +2407,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -250 // -25% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -250 // -25% Laser Damage
 							ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -250 // -25% Expander Damage
 							// Weaknesses
 							ifvare tempc ZAPPER1 addvar DAMAGEMODIFIER 200 // +20% Zapper 1 Damage
@@ -2450,6 +2453,7 @@ state add_generaldamage
 							//**************************
 							setvar DAMAGEMODIFIER 1000
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -100 // -10% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -100 // -10% Laser Damage
 							state damagemod-enemy-general
 				
 							//**********************
@@ -2479,6 +2483,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -100 // -10% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -100 // -10% Laser Damage
 							ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -667 // -66% Expander Damage
 							ifvare tempc GENERAL_RPG addvar DAMAGEMODIFIER -667 // -66% RPG[Assault General] Damage
 							ifvare tempc COMMANDER_RPG addvar DAMAGEMODIFIER -667 // -66% RPG[Assault Commander] Damage
@@ -2525,6 +2530,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -200 // -20% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -200 // -20% Laser Damage
 							ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -800 // -80% Expander Damage
 							state damagemod-enemy-general
 				
@@ -2555,6 +2561,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -500 // -50% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -500 // -50% Laser Damage
 							ifvare tempc SHOTSPARK1 addvar DAMAGEMODIFIER -750 // -75% Pistol/Bullet Damage
 							ifvare tempc SHOTGUN addvar DAMAGEMODIFIER -750 // -75% Shotgun Damage
 							ifvare tempc NEWSHOTSPARK1 addvar DAMAGEMODIFIER -750 // -75% Pistol/Bullet Damage
@@ -2606,6 +2613,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -50 // -5% Laser Damage [Natural]
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -50 // -5% Laser Damage [Natural]
 							state damagemod-enemy-general
 				
 							//**********************
@@ -2646,6 +2654,7 @@ state add_generaldamage
 							ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -333 // -33% Shotgun Damage
 							ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -333 // -33% Chaingun Damage
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -750 // -75% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -750 // -75% Laser Damage
 							ifvare tempc SPIT addvar DAMAGEMODIFIER -200 // -20% Spit Damage
 							// Weaknesses
 							ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 3000 // +300% Freezethrower Damage
@@ -2683,6 +2692,7 @@ state add_generaldamage
 							ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -600 // -60% Shotgun Damage
 							ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -600 // -60% Chaingun Damage
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -875 // -87.5% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -875 // -87.5% Laser Damage
 							ifvare tempc SPIT addvar DAMAGEMODIFIER -600 // -80% Spit Damage
 							// Weaknesses
 							ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 333 // +33% Freezethrower Damage
@@ -2720,6 +2730,7 @@ state add_generaldamage
 							ifvare tempc NEWSHOTGUN addvar DAMAGEMODIFIER -800 // -80% Shotgun Damage
 							ifvare tempc CHAINGUN addvar DAMAGEMODIFIER -800 // -80% Chaingun Damage
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -900 // -90% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -900 // -90% Laser Damage
 							ifvare tempc SPIT addvar DAMAGEMODIFIER -888 // -88.8% Spit Damage
 							// Weaknesses
 							ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER 500 // +50% Freezethrower Damage
@@ -2753,6 +2764,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -333 // -33% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -333 // -33% Laser Damage
 							ifvare tempc SPIT addvar DAMAGEMODIFIER -100 // -10% Spit Damage
 							ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -250 // -25% Freezethrower Damage
 							state damagemod-enemy-general
@@ -2862,6 +2874,7 @@ state add_generaldamage
 							ifvare tempc FREEZEBLAST addvar DAMAGEMODIFIER -500 // -50% Freezethrower Damage
 							// Weaknesses
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER 130 // +13% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER 130 // +13% Laser Damage
 							ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 50 // +5% Expander Damage
 							ifvare tempc RPG addvar DAMAGEMODIFIER 100 // +10% RPG[General] Damage
 							ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER 100 // +10% RPG[General] Damage
@@ -2914,6 +2927,7 @@ state add_generaldamage
 							ifvare tempc OCTANINE_RPG addvar DAMAGEMODIFIER -250 // -25% RPG[Octanine] damage
 							// Weaknesses
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER 650 // +65% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER 650 // +65% Laser Damage
 							ifvare tempc GROWSPARK addvar DAMAGEMODIFIER 250 // +25% Expander Damage
 							ifvare tempc RPG addvar DAMAGEMODIFIER 500 // +50% RPG[General] Damage
 							ifvare tempc RPG_NOAIM addvar DAMAGEMODIFIER 500 // +50% RPG[General] Damage
@@ -3783,6 +3797,7 @@ state add_generaldamage
 							setvar DAMAGEMODIFIER 1000
 							// Resistances
 							ifvare tempc FIRELASER addvar DAMAGEMODIFIER -250 // -25% Laser Damage
+							ifvare tempc FIRELASERP addvar DAMAGEMODIFIER -250 // -25% Laser Damage
 							ifvare tempc GROWSPARK addvar DAMAGEMODIFIER -250 // -25% Expander Damage
 							state damagemod-enemy-general
 				
@@ -4068,7 +4083,7 @@ state add_generaldamage
 						}
 						break
 				endswitch
-				state checkdamagecaps-general
+				state checkdamagecaps-general addlogvar GENERALDAMAGE
 				//*********************************************************************************
 				//*********************************************************************************
 				//*********************************************************************************
@@ -4083,11 +4098,16 @@ state add_generaldamage
 					state support-monsteroveralleffect-extra
 					state damagemod-enemy-general
 				}
-				state checkdamagecaps-general
+				state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 				//*********************************************************************************
 				//*********************************************************************************
 				//*********************************************************************************
+				addlogvar PICNUMTEMP
+				setvar TEMP4 0
+				ifvare PICNUMTEMP TRIPBOMB ifvarg TEMP5 0 { addvar TEMP4 1 }
+				ifvare PICNUMTEMP APLAYER { addvar TEMP4 1 }
+				
 				ifvarvare PICNUMTEMP DEFENDINGACTOR // If the attacking actor is the same species (i.e. Octabrain hits another Octabrain)...
 				{ 
 					ifvare DEFENDINGACTOR APLAYER nullop // Prevents the player from effectively becoming immune/absorbant to his own damage :P
@@ -4102,7 +4122,7 @@ state add_generaldamage
 							state calccriticalhits_actor
 							mulvarvar GENERALDAMAGE CRITICALHITMULTI
 							ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
-							state checkdamagecaps-general
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 							// Stage 8e of Damage Formula
 							state assessactortype
@@ -4116,11 +4136,11 @@ state add_generaldamage
 							{
 								subvarvar GENERALDAMAGE ACTORDEFENSE
 							}
-							state checkdamagecaps-general
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 							// Stage 9e of Damage Formula
 							ifvarl GENERALDAMAGE 1 { ifrnd 224 setvar GENERALDAMAGE 1 else setvar GENERALDAMAGE 0 }
-							state checkdamagecaps-general
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 							// Stage 10e of Damage Formula
 							//*************************
@@ -4182,7 +4202,7 @@ state add_generaldamage
 								state showdamage_actor-generalap
 								setvarvar GENERALDAMAGE tempd
 							}
-							state checkdamagecaps-general
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 							// Stage 11e of Damage Formula
 							subvarvar ACTORHP GENERALDAMAGE state showdamage_actor-generalhp
@@ -4198,11 +4218,13 @@ state add_generaldamage
 								setvar ACTORHP 0
 								setactor[THISACTOR].extra 0
 								state checkactorsurvivalvalue
-								ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+								ifvarl ACTORDEATHSWITCHDELAY 1
+								{
+									ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+								}
 								break
 							}
-							state checkdamagecaps-general
-			
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 						}
 						else
 						{
@@ -4218,13 +4240,13 @@ state add_generaldamage
 							setactor[OWNERTEMP].htextra 0
 							*/
 							setvar ACTORINVULN? 1
-							state checkdamagecaps-general
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 						}
 					}
 		
 				}
 				else
-				ifvare PICNUMTEMP APLAYER // If the attacking actor is the Player themself...
+				ifvarg TEMP4 0 // If the attacking actor is the Player themself...
 				{
 					setvarvar DEFENDINGACTORDEBUG DEFENDINGACTOR
 					{
@@ -4242,12 +4264,12 @@ state add_generaldamage
 							ifp ponsteroids mulvar PLAYERATTACKTEMP 4 else mulvar PLAYERATTACKTEMP 3
 							ifp ponsteroids divvar PLAYERATTACKTEMP 3 else divvar PLAYERATTACKTEMP 4
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 						// Stage 8p of Damage Formula
 						ifvarn tempvehicleid -1 { ifvare PUBLICBETA? 0 divvar PLAYERATTACKTEMP 25 else divvar PLAYERATTACKTEMP 10 }
 						addvarvar GENERALDAMAGE PLAYERATTACKTEMP
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 						// Stage 9p of Damage Formula
 						//*********************************************
@@ -4259,14 +4281,15 @@ state add_generaldamage
 							ifp ponsteroids mulvar TEMPVAR3 4 else mulvar TEMPVAR3 3
 							ifp ponsteroids divvar TEMPVAR3 3 else divvar TEMPVAR3 4
 							addvarvar GENERALDAMAGE TEMPVAR3
+							state checkdamagecaps-general addlogvar GENERALDAMAGE
 						}
 					}
-					state checkdamagecaps-general
-		
+					// Set Up whatever actors should never take damage. :V
 					ifvare DEFENDINGACTOR SPACESHUTTLE state nullgendamage
 					else ifvare DEFENDINGACTOR MIKE state nullgendamage
 					else ifvare DEFENDINGACTOR BURNING state nullgendamage
 					else ifvare DEFENDINGACTOR BURNING2 state nullgendamage
+					//
 					else
 					{
 						// Stage 10p of Damage Formula
@@ -4375,6 +4398,7 @@ state add_generaldamage
 							ifvare tempc STROKEMISSILE_SPLIT { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
 							ifvare tempc MORTER { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
 							ifvare tempc RADIUSEXPLOSION { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
+							ifvarg TEMP5 0 { mulvar GENERALDAMAGE 5 divvar GENERALDAMAGE 3 addlogvar GENERALDAMAGE } // Ted does +66% Damage for all Missile and Explosive damage he inflicts
 						}
 	
 						ifvare CHARACTERSELECTED? 8 // Lisa Bates
@@ -4383,6 +4407,7 @@ state add_generaldamage
 							// *Setting Up Lisa's Energy-Weapon Bonus*
 							// ***************************************
 							ifvare tempc FIRELASER { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
+							ifvare tempc FIRELASERP { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
 							ifvare tempc SHRINKSPARK { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
 							ifvare tempc SHRINKER { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
 							ifvare tempc GROWSPARK { mulvar GENERALDAMAGE 7 divvar GENERALDAMAGE 4 } // Lisa does +75% damage for all Energy damage she inflicts
@@ -4440,7 +4465,7 @@ state add_generaldamage
 	
 						// ifvare CHARACTERSELECTED? 15 { } // Maken Shinkara
 	
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 11p of Damage Formula
 						// *****************************
@@ -4458,7 +4483,7 @@ state add_generaldamage
 						ifvare PLAYEREQUIPSLOTITEM8 18 state powerwrist-check-general
 						mulvarvar GENERALDAMAGE DAMAGEMODIFIER
 						divvar GENERALDAMAGE 1000
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 12p of Damage Formula
 						// **********************************
@@ -4475,14 +4500,14 @@ state add_generaldamage
 						ifvare PLAYEREQUIPSLOTITEM8 28 addvar DAMAGEMODIFIER 10
 						ifvarg DAMAGEMODIFIER 1 subvar DAMAGEMODIFIER 1
 						mulvarvar GENERALDAMAGE DAMAGEMODIFIER
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 						// Stage 13p of Damage Formula
 						//****************
 						//*?????? ?? ????*
 						//****************
 						ifvarn ENEMYHASSHIKON? 0 divvar GENERALDAMAGE 10
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 14p of Damage Formula
 						//***********************
@@ -4496,7 +4521,7 @@ state add_generaldamage
 							mulvarvar GENERALDAMAGE TEMPVAR
 							divvar GENERALDAMAGE 1000
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 15p of Damage Formula
 						//***********************
@@ -4510,7 +4535,7 @@ state add_generaldamage
 							mulvarvar GENERALDAMAGE TEMPVAR
 							divvar GENERALDAMAGE 1000
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 16p of Damage Formula
 						// **********************
@@ -4528,7 +4553,7 @@ state add_generaldamage
 							mulvarvar GENERALDAMAGE tempc
 							divvar GENERALDAMAGE 1000
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 17p of Damage Formula
 						// *********************
@@ -4548,7 +4573,7 @@ state add_generaldamage
 							mulvarvar GENERALDAMAGE tempc
 							divvar GENERALDAMAGE 1000
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 18p of Damage Formula
 						// ****************************************
@@ -4558,7 +4583,7 @@ state add_generaldamage
 						state playersupport-deadcharacters
 						mulvarvar GENERALDAMAGE DAMAGEMODIFIER
 						divvar GENERALDAMAGE 1000
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 	
 						// Stage 19p of Damage Formula
 						// **************************************************
@@ -4571,14 +4596,13 @@ state add_generaldamage
 							mulvarvar GENERALDAMAGE CRITICALHITMULTI 
 							ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
 						}
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 					}
-					state checkdamagecaps-general
 		
 					// Stage 20p of Damage Formula
 					// ***************************************************************************
 					// *Sets up the Multiplier for Steroids-based damage dependant on skill level*
 					// ***************************************************************************
-		
 					ifvare PUBLICBETA? 1
 					{
 						ifp ponsteroids
@@ -4592,7 +4616,7 @@ state add_generaldamage
 							}
 						}
 					}
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 					// Stage 21p of Damage Formula
 					//******************
@@ -4605,26 +4629,29 @@ state add_generaldamage
 						mulvarvar GENERALDAMAGE TEMPVAR
 						divvar GENERALDAMAGE 100
 					}
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 					// Stage 22p of Damage Formula
 					// ifvare ISDEVASTATOR? 1 divvar GENERALDAMAGE 2
 					setvarvar ACTORDEFENSETEMP ACTORDEFENSE
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
-					// Stage 23p of Damage Formula
+					// Stage 23p of Damage Formula - Check for Serpent Helmets [~50% defense ignored, each]
 					state serpenthelmet_check
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
-					// Stage 24p of Damage Formula
-					ifvare ISDEVASTATOR? 1 divvar ACTORDEFENSETEMP 4
-					// addlogvar ISDEVASTATOR?
-					ifvare tempc SPIT { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5 }
-					ifvare tempc FIRELASER { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
-					ifvare tempc GROWSPARK { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
-					ifvare tempc FREEZEBLAST { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 }
-					ifvare tempc COOLEXPLOSION1 { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 3 }
-					ifvare tempc RADIUSEXPLOSION divvar ACTORDEFENSETEMP 2
+					// Stage 24p of Damage Formula - Check for Specfic attack types
+					addlogvar tempc
+					addlogvar ACTORDEFENSETEMP
+					ifvare ISDEVASTATOR? 1 divvar ACTORDEFENSETEMP 4 // addlogvar ISDEVASTATOR? // Is a Devastator Missile [-75%]
+					ifvare tempc SPIT { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 5 } // Spit [-60%]
+					ifvare tempc FIRELASER { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 } // Laser [-40%]
+					ifvare tempc FIRELASERP { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 } // Laser (player's) [-40%]
+					ifvare tempc GROWSPARK { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 } // Expander Wave (player's) [-40%]
+					ifvare tempc FREEZEBLAST { mulvar ACTORDEFENSETEMP 3 divvar ACTORDEFENSETEMP 5 } // Freezethrower (player's) [-40%]
+					ifvare tempc COOLEXPLOSION1 { mulvar ACTORDEFENSETEMP 2 divvar ACTORDEFENSETEMP 3 } // Octabrain Mindblast (player's) [-33.3%]
+					ifvare tempc RADIUSEXPLOSION divvar ACTORDEFENSETEMP 2 // General Explosion [-50%]
+					ifvarg TEMP5 0 divvar ACTORDEFENSETEMP 2 // If it's a Tripbomb [-50%]
 					ifvare tempc RPG divvar ACTORDEFENSETEMP 2
 					ifvare tempc RPG_NOAIM divvar ACTORDEFENSETEMP 2
 					ifvare tempc GENERAL_RPG divvar ACTORDEFENSETEMP 2
@@ -4635,7 +4662,8 @@ state add_generaldamage
 					ifvare tempc GATEMISSILE_SPLIT divvar ACTORDEFENSETEMP 30
 					ifvare tempc STROKEMISSILE_MAIN divvar ACTORDEFENSETEMP 4
 					ifvare tempc STROKEMISSILE_SPLIT divvar ACTORDEFENSETEMP 60
-					state checkdamagecaps-general
+					addlogvar ACTORDEFENSETEMP 
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 					// Stage 25p of Damage Formula - Defense Ignoring Abilities
 					ifvarand CHEATBITFIELD? 8
@@ -4669,7 +4697,7 @@ state add_generaldamage
 					}
 		
 					ifvarl GENERALDAMAGE 0 setvar GENERALDAMAGE 0
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 		
 		
 					ifvare DEFENDINGACTOR SPACESHUTTLE state nullgendamage
@@ -4678,7 +4706,7 @@ state add_generaldamage
 					else ifvare DEFENDINGACTOR BURNING2 state nullgendamage
 					else
 					{ 
-						// Stage 26p of Damage Formula
+						// Stage 26p of Damage Formula - Check for Quad Damage
 						ifvare tempvehicleid -1
 						{
 							ifvarg QUADTIME 0 mulvar GENERALDAMAGE 4
@@ -4687,16 +4715,15 @@ state add_generaldamage
 						{
 							ifvarg actorvar[tempvehicleid].ACTORQUADTIME 0 mulvar GENERALDAMAGE 4
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 				
-						// Stage 27p of Damage Formula
+						// Stage 27p of Damage Formula - Low-Clamp damage to 1
 						ifvarg ACTORHP 0 { ifvarl GENERALDAMAGE 1 setvar GENERALDAMAGE 1 }
-				
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 					}
-		
 					ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
-		
+
+
 					ifvarg ACTORINVULNTIME 0
 					{
 						ifvare tempc BIOMETRICBLAST1
@@ -4731,7 +4758,7 @@ state add_generaldamage
 					}
 					else setvar ACTORINVULN? 0
 		
-					// Stage 28p of Damage Formula
+					// Stage 28p of Damage Formula - Gets Armor damage
 					// *************************
 					// * IMPORTANT ARMOR START *
 					// *************************
@@ -4740,19 +4767,18 @@ state add_generaldamage
 					state enemyarmordamage
 					state showdamage_actor-generalap
 					setvarvar GENERALDAMAGE tempd
-		
 					// ***********************
 					// * IMPORTANT ARMOR END *
 					// ***********************
 					// FINAL DAMAGE COUNT
 					setactor[THISACTOR].htextra tempd
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 		
-					// Stage 29p of Damage Formula
+					// Stage 29p of Damage Formula - Snake Armband Poison/Slow Infliction Check
 					ifvarg GENERALDAMAGE 0 state snakearmband_check
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 		
-					// Stage 30p of Damage Formula
+					// Stage 30p of Damage Formula - Checks for Natural Status Inflictions from certain attacks.
 					setvarvar TEMP3 ACTORMAXHP
 					ifvarand ACTORSTATUS? 512
 					{ 
@@ -4783,30 +4809,29 @@ state add_generaldamage
 					mulvarvar TEMP3 TEMP2
 					divvar TEMP3 1000
 					// Damage to HP must be >5-10% to have the chance for Mindblasts to Confuse or for Spit Loogies to Poison, or for Freezethrower attacks to Slow
-		
 					ifvare tempc FREEZEBLAST ifvarvarg GENERALDAMAGE TEMP3 // Freezethrower Shot [Slow Only, Damage is above]
 					{
 						ifrnd 25
 						{
 							ifvarand ACTORSTATUS? 4 
 							{ 
-							randvar TEMP 390
-							addvar TEMP 390
-							addvarvar ACTORSLOWTIMER TEMP
+								randvar TEMP 390
+								addvar TEMP 390
+								addvarvar ACTORSLOWTIMER TEMP
 							} 
 							else 
 							{ 
-							addvar ACTORSTATUS? 4 
-							randvar TEMP 390
-							addvar TEMP 390
-							addvarvar ACTORSLOWTIMER TEMP
-							ifvarand ACTORSTATUS? 2 { subvar ACTORSTATUS? 2 setvar ACTORHASTETIMER 0 } 
-							redefinequote 335 ^22YOU HAVE SLOWN DOWN AN ENEMY!
-							setvarvar fta fta_normal setvar ftq 335
+								addvar ACTORSTATUS? 4 
+								randvar TEMP 390
+								addvar TEMP 390
+								addvarvar ACTORSLOWTIMER TEMP
+								ifvarand ACTORSTATUS? 2 { subvar ACTORSTATUS? 2 setvar ACTORHASTETIMER 0 } 
+								redefinequote 335 ^22YOU HAVE SLOWN DOWN AN ENEMY!
+								setvarvar fta fta_normal setvar ftq 335
 							}   
 						}
 					}
-					ifvare tempc SPIT ifvarvarg GENERALDAMAGE TEMP3 // Freezethrower Shot [Slow Only, Damage is above]
+					ifvare tempc SPIT ifvarvarg GENERALDAMAGE TEMP3 // Spit Shot [Poison Only, Damage is above]
 					{
 						ifrnd 25
 						{
@@ -4833,22 +4858,22 @@ state add_generaldamage
 							}   
 						}
 					}
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 		
-					// Stage 31p of Damage Formula
+					// Stage 31p of Damage Formula - Damage to Winter Clothing [Minimum]
 					randvar TEMPVAR 1
 					ifvarg enemywinterclothes 0 { ifrnd 128 subvarvar enemywinterclothes TEMPVAR }
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 		
-					// Stage 32p of Damage Formula
+					// Stage 32p of Damage Formula - Damage to Winter Clothing [Extra]
 					setvarvar DAMAGEFACTOR GENERALDAMAGE
 					mulvar DAMAGEFACTOR 100
 					divvarvar DAMAGEFACTOR ACTORMAXHP
 					divvar DAMAGEFACTOR 5
 					ifvarg enemywinterclothes 0 subvarvar enemywinterclothes DAMAGEFACTOR
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 		
-					// Stage 33p of Damage Formula
+					// Stage 33p of Damage Formula - Winter Clothing Check
 					ifvarg ACTORMAXAP 0
 					{
 						setvarvar DAMAGEFACTOR ACTORARMORDAMAGE
@@ -4856,11 +4881,10 @@ state add_generaldamage
 						divvarvar DAMAGEFACTOR ACTORMAXAP
 						divvar DAMAGEFACTOR 10
 						ifvarg enemywinterclothes 0 subvarvar enemywinterclothes DAMAGEFACTOR
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 					}
 		
-					// Stage 34p of Damage Formula
-					// Drain Artifact [for players since this is monster damage]
+					// Stage 34p of Damage Formula - Drain Artifact Effect [for players since this is monster damage]
 					ifvarg GENERALDAMAGE 0
 					{
 						ifvarvare OWNERTEMP PLAYERID
@@ -5023,10 +5047,10 @@ state add_generaldamage
 							}
 						}
 					}
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 					// End Drain Artifact [for players since this is monster damage]
 		
-					// Stage 35p of Damage Formula
+					// Stage 35p of Damage Formula - Check to kill the monster if HP drops below 1, or checks survival rates :P
 					ifvarg GENERALDAMAGE 0 setvar ACTORHPDAMAGED? 1
 					subvarvar ACTORHP GENERALDAMAGE state showdamage_actor-generalhp
 					setvarvar ACTORLASTDAMAGE GENERALDAMAGE
@@ -5040,9 +5064,12 @@ state add_generaldamage
 						setvar ACTORHP 0
 						setactor[THISACTOR].extra 0
 						state checkactorsurvivalvalue
-						ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+						ifvarl ACTORDEATHSWITCHDELAY 1
+						{
+							ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+						}
 					}
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 					// FINAL DAMAGE COUNT
 		
 					// Stage 36p of Damage Formula
@@ -5062,7 +5089,7 @@ state add_generaldamage
 					setvarvar TEMPATKCHARACTERVAR CHARACTERSELECTED?
 					setvar DEFENDERDISPLAYTIMER 0
 					setvar CRITICALHITMULTI 0
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE addlogvar ACTORARMORDAMAGE
 				} 
 				else // Monsters are of the same species
 				{
@@ -5072,14 +5099,14 @@ state add_generaldamage
 						state calccriticalhits_actor
 						mulvarvar GENERALDAMAGE CRITICALHITMULTI
 						ifvarvarg GENERALDAMAGE STATLIMITMAXIMUM setvarvar GENERALDAMAGE STATLIMITMAXIMUM
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 			
 						// Stage 8s of Damage Formula
 						state assessactortype
 						subvarvar GENERALDAMAGE ACTORDEFENSE
 						ifvarl GENERALDAMAGE 1 { ifrnd 224 setvar GENERALDAMAGE 1 else setvar GENERALDAMAGE 0 }
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 						// Stage 9s of Damage Formula
 						ifvarg SKILLLEVEL 6 // And the skill level is Damn I'm Good! or greater, same species monsters will heal each other and themselves instead of inflicting damage
@@ -5130,13 +5157,13 @@ state add_generaldamage
 							state showdamage_actor-generalap
 							setvarvar GENERALDAMAGE tempd
 						}
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 						// Stage 10s of Damage Formula
 						ifvarg GENERALDAMAGE 0 setvar ACTORHPDAMAGED? 1
 						subvarvar ACTORHP GENERALDAMAGE state showdamage_actor-generalhp
 						setvarvar ACTORLASTDAMAGE GENERALDAMAGE
-						state checkdamagecaps-general
+						state checkdamagecaps-general addlogvar GENERALDAMAGE
 			
 						// Stage 11s of Damage Formula
 						ifvarg ACTORHP 0
@@ -5150,7 +5177,10 @@ state add_generaldamage
 							setvar ACTORHP 0
 							setactor[THISACTOR].extra 0
 							state checkactorsurvivalvalue
-							ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+							ifvarl ACTORDEATHSWITCHDELAY 1
+							{
+								ifvarg GENERALDAMAGE 32767 setactor[THISACTOR].htextra 100 else setactor[THISACTOR].htextra GENERALDAMAGE
+							}
 							break
 						}
 					}
@@ -5167,7 +5197,7 @@ state add_generaldamage
 						*/
 						setvar ACTORINVULN? 1
 					}
-					state checkdamagecaps-general
+					state checkdamagecaps-general addlogvar GENERALDAMAGE
 				}
 			}
 		}

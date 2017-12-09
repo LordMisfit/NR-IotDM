@@ -1887,6 +1887,11 @@ state support-monsterdmgeffect
 			state support-monsterenergyeffect-main
 			state support-monsterenergyeffect-extra
 		}
+		ifvare tempc FIRELASERP 
+		{ 
+			state support-monsterenergyeffect-main
+			state support-monsterenergyeffect-extra
+		}
 		ifvare tempc ZAPPER1
 		{ 
 			state support-monsterenergyeffect-main
@@ -2053,6 +2058,9 @@ state equipment-monsterdmgeffect
 		{ 
 		}
 		ifvare tempc FIRELASER 
+		{ 
+		}
+		ifvare tempc FIRELASERP 
 		{ 
 		}
 		ifvare tempc ZAPPER1

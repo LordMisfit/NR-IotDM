@@ -30,6 +30,8 @@ define FIREBARREL_OUT 1399
 define POLEFEM2 1411
 define PODFEM1POD 1412
 
+define FIRELASERP 1626
+
 define SCORPIONTANK 1870
 
 define RECONNR 1966
@@ -570,21 +572,22 @@ define WORLDTILE254 8445
 define WORLDTILE255 8446
 define WORLDTILE256 8447
 
-include USERDEFS.CON			// USER.CON and DEFS.CON are now combined! :P
-include GAMEVARS.CON 			// Loads the majority of the defined gamevars
+include USERDEFS.CON				// USER.CON and DEFS.CON are now combined! :P
+include GAMEVARS.CON 				// Loads the majority of the defined gamevars
 include DAMAGETYPES.CON			// Defines for elemental damage
-include INVENTORYCHECK.CON      // Defines the inventory array for checking and setting item amounts.
-include DROPS.CON               // Loads drop definitions
-include SPECIAL.CON 			// Loads the majority of the key information
-include SUPPORT.CON 			// Loads the Support System States
-include STATES.CON 				// Loads Special States
+include INVENTORYCHECK.CON	// Defines the inventory array for checking and setting item amounts.
+include DROPS.CON						// Loads drop definitions
+include SPECIAL.CON 				// Loads the majority of the key information
+include SUPPORT.CON 				// Loads the Support System States
+include STATES.CON 					// Loads Special States
 include CHARACTERS.CON 			// Loads the character information
-include PICKUPS.CON				// Loads the Pickups information
+include PICKUPS.CON					// Loads the Pickups information
 include ENEMYSTATES.CON			// Loads Enemy handling of things like AP/Portable Medikits/Inventory Items, etc
 
 define TICSBASE 30
 
 // Prevents in-game shade from overriding the below
+spritenoshade FIRELASERP
 spritenoshade GATEMISSILE_SPLIT
 spritenoshade GATEMISSILE_MAIN
 spritenoshade STROKEMISSILE_SPLIT
@@ -1715,6 +1718,7 @@ state deathmissileangadjust
 ends
 
 state projectiles_menufreeze
+	//
 	ifvare mainmenu 0
 	{
 		getactor[THISACTOR].xvel TEMP
@@ -3346,7 +3350,8 @@ onevent EVENT_GAME
 			}
 			break
 		
-		case FIRELASER
+		case FIRELASER 
+		case FIRELASERP
 			state itemfullbright
 			state projectiles_menufreeze
 			ifvare mainmenu 0
@@ -3355,7 +3360,7 @@ onevent EVENT_GAME
 				ifvarg tempe 129 killit
 			}
 			break
-		
+			
 		case SPIT
 			state itemfullbright
 			state projectiles_menufreeze
@@ -14256,6 +14261,22 @@ actor COOLEXPLOSION1 COOL_EXPLOSION_STRENGTH
 	{
 		addvar tempe 1
 		ifvarg tempe 9 ifrnd 64 killit
+	}
+enda
+
+eventloadactor TRIPBOMB 
+	getactor[THISACTOR].owner TEMP
+	addlogvar TEMP
+	ifvare TEMP -1
+	{
+		getactor[THISACTOR].extra TEMP2
+		ifvare TEMP2 -1 addvar TEMP2 1 
+		addvar TEMP2 100
+		randvar TEMP3 50
+		addvarvar TEMP2 TEMP3
+		setactorvar[THISACTOR].ACTORATTACK TEMP2
+		setactor[THISACTOR].owner THISACTOR
+		setactor[THISACTOR].extra TEMP2
 	}
 enda
 
@@ -41512,12 +41533,12 @@ useractor notenemy EMPTYTANK TANKSTRENGTH AEMPTYTANKWAIT
 	else
 	ifaction AEMPTYTANKDESTRUCT
 	{
-			ifactioncount 64 action AEMPTYTANKDEAD
-			else ifactioncount 56 sound LASERTRIP_ARMING
-			else ifactioncount 48 sound LASERTRIP_ARMING
-			else ifactioncount 32 sound LASERTRIP_ARMING
-			else ifactioncount 16 sound LASERTRIP_ARMING
-			break
+		ifactioncount 64 action AEMPTYTANKDEAD
+		else ifactioncount 56 sound LASERTRIP_ARMING
+		else ifactioncount 48 sound LASERTRIP_ARMING
+		else ifactioncount 32 sound LASERTRIP_ARMING
+		else ifactioncount 16 sound LASERTRIP_ARMING
+		break
 	}
 	else
 	ifaction AEMPTYTANKDEAD

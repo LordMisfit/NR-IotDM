@@ -6186,8 +6186,8 @@ actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
 		else
 		ifvare CHAINGUNMODE 2
 		{
-			setvar WEAPON3_SHOOTS FIRELASER
-			setvar WEAPON3_SHOTSPERBURST 3
+			setvar WEAPON3_SHOOTS FIRELASERP // FIRELASERP
+			setvar WEAPON3_SHOTSPERBURST 1
 			setvar WEAPON3_FIRESOUND PRED_ATTACK
 			setvar WEAPON3_FLAGS 8212 // (4+16+8192) // 73748 ( 4+16+8192+(65536) )
 		}
@@ -13499,6 +13499,12 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 			else palfrom 16 32
 		}
 		ifwasweapon FIRELASER
+		{
+			ifvarg INVULNTIME 0 state invulnflash
+			else ifvarl PLAYERDAMAGE 1 state nullflash
+			else palfrom 32 32
+		}
+		ifwasweapon FIRELASERP
 		{
 			ifvarg INVULNTIME 0 state invulnflash
 			else ifvarl PLAYERDAMAGE 1 state nullflash

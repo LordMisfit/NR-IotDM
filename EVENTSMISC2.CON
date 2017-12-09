@@ -19,6 +19,7 @@ onevent EVENT_EGS
 	switch picnum
 	
 		case FIRELASER
+		case FIRELASERP
 			setactor[THISACTOR].xoffset -32
 		break
 	
@@ -31,7 +32,11 @@ onevent EVENT_EGS
 		getactor[TEMP].picnum TEMP
 		ifvare TEMP APLAYER
 		{
-			setactorvar[THISACTOR].ACTORATTACK PLAYERATTACK
+			setvarvar TEMP2 PLAYERATTACK 
+			mulvar TEMP2 2
+			addvar TEMP2 50
+			ifvare CHARACTERSELECTED? 7 { mulvar TEMP2 5 divvar TEMP2 3 }
+			setactorvar[THISACTOR].ACTORATTACK TEMP2
 			setactor[THISACTOR].owner THISACTOR
 		}
 		else
@@ -47,19 +52,28 @@ onevent EVENT_EGS
 	{
 		getactor[THISACTOR].owner TEMP
 		getactor[TEMP].picnum TEMP
+		//addlogvar THISACTOR
 		ifvare TEMP APLAYER
 		{
-			setactorvar[THISACTOR].ACTORATTACK PLAYERATTACK
+			setvarvar TEMP2 PLAYERATTACK 
+			mulvar TEMP2 4
+			addvar TEMP2 100
+			ifvare CHARACTERSELECTED? 7 { mulvar TEMP2 5 divvar TEMP2 3 }
+			setactorvar[THISACTOR].ACTORATTACK TEMP2
 			setactor[THISACTOR].owner THISACTOR
 			setactorvar[THISACTOR].PLAYERTRIPBOMB? 1
 		}
 		else
 		ifvare TEMP TRIPBOMB
 		{
-			getactor[THISACTOR].extra TEMP
-			setactorvar[THISACTOR].ACTORATTACK TEMP
+			getactor[THISACTOR].extra TEMP2
+			ifvare TEMP2 -1 addvar TEMP2 1 
+			addvar TEMP2 100 
+			randvar TEMP3 50
+			addvarvar TEMP2 TEMP3
+			setactorvar[THISACTOR].ACTORATTACK TEMP2
 			setactor[THISACTOR].owner THISACTOR
-			setactor[THISACTOR].extra 100
+			setactor[THISACTOR].extra TEMP2
 		}
 	}
 	ifactor HEAVYHBOMB
@@ -4727,6 +4741,24 @@ onevent EVENT_KILLIT
 				setvar RETURN 0
 			}
 			break
+
+		case FIRELASERP
+			getactor[THISACTOR].htmovflag temp
+			ifvarn temp 0
+			{
+				espawn TRANSPORTERSTAR
+				setactor[RETURN].pal 2
+				setactor[RETURN].xrepeat 14
+				setactor[RETURN].yrepeat 14
+				setactor[RETURN].cstat 642 // 130
+				ifrnd 240 state sparkstate
+				randvar temp 2
+				ifvare temp 0 sound FIRELASER_IMPACT1 else
+				ifvare temp 1 sound FIRELASER_IMPACT2 else
+				ifvare temp 2 sound FIRELASER_IMPACT3  
+				setvar RETURN 0
+			}
+			break
 		
 		case ZAPPER1
 			getactor[THISACTOR].htmovflag temp
@@ -4804,7 +4836,6 @@ onevent EVENT_KILLIT
 			break
 		
 		case OCTANINE_RPG
-		
 			// Try to make projectile disappear fully when hitting a PK-Shielded player.
 			findnearsprite APLAYER 512 TEMP
 			ifvarn TEMP -1 // If it's a player, check for PKShield

@@ -795,6 +795,7 @@ state player_explosiveattackdmg
 			// * 75% Damage
 		}
 	}
+	//addlogvar DAMAGEMODIFIER
 ends
 
 state pkshieldblockhit
@@ -831,9 +832,9 @@ state pkshieldblockhit
 				{
 					ifvare ENERGYSHIELDMODE 1 
 					{
-					setvar CELLDAMAGETIMER 0
-					ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1
-					else setvar BIOSHIELDNULLDAMAGE 0
+						setvar CELLDAMAGETIMER 0
+						ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1
+						else setvar BIOSHIELDNULLDAMAGE 0
 					}
 				}
 			}
@@ -1670,6 +1671,7 @@ state player_defense
   ifvare ATTACKPICNUM GATEMISSILE_SPLIT state player_explosiveattackdmg // DeathGate Missile (split) [Explosive Elemental]
   ifvare ATTACKPICNUM STROKEMISSILE_MAIN state player_explosiveattackdmg // DeathStroke Missile (whole) [Explosive Elemental]
   ifvare ATTACKPICNUM STROKEMISSILE_SPLIT state player_explosiveattackdmg // DeathStroke Missile (split) [Explosive Elemental]
+  ifvare ATTACKPICNUM TRIPBOMB state player_explosiveattackdmg // Laser Tripbomb [Explosive Elemental]
 
 	ifvare ATTACKPICNUM RADIUSEXPLOSION // General Explosion Radius [Explosive Elemental]
 	{
@@ -1750,7 +1752,10 @@ state player_defense
 	ifvare ATTACKPICNUM ZAPPER2 state player_electricalattackdmg // Electric Bolt (Small Ball) [Electric (50%) / Energy (50%) Elemental]
 	ifvare ATTACKPICNUM ZAPPER3 state player_electricalattackdmg // Electric Bolt (Large Ball) [Electric (50%) / Energy (50%) Elemental]
 
-	ifvare ATTACKPICNUM FIRELASER // Laser Shot [Energy Elemental]
+	setvar TEMP5 0
+	ifvare ATTACKPICNUM FIRELASER addvar TEMP5 1 // Laser Shot [Energy Elemental]
+	ifvare ATTACKPICNUM FIRELASERP addvar TEMP5 1 // Laser Shot [Energy Elemental]
+	ifvarg TEMP5 0
 	{ 
 		ifvare ATTACKINGACTORPICNUM LIZMAN { ifvare ATTACKINGACTORPAL 19 { mulvar PLAYERDAMAGE 7 divvar PLAYERDAMAGE 10 } }
 	
@@ -2361,6 +2366,7 @@ state player_defense
 				ifvare ATTACKPICNUM GROWSPARK { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
 				ifvare ATTACKPICNUM FREEZEBLAST { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
 				ifvare ATTACKPICNUM FIRELASER { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
+				ifvare ATTACKPICNUM FIRELASERP { mulvar PLAYERDEFENSETEMP 3 divvar PLAYERDEFENSETEMP 5 }
 				ifvare ATTACKPICNUM COOLEXPLOSION1 { mulvar PLAYERDEFENSETEMP 2 divvar PLAYERDEFENSETEMP 3 }
 				ifvare ATTACKPICNUM RADIUSEXPLOSION divvar PLAYERDEFENSETEMP 2
 				ifvare ATTACKPICNUM RPG divvar PLAYERDEFENSETEMP 2
@@ -2529,7 +2535,7 @@ state player_defense
 							getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Bubsy's current level
 							mulvarvar TEMPVAR 15 divvarvar TEMPVAR 4 // 3.75% increase [max of 62.5% at level 100]
 							subvarvar RNDMIZERLIMIT TEMPVAR
-							addlogvar RNDMIZERLIMIT
+							// addlogvar RNDMIZERLIMIT
 							ifvarvarg RNDMIZER RNDMIZERLIMIT
 							{
 								state dodgeanattack
@@ -2663,6 +2669,7 @@ state player_defense
 										// Check Specfic Projectile Types
 						
 										ifvare ATTACKPICNUM FIRELASER { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
+										ifvare ATTACKPICNUM FIRELASERP { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
 										ifvare ATTACKPICNUM FREEZEBLAST { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
 										ifvare ATTACKPICNUM GROWSPARK { mulvar CELLDAMAGE 2 divvar CELLDAMAGE 3 mulvar PLAYERDAMAGE 2 divvar PLAYERDAMAGE 3 }
 										ifvare ATTACKPICNUM ZAPPER1 { mulvar CELLDAMAGE 3 divvar CELLDAMAGE 5 mulvar PLAYERDAMAGE 3 divvar PLAYERDAMAGE 5 }
@@ -2813,7 +2820,7 @@ state player_defense
 						getactorvar[CHARACTERARRAY].CHARACTERLEVEL TEMPVAR // Get's Paula's current level
 						mulvarvar TEMPVAR 13 divvarvar TEMPVAR 2 // 6.5% increase [max of 86.8% at level 100]
 						subvarvar RNDMIZERLIMIT TEMPVAR
-						addlogvar RNDMIZERLIMIT
+						// addlogvar RNDMIZERLIMIT
 						ifvarvarg RNDMIZER RNDMIZERLIMIT state dodgeanattack
 					}
 			
@@ -3693,8 +3700,8 @@ state player_defense
 						ifvarg TEMPMOD 0 
 						{
 							setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT TEMPVAR5 // DEATHSWITCH-DELAY
-							addlogvar TEMPMOD
-							addlogvar TEMPVAR5
+							//addlogvar TEMPMOD
+							//addlogvar TEMPVAR5
 						}
 					}
 				}

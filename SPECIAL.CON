@@ -42895,7 +42895,7 @@ state sparkstate
 	addvar sparkcount1 1
 	setvar sparkcount2 0
 	getactor[THISACTOR].picnum x
-	cactor ROTATEGUN
+  //cactor ROTATEGUN
 	getactor[THISACTOR].ang sparkang
 	whilevarvarn sparkcount2 sparkcount1
 	{
@@ -42907,20 +42907,20 @@ state sparkstate
 			{
 				ifrnd 85
 				{
-				randvar sparkang2 2
-				ifvare sparkang2 0 sound FIRELASER_IMPACT1 else
-				ifvare sparkang2 1 sound FIRELASER_IMPACT2 else
-				ifvare sparkang2 2 sound FIRELASER_IMPACT3  
-				}
-				ifvarg ESHIELDADVANCEMENT 0
-				{
-				ifrnd 85
-				{
 					randvar sparkang2 2
 					ifvare sparkang2 0 sound FIRELASER_IMPACT1 else
 					ifvare sparkang2 1 sound FIRELASER_IMPACT2 else
 					ifvare sparkang2 2 sound FIRELASER_IMPACT3  
 				}
+				ifvarg ESHIELDADVANCEMENT 0
+				{
+					ifrnd 85
+					{
+						randvar sparkang2 2
+						ifvare sparkang2 0 sound FIRELASER_IMPACT1 else
+						ifvare sparkang2 1 sound FIRELASER_IMPACT2 else
+						ifvare sparkang2 2 sound FIRELASER_IMPACT3  
+					}
 				}
 			}
 			setvarvar angvar sparkang
@@ -42984,6 +42984,10 @@ state sparkstate
 				setactor[RETURN].z sparkang2
 			}
 		}
+
+		ifvare x FIRELASER setactor[RETURN].pal 2
+		ifvare x FIRELASERP setactor[RETURN].pal 2
+
 		setactor[RETURN].zvel zdist
 		setactor[RETURN].htpicnum x
 	}
@@ -44827,6 +44831,34 @@ useractor notenemy BIOMETRICEXPLOSION1 1 BIOMETRIC_EXPLODE1
 		ifcount 130 killit
 	}
 enda
+
+action FIRELASER2 -1
+useractor notenemy FIRELASERP FIRELASERP_WEAPON_STRENGTH FIRELASER2
+	state itemfullbright
+enda
+
+define FIRELASERTRAIL 1627
+useractor notenemy FIRELASERTRAIL 0 0
+	state itemfullbright
+	ifvarg temp 0 killit
+	addvar temp 1
+enda
+
+defineprojectile FIRELASERP PROJ_WORKSLIKE 167946 // 131072+4096+32768+8+2 - +AccurateAim +NoAutoAim +RPGImpact +BounceMirrors +RPGType
+defineprojectile FIRELASERP PROJ_TRAIL FIRELASERTRAIL
+defineprojectile FIRELASERP PROJ_TXREPEAT 16
+defineprojectile FIRELASERP PROJ_TYREPEAT 16
+defineprojectile FIRELASERP PROJ_TNUM 2
+defineprojectile FIRELASERP PROJ_EXTRA FIRELASERP_WEAPON_STRENGTH
+defineprojectile FIRELASERP PROJ_EXTRA_RAND 15
+defineprojectile FIRELASERP PROJ_VEL 840
+defineprojectile FIRELASERP PROJ_VEL_MULT 2
+defineprojectile FIRELASERP PROJ_CLIPDIST 24
+defineprojectile FIRELASERP PROJ_ISOUND -1
+defineprojectile FIRELASERP PROJ_HITRADIUS 0
+defineprojectile FIRELASERP PROJ_XREPEAT 16
+defineprojectile FIRELASERP PROJ_YREPEAT 16
+defineprojectile FIRELASERP PROJ_SPAWNS -1
 
 define BIOMETRICBLAST1 6071
 
