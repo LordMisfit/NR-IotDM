@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (git183)
-definequote 1337 ^22VERSION:^0 git183.12092017
+setgamename Naferia's Reign (git185)
+definequote 1337 ^22VERSION:^0 git185.12092017
 
 action ANULLACTION 0
 
@@ -1813,6 +1813,15 @@ state usewaterfountain
 	}
 ends
 
+state gatestroke_zvelalt
+	getactor[THISACTOR].xvel TEMP4
+	setactor[RETURN].xvel TEMP4
+	getactor[THISACTOR].yvel TEMP4
+	setactor[RETURN].yvel TEMP4
+	getactor[THISACTOR].zvel TEMP4
+	setactor[RETURN].zvel TEMP4
+ends
+
 onevent EVENT_GAME
 	// HUBS
 	
@@ -3515,6 +3524,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 0
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop -96
 				
 				// Bottom Middle
@@ -3523,6 +3533,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 0
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop 96
 				
 				// Top Left Missile
@@ -3531,6 +3542,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop -128
 				
 				// Bottom Left Missile
@@ -3539,6 +3551,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop 128
 				
 				// Top Right Missile
@@ -3547,6 +3560,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop -128
 				
 				// Bottom Right Missile
@@ -3555,6 +3569,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop 128
 				
 				
@@ -3563,6 +3578,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop -64
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3570,6 +3586,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop 64
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3577,6 +3594,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop -64
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3584,6 +3602,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				state gatestroke_zvelalt
 				setthisprojectile[RETURN].drop 64
 				
 				espawn EXPLOSION2CUSTOM
@@ -3622,6 +3641,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 16
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3629,6 +3649,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -16
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3636,6 +3657,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 32
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3643,6 +3665,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -32
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3650,6 +3673,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 48
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3657,6 +3681,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -48
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3664,6 +3689,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 64
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3671,6 +3697,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -64
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3678,6 +3705,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 80
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3685,6 +3713,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -80
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 			
@@ -3693,6 +3722,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 8
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3700,6 +3730,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -8
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3707,6 +3738,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 24
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3714,6 +3746,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -24
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3721,6 +3754,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 40
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3728,6 +3762,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -40
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3735,6 +3770,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 56
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3742,6 +3778,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -56
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3749,6 +3786,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 72
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3756,6 +3794,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -72
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop -128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3763,6 +3802,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 16
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3770,6 +3810,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -16
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3777,6 +3818,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 32
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3784,6 +3826,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -32
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3791,6 +3834,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 48
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3798,6 +3842,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -48
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3805,6 +3850,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 64
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3812,6 +3858,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -64
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3819,6 +3866,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 80
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3826,6 +3874,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -80
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 64
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 			
@@ -3834,6 +3883,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 8
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3841,6 +3891,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -8
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3848,6 +3899,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 24
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3855,6 +3907,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -24
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3862,6 +3915,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 40
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3869,6 +3923,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -40
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3876,6 +3931,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 56
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3883,6 +3939,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -56
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3890,6 +3947,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR 72
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
@@ -3897,6 +3955,7 @@ onevent EVENT_GAME
 				addvar TEMPVAR -72
 				state deathmissileangadjust
 				setthisprojectile[RETURN].drop 128
+				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
 			
 			
@@ -16000,7 +16059,7 @@ ends
 
 state troopcode 
 	ifvare mainmenu 0 fall
-	
+		
 	ifvare SKILLSET? -1 state rankstarbeta // tries to regenerate any attached-objects not spawned or that vanish prematurely
 	
 	ifai AITROOPJETPACK nullop else ifai AITROOPBOMBJETPACK nullop else setvar JETPACKSMOKEVAR 0

@@ -6805,7 +6805,7 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 	}
 	ifvarg CURRENTHITPOINTS 0 { setvar gameover? 0 ifvarand PLAYERSTATUS? 1 subvar PLAYERSTATUS? 1 }
 	
-	ifvarg RESETWORLDTILES 1 state resetworldtiles
+	ifvarg RESETWORLDTILES 0 state resetworldtiles
 	state getcharactergender
 
 	setvar MISCARRAYID 28 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // THROWBACK-DELAY
