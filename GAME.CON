@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (git180)
-definequote 1337 ^22VERSION:^0 git180.12082017
+setgamename Naferia's Reign (git182)
+definequote 1337 ^22VERSION:^0 git182.12092017
 
 action ANULLACTION 0
 
@@ -14266,18 +14266,8 @@ enda
 
 eventloadactor TRIPBOMB 
 	getactor[THISACTOR].owner TEMP
-	addlogvar TEMP
-	ifvare TEMP -1
-	{
-		getactor[THISACTOR].extra TEMP2
-		ifvare TEMP2 -1 addvar TEMP2 1 
-		addvar TEMP2 100
-		randvar TEMP3 50
-		addvarvar TEMP2 TEMP3
-		setactorvar[THISACTOR].ACTORATTACK TEMP2
-		setactor[THISACTOR].owner THISACTOR
-		setactor[THISACTOR].extra TEMP2
-	}
+	//addlogvar TEMP
+	ifvare TEMP -1 state calculatetripbombatk
 enda
 
 actor TRIPBOMB TRIPBOMB_STRENGTH enda

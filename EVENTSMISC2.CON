@@ -66,14 +66,7 @@ onevent EVENT_EGS
 		else
 		ifvare TEMP TRIPBOMB
 		{
-			getactor[THISACTOR].extra TEMP2
-			ifvare TEMP2 -1 addvar TEMP2 1 
-			addvar TEMP2 100 
-			randvar TEMP3 50
-			addvarvar TEMP2 TEMP3
-			setactorvar[THISACTOR].ACTORATTACK TEMP2
-			setactor[THISACTOR].owner THISACTOR
-			setactor[THISACTOR].extra TEMP2
+			state calculatetripbombatk
 		}
 	}
 	ifactor HEAVYHBOMB
