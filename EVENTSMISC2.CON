@@ -58,7 +58,25 @@ onevent EVENT_EGS
 			setvarvar TEMP2 PLAYERATTACK 
 			mulvar TEMP2 4
 			addvar TEMP2 100
-			ifvare CHARACTERSELECTED? 7 { mulvar TEMP2 5 divvar TEMP2 3 }
+			addlogvar TEMP2
+			ifvarg PLAYERLEVEL 0
+			{
+				setvarvar TEMP3 PLAYERLEVEL 
+				mulvar TEMP3 3 divvar TEMP3 2
+				addvar TEMP3 100
+				addlogvar TEMP3
+
+				mulvarvar TEMP2 TEMP3
+				divvar TEMP2 100
+				addlogvar TEMP2
+			}
+			ifvare CHARACTERSELECTED? 7 
+			{ 
+				mulvar TEMP2 5 
+				divvar TEMP2 3 
+				addlogvar TEMP2
+			}
+
 			setactorvar[THISACTOR].ACTORATTACK TEMP2
 			setactor[THISACTOR].owner THISACTOR
 			setactorvar[THISACTOR].PLAYERTRIPBOMB? 1

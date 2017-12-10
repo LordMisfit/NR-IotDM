@@ -583,6 +583,7 @@ gamevar LEVELUPTIMER 0 1
 gamevar INSTANTDEATH 0 0
 gamevar NEARDEATH 0 0
 gamevar FULLPOWER 0 0
+gamevar RESETWORLDTILES 0 0
 
 gamevar GENDER? 0 131073 // 0 = Male, 1 = Female
 gamevar DEFENDINGPAL 0 2

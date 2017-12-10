@@ -6598,6 +6598,26 @@ state killallcharacters // for "instant death" situations [bottomless pit, space
 	setvar ARMORPERCENT 0
 ends
 
+state resetworldtiles
+  setvar WORLDTILEBITFIELD1 0
+  setvar WORLDTILEBITFIELD2 0
+  setvar WORLDTILEBITFIELD3 0
+  setvar WORLDTILEBITFIELD4 0
+  setvar WORLDTILEBITFIELD5 0
+  setvar WORLDTILEBITFIELD6 0
+  setvar WORLDTILEBITFIELD7 0
+  setvar WORLDTILEBITFIELD8 0
+	savegamevar WORLDTILEBITFIELD1
+	savegamevar WORLDTILEBITFIELD2
+	savegamevar WORLDTILEBITFIELD3
+	savegamevar WORLDTILEBITFIELD4
+	savegamevar WORLDTILEBITFIELD5
+	savegamevar WORLDTILEBITFIELD6
+	savegamevar WORLDTILEBITFIELD7
+	savegamevar WORLDTILEBITFIELD8
+	setvar RESETWORLDTILES 0
+ends
+
 state useswitchcheckwall
 	ifvarn hitwall -1 
 	{
