@@ -6786,525 +6786,519 @@ onevent EVENT_DISPLAYREST // WARNING: Unsynchronized Event
 											}
 						
 											// ACTOR NAME DISPLAYS
-											ifvare TARGETTYPE 1
-											{ // line [6882]
-												getactor[hitsprite].statnum TARGETTYPE
-												getactor[hitsprite].picnum TARGETSPECIES
-												getactor[hitsprite].pal TARGETPAL
-											
-												ifvare TARGETSPECIES LIZTROOP state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPRUNNING state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPJUSTSIT state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPONTOILET state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPSTAYPUT state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPSHOOT state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPDUCKING state liztrooptargetting
-												else ifvare TARGETSPECIES LIZTROOPJETPACK state liztrooptargetting
-												else ifvare TARGETSPECIES PIGCOP state pigcoptargetting
-												else ifvare TARGETSPECIES PIGCOPSTAYPUT state pigcoptargetting
-												else ifvare TARGETSPECIES PIGCOPDIVE state pigcoptargetting
-												else ifvare TARGETSPECIES RECON
-												{ 
-													state digx320
-													state oldskooltarget
-													redefinequote 142 PIGCOP RECON PATROL VEHICLE
-												}
-												else ifvare TARGETSPECIES TANK
-												{ 
-													state digx320 // 192 (100%), 230 (75%)
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 PIGCOP RIOT TANK
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														ifvare TARGETPAL 17 redefinequote 142 PIGCOP RIOT TANK [BLUE]
-														else ifvare TARGETPAL 19 redefinequote 142 PIGCOP RIOT TANK [RED]
-														else redefinequote 142 PIGCOP RIOT TANK [GREEN]
-														setvar NPC_TYPE 1
-													}
-												} 
-												else ifvare TARGETSPECIES EMPTYTANK
-												{ 
-													state digx320
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 EMPTY RIOT TANK [DRIVABLE]
-														setvar NPC_TYPE 2
-													}
-													else
-													{
-														state monstertarget
-														ifvare TARGETPAL 17 redefinequote 142 EMPTY BLUE RIOT TANK [DRIVABLE]
-														else ifvare TARGETPAL 19 redefinequote 142 EMPTY RED RIOT TANK [DRIVABLE]
-														else redefinequote 142 EMPTY GREEN RIOT TANK [DRIVABLE]
-														setvar NPC_TYPE 2
-													}
-												}
-												else ifvare TARGETSPECIES 1870 // SCORPIONTANK
-												{
-													state digx320
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 PIGCOP SCORPION TANK
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 PIGCOP SCORPION TANK
-														setvar NPC_TYPE 1
-													}
-												}
-												else ifvare TARGETSPECIES LIZMAN state lizmantargetting
-												else ifvare TARGETSPECIES LIZMANJUMP state lizmantargetting
-												else ifvare TARGETSPECIES LIZMANSTAYPUT state lizmantargetting
-												else ifvare TARGETSPECIES LIZMANSPITTING state lizmantargetting
-												else ifvare TARGETSPECIES OCTABRAIN state octabraintargetting
-												else ifvare TARGETSPECIES OCTABRAINSTAYPUT state octabraintargetting
-												else ifvare TARGETSPECIES DRONE
-												{
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 SENTRY DRONE
-														setvar NPC_TYPE 1
-														state digx320
-													}
-													else
-													ifvare TARGETPAL 25
-													{
-														state monstertarget
-														redefinequote 142 SUPER DRONE
-														setvar NPC_TYPE 1
-														state digx320
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 SENTRY DRONE
-														setvar NPC_TYPE 1
-														state digx320
-													}
-												}
-												else ifvare TARGETSPECIES GREENSLIME
-												{
-													state digx320
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 PROTOZOID SLIMER
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 PROTOZOID SLIMER
-														setvar NPC_TYPE 1
-													}
-												}
-												else ifvarg TARGETSPECIES 2370 ifvarl TARGETSPECIES 2378
-												{
-													state digx320
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 PROTOZOID SLIMER
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 PROTOZOID SLIMER
-														setvar NPC_TYPE 1
-													}
-												}
-												else ifvare TARGETSPECIES EGG
-												{
-													state digx320
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 PROTOZOID SLIMER'S EGG
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 PROTOZOID SLIMER'S EGG
-														setvar NPC_TYPE 1
-													}
-												}
-												else ifvare TARGETSPECIES COMMANDER state commandertargetting
-												else ifvare TARGETSPECIES COMMANDERSTAYPUT state commandertargetting
-												else ifvare TARGETSPECIES NEWBEAST state newbeasttargetting
-												else ifvare TARGETSPECIES NEWBEASTSTAYPUT state newbeasttargetting
-												else ifvare TARGETSPECIES NEWBEASTJUMP state newbeasttargetting
-												else ifvare TARGETSPECIES NEWBEASTHANG state newbeasttargetting
-												else ifvare TARGETSPECIES NEWBEASTHANGDEAD
-												{
-													ifvare TARGETPAL 17
-													{
-														state oddtarget
-														redefinequote 142 DEAD LESSER NAFERIAITE
-														state digx320
-														setvar NPC_TYPE 1
-													}
-													else
-													ifvare TARGETPAL 20
-													{
-														state oddtarget
-														redefinequote 142 DEAD GREATER NAFERIAITE
-														state digx320
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state oddtarget
-														redefinequote 142 DEAD PROTECTOR DRONE
-														state digx320
-														setvar NPC_TYPE 1
-													}
-												}
-												else ifvare TARGETSPECIES BOSS1 state boss1targetting
-												else ifvare TARGETSPECIES BOSS1STAYPUT state boss1targetting
-												else ifvare TARGETSPECIES BOSS3 state boss3targetting
-												else ifvare TARGETSPECIES BOSS3STAYPUT state boss3targetting
-												else ifvare TARGETSPECIES BOSS3LOB state boss3targetting
-												else ifvare TARGETSPECIES BOSS2 state boss2targetting
-												else ifvare TARGETSPECIES BOSS2STAYPUT state boss2targetting
-												else ifvare TARGETSPECIES BOSS2SHOOT state boss2targetting
-												else ifvare TARGETSPECIES BOSS2BREATH state boss2targetting
-												else ifvare TARGETSPECIES BOSS4 state boss4targetting
-												else ifvare TARGETSPECIES BOSS4STAYPUT state boss4targetting
-												else ifvare TARGETSPECIES ROTATEGUN
-												{
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 MOUNTED TURRET
-														state digx320
-														setvar NPC_TYPE 1
-													}
-													else
-													ifvare TARGETPAL 17
-													{
-														state monstertarget
-														redefinequote 142 MOUNTED SHOTGUN TURRET
-														state digx320
-														setvar NPC_TYPE 1
-													}
-													else
-													ifvare TARGETPAL 19
-													{
-														state monstertarget
-														redefinequote 142 MOUNTED ROCKET TURRET
-														state digx320
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 MOUNTED TURRET
-														state digx320
-														setvar NPC_TYPE 1
-													}
-												}
-												else ifvare TARGETSPECIES SHARK
-												{
-													ifvare TARGETPAL 9
-													{
-														state oldskooltarget
-														redefinequote 142 SHARK
-														state digx320
-														setvar NPC_TYPE 3
-													}
-													else
-													ifvare TARGETPAL 24
-													{
-														state monstertarget
-														redefinequote 142 BLOODTOOTH SHARK
-														state digx320
-														setvar NPC_TYPE 1
-													}
-													else
-													{
-														state monstertarget
-														redefinequote 142 SHARK
-														state digx320
-														setvar NPC_TYPE 3
-													}
-												}
-												else ifvare TARGETSPECIES PODFEM1
+											ifvare TARGETSPECIES LIZTROOP state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPRUNNING state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPJUSTSIT state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPONTOILET state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPSTAYPUT state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPSHOOT state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPDUCKING state liztrooptargetting
+											else ifvare TARGETSPECIES LIZTROOPJETPACK state liztrooptargetting
+											else ifvare TARGETSPECIES PIGCOP state pigcoptargetting
+											else ifvare TARGETSPECIES PIGCOPSTAYPUT state pigcoptargetting
+											else ifvare TARGETSPECIES PIGCOPDIVE state pigcoptargetting
+											else ifvare TARGETSPECIES RECON
+											{ 
+												state digx320
+												state oldskooltarget
+												redefinequote 142 PIGCOP RECON PATROL VEHICLE
+											}
+											else ifvare TARGETSPECIES TANK
+											{ 
+												state digx320 // 192 (100%), 230 (75%)
+												ifvare TARGETPAL 9
 												{
 													state oldskooltarget
-													redefinequote 142 PODDED LADY
-													state digx320
-													setvar NPC_TYPE 2
+													redefinequote 142 PIGCOP RIOT TANK
+													setvar NPC_TYPE 1
 												}
-												else ifvare TARGETSPECIES FEM7
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM1
-												{
-													state oldskooltarget
-													redefinequote 142 STRIPPER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM2
-												{
-													state oldskooltarget
-													redefinequote 142 STRIPPER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM3
-												{
-													state oldskooltarget
-													redefinequote 142 YOUNG WOMAN
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM4
-												{
-													state oldskooltarget
-													redefinequote 142 DANCING LADY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM5
-												{
-													state oldskooltarget
-													redefinequote 142 CAPTURED WOMAN
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM6
-												{
-													state oldskooltarget
-													redefinequote 142 CAPTURED WOMAN
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES NAKED1
-												{
-													state oldskooltarget
-													redefinequote 142 CAPTURED WOMAN
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM10
-												{
-													state oldskooltarget
-													redefinequote 142 XXX-STACY ACTRESSES
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES FEM9
-												{
-													state oldskooltarget
-													redefinequote 142 CHEERLEADER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES TOUGHGAL
-												{
-													state oldskooltarget
-													redefinequote 142 TOUGH GAL
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES ROBOTDOG
-												{
-													state oldskooltarget
-													redefinequote 142 BORDER COLLIE
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES ROBOTDOG2
-												{
-													state oldskooltarget
-													redefinequote 142 GREAT DANE PUPPY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE1 // ENDWORLD Dancer #1
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE2 // ENDWORLD Dancer #2
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE3 // ENDWORLD Dancer #3
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE5 // ENDWORLD Dancer #5
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE6 // ENDWORLD Dancer #6
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE7 // ENDWORLD Dancer #7
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DANCE9 // ENDWORLD Dancer #9
-												{
-													state oldskooltarget
-													redefinequote 142 DANCER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES DEALER // Weapons Dealer
-												{
-													state oldskooltarget
-													redefinequote 142 WEAPONS DEALER
-													state digx320 // 200
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES STAND1 // Male NPC
-												{
-													state oldskooltarget
-													redefinequote 142 STANDING GUY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES STAND3 // Male NPC
-												{
-													state oldskooltarget
-													redefinequote 142 STANDING GUY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES STAND4 // Male NPC
-												{
-													state oldskooltarget
-													redefinequote 142 STANDING GUY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES WOLFDUDE
-												{
-													state oldskooltarget
-													redefinequote 142 BJ BLAZKOWICZ
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES COP1 // Cop #1
-												{
-													state oldskooltarget
-													redefinequote 142 POLICE OFFICER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES COP2 // Cop #1
-												{
-													state oldskooltarget
-													redefinequote 142 SWAT OFFICER
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES PUNKDUDE // Punk-Looking Guy
-												{
-													state oldskooltarget
-													redefinequote 142 PUNK GUY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES SITTINGDUDE // Sitting Guy
-												{
-													state oldskooltarget
-													redefinequote 142 SITTING GUY
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES ANIMEGIRL1 // SW Anime Chick #1 [Tool Girl]
+												else
 												{
 													state monstertarget
-													redefinequote 142 DRILL-WIELDING LADY
-													state digx320
-													setvar NPC_TYPE 2
+													ifvare TARGETPAL 17 redefinequote 142 PIGCOP RIOT TANK [BLUE]
+													else ifvare TARGETPAL 19 redefinequote 142 PIGCOP RIOT TANK [RED]
+													else redefinequote 142 PIGCOP RIOT TANK [GREEN]
+													setvar NPC_TYPE 1
 												}
-												else ifvare TARGETSPECIES ANIMEGIRL2 // SW Anime Chick #2 [Hotrod Girl]
-												{
-													state monstertarget
-													redefinequote 142 HOTROD SHOWGIRL
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES ANIMEGIRL3 // SW Anime Chick #3 ['Sailor' Babe]
-												{
-													state monstertarget
-													redefinequote 142 SAILOR BABE
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES ANIMEGIRL4 // SW Anime Chick #4 [Washing Girl]
-												{
-													state monstertarget
-													redefinequote 142 WASHING GIRL
-													state digx320
-													setvar NPC_TYPE 2
-												}
-												else ifvare TARGETSPECIES 1338  // Helicopter
+											} 
+											else ifvare TARGETSPECIES EMPTYTANK
+											{ 
+												state digx320
+												ifvare TARGETPAL 9
 												{
 													state oldskooltarget
-													redefinequote 142 HELICOPTER
-													state digx320
+													redefinequote 142 EMPTY RIOT TANK [DRIVABLE]
 													setvar NPC_TYPE 2
 												}
-												else ifvare TARGETSPECIES PRESIDENTCLINTON // President Bill Clinton
+												else
 												{
 													state monstertarget
-													redefinequote 142 PRESIDENT BILL CLINTON
+													ifvare TARGETPAL 17 redefinequote 142 EMPTY BLUE RIOT TANK [DRIVABLE]
+													else ifvare TARGETPAL 19 redefinequote 142 EMPTY RED RIOT TANK [DRIVABLE]
+													else redefinequote 142 EMPTY GREEN RIOT TANK [DRIVABLE]
+													setvar NPC_TYPE 2
+												}
+											}
+											else ifvare TARGETSPECIES 1870 // SCORPIONTANK
+											{
+												state digx320
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 PIGCOP SCORPION TANK
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 PIGCOP SCORPION TANK
+													setvar NPC_TYPE 1
+												}
+											}
+											else ifvare TARGETSPECIES LIZMAN state lizmantargetting
+											else ifvare TARGETSPECIES LIZMANJUMP state lizmantargetting
+											else ifvare TARGETSPECIES LIZMANSTAYPUT state lizmantargetting
+											else ifvare TARGETSPECIES LIZMANSPITTING state lizmantargetting
+											else ifvare TARGETSPECIES OCTABRAIN state octabraintargetting
+											else ifvare TARGETSPECIES OCTABRAINSTAYPUT state octabraintargetting
+											else ifvare TARGETSPECIES DRONE
+											{
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 SENTRY DRONE
+													setvar NPC_TYPE 1
 													state digx320
-													setvar NPC_TYPE 4
-												} 
-												else // If the target is scannable but is not defined above :P
-												{ 
-													setvar SHOWTARGETNAME? 0
-													setvar SHOWTARGETHEALTH? 0
-													setvar SHOWTARGETDEFENSE? 0
-													redefinequote 142 (UNIDENTIFIED ENTITY)
+												}
+												else
+												ifvare TARGETPAL 25
+												{
+													state monstertarget
+													redefinequote 142 SUPER DRONE
+													setvar NPC_TYPE 1
 													state digx320
-													setvar NPC_TYPE 0
-												} 
-											} // ifvare TARGETTYPE 1 [line 6294]
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 SENTRY DRONE
+													setvar NPC_TYPE 1
+													state digx320
+												}
+											}
+											else ifvare TARGETSPECIES GREENSLIME
+											{
+												state digx320
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 PROTOZOID SLIMER
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 PROTOZOID SLIMER
+													setvar NPC_TYPE 1
+												}
+											}
+											else ifvarg TARGETSPECIES 2370 ifvarl TARGETSPECIES 2378
+											{
+												state digx320
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 PROTOZOID SLIMER
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 PROTOZOID SLIMER
+													setvar NPC_TYPE 1
+												}
+											}
+											else ifvare TARGETSPECIES EGG
+											{
+												state digx320
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 PROTOZOID SLIMER'S EGG
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 PROTOZOID SLIMER'S EGG
+													setvar NPC_TYPE 1
+												}
+											}
+											else ifvare TARGETSPECIES COMMANDER state commandertargetting
+											else ifvare TARGETSPECIES COMMANDERSTAYPUT state commandertargetting
+											else ifvare TARGETSPECIES NEWBEAST state newbeasttargetting
+											else ifvare TARGETSPECIES NEWBEASTSTAYPUT state newbeasttargetting
+											else ifvare TARGETSPECIES NEWBEASTJUMP state newbeasttargetting
+											else ifvare TARGETSPECIES NEWBEASTHANG state newbeasttargetting
+											else ifvare TARGETSPECIES NEWBEASTHANGDEAD
+											{
+												ifvare TARGETPAL 17
+												{
+													state oddtarget
+													redefinequote 142 DEAD LESSER NAFERIAITE
+													state digx320
+													setvar NPC_TYPE 1
+												}
+												else
+												ifvare TARGETPAL 20
+												{
+													state oddtarget
+													redefinequote 142 DEAD GREATER NAFERIAITE
+													state digx320
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state oddtarget
+													redefinequote 142 DEAD PROTECTOR DRONE
+													state digx320
+													setvar NPC_TYPE 1
+												}
+											}
+											else ifvare TARGETSPECIES BOSS1 state boss1targetting
+											else ifvare TARGETSPECIES BOSS1STAYPUT state boss1targetting
+											else ifvare TARGETSPECIES BOSS3 state boss3targetting
+											else ifvare TARGETSPECIES BOSS3STAYPUT state boss3targetting
+											else ifvare TARGETSPECIES BOSS3LOB state boss3targetting
+											else ifvare TARGETSPECIES BOSS2 state boss2targetting
+											else ifvare TARGETSPECIES BOSS2STAYPUT state boss2targetting
+											else ifvare TARGETSPECIES BOSS2SHOOT state boss2targetting
+											else ifvare TARGETSPECIES BOSS2BREATH state boss2targetting
+											else ifvare TARGETSPECIES BOSS4 state boss4targetting
+											else ifvare TARGETSPECIES BOSS4STAYPUT state boss4targetting
+											else ifvare TARGETSPECIES ROTATEGUN
+											{
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 MOUNTED TURRET
+													state digx320
+													setvar NPC_TYPE 1
+												}
+												else
+												ifvare TARGETPAL 17
+												{
+													state monstertarget
+													redefinequote 142 MOUNTED SHOTGUN TURRET
+													state digx320
+													setvar NPC_TYPE 1
+												}
+												else
+												ifvare TARGETPAL 19
+												{
+													state monstertarget
+													redefinequote 142 MOUNTED ROCKET TURRET
+													state digx320
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 MOUNTED TURRET
+													state digx320
+													setvar NPC_TYPE 1
+												}
+											}
+											else ifvare TARGETSPECIES SHARK
+											{
+												ifvare TARGETPAL 9
+												{
+													state oldskooltarget
+													redefinequote 142 SHARK
+													state digx320
+													setvar NPC_TYPE 3
+												}
+												else
+												ifvare TARGETPAL 24
+												{
+													state monstertarget
+													redefinequote 142 BLOODTOOTH SHARK
+													state digx320
+													setvar NPC_TYPE 1
+												}
+												else
+												{
+													state monstertarget
+													redefinequote 142 SHARK
+													state digx320
+													setvar NPC_TYPE 3
+												}
+											}
+											else ifvare TARGETSPECIES PODFEM1
+											{
+												state oldskooltarget
+												redefinequote 142 PODDED LADY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM7
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM1
+											{
+												state oldskooltarget
+												redefinequote 142 STRIPPER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM2
+											{
+												state oldskooltarget
+												redefinequote 142 STRIPPER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM3
+											{
+												state oldskooltarget
+												redefinequote 142 YOUNG WOMAN
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM4
+											{
+												state oldskooltarget
+												redefinequote 142 DANCING LADY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM5
+											{
+												state oldskooltarget
+												redefinequote 142 CAPTURED WOMAN
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM6
+											{
+												state oldskooltarget
+												redefinequote 142 CAPTURED WOMAN
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES NAKED1
+											{
+												state oldskooltarget
+												redefinequote 142 CAPTURED WOMAN
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM10
+											{
+												state oldskooltarget
+												redefinequote 142 XXX-STACY ACTRESSES
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES FEM9
+											{
+												state oldskooltarget
+												redefinequote 142 CHEERLEADER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES TOUGHGAL
+											{
+												state oldskooltarget
+												redefinequote 142 TOUGH GAL
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES ROBOTDOG
+											{
+												state oldskooltarget
+												redefinequote 142 BORDER COLLIE
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES ROBOTDOG2
+											{
+												state oldskooltarget
+												redefinequote 142 GREAT DANE PUPPY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE1 // ENDWORLD Dancer #1
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE2 // ENDWORLD Dancer #2
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE3 // ENDWORLD Dancer #3
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE5 // ENDWORLD Dancer #5
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE6 // ENDWORLD Dancer #6
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE7 // ENDWORLD Dancer #7
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DANCE9 // ENDWORLD Dancer #9
+											{
+												state oldskooltarget
+												redefinequote 142 DANCER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES DEALER // Weapons Dealer
+											{
+												state oldskooltarget
+												redefinequote 142 WEAPONS DEALER
+												state digx320 // 200
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES STAND1 // Male NPC
+											{
+												state oldskooltarget
+												redefinequote 142 STANDING GUY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES STAND3 // Male NPC
+											{
+												state oldskooltarget
+												redefinequote 142 STANDING GUY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES STAND4 // Male NPC
+											{
+												state oldskooltarget
+												redefinequote 142 STANDING GUY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES WOLFDUDE
+											{
+												state oldskooltarget
+												redefinequote 142 BJ BLAZKOWICZ
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES COP1 // Cop #1
+											{
+												state oldskooltarget
+												redefinequote 142 POLICE OFFICER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES COP2 // Cop #1
+											{
+												state oldskooltarget
+												redefinequote 142 SWAT OFFICER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES PUNKDUDE // Punk-Looking Guy
+											{
+												state oldskooltarget
+												redefinequote 142 PUNK GUY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES SITTINGDUDE // Sitting Guy
+											{
+												state oldskooltarget
+												redefinequote 142 SITTING GUY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES ANIMEGIRL1 // SW Anime Chick #1 [Tool Girl]
+											{
+												state monstertarget
+												redefinequote 142 DRILL-WIELDING LADY
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES ANIMEGIRL2 // SW Anime Chick #2 [Hotrod Girl]
+											{
+												state monstertarget
+												redefinequote 142 HOTROD SHOWGIRL
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES ANIMEGIRL3 // SW Anime Chick #3 ['Sailor' Babe]
+											{
+												state monstertarget
+												redefinequote 142 SAILOR BABE
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES ANIMEGIRL4 // SW Anime Chick #4 [Washing Girl]
+											{
+												state monstertarget
+												redefinequote 142 WASHING GIRL
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES 1338  // Helicopter
+											{
+												state oldskooltarget
+												redefinequote 142 HELICOPTER
+												state digx320
+												setvar NPC_TYPE 2
+											}
+											else ifvare TARGETSPECIES PRESIDENTCLINTON // President Bill Clinton
+											{
+												state monstertarget
+												redefinequote 142 PRESIDENT BILL CLINTON
+												state digx320
+												setvar NPC_TYPE 4
+											} 
+											else // If the target is scannable but is not defined above :P
+											{ 
+												setvar SHOWTARGETNAME? 0
+												setvar SHOWTARGETHEALTH? 0
+												setvar SHOWTARGETDEFENSE? 0
+												redefinequote 142 (UNIDENTIFIED ENTITY)
+												state digx320
+												setvar NPC_TYPE 0
+											} 
 						
 											ifvare SHOWTARGETNAME? 1
 											{
+												setvar digy 81 // 81
 												setvar tilenum 2822
 												setvarvar pal TARGETPAL
 												setvar temp 142
@@ -7312,29 +7306,14 @@ onevent EVENT_DISPLAYREST // WARNING: Unsynchronized Event
 												state orientation27
 												state gtz
 											} // ifvare SHOWTARGETNAME? 1 ifvarg actorvar[hitsprite].ACTORHP 0
+
 										} // ifvare TARGETTYPE 1
+
 										ifvare TARGETTYPE 6
 										{
-											getactor[hitsprite].statnum TARGETTYPE
-											getactor[hitsprite].picnum TARGETSPECIES
-											getactor[hitsprite].pal TARGETPAL
-                      
-											setvar SHOWTARGETNAME? 0
-											setvar SHOWTARGETHEALTH? 0
-											setvar SHOWTARGETDEFENSE? 0
-											ifvare TARGETSPECIES TRIPBOMB // Armed Laser Tripbomb
-											{
-												setvar SHOWTARGETNAME? 1
-												redefinequote 142 ARMED LASER TRIPBOMB
-												state digx320
-												setvar NPC_TYPE 4
-												setvar TARGETPAL 10
-											} 
-
-											setvar digy 81 // 81
+											setvar digy 89 // 81
 											ifvare SHOWTARGETNAME? 1
 											{
-												addvar digy 8
 												// Shows "ATK:" text
 												setvar digx 183
 												setvar temp 324
@@ -7353,14 +7332,28 @@ onevent EVENT_DISPLAYREST // WARNING: Unsynchronized Event
 												setvarvar varname actorvar[hitsprite].ACTORATTACK
 												state dnz
 												subvar digy 8
+											} // ifvare SHOWTARGETNAME? 1 ifvarg actorvar[hitsprite].ACTORHP 0
 
+											setvar SHOWTARGETNAME? 0
+											setvar SHOWTARGETHEALTH? 0
+											setvar SHOWTARGETDEFENSE? 0
+											ifvare TARGETSPECIES TRIPBOMB // Armed Laser Tripbomb
+											{
+												setvar SHOWTARGETNAME? 1
+												redefinequote 142 ARMED LASER TRIPBOMB
+												state digx320
+												setvar NPC_TYPE 4
+												setvar TARGETPAL 10
+											} 
+
+											ifvare SHOWTARGETNAME? 1
+											{
 												setvar tilenum 2822
 												setvarvar pal TARGETPAL
 												setvar temp 142
 												setvar textscale 57344
 												state orientation27
 												state gtz
-
 											} // ifvare SHOWTARGETNAME? 1 ifvarg actorvar[hitsprite].ACTORHP 0
 										}
 

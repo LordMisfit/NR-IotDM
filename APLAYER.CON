@@ -7255,20 +7255,20 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 					
 							ifvare VEHICLETYPE 0 
 							{
-								eshoot FIRELASER
+								eshoot FIRELASERP
 								ifvare VEHICLEHUDFRAME 0 state rotateprojectilestraight
 								ifvare VEHICLEHUDFRAME 1 state rotateprojectileleft
 								ifvare VEHICLEHUDFRAME 2 state rotateprojectileright
-								setactor[RETURN].extra 30
+								setactor[RETURN].extra 63
 								getplayer[THISACTOR].posz TEMPVAR5
 								subvar TEMPVAR5 4096
 								setactor[RETURN].z TEMPVAR5
 				
-								eshoot FIRELASER
+								eshoot FIRELASERP
 								ifvare VEHICLEHUDFRAME 0 state rotateprojectilestraight
 								ifvare VEHICLEHUDFRAME 1 state rotateprojectileleft
 								ifvare VEHICLEHUDFRAME 2 state rotateprojectileright
-								setactor[RETURN].extra 30
+								setactor[RETURN].extra 63
 				
 								sound PRED_ATTACK
 							}
