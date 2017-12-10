@@ -3423,7 +3423,13 @@ state dealinvulndmg
 		getactorvar[INVULNAURATARGET].INVULNTIME tempb // check for invulntimer
 		ifvare tempb 0 // if none...
 		{
+			getactor[THISACTOR].z ITEMSEEKERZ
+			subvar ITEMSEEKERZ 8192
+			setactor[THISACTOR].z ITEMSEEKERZ
 			canseespr THISACTOR INVULNAURATARGET temp
+			addvar ITEMSEEKERZ 8192
+			setactor[THISACTOR].z ITEMSEEKERZ
+
 			ifvare temp 1
 			{
 				setvar MISCARRAYID 26 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // DEATHSWITCH-DELAY
@@ -3500,10 +3506,15 @@ state invulnauradetect
 					{
 						ifvare actorvar[INVULNAURATARGET].ACTORINVULNTIME 0 // If they have no Invuln, HIT 'EM! XD
 						{
+							getactor[THISACTOR].z ITEMSEEKERZ
+							subvar ITEMSEEKERZ 8192
+							setactor[THISACTOR].z ITEMSEEKERZ
 							canseespr THISACTOR INVULNAURATARGET temp
+							addvar ITEMSEEKERZ 8192
+							setactor[THISACTOR].z ITEMSEEKERZ
+
 							ifvare temp 1
-							{
-				
+							{			
 								ifvarg INVULNHEALTHDRAIN 0 // if between 1 & 2000, set a % drain for damage per tic
 								{
 									addvar TEMPCOUNT 1
@@ -9586,7 +9597,13 @@ state healdetectifdead
 		ifvare actorvar[HEALSEEK].EXPANDING? 1 { setvar HEALSEEK -1 break } // Makes it that if the current target is expanding, set to -1 to search for a non-expanded one
 		ifvare actorvar[HEALSEEK].CLOAKED? 1 { setvar HEALSEEK -1 break } // Makes it that if the current target is cloaked, set to -1 to search for a non-cloaked one
 	
+		getactor[THISACTOR].z ITEMSEEKERZ
+		subvar ITEMSEEKERZ 8192
+		setactor[THISACTOR].z ITEMSEEKERZ
 		canseespr THISACTOR HEALSEEK HEALSEEKB
+		addvar ITEMSEEKERZ 8192
+		setactor[THISACTOR].z ITEMSEEKERZ
+
 		ifvare HEALSEEKB 0 { setvar HEALSEEK -1 break } // Makes it the healer needs to see his/her target.
 	}
 ends
@@ -9604,7 +9621,14 @@ state itemdetectifdead
 			ifvare actorvar[ITEMSEEK].EXPANDING? 1 { setvar ITEMSEEK -1 break } // Makes it that if the current "seeker" is expanding, set to -1 to search for a non-expanding one
 			ifvare actorvar[ITEMSEEK].FROZEN? 1 { setvar ITEMSEEK -1 break } // Makes it that if the current "seeker" is frozen, set to -1 to search for a non-frozen one
 			ifvare actorvar[ITEMSEEK].CLOAKED? 1 { setvar ITEMSEEK -1 break } // Makes it that if the current "seeker" is cloaked, set to -1 to search for a non-cloaked one
+
+			getactor[THISACTOR].z ITEMSEEKERZ
+			subvar ITEMSEEKERZ 8192
+			setactor[THISACTOR].z ITEMSEEKERZ
 			canseespr THISACTOR ITEMSEEK ITEMSEEKD
+			addvar ITEMSEEKERZ 8192
+			setactor[THISACTOR].z ITEMSEEKERZ
+
 			ifvare ITEMSEEKD 0 { setvar ITEMSEEK -1 break } // Makes it the monster and the item need a line of sight.
 		}
 	}
@@ -15712,7 +15736,12 @@ state gemfinder
 		}
 		else
 		{
+			getactor[GEMID].z ITEMSEEKERZ
+			subvar ITEMSEEKERZ 4096
+			setactor[GEMID].z ITEMSEEKERZ
 			canseespr GEMID THISACTOR GEMSEE
+			addvar ITEMSEEKERZ 4096
+			setactor[GEMID].z ITEMSEEKERZ
 		
 			getactor[GEMID].x GEMX
 			getplayer[THISACTOR].posx x
@@ -15888,7 +15917,12 @@ state moneyfinder
 		}
 		else
 		{
+			getactor[MONEYID].z ITEMSEEKERZ
+			subvar ITEMSEEKERZ 4096
+			setactor[MONEYID].z ITEMSEEKERZ
 			canseespr MONEYID THISACTOR MONEYSEE
+			addvar ITEMSEEKERZ 4096
+			setactor[MONEYID].z ITEMSEEKERZ
 		
 			getactor[MONEYID].x MONEYX
 			getplayer[THISACTOR].posx x

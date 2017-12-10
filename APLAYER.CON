@@ -7218,8 +7218,8 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 						}
 						ifvare VEHICLETYPE 1 
 						{
-							shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN
-							shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN
+							shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN
+							shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN shoot NEWSHOTGUN
 							sound SHOTGUN_FIRE 
 						}
 						ifvare VEHICLETYPE 2
@@ -7230,9 +7230,15 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 							ifvare VEHICLEHUDFRAME 2 state rotateprojectileright
 							setactor[RETURN].extra 140
 							getplayer[THISACTOR].posz TEMPVAR5
-							subvar TEMPVAR5 2048
+							subvar TEMPVAR5 4096
 							setactor[RETURN].z TEMPVAR5
-				
+			
+							eshoot RPG
+							ifvare VEHICLEHUDFRAME 0 state rotateprojectilestraight
+							ifvare VEHICLEHUDFRAME 1 state rotateprojectileleft
+							ifvare VEHICLEHUDFRAME 2 state rotateprojectileright
+							setactor[RETURN].extra 140
+			
 							sound RPG_SHOOT
 						}
 						ifvarg actorvar[VEHICLEID].ACTORQUADTIME 0 sound QUADDAMAGE3
@@ -7275,8 +7281,8 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 							}
 							ifvare VEHICLETYPE 1 
 							{
-								shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK
-								shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK
+								shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK
+								shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK shoot GROWSPARK
 								sound EXPANDERSHOOT
 							}
 							ifvare VEHICLETYPE 2
@@ -7287,8 +7293,14 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 								ifvare VEHICLEHUDFRAME 2 state rotateprojectileright
 								setactor[RETURN].extra 140
 								getplayer[THISACTOR].posz TEMPVAR5
-								subvar TEMPVAR5 2048
+								subvar TEMPVAR5 4096
 								setactor[RETURN].z TEMPVAR5
+				
+								eshoot RPG
+								ifvare VEHICLEHUDFRAME 0 state rotateprojectilestraight
+								ifvare VEHICLEHUDFRAME 1 state rotateprojectileleft
+								ifvare VEHICLEHUDFRAME 2 state rotateprojectileright
+								setactor[RETURN].extra 140
 				
 								sound RPG_SHOOT
 							}
@@ -7494,7 +7506,18 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 	//*****************************
 	ifp ponsteroids mulvar CRITICALHITCHANCE2 2
 	setvar MISCARRAYID 94 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // HP-FACTOR
-	ifvarl MISCARRAYID_AMOUNTTEMP 251 mulvar CRITICALHITCHANCE2 2
+	ifvarl MISCARRAYID_AMOUNTTEMP 251 
+	{ 
+		ifvare CHARACTERSELECTED? 5 { mulvar CRITICALHITCHANCE2 3 divvar CRITICALHITCHANCE2 2 }
+		else ifvare CHARACTERSELECTED? 11 { mulvar CRITICALHITCHANCE2 7 divvar CRITICALHITCHANCE2 4 }
+		else { mulvar CRITICALHITCHANCE2 5 divvar CRITICALHITCHANCE2 4 }
+	}
+	ifvarl MISCARRAYID_AMOUNTTEMP 126 
+	{
+		ifvare CHARACTERSELECTED? 5 { mulvar CRITICALHITCHANCE2 3 }
+		else ifvare CHARACTERSELECTED? 11 { mulvar CRITICALHITCHANCE2 7 divvar CRITICALHITCHANCE2 2 }
+		else { mulvar CRITICALHITCHANCE2 2 }
+	}
 	
 	ifvare PLAYEREQUIPSLOTITEM1 28 mulvar CRITICALHITCHANCE2 10
 	ifvare PLAYEREQUIPSLOTITEM2 28 mulvar CRITICALHITCHANCE2 10
