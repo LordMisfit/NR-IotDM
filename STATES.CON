@@ -3679,23 +3679,23 @@ state invulntarget_player
 	ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 	{
 		findnearactorzvar BOSS4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar BOSS3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar BOSS2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar BOSS1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar SCORPIONTANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar TANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar COMMANDER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar NEWBEAST INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar OCTABRAIN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DRONE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar PIGCOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar LIZMAN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar RECON INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar LIZTROOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ROTATEGUN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar SHARK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar EGG INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar GREENSLIME INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
+		ifvare INVULNAURATARGET -1 { findnearactorzvar BOSS3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar BOSS2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar BOSS1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar SCORPIONTANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar TANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar COMMANDER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar NEWBEAST INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar OCTABRAIN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DRONE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar PIGCOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar LIZMAN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar RECON INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar LIZTROOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ROTATEGUN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar SHARK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar EGG INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar GREENSLIME INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
 		setvar FINDNEAR_INTERVAL 0
 	}
 ends
@@ -3705,23 +3705,23 @@ state invulntarget_civilians
 	ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 	{
 		findnearactorzvar BOSS4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar BOSS3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar BOSS2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar BOSS1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar SCORPIONTANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar TANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar COMMANDER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar NEWBEAST INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar OCTABRAIN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DRONE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar PIGCOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar LIZMAN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar RECON INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar LIZTROOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ROTATEGUN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar SHARK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar EGG INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar GREENSLIME INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
+		ifvare INVULNAURATARGET -1 { findnearactorzvar BOSS3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar BOSS2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar BOSS1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar SCORPIONTANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar TANK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar COMMANDER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar NEWBEAST INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar OCTABRAIN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DRONE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar PIGCOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar LIZMAN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar RECON INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar LIZTROOP INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ROTATEGUN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar SHARK INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar EGG INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar GREENSLIME INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
 		setvar FINDNEAR_INTERVAL 0
 	}
 ends
@@ -3730,43 +3730,43 @@ state invulntarget_monsters
 	addvar FINDNEAR_INTERVAL 1
 	ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 	{
-		findnearactorzvar PRESIDENTCLINTON INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearspritezvar APLAYER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar PODFEM1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar NAKED1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM5 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM6 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM7 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM9 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar FEM10 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar TOUGHGAL INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar WOMAN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ROBOTDOG INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ROBOTDOG2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar STAND1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DEALER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar STAND3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar STAND4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE5 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE6 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE7 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar DANCE9 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar WOLFDUDE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar COP1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar PUNKDUDE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar COP2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar SITTINGDUDE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ANIMEGIRL1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ANIMEGIRL2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ANIMEGIRL3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
-		ifvare INVULNAURATARGET -1 findnearactorzvar ANIMEGIRL4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
+		findnearspritezvar APLAYER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar PRESIDENTCLINTON INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect
+		ifvare INVULNAURATARGET -1 { findnearactorzvar PODFEM1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar NAKED1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM5 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM6 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM7 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM9 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar FEM10 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar TOUGHGAL INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar WOMAN INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ROBOTDOG INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ROBOTDOG2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar STAND1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DEALER INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar STAND3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar STAND4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE5 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE6 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE7 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar DANCE9 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar WOLFDUDE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar COP1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar PUNKDUDE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar COP2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar SITTINGDUDE INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ANIMEGIRL1 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ANIMEGIRL2 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ANIMEGIRL3 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
+		ifvare INVULNAURATARGET -1 { findnearactorzvar ANIMEGIRL4 INVULNAURARANGEXY INVULNAURARANGEZ INVULNAURATARGET state invulnauradetect }
 		setvar FINDNEAR_INTERVAL 0
 	}
 ends
@@ -9290,6 +9290,29 @@ include TILEEMUL.CON
 //********************
 //********************
 
+state enemyfirstaidstatcheck2
+	ifactornotstayput
+	{
+		ifvarl actorvar[ITEMTARGET].HEALPANEL_CHARGES 1
+		{
+			setvar ITEMTARGET -1
+			break
+		}
+		else setvarvar ITEMFATARGET ITEMTARGET
+	}
+	else
+	{
+		getactor[THISACTOR].sectnum TEMP2
+		getactor[ITEMTARGET].sectnum TEMP3
+		ifvarvarn TEMP2 TEMP3
+		{
+			setvar ITEMTARGET -1
+			break
+		}
+		else setvarvar ITEMFATARGET ITEMTARGET
+	}
+ends
+
 state enemyfirstaidstationcheck
 	setvar ITEMFATARGET -1
 	ifvarn ITEMTARGET -1
@@ -9310,74 +9333,32 @@ state enemyfirstaidstationcheck
 				}
 				else
 				{
-					ifactornotstayput
-					{
-					ifvarl actorvar[ITEMTARGET].HEALPANEL_CHARGES 1
-					{
-						setvar ITEMTARGET -1
-						break
-					}
-					else setvarvar ITEMFATARGET ITEMTARGET
-					}
-					else
-					{
-					getactor[THISACTOR].sectnum TEMP2
-					getactor[ITEMTARGET].sectnum TEMP3
-					ifvarvarn TEMP2 TEMP3
-					{
-						setvar ITEMTARGET -1
-						break
-					}
-					else setvarvar ITEMFATARGET ITEMTARGET
-					}
+					state enemyfirstaidstatcheck2
 				}
 			}
 			else
 			{
-				ifactornotstayput
-				{
-					ifvarl actorvar[ITEMTARGET].HEALPANEL_CHARGES 1
-					{
-						setvar ITEMTARGET -1
-						break
-					}
-					else setvarvar ITEMFATARGET ITEMTARGET
-				}
-				else
-				{
-					getactor[THISACTOR].sectnum TEMP2
-					getactor[ITEMTARGET].sectnum TEMP3
-					ifvarvarn TEMP2 TEMP3
-					{
-						setvar ITEMTARGET -1
-						break
-					}
-					else setvarvar ITEMFATARGET ITEMTARGET
-				}
+				state enemyfirstaidstatcheck2
 			}
 		}
 		else
 		{
-			ifactornotstayput
-			{
-				ifvarl actorvar[ITEMTARGET].HEALPANEL_CHARGES 1
-				{
-					setvar ITEMTARGET -1
-					break
-				}
-				else setvarvar ITEMFATARGET ITEMTARGET
-			}
-			else
-			{
-				getactor[THISACTOR].sectnum TEMP2
-				getactor[ITEMTARGET].sectnum TEMP3
-				ifvarvarn TEMP2 TEMP3
-				{
-					setvar ITEMTARGET -1
-					break
-				}
-				else setvarvar ITEMFATARGET ITEMTARGET
-			}
+			state enemyfirstaidstatcheck2
+		}
+	}
+ends
+
+
+state enemyitemcheckstayput2null
+	ifactornotstayput nullop
+	else
+	{
+		getactor[THISACTOR].sectnum TEMP2
+		getactor[ITEMTARGET].sectnum TEMP3
+		ifvarvarn TEMP2 TEMP3
+		{
+			setvar ITEMTARGET -1
+			break
 		}
 	}
 ends
@@ -9417,17 +9398,7 @@ state enemyitemcheckstayput
 					}
 					else // If it is a LIZTROOP, make sure it is not stayput and the jetpack is in a different sector from it.
 					{
-						ifactornotstayput nullop
-						else
-						{
-							getactor[THISACTOR].sectnum TEMP2
-							getactor[ITEMTARGET].sectnum TEMP3
-							ifvarvarn TEMP2 TEMP3
-							{
-								setvar ITEMTARGET -1
-								break
-							}
-						}
+						state enemyitemcheckstayput2null
 					}
 				}
 				// Only Living Creatures will look for Winter Clothes
@@ -9442,17 +9413,7 @@ state enemyitemcheckstayput
 					else ifvare TEMP EMPTYTANK { setvar ITEMTARGET -1 break }
 					else // If it is a Living Creature, make sure it is not stayput and the winterclothes is in a different sector from it.
 					{
-						ifactornotstayput nullop
-						else
-						{
-							getactor[THISACTOR].sectnum TEMP2
-							getactor[ITEMTARGET].sectnum TEMP3
-							ifvarvarn TEMP2 TEMP3
-							{
-								setvar ITEMTARGET -1
-								break
-							}
-						}
+						state enemyitemcheckstayput2null
 					}
 				}
 		
@@ -9472,47 +9433,17 @@ state enemyitemcheckstayput
 						}
 						else
 						{
-							ifactornotstayput nullop
-							else
-							{
-								getactor[THISACTOR].sectnum TEMP2
-								getactor[ITEMTARGET].sectnum TEMP3
-								ifvarvarn TEMP2 TEMP3
-								{
-									setvar ITEMTARGET -1
-									break
-								}
-							}
+							state enemyitemcheckstayput2null
 						}
 					}
 					else
 					{
-						ifactornotstayput nullop
-						else
-						{
-							getactor[THISACTOR].sectnum TEMP2
-							getactor[ITEMTARGET].sectnum TEMP3
-							ifvarvarn TEMP2 TEMP3
-							{
-								setvar ITEMTARGET -1
-								break
-							}
-						}
+						state enemyitemcheckstayput2null
 					}
 				}
 				else
 				{
-					ifactornotstayput nullop
-					else
-					{
-						getactor[THISACTOR].sectnum TEMP2
-						getactor[ITEMTARGET].sectnum TEMP3
-						ifvarvarn TEMP2 TEMP3
-						{
-							setvar ITEMTARGET -1
-							break
-						}
-					}
+					state enemyitemcheckstayput2null
 				}
 			}
 			else
@@ -9524,35 +9455,56 @@ state enemyitemcheckstayput
 	}
 ends
 
+state enemyitemseekcooldown
+	addvar ITEMSEEKCOOLDOWN 1
+	ifvarg ITEMSEEKCOOLDOWN 129
+	{
+		setvar ITEMSEEKTIMER 0
+		setvar ITEMSEEKCOOLDOWN 0
+	}
+ends
+
 state enemyitemzsetup1
 	getactor[ITEMTARGET].z ITEMTARGETZ
 	getactor[THISACTOR].z ITEMSEEKERZ
+
 	subvar ITEMTARGETZ 4096
-	setactor[ITEMTARGET].z ITEMTARGETZ
 	subvar ITEMSEEKERZ 8192
-	setactor[THISACTOR].z ITEMSEEKERZ
-	canseespr THISACTOR ITEMTARGET CANSEEITEM?
-	addvar ITEMTARGETZ 4096
 	setactor[ITEMTARGET].z ITEMTARGETZ
+	setactor[THISACTOR].z ITEMSEEKERZ
+
+	canseespr THISACTOR ITEMTARGET CANSEEITEM?
+	ifvarg CANSEEITEM? 0 addlogvar CANSEEITEM?
+
+	addvar ITEMTARGETZ 4096
 	addvar ITEMSEEKERZ 8192
+	setactor[ITEMTARGET].z ITEMTARGETZ
 	setactor[THISACTOR].z ITEMSEEKERZ
 ends
 
 state enemyitemzsetup2
-	getactor[ITEMTARGET].x ITEMTARGETX
-	getactor[ITEMTARGET].y ITEMTARGETY
-	getactor[THISACTOR].x ITEMSEEKERX
-	getactor[THISACTOR].y ITEMSEEKERY
-	subvarvar ITEMTARGETX ITEMSEEKERX
-	subvarvar ITEMTARGETY ITEMSEEKERY
-	getangle ITEMSEEKERANGLE ITEMTARGETX ITEMTARGETY
-	ifvarand ACTORSTATUS? 128
+	// If they find an item, try to move them towards it for up to 2.5 seconds.
+	ifvarl ITEMSEEKTIMER 66
 	{
-		setvarvar TEMPVAR4 ITEMSEEKERANGLE
-		subvarvar TEMPVAR4 ACTORANGLE
-		subvarvar ITEMSEEKERANGLE TEMPVAR4
+		addvar ITEMSEEKTIMER 1
+		setvar ITEMSEEKCOOLDOWN 0
+
+		getactor[ITEMTARGET].x ITEMTARGETX
+		getactor[ITEMTARGET].y ITEMTARGETY
+		getactor[THISACTOR].x ITEMSEEKERX
+		getactor[THISACTOR].y ITEMSEEKERY
+		subvarvar ITEMTARGETX ITEMSEEKERX
+		subvarvar ITEMTARGETY ITEMSEEKERY
+		getangle ITEMSEEKERANGLE ITEMTARGETX ITEMTARGETY
+		ifvarand ACTORSTATUS? 128 // Confusion
+		{
+			setvarvar TEMPVAR4 ITEMSEEKERANGLE
+			subvarvar TEMPVAR4 ACTORANGLE
+			subvarvar ITEMSEEKERANGLE TEMPVAR4
+		}
+		setactor[THISACTOR].ang ITEMSEEKERANGLE
 	}
-	setactor[THISACTOR].ang ITEMSEEKERANGLE
+	else break
 ends
 
 state resetplayeritems
@@ -9656,57 +9608,57 @@ state itemseekingactor
 		{
 			// List in the order of top to low priority
 			findnearactorz BOSS4 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz BOSS2 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz BOSS3 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz BOSS1 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz SCORPIONTANK BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz TANK BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz COMMANDER ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz NEWBEAST ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz OCTABRAIN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DRONE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz LIZMAN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz PIGCOP ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz LIZTROOP ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ROTATEGUN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz SHARK ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
+			ifvare ITEMSEEK -1 { findnearactorz BOSS2 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz BOSS3 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz BOSS1 BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz SCORPIONTANK BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz TANK BOSSRETRIEVEDISTANCE BOSSZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz COMMANDER ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz NEWBEAST ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz OCTABRAIN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DRONE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz LIZMAN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz PIGCOP ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz LIZTROOP ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ROTATEGUN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz SHARK ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
 			// NPCs
-			ifvare ITEMSEEK -1 findnearactorz PRESIDENTCLINTON ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ROBOTDOG ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ROBOTDOG2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz PODFEM1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz NAKED1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM4 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM5 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM6 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM7 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM9 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz FEM10 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz TOUGHGAL ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz WOMAN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE5 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE6 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE7 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DANCE9 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz STAND1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz DEALER ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz STAND3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz STAND4 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz WOLFDUDE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz COP1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz PUNKDUDE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz COP2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz SITTINGDUDE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ANIMEGIRL1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ANIMEGIRL2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ANIMEGIRL3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
-			ifvare ITEMSEEK -1 findnearactorz ANIMEGIRL4 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead
+			ifvare ITEMSEEK -1 { findnearactorz PRESIDENTCLINTON ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ROBOTDOG ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ROBOTDOG2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz PODFEM1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz NAKED1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM4 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM5 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM6 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM7 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM9 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz FEM10 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz TOUGHGAL ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz WOMAN ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE5 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE6 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE7 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DANCE9 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz STAND1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz DEALER ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz STAND3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz STAND4 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz WOLFDUDE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz COP1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz PUNKDUDE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz COP2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz SITTINGDUDE ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ANIMEGIRL1 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ANIMEGIRL2 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ANIMEGIRL3 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
+			ifvare ITEMSEEK -1 { findnearactorz ANIMEGIRL4 ENEMYRETRIEVEDISTANCE ENEMYZRETRIEVEDISTANCE ITEMSEEK state itemdetectifdead }
 			setvar FINDNEAR_INTERVAL 0
 		}
 	}
@@ -9719,14 +9671,7 @@ state actorseekingsuperatom
 		ifvarvarl ACTORHP ACTORMAXHPATOMIC addvar TEMP5 1
 		ifvarvarl ACTORAP ACTORMAXAPATOMIC addvar TEMP5 1
 		ifvarvarl actorvar[ITEMSEEK].ACTORFIRSTAID ACTORMAXHPATOMIC addvar TEMP5 1
-		ifvarand ACTORSTATUS? 16
-		{
-			ifvarg TEMP5 0 { findnearactorz SUPERATOM ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput }
-		}
-		else
-		{
-			ifvarg TEMP5 0 { findnearactorz SUPERATOM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
-		}
+		ifvarg TEMP5 0 { findnearactorzvar SUPERATOM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
 	}
 ends
 
@@ -9734,101 +9679,65 @@ state actorseekingitem
 	addvar FINDNEAR_INTERVAL 1
 	ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 	{
-		ifvarand ACTORSTATUS? 16
-		{
-			// List in the order of top to low priority
-			findnearactorz ICONOFTHEDEFENDER ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz VAMPIREITEM ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz REGENITEM ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz APREGENITEM ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz QUADDAMAGE ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl enemywinterclothes 50 findnearactorz WINTERCLOTHES ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarand ACTORSTATUS? 128 findnearactorz FOGHORN ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarand ACTORSTATUS? 8 findnearactorz ANTIDOTE ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarand ACTORSTATUS? 16 findnearactorz EYEDROP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz AIRTIMEBONUS ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORMAXHP STATLIMIT ifvarvarl ACTORMAXAP STATLIMIT findnearactorz MAXHPAPUP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORMAXAP STATLIMIT findnearactorz MAXAPUP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORMAXHP STATLIMIT findnearactorz MAXHPUP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORATTACK STATLIMIT ifvarvarl ACTORDEFENSE STATLIMIT findnearactorz ATKDEFUP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORDEFENSE STATLIMIT findnearactorz DEFUP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORATTACK STATLIMIT findnearactorz ATKUP ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			state actorseekingsuperatom
-		
-			ifvare ITEMTARGET -1 ifvarvarl ACTORAP STATLIMITATOMIC ifvarvarl ACTORAP ACTORMAXAPATOMIC findnearactorz SUPERSHIELD ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl actorvar[ITEMSEEK].ACTORFIRSTAID ACTORMAXHP findnearactorz FIRSTAID ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORAP ACTORMAXAP findnearactorz COLORSHIELD ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORAP ACTORMAXAP findnearactorz SHIELD ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC findnearactorz FORTUNECOOKIE ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC findnearactorz ATOMICHEALTH ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl ACTORJETPACKAMOUNT JETPACK_AMOUNT findnearactorz JETPACK ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl ACTORBOOTSAMOUNT BOOT_AMOUNT findnearactorz BOOTS ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl ACTORAIRTANKAMOUNT SCUBA_AMOUNT findnearactorz AIRTANK ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SURGERYKIT ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz MEDPACK ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SWBIGMEDIKIT ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SIXPAK ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SWMEDIKIT ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz COLA ENEMYSEEKDISTANCEDIM ENEMYSEEKZDISTANCEDIM ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz FIRSTAIDPANEL_ON ENEMYSEEKDISTANCEDIM 422 ITEMTARGET state enemyfirstaidstationcheck
-		}
-		else
-		{
-			// List in the order of top to low priority
-			findnearactorz ICONOFTHEDEFENDER ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz VAMPIREITEM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz REGENITEM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz APREGENITEM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz QUADDAMAGE ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl enemywinterclothes 50 findnearactorz WINTERCLOTHES ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarand ACTORSTATUS? 8 findnearactorz ANTIDOTE ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 findnearactorz AIRTIMEBONUS ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORMAXHP STATLIMIT ifvarvarl ACTORMAXAP STATLIMIT findnearactorz MAXHPAPUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORMAXAP STATLIMIT findnearactorz MAXAPUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORMAXHP STATLIMIT findnearactorz MAXHPUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORATTACK STATLIMIT ifvarvarl ACTORDEFENSE STATLIMIT findnearactorz ATKDEFUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORDEFENSE STATLIMIT findnearactorz DEFUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORATTACK STATLIMIT findnearactorz ATKUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			state actorseekingsuperatom //  ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC findnearactorz SUPERATOM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-		
-			ifvare ITEMTARGET -1 ifvarvarl ACTORAP STATLIMITATOMIC ifvarvarl ACTORAP ACTORMAXAPATOMIC findnearactorz SUPERSHIELD ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl actorvar[ITEMSEEK].ACTORFIRSTAID ACTORMAXHP findnearactorz FIRSTAID ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORAP ACTORMAXAP findnearactorz COLORSHIELD ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORAP ACTORMAXAP findnearactorz SHIELD ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC findnearactorz FORTUNECOOKIE ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC findnearactorz ATOMICHEALTH ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl ACTORJETPACKAMOUNT JETPACK_AMOUNT findnearactorz JETPACK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl ACTORBOOTSAMOUNT BOOT_AMOUNT findnearactorz BOOTS ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarl ACTORAIRTANKAMOUNT SCUBA_AMOUNT findnearactorz AIRTANK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SURGERYKIT ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz MEDPACK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SWBIGMEDIKIT ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SIXPAK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz SWMEDIKIT ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz COLA ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
-			ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP findnearactorz FIRSTAIDPANEL_ON ENEMYSEEKDISTANCE 4220 ITEMTARGET state enemyfirstaidstationcheck
-		}
+		ifvarand ACTORSTATUS? 16 { divvar ENEMYSEEKDISTANCE 10 divvar ENEMYSEEKZDISTANCE 10 divvar ENEMYSEEKZDISTANCEFAS 10 } // Dimness
+
+		// List in the order of top to low priority
+		findnearactorzvar ICONOFTHEDEFENDER ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput
+		ifvare ITEMTARGET -1 { findnearactorzvar VAMPIREITEM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 { findnearactorzvar REGENITEM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 { findnearactorzvar APREGENITEM ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 { findnearactorzvar QUADDAMAGE ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarl enemywinterclothes 50 { findnearactorzvar WINTERCLOTHES ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarand ACTORSTATUS? 8 { findnearactorzvar ANTIDOTE ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 { findnearactorzvar AIRTIMEBONUS ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORMAXHP STATLIMIT ifvarvarl ACTORMAXAP STATLIMIT { findnearactorzvar MAXHPAPUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORMAXAP STATLIMIT { findnearactorzvar MAXAPUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORMAXHP STATLIMIT { findnearactorzvar MAXHPUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORATTACK STATLIMIT ifvarvarl ACTORDEFENSE STATLIMIT { findnearactorzvar ATKDEFUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORDEFENSE STATLIMIT { findnearactorzvar DEFUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORATTACK STATLIMIT { findnearactorzvar ATKUP ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		state actorseekingsuperatom
+		ifvare ITEMTARGET -1 ifvarvarl ACTORAP STATLIMITATOMIC ifvarvarl ACTORAP ACTORMAXAPATOMIC { findnearactorzvar SUPERSHIELD ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl actorvar[ITEMSEEK].ACTORFIRSTAID ACTORMAXHP { findnearactorzvar FIRSTAID ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORAP ACTORMAXAP { findnearactorzvar COLORSHIELD ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORAP ACTORMAXAP { findnearactorzvar SHIELD ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC { findnearactorzvar FORTUNECOOKIE ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP STATLIMITATOMIC ifvarvarl ACTORHP ACTORMAXHPATOMIC { findnearactorzvar ATOMICHEALTH ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarl ACTORJETPACKAMOUNT JETPACK_AMOUNT { findnearactorzvar JETPACK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarl ACTORBOOTSAMOUNT BOOT_AMOUNT { findnearactorzvar BOOTS ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarl ACTORAIRTANKAMOUNT SCUBA_AMOUNT { findnearactorzvar AIRTANK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar SURGERYKIT ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar MEDPACK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar SWBIGMEDIKIT ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar SIXPAK ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar SWMEDIKIT ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar COLA ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCE ITEMTARGET state enemyitemcheckstayput }
+
+		ifvare ITEMTARGET -1 ifvarvarl ACTORHP ACTORMAXHP { findnearactorzvar FIRSTAIDPANEL_ON ENEMYSEEKDISTANCE ENEMYSEEKZDISTANCEFAS ITEMTARGET state enemyfirstaidstationcheck }
+
 		setvar FINDNEAR_INTERVAL 0
+
+		ifvarn ITEMTARGET -1 addlogvar ITEMTARGET
 	}
 ends
 
 state playerstealjustbeforemonster
 	// List in the order of top to low priority
 	findnearactorz BOSS4 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz BOSS2 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz BOSS3 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz BOSS1 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz SCORPIONTANK BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz TANK BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz COMMANDER ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz NEWBEAST ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz OCTABRAIN ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz DRONE ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz LIZMAN ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz PIGCOP ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz LIZTROOP ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz ROTATEGUN ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
-	ifvare ITEMSEEK -1 findnearactorz SHARK ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead
+	ifvare ITEMSEEK -1 { findnearactorz BOSS2 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz BOSS3 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz BOSS1 BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz SCORPIONTANK BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz TANK BOSSSTOLENDISTANCE BOSSZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz COMMANDER ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz NEWBEAST ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz OCTABRAIN ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz DRONE ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz LIZMAN ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz PIGCOP ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz LIZTROOP ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz ROTATEGUN ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
+	ifvare ITEMSEEK -1 { findnearactorz SHARK ENEMYSTOLENDISTANCE ENEMYZSTOLENDISTANCE ITEMSEEK state itemdetectifdead }
 	ifvarn ITEMSEEK -1
 	{
 		ifvarn actorvar[ITEMSEEK].ITEMTARGET -1
@@ -13081,78 +12990,78 @@ state fireheatactors
 	ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 	{
 		findnearactor3d FEM1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM5 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM6 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM7 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM9 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM10 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d WOMAN 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d TOUGHGAL 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NAKED1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PODFEM1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d WOLFDUDE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE5 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE6 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE7 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE9 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d STAND1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DEALER 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d STAND3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d STAND4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PUNKDUDE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COP1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COP2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d SITTINGDUDE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PRESIDENTCLINTON 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d SHARK 6144 FIREACTORDMGID state firedetectifdead_heat 
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSHOOT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPDUCKING 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJETPACK 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPRUNNING 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJUSTSIT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPONTOILET 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PIGCOP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPDIVE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMAN 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMANJUMP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSPITTING 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAIN 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAINSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEAST 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTJUMP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTHANG 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COMMANDER 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COMMANDERSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1SHOOT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1LOB 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2SHOOT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2BREATH 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS3STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS3LOB 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS4STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM2 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM3 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM4 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM5 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM6 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM7 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM9 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM10 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d WOMAN 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG2 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d TOUGHGAL 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NAKED1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PODFEM1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d WOLFDUDE 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE2 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE3 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE5 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE6 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE7 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE9 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d STAND1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DEALER 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d STAND3 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d STAND4 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PUNKDUDE 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COP1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COP2 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d SITTINGDUDE 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL2 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL3 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL4 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PRESIDENTCLINTON 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d SHARK 6144 FIREACTORDMGID  state firedetectifdead_heat } 
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOP 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSTAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSHOOT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPDUCKING 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJETPACK 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPRUNNING 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJUSTSIT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPONTOILET 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOP 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPDIVE 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPSTAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMAN 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSTAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANJUMP 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSPITTING 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAIN 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAINSTAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEAST 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTSTAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTJUMP 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTHANG 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDER 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDERSTAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1STAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1SHOOT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1LOB 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2STAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2SHOOT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2BREATH 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3STAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3LOB 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4 6144 FIREACTORDMGID  state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4STAYPUT 6144 FIREACTORDMGID  state firedetectifdead_heat }
 		setvar FINDNEAR_INTERVAL 0
 	
 		ifvarn FIREACTORDMGID -1
@@ -13243,78 +13152,78 @@ state firebarreldmgactors
 	ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 	{
 		findnearactor3d FEM1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM5 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM6 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM7 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM9 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d FEM10 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d WOMAN 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d TOUGHGAL 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NAKED1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PODFEM1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d WOLFDUDE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE5 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE6 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE7 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DANCE9 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d STAND1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d DEALER 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d STAND3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d STAND4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PUNKDUDE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COP1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COP2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d SITTINGDUDE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PRESIDENTCLINTON 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d SHARK 6144 FIREACTORDMGID state firedetectifdead_heat 
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSHOOT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPDUCKING 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJETPACK 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPRUNNING 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJUSTSIT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPONTOILET 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PIGCOP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPDIVE 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMAN 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMANJUMP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSPITTING 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAIN 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAINSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEAST 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTJUMP 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTHANG 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COMMANDER 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d COMMANDERSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1SHOOT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS1LOB 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2SHOOT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS2BREATH 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS3 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS3STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS3LOB 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS4 6144 FIREACTORDMGID state firedetectifdead_heat
-		ifvare FIREACTORDMGID -1 findnearactor3d BOSS4STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM2 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM3 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM4 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM5 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM6 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM7 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM9 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d FEM10 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d WOMAN 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG2 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d TOUGHGAL 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NAKED1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PODFEM1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d WOLFDUDE 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE2 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE3 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE5 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE6 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE7 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DANCE9 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d STAND1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d DEALER 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d STAND3 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d STAND4 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PUNKDUDE 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COP1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COP2 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d SITTINGDUDE 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL2 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL3 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL4 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PRESIDENTCLINTON 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d SHARK 6144 FIREACTORDMGID state firedetectifdead_heat } 
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOP 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSHOOT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPDUCKING 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJETPACK 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPRUNNING 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJUSTSIT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPONTOILET 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOP 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPDIVE 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMAN 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANJUMP 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSPITTING 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAIN 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAINSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEAST 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTJUMP 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTHANG 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDER 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDERSTAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1SHOOT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1LOB 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2SHOOT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2BREATH 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3LOB 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4 6144 FIREACTORDMGID state firedetectifdead_heat }
+		ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4STAYPUT 6144 FIREACTORDMGID state firedetectifdead_heat }
 		setvar FINDNEAR_INTERVAL 0
 	
 		ifvarn FIREACTORDMGID -1
@@ -13402,83 +13311,83 @@ state firebarreldmgactors
 		ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 		{
 			findnearactor3d FEM1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM2 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM3 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM4 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM5 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM6 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM7 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM9 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM10 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d WOMAN 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG2 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d TOUGHGAL 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NAKED1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PODFEM1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d WOLFDUDE 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE2 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE3 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE5 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE6 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE7 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE9 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d STAND1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DEALER 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d STAND3 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d STAND4 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PUNKDUDE 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COP1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COP2 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d SITTINGDUDE 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL2 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL3 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL4 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PRESIDENTCLINTON 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ROTATEGUN 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d SHARK 1480 FIREACTORDMGID state firedetectifdead 
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOP 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSTAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSHOOT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPDUCKING 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJETPACK 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPRUNNING 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJUSTSIT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPONTOILET 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PIGCOP 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPDIVE 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPSTAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMAN 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSTAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMANJUMP 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSPITTING 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DRONE 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAIN 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAINSTAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEAST 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTSTAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTJUMP 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTHANG 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COMMANDER 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COMMANDERSTAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d TANK 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d EMPTYTANK 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d SCORPIONTANK 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1STAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1SHOOT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1LOB 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2STAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2SHOOT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2BREATH 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS3 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS3STAYPUT 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS3LOB 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS4 1480 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS4STAYPUT 1480 FIREACTORDMGID state firedetectifdead
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM2 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM3 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM4 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM5 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM6 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM7 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM9 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM10 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d WOMAN 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG2 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d TOUGHGAL 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NAKED1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PODFEM1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d WOLFDUDE 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE2 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE3 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE5 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE6 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE7 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE9 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d STAND1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DEALER 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d STAND3 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d STAND4 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PUNKDUDE 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COP1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COP2 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d SITTINGDUDE 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL2 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL3 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL4 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PRESIDENTCLINTON 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ROTATEGUN 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d SHARK 1480 FIREACTORDMGID state firedetectifdead } 
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOP 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSTAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSHOOT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPDUCKING 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJETPACK 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPRUNNING 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJUSTSIT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPONTOILET 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOP 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPDIVE 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPSTAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMAN 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSTAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANJUMP 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSPITTING 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DRONE 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAIN 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAINSTAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEAST 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTSTAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTJUMP 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTHANG 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDER 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDERSTAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d TANK 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d EMPTYTANK 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d SCORPIONTANK 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1STAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1SHOOT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1LOB 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2STAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2SHOOT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2BREATH 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3STAYPUT 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3LOB 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4 1480 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4STAYPUT 1480 FIREACTORDMGID state firedetectifdead }
 			setvar FINDNEAR_INTERVAL 0
 		}   
 	
@@ -13578,83 +13487,83 @@ state firedmgactors
 		ifvarvarg FINDNEAR_INTERVAL FINDNEAR_INTERVAL_MAX
 		{
 			findnearactor3d FEM1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM2 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM3 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM4 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM5 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM6 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM7 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM9 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d FEM10 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d WOMAN 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ROBOTDOG2 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d TOUGHGAL 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NAKED1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PODFEM1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d WOLFDUDE 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE2 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE3 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE5 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE6 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE7 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DANCE9 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d STAND1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DEALER 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d STAND3 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d STAND4 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PUNKDUDE 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COP1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COP2 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d SITTINGDUDE 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL2 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL3 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ANIMEGIRL4 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PRESIDENTCLINTON 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d ROTATEGUN 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d SHARK 844 FIREACTORDMGID state firedetectifdead 
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOP 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSTAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPSHOOT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPDUCKING 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJETPACK 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPRUNNING 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPJUSTSIT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZTROOPONTOILET 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PIGCOP 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPDIVE 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d PIGCOPSTAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMAN 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSTAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMANJUMP 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d LIZMANSPITTING 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d DRONE 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAIN 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d OCTABRAINSTAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEAST 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTSTAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTJUMP 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d NEWBEASTHANG 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COMMANDER 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d COMMANDERSTAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d TANK 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d EMPTYTANK 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d SCORPIONTANK 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1STAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1SHOOT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS1LOB 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2STAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2SHOOT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS2BREATH 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS3 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS3STAYPUT 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS3LOB 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS4 844 FIREACTORDMGID state firedetectifdead
-			ifvare FIREACTORDMGID -1 findnearactor3d BOSS4STAYPUT 844 FIREACTORDMGID state firedetectifdead
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM2 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM3 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM4 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM5 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM6 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM7 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM9 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d FEM10 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d WOMAN 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ROBOTDOG2 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d TOUGHGAL 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NAKED1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PODFEM1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d WOLFDUDE 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE2 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE3 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE5 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE6 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE7 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DANCE9 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d STAND1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DEALER 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d STAND3 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d STAND4 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PUNKDUDE 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COP1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COP2 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d SITTINGDUDE 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL2 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL3 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ANIMEGIRL4 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PRESIDENTCLINTON 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d ROTATEGUN 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d SHARK 844 FIREACTORDMGID state firedetectifdead } 
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOP 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSTAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPSHOOT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPDUCKING 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJETPACK 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPRUNNING 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPJUSTSIT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZTROOPONTOILET 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOP 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPDIVE 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d PIGCOPSTAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMAN 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSTAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANJUMP 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d LIZMANSPITTING 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d DRONE 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAIN 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d OCTABRAINSTAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEAST 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTSTAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTJUMP 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d NEWBEASTHANG 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDER 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d COMMANDERSTAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d TANK 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d EMPTYTANK 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d SCORPIONTANK 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1STAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1SHOOT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS1LOB 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2STAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2SHOOT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS2BREATH 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3STAYPUT 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS3LOB 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4 844 FIREACTORDMGID state firedetectifdead }
+			ifvare FIREACTORDMGID -1 { findnearactor3d BOSS4STAYPUT 844 FIREACTORDMGID state firedetectifdead }
 			setvar FINDNEAR_INTERVAL 0
 		}   
 	
@@ -18872,58 +18781,59 @@ state moveitem
 			ifvarn HOLDINGID -1 { getactorvar[HOLDINGID].myspawner RETURN subvar RETURN 16384 }
 			*/
 			findnearactorz DEALER 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz STAND1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz STAND3 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz STAND4 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE2 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE3 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE5 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE6 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE7 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DANCE9 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ROBOTDOG 960 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ROBOTDOG2 960 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz PRESIDENTCLINTON 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz COP1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz COP2 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz PUNKDUDE 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz SITTINGDUDE 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM2 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM3 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM4 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM5 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM6 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM7 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM9 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz FEM10 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz TOUGHGAL 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz WOMAN 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz NAKED1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz PODFEM1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ANIMEGIRL1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ANIMEGIRL2 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ANIMEGIRL3 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ANIMEGIRL4 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz EGG 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz GREENSLIME 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz SHARK 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz ROTATEGUN 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz LIZTROOP 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz PIGCOP 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz RECON 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz LIZMAN 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz DRONE 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz OCTABRAIN 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz COMMANDER 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz NEWBEAST 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz TANK 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz SCORPIONTANK 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz BOSS1 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz BOSS2 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz BOSS3 480 10240 HOLDINGID
-			ifvare HOLDINGID -1 findnearactorz BOSS4 480 10240 HOLDINGID
+			ifvare HOLDINGID -1 { findnearactorz STAND1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz STAND3 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz STAND4 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE2 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE3 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE5 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE6 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE7 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DANCE9 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ROBOTDOG 960 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ROBOTDOG2 960 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz PRESIDENTCLINTON 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz COP1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz COP2 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz PUNKDUDE 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz SITTINGDUDE 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM2 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM3 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM4 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM5 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM6 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM7 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM9 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz FEM10 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz TOUGHGAL 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz WOMAN 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz NAKED1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz PODFEM1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ANIMEGIRL1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ANIMEGIRL2 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ANIMEGIRL3 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ANIMEGIRL4 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz EGG 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz GREENSLIME 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz SHARK 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz ROTATEGUN 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz LIZTROOP 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz PIGCOP 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz RECON 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz LIZMAN 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz DRONE 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz OCTABRAIN 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz COMMANDER 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz NEWBEAST 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz TANK 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz SCORPIONTANK 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz BOSS1 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz BOSS2 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz BOSS3 480 10240 HOLDINGID }
+			ifvare HOLDINGID -1 { findnearactorz BOSS4 480 10240 HOLDINGID }
+
 			ifvarn HOLDINGID -1 { setvarvar RETURN HOLDINGID subvar RETURN 16384 }
 		}
 		ifvarn RETURN -1
@@ -18939,10 +18849,10 @@ state moveitem
 				setvarvar tempb ACTORWEIGHT
 				ifvarvarg STRENGTHRATIO LIFTRATIO
 				{
-				randvar TEMP3 15
-				addvar TEMP3 130
-				mulvarvar tempb TEMP3
-				divvar tempb 100
+					randvar TEMP3 15
+					addvar TEMP3 130
+					mulvarvar tempb TEMP3
+					divvar tempb 100
 				}
 				mulvar tempb 2
 				ifmove ITEMSHOOT nullop else shiftvarr tempb 2
@@ -18951,12 +18861,12 @@ state moveitem
 				ifmove ITEMFLY ifvarl ACTORWEIGHT 1 nullop
 				else
 				{
-				sound THROWSMACK
-				setactor[RETURN].htextra tempb
-				setactor[RETURN].htpicnum CRATE1 // SHOTSPARK1
-				setactor[RETURN].htowner PLAYERID // PLAYERID
-				getactor[THISACTOR].ang angvar
-				setactor[RETURN].htang angvar
+					sound THROWSMACK
+					setactor[RETURN].htextra tempb
+					setactor[RETURN].htpicnum CRATE1 // SHOTSPARK1
+					setactor[RETURN].htowner PLAYERID // PLAYERID
+					getactor[THISACTOR].ang angvar
+					setactor[RETURN].htang angvar
 				}
 			}
 			ifmove ITEMSHOOT 

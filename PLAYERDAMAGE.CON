@@ -2361,7 +2361,7 @@ state player_defense
 				// Defense Formula
 				ifvare tempvehicleid -1 { setvarvar PLAYERDEFENSETEMP PLAYERDEFENSE }
 				else { getactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR3 setvarvar PLAYERDEFENSETEMP TEMPVAR3 }
-				addlogvar PLAYERDEFENSETEMP
+				//addlogvar PLAYERDEFENSETEMP
 				state watchovermeskill-defense
 				ifvare ISDEVASTATOR? 1 divvar PLAYERDEFENSETEMP 10
 				ifvare ATTACKPICNUM SPIT { mulvar PLAYERDEFENSETEMP 2 divvar PLAYERDEFENSETEMP 5 }
@@ -2378,7 +2378,7 @@ state player_defense
 				ifvare ATTACKPICNUM COMMANDER_RPG divvar PLAYERDEFENSETEMP 2
 				ifvare ATTACKPICNUM LEADER_RPG divvar PLAYERDEFENSETEMP 2
 				ifvare ATTACKPICNUM BAALO_RPG divvar PLAYERDEFENSETEMP 2
-				addlogvar PLAYERDEFENSETEMP
+				//addlogvar PLAYERDEFENSETEMP
 		
 				subvarvar PLAYERDAMAGE PLAYERDEFENSETEMP
 		

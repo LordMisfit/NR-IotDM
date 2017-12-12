@@ -348,7 +348,13 @@ gamevar SPRITEID-TELEKENESIS_E -1 2 // Sprite ID of the item the monster is tele
 
 // End of Push/Pull/Grab/Lift Related Variables
 
+gamevar FREEZEMONSTERS 0 0
 //
+gamevar ENEMYSEEKDISTANCE 6144 2
+gamevar ENEMYSEEKZDISTANCE 1536 2
+gamevar ENEMYSEEKZDISTANCEFAS 4220 2
+
+
 gamevar FINDNEAR_INTERVAL 0 2
 gamevar FINDNEAR_INTERVAL_MAX 0 0
 gamevar VRVISORMSG1 0 131073
@@ -719,7 +725,9 @@ gamevar ITEMTARGETX 0 2
 gamevar ITEMTARGETY 0 2
 gamevar ITEMTARGETZ 0 2
 gamevar CANSEEITEM? 0 2
-gamevar SEEKDISTANCE 0 2
+gamevar ITEMSEEKTIMER 0 2
+gamevar ITEMSEEKTIMERMAX 66 2
+gamevar ITEMSEEKCOOLDOWN 0 2
 
 gamevar HEALSEEK 0 2
 gamevar HEALSEEKB 0 2

@@ -558,8 +558,8 @@ state showdamage
 	
 		ifvare TEMP APLAYER 
 		{
-			getactor[SHOWDAMAGEACTORID].cstat temp
-			ifvarand temp 8 
+			getactor[SHOWDAMAGEACTORID].cstat TEMP8
+			ifvarand TEMP8 8 
 			{ 
 				getactorvar[SHOWDAMAGEACTORID].VEHICLEID TEMPVAR3
 				ifvare TEMPVAR3 -1
@@ -599,8 +599,8 @@ state showdamage
 		} 
 		else
 		{
-			getactor[SHOWDAMAGEACTORID].cstat temp
-			ifvarand temp 8 
+			getactor[SHOWDAMAGEACTORID].cstat TEMP8
+			ifvarand TEMP8 8 
 			{ 
 				mulvar EXTRAZ 8
 				mulvar EXTRAZ -1 

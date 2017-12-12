@@ -7855,9 +7855,9 @@ useractor notenemy MAXHPAPUP 0
 				ifvarvarg tempc TEMPVAR nullop
 				else
 				{
-				state checkexplodeflag
-				state maxhpapbonusgive2
-				ifvarand ACTORFLAGS 4 nullop else state monsterstealjustbeforeplayer
+					state checkexplodeflag
+					state maxhpapbonusgive2
+					ifvarand ACTORFLAGS 4 nullop else state monsterstealjustbeforeplayer
 				}
 			}
 			else
