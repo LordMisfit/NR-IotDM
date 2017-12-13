@@ -4236,7 +4236,7 @@ state checkkillstatbonus
 	// addlogvar TEMP6
 	ifvarvarg TEMP6 TEMP7 nullop else
 	{
-		palfrom 24 64 64 64
+		palfrom 12 64 64 64
 		sound STATBONUSGRAB
 		sound STATBONUSGRAB
 		// To fill in here

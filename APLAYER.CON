@@ -7733,23 +7733,23 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 		{
 			// old increments of 4
 			addvar SHIELDPULSETIMER 1
-			ifvare SHIELDPULSETIMER 1  palfrom  2 0 0 64
-			ifvare SHIELDPULSETIMER 2  palfrom  4 0 0 64
-			ifvare SHIELDPULSETIMER 3  palfrom  6 0 0 64
-			ifvare SHIELDPULSETIMER 4  palfrom  8 0 0 64
-			ifvare SHIELDPULSETIMER 5  palfrom 10 0 0 64
-			ifvare SHIELDPULSETIMER 6  palfrom 12 0 0 64
-			ifvare SHIELDPULSETIMER 7  palfrom 14 0 0 64
-			ifvare SHIELDPULSETIMER 8  palfrom 16 0 0 64
-			ifvare SHIELDPULSETIMER 9  palfrom 14 0 0 64
-			ifvare SHIELDPULSETIMER 10 palfrom 12 0 0 64
-			ifvare SHIELDPULSETIMER 11 palfrom 10 0 0 64
-			ifvare SHIELDPULSETIMER 12 palfrom  8 0 0 64
-			ifvare SHIELDPULSETIMER 13 palfrom  6 0 0 64
-			ifvare SHIELDPULSETIMER 14 palfrom  4 0 0 64
+			ifvare SHIELDPULSETIMER 1  palfrom  1 0 0 64
+			ifvare SHIELDPULSETIMER 2  palfrom  2 0 0 64
+			ifvare SHIELDPULSETIMER 3  palfrom  4 0 0 64
+			ifvare SHIELDPULSETIMER 4  palfrom  5 0 0 64
+			ifvare SHIELDPULSETIMER 5  palfrom  7 0 0 64
+			ifvare SHIELDPULSETIMER 6  palfrom  8 0 0 64
+			ifvare SHIELDPULSETIMER 7  palfrom 10 0 0 64
+			ifvare SHIELDPULSETIMER 8  palfrom 11 0 0 64
+			ifvare SHIELDPULSETIMER 9  palfrom 10 0 0 64
+			ifvare SHIELDPULSETIMER 10 palfrom  8 0 0 64
+			ifvare SHIELDPULSETIMER 11 palfrom  7 0 0 64
+			ifvare SHIELDPULSETIMER 12 palfrom  5 0 0 64
+			ifvare SHIELDPULSETIMER 13 palfrom  4 0 0 64
+			ifvare SHIELDPULSETIMER 14 palfrom  2 0 0 64
 			ifvare SHIELDPULSETIMER 15
 			{
-				palfrom 2 0 0 64 
+				palfrom 1 0 0 64 
 				setvar SHIELDPULSETIMER 1
 			
 				ifvarl ESHIELDCOMPARISON 16 { stopsound BIOSHIELD_HUM_QUIETEST sound BIOSHIELD_HUM_QUIETEST }
@@ -7772,7 +7772,7 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 		ifvare player[THISACTOR].heat_on 1 
 		{ 
 			// old intensity 16
-			setvar VRVISORHUE? 1 palfrom 12 0 0 64
+			setvar VRVISORHUE? 1 palfrom 9 0 0 64
 		}
 		else setvar VRVISORHUE? 0
 	}
@@ -7817,74 +7817,74 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 		ifvarg TEMPVAR5 100 ifvarl TEMPVAR5 251
 		{
 			ifvare DAMAGEVISIONTIMER 0  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  0 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  8 16 0 48 else palfrom  0 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 1  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  2 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 10 16 0 48 else palfrom  1 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 2  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  4 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 12 16 0 48 else palfrom  2 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 3  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  3 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 4  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  8 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 16 16 0 48 else palfrom  4 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 5  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 10 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 18 16 0 48 else palfrom  5 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 6  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom  6 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 7  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 14 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 22 16 0 48 else palfrom  7 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 8  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 16 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 24 16 0 48 else palfrom  8 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 9  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom  9 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 10 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 20 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 28 16 0 48 else palfrom 10 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 11 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 22 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 30 16 0 48 else palfrom 11 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 12 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 24 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 32 16 0 48 else palfrom 12 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 13 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 26 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 34 16 0 48 else palfrom 13 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 14 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 28 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 36 16 0 48 else palfrom 14 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 15 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 30 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 38 16 0 48 else palfrom 15 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 16 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 32 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 40 16 0 48 else palfrom 16 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 17 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 30 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 38 16 0 48 else palfrom 15 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 18 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 28 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 36 16 0 48 else palfrom 14 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 19 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 26 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 34 16 0 48 else palfrom 13 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 20 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 24 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 32 16 0 48 else palfrom 12 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 21 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 22 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 30 16 0 48 else palfrom 11 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 22 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 20 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 28 16 0 48 else palfrom 10 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 23 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom  9 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 24 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 16 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 24 16 0 48 else palfrom  8 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 25 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 14 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 22 16 0 48 else palfrom  7 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 26 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom  6 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 27 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 10 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 18 16 0 48 else palfrom  5 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 28 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  8 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 16 16 0 48 else palfrom  4 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 29 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  3 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 30 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  4 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 12 16 0 48 else palfrom  2 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 31 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  2 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 10 16 0 48 else palfrom  1 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 1  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  1 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  9 16 0 48 else palfrom  1 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 2  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  2 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 10 16 0 48 else palfrom  1 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 3  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  3 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 11 16 0 48 else palfrom  2 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 4  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  4 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 12 16 0 48 else palfrom  2 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 5  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  3 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 6  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  7 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 15 16 0 48 else palfrom  4 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 7  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  8 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 16 16 0 48 else palfrom  4 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 8  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  9 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 17 16 0 48 else palfrom  5 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 9  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 11 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 19 16 0 48 else palfrom  5 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 10 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom  6 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 11 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 13 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 21 16 0 48 else palfrom  7 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 12 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 14 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 22 16 0 48 else palfrom  7 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 13 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 16 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 24 16 0 48 else palfrom  8 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 14 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 17 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 25 16 0 48 else palfrom  8 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 15 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom  9 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 16 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 19 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 27 16 0 48 else palfrom 10 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 17 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom  9 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 18 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 17 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 25 16 0 48 else palfrom  8 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 19 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 16 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 24 16 0 48 else palfrom  8 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 20 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 14 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 22 16 0 48 else palfrom  7 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 21 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 13 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 21 16 0 48 else palfrom  7 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 22 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom  6 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 23 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 11 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 19 16 0 48 else palfrom  5 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 24 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  9 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 17 16 0 48 else palfrom  5 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 25 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  8 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 16 16 0 48 else palfrom  4 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 26 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  7 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 15 16 0 48 else palfrom  4 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 27 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  3 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 28 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  4 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 12 16 0 48 else palfrom  2 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 29 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  3 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 11 16 0 48 else palfrom  2 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 30 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  2 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 10 16 0 48 else palfrom  1 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 31 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  1 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  9 16 0 48 else palfrom  1 32 0 0 } }
 			ifvare DAMAGEVISIONTIMER 32 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  0 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  8 16 0 48 else palfrom  0 32 0 0 } }
 		}
 		else
 		ifvarl TEMPVAR5 101
 		{
 			ifvare DAMAGEVISIONTIMER 0  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  0 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  8 16 0 48 else palfrom  0 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 1  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  3 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 11 16 0 48 else palfrom  3 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 2  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  6 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 3  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  9 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 17 16 0 48 else palfrom  9 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 4  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom 12 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 5  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 15 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 23 16 0 48 else palfrom 15 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 6  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom 18 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 7  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 21 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 29 16 0 48 else palfrom 21 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 8  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 24 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 32 16 0 48 else palfrom 24 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 9  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 27 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 35 16 0 48 else palfrom 27 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 10 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 30 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 38 16 0 48 else palfrom 30 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 11 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 33 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 41 16 0 48 else palfrom 33 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 12 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 36 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 44 16 0 48 else palfrom 36 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 13 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 39 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 47 16 0 48 else palfrom 39 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 14 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 42 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 50 16 0 48 else palfrom 42 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 15 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 45 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 53 16 0 48 else palfrom 45 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 16 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 48 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 56 16 0 48 else palfrom 48 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 17 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 45 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 53 16 0 48 else palfrom 45 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 18 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 42 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 50 16 0 48 else palfrom 42 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 19 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 39 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 47 16 0 48 else palfrom 39 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 20 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 36 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 44 16 0 48 else palfrom 36 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 21 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 33 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 41 16 0 48 else palfrom 33 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 22 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 30 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 38 16 0 48 else palfrom 30 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 23 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 27 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 35 16 0 48 else palfrom 27 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 24 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 24 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 32 16 0 48 else palfrom 24 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 25 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 21 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 29 16 0 48 else palfrom 21 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 26 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom 18 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 27 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 15 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 23 16 0 48 else palfrom 15 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 28 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom 12 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 29 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  9 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 17 16 0 48 else palfrom  9 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 30 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  6 32 0 0 } }
-			ifvare DAMAGEVISIONTIMER 31 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  3 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 11 16 0 48 else palfrom  3 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 1  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  1 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  9 16 0 48 else palfrom  1 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 2  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  3 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 10 16 0 48 else palfrom  3 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 3  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  4 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 11 16 0 48 else palfrom  4 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 4  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 12 16 0 48 else palfrom  6 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 5  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  7 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 13 16 0 48 else palfrom  7 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 6  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  9 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  9 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 7  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 10 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 15 16 0 48 else palfrom 10 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 8  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 17 16 0 48 else palfrom 12 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 9  { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 13 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 18 16 0 48 else palfrom 13 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 10 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 15 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom 15 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 11 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 16 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 21 16 0 48 else palfrom 16 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 12 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 22 16 0 48 else palfrom 18 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 13 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 19 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 24 16 0 48 else palfrom 19 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 14 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 21 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 25 16 0 48 else palfrom 21 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 15 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 22 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom 22 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 16 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 24 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 28 16 0 48 else palfrom 24 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 17 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 22 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 26 16 0 48 else palfrom 22 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 18 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 21 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 25 16 0 48 else palfrom 21 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 19 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 19 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 24 16 0 48 else palfrom 19 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 20 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 18 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 22 16 0 48 else palfrom 18 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 21 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 16 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 21 16 0 48 else palfrom 16 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 22 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 15 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 20 16 0 48 else palfrom 15 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 23 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 13 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 18 16 0 48 else palfrom 13 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 24 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 12 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 17 16 0 48 else palfrom 12 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 25 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom 10 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 15 16 0 48 else palfrom 10 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 26 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  9 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 14 16 0 48 else palfrom  9 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 27 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  7 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 13 16 0 48 else palfrom  7 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 28 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  6 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 12 16 0 48 else palfrom  6 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 29 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  4 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 11 16 0 48 else palfrom  4 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 30 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  3 16 0 48 else { ifvare VRVISORHUE? 1 palfrom 10 16 0 48 else palfrom  3 32 0 0 } }
+			ifvare DAMAGEVISIONTIMER 31 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  1 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  9 16 0 48 else palfrom  1 32 0 0 } }
 			ifvare DAMAGEVISIONTIMER 32 { ifvare BIOSHIELDFLASHPULSE? 1 palfrom  0 16 0 48 else { ifvare VRVISORHUE? 1 palfrom  8 16 0 48 else palfrom  0 32 0 0 } }
 		}
 		ifvarg DAMAGEVISIONTIMER 31 setvar DAMAGEVISIONTIMER 0
@@ -11218,7 +11218,7 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 														stopsound NODAMAGE
 														ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
 														state bioshieldhitsounds
-														palfrom 32 0 0 64
+														palfrom 24 0 0 64
 													}
 												}
 											}

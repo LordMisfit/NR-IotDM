@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (git187)
-definequote 1337 ^22VERSION:^0 git187.12122017
+setgamename Naferia's Reign (git188)
+definequote 1337 ^22VERSION:^0 git188.12132017
 
 action ANULLACTION 0
 
@@ -2087,7 +2087,7 @@ onevent EVENT_GAME
 									{
 										ifvarg CURRENTHITPOINTS 0 setactor[PLAYERID].extra 16384
 										sound SHORT_CIRCUIT
-										palfrom 32 32 0 0
+										palfrom 24 32 0 0
 					
 										randvar tempe 3 addvar tempe 4 // 4-7 dmg
 										randvar tempd 1 addvar tempd 2 // 2-3 dmg
@@ -2251,7 +2251,7 @@ onevent EVENT_GAME
 										getactorvar[TEMPVAR2].ACTORMAXHP TEMPVAR4
 										ifvarg TEMPVAR3 0 setactor[TEMPVAR2].extra 16384
 										sound SHORT_CIRCUIT
-										palfrom 8 32 0 0
+										palfrom 6 32 0 0
 					
 										randvar tempe 3 addvar tempe 4 // 4-7 dmg
 										randvar tempd 1 addvar tempd 2 // 2-3 dmg
@@ -2299,7 +2299,7 @@ onevent EVENT_GAME
 					
 										ifvarg tempe 0
 										{
-											palfrom 16 16 0 0
+											palfrom 12 16 0 0
 						
 											setvarvar ATTACKINGACTORPICNUM TEMP3
 											getactor[THISACTOR].pal TEMP
@@ -2582,7 +2582,7 @@ onevent EVENT_GAME
 										{
 											ifvarg CURRENTHITPOINTS 0 setactor[PLAYERID].extra 16384
 											sound SHORT_CIRCUIT
-											palfrom 16 8 8 8
+											palfrom 12 8 8 8
 						
 											randvar tempe 7 addvar tempe 8 // 8-15 dmg
 											randvar tempd 3 addvar tempd 4 // 4-7 dmg
@@ -2753,7 +2753,7 @@ onevent EVENT_GAME
 											getactorvar[TEMPVAR2].ACTORMAXHP TEMPVAR4
 											ifvarg TEMPVAR3 0 setactor[TEMPVAR2].extra 16384
 											sound SHORT_CIRCUIT
-											palfrom 8 8 8 8
+											palfrom 6 8 8 8
 						
 											randvar tempe 7 addvar tempe 8 // 8-15 dmg
 											randvar tempd 3 addvar tempd 4 // 4-7 dmg
@@ -2810,7 +2810,7 @@ onevent EVENT_GAME
 						
 											ifvarg tempe 0
 											{
-												palfrom 16 16 0 0
+												palfrom 12 16 0 0
 												setvar ATTACKINGACTORPICNUM 4890
 												getactor[THISACTOR].pal TEMP
 												setvarvar ATTACKINGACTORPAL TEMP

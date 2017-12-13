@@ -1341,7 +1341,7 @@ state lisashield_misc
 						stopsound NODAMAGE
 						ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
 						state bioshieldhitsounds
-						palfrom 32 0 0 64
+						palfrom 24 0 0 64
 					}
 				}
 			}
@@ -3311,7 +3311,7 @@ state invulndrainplayer
 			stopsound NODAMAGE
 			ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
 			state bioshieldhitsounds
-			palfrom 32 0 0 64
+			palfrom 24 0 0 64
 		
 			ifvarn player[THISACTOR].over_shoulder_on 0
 			{
