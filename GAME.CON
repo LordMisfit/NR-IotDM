@@ -1,8 +1,8 @@
 // 40 = 160X/Y/Z
 scriptsize 1048576 // FOR GOD'S SAKE MISFIT: KEEP THIS HERE TO PREVENT ANY POSSIBLE ANNOYING CRASHES!! >____>
 
-setgamename Naferia's Reign (git188)
-definequote 1337 ^22VERSION:^0 git188.12132017
+setgamename Naferia's Reign (git189)
+definequote 1337 ^22VERSION:^0 git189.03032018
 
 action ANULLACTION 0
 
@@ -1597,11 +1597,8 @@ include ACTORDAMAGE.CON
 // Kick Damage Code END
 
 move SHUTTLEVELS 16
-actor SPACESHUTTLE TOUGH
-enda
-
-actor SATELLITE TOUGH
-enda
+actor SPACESHUTTLE TOUGH enda
+actor SATELLITE TOUGH enda
 
 state checkfiresteamtags
 	getactor[THISACTOR].extra extrasav 
@@ -1712,13 +1709,14 @@ ends
 
 state deathmissileangadjust
 	setactor[RETURN].ang TEMPVAR
+
 	getactor[THISACTOR].z TEMPVAR
 	setactor[RETURN].z TEMPVAR
+
 	setactor[RETURN].owner PLAYERID
 ends
 
 state projectiles_menufreeze
-	//
 	ifvare mainmenu 0
 	{
 		getactor[THISACTOR].xvel TEMP
@@ -1816,10 +1814,14 @@ ends
 state gatestroke_zvelalt
 	getactor[THISACTOR].xvel TEMP4
 	setactor[RETURN].xvel TEMP4
+
 	getactor[THISACTOR].yvel TEMP4
 	setactor[RETURN].yvel TEMP4
+
 	getactor[THISACTOR].zvel TEMP4
 	setactor[RETURN].zvel TEMP4
+
+	divvar TEMP5 2
 ends
 
 onevent EVENT_GAME
@@ -3524,8 +3526,9 @@ onevent EVENT_GAME
 				addvar TEMPVAR 0
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 -96
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop -96
+				setthisprojectile[RETURN].drop TEMP5
 				
 				// Bottom Middle
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3533,8 +3536,9 @@ onevent EVENT_GAME
 				addvar TEMPVAR 0
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 96
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop 96
+				setthisprojectile[RETURN].drop TEMP5
 				
 				// Top Left Missile
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3542,8 +3546,9 @@ onevent EVENT_GAME
 				addvar TEMPVAR 16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 -128
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop -128
+				setthisprojectile[RETURN].drop TEMP5
 				
 				// Bottom Left Missile
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3551,8 +3556,9 @@ onevent EVENT_GAME
 				addvar TEMPVAR 16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 128
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop 128
+				setthisprojectile[RETURN].drop TEMP5
 				
 				// Top Right Missile
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3560,8 +3566,9 @@ onevent EVENT_GAME
 				addvar TEMPVAR -16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 -128
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop -128
+				setthisprojectile[RETURN].drop TEMP5
 				
 				// Bottom Right Missile
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3569,8 +3576,9 @@ onevent EVENT_GAME
 				addvar TEMPVAR -16
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 128
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop 128
+				setthisprojectile[RETURN].drop TEMP5
 				
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
@@ -3578,32 +3586,36 @@ onevent EVENT_GAME
 				addvar TEMPVAR 32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 -64
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop -64
+				setthisprojectile[RETURN].drop TEMP5
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 64
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop 64
+				setthisprojectile[RETURN].drop TEMP5
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 -64
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop -64
+				setthisprojectile[RETURN].drop TEMP5
 				
 				ezshoot TEMP3 GATEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -32
 				state deathmissileangadjust
 				setactor[RETURN].extra 105
+				setvar TEMP5 64
 				state gatestroke_zvelalt
-				setthisprojectile[RETURN].drop 64
+				setthisprojectile[RETURN].drop TEMP5
 				
 				espawn EXPLOSION2CUSTOM
 				state randomshrapnel
@@ -3640,323 +3652,363 @@ onevent EVENT_GAME
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 16
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -16
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 32
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -32
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 48
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -48
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 64
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -64
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 80
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -80
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 8
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -8
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 24
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -24
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 40
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -40
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 56
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -56
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 72
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -72
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop -128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 -128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 16
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -16
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 32
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -32
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 48
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -48
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 64
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -64
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 80
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -80
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 64
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 64
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 8
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -8
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 24
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -24
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 40
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -40
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 56
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -56
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR 72
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 				ezshoot TEMP3 STROKEMISSILE_SPLIT
 				getactor[THISACTOR].ang TEMPVAR
 				addvar TEMPVAR -72
 				state deathmissileangadjust
-				setthisprojectile[RETURN].drop 128
-				state gatestroke_zvelalt
 				setactor[RETURN].extra 140
+				setvar TEMP5 128
+				state gatestroke_zvelalt
+				setthisprojectile[RETURN].drop TEMP5
 			
 			
 				espawn EXPLOSION2CUSTOM
@@ -14488,7 +14540,7 @@ ends
 state itemseekaireset
 	setvar ITEMTARGET -1 
 	state enemyitemseekcooldown
-	addlogvar ITEMSEEKCOOLDOWN
+	//addlogvar ITEMSEEKCOOLDOWN
 ends
 
 state liztroopexplode
@@ -14796,7 +14848,7 @@ state liztroopseekitem
 					else setvar ITEMTARGET -1 
 				}
 			}
-			addlogvar ITEMSEEKTIMER
+			//addlogvar ITEMSEEKTIMER
 		}
 		else state itemseekaireset
 	}

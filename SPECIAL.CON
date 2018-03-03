@@ -30099,14 +30099,14 @@ state calculatetripbombatk
 			mulvarvar TEMP3 TEMP2
 			divvar TEMP3 100
 			addvarvar TEMP2 TEMP3
-			addlogvar TEMP3
-			addlogvar TEMP2
+			//addlogvar TEMP3
+			//addlogvar TEMP2
 		}
 
 		getactor[THISACTOR].yvel TEMP3
 		addvarvar TEMP2 TEMP3
-		addlogvar TEMP3
-		addlogvar TEMP2
+		//addlogvar TEMP3
+		//addlogvar TEMP2
 
 		ifvarg TEMP2 0
 		{
@@ -30117,8 +30117,8 @@ state calculatetripbombatk
 			displayrandvar TEMP5 1 
 			ifvare TEMP5 1 mulvar TEMP4 -1
 			addvarvar TEMP2 TEMP4
-			addlogvar TEMP4
-			addlogvar TEMP2
+			//addlogvar TEMP4
+			//addlogvar TEMP2
 		}
 	}
 	setactorvar[THISACTOR].ACTORATTACK TEMP2

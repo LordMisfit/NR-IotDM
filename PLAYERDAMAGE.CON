@@ -511,9 +511,10 @@ state player_mirrorshield
 					ifvare ATTACKINGACTORPICNUM STEAM setvar TEMPVAR7 0
 					ifvare ATTACKINGACTORPICNUM CEILINGSTEAM setvar TEMPVAR7 0
 		
-					ifvare TEMPVAR7 1
+					ifvarg TEMPVAR7 0
 					{ 
 						setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
+						//ifvarg DEFLECTEDDAMAGE 0 addlogvar DEFLECTEDDAMAGE
 						setactor[ATTACKINGACTOR].htextra 1 // TODO: Leave This
 						setactor[ATTACKINGACTOR].htpicnum ATTACKPICNUM 
 						setactor[ATTACKINGACTOR].htowner PLAYERID
@@ -532,9 +533,10 @@ state player_mirrorshield
 					ifvare MELEEATTACKER STEAM setvar TEMPVAR7 0
 					ifvare MELEEATTACKER CEILINGSTEAM setvar TEMPVAR7 0
 		
-					ifvare TEMPVAR7 1
+					ifvarg TEMPVAR7 0
 					{ 
 						setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
+						//ifvarg DEFLECTEDDAMAGE 0 addlogvar DEFLECTEDDAMAGE
 						setactor[MELEEATTACKERID].htextra 1 // TODO: Leave This
 						setactor[MELEEATTACKERID].htpicnum SHOTSPARK1
 						setactor[MELEEATTACKERID].htowner PLAYERID
@@ -1996,7 +1998,7 @@ state player_defense
 	ifvare ATTACKPICNUM SHRINKER { setactor[THISACTOR].htextra 0 break }
 	else ifvare ATTACKPICNUM SHRINKSPARK { setactor[THISACTOR].htextra 0 break }
 	else
-	{ // Fix positioning 3
+	{
 		setvarvar TEMPVAR4 PLAYERDAMAGE // TEMPVAR4 is for setting damage to 0 if Defense is 8x [4x on Release Mode] or more the damage of the attack
 		ifvare PUBLICBETA? 0 mulvar TEMPVAR4 8 else mulvar TEMPVAR4 4
 		subvar TEMPVAR4 1
@@ -2148,7 +2150,7 @@ state player_defense
 													stopsound NODAMAGE
 													ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
 													state bioshieldhitsounds
-													palfrom 32 0 0 64
+													palfrom 24 0 0 64
 													ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
 													state showdamage_playerbioshield
 													setvar ATTACKERDISPLAYTIMER 0
@@ -2243,9 +2245,9 @@ state player_defense
 			state setplayerinvulnprop
 		}
 		else
-		{ // Fix positioning 2
+		{
 			ifvarg PLAYERDAMAGE 0 
-			{ // Fix positioning 1
+			{
 				ifvarn MELEEATTACK? 1 getactor[ATTACKINGACTOR].ang ATTACKERANGLE
 				getactor[PLAYERID].ang PLAYERHITANGLE
 				setvarvar SYSDIFFANGLE ATTACKERANGLE
@@ -2354,10 +2356,10 @@ state player_defense
 						}
 					}
 				}
-		
+
 				ifvarg actorvar[ATTACKINGACTOR].ACTORQUADTIME 0 mulvar PLAYERDAMAGE 4
 				ifvare ISDEVASTATOR? 1 divvar PLAYERDAMAGE 2
-		
+
 				// Defense Formula
 				ifvare tempvehicleid -1 { setvarvar PLAYERDEFENSETEMP PLAYERDEFENSE }
 				else { getactorvar[tempvehicleid].ACTORDEFENSE TEMPVAR3 setvarvar PLAYERDEFENSETEMP TEMPVAR3 }
@@ -2740,7 +2742,7 @@ state player_defense
 										{
 											ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
 											state bioshieldhitsounds
-											palfrom 32 0 0 64
+											palfrom 24 0 0 64
 											ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
 											state showdamage_playerbioshield
 											setvar ATTACKERDISPLAYTIMER 0
@@ -2913,9 +2915,10 @@ state player_defense
 										ifvare ATTACKINGACTORPICNUM STEAM setvar TEMPVAR7 0
 										ifvare ATTACKINGACTORPICNUM CEILINGSTEAM setvar TEMPVAR7 0
 					
-										ifvare TEMPVAR7 1
-										{ 
+										ifvarg TEMPVAR7 0
+										{
 											setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
+											//ifvarg DEFLECTEDDAMAGE 0 addlogvar DEFLECTEDDAMAGE
 											setactor[ATTACKINGACTOR].htextra 1 // TODO: Leave This
 											setactor[ATTACKINGACTOR].htpicnum ATTACKPICNUM 
 											setactor[ATTACKINGACTOR].htowner PLAYERID
@@ -2934,9 +2937,10 @@ state player_defense
 										ifvare MELEEATTACKER STEAM setvar TEMPVAR7 0
 										ifvare MELEEATTACKER CEILINGSTEAM setvar TEMPVAR7 0
 					
-										ifvare TEMPVAR7 1
+										ifvarg TEMPVAR7 0
 										{ 
 											setvarvar DEFLECTEDDAMAGE TEMPPLAYERDAMAGE
+											//ifvarg DEFLECTEDDAMAGE 0 addlogvar DEFLECTEDDAMAGE
 											setactor[MELEEATTACKERID].htextra 1 // TODO: Leave This
 											setactor[MELEEATTACKERID].htpicnum SHOTSPARK1
 											setactor[MELEEATTACKERID].htowner PLAYERID
@@ -3133,52 +3137,18 @@ state player_defense
 		
 				ifvarl PLAYERDAMAGE 1 
 				{ 
-					ifvare PLAYEREQUIPSLOTITEM1 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } 
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM2 28 
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM3 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM4 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM5 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM6 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM7 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
-					else
-					ifvare PLAYEREQUIPSLOTITEM8 28
-					{
-						ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash }
-					}
+					ifvare PLAYEREQUIPSLOTITEM1 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM2 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM3 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM4 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM5 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM6 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM7 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
+					else ifvare PLAYEREQUIPSLOTITEM8 28 { ifrnd 231 { setvar PLAYERDAMAGE 0 state nullflash } }
 					else
 					{
-						ifvarvarg PLAYERDEFENSETEMP TEMPVAR4 // If Player has 8x the defense of the attack's damage [4 times on Release mode], they will receive 0 damage from any hit 
-						{ 
-							setvar PLAYERDAMAGE 0 
-							state nullflash 
-						}
+						// If Player has 8x the defense of the attack's damage [4x on Release mode], they will receive 0 damage from any hit
+						ifvarvarg PLAYERDEFENSETEMP TEMPVAR4 { setvar PLAYERDAMAGE 0 state nullflash }
 						else
 						{ 
 							ifrnd 224 // 87.5% chance of taking damage
@@ -3198,46 +3168,21 @@ state player_defense
 											ifvarg CURRENTCELLS -1 ifvarg DAMAGEINCELL 0
 											{
 												ifvare ENERGYSHIELDMODE 1 nullop
-												else 
-												{ 
-													setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 
-												}
+												else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
 											}
-											else 
-											{ 
-												setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 
-											}
+											else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
 										}
-										else 
-										{ 
-											setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 
-										}
+										else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
 									} 
 									else 
 									ifvare CHARACTERSELECTED? 12
 									{ 
-										ifvarand PLAYERSTATUS? 32
-										{
-											setvar PLAYERDAMAGE 0 
-											state nullflash 
-										}
-										else
-										{
-											setvar PLAYERDAMAGE 1 
-											palfrom 0 64 64 64 
-										}
+										ifvarand PLAYERSTATUS? 32 { setvar PLAYERDAMAGE 0 state nullflash }
+										else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
 									}
-									else 
-									{
-										setvar PLAYERDAMAGE 1 
-										palfrom 0 64 64 64 
-									}
+									else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
 								}
-								else
-								{
-									setvar PLAYERDAMAGE 1 
-									palfrom 0 64 64 64 
-								}
+								else { setvar PLAYERDAMAGE 1 palfrom 0 64 64 64 }
 							} 
 							else // 12.5% of the time the character will not actually take any damage at all if their defense fully protects them
 							{ 
@@ -3269,11 +3214,8 @@ state player_defense
 				*/
 		
 				//***********************************
-				//***********************************
 				//**CALCULATES DAMAGE THROUGH ARMOR**
 				//***********************************
-				//***********************************
-		
 				/*
 				ifvare tempvehicleid -1
 				{
@@ -3339,10 +3281,7 @@ state player_defense
 						}
 					}
 				}
-				else
-				{
-					setvar ARMORDAMAGE 0
-				}
+				else setvar ARMORDAMAGE 0
 		
 				ifvarg ARMORDAMAGE 0
 				{
@@ -3358,11 +3297,8 @@ state player_defense
 					state playerarmorbitsshrapnel
 					ifvare tempvehicleid -1 setvar PLAYERAPDAMAGED? 1 else setvar VEHICLEAPDAMAGED? 1
 				}
-		
-				//********************************
 				//********************************
 				//**END ARMOR DAMAGE CALCULATION**
-				//********************************
 				//********************************
 		
 				setvarvar TEMP3 MAXHITPOINTS
@@ -3704,8 +3640,6 @@ state player_defense
 						ifvarg TEMPMOD 0 
 						{
 							setvar MISCARRAYID 26 setactorvar[MISCARRAYID].MISCARRAYID_AMOUNT TEMPVAR5 // DEATHSWITCH-DELAY
-							//addlogvar TEMPMOD
-							//addlogvar TEMPVAR5
 						}
 					}
 				}
@@ -3730,7 +3664,7 @@ state player_defense
 									stopsound NODAMAGE
 									ifvare ENERGYSHIELDMODE 1 { setvar sparkflag 1 state sparkstate }
 									state bioshieldhitsounds
-									palfrom 32 0 0 64
+									palfrom 24 0 0 64
 									ifvare CELLDAMAGETEMP 0 setvar BIOSHIELDNULLDAMAGE 1 else setvar BIOSHIELDNULLDAMAGE 0
 									setvar ATTACKERDISPLAYTIMER 0
 								}
@@ -3762,9 +3696,9 @@ state player_defense
 					ifvarl SYSDIFFANGLE 0 addvar SYSDIFFANGLE 2048
 				}
 				setvar MELEEATTACK? 0
-			} // Fix positioning 1
-		} // Fix positioning 2	
-	} // Fix positioning 3
+			}
+		}
+	}
 	setvar MELEEATTACKERID -1
 	setvar ATTACKINGACTOR -1
 ends

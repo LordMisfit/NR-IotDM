@@ -2335,8 +2335,7 @@ state handle_dead_dukes
 	else
 	{
 		strength 0
-		ifhitweapon
-			ifwasweapon RADIUSEXPLOSION
+		ifhitweapon ifwasweapon RADIUSEXPLOSION
 		{
 			state standard_jibs
 			killit

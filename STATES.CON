@@ -3479,14 +3479,13 @@ state invulnauradetect
 	{
 		ifvarn INVULNAURATARGET -1
 		{ 
-		
 			getactor[INVULNAURATARGET].owner TEMPVAR ifvare TEMPVAR -1 { setvar INVULNAURATARGET -1 break }
 			ifvarvare INVULNAURATARGET PARENTID { setvar INVULNAURATARGET -1 break }
 		
 			getactor[INVULNAURATARGET].picnum temp
 			ifvare temp APLAYER
 			{ 
-			getactor[INVULNAURATARGET].owner TEMPVAR ifvare TEMPVAR -1 { setvar INVULNAURATARGET -1 break } else { getactorvar[INVULNAURATARGET].CURRENTHITPOINTS tempc } // Checks the owner to see if the APLAYER sprite is a hologram [-1] [this checks ensures you can't die due to your hologram being touched by an invuln carrier]
+				getactor[INVULNAURATARGET].owner TEMPVAR ifvare TEMPVAR -1 { setvar INVULNAURATARGET -1 break } else { getactorvar[INVULNAURATARGET].CURRENTHITPOINTS tempc } // Checks the owner to see if the APLAYER sprite is a hologram [-1] [this checks ensures you can't die due to your hologram being touched by an invuln carrier]
 			}
 			else getactorvar[INVULNAURATARGET].ACTORHP tempc
 			ifvarl tempc 1 { setvar INVULNAURATARGET -1 break } // Makes it that if the current "seeker" is dead, set to -1 to search for a living one
@@ -9474,7 +9473,7 @@ state enemyitemzsetup1
 	setactor[THISACTOR].z ITEMSEEKERZ
 
 	canseespr THISACTOR ITEMTARGET CANSEEITEM?
-	ifvarg CANSEEITEM? 0 addlogvar CANSEEITEM?
+	ifvarg CANSEEITEM? 0 //addlogvar CANSEEITEM?
 
 	addvar ITEMTARGETZ 4096
 	addvar ITEMSEEKERZ 8192
@@ -9717,7 +9716,7 @@ state actorseekingitem
 
 		setvar FINDNEAR_INTERVAL 0
 
-		ifvarn ITEMTARGET -1 addlogvar ITEMTARGET
+		ifvarn ITEMTARGET -1 //addlogvar ITEMTARGET
 	}
 ends
 

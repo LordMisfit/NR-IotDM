@@ -158,18 +158,18 @@ state enemy-newfloorslime
 					{
 						ifvarg ACTORBOOTSAMOUNT 0 
 						{ 
-						subvar ACTORBOOTSAMOUNT 1 
-						state enemybootscheck
+							subvar ACTORBOOTSAMOUNT 1 
+							state enemybootscheck
 						} 
 						else 
 						{ 
-						state enemycheckhealthdmgflr 
-						randvar FLOORDAMAGETEMP 2 
-						mulvar FLOORDAMAGETEMP 1 
-						addvar FLOORDAMAGETEMP 1
-						state enemynewfloorslime_hpmaxcalc
-						divvar tempe 1500
-						state enemydmgflr_hpmaxcalcend
+							state enemycheckhealthdmgflr 
+							randvar FLOORDAMAGETEMP 2 
+							mulvar FLOORDAMAGETEMP 1 
+							addvar FLOORDAMAGETEMP 1
+							state enemynewfloorslime_hpmaxcalc
+							divvar tempe 1500
+							state enemydmgflr_hpmaxcalcend
 						}
 					}
 				}
@@ -3957,7 +3957,7 @@ state player-amoebaacid_dmg
 			//*********************
 			//*Character Modifiers*
 			//*********************
-			addlogvar CHARACTERSELECTED?
+			//addlogvar CHARACTERSELECTED?
 			ifvare CHARACTERSELECTED? 2
 			{
 				ifrnd 40 state addcorrosion

@@ -14428,10 +14428,10 @@ onevent EVENT_DISPLAYREST // WARNING: Unsynchronized Event
           
 					addvar digx 0 // 110
 					addvar digy 4 // 53
-					getplayer[THISACTOR].pals 0 TEMPVAR5 //Red [0-63]
-					getplayer[THISACTOR].pals 1 TEMPVAR6 //Green [0-63]
-					getplayer[THISACTOR].pals 2 TEMPVAR7 //Blue [0-63]
-					getplayer[THISACTOR].pals_time TEMPVAR8 //Intensity [0-63]
+					getplayer[THISACTOR].pals 0 TEMPVAR5			// Red [0-63]
+					getplayer[THISACTOR].pals 1 TEMPVAR6			// Green [0-63]
+					getplayer[THISACTOR].pals 2 TEMPVAR7			// Blue [0-63]
+					getplayer[THISACTOR].pals_time TEMPVAR8		// Intensity [0-63]
 					redefinequote 332 .PALS ^210^0/^221^0/^162^0/^20T^0: ^21%d^0/^22%d^0/^16%d^0/^20%d
 					qsprintf 332 332 TEMPVAR5 TEMPVAR6 TEMPVAR7 TEMPVAR8
 					setvar temp 332

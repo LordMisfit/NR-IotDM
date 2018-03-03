@@ -58,23 +58,23 @@ onevent EVENT_EGS
 			setvarvar TEMP2 PLAYERATTACK 
 			mulvar TEMP2 4
 			addvar TEMP2 100
-			addlogvar TEMP2
+			//addlogvar TEMP2
 			ifvarg PLAYERLEVEL 0
 			{
 				setvarvar TEMP3 PLAYERLEVEL 
 				mulvar TEMP3 3 divvar TEMP3 2
 				addvar TEMP3 100
-				addlogvar TEMP3
+				//addlogvar TEMP3
 
 				mulvarvar TEMP2 TEMP3
 				divvar TEMP2 100
-				addlogvar TEMP2
+				//addlogvar TEMP2
 			}
 			ifvare CHARACTERSELECTED? 7 
 			{ 
 				mulvar TEMP2 5 
 				divvar TEMP2 3 
-				addlogvar TEMP2
+				//addlogvar TEMP2
 			}
 
 			setactorvar[THISACTOR].ACTORATTACK TEMP2
@@ -812,7 +812,10 @@ onevent EVENT_USE
 						// Lisa's new ability to charge her Bioshield via EP [Key Combo of Strafe-Left/Strafe-Right/Use required]
 						ifvare CHARACTERSELECTED? 8 ifvare HAVEENERGYSHIELD? 1 ifvare ENERGYSHIELDMODE 1 ifvarg CURRENTENERGYPOINTS 0
 						{
-							ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR setvar ESHIELDCHARGETIMER 0
+							ifvarvare CURRENTCELLS MAXCELLS ifvarvare DAMAGEINCELL ESHIELDDMGFACTOR 
+							{
+								setvar ESHIELDCHARGETIMER 0
+							}
 							else
 							{
 								setvarvar ESHIELDCHARGEMULTI ESHIELDCHARGETIMER divvar ESHIELDCHARGEMULTI 52 addvar ESHIELDCHARGEMULTI 1

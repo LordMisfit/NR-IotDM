@@ -1931,21 +1931,21 @@ gamevar MISCARRAYID -1 131072
 // [101] = DUKE-FORM?
 // [102] = JACK-FORM?
 // [103] = BUBSY-FORM?			// 0 = Normal Form, 1 = 'Loki Mask' on
-// [104] = AMI-FORM?			// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
+// [104] = AMI-FORM?				// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 // [105] = LOWANG-FORM?
 // [106] = ESSENCE-FORM?		// 0 = Normal Attire/Weapons, 1 = Armorless Attire/Weapons
 // [107] = TED-FORM?
 // [108] = LISA-FORM?
 // [109] = CYBANIS-FORM?
-// [110] = NETHRA-FORM?		// 0 = 'Protector Drone' Form, 1 = 'Human' Form
+// [110] = NETHRA-FORM?			// 0 = 'Protector Drone' Form, 1 = 'Human' Form
 // [111] = PAULA-FORM?
 // [112] = LORI-FORM?
-// [113] = MINAKO-FORM?		// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
+// [113] = MINAKO-FORM?			// 0 = 'Civilian' Form, 1 = 'Senshi' Form, 2 = "Balanced" Form
 // [114] = MYSTERY1-FORM?
 // [115] = MAKEN-FORM?
 // ***[116-200] are reserved for Party Member IDs***
-// [201] = hitwall				**RESERVED FOR IF NEEDED**
-// [202] = hitwall2			**RESERVED FOR IF NEEDED**
+// [201] = hitwall					**RESERVED FOR IF NEEDED**
+// [202] = hitwall2					**RESERVED FOR IF NEEDED**
 // [203] = hitwall-x
 // [204] = hitwall-y
 // [205] = hitwall-point2
@@ -1982,6 +1982,10 @@ gamevar MISCARRAYID_AMOUNTTEMP 0 131072 // Keeps a temporary var at the forefron
 gamevar MISCARRAYID_AMOUNTTEMP2 0 131072 // Keeps a 2nd temporary var at the forefront for if-checks and array changes
 //gamevar MISCARRAYID_AMOUNTTEMP3 0 131072 // Keeps a 3rd temporary var at the forefront for if-checks and array changes
 //gamevar MISCARRAYID_AMOUNTTEMP4 0 131072 // Keeps a 4th temporary var at the forefront for if-checks and array changes
+//gamevar MISCARRAYID_AMOUNTTEMP5 0 131072 // Keeps a 4th temporary var at the forefront for if-checks and array changes
+//gamevar MISCARRAYID_AMOUNTTEMP6 0 131072 // Keeps a 4th temporary var at the forefront for if-checks and array changes
+//gamevar MISCARRAYID_AMOUNTTEMP7 0 131072 // Keeps a 4th temporary var at the forefront for if-checks and array changes
+//gamevar MISCARRAYID_AMOUNTTEMP8 0 131072 // Keeps a 4th temporary var at the forefront for if-checks and array changes
 
 gamevar itemidinuse -1 0 // Indexes what item id is trying to be used in the menu [set to -1 when not in use]
 // ID #0 = Resurrection Chalice
