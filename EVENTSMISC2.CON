@@ -2752,7 +2752,7 @@ onevent EVENT_FIRE // Cancel Button
 	}
 endevent
 	
-onevent EVENT_QUICKKICK // Alt-fire mode for now
+onevent EVENT_ALTWEAPON // Alt-fire mode for now 
 	ifvare mainmenu 1 state setreturn-1 
 	else 
 	{ 
@@ -2765,6 +2765,36 @@ onevent EVENT_QUICKKICK // Alt-fire mode for now
 				ifvarg EDGEGRAPPLING 0 state setreturn-1
 				else
 				{
+					ifvare DEATHMISSILESUSABLE? 1
+					{
+						getplayer[THISACTOR].curr_weapon TEMPVAR
+						ifvare TEMPVAR 4
+						{
+							state setreturn-1
+							setvar DEATHMISSILEACTIVATED 1
+							setvar DEATHMISSILETIMERLAPSE 0
+						}
+					}
+				}
+			}
+		}
+	}
+endevent
+	
+onevent EVENT_QUICKKICK
+	ifvare mainmenu 1 state setreturn-1 
+	else 
+	{ 
+		ifvarn shop_id -1 state setreturn-1 
+		else
+		{
+			ifvarg ONAWALL? 0 state setreturn-1
+			else
+			{
+				ifvarg EDGEGRAPPLING 0 state setreturn-1
+				else
+				{
+				/*
 					ifvare DEATHMISSILESUSABLE? 1
 					{
 						state setreturn-1
@@ -2792,6 +2822,7 @@ onevent EVENT_QUICKKICK // Alt-fire mode for now
 							ifvarg VAMPIRETIME 1 sound SHOOT_VAMPIREITEM
 						}
 					}
+				*/
 				}
 			}
 		}
