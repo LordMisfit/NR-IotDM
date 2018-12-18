@@ -33,7 +33,6 @@ definecheat 25 endvolume // <RESERVED>
 
 definegamefuncname 11 GLIDING_MODE
 definegamefuncname 30 MAIN_MENU
-definegamefuncname 49 ALT_FIRE
 // definegamefuncname 50 NEXT_CHAR/WEAP
 // definegamefuncname 51 PREV_CHAR/WEAP
 
