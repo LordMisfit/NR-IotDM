@@ -25,20 +25,20 @@ state freezecode_player
 							{
 								getactor[THISACTOR].sectnum temp
 								getsector[temp].floorpicnum TEMPVAR3
-								ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-								else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-								else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+								ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+								else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+								else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+								else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+								else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 								else
 								{
 									getactor[THISACTOR].sectnum temp
 									getsector[temp].hitag TEMPVAR3
-									ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-									else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-									else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+									ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+									else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+									else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+									else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+									else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 									else
 									{
 										mulvar tempe 12
@@ -51,20 +51,20 @@ state freezecode_player
 							{
 								getactor[THISACTOR].sectnum temp
 								getsector[temp].ceilingpicnum TEMPVAR3
-								ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-								else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-								else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+								ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+								else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+								else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+								else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+								else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 								else
 								{
 									getactor[THISACTOR].sectnum temp
 									getsector[temp].hitag TEMPVAR3
-									ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-									else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-									else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+									ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+									else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+									else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+									else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+									else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 									else
 									{
 										mulvar tempe 28
@@ -85,20 +85,20 @@ state freezecode_player
 							{
 								getactor[THISACTOR].sectnum temp
 								getsector[temp].floorpicnum TEMPVAR3
-								ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-								else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-								else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+								ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+								else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+								else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+								else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+								else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 								else
 								{
 									getactor[THISACTOR].sectnum temp
 									getsector[temp].hitag TEMPVAR3
-									ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-									else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-									else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+									ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+									else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+									else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+									else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+									else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 									else
 									{
 										mulvar tempe 12
@@ -111,20 +111,20 @@ state freezecode_player
 							{
 								getactor[THISACTOR].sectnum temp
 								getsector[temp].ceilingpicnum TEMPVAR3
-								ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-								else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-								else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-								else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+								ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+								else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+								else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+								else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+								else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 								else
 								{
 									getactor[THISACTOR].sectnum temp
 									getsector[temp].hitag TEMPVAR3
-									ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-									else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-									else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-									else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+									ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+									else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+									else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+									else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+									else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 									else
 									{
 										mulvar tempe 28
@@ -6298,30 +6298,34 @@ actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
 			{
 				setvarvar TEMPVAR4 player[THISACTOR].oposz
 				subvarvar TEMPVAR4 player[THISACTOR].posz
-				ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR4 0
-				ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR4 534
-				ifvare CHARACTERSELECTED? 3
+				ifvare CHARACTERSELECTED? 1 setvar TEMPVAR4 0
+				else
 				{
-					setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
-					ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar TEMPVAR4 541 else mulvar TEMPVAR4 635
+					ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR4 534
+					ifvare CHARACTERSELECTED? 3
+					{
+						setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+						ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar TEMPVAR4 541 else mulvar TEMPVAR4 635
+					}
+					ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 821
+					ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 198
+					ifvare CHARACTERSELECTED? 6
+					{
+						setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+						ifvare MISCARRAYID_AMOUNTTEMP 0 mulvar TEMPVAR4 -783 else mulvar TEMPVAR4 -627 
+					}
+					ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR4 211
+					ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR4 723
+					ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR4 -811
+					ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR4 623
+					ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR4 851
+					ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR4 647
+					ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR4 778
+					ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR4 556
+					ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR4 806
+					divvar TEMPVAR4 1000
 				}
-				ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 821
-				ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 198
-				ifvare CHARACTERSELECTED? 6
-				{
-					setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
-					ifvare MISCARRAYID_AMOUNTTEMP 0 mulvar TEMPVAR4 -783 else mulvar TEMPVAR4 -627 
-				}
-				ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR4 211
-				ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR4 723
-				ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR4 -811
-				ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR4 623
-				ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR4 851
-				ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR4 647
-				ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR4 778
-				ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR4 556
-				ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR4 806
-				divvar TEMPVAR4 1000
+
 				ifvare CHARACTERSELECTED? 1 { ifvarg TEMPVAR4 0 setvar TEMPVAR4 0 }
 				ifvare CHARACTERSELECTED? 2 { ifvarg TEMPVAR4 1094 setvar TEMPVAR4 1094 }
 				ifvare CHARACTERSELECTED? 3
@@ -6357,30 +6361,33 @@ actor APLAYER MAXPLAYERHEALTH PSTAND 0 0
 			{
 				setvarvar TEMPVAR4 player[THISACTOR].oposz
 				subvarvar TEMPVAR4 player[THISACTOR].posz
-				ifvare CHARACTERSELECTED? 1 mulvar TEMPVAR4 0
-				ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR4 348
-				ifvare CHARACTERSELECTED? 3
+				ifvare CHARACTERSELECTED? 1 setvar TEMPVAR4 0
+				else
 				{
-					setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
-					ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar TEMPVAR4 355 else mulvar TEMPVAR4 388
+					ifvare CHARACTERSELECTED? 2 mulvar TEMPVAR4 348
+					ifvare CHARACTERSELECTED? 3
+					{
+						setvar MISCARRAYID 231 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // BUBSY-DIVINGSUIT?
+						ifvare MISCARRAYID_AMOUNTTEMP 1 mulvar TEMPVAR4 355 else mulvar TEMPVAR4 388
+					}
+					ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 451
+					ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 165
+					ifvare CHARACTERSELECTED? 6
+					{
+						setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
+						ifvare MISCARRAYID_AMOUNTTEMP 0 mulvar TEMPVAR4 -3607 else mulvar TEMPVAR4 -2525 
+					}
+					ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR4 174
+					ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR4 420
+					ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR4 -4295
+					ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR4 384
+					ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR4 460
+					ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR4 393
+					ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR4 438
+					ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR4 357
+					ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR4 446
+					divvar TEMPVAR4 1000
 				}
-				ifvare CHARACTERSELECTED? 4 mulvar TEMPVAR4 451
-				ifvare CHARACTERSELECTED? 5 mulvar TEMPVAR4 165
-				ifvare CHARACTERSELECTED? 6
-				{
-					setvar MISCARRAYID 106 getactorvar[MISCARRAYID].MISCARRAYID_AMOUNT MISCARRAYID_AMOUNTTEMP // ESSENCE-FORM?
-					ifvare MISCARRAYID_AMOUNTTEMP 0 mulvar TEMPVAR4 -3607 else mulvar TEMPVAR4 -2525 
-				}
-				ifvare CHARACTERSELECTED? 7 mulvar TEMPVAR4 174
-				ifvare CHARACTERSELECTED? 8 mulvar TEMPVAR4 420
-				ifvare CHARACTERSELECTED? 9 mulvar TEMPVAR4 -4295
-				ifvare CHARACTERSELECTED? 10 mulvar TEMPVAR4 384
-				ifvare CHARACTERSELECTED? 11 mulvar TEMPVAR4 460
-				ifvare CHARACTERSELECTED? 12 mulvar TEMPVAR4 393
-				ifvare CHARACTERSELECTED? 13 mulvar TEMPVAR4 438
-				ifvare CHARACTERSELECTED? 14 mulvar TEMPVAR4 357
-				ifvare CHARACTERSELECTED? 15 mulvar TEMPVAR4 446
-				divvar TEMPVAR4 1000
 				setvarvar TEMPVAR5 player[THISACTOR].posz
 				addvarvar TEMPVAR5 TEMPVAR4
 				setplayer[THISACTOR].posz TEMPVAR5

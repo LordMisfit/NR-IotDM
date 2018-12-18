@@ -484,20 +484,20 @@ state freezecode_actor
 					{
 						getactor[THISACTOR].sectnum temp
 						getsector[temp].floorpicnum TEMPVAR3
-						ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-						else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-						else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+						ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+						else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+						else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+						else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+						else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 						else
 						{
 							getactor[THISACTOR].sectnum temp
 							getsector[temp].hitag TEMPVAR3
-							ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-							else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-							else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+							ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+							else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+							else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+							else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+							else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 							else
 							{
 								mulvar tempe 12
@@ -510,20 +510,20 @@ state freezecode_actor
 					{
 						getactor[THISACTOR].sectnum temp
 						getsector[temp].ceilingpicnum TEMPVAR3
-						ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-						else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-						else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+						ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+						else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+						else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+						else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+						else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 						else
 						{
 							getactor[THISACTOR].sectnum temp
 							getsector[temp].hitag TEMPVAR3
-							ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-							else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-							else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+							ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+							else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+							else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+							else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+							else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 							else
 							{
 								mulvar tempe 28
@@ -544,20 +544,20 @@ state freezecode_actor
 					{
 						getactor[THISACTOR].sectnum temp
 						getsector[temp].floorpicnum TEMPVAR3
-						ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-						else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-						else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+						ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+						else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+						else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+						else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+						else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 						else
 						{
 							getactor[THISACTOR].sectnum temp
 							getsector[temp].hitag TEMPVAR3
-							ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-							else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-							else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+							ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+							else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+							else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+							else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+							else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 							else
 							{
 								mulvar tempe 12
@@ -570,20 +570,20 @@ state freezecode_actor
 					{
 						getactor[THISACTOR].sectnum temp
 						getsector[temp].ceilingpicnum TEMPVAR3
-						ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-						else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-						else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-						else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+						ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+						else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+						else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+						else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+						else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 						else
 						{
 							getactor[THISACTOR].sectnum temp
 							getsector[temp].hitag TEMPVAR3
-							ifvare TEMPVAR3 NEWFLOORPLASMA mulvar tempe 0
-							else ifvare TEMPVAR3 HOTLAVA mulvar tempe 0
-							else ifvare TEMPVAR3 MEGALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 ULTRALAVA mulvar tempe 0
-							else ifvare TEMPVAR3 HYPERMAGMA mulvar tempe 0
+							ifvare TEMPVAR3 NEWFLOORPLASMA setvar tempe 0
+							else ifvare TEMPVAR3 HOTLAVA setvar tempe 0
+							else ifvare TEMPVAR3 MEGALAVA setvar tempe 0
+							else ifvare TEMPVAR3 ULTRALAVA setvar tempe 0
+							else ifvare TEMPVAR3 HYPERMAGMA setvar tempe 0
 							else
 							{
 								mulvar tempe 28

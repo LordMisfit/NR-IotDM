@@ -6144,7 +6144,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 1 // Damage Shell
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6240,10 +6239,23 @@ ifvare mainmenu 1
 					getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
 					setvar USESKILLARRAY 2 // Mercury Aqua Protection
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
-					ifvarand CHEATBITFIELD? 128 mulvar varname 0 else { ifvarand TEMP 256 mulvar varname 0 else mulvarvar varname TEMPVAR }
-					divvar varname 100
+					ifvarand CHEATBITFIELD? 128 setvar varname 0 
+					else 
+					{ 
+						ifvarand TEMP 256 setvar varname 0 
+						else 
+						{
+							mulvarvar varname TEMPVAR 
+							divvar varname 100
+						}
+					}
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
-					ifvarand CHEATBITFIELD? 128 addvar varname 0 else { ifvarand TEMP 256 addvar varname 0 else addvarvar varname TEMPVAR }
+					ifvarand CHEATBITFIELD? 128 addvar varname 0 
+					else 
+					{ 
+						ifvarand TEMP 256 addvar varname 0 
+						else addvarvar varname TEMPVAR 
+					}
 			
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
 					setvarvar ENERGYCOST_TEMP varname state energycost_check setvarvar varname ENERGYCOST_TEMP
@@ -6312,7 +6324,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 3 // Mercury Quickening
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6428,7 +6439,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 4 // Fortify [Lesser]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6480,7 +6490,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 5 // Fortify [Moderate]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6532,7 +6541,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 6 // Fortify [Greater]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6626,7 +6634,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 7 // Bloodlusting
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6703,7 +6710,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 8 // Lesser Resurrection
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6757,7 +6763,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 9 // Heal Life [Lesser]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6811,7 +6816,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 10 // Cure Ailment [Moderate]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6865,7 +6869,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 11 // Heal Life [Greater]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6920,7 +6923,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 12 // Greater Resurrection
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -6974,7 +6976,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 13 // Cure Ailment [Greatest]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7048,7 +7049,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 14 // PK Shield
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7120,7 +7120,16 @@ ifvare mainmenu 1
 					getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
 					setvar USESKILLARRAY 15 // Triad Refractor
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
-					ifvarand CHEATBITFIELD? 128 mulvar varname 0 else { ifvarand TEMP 32 mulvar varname 0 else mulvarvar varname TEMPVAR }
+					ifvarand CHEATBITFIELD? 128 setvar varname 0 
+					else 
+					{ 
+						ifvarand TEMP 32 setvar varname 0 
+						else 
+						{
+							mulvarvar varname TEMPVAR 
+							divvar varname 100
+						}
+					}
 					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					ifvarand CHEATBITFIELD? 128 addvar varname 0 else { ifvarand TEMP 32 addvar varname 0 else addvarvar varname TEMPVAR }
@@ -7191,8 +7200,16 @@ ifvare mainmenu 1
 					getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
 					setvar USESKILLARRAY 16 // Triad Ragnarok
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
-					ifvarand CHEATBITFIELD? 128 mulvar varname 0 else { ifvarand TEMP 64 mulvar varname 0 else mulvarvar varname TEMPVAR }
-					divvar varname 100
+					ifvarand CHEATBITFIELD? 128 setvar varname 0 
+					else 
+					{ 
+						ifvarand TEMP 64 setvar varname 0 
+						else 
+						{
+							mulvarvar varname TEMPVAR 
+							divvar varname 100
+						}
+					}
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					ifvarand CHEATBITFIELD? 128 addvar varname 0 else { ifvarand TEMP 64 addvar varname 0 else addvarvar varname TEMPVAR }
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7284,7 +7301,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 21 // Venus Steel Mending [Lesser]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7336,7 +7352,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 22 // Venus Steel Mending [Moderate]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7388,7 +7403,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 23 // Venus Steel Mending [Greater]
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7473,7 +7487,6 @@ ifvare mainmenu 1
 						setvar USESKILLARRAY 17 // Resurrection Prime
 						getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 						state check-skillenergycost-mulmenu
-						divvar varname 100
 						getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 						state check-skillenergycost-addmenu
 						setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7534,7 +7547,6 @@ ifvare mainmenu 1
 						setvar USESKILLARRAY 18 // Resurrection Ultima
 						getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 						state check-skillenergycost-mulmenu
-						divvar varname 100
 						getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 						state check-skillenergycost-addmenu
 						setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7617,8 +7629,16 @@ ifvare mainmenu 1
 					getactorvar[CHARACTERARRAY].CHARACTERMAXEP varname
 					setvar USESKILLARRAY 19 // Triad Blitzkrieg
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
-					ifvarand CHEATBITFIELD? 128 mulvar varname 0 else { ifvarand TEMP 2048 mulvar varname 0 else mulvarvar varname TEMPVAR }
-					divvar varname 100
+					ifvarand CHEATBITFIELD? 128 setvar varname 0 
+					else 
+					{ 
+						ifvarand TEMP 2048 setvar varname 0 
+						else 
+						{
+							mulvarvar varname TEMPVAR 
+							divvar varname 100
+						}
+					}
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					ifvarand CHEATBITFIELD? 128 addvar varname 0 else { ifvarand TEMP 2048 addvar varname 0 else addvarvar varname TEMPVAR }
 					setvarvar SKILLUSERARRAY CHARACTERARRAY
@@ -7688,7 +7708,6 @@ ifvare mainmenu 1
 					setvar USESKILLARRAY 20 // Triad Booster
 					getactorvar[USESKILLARRAY].USESKILLPERCENTCOST TEMPVAR
 					state check-skillenergycost-mulmenu
-					divvar varname 100
 					getactorvar[USESKILLARRAY].USESKILLEXACTCOST TEMPVAR
 					state check-skillenergycost-addmenu
 					setvarvar SKILLUSERARRAY CHARACTERARRAY

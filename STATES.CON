@@ -9716,7 +9716,7 @@ state actorseekingitem
 
 		setvar FINDNEAR_INTERVAL 0
 
-		ifvarn ITEMTARGET -1 //addlogvar ITEMTARGET
+		//ifvarn ITEMTARGET -1 addlogvar ITEMTARGET
 	}
 ends
 
