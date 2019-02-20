@@ -42117,8 +42117,8 @@ state menu-mainmenu-state
 		sound PISTOL_BODYHIT // INTRUDER_ALERT
 	}
 
-  ifvare mainmenusubmenu 3 state menuerrorsound // Status Menu
-    
+	ifvare mainmenusubmenu 3 state menuerrorsound // Status Menu
+
 	ifvare mainmenusubmenu 4 // Skills Menu
 	{
 		ifvare mainmenupage 0 nullop // Duke Nukem
