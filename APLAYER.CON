@@ -7739,21 +7739,58 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 		{
 			// old increments of 4
 			addvar SHIELDPULSETIMER 1
-			ifvare SHIELDPULSETIMER 1  palfrom  1 0 0 64
-			ifvare SHIELDPULSETIMER 2  palfrom  2 0 0 64
-			ifvare SHIELDPULSETIMER 3  palfrom  4 0 0 64
-			ifvare SHIELDPULSETIMER 4  palfrom  5 0 0 64
-			ifvare SHIELDPULSETIMER 5  palfrom  7 0 0 64
-			ifvare SHIELDPULSETIMER 6  palfrom  8 0 0 64
-			ifvare SHIELDPULSETIMER 7  palfrom 10 0 0 64
-			ifvare SHIELDPULSETIMER 8  palfrom 11 0 0 64
-			ifvare SHIELDPULSETIMER 9  palfrom 10 0 0 64
-			ifvare SHIELDPULSETIMER 10 palfrom  8 0 0 64
-			ifvare SHIELDPULSETIMER 11 palfrom  7 0 0 64
-			ifvare SHIELDPULSETIMER 12 palfrom  5 0 0 64
-			ifvare SHIELDPULSETIMER 13 palfrom  4 0 0 64
-			ifvare SHIELDPULSETIMER 14 palfrom  2 0 0 64
-			ifvare SHIELDPULSETIMER 15
+			switch SHIELDPULSETIMER
+				case 1 case 2 case 40 case 41
+					palfrom 1 0 0 64
+					break
+				case 3 case 4 case 39 case 40
+					palfrom 2 0 0 64
+					break
+				case 5 case 6 case 37 case 38
+					palfrom 3 0 0 64
+					break
+				case 7 case 8 case 35 case 36
+					palfrom 4 0 0 64
+					break
+				case 9 case 10 case 33 case 34
+					palfrom 5 0 0 64
+					break
+				case 11 case 12 case 31 case 32
+					palfrom 6 0 0 64
+					break
+				case 13 case 14 case 29 case 30
+					palfrom 7 0 0 64
+					break
+				case 15 case 16 case 27 case 28
+					palfrom 8 0 0 64
+					break
+				case 17 case 18 case 25 case 26
+					palfrom 9 0 0 64
+					break
+				case 19 case 20 case 23 case 24
+					palfrom 10 0 0 64
+					break
+				case 21 case 22
+					palfrom 11 0 0 64
+					break
+			endswitch
+			ifvare SHIELDPULSETIMER 14
+			{
+				ifvarl ESHIELDCOMPARISON 16 { stopsound BIOSHIELD_HUM_QUIETEST sound BIOSHIELD_HUM_QUIETEST }
+				ifvarg ESHIELDCOMPARISON 15 ifvarl ESHIELDCOMPARISON 64 { stopsound BIOSHIELD_HUM_QUIET sound BIOSHIELD_HUM_QUIET }
+				ifvarg ESHIELDCOMPARISON 63 ifvarl ESHIELDCOMPARISON 256 { stopsound BIOSHIELD_HUM_NORMAL  sound BIOSHIELD_HUM_NORMAL }
+				ifvarg ESHIELDCOMPARISON 255 ifvarl ESHIELDCOMPARISON 1024 { stopsound BIOSHIELD_HUM_LOUD sound BIOSHIELD_HUM_LOUD }
+				ifvarg ESHIELDCOMPARISON 1023 { stopsound BIOSHIELD_HUM_LOUDEST sound BIOSHIELD_HUM_LOUDEST }
+			}
+			ifvare SHIELDPULSETIMER 28
+			{
+				ifvarl ESHIELDCOMPARISON 16 { stopsound BIOSHIELD_HUM_QUIETEST sound BIOSHIELD_HUM_QUIETEST }
+				ifvarg ESHIELDCOMPARISON 15 ifvarl ESHIELDCOMPARISON 64 { stopsound BIOSHIELD_HUM_QUIET sound BIOSHIELD_HUM_QUIET }
+				ifvarg ESHIELDCOMPARISON 63 ifvarl ESHIELDCOMPARISON 256 { stopsound BIOSHIELD_HUM_NORMAL  sound BIOSHIELD_HUM_NORMAL }
+				ifvarg ESHIELDCOMPARISON 255 ifvarl ESHIELDCOMPARISON 1024 { stopsound BIOSHIELD_HUM_LOUD sound BIOSHIELD_HUM_LOUD }
+				ifvarg ESHIELDCOMPARISON 1023 { stopsound BIOSHIELD_HUM_LOUDEST sound BIOSHIELD_HUM_LOUDEST }
+			}
+			ifvare SHIELDPULSETIMER 41
 			{
 				palfrom 1 0 0 64 
 				setvar SHIELDPULSETIMER 1
