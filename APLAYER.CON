@@ -1106,7 +1106,7 @@ state determineregenrates // affects how regeneration speed for HP and EP works.
 				else { mulvar TEMPMOD 500 divvar TEMPMOD 1000 }
 			}
 		}
-		else ifvarand bits 4194304 // Alt-Fire/Quick Kick
+		else ifvarand bits 3328 // Alt-Fire
 		{ 
 			ifvare TEMPVAR8 0 // HP Regen
 			{ 
@@ -7193,7 +7193,7 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 				ifvare PUBLICBETA? 0
 				{
 					ifvarand bits 4 setplayer[THISACTOR].movement_lock 127 // No Strafing w/ Vehicles
-					else ifvarand bits 4194304 setplayer[THISACTOR].movement_lock 127 // No Strafing w/ Vehicles
+					else ifvarand bits 3328 setplayer[THISACTOR].movement_lock 127 // No Strafing w/ Vehicles
 					else setplayer[THISACTOR].movement_lock 60 // No Strafing w/ Vehicles
 				}
 				else setplayer[THISACTOR].movement_lock 60
@@ -7254,7 +7254,7 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 				}
 				else
 				{
-					ifvarand bits 4194304 // Alt-Fire
+					ifvarand bits 3328 // Alt-Fire
 					{
 						ifvarand PLAYERSTATUS? 2 { setvar TEMPVAR 1 setvar TEMPVAR2 1 }
 						else ifvarand PLAYERSTATUS? 4 { setvar TEMPVAR 2 setvar TEMPVAR2 4 }
@@ -7743,34 +7743,34 @@ getplayer[THISACTOR].got_access ACCESSCARDS?
 				case 1 case 2 case 40 case 41
 					palfrom 1 0 0 64
 					break
-				case 3 case 4 case 39 case 40
+				case 3 case 4 case 38 case 39
 					palfrom 2 0 0 64
 					break
-				case 5 case 6 case 37 case 38
+				case 5 case 6 case 36 case 37
 					palfrom 3 0 0 64
 					break
-				case 7 case 8 case 35 case 36
+				case 7 case 8 case 34 case 35
 					palfrom 4 0 0 64
 					break
-				case 9 case 10 case 33 case 34
+				case 9 case 10 case 32 case 33
 					palfrom 5 0 0 64
 					break
-				case 11 case 12 case 31 case 32
+				case 11 case 12 case 30 case 31
 					palfrom 6 0 0 64
 					break
-				case 13 case 14 case 29 case 30
+				case 13 case 14 case 28 case 29
 					palfrom 7 0 0 64
 					break
-				case 15 case 16 case 27 case 28
+				case 15 case 16 case 26 case 27
 					palfrom 8 0 0 64
 					break
-				case 17 case 18 case 25 case 26
+				case 17 case 18 case 24 case 25
 					palfrom 9 0 0 64
 					break
-				case 19 case 20 case 23 case 24
+				case 19 case 20 case 22 case 23
 					palfrom 10 0 0 64
 					break
-				case 21 case 22
+				case 21
 					palfrom 11 0 0 64
 					break
 			endswitch

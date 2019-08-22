@@ -28259,11 +28259,11 @@ state showvehiclecommands
 			state pal10
 			state settilealphanum
 			state orientation10
-			ifvarand bits 4194304 state shadepulse3
+			ifvarand bits 3328 state shadepulse3
 			ifvare VEHICLETYPE 0 redefinequote 438 ^21 = ^22LASERS
 			ifvare VEHICLETYPE 1 redefinequote 438 ^21 = ^22EXPANDER CLUSTERS
 			ifvare VEHICLETYPE 2 redefinequote 438 ^21 = ^22RPG MISSILES
-			getkeyname 437 49 0
+			getkeyname 437 56 0 // 49
 			qstrcat 437 438
 			state gtz
 		
